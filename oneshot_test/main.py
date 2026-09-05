@@ -42,6 +42,9 @@ def generate_frames():
         if not success:
             break
         else:
+            # MIRROR THE CAMERA (Inverted fix)
+            frame = cv2.flip(frame, 1)
+
             ret, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
             yield (b'--frame\r\n'

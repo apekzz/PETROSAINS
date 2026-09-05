@@ -3,69 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OneShot Inventory | Petronas Dashboard</title>
+    <title>OneShot Inventory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* PETRONAS COLOR PALETTE */
+        /* NEON THEME VARIABLES */
         :root {
-            --teal: #00A3B4;
-            --teal-dark: #008C9E;
-            --graphite: #1A1A2E;
-            --silver: #E0E0E0;
-            --white: #FFFFFF;
-            --bg-grey: #F4F7F9;
+            --bg-dark: #0a0a0f;
+            --bg-panel: rgba(18, 18, 30, 0.85);
+            --neon-cyan: #00f0ff;
+            --neon-purple: #b026ff;
+            --neon-green: #39ff14;
+            --neon-red: #ff003c;
+            --neon-yellow: #ffea00;
+            --text-main: #ffffff;
+            --text-dim: #8892b0;
+            --border-glow: 0 0 10px rgba(0, 240, 255, 0.5), inset 0 0 10px rgba(0, 240, 255, 0.1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: var(--bg-grey);
-            color: var(--graphite);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ANIMATED CYBER BACKGROUND GRID */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
         }
 
         /* HEADER */
         .header {
-            background: var(--graphite);
-            color: var(--white);
+            background: rgba(10, 10, 15, 0.95);
+            border-bottom: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 4px solid var(--teal);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         .header h1 {
-            font-size: 24px;
-            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
         }
 
         .header h1 span {
-            color: var(--teal);
+            color: var(--neon-cyan);
         }
 
+        /* PULSING LIVE STATUS */
         .status-badge {
-            background: var(--teal);
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--neon-cyan);
             padding: 8px 15px;
             border-radius: 20px;
             font-size: 14px;
-            font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            animation: badgePulse 2s infinite;
+        }
+
+        @keyframes badgePulse {
+            0% { box-shadow: 0 0 5px rgba(0, 240, 255, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.9); }
+            100% { box-shadow: 0 0 5px rgba(0, 240, 255, 0.5); }
         }
 
         .status-dot {
             width: 10px;
             height: 10px;
-            background: #4CAF50;
+            background: var(--neon-green);
             border-radius: 50%;
+            animation: blink 1.2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
         }
 
         /* LAYOUT */
@@ -78,37 +121,68 @@
             gap: 30px;
         }
 
-        /* CARDS */
+        /* GLASSMORPHISM CARDS */
         .card {
-            background: var(--white);
+            background: var(--bg-panel);
+            border: 1px solid rgba(0, 240, 255, 0.3);
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid var(--teal);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 20px rgba(176, 38, 255, 0.4);
+            transform: translateY(-5px);
         }
 
         .card h2 {
-            font-size: 18px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
             margin-bottom: 20px;
-            color: var(--graphite);
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* CAMERA VIEW */
+        /* CAMERA VIEW WITH SCANNING LINE */
         .camera-view {
             width: 100%;
             height: 400px;
-            background: var(--graphite);
+            background: #000;
+            border: 2px solid var(--neon-cyan);
             border-radius: 8px;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative;
+            box-shadow: var(--border-glow);
         }
 
         .camera-view img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            opacity: 0.9;
+        }
+
+        /* The Scanning Line Animation */
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, transparent, var(--neon-cyan), transparent);
+            opacity: 0.7;
+            box-shadow: 0 0 10px var(--neon-cyan);
+            animation: scan 3s linear infinite;
+            z-index: 10;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            50% { top: calc(100% - 4px); }
+            100% { top: 0; }
         }
 
         /* SEARCH BAR */
@@ -116,53 +190,66 @@
             width: 100%;
             padding: 12px 15px;
             margin-bottom: 20px;
-            border: 2px solid var(--silver);
+            background: transparent;
+            border: 1px solid var(--text-dim);
             border-radius: 8px;
             font-size: 16px;
-            transition: border-color 0.3s;
+            color: var(--text-main);
+            transition: all 0.3s;
         }
 
         .search-bar:focus {
             outline: none;
-            border-color: var(--teal);
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 10px rgba(176, 38, 255, 0.5);
         }
 
-        /* TABLE */
+        /* NEON TABLE */
         table {
             width: 100%;
             border-collapse: collapse;
         }
 
         th {
-            background: var(--graphite);
-            color: var(--white);
+            font-family: 'Orbitron', sans-serif;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--neon-cyan);
             padding: 12px;
             text-align: left;
-            font-weight: 500;
+            border-bottom: 2px solid var(--neon-cyan);
         }
 
         td {
             padding: 12px;
-            border-bottom: 1px solid var(--silver);
-            color: var(--graphite);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            transition: all 0.2s;
         }
 
         tr:hover {
-            background: #f0f9fa;
+            background: rgba(0, 240, 255, 0.1);
+            text-shadow: 0 0 5px var(--neon-cyan);
         }
 
+        /* GLOWING STATUS PILLS */
         .status-pill {
             padding: 4px 10px;
             border-radius: 15px;
             font-size: 12px;
             font-weight: 600;
+            animation: glowPill 2s infinite;
         }
 
-        .available { background: #E8F5E9; color: #2E7D32; }
-        .checked-out { background: #FFF3E0; color: #EF6C00; }
-        .missing { background: #FFEBEE; color: #C62828; }
+        @keyframes glowPill {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
 
-        /* STATS CARDS */
+        .available { background: rgba(57, 255, 20, 0.2); color: var(--neon-green); border: 1px solid var(--neon-green); }
+        .checked-out { background: rgba(255, 234, 0, 0.2); color: var(--neon-yellow); border: 1px solid var(--neon-yellow); }
+        .missing { background: rgba(255, 0, 60, 0.2); color: var(--neon-red); border: 1px solid var(--neon-red); }
+
+        /* ANIMATED STATS */
         .stats-row {
             grid-column: 1 / -1;
             display: grid;
@@ -171,42 +258,53 @@
         }
 
         .stat-card {
-            background: var(--white);
+            background: var(--bg-panel);
+            border: 1px solid rgba(0, 240, 255, 0.3);
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            border-bottom: 3px solid var(--teal);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            100% { left: 100%; }
         }
 
         .stat-card h3 {
             font-size: 14px;
-            color: #777;
+            color: var(--text-dim);
             margin-bottom: 10px;
         }
 
         .stat-card p {
-            font-size: 36px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 40px;
             font-weight: 700;
-            color: var(--teal);
+            color: var(--neon-cyan);
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.7);
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER -->
     <div class="header">
         <h1>OneShot <span>Inventory</span></h1>
         <div class="status-badge">
             <div class="status-dot"></div>
-            Live
+            LIVE
         </div>
     </div>
 
-    <!-- MAIN CONTAINER -->
     <div class="container">
-
-        <!-- STATS ROW -->
         <div class="stats-row">
             <div class="stat-card">
                 <h3>Total Items</h3>
@@ -214,73 +312,78 @@
             </div>
             <div class="stat-card">
                 <h3>Available</h3>
-                <p id="available-items" style="color: #2E7D32;">0</p>
+                <p id="available-items" style="color: var(--neon-green); text-shadow: 0 0 15px rgba(57,255,20,0.7);">0</p>
             </div>
             <div class="stat-card">
                 <h3>Checked Out</h3>
-                <p id="checked-items" style="color: #EF6C00;">0</p>
+                <p id="checked-items" style="color: var(--neon-yellow); text-shadow: 0 0 15px rgba(255,234,0,0.7);">0</p>
             </div>
             <div class="stat-card">
-                <h3>Low Stock Alert</h3>
-                <p id="low-stock" style="color: #C62828;">0</p>
+                <h3>Low Stock</h3>
+                <p id="low-stock" style="color: var(--neon-red); text-shadow: 0 0 15px rgba(255,0,60,0.7);">0</p>
             </div>
         </div>
 
-        <!-- CAMERA VIEW -->
         <div class="card">
             <h2>Live Camera Feed</h2>
             <div class="camera-view">
                 <img src="/video_feed" alt="Live Camera Feed">
+                <div class="scanline"></div>
             </div>
         </div>
 
-        <!-- INVENTORY TABLE -->
         <div class="card">
-            <h2>Inventory List</h2>
-            <input type="text" class="search-bar" id="searchInput" placeholder="Search items...">
+            <h2>Inventory Matrix</h2>
+            <input type="text" class="search-bar" id="searchInput" placeholder="Search database...">
             <table>
                 <thead>
                     <tr>
                         <th>Item Name</th>
-                        <th>Quantity</th>
+                        <th>Qty</th>
                         <th>Unit</th>
                         <th>Location</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody id="inventoryTable">
-                    <!-- Rows will be inserted here -->
+                    <!-- Data injected here -->
                 </tbody>
             </table>
         </div>
-
     </div>
 
     <script>
-        // Fetch inventory data
+        // Animated Counting Function
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+        }
+
         async function fetchInventory(query = '') {
             let url = '/api/inventory';
-            if (query) {
-                url = `/api/search?q=${query}`;
-            }
+            if (query) url = `/api/search?q=${query}`;
             const response = await fetch(url);
             const data = await response.json();
             renderInventory(data);
         }
 
-        // Render inventory table
         function renderInventory(items) {
             const table = document.getElementById('inventoryTable');
             table.innerHTML = '';
 
-            let total = 0;
-            let available = 0;
-            let checkedOut = 0;
+            let total = 0, available = 0, checkedOut = 0, lowStock = 0;
 
             items.forEach(item => {
                 total++;
                 if (item.status === 'Available') available++;
                 if (item.status === 'Checked Out') checkedOut++;
+                if (item.quantity < 10) lowStock++;
 
                 const statusClass = item.status.toLowerCase().replace(' ', '-');
                 const row = `
@@ -290,24 +393,21 @@
                         <td>${item.unit_type}</td>
                         <td>${item.location}</td>
                         <td><span class="status-pill ${statusClass}">${item.status}</span></td>
-                    </tr>
-                `;
+                    </tr>`;
                 table.innerHTML += row;
             });
 
-            // Update stats
-            document.getElementById('total-items').textContent = total;
-            document.getElementById('available-items').textContent = available;
-            document.getElementById('checked-items').textContent = checkedOut;
-            document.getElementById('low-stock').textContent = items.filter(i => i.quantity < 10).length;
+            // Animate the numbers
+            animateValue(document.getElementById('total-items'), 0, total, 1000);
+            animateValue(document.getElementById('available-items'), 0, available, 1000);
+            animateValue(document.getElementById('checked-items'), 0, checkedOut, 1000);
+            animateValue(document.getElementById('low-stock'), 0, lowStock, 1000);
         }
 
-        // Search functionality
         document.getElementById('searchInput').addEventListener('input', (e) => {
             fetchInventory(e.target.value);
         });
 
-        // Initial load
         fetchInventory();
     </script>
 </body>
