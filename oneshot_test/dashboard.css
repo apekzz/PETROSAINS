@@ -133,20 +133,33 @@ body::before {
     gap: 10px;
 }
 
+/* ============================================================
+   CHANGE 1: ADD NEW ITEM - MORE LIKE A BUTTON
+   ============================================================ */
 .add-item-card {
-    background: var(--bg-panel);
-    border: 1px solid var(--neon-green);
+    background: linear-gradient(145deg, rgba(94, 233, 160, 0.15), rgba(94, 233, 160, 0.05));
+    border: 2px solid var(--neon-green);
     border-radius: 12px;
     padding: 15px;
     text-align: center;
     cursor: pointer;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
     position: relative;
     overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(94, 233, 160, 0.2);
+    /* Make it feel like a button */
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.add-item-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 25px rgba(94, 233, 160, 0.4);
 }
 
 .add-item-card:hover {
-    box-shadow: 0 0 16px rgba(94, 233, 160, 0.28);
+    box-shadow: 0 0 25px rgba(94, 233, 160, 0.5);
+    border-color: #7fffbb;
 }
 
 .add-item-card h2 {
@@ -307,12 +320,26 @@ body::before {
     flex-shrink: 0;
 }
 
+/* ============================================================
+   CHANGE 2 & 3: TOUCH SCROLLABLE & NON-SELECTABLE
+   ============================================================ */
 .inventory-table-wrap {
     flex: 1;
     min-height: 0;
-    overflow: auto;
+    overflow-y: auto;
     border: 1px solid var(--border-soft);
     border-radius: 10px;
+    /* Enable smooth native scrolling on touch screens */
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+}
+
+/* Disable text selection for ALL table content */
+.inventory-table-wrap *,
+.inventory-table-wrap {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 
 .inventory-table-wrap::-webkit-scrollbar {
@@ -339,6 +366,9 @@ body::before {
     font-size: 15px;
     color: var(--text-main);
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    /* Allow text selection in the search bar, just not the table */
+    user-select: text;
+    -webkit-user-select: text;
 }
 
 .search-bar:focus {
