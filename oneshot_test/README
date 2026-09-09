@@ -1,0 +1,37 @@
+# OneShot Inventory - Setup & Run Notes
+
+## File Structure
+- **`main.py`** -> **[RUN THIS]**: Starts the server and camera. (Entry point)
+- **`setup_db.py`** -> **[RUN ONCE]**: Creates the `inventory.db` database with sample data.
+- **`api.py`** -> The API layer (endpoints like `/api/inventory`, `/api/stats`).
+- **`config.py`** -> Configuration file (Camera Index, Port, Thresholds, Colors).
+- **`dashboard.html`** -> The main frontend page.
+- **`dashboard.css`** -> Styling for the dashboard.
+- **`dashboard.js`** -> Frontend logic (fetches API data, animations).
+- **`theme.css`** -> Color palette and variables (Neon theme).
+- **`config.js`** -> Frontend API endpoints and delay settings.
+
+---
+
+## How to Run (MacBook)
+
+### Step 1: Install Dependencies (One time only)
+Open Terminal, navigate to this folder, and run:
+```bash
+pip3 install fastapi uvicorn opencv-python
+
+RUN THIS ONCE!!!
+python3 setup_db.py
+
+START THE SERVER!!!
+python3 main.py
+
+OPEN THE WEBSITE!!!
+http://127.0.0.1:8000
+
+Useful URLs
+
+Dashboard: http://127.0.0.1:8000
+API Docs: http://127.0.0.1:8000/docs
+Camera Feed: http://127.0.0.1:8000/video_feed
+Camera Status: http://127.0.0.1:8000/camera_status
