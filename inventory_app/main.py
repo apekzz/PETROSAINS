@@ -621,6 +621,7 @@ FRONTEND_FILES = {
     "dashboard.css": "text/css",
     "config.js": "application/javascript",
     "dashboard.js": "application/javascript",
+    "petronas-logo.svg": "image/svg+xml",
 }
 
 

@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Outfit", sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 html,
@@ -21,37 +21,7 @@ body {
 }
 
 .orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(90px);
-    pointer-events: none;
-    z-index: -2;
-    opacity: 0.55;
-}
-
-.orb-cyan {
-    width: 420px;
-    height: 420px;
-    background: var(--neon-cyan);
-    top: -140px;
-    left: -80px;
-}
-
-.orb-purple {
-    width: 380px;
-    height: 380px;
-    background: var(--neon-purple);
-    top: 18%;
-    right: -120px;
-}
-
-.orb-green {
-    width: 320px;
-    height: 320px;
-    background: var(--neon-green);
-    bottom: -140px;
-    left: 35%;
-    opacity: 0.22;
+    display: none;
 }
 
 body::after {
@@ -60,18 +30,18 @@ body::after {
     inset: 0;
     pointer-events: none;
     z-index: -1;
-    opacity: 0.09;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.55) 0.6px, transparent 0.6px);
-    background-size: 3px 3px;
+    opacity: 0.04;
+    background-image:
+        linear-gradient(rgba(0, 212, 200, 0.35) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 200, 0.35) 1px, transparent 1px);
+    background-size: 28px 28px;
 }
 
 .header {
     flex-shrink: 0;
     background: var(--bg-header);
     border-bottom: 1px solid var(--border-soft);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-    padding: 10px 20px;
+    padding: 10px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -84,50 +54,47 @@ body::after {
     gap: 12px;
 }
 
-.brand-mark {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
-    display: grid;
-    place-items: center;
-    font-family: "Syne", sans-serif;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    color: #041016;
-    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-green));
-    box-shadow: 0 0 24px rgba(79, 212, 232, 0.35);
+.petronas-logo {
+    height: 42px;
+    width: auto;
+    display: block;
 }
 
 .header h1 {
-    font-family: "Syne", sans-serif;
-    font-size: 18px;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-}
-
-.header h1 span {
-    color: var(--neon-cyan);
-}
-
-.brand-tag {
-    margin-top: 1px;
-    color: var(--text-dim);
-    font-size: 11px;
+    font-family: "Rajdhani", sans-serif;
+    font-size: 28px;
+    font-weight: 700;
     letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+}
+
+.brand-divider {
+    width: 1px;
+    height: 22px;
+    background: rgba(232, 240, 246, 0.28);
+}
+
+.brand-sub {
+    color: var(--text-main);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
 }
 
 .status-badge {
-    background: rgba(94, 233, 160, 0.1);
-    border: 1px solid rgba(94, 233, 160, 0.35);
-    padding: 6px 12px;
-    border-radius: var(--radius-sm);
+    background: rgba(0, 212, 200, 0.08);
+    border: 1px solid rgba(0, 212, 200, 0.4);
+    padding: 5px 12px;
+    border-radius: 4px;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.14em;
     display: flex;
     align-items: center;
     gap: 8px;
+    color: var(--neon-cyan);
 }
 
 .status-dot {
@@ -186,9 +153,6 @@ body::after {
     background: var(--bg-panel);
     border: 1px solid var(--border-soft);
     border-radius: var(--radius-md);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    box-shadow: var(--border-glow);
 }
 
 .stat-card {
@@ -203,7 +167,7 @@ body::after {
     inset: 0 auto auto 0;
     width: 100%;
     height: 3px;
-    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+    background: var(--neon-cyan);
     opacity: 0.85;
 }
 
@@ -217,7 +181,7 @@ body::after {
 }
 
 .stat-card p {
-    font-family: "Syne", sans-serif;
+    font-family: "Rajdhani", sans-serif;
     font-size: 26px;
     font-weight: 800;
     letter-spacing: -0.05em;
@@ -249,8 +213,7 @@ body::after {
 }
 
 .add-item-card:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0 28px rgba(94, 233, 160, 0.22);
+    border-color: var(--neon-green);
 }
 
 .add-item-card:active {
@@ -259,10 +222,11 @@ body::after {
 
 .add-item-card h2,
 .ai-training-card h2 {
-    font-family: "Syne", sans-serif;
-    font-size: 16px;
-    text-transform: none;
-    letter-spacing: -0.03em;
+    font-family: "Rajdhani", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     margin: 0;
 }
 
@@ -333,12 +297,13 @@ body::after {
 }
 
 .card h2 {
-    font-family: "Syne", sans-serif;
-    font-size: 16px;
+    font-family: "Rajdhani", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
     margin: 0;
-    color: var(--text-main);
-    text-transform: none;
-    letter-spacing: -0.04em;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .camera-card,
@@ -357,7 +322,7 @@ body::after {
     height: auto;
     background: #05070c;
     border: 1px solid var(--border-soft);
-    border-radius: 16px;
+    border-radius: 8px;
     overflow: hidden;
     position: relative;
 }
@@ -416,9 +381,7 @@ body::after {
     border-radius: var(--radius-sm);
     padding: 7px 10px;
     cursor: pointer;
-    font-family: "Syne", sans-serif;
-    font-size: 12px;
-    font-weight: 800;
+    font-family: "Rajdhani", sans-serif;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
@@ -621,7 +584,7 @@ tbody tr:hover {
     z-index: 9999;
     display: grid;
     place-items: center;
-    background: rgba(7, 9, 15, 0.92);
+    background: rgba(10, 18, 25, 0.96);
     backdrop-filter: blur(18px);
     transition: opacity 0.45s ease, visibility 0.45s ease;
 }
@@ -639,16 +602,16 @@ tbody tr:hover {
 
 .boot-logo {
     margin: 0 auto 16px;
-    width: 56px;
-    height: 56px;
-    border-radius: 18px;
+    height: 72px;
+    width: auto;
 }
 
 .boot-card h1 {
-    font-family: "Syne", sans-serif;
+    font-family: "Rajdhani", sans-serif;
     font-size: 28px;
     letter-spacing: 0.18em;
     margin-bottom: 8px;
+    color: var(--neon-cyan);
 }
 
 .boot-card p {
@@ -675,8 +638,7 @@ tbody tr:hover {
 }
 
 .boot-pct {
-    font-family: "Syne", sans-serif;
-    color: var(--neon-cyan) !important;
+    font-family: "Rajdhani", sans-serif;
     letter-spacing: 0.12em;
 }
 

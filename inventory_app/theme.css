@@ -1,26 +1,26 @@
-/* Petronas neon, Gen Z layout. dashboard.css reads these variables. */
+/* KAILA-style command center, PETRONAS teal. */
 
 :root {
-    --bg-dark: #07090f;
-    --bg-panel: rgba(16, 22, 36, 0.62);
-    --bg-header: rgba(8, 11, 18, 0.72);
-    --bg-input: rgba(10, 14, 24, 0.72);
+    --bg-dark: #0a1219;
+    --bg-panel: #101b26;
+    --bg-header: #0c151d;
+    --bg-input: #0d1620;
 
-    --neon-cyan: #4fd4e8;
-    --neon-purple: #b98cff;
-    --neon-green: #5ee9a0;
-    --neon-red: #ff6b88;
-    --neon-yellow: #f5d76e;
+    --neon-cyan: #00d4c8;
+    --neon-purple: #6ec8ff;
+    --neon-green: #3ee0b0;
+    --neon-red: #ff5a6a;
+    --neon-yellow: #f5a54a;
 
-    --text-main: #f4f7fb;
-    --text-dim: #9aa8c2;
+    --text-main: #e8f0f6;
+    --text-dim: #7f93a6;
 
-    --border-soft: rgba(79, 212, 232, 0.22);
-    --border-glow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    --border-soft: rgba(0, 212, 200, 0.22);
+    --border-glow: none;
 
-    --radius-xl: 28px;
-    --radius-lg: 22px;
-    --radius-md: 16px;
+    --radius-xl: 14px;
+    --radius-lg: 12px;
+    --radius-md: 10px;
     --radius-sm: 999px;
 
     --container-max-width: 1440px;
