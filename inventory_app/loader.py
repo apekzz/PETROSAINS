@@ -44,15 +44,19 @@ def set_progress(percent, stage):
     sys.stdout.flush()
 
 
-def finish(dashboard_url):
+def finish(dashboard_url, lan_url=None):
     set_progress(100, "systems online")
     print("\n")
     print(f"  {GREEN}●{RESET}  model locked")
     print(f"  {GREEN}●{RESET}  camera live")
     print(f"  {GREEN}●{RESET}  capture pipeline on backend")
     print()
-    print(f"  {PURPLE}{BOLD}Dashboard{RESET}  {CYAN}{dashboard_url}{RESET}")
-    print(f"  {DIM}Live feed never freezes. Detections stay server-side.{RESET}")
+    print(f"  {PURPLE}{BOLD}This Mac{RESET}        {CYAN}{dashboard_url}{RESET}")
+    if lan_url:
+        print(f"  {PURPLE}{BOLD}Other devices{RESET}   {CYAN}{lan_url}{RESET}")
+        print(f"  {DIM}Same Wi-Fi as this Mac. Allow Python in Firewall if asked.{RESET}")
+    else:
+        print(f"  {DIM}Could not detect LAN IP. Other devices: http://<this-mac-ip>:{dashboard_url.rsplit(':', 1)[-1]}{RESET}")
     print()
     sys.stdout.write(SHOW)
     sys.stdout.flush()

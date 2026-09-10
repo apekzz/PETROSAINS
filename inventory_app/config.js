@@ -10,5 +10,6 @@ window.ONESHOT_CONFIG = {
     searchDebounceMs: 150,
     cameraPollMs: 2000,
     cameraRetryMs: 1500,
-    statsAnimMs: 1000
+    statsAnimMs: 1000,
+    triggerPollMs: 500
 };

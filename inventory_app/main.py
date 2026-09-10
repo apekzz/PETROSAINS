@@ -3,7 +3,6 @@ import sys
 import time
 import threading
 import platform
-import sqlite3
 from collections import defaultdict
 from datetime import datetime
 
@@ -19,12 +18,14 @@ import uvicorn
 
 from api import router as api_router
 import loader
+from db import init_schema, record_yolo_capture, normalize_item_name
 from config import (
     BASE_DIR, HOST, PORT, CAMERA_INDEX, CAMERA_WIDTH, CAMERA_HEIGHT,
     TARGET_FPS, JPEG_QUALITY, MODEL_PATH, MODEL_CONFIDENCE, MODEL_IMAGE_SIZE,
-    DB_PATH, TRIGGER_ENABLED, CHANGE_AREA_PERCENT, SETTLE_FRAMES,
+    TRIGGER_ENABLED, CHANGE_AREA_PERCENT, SETTLE_FRAMES,
     TRIGGER_COOLDOWN, MOG2_HISTORY, MOG2_VAR_THRESHOLD, MOG2_DETECT_SHADOWS,
-    WARMUP_FRAMES,
+    WARMUP_FRAMES, YOLO_PREVIEW_ENABLED, YOLO_PREVIEW_INTERVAL, YOLO_HOLD_SECONDS,
+    get_lan_ip,
 )
 
 
@@ -87,6 +88,21 @@ last_capture = None
 last_detections = 0
 last_classes = []
 cooldown_until = 0.0
+inventory_revision = 0
+inventory_revision_lock = threading.Lock()
+
+model_lock = threading.Lock()
+yolo_overlay_lock = threading.Lock()
+yolo_boxes = []
+yolo_labels = []
+annotated_hold_jpeg = None
+annotated_hold_until = 0.0
+preview_pending = False
+last_preview_at = 0.0
+
+BOX_COLOR = (200, 212, 0)
+LABEL_BG = (12, 21, 16)
+TEXT_COLOR = (246, 240, 232)
 
 boot_ready = False
 boot_stage = "standby"
@@ -134,6 +150,140 @@ def encode_jpeg(frame):
     if encode_ok:
         return encoded.tobytes()
     return None
+
+
+def predict_frame(frame):
+    with model_lock:
+        return model.predict(
+            source=frame,
+            imgsz=MODEL_IMAGE_SIZE,
+            conf=MODEL_CONFIDENCE,
+            device=MODEL_DEVICE,
+            verbose=False,
+        )
+
+
+def parse_yolo_boxes(results):
+    if not results:
+        return []
+    result = results[0]
+    boxes = getattr(result, "boxes", None)
+    if boxes is None or len(boxes) == 0:
+        return []
+
+    xyxy = boxes.xyxy.cpu().numpy()
+    confidences = boxes.conf.cpu().numpy()
+    class_ids = boxes.cls.cpu().numpy()
+    names = result.names if getattr(result, "names", None) else model.names
+
+    detections = []
+    for box, confidence, class_id in zip(xyxy, confidences, class_ids):
+        x1, y1, x2, y2 = [int(value) for value in box]
+        detections.append({
+            "xyxy": (x1, y1, x2, y2),
+            "confidence": float(confidence),
+            "name": normalize_item_name(names[int(class_id)]),
+        })
+    return detections
+
+
+def detection_labels(detections):
+    return [
+        f"{item['name']} {int(item['confidence'] * 100)}%"
+        for item in detections
+    ]
+
+
+def draw_yolo_boxes(frame, detections):
+    vis = frame.copy()
+    for item in detections:
+        x1, y1, x2, y2 = item["xyxy"]
+        label = f"{item['name']} {int(item['confidence'] * 100)}%"
+        cv2.rectangle(vis, (x1, y1), (x2, y2), BOX_COLOR, 2)
+
+        (text_w, text_h), baseline = cv2.getTextSize(
+            label, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1
+        )
+        label_y = max(0, y1 - text_h - 8)
+        cv2.rectangle(
+            vis,
+            (x1, label_y),
+            (x1 + text_w + 10, label_y + text_h + baseline + 8),
+            LABEL_BG,
+            -1,
+        )
+        cv2.rectangle(
+            vis,
+            (x1, label_y),
+            (x1 + text_w + 10, label_y + text_h + baseline + 8),
+            BOX_COLOR,
+            1,
+        )
+        cv2.putText(
+            vis,
+            label,
+            (x1 + 5, label_y + text_h + 3),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.5,
+            TEXT_COLOR,
+            1,
+            cv2.LINE_AA,
+        )
+    return vis
+
+
+def set_yolo_overlay(detections, hold_frame=None, hold_seconds=0):
+    global yolo_boxes, yolo_labels, annotated_hold_jpeg, annotated_hold_until
+    labels = detection_labels(detections)
+    hold_jpeg = None
+    hold_until = 0.0
+    if hold_frame is not None and detections and hold_seconds > 0:
+        hold_jpeg = encode_jpeg(draw_yolo_boxes(hold_frame, detections))
+        hold_until = time.monotonic() + hold_seconds
+    with yolo_overlay_lock:
+        yolo_boxes = detections
+        yolo_labels = labels
+        if hold_jpeg is not None:
+            annotated_hold_jpeg = hold_jpeg
+            annotated_hold_until = hold_until
+
+
+def run_yolo_preview(frame):
+    global preview_pending
+    try:
+        if model is None:
+            return
+        detections = parse_yolo_boxes(predict_frame(frame))
+        set_yolo_overlay(detections)
+    except Exception as exc:
+        print("[YOLO] Preview error:", exc)
+    finally:
+        preview_pending = False
+
+
+def maybe_start_yolo_preview(frame, state):
+    global preview_pending, last_preview_at
+    if not YOLO_PREVIEW_ENABLED or model is None:
+        return
+    if state in {"CAPTURING", "WARMUP"}:
+        return
+    with yolo_overlay_lock:
+        holding = annotated_hold_jpeg and time.monotonic() < annotated_hold_until
+    if holding:
+        return
+    now = time.monotonic()
+    if now - last_preview_at < YOLO_PREVIEW_INTERVAL:
+        return
+    if preview_pending:
+        return
+    preview_pending = True
+    last_preview_at = now
+    threading.Thread(
+        target=run_yolo_preview,
+        args=(frame.copy(),),
+        name="YoloPreview",
+        daemon=True,
+    ).start()
 
 
 def significant_change(mask):
@@ -227,9 +377,12 @@ def open_camera():
 def log_yolo_detections(results):
     """
     Insert one detections row per class found in this capture.
-    Apply IN / OUT inventory updates. Never crash the camera.
+    New classes are added to inventory; IN / OUT update stock.
+    Newest captured items stay at the top of the list.
+    Never crash the camera.
     Returns (logged_count, class_names).
     """
+    global inventory_revision
     try:
         if not results:
             return 0, []
@@ -256,45 +409,15 @@ def log_yolo_detections(results):
         session_id = scan_session or datetime.now().strftime("%Y%m%d_%H%M%S")
         class_names = list(grouped.keys())
 
-        conn = sqlite3.connect(DB_PATH, timeout=2)
-        try:
-            rows = [
-                (
-                    class_name,
-                    len(scores),
-                    sum(scores) / len(scores),
-                    mode,
-                    timestamp,
-                    session_id,
-                    SCAN_OPERATOR,
-                )
-                for class_name, scores in grouped.items()
-            ]
-            conn.executemany(
-                """
-                INSERT INTO detections
-                    (class_name, count, confidence, direction, timestamp, scan_session, operator)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-                """,
-                rows,
-            )
-
-            if mode == "IN":
-                for class_name, scores in grouped.items():
-                    conn.execute(
-                        "UPDATE inventory SET quantity = quantity + ? WHERE item_name = ?",
-                        (len(scores), class_name),
-                    )
-            elif mode == "OUT":
-                for class_name, scores in grouped.items():
-                    conn.execute(
-                        "UPDATE inventory SET quantity = MAX(0, quantity - ?) WHERE item_name = ?",
-                        (len(scores), class_name),
-                    )
-
-            conn.commit()
-        finally:
-            conn.close()
+        record_yolo_capture(
+            grouped,
+            mode,
+            timestamp,
+            session_id,
+            SCAN_OPERATOR,
+        )
+        with inventory_revision_lock:
+            inventory_revision += 1
 
         print(
             f"[DETECTION] Mode={mode} | Logged {len(class_names)} classes at {timestamp}"
@@ -311,26 +434,23 @@ def log_yolo_detections(results):
 # ============================================================
 
 def run_backend_capture(frame):
-    """Run YOLO + DB log without touching the MJPEG live frame."""
+    """Run YOLO + DB log without blocking the MJPEG camera thread."""
     global last_capture, last_detections, last_classes, cooldown_until
 
     try:
-        results = model.predict(
-            source=frame,
-            imgsz=MODEL_IMAGE_SIZE,
-            conf=MODEL_CONFIDENCE,
-            device=MODEL_DEVICE,
-            verbose=False,
-        )
+        results = predict_frame(frame)
+        detections = parse_yolo_boxes(results)
         logged_count, class_names = log_yolo_detections(results)
         last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         last_detections = logged_count
         last_classes = class_names
+        set_yolo_overlay(detections)
     except Exception as exc:
         print("[MODEL] Inference error:", exc)
         last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         last_detections = 0
         last_classes = []
+        set_yolo_overlay([])
     finally:
         cooldown_until = time.monotonic() + TRIGGER_COOLDOWN
         set_trigger_state("COOLDOWN")
@@ -412,7 +532,21 @@ def camera_capture_loop():
             except Exception as exc:
                 print("[TRIGGER] State machine error:", exc)
 
-        encoded = encode_jpeg(live_frame)
+        maybe_start_yolo_preview(live_frame, state)
+
+        display_frame = live_frame
+        with yolo_overlay_lock:
+            hold_jpeg = annotated_hold_jpeg
+            hold_until = annotated_hold_until
+            boxes = list(yolo_boxes)
+
+        now = time.monotonic()
+        if hold_jpeg and now < hold_until:
+            encoded = hold_jpeg
+        else:
+            if boxes:
+                display_frame = draw_yolo_boxes(live_frame, boxes)
+            encoded = encode_jpeg(display_frame)
         if encoded is not None:
             with camera_lock:
                 latest_frame = encoded
@@ -467,6 +601,7 @@ def stop_camera():
 
 @app.on_event("startup")
 def startup_event():
+    init_schema()
     if model is None:
         load_model()
     if not camera_running:
@@ -530,11 +665,17 @@ def set_mode(new_mode: str):
 
 @app.get("/api/trigger_status")
 def trigger_status():
+    with yolo_overlay_lock:
+        labels = list(yolo_labels)
+    with inventory_revision_lock:
+        revision = inventory_revision
     return JSONResponse({
         "state": get_trigger_state(),
         "last_capture": last_capture,
         "last_detections": last_detections,
         "last_classes": last_classes,
+        "yolo_labels": labels,
+        "inventory_revision": revision,
     })
 
 
@@ -673,7 +814,10 @@ def run_high_end_boot():
 
         set_boot(100, "systems online")
         boot_ready = True
-        loader.finish(f"http://{HOST}:{PORT}")
+        lan_ip = get_lan_ip()
+        local_url = f"http://127.0.0.1:{PORT}"
+        lan_url = f"http://{lan_ip}:{PORT}" if lan_ip else None
+        loader.finish(local_url, lan_url)
     except Exception as exc:
         boot_ready = True
         loader.fail(str(exc))
