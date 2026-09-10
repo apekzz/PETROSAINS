@@ -11,16 +11,14 @@ LOW_STOCK_THRESHOLD = 10
 HOST = "127.0.0.1"
 PORT = 8000
 
-# Camera — Lower resolution = faster AI processing & no stream lag
+# Camera
 CAMERA_INDEX = int(os.environ.get("CAMERA_INDEX", "0"))
-CAMERA_WIDTH = 640
-CAMERA_HEIGHT = 480
+CAMERA_WIDTH = 640   # Lowered for faster AI processing (fixes black screen lag)
+CAMERA_HEIGHT = 480  # Lowered for faster AI processing
 TARGET_FPS = 25
 JPEG_QUALITY = 85
 
-# AI Model
-# If you have your own trained model (best.pt), change this to:
-# MODEL_PATH = os.path.join(BASE_DIR, "best.pt")
-MODEL_PATH = "yolov8n.pt"   # Auto-downloads if missing
+# AI Model (YOUR ORIGINAL MODEL)
+MODEL_PATH = os.path.join(BASE_DIR, "models", "best.pt")
 MODEL_CONFIDENCE = 0.25
 MODEL_IMAGE_SIZE = 640

@@ -57,7 +57,7 @@ function renderInventory(items) {
 const cameraFeed = document.getElementById("cameraFeed");
 const cameraStatus = document.getElementById("cameraStatus");
 
-// FIX: Force browser to load a fresh stream, bypassing cache
+// FORCE FRESH STREAM (Bypasses browser cache)
 cameraFeed.src = `${CONFIG.videoFeedUrl}?t=${Date.now()}`;
 
 function updateCameraStatus() {

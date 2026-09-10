@@ -6,20 +6,13 @@ import platform
 
 import cv2
 import numpy as np
+import torch
+from ultralytics import YOLO
 
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse, HTMLResponse, JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-
-# Safe import for the AI model
-try:
-    from ultralytics import YOLO
-    import torch
-    AI_ENABLED = True
-except ImportError:
-    AI_ENABLED = False
-    print("[MODEL] Ultralytics or Torch not installed. AI detection is disabled.")
 
 from api import router as api_router
 from config import (
@@ -27,33 +20,44 @@ from config import (
     TARGET_FPS, JPEG_QUALITY, MODEL_PATH, MODEL_CONFIDENCE, MODEL_IMAGE_SIZE,
 )
 
+
+# ============================================================
+# APP
+# ============================================================
+
 app = FastAPI(title="OneShot Inventory API", version="1.0.0")
+
 app.add_middleware(
-    CORSMiddleware, allow_origins=["*"], allow_credentials=True,
-    allow_methods=["*"], allow_headers=["*"],
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
+
 app.include_router(api_router)
 
-# ============================================================
-# AI MODEL
-# ============================================================
-model = None
-MODEL_DEVICE = "cpu"
 
-if AI_ENABLED:
-    print("[MODEL] Loading model...")
-    try:
-        model = YOLO(MODEL_PATH)
-        MODEL_DEVICE = 0 if torch.cuda.is_available() else "cpu"
-        print("[MODEL] Model loaded successfully.")
-        print(f"[MODEL] Classes: {len(model.names)} | Device: {MODEL_DEVICE}")
-    except Exception as e:
-        print(f"[MODEL] Failed to load model: {e}")
-        model = None
+# ============================================================
+# AI MODEL (YOUR ORIGINAL MODEL)
+# ============================================================
+
+print("[MODEL] Loading best model...")
+print("[MODEL] Path:", MODEL_PATH)
+
+model = YOLO(MODEL_PATH)
+
+MODEL_DEVICE = 0 if torch.cuda.is_available() else "cpu"
+
+print("[MODEL] Best model loaded successfully.")
+print("[MODEL] Classes:", len(model.names))
+print("[MODEL] Device:", MODEL_DEVICE)
+
 
 # ============================================================
 # CAMERA GLOBAL VARIABLES
 # ============================================================
+
 camera = None
 camera_lock = threading.Lock()
 camera_thread = None
@@ -62,11 +66,14 @@ latest_frame = None
 camera_ok = False
 camera_error = "Camera has not started."
 
+
 # ============================================================
 # OPEN CAMERA
 # ============================================================
+
 def open_camera():
     global camera, camera_ok, camera_error
+
     if camera is not None:
         try: camera.release()
         except Exception: pass
@@ -74,15 +81,20 @@ def open_camera():
 
     backend = cv2.CAP_AVFOUNDATION if sys.platform == "darwin" else cv2.CAP_ANY
     print(f"[CAMERA] Trying camera index {CAMERA_INDEX}...")
+
     try:
         camera = cv2.VideoCapture(CAMERA_INDEX, backend)
     except Exception as exc:
-        camera = None; camera_ok = False; camera_error = f"Could not create VideoCapture: {exc}"
-        print("[CAMERA]", camera_error); return False
+        camera = None
+        camera_ok = False
+        camera_error = f"Could not create VideoCapture: {exc}"
+        print("[CAMERA]", camera_error)
+        return False
 
     if camera is None or not camera.isOpened():
         camera_error = f"Camera index {CAMERA_INDEX} could not be opened."
-        camera_ok = False; print("[CAMERA]", camera_error)
+        camera_ok = False
+        print("[CAMERA]", camera_error)
         if camera is not None:
             try: camera.release()
             except Exception: pass
@@ -94,28 +106,35 @@ def open_camera():
     camera.set(cv2.CAP_PROP_FPS, TARGET_FPS)
 
     print("[CAMERA] Warming up...")
-    time.sleep(1.0)
+    time.sleep(1.0)  # Give macOS time to adjust exposure
+
     for _ in range(20):
         ok, frame = camera.read()
         if ok and frame is not None:
             if np.mean(frame) < 5.0:
-                print("[CAMERA] WARNING: Frames are black. Check FaceTime/Zoom!")
+                print("[CAMERA] WARNING: Frames are black. Check FaceTime/Zoom/Teams!")
             else:
                 print("[CAMERA] Camera feed is live!")
-            camera_ok = True; camera_error = ""
+
+            camera_ok = True
+            camera_error = ""
             print(f"[CAMERA] Ready: {int(camera.get(cv2.CAP_PROP_FRAME_WIDTH))} x {int(camera.get(cv2.CAP_PROP_FRAME_HEIGHT))}")
             return True
         time.sleep(0.1)
 
     camera_error = "Camera opened, but frames could not be read."
-    camera_ok = False; print("[CAMERA]", camera_error)
+    camera_ok = False
+    print("[CAMERA]", camera_error)
     try: camera.release()
     except Exception: pass
-    camera = None; return False
+    camera = None
+    return False
+
 
 # ============================================================
 # CAMERA CAPTURE LOOP (FIXED INDENTATION)
 # ============================================================
+
 def camera_capture_loop():
     global latest_frame, camera_ok, camera_error, camera_running
     frame_interval = 1.0 / TARGET_FPS
@@ -124,31 +143,43 @@ def camera_capture_loop():
         if camera is None or not camera.isOpened():
             camera_ok = False
             if not open_camera():
-                time.sleep(2); continue
+                time.sleep(2)
+                continue
 
         start_time = time.monotonic()
         with camera_lock:
             ok, frame = camera.read()
 
-        # FIXED: This block is now INSIDE the while loop
+        # ---- THIS BLOCK WAS OUTSIDE THE WHILE LOOP BEFORE. NOW IT IS INSIDE. ----
         if ok and frame is not None:
             frame = cv2.flip(frame, 1)
-            if model is not None:
-                try:
-                    results = model.predict(source=frame, imgsz=MODEL_IMAGE_SIZE, conf=MODEL_CONFIDENCE, device=MODEL_DEVICE, verbose=False)
-                    frame = results[0].plot()
-                except Exception as exc:
-                    print("[MODEL] Inference error:", exc)
 
+            # YOUR AI INFERENCE
+            try:
+                results = model.predict(
+                    source=frame,
+                    imgsz=MODEL_IMAGE_SIZE,
+                    conf=MODEL_CONFIDENCE,
+                    device=MODEL_DEVICE,
+                    verbose=False
+                )
+                frame = results[0].plot()
+            except Exception as exc:
+                print("[MODEL] Inference error:", exc)
+
+            # Encode JPEG
             encode_ok, encoded = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, JPEG_QUALITY])
             if encode_ok:
                 with camera_lock:
                     latest_frame = encoded.tobytes()
-                    camera_ok = True; camera_error = ""
+                    camera_ok = True
+                    camera_error = ""
             else:
-                camera_ok = False; camera_error = "JPEG encoding failed."
+                camera_ok = False
+                camera_error = "JPEG encoding failed."
         else:
-            camera_ok = False; camera_error = "Camera frame read failed."
+            camera_ok = False
+            camera_error = "Camera frame read failed."
             time.sleep(0.1)
 
         elapsed = time.monotonic() - start_time
@@ -156,9 +187,11 @@ def camera_capture_loop():
 
     camera_ok = False
 
+
 # ============================================================
 # START / STOP CAMERA
 # ============================================================
+
 def start_camera():
     global camera_thread, camera_running
     if camera_running: return
@@ -181,27 +214,40 @@ def stop_camera():
         latest_frame = None
     print("[CAMERA] Stopped.")
 
+
 @app.on_event("startup")
 def startup_event(): start_camera()
 
 @app.on_event("shutdown")
 def shutdown_event(): stop_camera()
 
+
 # ============================================================
 # CAMERA STATUS API
 # ============================================================
+
 @app.get("/camera_status")
 def camera_status():
     if camera is not None and camera.isOpened():
         width = int(camera.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(camera.get(cv2.CAP_PROP_FRAME_HEIGHT))
     else:
-        width = 0; height = 0
-    return JSONResponse({"ok": camera_ok, "camera_index": CAMERA_INDEX, "platform": platform.system(), "width": width, "height": height, "error": camera_error})
+        width = 0
+        height = 0
+    return JSONResponse({
+        "ok": camera_ok,
+        "camera_index": CAMERA_INDEX,
+        "platform": platform.system(),
+        "width": width,
+        "height": height,
+        "error": camera_error
+    })
+
 
 # ============================================================
 # ERROR FRAME
 # ============================================================
+
 def make_error_frame(text):
     frame = np.zeros((480, 640, 3), dtype=np.uint8)
     cv2.putText(frame, "ONESHOT CAMERA", (145, 190), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 255, 255), 2, cv2.LINE_AA)
@@ -209,23 +255,44 @@ def make_error_frame(text):
     ok, encoded = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, JPEG_QUALITY])
     return encoded.tobytes() if ok else b""
 
+
 # ============================================================
-# MJPEG FRAME GENERATOR (FIXED HEADER FOR BROWSER)
+# MJPEG FRAME GENERATOR (FIXED HEADER - NO BLACK SCREEN)
 # ============================================================
+
 def generate_frames():
+    last_frame = None
     while True:
         with camera_lock:
             frame_bytes = latest_frame
+
         if frame_bytes is None:
             frame_bytes = make_error_frame("Waiting for camera..." if camera_running else "Camera is stopped.")
 
-        # Standard MJPEG format. No custom Content-Length headers.
-        yield (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + frame_bytes + b"\r\n")
+        if frame_bytes != last_frame:
+            last_frame = frame_bytes
+
+        # Simplified MJPEG header (removed Content-Length that caused black screens)
+        yield (
+            b"--frame\r\n"
+            b"Content-Type: image/jpeg\r\n\r\n"
+            + frame_bytes
+            + b"\r\n"
+        )
         time.sleep(0.04)
+
 
 @app.get("/video_feed")
 def video_feed():
-    return StreamingResponse(generate_frames(), media_type="multipart/x-mixed-replace; boundary=frame")
+    return StreamingResponse(
+        generate_frames(),
+        media_type="multipart/x-mixed-replace; boundary=frame"
+    )
+
+
+# ============================================================
+# DASHBOARD
+# ============================================================
 
 @app.get("/", response_class=HTMLResponse)
 def serve_dashboard():
@@ -236,19 +303,29 @@ def serve_dashboard():
         html = file.read()
     return HTMLResponse(content=html)
 
-FRONTEND_FILES = {"theme.css": "text/css", "dashboard.css": "text/css", "config.js": "application/javascript", "dashboard.js": "application/javascript"}
+
+FRONTEND_FILES = {
+    "theme.css": "text/css",
+    "dashboard.css": "text/css",
+    "config.js": "application/javascript",
+    "dashboard.js": "application/javascript",
+}
 
 @app.get("/{filename}")
 def serve_frontend_file(filename: str):
     media_type = FRONTEND_FILES.get(filename)
-    if media_type is None: return JSONResponse({"detail": "Not found"}, status_code=404)
+    if media_type is None:
+        return JSONResponse({"detail": "Not found"}, status_code=404)
     file_path = os.path.join(BASE_DIR, filename)
-    if not os.path.exists(file_path): return JSONResponse({"detail": f"{filename} not found"}, status_code=404)
+    if not os.path.exists(file_path):
+        return JSONResponse({"detail": f"{filename} not found"}, status_code=404)
     return FileResponse(file_path, media_type=media_type)
+
 
 # ============================================================
 # RUN SERVER
 # ============================================================
+
 if __name__ == "__main__":
     print("\n==========================================")
     print(" OneShot Inventory")
