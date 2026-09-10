@@ -18,10 +18,13 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from api import router as api_router
+import loader
 from config import (
     BASE_DIR, HOST, PORT, CAMERA_INDEX, CAMERA_WIDTH, CAMERA_HEIGHT,
     TARGET_FPS, JPEG_QUALITY, MODEL_PATH, MODEL_CONFIDENCE, MODEL_IMAGE_SIZE,
-    DB_PATH,
+    DB_PATH, TRIGGER_ENABLED, CHANGE_AREA_PERCENT, SETTLE_FRAMES,
+    TRIGGER_COOLDOWN, MOG2_HISTORY, MOG2_VAR_THRESHOLD, MOG2_DETECT_SHADOWS,
+    WARMUP_FRAMES,
 )
 
 
@@ -43,19 +46,20 @@ app.include_router(api_router)
 
 
 # ============================================================
-# AI MODEL (YOUR ORIGINAL MODEL)
+# AI MODEL (loaded during high-end boot, not at import)
 # ============================================================
 
-print("[MODEL] Loading best model...")
-print("[MODEL] Path:", MODEL_PATH)
+model = None
+MODEL_DEVICE = "cpu"
 
-model = YOLO(MODEL_PATH)
 
-MODEL_DEVICE = 0 if torch.cuda.is_available() else "cpu"
+def load_model():
+    global model, MODEL_DEVICE
+    if model is not None:
+        return
+    model = YOLO(MODEL_PATH)
+    MODEL_DEVICE = 0 if torch.cuda.is_available() else "cpu"
 
-print("[MODEL] Best model loaded successfully.")
-print("[MODEL] Classes:", len(model.names))
-print("[MODEL] Device:", MODEL_DEVICE)
 
 
 # ============================================================
@@ -72,6 +76,74 @@ camera_error = "Camera has not started."
 scan_session = None
 SCAN_OPERATOR = "System"
 
+VALID_MODES = {"IN", "OUT", "SCAN"}
+detection_mode = "SCAN"
+detection_mode_lock = threading.Lock()
+
+trigger_state = "WARMUP"
+trigger_state_lock = threading.Lock()
+bg_subtractor = None
+last_capture = None
+last_detections = 0
+last_classes = []
+cooldown_until = 0.0
+
+boot_ready = False
+boot_stage = "standby"
+boot_percent = 0
+
+
+# ============================================================
+# MODE / TRIGGER HELPERS
+# ============================================================
+
+def get_detection_mode():
+    with detection_mode_lock:
+        return detection_mode
+
+
+def set_trigger_state(new_state):
+    global trigger_state
+    with trigger_state_lock:
+        trigger_state = new_state
+
+
+def get_trigger_state():
+    with trigger_state_lock:
+        return trigger_state
+
+
+def reset_background_subtractor():
+    """Rebuild MOG2 after camera open / reconnect."""
+    global bg_subtractor
+    bg_subtractor = cv2.createBackgroundSubtractorMOG2(
+        history=MOG2_HISTORY,
+        varThreshold=MOG2_VAR_THRESHOLD,
+        detectShadows=MOG2_DETECT_SHADOWS,
+    )
+    set_trigger_state("WARMUP")
+    print("[TRIGGER] Background subtractor reset. State = WARMUP")
+
+
+def encode_jpeg(frame):
+    encode_ok, encoded = cv2.imencode(
+        ".jpg",
+        frame,
+        [cv2.IMWRITE_JPEG_QUALITY, JPEG_QUALITY],
+    )
+    if encode_ok:
+        return encoded.tobytes()
+    return None
+
+
+def significant_change(mask):
+    total_pixels = mask.shape[0] * mask.shape[1]
+    if total_pixels == 0:
+        return False, 0.0
+    non_zero_pixels = cv2.countNonZero(mask)
+    change_percent = (non_zero_pixels / total_pixels) * 100.0
+    return change_percent > CHANGE_AREA_PERCENT, change_percent
+
 
 # ============================================================
 # OPEN CAMERA
@@ -81,8 +153,10 @@ def open_camera():
     global camera, camera_ok, camera_error
 
     if camera is not None:
-        try: camera.release()
-        except Exception: pass
+        try:
+            camera.release()
+        except Exception:
+            pass
         camera = None
 
     backend = cv2.CAP_AVFOUNDATION if sys.platform == "darwin" else cv2.CAP_ANY
@@ -102,8 +176,10 @@ def open_camera():
         camera_ok = False
         print("[CAMERA]", camera_error)
         if camera is not None:
-            try: camera.release()
-            except Exception: pass
+            try:
+                camera.release()
+            except Exception:
+                pass
             camera = None
         return False
 
@@ -112,7 +188,7 @@ def open_camera():
     camera.set(cv2.CAP_PROP_FPS, TARGET_FPS)
 
     print("[CAMERA] Warming up...")
-    time.sleep(1.0)  # Give macOS time to adjust exposure
+    time.sleep(1.0)
 
     for _ in range(20):
         ok, frame = camera.read()
@@ -124,33 +200,44 @@ def open_camera():
 
             camera_ok = True
             camera_error = ""
-            print(f"[CAMERA] Ready: {int(camera.get(cv2.CAP_PROP_FRAME_WIDTH))} x {int(camera.get(cv2.CAP_PROP_FRAME_HEIGHT))}")
+            print(
+                f"[CAMERA] Ready: "
+                f"{int(camera.get(cv2.CAP_PROP_FRAME_WIDTH))} x "
+                f"{int(camera.get(cv2.CAP_PROP_FRAME_HEIGHT))}"
+            )
+            reset_background_subtractor()
             return True
         time.sleep(0.1)
 
     camera_error = "Camera opened, but frames could not be read."
     camera_ok = False
     print("[CAMERA]", camera_error)
-    try: camera.release()
-    except Exception: pass
+    try:
+        camera.release()
+    except Exception:
+        pass
     camera = None
     return False
 
 
 # ============================================================
-# YOLO DETECTION LOGGING
+# YOLO DETECTION LOGGING + INVENTORY UPDATES
 # ============================================================
 
 def log_yolo_detections(results):
-    """Insert one detections row per class found in this frame. Never crash the camera."""
+    """
+    Insert one detections row per class found in this capture.
+    Apply IN / OUT inventory updates. Never crash the camera.
+    Returns (logged_count, class_names).
+    """
     try:
         if not results:
-            return
+            return 0, []
 
         result = results[0]
         boxes = getattr(result, "boxes", None)
         if boxes is None or len(boxes) == 0:
-            return
+            return 0, []
 
         class_ids = boxes.cls.cpu().numpy()
         confidences = boxes.conf.cpu().numpy()
@@ -162,10 +249,12 @@ def log_yolo_detections(results):
             grouped[class_name].append(float(confidence))
 
         if not grouped:
-            return
+            return 0, []
 
+        mode = get_detection_mode()
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         session_id = scan_session or datetime.now().strftime("%Y%m%d_%H%M%S")
+        class_names = list(grouped.keys())
 
         conn = sqlite3.connect(DB_PATH, timeout=2)
         try:
@@ -174,7 +263,7 @@ def log_yolo_detections(results):
                     class_name,
                     len(scores),
                     sum(scores) / len(scores),
-                    "SCAN",
+                    mode,
                     timestamp,
                     session_id,
                     SCAN_OPERATOR,
@@ -189,24 +278,77 @@ def log_yolo_detections(results):
                 """,
                 rows,
             )
+
+            if mode == "IN":
+                for class_name, scores in grouped.items():
+                    conn.execute(
+                        "UPDATE inventory SET quantity = quantity + ? WHERE item_name = ?",
+                        (len(scores), class_name),
+                    )
+            elif mode == "OUT":
+                for class_name, scores in grouped.items():
+                    conn.execute(
+                        "UPDATE inventory SET quantity = MAX(0, quantity - ?) WHERE item_name = ?",
+                        (len(scores), class_name),
+                    )
+
             conn.commit()
         finally:
             conn.close()
+
+        print(
+            f"[DETECTION] Mode={mode} | Logged {len(class_names)} classes at {timestamp}"
+        )
+        return len(class_names), class_names
+
     except Exception as exc:
         print("[DB] Detection log error:", exc)
+        return 0, []
 
 
 # ============================================================
-# CAMERA CAPTURE LOOP (FIXED INDENTATION)
+# BACKEND CAPTURE (YOLO off the live stream)
 # ============================================================
+
+def run_backend_capture(frame):
+    """Run YOLO + DB log without touching the MJPEG live frame."""
+    global last_capture, last_detections, last_classes, cooldown_until
+
+    try:
+        results = model.predict(
+            source=frame,
+            imgsz=MODEL_IMAGE_SIZE,
+            conf=MODEL_CONFIDENCE,
+            device=MODEL_DEVICE,
+            verbose=False,
+        )
+        logged_count, class_names = log_yolo_detections(results)
+        last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        last_detections = logged_count
+        last_classes = class_names
+    except Exception as exc:
+        print("[MODEL] Inference error:", exc)
+        last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        last_detections = 0
+        last_classes = []
+    finally:
+        cooldown_until = time.monotonic() + TRIGGER_COOLDOWN
+        set_trigger_state("COOLDOWN")
+        print("[TRIGGER] Capture done → COOLDOWN")
 
 def camera_capture_loop():
     global latest_frame, camera_ok, camera_error, camera_running
+    global last_capture, last_detections, last_classes, bg_subtractor, cooldown_until
+
     frame_interval = 1.0 / TARGET_FPS
+    warmup_count = 0
+    settle_count = 0
 
     while camera_running:
         if camera is None or not camera.isOpened():
             camera_ok = False
+            warmup_count = 0
+            settle_count = 0
             if not open_camera():
                 time.sleep(2)
                 continue
@@ -215,38 +357,70 @@ def camera_capture_loop():
         with camera_lock:
             ok, frame = camera.read()
 
-        # ---- THIS BLOCK WAS OUTSIDE THE WHILE LOOP BEFORE. NOW IT IS INSIDE. ----
-        if ok and frame is not None:
-            frame = cv2.flip(frame, 1)
-
-            # YOUR AI INFERENCE
-            try:
-                results = model.predict(
-                    source=frame,
-                    imgsz=MODEL_IMAGE_SIZE,
-                    conf=MODEL_CONFIDENCE,
-                    device=MODEL_DEVICE,
-                    verbose=False
-                )
-                frame = results[0].plot()
-                log_yolo_detections(results)
-            except Exception as exc:
-                print("[MODEL] Inference error:", exc)
-
-            # Encode JPEG
-            encode_ok, encoded = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, JPEG_QUALITY])
-            if encode_ok:
-                with camera_lock:
-                    latest_frame = encoded.tobytes()
-                    camera_ok = True
-                    camera_error = ""
-            else:
-                camera_ok = False
-                camera_error = "JPEG encoding failed."
-        else:
+        if not ok or frame is None:
             camera_ok = False
             camera_error = "Camera frame read failed."
             time.sleep(0.1)
+            elapsed = time.monotonic() - start_time
+            time.sleep(max(0.001, frame_interval - elapsed))
+            continue
+
+        live_frame = cv2.flip(frame, 1)
+        now = time.monotonic()
+        state = get_trigger_state()
+
+        if TRIGGER_ENABLED and bg_subtractor is not None:
+            try:
+                mask = bg_subtractor.apply(live_frame)
+                changed, _change_percent = significant_change(mask)
+
+                if state == "WARMUP":
+                    warmup_count += 1
+                    if warmup_count >= WARMUP_FRAMES:
+                        warmup_count = 0
+                        set_trigger_state("WAITING")
+                        print("[TRIGGER] Warming complete. State = WAITING")
+
+                elif state == "WAITING":
+                    if changed:
+                        settle_count = 0
+                        set_trigger_state("SETTLING")
+                        print("[TRIGGER] Change detected → SETTLING")
+
+                elif state == "SETTLING":
+                    settle_count += 1
+                    if settle_count >= SETTLE_FRAMES:
+                        capture_frame = live_frame.copy()
+                        set_trigger_state("CAPTURING")
+                        print("[TRIGGER] Object settled → CAPTURING")
+                        threading.Thread(
+                            target=run_backend_capture,
+                            args=(capture_frame,),
+                            name="BackendCapture",
+                            daemon=True,
+                        ).start()
+
+                elif state == "CAPTURING":
+                    pass
+
+                elif state == "COOLDOWN":
+                    if now >= cooldown_until:
+                        settle_count = 0
+                        set_trigger_state("WAITING")
+                        print("[TRIGGER] Cooldown complete. State = WAITING")
+
+            except Exception as exc:
+                print("[TRIGGER] State machine error:", exc)
+
+        encoded = encode_jpeg(live_frame)
+        if encoded is not None:
+            with camera_lock:
+                latest_frame = encoded
+                camera_ok = True
+                camera_error = ""
+        else:
+            camera_ok = False
+            camera_error = "JPEG encoding failed."
 
         elapsed = time.monotonic() - start_time
         time.sleep(max(0.001, frame_interval - elapsed))
@@ -260,14 +434,20 @@ def camera_capture_loop():
 
 def start_camera():
     global camera_thread, camera_running, scan_session
-    if camera_running: return
+    if camera_running:
+        return
     print("[CAMERA] Starting camera...")
     camera_running = True
     scan_session = datetime.now().strftime("%Y%m%d_%H%M%S")
     print("[CAMERA] Scan session:", scan_session)
     open_camera()
-    camera_thread = threading.Thread(target=camera_capture_loop, name="CameraCapture", daemon=True)
+    camera_thread = threading.Thread(
+        target=camera_capture_loop,
+        name="CameraCapture",
+        daemon=True,
+    )
     camera_thread.start()
+
 
 def stop_camera():
     global camera_running, camera, latest_frame
@@ -276,18 +456,26 @@ def stop_camera():
         camera_thread.join(timeout=2)
     with camera_lock:
         if camera is not None:
-            try: camera.release()
-            except Exception: pass
+            try:
+                camera.release()
+            except Exception:
+                pass
             camera = None
         latest_frame = None
     print("[CAMERA] Stopped.")
 
 
 @app.on_event("startup")
-def startup_event(): start_camera()
+def startup_event():
+    if model is None:
+        load_model()
+    if not camera_running:
+        start_camera()
+
 
 @app.on_event("shutdown")
-def shutdown_event(): stop_camera()
+def shutdown_event():
+    stop_camera()
 
 
 # ============================================================
@@ -308,7 +496,56 @@ def camera_status():
         "platform": platform.system(),
         "width": width,
         "height": height,
-        "error": camera_error
+        "error": camera_error,
+    })
+
+
+# ============================================================
+# DETECTION MODE API
+# ============================================================
+
+@app.get("/api/mode")
+def get_mode():
+    return JSONResponse({"mode": get_detection_mode()})
+
+
+@app.post("/api/mode/{new_mode}")
+def set_mode(new_mode: str):
+    global detection_mode
+    mode = new_mode.strip().upper()
+    if mode not in VALID_MODES:
+        return JSONResponse(
+            {"detail": "Invalid mode. Use IN, OUT, or SCAN."},
+            status_code=400,
+        )
+    with detection_mode_lock:
+        detection_mode = mode
+    print(f"[MODE] Changed to: {mode}")
+    return JSONResponse({"mode": mode, "status": "changed"})
+
+
+# ============================================================
+# TRIGGER STATUS API
+# ============================================================
+
+@app.get("/api/trigger_status")
+def trigger_status():
+    return JSONResponse({
+        "state": get_trigger_state(),
+        "last_capture": last_capture,
+        "last_detections": last_detections,
+        "last_classes": last_classes,
+    })
+
+
+@app.get("/api/boot_status")
+def boot_status():
+    return JSONResponse({
+        "ready": boot_ready,
+        "stage": boot_stage,
+        "percent": boot_percent,
+        "camera_ok": camera_ok,
+        "trigger_state": get_trigger_state(),
     })
 
 
@@ -318,8 +555,14 @@ def camera_status():
 
 def make_error_frame(text):
     frame = np.zeros((480, 640, 3), dtype=np.uint8)
-    cv2.putText(frame, "ONESHOT CAMERA", (145, 190), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 255, 255), 2, cv2.LINE_AA)
-    cv2.putText(frame, text, (65, 250), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 0, 255), 2, cv2.LINE_AA)
+    cv2.putText(
+        frame, "ONESHOT CAMERA", (145, 190),
+        cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 255, 255), 2, cv2.LINE_AA,
+    )
+    cv2.putText(
+        frame, text, (65, 250),
+        cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 0, 255), 2, cv2.LINE_AA,
+    )
     ok, encoded = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, JPEG_QUALITY])
     return encoded.tobytes() if ok else b""
 
@@ -335,12 +578,13 @@ def generate_frames():
             frame_bytes = latest_frame
 
         if frame_bytes is None:
-            frame_bytes = make_error_frame("Waiting for camera..." if camera_running else "Camera is stopped.")
+            frame_bytes = make_error_frame(
+                "Waiting for camera..." if camera_running else "Camera is stopped."
+            )
 
         if frame_bytes != last_frame:
             last_frame = frame_bytes
 
-        # Simplified MJPEG header (removed Content-Length that caused black screens)
         yield (
             b"--frame\r\n"
             b"Content-Type: image/jpeg\r\n\r\n"
@@ -354,7 +598,7 @@ def generate_frames():
 def video_feed():
     return StreamingResponse(
         generate_frames(),
-        media_type="multipart/x-mixed-replace; boundary=frame"
+        media_type="multipart/x-mixed-replace; boundary=frame",
     )
 
 
@@ -379,6 +623,7 @@ FRONTEND_FILES = {
     "dashboard.js": "application/javascript",
 }
 
+
 @app.get("/{filename}")
 def serve_frontend_file(filename: str):
     media_type = FRONTEND_FILES.get(filename)
@@ -394,11 +639,45 @@ def serve_frontend_file(filename: str):
 # RUN SERVER
 # ============================================================
 
+def set_boot(percent, stage):
+    global boot_percent, boot_stage
+    boot_percent = percent
+    boot_stage = stage
+    loader.set_progress(percent, stage)
+
+
+def run_high_end_boot():
+    global boot_ready
+    loader.start()
+    try:
+        set_boot(8, "booting core systems")
+        loader.pulse(0.25)
+
+        set_boot(22, "loading neon UI kernel")
+        loader.pulse(0.2)
+
+        set_boot(40, "loading YOLOv8 weights")
+        load_model()
+        loader.pulse(0.15)
+
+        set_boot(68, "opening camera pipeline")
+        start_camera()
+
+        set_boot(86, "calibrating motion sensors")
+        deadline = time.monotonic() + 12
+        while time.monotonic() < deadline:
+            if camera_ok and get_trigger_state() != "WARMUP":
+                break
+            loader.pulse(0.12)
+
+        set_boot(100, "systems online")
+        boot_ready = True
+        loader.finish(f"http://{HOST}:{PORT}")
+    except Exception as exc:
+        boot_ready = True
+        loader.fail(str(exc))
+
+
 if __name__ == "__main__":
-    print("\n==========================================")
-    print(" OneShot Inventory")
-    print("==========================================")
-    print(f" Dashboard: http://{HOST}:{PORT}")
-    print(f" Camera:    http://{HOST}:{PORT}/video_feed")
-    print("==========================================\n")
-    uvicorn.run(app, host=HOST, port=PORT, reload=False)
+    run_high_end_boot()
+    uvicorn.run(app, host=HOST, port=PORT, reload=False, log_level="warning")

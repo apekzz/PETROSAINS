@@ -1,10 +1,10 @@
-/* Edit colors and sizes here. dashboard.css reads these variables. */
+/* Petronas neon, Gen Z layout. dashboard.css reads these variables. */
 
 :root {
-    --bg-dark: #0b0f16;
-    --bg-panel: rgba(14, 20, 32, 0.92);
-    --bg-header: rgba(10, 10, 15, 0.95);
-    --bg-input: rgba(8, 12, 20, 0.45);
+    --bg-dark: #07090f;
+    --bg-panel: rgba(16, 22, 36, 0.62);
+    --bg-header: rgba(8, 11, 18, 0.72);
+    --bg-input: rgba(10, 14, 24, 0.72);
 
     --neon-cyan: #4fd4e8;
     --neon-purple: #b98cff;
@@ -12,15 +12,17 @@
     --neon-red: #ff6b88;
     --neon-yellow: #f5d76e;
 
-    --text-main: #e8eef8;
-    --text-dim: #8b9bb4;
+    --text-main: #f4f7fb;
+    --text-dim: #9aa8c2;
 
-    --border-soft: rgba(79, 212, 232, 0.28);
-    --border-glow: 0 0 18px rgba(79, 212, 232, 0.16);
+    --border-soft: rgba(79, 212, 232, 0.22);
+    --border-glow: 0 18px 50px rgba(0, 0, 0, 0.35);
 
-    --camera-height: 400px;
-    --inventory-max-height: 520px;
-    --inventory-max-height-mobile: 420px;
-    --container-max-width: 1400px;
+    --radius-xl: 28px;
+    --radius-lg: 22px;
+    --radius-md: 16px;
+    --radius-sm: 999px;
+
+    --container-max-width: 1440px;
     --break-mobile: 980px;
 }

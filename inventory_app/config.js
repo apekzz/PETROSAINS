@@ -4,6 +4,8 @@ window.ONESHOT_CONFIG = {
     searchUrl: "/api/search",
     cameraStatusUrl: "/camera_status",
     videoFeedUrl: "/video_feed",
+    modeUrl: "/api/mode",
+    triggerStatusUrl: "/api/trigger_status",
 
     searchDebounceMs: 150,
     cameraPollMs: 2000,

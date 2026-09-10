@@ -22,3 +22,14 @@ JPEG_QUALITY = 85
 MODEL_PATH = os.path.join(BASE_DIR, "models", "best.pt")
 MODEL_CONFIDENCE = 0.25
 MODEL_IMAGE_SIZE = 640
+
+# Image-difference trigger (YOLO runs only on capture, not every frame)
+TRIGGER_ENABLED = True
+DIFF_THRESHOLD = 25          # MOG2 varThreshold
+CHANGE_AREA_PERCENT = 5      # % of frame area that must change
+SETTLE_FRAMES = 15           # frames to wait after trigger
+TRIGGER_COOLDOWN = 5         # seconds between triggers
+MOG2_HISTORY = 500
+MOG2_VAR_THRESHOLD = DIFF_THRESHOLD
+MOG2_DETECT_SHADOWS = False
+WARMUP_FRAMES = 30

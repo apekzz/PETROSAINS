@@ -95,7 +95,117 @@ document.getElementById("searchInput").addEventListener("input", (event) => {
     searchTimer = setTimeout(() => { fetchInventory(query); }, CONFIG.searchDebounceMs);
 });
 
+async function setMode(mode) {
+    try {
+        const response = await fetch(`/api/mode/${mode}`, {
+            method: "POST",
+            cache: "no-store",
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.detail || "Mode change failed");
+        }
+        applyMode(data.mode);
+    } catch (error) {
+        console.error("Mode error:", error);
+    }
+}
+
+async function loadCurrentMode() {
+    try {
+        const response = await fetch("/api/mode", { cache: "no-store" });
+        if (!response.ok) throw new Error("Mode request failed");
+        const data = await response.json();
+        applyMode(data.mode);
+    } catch (error) {
+        console.error("Mode load error:", error);
+    }
+}
+
+function applyMode(mode) {
+    document.querySelectorAll(".mode-btn").forEach((btn) => {
+        btn.classList.remove("active");
+    });
+    const buttonMap = {
+        IN: "btnIn",
+        SCAN: "btnScan",
+        OUT: "btnOut",
+    };
+    const buttonId = buttonMap[mode];
+    if (buttonId) {
+        document.getElementById(buttonId).classList.add("active");
+    }
+    const modeCopy = {
+        IN: "locked in · IN · stock goes up",
+        SCAN: "locked in · SCAN · view only",
+        OUT: "locked in · OUT · stock goes down",
+    };
+    document.getElementById("modeStatus").textContent =
+        modeCopy[mode] || `locked in · ${mode}`;
+}
+
+let lastSeenCapture = null;
+
+async function updateTriggerStatus() {
+    try {
+        const response = await fetch("/api/trigger_status", { cache: "no-store" });
+        if (!response.ok) throw new Error("Trigger status request failed");
+        const data = await response.json();
+        const state = (data.state || "WAITING").toUpperCase();
+        const statusEl = document.getElementById("triggerStatus");
+        const textEl = document.getElementById("triggerStatusText");
+        const cssClass = state.toLowerCase();
+
+        statusEl.className = `trigger-status ${cssClass}`;
+        textEl.textContent = state;
+
+        if (data.last_capture && data.last_capture !== lastSeenCapture) {
+            lastSeenCapture = data.last_capture;
+            fetchInventory();
+            fetchStats();
+        }
+    } catch (error) {
+        console.error("Trigger status error:", error);
+    }
+}
+
 fetchStats();
 fetchInventory();
 updateCameraStatus();
+loadCurrentMode();
+updateTriggerStatus();
 setInterval(updateCameraStatus, CONFIG.cameraPollMs);
+setInterval(updateTriggerStatus, 1000);
+
+const bootOverlay = document.getElementById("bootOverlay");
+const bootStage = document.getElementById("bootStage");
+const bootFill = document.getElementById("bootFill");
+const bootPct = document.getElementById("bootPct");
+const bootStartedAt = Date.now();
+
+function hideBootOverlay() {
+    bootOverlay.classList.add("is-done");
+}
+
+async function pollBootStatus() {
+    try {
+        const response = await fetch("/api/boot_status", { cache: "no-store" });
+        if (response.ok) {
+            const data = await response.json();
+            const percent = Math.max(8, data.percent || 0);
+            bootStage.textContent = data.stage || "initializing vision core";
+            bootFill.style.width = `${percent}%`;
+            bootPct.textContent = `${percent}%`;
+            if (data.ready) {
+                const wait = Math.max(0, 1200 - (Date.now() - bootStartedAt));
+                setTimeout(hideBootOverlay, wait);
+                return;
+            }
+        }
+    } catch (error) {
+        bootStage.textContent = "waiting for OneShot core";
+    }
+    setTimeout(pollBootStatus, 140);
+}
+
+pollBootStatus();

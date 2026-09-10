@@ -5,17 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OneShot Inventory</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@320;400;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/theme.css">
     <link rel="stylesheet" href="/dashboard.css">
 </head>
 
 <body>
+    <div id="bootOverlay" class="boot-overlay">
+        <div class="boot-card">
+            <div class="brand-mark boot-logo">OS</div>
+            <h1>ONESHOT</h1>
+            <p id="bootStage">initializing vision core</p>
+            <div class="boot-track">
+                <div id="bootFill" class="boot-fill"></div>
+            </div>
+            <p id="bootPct" class="boot-pct">0%</p>
+        </div>
+    </div>
+
+    <div class="orb orb-cyan"></div>
+    <div class="orb orb-purple"></div>
+    <div class="orb orb-green"></div>
+
     <div class="header">
-        <h1>
-            OneShot
-            <span>Inventory</span>
-        </h1>
+        <div class="brand">
+            <div class="brand-mark">OS</div>
+            <div>
+                <h1>OneShot <span>Inventory</span></h1>
+                <p class="brand-tag">campus stock, but make it neon</p>
+            </div>
+        </div>
         <div class="status-badge">
             <div class="status-dot"></div>
             LIVE
@@ -23,9 +42,9 @@
     </div>
 
     <div class="container">
-        <div class="stats-column">
+        <div class="stats-row">
             <div class="stat-card">
-                <h3>Total Items</h3>
+                <h3>Total items</h3>
                 <p id="total-items">0</p>
             </div>
             <div class="stat-card">
@@ -33,61 +52,83 @@
                 <p id="available-items" class="stat-available">0</p>
             </div>
             <div class="stat-card">
-                <h3>Checked Out</h3>
+                <h3>Checked out</h3>
                 <p id="checked-items" class="stat-checked">0</p>
             </div>
             <div class="stat-card">
-                <h3>Low Stock</h3>
+                <h3>Low stock</h3>
                 <p id="low-stock" class="stat-low">0</p>
             </div>
         </div>
 
-        <div class="top-right-container">
+        <div class="action-row">
             <div class="add-item-card" onclick="alert('Function coming soon!')">
-                <h2>Add New Item</h2>
+                <div>
+                    <h2>Add new item</h2>
+                    <p class="hint">tap to drop something in</p>
+                </div>
                 <div class="plus">+</div>
-                <p class="hint">Click to Add</p>
             </div>
             <div class="ai-training-card">
-                <h2>AI Training</h2>
-                <div class="ai-placeholder">
-                    <div class="ai-circle"></div>
-                    <p class="coming-soon">COMING SOON...</p>
+                <div>
+                    <h2>AI Training</h2>
+                    <p class="coming-soon">coming soon</p>
                 </div>
+                <div class="ai-circle"></div>
             </div>
         </div>
 
-        <div class="card">
-            <h2>Live Camera Feed</h2>
-            <div class="camera-view">
-                <img id="cameraFeed" alt="Live Camera Feed">
-                <div id="cameraStatus" class="camera-status">
-                    CONNECTING TO CAMERA...
-                </div>
+        <div class="card mode-card">
+            <h2>Detection mode</h2>
+            <div class="mode-buttons">
+                <button id="btnIn" class="mode-btn" onclick="setMode('IN')">IN</button>
+                <button id="btnScan" class="mode-btn active" onclick="setMode('SCAN')">SCAN</button>
+                <button id="btnOut" class="mode-btn" onclick="setMode('OUT')">OUT</button>
             </div>
+            <p id="modeStatus">locked in · SCAN · view only</p>
         </div>
 
-        <div class="card inventory-card">
-            <h2>Inventory Matrix</h2>
-            <input
-                type="text"
-                class="search-bar"
-                id="searchInput"
-                placeholder="Search database..."
-            >
-            <div class="inventory-table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Item Name</th>
-                            <th>Qty</th>
-                            <th>Unit</th>
-                            <th>Location</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="inventoryTable"></tbody>
-                </table>
+        <div class="workspace">
+            <div class="card camera-card">
+                <div class="card-head">
+                    <h2>Live camera</h2>
+                    <p id="triggerStatus" class="trigger-status waiting">
+                        <span class="trigger-dot"></span>
+                        <span id="triggerStatusText">WARMUP</span>
+                    </p>
+                </div>
+                <div class="camera-view">
+                    <img id="cameraFeed" alt="Live Camera Feed">
+                    <div id="cameraStatus" class="camera-status">
+                        CONNECTING TO CAMERA...
+                    </div>
+                </div>
+            </div>
+
+            <div class="card inventory-card">
+                <div class="card-head">
+                    <h2>Inventory</h2>
+                </div>
+                <input
+                    type="text"
+                    class="search-bar"
+                    id="searchInput"
+                    placeholder="search anything…"
+                >
+                <div class="inventory-table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Qty</th>
+                                <th>Unit</th>
+                                <th>Spot</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryTable"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
