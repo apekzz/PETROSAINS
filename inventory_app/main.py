@@ -3,6 +3,9 @@ import sys
 import time
 import threading
 import platform
+import sqlite3
+from collections import defaultdict
+from datetime import datetime
 
 import cv2
 import numpy as np
@@ -18,6 +21,7 @@ from api import router as api_router
 from config import (
     BASE_DIR, HOST, PORT, CAMERA_INDEX, CAMERA_WIDTH, CAMERA_HEIGHT,
     TARGET_FPS, JPEG_QUALITY, MODEL_PATH, MODEL_CONFIDENCE, MODEL_IMAGE_SIZE,
+    DB_PATH,
 )
 
 
@@ -65,6 +69,8 @@ camera_running = False
 latest_frame = None
 camera_ok = False
 camera_error = "Camera has not started."
+scan_session = None
+SCAN_OPERATOR = "System"
 
 
 # ============================================================
@@ -132,6 +138,65 @@ def open_camera():
 
 
 # ============================================================
+# YOLO DETECTION LOGGING
+# ============================================================
+
+def log_yolo_detections(results):
+    """Insert one detections row per class found in this frame. Never crash the camera."""
+    try:
+        if not results:
+            return
+
+        result = results[0]
+        boxes = getattr(result, "boxes", None)
+        if boxes is None or len(boxes) == 0:
+            return
+
+        class_ids = boxes.cls.cpu().numpy()
+        confidences = boxes.conf.cpu().numpy()
+        names = result.names if getattr(result, "names", None) else model.names
+
+        grouped = defaultdict(list)
+        for class_id, confidence in zip(class_ids, confidences):
+            class_name = names[int(class_id)]
+            grouped[class_name].append(float(confidence))
+
+        if not grouped:
+            return
+
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        session_id = scan_session or datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        conn = sqlite3.connect(DB_PATH, timeout=2)
+        try:
+            rows = [
+                (
+                    class_name,
+                    len(scores),
+                    sum(scores) / len(scores),
+                    "SCAN",
+                    timestamp,
+                    session_id,
+                    SCAN_OPERATOR,
+                )
+                for class_name, scores in grouped.items()
+            ]
+            conn.executemany(
+                """
+                INSERT INTO detections
+                    (class_name, count, confidence, direction, timestamp, scan_session, operator)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                rows,
+            )
+            conn.commit()
+        finally:
+            conn.close()
+    except Exception as exc:
+        print("[DB] Detection log error:", exc)
+
+
+# ============================================================
 # CAMERA CAPTURE LOOP (FIXED INDENTATION)
 # ============================================================
 
@@ -164,6 +229,7 @@ def camera_capture_loop():
                     verbose=False
                 )
                 frame = results[0].plot()
+                log_yolo_detections(results)
             except Exception as exc:
                 print("[MODEL] Inference error:", exc)
 
@@ -193,10 +259,12 @@ def camera_capture_loop():
 # ============================================================
 
 def start_camera():
-    global camera_thread, camera_running
+    global camera_thread, camera_running, scan_session
     if camera_running: return
     print("[CAMERA] Starting camera...")
     camera_running = True
+    scan_session = datetime.now().strftime("%Y%m%d_%H%M%S")
+    print("[CAMERA] Scan session:", scan_session)
     open_camera()
     camera_thread = threading.Thread(target=camera_capture_loop, name="CameraCapture", daemon=True)
     camera_thread.start()

@@ -70,3 +70,50 @@ def get_item(item_id: int):
     if item is None:
         raise HTTPException(status_code=404, detail="Item not found")
     return dict(item)
+
+
+# API 5: Recent YOLO detections
+@router.get("/detections")
+def get_detections(limit: int = Query(100, ge=1, le=1000)):
+    conn = get_db()
+    rows = conn.execute(
+        "SELECT * FROM detections ORDER BY id DESC LIMIT ?",
+        (limit,),
+    ).fetchall()
+    conn.close()
+    return [dict(row) for row in rows]
+
+
+# API 6: Total count and average confidence per class
+@router.get("/detections/summary")
+def get_detections_summary():
+    conn = get_db()
+    rows = conn.execute(
+        """
+        SELECT
+            class_name,
+            SUM(count) AS total_count,
+            AVG(confidence) AS avg_confidence,
+            COUNT(*) AS frames
+        FROM detections
+        GROUP BY class_name
+        ORDER BY total_count DESC
+        """
+    ).fetchall()
+    conn.close()
+    return [dict(row) for row in rows]
+
+
+# API 7: Today's detections only
+@router.get("/detections/today")
+def get_detections_today():
+    conn = get_db()
+    rows = conn.execute(
+        """
+        SELECT * FROM detections
+        WHERE date(timestamp) = date('now', 'localtime')
+        ORDER BY id DESC
+        """
+    ).fetchall()
+    conn.close()
+    return [dict(row) for row in rows]
