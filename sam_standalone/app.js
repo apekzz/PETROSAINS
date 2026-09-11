@@ -26,7 +26,7 @@ const state = {
   points: [], maskPixels: 0, samBaseMask: null, maskModified: false,
   view: { zoom: 1, panX: 0, panY: 0 },
   pointer: { inside: false, screenX: 0, screenY: 0, activeId: null, drawing: false, panning: false, lastImage: null, lastScreen: null },
-  spaceDown: false, undoStack: [], redoStack: [], historyLimit: 20,
+  spaceDown: false, undoStack: [], redoStack: [], historyLimit: 8, strokeBounds: null,
   renderPending: false, busy: false, saved: false
 };
 
@@ -136,7 +136,13 @@ function restoreMask(bytes) {
   }
   maskCtx.putImageData(imageData, 0, 0); state.maskPixels = count; updateMaskUi(); scheduleRender();
 }
-function normalizeMask() { restoreMask(maskBytes()); }
+function normalizeMask(bounds = null) {
+  const left = bounds ? Math.max(0, Math.floor(bounds.left)) : 0, top = bounds ? Math.max(0, Math.floor(bounds.top)) : 0;
+  const right = bounds ? Math.min(state.imageWidth, Math.ceil(bounds.right)) : state.imageWidth, bottom = bounds ? Math.min(state.imageHeight, Math.ceil(bounds.bottom)) : state.imageHeight;
+  const data = maskCtx.getImageData(left, top, right - left, bottom - top); let delta = 0;
+  for (let i = 0; i < data.data.length; i += 4) { const wasFilled = data.data[i + 3] > 0, filled = data.data[i + 3] >= 128; delta += Number(filled) - Number(wasFilled); data.data[i] = 0; data.data[i + 1] = 240; data.data[i + 2] = 255; data.data[i + 3] = filled ? 255 : 0; }
+  maskCtx.putImageData(data, left, top); state.maskPixels = Math.max(0, state.maskPixels + delta);
+}
 function pushHistory() {
   if (!state.imageLoaded) return;
   state.undoStack.push(maskBytes()); if (state.undoStack.length > state.historyLimit) state.undoStack.shift(); state.redoStack = []; updateHistoryUi();
@@ -176,7 +182,13 @@ function drawSegment(from, to, tool) {
 }
 function finishStroke() {
   if (!state.pointer.drawing) return;
-  state.pointer.drawing = false; state.pointer.lastImage = null; normalizeMask(); state.maskModified = true; state.saved = false; updateHistoryUi(); renderPreview(); updateMaskUi(); setMessage("Mask modified locally.");
+  state.pointer.drawing = false; state.pointer.lastImage = null; normalizeMask(state.strokeBounds); state.strokeBounds = null; state.maskModified = true; state.saved = false; updateHistoryUi(); updateMaskUi(); setMessage("Mask modified locally. Select Preview Object when ready.");
+}
+function expandStrokeBounds(a, b) {
+  const radius = state.brushSize / 2 + 2;
+  const left = Math.min(a.x, b.x) - radius, top = Math.min(a.y, b.y) - radius, right = Math.max(a.x, b.x) + radius, bottom = Math.max(a.y, b.y) + radius;
+  if (!state.strokeBounds) state.strokeBounds = { left, top, right, bottom };
+  else { state.strokeBounds.left = Math.min(state.strokeBounds.left, left); state.strokeBounds.top = Math.min(state.strokeBounds.top, top); state.strokeBounds.right = Math.max(state.strokeBounds.right, right); state.strokeBounds.bottom = Math.max(state.strokeBounds.bottom, bottom); }
 }
 
 ui.stage.addEventListener("contextmenu", (event) => event.preventDefault());
@@ -191,7 +203,7 @@ ui.stage.addEventListener("pointerdown", (event) => {
     if (insideImage(image)) { state.points.push({ x: image.x, y: image.y, label: tool === "fg" ? 1 : 0 }); ui.generate.disabled = false; ui.clearPoints.disabled = false; setMessage(`${tool === "fg" ? "Foreground" : "Background"} point added at ${Math.round(image.x)}, ${Math.round(image.y)}.`); scheduleRender(); }
     return;
   }
-  pushHistory(); state.pointer.drawing = true; state.pointer.lastImage = image; drawDot(image, tool); scheduleRender();
+  pushHistory(); state.pointer.drawing = true; state.pointer.lastImage = image; state.strokeBounds = null; expandStrokeBounds(image, image); drawDot(image, tool); scheduleRender();
 });
 ui.stage.addEventListener("pointermove", (event) => {
   const screen = stagePoint(event), image = screenToImage(screen); state.pointer.screenX = screen.x; state.pointer.screenY = screen.y; state.pointer.inside = true;
@@ -199,7 +211,7 @@ ui.stage.addEventListener("pointermove", (event) => {
   if (state.pointer.panning) { state.view.panX += screen.x - state.pointer.lastScreen.x; state.view.panY += screen.y - state.pointer.lastScreen.y; state.pointer.lastScreen = screen; scheduleRender(); return; }
   if (state.pointer.drawing) {
     const events = typeof event.getCoalescedEvents === "function" ? event.getCoalescedEvents() : [event];
-    for (const sample of events) { const next = screenToImage(stagePoint(sample)); drawSegment(state.pointer.lastImage, next, state.tool); state.pointer.lastImage = next; }
+    for (const sample of events) { const next = screenToImage(stagePoint(sample)); expandStrokeBounds(state.pointer.lastImage, next); drawSegment(state.pointer.lastImage, next, state.tool); state.pointer.lastImage = next; }
   }
   scheduleRender();
 });
@@ -214,8 +226,9 @@ ui.stage.addEventListener("wheel", (event) => { if (!state.imageLoaded) return; 
 
 function renderPreview() {
   if (!state.imageLoaded || !state.maskPixels) { ui.previewStage.classList.remove("has-preview"); previewCtx.clearRect(0, 0, ui.preview.width, ui.preview.height); return; }
-  ui.preview.width = state.imageWidth; ui.preview.height = state.imageHeight; previewCtx.fillStyle = "white"; previewCtx.fillRect(0, 0, state.imageWidth, state.imageHeight);
-  const object = document.createElement("canvas"); object.width = state.imageWidth; object.height = state.imageHeight; const ctx = object.getContext("2d"); ctx.drawImage(sourceImage, 0, 0); ctx.globalCompositeOperation = "destination-in"; ctx.drawImage(sourceMask, 0, 0); previewCtx.drawImage(object, 0, 0); ui.previewStage.classList.add("has-preview");
+  const scale = Math.min(1, 480 / state.imageWidth, 420 / state.imageHeight), width = Math.max(1, Math.round(state.imageWidth * scale)), height = Math.max(1, Math.round(state.imageHeight * scale));
+  ui.preview.width = width; ui.preview.height = height; previewCtx.fillStyle = "white"; previewCtx.fillRect(0, 0, width, height);
+  previewCtx.drawImage(sourceImage, 0, 0, width, height); previewCtx.globalCompositeOperation = "destination-in"; previewCtx.drawImage(sourceMask, 0, 0, width, height); previewCtx.globalCompositeOperation = "source-over"; ui.previewStage.classList.add("has-preview");
 }
 function exportMask() {
   const bytes = maskBytes(), canvas = document.createElement("canvas"); canvas.width = state.imageWidth; canvas.height = state.imageHeight; const ctx = canvas.getContext("2d"), output = ctx.createImageData(canvas.width, canvas.height);

@@ -112,6 +112,18 @@ def get_clipper():
         return clipper
 
 
+def database_config() -> PgConfig:
+    """Use the repository's documented local pgvector defaults."""
+    return PgConfig(
+        host=os.environ.get("PGHOST", "127.0.0.1"),
+        port=int(os.environ.get("PGPORT", "5432")),
+        db=os.environ.get("PGDATABASE", "petrosains"),
+        user=os.environ.get("PGUSER", "postgres"),
+        password=os.environ.get("PGPASSWORD", "ai_squad"),
+        connect_timeout=3,
+    )
+
+
 @app.get("/", response_class=HTMLResponse)
 def page():
     return HTMLResponse((APP_DIR / "index.html").read_text(encoding="utf-8"))
@@ -135,8 +147,8 @@ def status():
         "sam": {"ready": checkpoint.exists(), "label": "READY" if checkpoint.exists() else "CHECKPOINT MISSING"},
         "gpu": {"ready": sam_device is not None, "label": sam_device or "AUTO · NOT LOADED"},
         "database": {
-            "ready": bool(os.environ.get("PGPASSWORD")),
-            "label": "CONFIGURED" if os.environ.get("PGPASSWORD") else "PASSWORD NOT SET",
+            "ready": True,
+            "label": "CONFIGURED",
         },
     }
 
@@ -197,11 +209,7 @@ def register(payload: SaveRequest):
         embedding = get_clip_embedding(get_clipper(), Image.fromarray(crop))
         if embedding.size != CLIP_DIM or not np.isfinite(embedding).all():
             raise ValueError("OpenCLIP did not produce a valid 512-dimensional embedding.")
-        cfg = PgConfig(
-            host=os.environ.get("PGHOST", "127.0.0.1"), port=int(os.environ.get("PGPORT", "5432")),
-            db=os.environ.get("PGDATABASE", "petrosains"), user=os.environ.get("PGUSER", "postgres"),
-            password=os.environ.get("PGPASSWORD", ""),
-        )
+        cfg = database_config()
         conn = connect_db(cfg)
         try:
             with conn.transaction(), conn.cursor() as cur:
@@ -213,7 +221,14 @@ def register(payload: SaveRequest):
         finally:
             close_db(conn)
     except Exception as exc:
-        raise HTTPException(400, str(exc)) from exc
+        message = str(exc)
+        if "password authentication failed" in message.lower():
+            message = (
+                "Database login was rejected for user 'postgres'. This project expects "
+                "PGPASSWORD=ai_squad. Your existing petrosains-pg container was created "
+                "with another password; recreate that local container with setup_pgvector.py."
+            )
+        raise HTTPException(400, message) from exc
     current["saved"] = True
     return {"ok": True, "id": row_id}
 
