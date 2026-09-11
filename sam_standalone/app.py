@@ -33,6 +33,7 @@ MAX_BYTES = 15 * 1024 * 1024
 sessions: dict[str, dict] = {}
 sessions_lock = threading.Lock()
 sam_predictor = None
+sam_device = None
 sam_lock = threading.RLock()
 clipper = None
 clip_lock = threading.Lock()
@@ -83,7 +84,7 @@ def session(session_id: str) -> dict:
 
 
 def get_sam():
-    global sam_predictor
+    global sam_predictor, sam_device
     with sam_lock:
         if sam_predictor is not None:
             return sam_predictor
@@ -97,7 +98,8 @@ def get_sam():
             raise RuntimeError("Install segment-anything first.") from exc
         model_type = os.environ.get("SAM_MODEL_TYPE", "vit_b")
         model = sam_model_registry[model_type](checkpoint=str(checkpoint))
-        model.to("cuda" if torch.cuda.is_available() else "cpu")
+        sam_device = "CUDA" if torch.cuda.is_available() else "CPU"
+        model.to(sam_device.lower())
         sam_predictor = SamPredictor(model)
         return sam_predictor
 
@@ -123,6 +125,20 @@ def javascript():
 @app.get("/style.css")
 def stylesheet():
     return FileResponse(APP_DIR / "style.css", media_type="text/css")
+
+
+@app.get("/api/status")
+def status():
+    """Report real runtime capabilities for the editor status bar."""
+    checkpoint = Path(os.environ.get("SAM_CHECKPOINT", ROOT / "models" / "sam_vit_b_01ec64.pth"))
+    return {
+        "sam": {"ready": checkpoint.exists(), "label": "READY" if checkpoint.exists() else "CHECKPOINT MISSING"},
+        "gpu": {"ready": sam_device is not None, "label": sam_device or "AUTO · NOT LOADED"},
+        "database": {
+            "ready": bool(os.environ.get("PGPASSWORD")),
+            "label": "CONFIGURED" if os.environ.get("PGPASSWORD") else "PASSWORD NOT SET",
+        },
+    }
 
 
 @app.post("/api/image")
