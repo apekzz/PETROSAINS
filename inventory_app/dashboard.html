@@ -30,9 +30,9 @@
             <span class="brand-divider"></span>
             <p class="brand-sub">Inventory System</p>
         </div>
-        <div class="status-badge">
+        <div id="dbStatusBadge" class="status-badge connecting">
             <div class="status-dot"></div>
-            LIVE
+            <span id="dbStatusText">CONNECTING TO DATABASE...</span>
         </div>
     </div>
 
@@ -57,12 +57,22 @@
         </div>
 
         <div class="action-row">
-            <div class="add-item-card" onclick="alert('Function coming soon!')">
-                <div>
-                    <h2>Add new item</h2>
-                    <p class="hint">tap to drop something in</p>
+            <div class="add-item-card">
+                <h2>Add new item</h2>
+                <div class="embed-preview-wrap">
+                    <img id="capturePreview" alt="Captured frame">
+                    <p class="embed-preview-hint">no frame</p>
                 </div>
-                <div class="plus">+</div>
+                <button id="btnCapture" type="button" class="embed-btn">📸 Capture</button>
+                <input
+                    type="text"
+                    id="objectName"
+                    class="embed-input"
+                    placeholder="Object Name"
+                    autocomplete="off"
+                >
+                <button id="btnEmbed" type="button" class="embed-btn embed-btn-primary" disabled>🧠 Embed</button>
+                <p id="embedStatus" class="embed-status">Capture, name, embed.</p>
             </div>
             <div class="ai-training-card">
                 <div>
@@ -94,6 +104,7 @@
                 </div>
                 <div class="camera-view">
                     <img id="cameraFeed" alt="Live Camera Feed">
+                    <div id="yoloDetections" class="yolo-detections"></div>
                     <div id="cameraStatus" class="camera-status">
                         CONNECTING TO CAMERA...
                     </div>

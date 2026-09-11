@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-multipart
+opencv-python
+ultralytics
+torch
+torchvision
+psycopg[binary]
+sentence-transformers
+pillow

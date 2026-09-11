@@ -3,32 +3,41 @@ import sys
 import time
 import threading
 import platform
-import sqlite3
 from collections import defaultdict
 from datetime import datetime
+from io import BytesIO
 
 import cv2
 import numpy as np
 import torch
 from ultralytics import YOLO
 
-from fastapi import FastAPI
+from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.responses import StreamingResponse, HTMLResponse, JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from api import router as api_router
 import loader
+from db import init_schema, record_yolo_capture, normalize_item_name, check_db, save_object_embedding
 from config import (
     BASE_DIR, HOST, PORT, CAMERA_INDEX, CAMERA_WIDTH, CAMERA_HEIGHT,
     TARGET_FPS, JPEG_QUALITY, MODEL_PATH, MODEL_CONFIDENCE, MODEL_IMAGE_SIZE,
-    DB_PATH, TRIGGER_ENABLED, CHANGE_AREA_PERCENT, SETTLE_FRAMES,
+    TRIGGER_ENABLED, CHANGE_AREA_PERCENT, SETTLE_FRAMES,
     TRIGGER_COOLDOWN, MOG2_HISTORY, MOG2_VAR_THRESHOLD, MOG2_DETECT_SHADOWS,
-    WARMUP_FRAMES,
+    WARMUP_FRAMES, YOLO_PREVIEW_ENABLED, YOLO_PREVIEW_INTERVAL, YOLO_HOLD_SECONDS,
+    get_lan_ip,
 )
 
 
-# ============================================================
+# ====================
+# 
+# 
+# 
+# 
+# 
+# 
+# ========================================
 # APP
 # ============================================================
 
@@ -52,6 +61,11 @@ app.include_router(api_router)
 model = None
 MODEL_DEVICE = "cpu"
 
+embed_model = None
+embed_backend = None
+embed_lock = threading.Lock()
+EMBEDDING_SIZE = 512
+
 
 def load_model():
     global model, MODEL_DEVICE
@@ -59,6 +73,63 @@ def load_model():
         return
     model = YOLO(MODEL_PATH)
     MODEL_DEVICE = 0 if torch.cuda.is_available() else "cpu"
+
+
+def load_embed_model():
+    """CLIP (512-d) with ResNet50 pooled-to-512 fallback."""
+    global embed_model, embed_backend
+    if embed_model is not None:
+        return
+    with embed_lock:
+        if embed_model is not None:
+            return
+        try:
+            from sentence_transformers import SentenceTransformer
+            embed_model = SentenceTransformer("clip-ViT-B-32")
+            embed_backend = "clip"
+            print("[EMBED] Loaded CLIP clip-ViT-B-32 (512-d)")
+            return
+        except Exception as exc:
+            print("[EMBED] CLIP unavailable, using ResNet50 fallback:", exc)
+
+        from torchvision.models import resnet50, ResNet50_Weights
+        backbone = resnet50(weights=ResNet50_Weights.DEFAULT)
+        backbone.fc = torch.nn.Identity()
+        backbone.eval()
+        embed_model = backbone
+        embed_backend = "resnet50"
+        print("[EMBED] Loaded ResNet50 without final layer (pooled to 512-d)")
+
+
+def image_to_embedding(image_bytes):
+    from PIL import Image
+
+    load_embed_model()
+    image = Image.open(BytesIO(image_bytes)).convert("RGB")
+
+    if embed_backend == "clip":
+        vector = embed_model.encode(image, convert_to_numpy=True)
+        vector = np.asarray(vector, dtype=np.float32).reshape(-1)
+    else:
+        from torchvision import transforms
+        preprocess = transforms.Compose([
+            transforms.Resize(256),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize(
+                mean=[0.485, 0.456, 0.406],
+                std=[0.229, 0.224, 0.225],
+            ),
+        ])
+        tensor = preprocess(image).unsqueeze(0)
+        with torch.no_grad():
+            features = embed_model(tensor).squeeze().cpu().numpy().astype(np.float32)
+        # ResNet50 is 2048-d after dropping fc; pool groups of 4 → 512
+        vector = features.reshape(EMBEDDING_SIZE, -1).mean(axis=1)
+
+    if vector.size != EMBEDDING_SIZE:
+        raise ValueError(f"Expected {EMBEDDING_SIZE}-d embedding, got {vector.size}")
+    return [float(value) for value in vector]
 
 
 
@@ -87,6 +158,21 @@ last_capture = None
 last_detections = 0
 last_classes = []
 cooldown_until = 0.0
+inventory_revision = 0
+inventory_revision_lock = threading.Lock()
+
+model_lock = threading.Lock()
+yolo_overlay_lock = threading.Lock()
+yolo_boxes = []
+yolo_labels = []
+annotated_hold_jpeg = None
+annotated_hold_until = 0.0
+preview_pending = False
+last_preview_at = 0.0
+
+BOX_COLOR = (200, 212, 0)
+LABEL_BG = (12, 21, 16)
+TEXT_COLOR = (246, 240, 232)
 
 boot_ready = False
 boot_stage = "standby"
@@ -136,6 +222,140 @@ def encode_jpeg(frame):
     return None
 
 
+def predict_frame(frame):
+    with model_lock:
+        return model.predict(
+            source=frame,
+            imgsz=MODEL_IMAGE_SIZE,
+            conf=MODEL_CONFIDENCE,
+            device=MODEL_DEVICE,
+            verbose=False,
+        )
+
+
+def parse_yolo_boxes(results):
+    if not results:
+        return []
+    result = results[0]
+    boxes = getattr(result, "boxes", None)
+    if boxes is None or len(boxes) == 0:
+        return []
+
+    xyxy = boxes.xyxy.cpu().numpy()
+    confidences = boxes.conf.cpu().numpy()
+    class_ids = boxes.cls.cpu().numpy()
+    names = result.names if getattr(result, "names", None) else model.names
+
+    detections = []
+    for box, confidence, class_id in zip(xyxy, confidences, class_ids):
+        x1, y1, x2, y2 = [int(value) for value in box]
+        detections.append({
+            "xyxy": (x1, y1, x2, y2),
+            "confidence": float(confidence),
+            "name": normalize_item_name(names[int(class_id)]),
+        })
+    return detections
+
+
+def detection_labels(detections):
+    return [
+        f"{item['name']} {int(item['confidence'] * 100)}%"
+        for item in detections
+    ]
+
+
+def draw_yolo_boxes(frame, detections):
+    vis = frame.copy()
+    for item in detections:
+        x1, y1, x2, y2 = item["xyxy"]
+        label = f"{item['name']} {int(item['confidence'] * 100)}%"
+        cv2.rectangle(vis, (x1, y1), (x2, y2), BOX_COLOR, 2)
+
+        (text_w, text_h), baseline = cv2.getTextSize(
+            label, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1
+        )
+        label_y = max(0, y1 - text_h - 8)
+        cv2.rectangle(
+            vis,
+            (x1, label_y),
+            (x1 + text_w + 10, label_y + text_h + baseline + 8),
+            LABEL_BG,
+            -1,
+        )
+        cv2.rectangle(
+            vis,
+            (x1, label_y),
+            (x1 + text_w + 10, label_y + text_h + baseline + 8),
+            BOX_COLOR,
+            1,
+        )
+        cv2.putText(
+            vis,
+            label,
+            (x1 + 5, label_y + text_h + 3),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.5,
+            TEXT_COLOR,
+            1,
+            cv2.LINE_AA,
+        )
+    return vis
+
+
+def set_yolo_overlay(detections, hold_frame=None, hold_seconds=0):
+    global yolo_boxes, yolo_labels, annotated_hold_jpeg, annotated_hold_until
+    labels = detection_labels(detections)
+    hold_jpeg = None
+    hold_until = 0.0
+    if hold_frame is not None and detections and hold_seconds > 0:
+        hold_jpeg = encode_jpeg(draw_yolo_boxes(hold_frame, detections))
+        hold_until = time.monotonic() + hold_seconds
+    with yolo_overlay_lock:
+        yolo_boxes = detections
+        yolo_labels = labels
+        if hold_jpeg is not None:
+            annotated_hold_jpeg = hold_jpeg
+            annotated_hold_until = hold_until
+
+
+def run_yolo_preview(frame):
+    global preview_pending
+    try:
+        if model is None:
+            return
+        detections = parse_yolo_boxes(predict_frame(frame))
+        set_yolo_overlay(detections)
+    except Exception as exc:
+        print("[YOLO] Preview error:", exc)
+    finally:
+        preview_pending = False
+
+
+def maybe_start_yolo_preview(frame, state):
+    global preview_pending, last_preview_at
+    if not YOLO_PREVIEW_ENABLED or model is None:
+        return
+    if state in {"CAPTURING", "WARMUP"}:
+        return
+    with yolo_overlay_lock:
+        holding = annotated_hold_jpeg and time.monotonic() < annotated_hold_until
+    if holding:
+        return
+    now = time.monotonic()
+    if now - last_preview_at < YOLO_PREVIEW_INTERVAL:
+        return
+    if preview_pending:
+        return
+    preview_pending = True
+    last_preview_at = now
+    threading.Thread(
+        target=run_yolo_preview,
+        args=(frame.copy(),),
+        name="YoloPreview",
+        daemon=True,
+    ).start()
+
+
 def significant_change(mask):
     total_pixels = mask.shape[0] * mask.shape[1]
     if total_pixels == 0:
@@ -152,71 +372,252 @@ def significant_change(mask):
 def open_camera():
     global camera, camera_ok, camera_error
 
+    # --------------------------------------------------------
+    # RELEASE PREVIOUS CAMERA
+    # --------------------------------------------------------
+
     if camera is not None:
         try:
             camera.release()
         except Exception:
             pass
+
         camera = None
 
-    backend = cv2.CAP_AVFOUNDATION if sys.platform == "darwin" else cv2.CAP_ANY
-    print(f"[CAMERA] Trying camera index {CAMERA_INDEX}...")
+    # --------------------------------------------------------
+    # BACKEND OPTIONS
+    # --------------------------------------------------------
 
-    try:
-        camera = cv2.VideoCapture(CAMERA_INDEX, backend)
-    except Exception as exc:
-        camera = None
-        camera_ok = False
-        camera_error = f"Could not create VideoCapture: {exc}"
-        print("[CAMERA]", camera_error)
-        return False
+    if sys.platform == "darwin":
 
-    if camera is None or not camera.isOpened():
-        camera_error = f"Camera index {CAMERA_INDEX} could not be opened."
-        camera_ok = False
-        print("[CAMERA]", camera_error)
-        if camera is not None:
-            try:
-                camera.release()
-            except Exception:
-                pass
-            camera = None
-        return False
+        backend_options = [
+            ("AVFOUNDATION", cv2.CAP_AVFOUNDATION)
+        ]
 
-    camera.set(cv2.CAP_PROP_FRAME_WIDTH, CAMERA_WIDTH)
-    camera.set(cv2.CAP_PROP_FRAME_HEIGHT, CAMERA_HEIGHT)
-    camera.set(cv2.CAP_PROP_FPS, TARGET_FPS)
+    elif sys.platform.startswith("win"):
 
-    print("[CAMERA] Warming up...")
-    time.sleep(1.0)
+        backend_options = [
+            ("DSHOW", cv2.CAP_DSHOW),
+            ("MSMF", cv2.CAP_MSMF),
+            ("ANY", cv2.CAP_ANY),
+        ]
 
-    for _ in range(20):
-        ok, frame = camera.read()
-        if ok and frame is not None:
-            if np.mean(frame) < 5.0:
-                print("[CAMERA] WARNING: Frames are black. Check FaceTime/Zoom/Teams!")
-            else:
-                print("[CAMERA] Camera feed is live!")
+    else:
+
+        backend_options = [
+            ("ANY", cv2.CAP_ANY)
+        ]
+
+    # --------------------------------------------------------
+    # TRY EACH BACKEND
+    # --------------------------------------------------------
+
+    for backend_name, backend in backend_options:
+
+        print(
+            f"[CAMERA] Trying index {CAMERA_INDEX} "
+            f"with {backend_name}..."
+        )
+
+        try:
+
+            test_camera = cv2.VideoCapture(
+                CAMERA_INDEX,
+                backend
+            )
+
+        except Exception as exc:
+
+            print(
+                f"[CAMERA] {backend_name} failed:",
+                exc
+            )
+
+            continue
+
+        if not test_camera.isOpened():
+
+            print(
+                f"[CAMERA] {backend_name} could not open camera."
+            )
+
+            test_camera.release()
+
+            continue
+
+        # ----------------------------------------------------
+        # WINDOWS — REQUEST MJPG
+        # ----------------------------------------------------
+
+        if sys.platform.startswith("win"):
+
+            test_camera.set(
+                cv2.CAP_PROP_FOURCC,
+                cv2.VideoWriter_fourcc(
+                    "M",
+                    "J",
+                    "P",
+                    "G"
+                )
+            )
+
+        # ----------------------------------------------------
+        # CAMERA SETTINGS
+        # ----------------------------------------------------
+
+        test_camera.set(
+            cv2.CAP_PROP_FRAME_WIDTH,
+            CAMERA_WIDTH
+        )
+
+        test_camera.set(
+            cv2.CAP_PROP_FRAME_HEIGHT,
+            CAMERA_HEIGHT
+        )
+
+        test_camera.set(
+            cv2.CAP_PROP_FPS,
+            TARGET_FPS
+        )
+
+        print(
+            f"[CAMERA] Warming up {backend_name}..."
+        )
+
+        time.sleep(1.0)
+
+        valid_frame = None
+
+        # ----------------------------------------------------
+        # TEST FRAMES
+        # ----------------------------------------------------
+
+        for _ in range(30):
+
+            ok, frame = test_camera.read()
+
+            if not ok or frame is None:
+                time.sleep(0.1)
+                continue
+
+            # ----------------------------------------------
+            # BASIC FRAME STATISTICS
+            # OpenCV channel order = BGR
+            # ----------------------------------------------
+
+            channel_mean = frame.mean(
+                axis=(0, 1)
+            )
+
+            blue_mean = channel_mean[0]
+            green_mean = channel_mean[1]
+            red_mean = channel_mean[2]
+
+            frame_std = frame.std()
+
+            print(
+                f"[CAMERA DEBUG] "
+                f"B={blue_mean:.1f} "
+                f"G={green_mean:.1f} "
+                f"R={red_mean:.1f} "
+                f"STD={frame_std:.1f}"
+            )
+
+            # ----------------------------------------------
+            # REJECT BLACK / EMPTY FRAME
+            # ----------------------------------------------
+
+            if frame.mean() < 5.0:
+                continue
+
+            # ----------------------------------------------
+            # REJECT SOLID / CORRUPTED GREEN FRAME
+            # ----------------------------------------------
+
+            green_corrupt = (
+                green_mean
+                > blue_mean * 2.5
+                and
+                green_mean
+                > red_mean * 2.5
+                and
+                frame_std < 70
+            )
+
+            if green_corrupt:
+
+                print(
+                    "[CAMERA] Corrupted green frame detected."
+                )
+
+                continue
+
+            valid_frame = frame
+            break
+
+        # ----------------------------------------------------
+        # BACKEND SUCCESS
+        # ----------------------------------------------------
+
+        if valid_frame is not None:
+
+            camera = test_camera
 
             camera_ok = True
             camera_error = ""
+
+            actual_width = int(
+                camera.get(
+                    cv2.CAP_PROP_FRAME_WIDTH
+                )
+            )
+
+            actual_height = int(
+                camera.get(
+                    cv2.CAP_PROP_FRAME_HEIGHT
+                )
+            )
+
+            print(
+                f"[CAMERA] SUCCESS using {backend_name}"
+            )
+
             print(
                 f"[CAMERA] Ready: "
-                f"{int(camera.get(cv2.CAP_PROP_FRAME_WIDTH))} x "
-                f"{int(camera.get(cv2.CAP_PROP_FRAME_HEIGHT))}"
+                f"{actual_width} x "
+                f"{actual_height}"
             )
-            reset_background_subtractor()
-            return True
-        time.sleep(0.1)
 
-    camera_error = "Camera opened, but frames could not be read."
-    camera_ok = False
-    print("[CAMERA]", camera_error)
-    try:
-        camera.release()
-    except Exception:
-        pass
+            reset_background_subtractor()
+
+            return True
+
+        # ----------------------------------------------------
+        # BACKEND PRODUCED INVALID FRAMES
+        # ----------------------------------------------------
+
+        print(
+            f"[CAMERA] {backend_name} produced invalid frames."
+        )
+
+        test_camera.release()
+
+    # --------------------------------------------------------
+    # ALL BACKENDS FAILED
+    # --------------------------------------------------------
+
     camera = None
+    camera_ok = False
+
+    camera_error = (
+        "No camera backend produced a valid frame."
+    )
+
+    print(
+        "[CAMERA]",
+        camera_error
+    )
+
     return False
 
 
@@ -227,9 +628,12 @@ def open_camera():
 def log_yolo_detections(results):
     """
     Insert one detections row per class found in this capture.
-    Apply IN / OUT inventory updates. Never crash the camera.
+    New classes are added to inventory; IN / OUT update stock.
+    Newest captured items stay at the top of the list.
+    Never crash the camera.
     Returns (logged_count, class_names).
     """
+    global inventory_revision
     try:
         if not results:
             return 0, []
@@ -256,45 +660,15 @@ def log_yolo_detections(results):
         session_id = scan_session or datetime.now().strftime("%Y%m%d_%H%M%S")
         class_names = list(grouped.keys())
 
-        conn = sqlite3.connect(DB_PATH, timeout=2)
-        try:
-            rows = [
-                (
-                    class_name,
-                    len(scores),
-                    sum(scores) / len(scores),
-                    mode,
-                    timestamp,
-                    session_id,
-                    SCAN_OPERATOR,
-                )
-                for class_name, scores in grouped.items()
-            ]
-            conn.executemany(
-                """
-                INSERT INTO detections
-                    (class_name, count, confidence, direction, timestamp, scan_session, operator)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-                """,
-                rows,
-            )
-
-            if mode == "IN":
-                for class_name, scores in grouped.items():
-                    conn.execute(
-                        "UPDATE inventory SET quantity = quantity + ? WHERE item_name = ?",
-                        (len(scores), class_name),
-                    )
-            elif mode == "OUT":
-                for class_name, scores in grouped.items():
-                    conn.execute(
-                        "UPDATE inventory SET quantity = MAX(0, quantity - ?) WHERE item_name = ?",
-                        (len(scores), class_name),
-                    )
-
-            conn.commit()
-        finally:
-            conn.close()
+        record_yolo_capture(
+            grouped,
+            mode,
+            timestamp,
+            session_id,
+            SCAN_OPERATOR,
+        )
+        with inventory_revision_lock:
+            inventory_revision += 1
 
         print(
             f"[DETECTION] Mode={mode} | Logged {len(class_names)} classes at {timestamp}"
@@ -311,26 +685,23 @@ def log_yolo_detections(results):
 # ============================================================
 
 def run_backend_capture(frame):
-    """Run YOLO + DB log without touching the MJPEG live frame."""
+    """Run YOLO + DB log without blocking the MJPEG camera thread."""
     global last_capture, last_detections, last_classes, cooldown_until
 
     try:
-        results = model.predict(
-            source=frame,
-            imgsz=MODEL_IMAGE_SIZE,
-            conf=MODEL_CONFIDENCE,
-            device=MODEL_DEVICE,
-            verbose=False,
-        )
+        results = predict_frame(frame)
+        detections = parse_yolo_boxes(results)
         logged_count, class_names = log_yolo_detections(results)
         last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         last_detections = logged_count
         last_classes = class_names
+        set_yolo_overlay(detections)
     except Exception as exc:
         print("[MODEL] Inference error:", exc)
         last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         last_detections = 0
         last_classes = []
+        set_yolo_overlay([])
     finally:
         cooldown_until = time.monotonic() + TRIGGER_COOLDOWN
         set_trigger_state("COOLDOWN")
@@ -412,7 +783,21 @@ def camera_capture_loop():
             except Exception as exc:
                 print("[TRIGGER] State machine error:", exc)
 
-        encoded = encode_jpeg(live_frame)
+        maybe_start_yolo_preview(live_frame, state)
+
+        display_frame = live_frame
+        with yolo_overlay_lock:
+            hold_jpeg = annotated_hold_jpeg
+            hold_until = annotated_hold_until
+            boxes = list(yolo_boxes)
+
+        now = time.monotonic()
+        if hold_jpeg and now < hold_until:
+            encoded = hold_jpeg
+        else:
+            if boxes:
+                display_frame = draw_yolo_boxes(live_frame, boxes)
+            encoded = encode_jpeg(display_frame)
         if encoded is not None:
             with camera_lock:
                 latest_frame = encoded
@@ -467,6 +852,7 @@ def stop_camera():
 
 @app.on_event("startup")
 def startup_event():
+    init_schema()
     if model is None:
         load_model()
     if not camera_running:
@@ -530,11 +916,17 @@ def set_mode(new_mode: str):
 
 @app.get("/api/trigger_status")
 def trigger_status():
+    with yolo_overlay_lock:
+        labels = list(yolo_labels)
+    with inventory_revision_lock:
+        revision = inventory_revision
     return JSONResponse({
         "state": get_trigger_state(),
         "last_capture": last_capture,
         "last_detections": last_detections,
         "last_classes": last_classes,
+        "yolo_labels": labels,
+        "inventory_revision": revision,
     })
 
 
@@ -546,6 +938,47 @@ def boot_status():
         "percent": boot_percent,
         "camera_ok": camera_ok,
         "trigger_state": get_trigger_state(),
+    })
+
+
+@app.get("/db_status")
+def db_status():
+    connected, error = check_db()
+    if connected:
+        return JSONResponse({"connected": True})
+    return JSONResponse({"connected": False, "error": error})
+
+
+@app.post("/api/objects/embedding")
+async def create_object_embedding(
+    file: UploadFile = File(...),
+    object_name: str = Form(...),
+):
+    name = normalize_item_name(object_name)
+    if not name:
+        return JSONResponse(
+            {"detail": "object_name is required"},
+            status_code=400,
+        )
+    image_bytes = await file.read()
+    if not image_bytes:
+        return JSONResponse(
+            {"detail": "Image file is empty"},
+            status_code=400,
+        )
+    try:
+        embedding = image_to_embedding(image_bytes)
+        save_object_embedding(name, embedding)
+    except Exception as exc:
+        print("[EMBED] Error:", exc)
+        return JSONResponse(
+            {"detail": f"Could not create embedding: {exc}"},
+            status_code=500,
+        )
+    return JSONResponse({
+        "status": "saved",
+        "object_name": name,
+        "embedding_size": len(embedding),
     })
 
 
@@ -673,7 +1106,10 @@ def run_high_end_boot():
 
         set_boot(100, "systems online")
         boot_ready = True
-        loader.finish(f"http://{HOST}:{PORT}")
+        lan_ip = get_lan_ip()
+        local_url = f"http://127.0.0.1:{PORT}"
+        lan_url = f"http://{lan_ip}:{PORT}" if lan_ip else None
+        loader.finish(local_url, lan_url)
     except Exception as exc:
         boot_ready = True
         loader.fail(str(exc))

@@ -1,30 +1,66 @@
 const CONFIG = window.ONESHOT_CONFIG;
 
+let statsReady = false;
+let lastIdentifiedNames = [];
+
 function animateValue(obj, start, end, duration) {
+    const target = Number(end) || 0;
     let startTimestamp = null;
+    let finished = false;
     const step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        obj.innerHTML = Math.floor(progress * (end - start) + start);
-        if (progress < 1) window.requestAnimationFrame(step);
+        obj.textContent = Math.floor(progress * (target - start) + start);
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            obj.textContent = target;
+            finished = true;
+        }
     };
     window.requestAnimationFrame(step);
+    setTimeout(() => {
+        if (!finished) obj.textContent = target;
+    }, duration + 80);
 }
 
-async function fetchStats() {
+function setStatValue(id, value) {
+    document.getElementById(id).textContent = Number(value) || 0;
+}
+
+async function fetchStats(animate = false) {
     try {
         const response = await fetch(CONFIG.statsUrl, { cache: "no-store" });
         if (!response.ok) throw new Error("Stats request failed");
         const data = await response.json();
-        const duration = CONFIG.statsAnimMs;
-        animateValue(document.getElementById("total-items"), 0, data.total, duration);
-        animateValue(document.getElementById("available-items"), 0, data.available, duration);
-        animateValue(document.getElementById("checked-items"), 0, data.checked_out, duration);
-        animateValue(document.getElementById("low-stock"), 0, data.low_stock, duration);
+        const total = data.total || 0;
+        const available = data.available || 0;
+        const checkedOut = data.checked_out || 0;
+        const lowStock = data.low_stock || 0;
+
+        if (animate && !statsReady) {
+            const duration = CONFIG.statsAnimMs;
+            animateValue(document.getElementById("total-items"), 0, total, duration);
+            animateValue(document.getElementById("available-items"), 0, available, duration);
+            animateValue(document.getElementById("checked-items"), 0, checkedOut, duration);
+            animateValue(document.getElementById("low-stock"), 0, lowStock, duration);
+            statsReady = true;
+            return;
+        }
+
+        setStatValue("total-items", total);
+        setStatValue("available-items", available);
+        setStatValue("checked-items", checkedOut);
+        setStatValue("low-stock", lowStock);
+        statsReady = true;
     } catch (error) { console.error("Stats error:", error); }
 }
 
-async function fetchInventory(query = "") {
+function currentInventoryQuery() {
+    return document.getElementById("searchInput").value.trim();
+}
+
+async function fetchInventory(query = currentInventoryQuery()) {
     try {
         let url = CONFIG.inventoryUrl;
         if (query) url = `${CONFIG.searchUrl}?query=${encodeURIComponent(query)}`;
@@ -32,6 +68,19 @@ async function fetchInventory(query = "") {
         if (!response.ok) throw new Error("Inventory request failed");
         renderInventory(await response.json());
     } catch (error) { console.error("Inventory error:", error); }
+}
+
+function normalizeName(name) {
+    return String(name || "").replace(/_/g, " ").replace(/\s+/g, " ").trim().toLowerCase();
+}
+
+function isFreshScan(item) {
+    const identified = new Set(lastIdentifiedNames.map(normalizeName));
+    if (identified.has(normalizeName(item.item_name))) return true;
+    if (!item.last_seen) return false;
+    const scannedAt = Date.parse(String(item.last_seen).replace(" ", "T"));
+    if (Number.isNaN(scannedAt)) return false;
+    return Date.now() - scannedAt < 20000;
 }
 
 function renderInventory(items) {
@@ -42,16 +91,20 @@ function renderInventory(items) {
         return;
     }
     items.forEach((item) => {
-        const statusClass = item.status.toLowerCase().replace(" ", "-");
+        const status = item.status || "Available";
+        const statusClass = status.toLowerCase().replace(" ", "-");
+        const fresh = isFreshScan(item);
         table.innerHTML += `
-            <tr>
-                <td>${item.item_name}</td>
+            <tr class="${fresh ? "is-new" : ""}">
+                <td>${item.item_name}${fresh ? ' <span class="new-tag">new</span>' : ""}</td>
                 <td>${item.quantity}</td>
-                <td>${item.unit_type}</td>
-                <td>${item.location}</td>
-                <td><span class="status-pill ${statusClass}">${item.status}</span></td>
+                <td>${item.unit_type || "—"}</td>
+                <td>${item.location || "—"}</td>
+                <td><span class="status-pill ${statusClass}">${status}</span></td>
             </tr>`;
     });
+    const wrap = document.querySelector(".inventory-table-wrap");
+    if (wrap) wrap.scrollTop = 0;
 }
 
 const cameraFeed = document.getElementById("cameraFeed");
@@ -145,6 +198,7 @@ function applyMode(mode) {
 }
 
 let lastSeenCapture = null;
+let lastInventoryRevision = null;
 
 async function updateTriggerStatus() {
     try {
@@ -159,23 +213,43 @@ async function updateTriggerStatus() {
         statusEl.className = `trigger-status ${cssClass}`;
         textEl.textContent = state;
 
-        if (data.last_capture && data.last_capture !== lastSeenCapture) {
+        const yoloEl = document.getElementById("yoloDetections");
+        const labels = data.yolo_labels || [];
+        yoloEl.innerHTML = labels
+            .map((label) => `<span class="yolo-chip">${label}</span>`)
+            .join("");
+
+        const identified = data.last_classes || [];
+        if (identified.length) {
+            lastIdentifiedNames = identified;
+        }
+
+        const revision = data.inventory_revision;
+        const captureChanged = data.last_capture && data.last_capture !== lastSeenCapture;
+        const inventoryChanged = lastInventoryRevision !== null && revision !== lastInventoryRevision;
+        if (lastInventoryRevision === null && revision !== undefined) {
+            lastInventoryRevision = revision;
+        }
+        if (captureChanged) {
             lastSeenCapture = data.last_capture;
+        }
+        if (captureChanged || inventoryChanged) {
+            lastInventoryRevision = revision;
             fetchInventory();
-            fetchStats();
+            fetchStats(false);
         }
     } catch (error) {
         console.error("Trigger status error:", error);
     }
 }
 
-fetchStats();
+fetchStats(true);
 fetchInventory();
 updateCameraStatus();
 loadCurrentMode();
 updateTriggerStatus();
 setInterval(updateCameraStatus, CONFIG.cameraPollMs);
-setInterval(updateTriggerStatus, 1000);
+setInterval(updateTriggerStatus, CONFIG.triggerPollMs || 500);
 
 const bootOverlay = document.getElementById("bootOverlay");
 const bootStage = document.getElementById("bootStage");
@@ -209,3 +283,111 @@ async function pollBootStatus() {
 }
 
 pollBootStatus();
+
+let capturedFrameBlob = null;
+let capturedPreviewUrl = null;
+
+function setEmbedStatus(message, kind = "") {
+    const statusEl = document.getElementById("embedStatus");
+    statusEl.textContent = message;
+    statusEl.className = `embed-status ${kind}`.trim();
+}
+
+function updateEmbedButton() {
+    const ready = Boolean(capturedFrameBlob) && Boolean(document.getElementById("objectName").value.trim());
+    document.getElementById("btnEmbed").disabled = !ready;
+}
+
+async function captureFromCamera() {
+    const feed = document.getElementById("cameraFeed");
+    const preview = document.getElementById("capturePreview");
+    const wrap = preview.parentElement;
+    try {
+        if (!feed.naturalWidth) {
+            throw new Error("Live camera frame is not ready");
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = feed.naturalWidth;
+        canvas.height = feed.naturalHeight;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(feed, 0, 0);
+        const blob = await new Promise((resolve, reject) => {
+            canvas.toBlob((result) => {
+                if (result) resolve(result);
+                else reject(new Error("Could not encode captured frame"));
+            }, "image/jpeg", 0.92);
+        });
+        capturedFrameBlob = blob;
+        if (capturedPreviewUrl) URL.revokeObjectURL(capturedPreviewUrl);
+        capturedPreviewUrl = URL.createObjectURL(blob);
+        preview.src = capturedPreviewUrl;
+        wrap.classList.add("has-frame");
+        setEmbedStatus("Frame captured. Name the object, then create the embedding.");
+        updateEmbedButton();
+    } catch (error) {
+        console.error("Capture error:", error);
+        setEmbedStatus(error.message || "Could not capture the camera frame.", "error");
+    }
+}
+
+async function createEmbedding() {
+    const objectName = document.getElementById("objectName").value.trim();
+    if (!capturedFrameBlob || !objectName) {
+        setEmbedStatus("Capture a frame and enter an object name first.", "error");
+        return;
+    }
+    const button = document.getElementById("btnEmbed");
+    button.disabled = true;
+    setEmbedStatus("Creating embedding…", "busy");
+    try {
+        const body = new FormData();
+        body.append("file", capturedFrameBlob, "capture.jpg");
+        body.append("object_name", objectName);
+        const response = await fetch(CONFIG.embeddingUrl, {
+            method: "POST",
+            body,
+            cache: "no-store",
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            const detail = data.detail;
+            const message = typeof detail === "string" ? detail : "Embedding request failed";
+            throw new Error(message);
+        }
+        setEmbedStatus(`✅ Embedding saved for ${data.object_name}`, "ok");
+    } catch (error) {
+        console.error("Embedding error:", error);
+        setEmbedStatus(error.message || "Could not save embedding.", "error");
+    } finally {
+        updateEmbedButton();
+    }
+}
+
+document.getElementById("btnCapture").addEventListener("click", captureFromCamera);
+document.getElementById("objectName").addEventListener("input", updateEmbedButton);
+document.getElementById("btnEmbed").addEventListener("click", createEmbedding);
+
+function setDbBadge(state, text) {
+    const badge = document.getElementById("dbStatusBadge");
+    const label = document.getElementById("dbStatusText");
+    badge.className = `status-badge ${state}`;
+    label.textContent = text;
+}
+
+async function updateDbStatus() {
+    try {
+        const response = await fetch(CONFIG.dbStatusUrl, { cache: "no-store" });
+        const data = await response.json();
+        if (data.connected) {
+            setDbBadge("live", "LIVE");
+            return;
+        }
+        throw new Error(data.error || "Database unavailable");
+    } catch (error) {
+        console.error("DB status error:", error);
+        setDbBadge("error", "DB ERROR");
+        setTimeout(updateDbStatus, CONFIG.dbRetryMs || 5000);
+    }
+}
+
+updateDbStatus();
