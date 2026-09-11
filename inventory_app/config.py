@@ -4,8 +4,27 @@ import socket
 # App folder (this file's directory)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Database
-DB_PATH = os.path.join(BASE_DIR, "inventory.db")
+# Database (PostgreSQL). Override with a .env file or DATABASE_URL.
+def _load_dotenv():
+    env_path = os.path.join(BASE_DIR, ".env")
+    if not os.path.isfile(env_path):
+        return
+    with open(env_path, encoding="utf-8") as handle:
+        for raw in handle:
+            line = raw.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip().strip("'").strip('"'))
+
+
+_load_dotenv()
+
+DATABASE_URL = os.environ.get(
+    "DATABASE_URL",
+    "postgresql://oneshot:oneshot@127.0.0.1:5432/oneshot_inventory",
+)
+SQLITE_PATH = os.path.join(BASE_DIR, "inventory.db")
 LOW_STOCK_THRESHOLD = 10
 
 # Server — 0.0.0.0 lets phones/laptops on the same Wi-Fi open the dashboard

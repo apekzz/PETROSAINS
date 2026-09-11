@@ -1,6 +1,9 @@
-import sqlite3
+from contextlib import contextmanager
 
-from config import DB_PATH, LOW_STOCK_THRESHOLD
+import psycopg
+from psycopg.rows import dict_row
+
+from config import DATABASE_URL, LOW_STOCK_THRESHOLD
 
 INVENTORY_ORDER = """
 ORDER BY
@@ -17,13 +20,17 @@ SEED_ITEMS = [
 ]
 
 
+@contextmanager
 def get_db():
-    conn = sqlite3.connect(DB_PATH, timeout=5)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA foreign_keys=ON")
-    conn.execute("PRAGMA busy_timeout=5000")
-    return conn
+    conn = psycopg.connect(DATABASE_URL, row_factory=dict_row)
+    try:
+        yield conn
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
 
 
 def normalize_item_name(name):
@@ -38,13 +45,12 @@ def status_for_quantity(quantity, previous_status=None):
     return "Available"
 
 
-def init_schema(clear_non_inventory=False):
-    conn = get_db()
-    try:
+def init_schema(clear_non_inventory=False, seed=True):
+    with get_db() as conn:
         conn.execute(
             """
             CREATE TABLE IF NOT EXISTS inventory (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id SERIAL PRIMARY KEY,
                 item_name TEXT NOT NULL,
                 category TEXT,
                 quantity INTEGER DEFAULT 0,
@@ -59,22 +65,21 @@ def init_schema(clear_non_inventory=False):
         conn.execute(
             """
             CREATE TABLE IF NOT EXISTS transactions (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                item_id INTEGER,
+                id SERIAL PRIMARY KEY,
+                item_id INTEGER REFERENCES inventory(id),
                 action TEXT,
-                user TEXT,
-                timestamp TEXT,
-                FOREIGN KEY (item_id) REFERENCES inventory(id)
+                acted_by TEXT,
+                timestamp TEXT
             )
             """
         )
         conn.execute(
             """
             CREATE TABLE IF NOT EXISTS detections (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id SERIAL PRIMARY KEY,
                 class_name TEXT,
                 count INTEGER,
-                confidence REAL,
+                confidence DOUBLE PRECISION,
                 direction TEXT DEFAULT 'SCAN',
                 timestamp TEXT,
                 scan_session TEXT,
@@ -82,24 +87,12 @@ def init_schema(clear_non_inventory=False):
             )
             """
         )
-
-        existing_columns = {
-            row[1] for row in conn.execute("PRAGMA table_info(detections)").fetchall()
-        }
-        required_columns = {
-            "class_name": "TEXT",
-            "count": "INTEGER",
-            "confidence": "REAL",
-            "direction": "TEXT DEFAULT 'SCAN'",
-            "timestamp": "TEXT",
-            "scan_session": "TEXT",
-            "operator": "TEXT DEFAULT 'System'",
-        }
-        for column_name, column_def in required_columns.items():
-            if column_name not in existing_columns:
-                conn.execute(
-                    f"ALTER TABLE detections ADD COLUMN {column_name} {column_def}"
-                )
+        conn.execute(
+            """
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_inventory_item_name
+            ON inventory (LOWER(item_name))
+            """
+        )
 
         if clear_non_inventory:
             conn.execute("DELETE FROM detections")
@@ -107,48 +100,39 @@ def init_schema(clear_non_inventory=False):
 
         conn.execute(
             """
-            DELETE FROM inventory
-            WHERE id NOT IN (
-                SELECT MIN(id) FROM inventory GROUP BY item_name COLLATE NOCASE
-            )
-            """
-        )
-        conn.execute(
-            """
-            CREATE UNIQUE INDEX IF NOT EXISTS idx_inventory_item_name
-            ON inventory(item_name COLLATE NOCASE)
+            DELETE FROM inventory a
+            USING inventory b
+            WHERE a.id > b.id
+              AND LOWER(a.item_name) = LOWER(b.item_name)
             """
         )
 
-        if conn.execute("SELECT COUNT(*) FROM inventory").fetchone()[0] == 0:
-            conn.executemany(
-                """
-                INSERT INTO inventory
-                    (item_name, category, quantity, unit_type, location, status)
-                VALUES (?, ?, ?, ?, ?, ?)
-                """,
-                SEED_ITEMS,
-            )
-
-        conn.commit()
-    finally:
-        conn.close()
+        count = conn.execute("SELECT COUNT(*) AS n FROM inventory").fetchone()["n"]
+        if seed and count == 0:
+            with conn.cursor() as cur:
+                cur.executemany(
+                    """
+                    INSERT INTO inventory
+                        (item_name, category, quantity, unit_type, location, status)
+                    VALUES (%s, %s, %s, %s, %s, %s)
+                    """,
+                    SEED_ITEMS,
+                )
 
 
 def fetch_inventory(term=""):
-    conn = get_db()
-    try:
+    with get_db() as conn:
         needle = (term or "").strip()
         if needle:
             like = f"%{needle}%"
             rows = conn.execute(
                 f"""
                 SELECT * FROM inventory
-                WHERE item_name LIKE ? COLLATE NOCASE
-                   OR location LIKE ? COLLATE NOCASE
-                   OR status LIKE ? COLLATE NOCASE
-                   OR category LIKE ? COLLATE NOCASE
-                   OR unit_type LIKE ? COLLATE NOCASE
+                WHERE item_name ILIKE %s
+                   OR location ILIKE %s
+                   OR status ILIKE %s
+                   OR category ILIKE %s
+                   OR unit_type ILIKE %s
                 {INVENTORY_ORDER}
                 """,
                 (like, like, like, like, like),
@@ -158,25 +142,19 @@ def fetch_inventory(term=""):
                 f"SELECT * FROM inventory {INVENTORY_ORDER}"
             ).fetchall()
         return [dict(row) for row in rows]
-    finally:
-        conn.close()
 
 
 def fetch_item(item_id):
-    conn = get_db()
-    try:
+    with get_db() as conn:
         row = conn.execute(
-            "SELECT * FROM inventory WHERE id = ?",
+            "SELECT * FROM inventory WHERE id = %s",
             (item_id,),
         ).fetchone()
         return dict(row) if row else None
-    finally:
-        conn.close()
 
 
 def fetch_stats():
-    conn = get_db()
-    try:
+    with get_db() as conn:
         row = conn.execute(
             """
             SELECT
@@ -184,7 +162,7 @@ def fetch_stats():
                 COALESCE(SUM(CASE WHEN status = 'Available' THEN 1 ELSE 0 END), 0) AS available,
                 COALESCE(SUM(CASE WHEN status = 'Checked Out' THEN 1 ELSE 0 END), 0) AS checked_out,
                 COALESCE(SUM(
-                    CASE WHEN quantity > 0 AND quantity < ? THEN 1 ELSE 0 END
+                    CASE WHEN quantity > 0 AND quantity < %s THEN 1 ELSE 0 END
                 ), 0) AS low_stock
             FROM inventory
             """,
@@ -196,25 +174,19 @@ def fetch_stats():
             "checked_out": int(row["checked_out"] or 0),
             "low_stock": int(row["low_stock"] or 0),
         }
-    finally:
-        conn.close()
 
 
 def fetch_detections(limit=100):
-    conn = get_db()
-    try:
+    with get_db() as conn:
         rows = conn.execute(
-            "SELECT * FROM detections ORDER BY id DESC LIMIT ?",
+            "SELECT * FROM detections ORDER BY id DESC LIMIT %s",
             (limit,),
         ).fetchall()
         return [dict(row) for row in rows]
-    finally:
-        conn.close()
 
 
 def fetch_detections_summary():
-    conn = get_db()
-    try:
+    with get_db() as conn:
         rows = conn.execute(
             """
             SELECT
@@ -227,29 +199,32 @@ def fetch_detections_summary():
             ORDER BY total_count DESC
             """
         ).fetchall()
-        return [dict(row) for row in rows]
-    finally:
-        conn.close()
+        return [
+            {
+                **dict(row),
+                "avg_confidence": float(row["avg_confidence"])
+                if row["avg_confidence"] is not None
+                else None,
+            }
+            for row in rows
+        ]
 
 
 def fetch_detections_today():
-    conn = get_db()
-    try:
+    with get_db() as conn:
         rows = conn.execute(
             """
             SELECT * FROM detections
-            WHERE date(timestamp) = date('now', 'localtime')
+            WHERE timestamp::date = CURRENT_DATE
             ORDER BY id DESC
             """
         ).fetchall()
         return [dict(row) for row in rows]
-    finally:
-        conn.close()
 
 
 def _get_item_by_name(conn, item_name):
     return conn.execute(
-        "SELECT * FROM inventory WHERE item_name = ? COLLATE NOCASE",
+        "SELECT * FROM inventory WHERE LOWER(item_name) = LOWER(%s)",
         (item_name,),
     ).fetchone()
 
@@ -268,15 +243,16 @@ def apply_capture_to_inventory(conn, class_name, count, mode, timestamp, operato
         else:
             quantity = count
         status = status_for_quantity(quantity)
-        cursor = conn.execute(
+        inserted = conn.execute(
             """
             INSERT INTO inventory
                 (item_name, category, quantity, unit_type, location, status, last_seen)
-            VALUES (?, 'Detected', ?, 'Single', 'Camera', ?, ?)
+            VALUES (%s, 'Detected', %s, 'Single', 'Camera', %s, %s)
+            RETURNING id
             """,
             (item_name, quantity, status, timestamp),
-        )
-        item_id = cursor.lastrowid
+        ).fetchone()
+        item_id = inserted["id"]
         print(
             f"[INVENTORY] NEW {item_name} | mode={mode} qty={quantity} status={status}"
         )
@@ -300,8 +276,8 @@ def apply_capture_to_inventory(conn, class_name, count, mode, timestamp, operato
         conn.execute(
             """
             UPDATE inventory
-            SET quantity = ?, status = ?, last_seen = ?
-            WHERE id = ?
+            SET quantity = %s, status = %s, last_seen = %s
+            WHERE id = %s
             """,
             (quantity, status, last_seen, item_id),
         )
@@ -311,8 +287,8 @@ def apply_capture_to_inventory(conn, class_name, count, mode, timestamp, operato
 
     conn.execute(
         """
-        INSERT INTO transactions (item_id, action, user, timestamp)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO transactions (item_id, action, acted_by, timestamp)
+        VALUES (%s, %s, %s, %s)
         """,
         (item_id, action, operator, timestamp),
     )
@@ -324,8 +300,7 @@ def record_yolo_capture(grouped, mode, timestamp, session_id, operator):
     Log YOLO classes and upsert them into inventory.
     grouped: {class_name: [confidence, ...]}
     """
-    conn = get_db()
-    try:
+    with get_db() as conn:
         rows = [
             (
                 class_name,
@@ -338,14 +313,15 @@ def record_yolo_capture(grouped, mode, timestamp, session_id, operator):
             )
             for class_name, scores in grouped.items()
         ]
-        conn.executemany(
-            """
-            INSERT INTO detections
-                (class_name, count, confidence, direction, timestamp, scan_session, operator)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-            """,
-            rows,
-        )
+        with conn.cursor() as cur:
+            cur.executemany(
+                """
+                INSERT INTO detections
+                    (class_name, count, confidence, direction, timestamp, scan_session, operator)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                """,
+                rows,
+            )
         for class_name, scores in grouped.items():
             apply_capture_to_inventory(
                 conn,
@@ -355,6 +331,3 @@ def record_yolo_capture(grouped, mode, timestamp, session_id, operator):
                 timestamp,
                 operator,
             )
-        conn.commit()
-    finally:
-        conn.close()
