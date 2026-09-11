@@ -137,11 +137,12 @@ function restoreMask(bytes) {
   maskCtx.putImageData(imageData, 0, 0); state.maskPixels = count; updateMaskUi(); scheduleRender();
 }
 function normalizeMask(bounds = null) {
+  const fullMask = bounds === null;
   const left = bounds ? Math.max(0, Math.floor(bounds.left)) : 0, top = bounds ? Math.max(0, Math.floor(bounds.top)) : 0;
   const right = bounds ? Math.min(state.imageWidth, Math.ceil(bounds.right)) : state.imageWidth, bottom = bounds ? Math.min(state.imageHeight, Math.ceil(bounds.bottom)) : state.imageHeight;
-  const data = maskCtx.getImageData(left, top, right - left, bottom - top); let delta = 0;
-  for (let i = 0; i < data.data.length; i += 4) { const wasFilled = data.data[i + 3] > 0, filled = data.data[i + 3] >= 128; delta += Number(filled) - Number(wasFilled); data.data[i] = 0; data.data[i + 1] = 240; data.data[i + 2] = 255; data.data[i + 3] = filled ? 255 : 0; }
-  maskCtx.putImageData(data, left, top); state.maskPixels = Math.max(0, state.maskPixels + delta);
+  const data = maskCtx.getImageData(left, top, right - left, bottom - top); let delta = 0, total = 0;
+  for (let i = 0; i < data.data.length; i += 4) { const wasFilled = data.data[i + 3] > 0, filled = data.data[i + 3] >= 128; delta += Number(filled) - Number(wasFilled); total += Number(filled); data.data[i] = 0; data.data[i + 1] = 240; data.data[i + 2] = 255; data.data[i + 3] = filled ? 255 : 0; }
+  maskCtx.putImageData(data, left, top); state.maskPixels = fullMask ? total : Math.max(0, state.maskPixels + delta);
 }
 function pushHistory() {
   if (!state.imageLoaded) return;
