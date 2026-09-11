@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Query
 
-from db import (
+from database.db import (
     fetch_detections,
     fetch_detections_summary,
     fetch_detections_today,

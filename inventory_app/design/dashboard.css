@@ -8,6 +8,8 @@
 html,
 body {
     height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -45,13 +47,18 @@ body::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: nowrap;
+    gap: 10px;
     z-index: 100;
+    min-width: 0;
 }
 
 .brand {
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 0;
+    flex: 1;
 }
 
 .petronas-logo {
@@ -62,7 +69,7 @@ body::after {
 
 .header h1 {
     font-family: "Rajdhani", sans-serif;
-    font-size: 28px;
+    font-size: clamp(18px, 2.4vw, 28px);
     font-weight: 700;
     letter-spacing: 0.04em;
     line-height: 1;
@@ -78,7 +85,7 @@ body::after {
 
 .brand-sub {
     color: var(--text-main);
-    font-size: 14px;
+    font-size: clamp(11px, 1.4vw, 14px);
     font-weight: 500;
     letter-spacing: 0.02em;
 }
@@ -95,6 +102,8 @@ body::after {
     align-items: center;
     gap: 8px;
     color: var(--neon-cyan);
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .status-dot {
@@ -219,7 +228,7 @@ body::after {
 
 .stat-card p {
     font-family: "Rajdhani", sans-serif;
-    font-size: 26px;
+    font-size: clamp(20px, 2.4vw, 26px);
     font-weight: 800;
     letter-spacing: -0.05em;
     color: var(--neon-cyan);
@@ -451,7 +460,7 @@ body::after {
 
 .camera-view {
     flex: 1;
-    min-height: 0;
+    min-height: 400px;
     width: 100%;
     height: auto;
     background: #05070c;
@@ -475,40 +484,25 @@ body::after {
     z-index: 20;
     padding: 5px 10px;
     border-radius: var(--radius-sm);
-    background: rgba(5, 7, 12, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--border-soft);
+    background: rgba(5, 7, 12, 0.22);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(0, 212, 200, 0.12);
     color: var(--neon-cyan);
     font-size: 10px;
     letter-spacing: 0.08em;
+    opacity: 0.28;
+    pointer-events: none;
 }
 
 .camera-status.error {
     color: var(--neon-red);
-    border-color: var(--neon-red);
+    border-color: rgba(255, 90, 106, 0.35);
+    opacity: 0.7;
 }
 
-.yolo-detections {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    z-index: 21;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    pointer-events: none;
-}
-
+.yolo-detections,
 .yolo-chip {
-    padding: 4px 8px;
-    border-radius: var(--radius-sm);
-    background: rgba(5, 7, 12, 0.78);
-    border: 1px solid rgba(0, 212, 200, 0.45);
-    color: var(--neon-cyan);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.03em;
+    display: none;
 }
 
 .mode-card {
@@ -632,11 +626,12 @@ body::after {
 .inventory-table-wrap {
     flex: 1;
     min-height: 0;
+    overflow-x: auto;
     overflow-y: auto;
     border: 1px solid var(--border-soft);
     border-radius: 14px;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
+    touch-action: pan-x pan-y;
 }
 
 .inventory-table-wrap *,
@@ -822,26 +817,219 @@ tbody tr:hover {
     letter-spacing: 0.12em;
 }
 
-@media (max-width: 980px) {
-    body {
-        overflow: auto;
-        height: auto;
-        min-height: 100dvh;
+/* Tablet portrait */
+@media (max-width: 1024px) and (orientation: portrait) {
+    .container {
+        gap: 8px;
+        padding: 8px 12px 10px;
     }
 
     .stats-row,
     .action-row,
-    .workspace,
-    .mode-buttons,
-    .add-item-card {
-        grid-template-columns: 1fr;
+    .workspace {
+        gap: 8px;
     }
 
-    .mode-card {
-        flex-wrap: wrap;
+    .stats-row {
+        grid-template-columns: 1fr 1fr;
     }
 
     .workspace {
-        min-height: 70vh;
+        grid-template-columns: 1fr 1fr;
+        min-height: 0;
+    }
+
+    .camera-view {
+        min-height: 320px;
+        height: 320px;
+        flex: none;
+    }
+}
+
+/* Phone */
+@media (max-width: 767px) {
+    html,
+    body {
+        height: auto;
+        min-height: 100dvh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .header {
+        padding: 8px 10px;
+        gap: 8px;
+    }
+
+    .brand {
+        gap: 8px;
+        min-width: 0;
+    }
+
+    .petronas-logo {
+        height: 28px;
+    }
+
+    .header h1 {
+        font-size: 16px;
+    }
+
+    .brand-divider {
+        height: 16px;
+    }
+
+    .brand-sub {
+        font-size: 11px;
+        white-space: nowrap;
+    }
+
+    .status-badge {
+        padding: 4px 8px;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+
+    .container {
+        padding: 8px 10px 12px;
+        gap: 8px;
+        overflow: visible;
+    }
+
+    .action-row {
+        display: none;
+    }
+
+    .workspace {
+        display: contents;
+    }
+
+    .inventory-card {
+        order: 1;
+        width: 100%;
+        height: auto;
+        min-height: 280px;
+        max-height: 52dvh;
+    }
+
+    .stats-row {
+        order: 2;
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+
+    .mode-card {
+        order: 3;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 8px 10px;
+    }
+
+    .camera-card {
+        order: 4;
+        width: 100%;
+        height: auto;
+    }
+
+    .stat-card {
+        padding: 8px 10px;
+    }
+
+    .stat-card p {
+        font-size: 22px;
+    }
+
+    .mode-buttons {
+        width: 100%;
+        gap: 6px;
+    }
+
+    .mode-btn,
+    .search-bar {
+        min-height: 44px;
+    }
+
+    .camera-view {
+        min-height: 220px;
+        height: 220px;
+        flex: none;
+    }
+
+    .inventory-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .inventory-table-wrap table {
+        min-width: 520px;
+    }
+
+    .boot-card {
+        width: min(360px, 92vw);
+    }
+}
+
+/* Small phone */
+@media (max-width: 480px) {
+    .header {
+        padding: 6px 8px;
+    }
+
+    .petronas-logo {
+        height: 24px;
+    }
+
+    .header h1 {
+        font-size: 15px;
+    }
+
+    .brand-sub {
+        font-size: 10px;
+    }
+
+    .status-badge {
+        padding: 3px 6px;
+        font-size: 8px;
+        gap: 5px;
+    }
+
+    .container {
+        padding: 6px 8px 10px;
+        gap: 6px;
+    }
+
+    .stat-card {
+        padding: 6px 8px;
+    }
+
+    .stat-card h3 {
+        font-size: 9px;
+        margin-bottom: 2px;
+    }
+
+    .stat-card p {
+        font-size: 20px;
+    }
+
+    .camera-view {
+        min-height: 200px;
+        height: 200px;
+    }
+
+    .mode-card h2,
+    #modeStatus {
+        font-size: 11px;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .mode-btn,
+    .search-bar,
+    .embed-btn,
+    .embed-input {
+        min-height: 44px;
     }
 }

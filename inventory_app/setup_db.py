@@ -9,7 +9,7 @@ import sys
 import psycopg
 
 from config import BASE_DIR, DATABASE_URL, SQLITE_PATH
-from db import fetch_inventory, fetch_stats, init_schema
+from database.db import fetch_inventory, fetch_stats, init_schema
 
 ADMIN_URL = os.environ.get("POSTGRES_ADMIN_URL", "postgresql:///postgres")
 
@@ -105,7 +105,7 @@ def migrate_sqlite_inventory():
     if not rows:
         return 0
 
-    from db import get_db
+    from database.db import get_db
 
     seen = set()
     copied = 0
@@ -155,7 +155,7 @@ if __name__ == "__main__":
     if copied:
         print(f"Copied {copied} unique items from the old SQLite file.")
     print("Inventory stats:", stats)
-    from db import get_db
+    from database.db import get_db
     with get_db() as conn:
         embed_count = conn.execute(
             "SELECT COUNT(*) AS n FROM object_embeddings"

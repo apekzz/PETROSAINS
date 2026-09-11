@@ -17,9 +17,9 @@ from fastapi.responses import StreamingResponse, HTMLResponse, JSONResponse, Fil
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
-from api import router as api_router
-import loader
-from db import init_schema, record_yolo_capture, normalize_item_name, check_db, save_object_embedding
+from database.api import router as api_router
+from boot import loader
+from database.db import init_schema, record_yolo_capture, normalize_item_name, check_db, save_object_embedding
 from config import (
     BASE_DIR, HOST, PORT, CAMERA_INDEX, CAMERA_WIDTH, CAMERA_HEIGHT,
     TARGET_FPS, JPEG_QUALITY, MODEL_PATH, MODEL_CONFIDENCE, MODEL_IMAGE_SIZE,
@@ -247,12 +247,45 @@ def parse_yolo_boxes(results):
             "confidence": float(confidence),
             "name": normalize_item_name(names[int(class_id)]),
         })
-    return detections
+    return _nms_detections(detections)
+
+
+def _box_iou(a, b):
+    ax1, ay1, ax2, ay2 = a
+    bx1, by1, bx2, by2 = b
+    ix1, iy1 = max(ax1, bx1), max(ay1, by1)
+    ix2, iy2 = min(ax2, bx2), min(ay2, by2)
+    inter = max(0, ix2 - ix1) * max(0, iy2 - iy1)
+    if inter == 0:
+        return 0.0
+    area_a = max(0, ax2 - ax1) * max(0, ay2 - ay1)
+    area_b = max(0, bx2 - bx1) * max(0, by2 - by1)
+    union = area_a + area_b - inter
+    return inter / union if union else 0.0
+
+
+def _nms_detections(detections, iou_thresh=0.45):
+    """Keep the highest-confidence box when two overlap (same item)."""
+    ranked = sorted(detections, key=lambda item: item["confidence"], reverse=True)
+    kept = []
+    for item in ranked:
+        overlap = False
+        for other in kept:
+            if _box_iou(item["xyxy"], other["xyxy"]) >= iou_thresh:
+                overlap = True
+                break
+        if not overlap:
+            kept.append(item)
+    return kept
+
+
+def format_confidence(confidence):
+    return f"{int(round(float(confidence) * 100))}%"
 
 
 def detection_labels(detections):
     return [
-        f"{item['name']} {int(item['confidence'] * 100)}%"
+        f"{item['name']} {format_confidence(item['confidence'])}"
         for item in detections
     ]
 
@@ -261,7 +294,7 @@ def draw_yolo_boxes(frame, detections):
     vis = frame.copy()
     for item in detections:
         x1, y1, x2, y2 = item["xyxy"]
-        label = f"{item['name']} {int(item['confidence'] * 100)}%"
+        label = f"{item['name']} {format_confidence(item['confidence'])}"
         cv2.rectangle(vis, (x1, y1), (x2, y2), BOX_COLOR, 2)
 
         (text_w, text_h), baseline = cv2.getTextSize(
@@ -853,7 +886,7 @@ def video_feed():
 
 @app.get("/", response_class=HTMLResponse)
 def serve_dashboard():
-    dashboard_path = os.path.join(BASE_DIR, "dashboard.html")
+    dashboard_path = os.path.join(BASE_DIR, "design", "dashboard.html")
     if not os.path.exists(dashboard_path):
         return HTMLResponse("<h1>dashboard.html not found</h1>", status_code=500)
     with open(dashboard_path, "r", encoding="utf-8") as file:
@@ -875,7 +908,7 @@ def serve_frontend_file(filename: str):
     media_type = FRONTEND_FILES.get(filename)
     if media_type is None:
         return JSONResponse({"detail": "Not found"}, status_code=404)
-    file_path = os.path.join(BASE_DIR, filename)
+    file_path = os.path.join(BASE_DIR, "design", filename)
     if not os.path.exists(file_path):
         return JSONResponse({"detail": f"{filename} not found"}, status_code=404)
     return FileResponse(file_path, media_type=media_type)

@@ -3,21 +3,20 @@
 ## File Structure
 - **`main.py`** -> **[RUN THIS]**: Starts the server and camera. (Entry point)
 - **`setup_db.py`** -> **[RUN ONCE]**: Creates the Postgres database, tables, and sample/imported inventory.
-- **`db.py`** -> Database access (PostgreSQL).
-- **`api.py`** -> The API layer (endpoints like `/api/inventory`, `/api/stats`).
 - **`config.py`** -> Configuration (Postgres URL, camera, port).
 - **`.env`** -> Local secrets (copy from `.env.example`). Not committed.
-- **`dashboard.html`** -> The main frontend page.
-- **`dashboard.css`** -> Styling for the dashboard.
-- **`dashboard.js`** -> Frontend logic.
-- **`theme.css`** -> Color palette and variables (Neon theme).
-- **`config.js`** -> Frontend API endpoints and delay settings.
+- **`boot/loader.py`** -> Terminal boot splash while the app starts.
+- **`database/db.py`** -> Database access (PostgreSQL).
+- **`database/api.py`** -> API layer (`/api/inventory`, `/api/stats`, …).
+- **`database/inventory.db`** -> Legacy SQLite copy (optional import into Postgres).
+- **`design/`** -> Dashboard HTML, CSS, JS, theme, and logo.
+- **`models/`** -> YOLO weights (`best.pt`, `yolov8n.pt`).
 
 ---
 
 ## PostgreSQL (config, use, maintain)
 
-The app no longer uses `inventory.db` (SQLite). It stores inventory, scans, and transactions in Postgres.
+The app no longer uses SQLite at runtime. It stores inventory, scans, and transactions in Postgres. The old `database/inventory.db` file is only used if you import it with `setup_db.py`.
 
 Default login created by `setup_db.py`:
 
@@ -59,7 +58,7 @@ python3 setup_db.py
 1. Start/check Postgres
 2. Create the `oneshot` user and `oneshot_inventory` database if missing
 3. Create tables (`inventory`, `transactions`, `detections`)
-4. Copy unique items from the old `inventory.db` if Postgres is empty
+4. Copy unique items from the old `database/inventory.db` if Postgres is empty
 5. Seed sample items only if both are empty
 
 ### Daily use

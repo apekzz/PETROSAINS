@@ -24,5 +24,6 @@
     --radius-sm: 999px;
 
     --container-max-width: 1440px;
-    --break-mobile: 980px;
+    --break-mobile: 767px;
+    --break-tablet: 1024px;
 }

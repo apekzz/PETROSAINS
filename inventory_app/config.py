@@ -24,7 +24,7 @@ DATABASE_URL = os.environ.get(
     "DATABASE_URL",
     "postgresql://oneshot:oneshot@127.0.0.1:5432/oneshot_inventory",
 )
-SQLITE_PATH = os.path.join(BASE_DIR, "inventory.db")
+SQLITE_PATH = os.path.join(BASE_DIR, "database", "inventory.db")
 LOW_STOCK_THRESHOLD = 10
 
 # Server — 0.0.0.0 lets phones/laptops on the same Wi-Fi open the dashboard
