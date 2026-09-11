@@ -30,7 +30,14 @@ from config import (
 )
 
 
-# ============================================================
+# ====================
+# 
+# 
+# 
+# 
+# 
+# 
+# ========================================
 # APP
 # ============================================================
 
@@ -365,71 +372,252 @@ def significant_change(mask):
 def open_camera():
     global camera, camera_ok, camera_error
 
+    # --------------------------------------------------------
+    # RELEASE PREVIOUS CAMERA
+    # --------------------------------------------------------
+
     if camera is not None:
         try:
             camera.release()
         except Exception:
             pass
+
         camera = None
 
-    backend = cv2.CAP_AVFOUNDATION if sys.platform == "darwin" else cv2.CAP_ANY
-    print(f"[CAMERA] Trying camera index {CAMERA_INDEX}...")
+    # --------------------------------------------------------
+    # BACKEND OPTIONS
+    # --------------------------------------------------------
 
-    try:
-        camera = cv2.VideoCapture(CAMERA_INDEX, backend)
-    except Exception as exc:
-        camera = None
-        camera_ok = False
-        camera_error = f"Could not create VideoCapture: {exc}"
-        print("[CAMERA]", camera_error)
-        return False
+    if sys.platform == "darwin":
 
-    if camera is None or not camera.isOpened():
-        camera_error = f"Camera index {CAMERA_INDEX} could not be opened."
-        camera_ok = False
-        print("[CAMERA]", camera_error)
-        if camera is not None:
-            try:
-                camera.release()
-            except Exception:
-                pass
-            camera = None
-        return False
+        backend_options = [
+            ("AVFOUNDATION", cv2.CAP_AVFOUNDATION)
+        ]
 
-    camera.set(cv2.CAP_PROP_FRAME_WIDTH, CAMERA_WIDTH)
-    camera.set(cv2.CAP_PROP_FRAME_HEIGHT, CAMERA_HEIGHT)
-    camera.set(cv2.CAP_PROP_FPS, TARGET_FPS)
+    elif sys.platform.startswith("win"):
 
-    print("[CAMERA] Warming up...")
-    time.sleep(1.0)
+        backend_options = [
+            ("DSHOW", cv2.CAP_DSHOW),
+            ("MSMF", cv2.CAP_MSMF),
+            ("ANY", cv2.CAP_ANY),
+        ]
 
-    for _ in range(20):
-        ok, frame = camera.read()
-        if ok and frame is not None:
-            if np.mean(frame) < 5.0:
-                print("[CAMERA] WARNING: Frames are black. Check FaceTime/Zoom/Teams!")
-            else:
-                print("[CAMERA] Camera feed is live!")
+    else:
+
+        backend_options = [
+            ("ANY", cv2.CAP_ANY)
+        ]
+
+    # --------------------------------------------------------
+    # TRY EACH BACKEND
+    # --------------------------------------------------------
+
+    for backend_name, backend in backend_options:
+
+        print(
+            f"[CAMERA] Trying index {CAMERA_INDEX} "
+            f"with {backend_name}..."
+        )
+
+        try:
+
+            test_camera = cv2.VideoCapture(
+                CAMERA_INDEX,
+                backend
+            )
+
+        except Exception as exc:
+
+            print(
+                f"[CAMERA] {backend_name} failed:",
+                exc
+            )
+
+            continue
+
+        if not test_camera.isOpened():
+
+            print(
+                f"[CAMERA] {backend_name} could not open camera."
+            )
+
+            test_camera.release()
+
+            continue
+
+        # ----------------------------------------------------
+        # WINDOWS — REQUEST MJPG
+        # ----------------------------------------------------
+
+        if sys.platform.startswith("win"):
+
+            test_camera.set(
+                cv2.CAP_PROP_FOURCC,
+                cv2.VideoWriter_fourcc(
+                    "M",
+                    "J",
+                    "P",
+                    "G"
+                )
+            )
+
+        # ----------------------------------------------------
+        # CAMERA SETTINGS
+        # ----------------------------------------------------
+
+        test_camera.set(
+            cv2.CAP_PROP_FRAME_WIDTH,
+            CAMERA_WIDTH
+        )
+
+        test_camera.set(
+            cv2.CAP_PROP_FRAME_HEIGHT,
+            CAMERA_HEIGHT
+        )
+
+        test_camera.set(
+            cv2.CAP_PROP_FPS,
+            TARGET_FPS
+        )
+
+        print(
+            f"[CAMERA] Warming up {backend_name}..."
+        )
+
+        time.sleep(1.0)
+
+        valid_frame = None
+
+        # ----------------------------------------------------
+        # TEST FRAMES
+        # ----------------------------------------------------
+
+        for _ in range(30):
+
+            ok, frame = test_camera.read()
+
+            if not ok or frame is None:
+                time.sleep(0.1)
+                continue
+
+            # ----------------------------------------------
+            # BASIC FRAME STATISTICS
+            # OpenCV channel order = BGR
+            # ----------------------------------------------
+
+            channel_mean = frame.mean(
+                axis=(0, 1)
+            )
+
+            blue_mean = channel_mean[0]
+            green_mean = channel_mean[1]
+            red_mean = channel_mean[2]
+
+            frame_std = frame.std()
+
+            print(
+                f"[CAMERA DEBUG] "
+                f"B={blue_mean:.1f} "
+                f"G={green_mean:.1f} "
+                f"R={red_mean:.1f} "
+                f"STD={frame_std:.1f}"
+            )
+
+            # ----------------------------------------------
+            # REJECT BLACK / EMPTY FRAME
+            # ----------------------------------------------
+
+            if frame.mean() < 5.0:
+                continue
+
+            # ----------------------------------------------
+            # REJECT SOLID / CORRUPTED GREEN FRAME
+            # ----------------------------------------------
+
+            green_corrupt = (
+                green_mean
+                > blue_mean * 2.5
+                and
+                green_mean
+                > red_mean * 2.5
+                and
+                frame_std < 70
+            )
+
+            if green_corrupt:
+
+                print(
+                    "[CAMERA] Corrupted green frame detected."
+                )
+
+                continue
+
+            valid_frame = frame
+            break
+
+        # ----------------------------------------------------
+        # BACKEND SUCCESS
+        # ----------------------------------------------------
+
+        if valid_frame is not None:
+
+            camera = test_camera
 
             camera_ok = True
             camera_error = ""
+
+            actual_width = int(
+                camera.get(
+                    cv2.CAP_PROP_FRAME_WIDTH
+                )
+            )
+
+            actual_height = int(
+                camera.get(
+                    cv2.CAP_PROP_FRAME_HEIGHT
+                )
+            )
+
+            print(
+                f"[CAMERA] SUCCESS using {backend_name}"
+            )
+
             print(
                 f"[CAMERA] Ready: "
-                f"{int(camera.get(cv2.CAP_PROP_FRAME_WIDTH))} x "
-                f"{int(camera.get(cv2.CAP_PROP_FRAME_HEIGHT))}"
+                f"{actual_width} x "
+                f"{actual_height}"
             )
-            reset_background_subtractor()
-            return True
-        time.sleep(0.1)
 
-    camera_error = "Camera opened, but frames could not be read."
-    camera_ok = False
-    print("[CAMERA]", camera_error)
-    try:
-        camera.release()
-    except Exception:
-        pass
+            reset_background_subtractor()
+
+            return True
+
+        # ----------------------------------------------------
+        # BACKEND PRODUCED INVALID FRAMES
+        # ----------------------------------------------------
+
+        print(
+            f"[CAMERA] {backend_name} produced invalid frames."
+        )
+
+        test_camera.release()
+
+    # --------------------------------------------------------
+    # ALL BACKENDS FAILED
+    # --------------------------------------------------------
+
     camera = None
+    camera_ok = False
+
+    camera_error = (
+        "No camera backend produced a valid frame."
+    )
+
+    print(
+        "[CAMERA]",
+        camera_error
+    )
+
     return False
 
 
