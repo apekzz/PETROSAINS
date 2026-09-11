@@ -155,4 +155,10 @@ if __name__ == "__main__":
     if copied:
         print(f"Copied {copied} unique items from the old SQLite file.")
     print("Inventory stats:", stats)
+    from db import get_db
+    with get_db() as conn:
+        embed_count = conn.execute(
+            "SELECT COUNT(*) AS n FROM object_embeddings"
+        ).fetchone()["n"]
+    print("object_embeddings rows:", embed_count)
     print("Project folder:", BASE_DIR)

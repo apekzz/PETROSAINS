@@ -283,3 +283,111 @@ async function pollBootStatus() {
 }
 
 pollBootStatus();
+
+let capturedFrameBlob = null;
+let capturedPreviewUrl = null;
+
+function setEmbedStatus(message, kind = "") {
+    const statusEl = document.getElementById("embedStatus");
+    statusEl.textContent = message;
+    statusEl.className = `embed-status ${kind}`.trim();
+}
+
+function updateEmbedButton() {
+    const ready = Boolean(capturedFrameBlob) && Boolean(document.getElementById("objectName").value.trim());
+    document.getElementById("btnEmbed").disabled = !ready;
+}
+
+async function captureFromCamera() {
+    const feed = document.getElementById("cameraFeed");
+    const preview = document.getElementById("capturePreview");
+    const wrap = preview.parentElement;
+    try {
+        if (!feed.naturalWidth) {
+            throw new Error("Live camera frame is not ready");
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = feed.naturalWidth;
+        canvas.height = feed.naturalHeight;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(feed, 0, 0);
+        const blob = await new Promise((resolve, reject) => {
+            canvas.toBlob((result) => {
+                if (result) resolve(result);
+                else reject(new Error("Could not encode captured frame"));
+            }, "image/jpeg", 0.92);
+        });
+        capturedFrameBlob = blob;
+        if (capturedPreviewUrl) URL.revokeObjectURL(capturedPreviewUrl);
+        capturedPreviewUrl = URL.createObjectURL(blob);
+        preview.src = capturedPreviewUrl;
+        wrap.classList.add("has-frame");
+        setEmbedStatus("Frame captured. Name the object, then create the embedding.");
+        updateEmbedButton();
+    } catch (error) {
+        console.error("Capture error:", error);
+        setEmbedStatus(error.message || "Could not capture the camera frame.", "error");
+    }
+}
+
+async function createEmbedding() {
+    const objectName = document.getElementById("objectName").value.trim();
+    if (!capturedFrameBlob || !objectName) {
+        setEmbedStatus("Capture a frame and enter an object name first.", "error");
+        return;
+    }
+    const button = document.getElementById("btnEmbed");
+    button.disabled = true;
+    setEmbedStatus("Creating embedding…", "busy");
+    try {
+        const body = new FormData();
+        body.append("file", capturedFrameBlob, "capture.jpg");
+        body.append("object_name", objectName);
+        const response = await fetch(CONFIG.embeddingUrl, {
+            method: "POST",
+            body,
+            cache: "no-store",
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            const detail = data.detail;
+            const message = typeof detail === "string" ? detail : "Embedding request failed";
+            throw new Error(message);
+        }
+        setEmbedStatus(`✅ Embedding saved for ${data.object_name}`, "ok");
+    } catch (error) {
+        console.error("Embedding error:", error);
+        setEmbedStatus(error.message || "Could not save embedding.", "error");
+    } finally {
+        updateEmbedButton();
+    }
+}
+
+document.getElementById("btnCapture").addEventListener("click", captureFromCamera);
+document.getElementById("objectName").addEventListener("input", updateEmbedButton);
+document.getElementById("btnEmbed").addEventListener("click", createEmbedding);
+
+function setDbBadge(state, text) {
+    const badge = document.getElementById("dbStatusBadge");
+    const label = document.getElementById("dbStatusText");
+    badge.className = `status-badge ${state}`;
+    label.textContent = text;
+}
+
+async function updateDbStatus() {
+    try {
+        const response = await fetch(CONFIG.dbStatusUrl, { cache: "no-store" });
+        const data = await response.json();
+        if (data.connected) {
+            setDbBadge("live", "LIVE");
+            return;
+        }
+        throw new Error(data.error || "Database unavailable");
+    } catch (error) {
+        console.error("DB status error:", error);
+        setDbBadge("error", "DB ERROR");
+        setTimeout(updateDbStatus, CONFIG.dbRetryMs || 5000);
+    }
+}
+
+updateDbStatus();

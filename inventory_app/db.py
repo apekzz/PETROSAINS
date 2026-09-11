@@ -89,6 +89,16 @@ def init_schema(clear_non_inventory=False, seed=True):
         )
         conn.execute(
             """
+            CREATE TABLE IF NOT EXISTS object_embeddings (
+                id SERIAL PRIMARY KEY,
+                object_name TEXT NOT NULL,
+                embedding TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+            """
+        )
+        conn.execute(
+            """
             CREATE UNIQUE INDEX IF NOT EXISTS idx_inventory_item_name
             ON inventory (LOWER(item_name))
             """
@@ -331,3 +341,25 @@ def record_yolo_capture(grouped, mode, timestamp, session_id, operator):
                 timestamp,
                 operator,
             )
+
+
+def check_db():
+    try:
+        with get_db() as conn:
+            conn.execute("SELECT 1")
+        return True, ""
+    except Exception as exc:
+        return False, str(exc)
+
+
+def save_object_embedding(object_name, embedding):
+    import json
+
+    with get_db() as conn:
+        conn.execute(
+            """
+            INSERT INTO object_embeddings (object_name, embedding)
+            VALUES (%s, %s)
+            """,
+            (object_name, json.dumps(embedding)),
+        )

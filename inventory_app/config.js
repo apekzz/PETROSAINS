@@ -6,10 +6,13 @@ window.ONESHOT_CONFIG = {
     videoFeedUrl: "/video_feed",
     modeUrl: "/api/mode",
     triggerStatusUrl: "/api/trigger_status",
+    dbStatusUrl: "/db_status",
+    embeddingUrl: "/api/objects/embedding",
 
     searchDebounceMs: 150,
     cameraPollMs: 2000,
     cameraRetryMs: 1500,
     statsAnimMs: 1000,
-    triggerPollMs: 500
+    triggerPollMs: 500,
+    dbRetryMs: 5000
 };

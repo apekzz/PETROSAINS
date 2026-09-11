@@ -5,20 +5,21 @@ import threading
 import platform
 from collections import defaultdict
 from datetime import datetime
+from io import BytesIO
 
 import cv2
 import numpy as np
 import torch
 from ultralytics import YOLO
 
-from fastapi import FastAPI
+from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.responses import StreamingResponse, HTMLResponse, JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from api import router as api_router
 import loader
-from db import init_schema, record_yolo_capture, normalize_item_name
+from db import init_schema, record_yolo_capture, normalize_item_name, check_db, save_object_embedding
 from config import (
     BASE_DIR, HOST, PORT, CAMERA_INDEX, CAMERA_WIDTH, CAMERA_HEIGHT,
     TARGET_FPS, JPEG_QUALITY, MODEL_PATH, MODEL_CONFIDENCE, MODEL_IMAGE_SIZE,
@@ -53,6 +54,11 @@ app.include_router(api_router)
 model = None
 MODEL_DEVICE = "cpu"
 
+embed_model = None
+embed_backend = None
+embed_lock = threading.Lock()
+EMBEDDING_SIZE = 512
+
 
 def load_model():
     global model, MODEL_DEVICE
@@ -60,6 +66,63 @@ def load_model():
         return
     model = YOLO(MODEL_PATH)
     MODEL_DEVICE = 0 if torch.cuda.is_available() else "cpu"
+
+
+def load_embed_model():
+    """CLIP (512-d) with ResNet50 pooled-to-512 fallback."""
+    global embed_model, embed_backend
+    if embed_model is not None:
+        return
+    with embed_lock:
+        if embed_model is not None:
+            return
+        try:
+            from sentence_transformers import SentenceTransformer
+            embed_model = SentenceTransformer("clip-ViT-B-32")
+            embed_backend = "clip"
+            print("[EMBED] Loaded CLIP clip-ViT-B-32 (512-d)")
+            return
+        except Exception as exc:
+            print("[EMBED] CLIP unavailable, using ResNet50 fallback:", exc)
+
+        from torchvision.models import resnet50, ResNet50_Weights
+        backbone = resnet50(weights=ResNet50_Weights.DEFAULT)
+        backbone.fc = torch.nn.Identity()
+        backbone.eval()
+        embed_model = backbone
+        embed_backend = "resnet50"
+        print("[EMBED] Loaded ResNet50 without final layer (pooled to 512-d)")
+
+
+def image_to_embedding(image_bytes):
+    from PIL import Image
+
+    load_embed_model()
+    image = Image.open(BytesIO(image_bytes)).convert("RGB")
+
+    if embed_backend == "clip":
+        vector = embed_model.encode(image, convert_to_numpy=True)
+        vector = np.asarray(vector, dtype=np.float32).reshape(-1)
+    else:
+        from torchvision import transforms
+        preprocess = transforms.Compose([
+            transforms.Resize(256),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize(
+                mean=[0.485, 0.456, 0.406],
+                std=[0.229, 0.224, 0.225],
+            ),
+        ])
+        tensor = preprocess(image).unsqueeze(0)
+        with torch.no_grad():
+            features = embed_model(tensor).squeeze().cpu().numpy().astype(np.float32)
+        # ResNet50 is 2048-d after dropping fc; pool groups of 4 → 512
+        vector = features.reshape(EMBEDDING_SIZE, -1).mean(axis=1)
+
+    if vector.size != EMBEDDING_SIZE:
+        raise ValueError(f"Expected {EMBEDDING_SIZE}-d embedding, got {vector.size}")
+    return [float(value) for value in vector]
 
 
 
@@ -687,6 +750,47 @@ def boot_status():
         "percent": boot_percent,
         "camera_ok": camera_ok,
         "trigger_state": get_trigger_state(),
+    })
+
+
+@app.get("/db_status")
+def db_status():
+    connected, error = check_db()
+    if connected:
+        return JSONResponse({"connected": True})
+    return JSONResponse({"connected": False, "error": error})
+
+
+@app.post("/api/objects/embedding")
+async def create_object_embedding(
+    file: UploadFile = File(...),
+    object_name: str = Form(...),
+):
+    name = normalize_item_name(object_name)
+    if not name:
+        return JSONResponse(
+            {"detail": "object_name is required"},
+            status_code=400,
+        )
+    image_bytes = await file.read()
+    if not image_bytes:
+        return JSONResponse(
+            {"detail": "Image file is empty"},
+            status_code=400,
+        )
+    try:
+        embedding = image_to_embedding(image_bytes)
+        save_object_embedding(name, embedding)
+    except Exception as exc:
+        print("[EMBED] Error:", exc)
+        return JSONResponse(
+            {"detail": f"Could not create embedding: {exc}"},
+            status_code=500,
+        )
+    return JSONResponse({
+        "status": "saved",
+        "object_name": name,
+        "embedding_size": len(embedding),
     })
 
 
