@@ -144,6 +144,19 @@ function normalizeMask(bounds = null) {
   for (let i = 0; i < data.data.length; i += 4) { const wasFilled = data.data[i + 3] > 0, filled = data.data[i + 3] >= 128; delta += Number(filled) - Number(wasFilled); total += Number(filled); data.data[i] = 0; data.data[i + 1] = 240; data.data[i + 2] = 255; data.data[i + 3] = filled ? 255 : 0; }
   maskCtx.putImageData(data, left, top); state.maskPixels = fullMask ? total : Math.max(0, state.maskPixels + delta);
 }
+function importSamMask(image) {
+  maskCtx.clearRect(0, 0, state.imageWidth, state.imageHeight);
+  maskCtx.drawImage(image, 0, 0, state.imageWidth, state.imageHeight);
+  const data = maskCtx.getImageData(0, 0, state.imageWidth, state.imageHeight);
+  for (let i = 0; i < data.data.length; i += 4) {
+    // SAM sends a black/white PNG. Black pixels are still opaque PNG pixels,
+    // so alpha cannot be used to decide which pixels belong to the object.
+    const foreground = data.data[i] >= 128;
+    data.data[i] = 0; data.data[i + 1] = 240; data.data[i + 2] = 255; data.data[i + 3] = foreground ? 255 : 0;
+  }
+  maskCtx.putImageData(data, 0, 0);
+  normalizeMask();
+}
 function pushHistory() {
   if (!state.imageLoaded) return;
   state.undoStack.push(maskBytes()); if (state.undoStack.length > state.historyLimit) state.undoStack.shift(); state.redoStack = []; updateHistoryUi();
@@ -251,7 +264,7 @@ ui.file.addEventListener("change", () => {
 ui.generate.addEventListener("click", async () => {
   setBusy(true, "ANALYZING IMAGE..."); setMessage("Generating segmentation mask with SAM...");
   try { const data = await post("/api/mask", { session_id: state.sessionId, points: state.points.map(p => [p.x, p.y]), labels: state.points.map(p => p.label) }), image = new Image();
-    image.onload = () => { pushHistory(); maskCtx.clearRect(0, 0, state.imageWidth, state.imageHeight); maskCtx.drawImage(image, 0, 0); maskCtx.globalCompositeOperation = "source-in"; maskCtx.fillStyle = "#00f0ff"; maskCtx.fillRect(0, 0, state.imageWidth, state.imageHeight); maskCtx.globalCompositeOperation = "source-over"; normalizeMask(); state.samBaseMask = maskBytes(); state.maskModified = false; state.saved = false; setBusy(false); selectTool("brush"); updateMaskUi(); renderPreview(); refreshRuntimeStatus(); setMessage(`SAM mask ready · ${data.pixels.toLocaleString()} selected pixels.`, "success"); };
+    image.onload = () => { pushHistory(); importSamMask(image); state.samBaseMask = maskBytes(); state.maskModified = false; state.saved = false; setBusy(false); selectTool("brush"); updateMaskUi(); renderPreview(); refreshRuntimeStatus(); setMessage(`SAM mask ready · ${data.pixels.toLocaleString()} selected pixels.`, "success"); };
     image.src = data.mask_data;
   } catch (error) { setBusy(false); setMessage(error.message, "error"); }
 });
