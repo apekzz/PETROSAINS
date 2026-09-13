@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneShot iPhone setup</title>
+    <link rel="stylesheet" href="/fonts.css">
+    <link rel="stylesheet" href="/theme.css">
+    <style>
+        body { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+        .card { max-width: 440px; width: 100%; background: var(--bg-panel); border: 1px solid var(--border-soft); border-radius: 16px; padding: 24px; }
+        h1 { font-family: Rajdhani, sans-serif; font-size: 28px; margin: 0 0 8px; }
+        p, li { color: var(--text-dim); line-height: 1.45; }
+        ol { padding-left: 20px; }
+        li { margin: 12px 0; }
+        strong { color: var(--text-main); }
+        .warn { color: #ff8a9a; }
+        .btn { display: block; text-align: center; margin-top: 12px; padding: 14px 16px; border-radius: 999px; text-decoration: none; font-weight: 600; }
+        .btn-main { background: var(--neon-cyan); color: #041016; }
+        .btn-next { border: 1px solid var(--neon-cyan); color: var(--neon-cyan); }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>iPhone camera setup</h1>
+        <p class="warn">The red warning appears if you skip step 3, or if you open the IP address instead of oneshot.local.</p>
+        <ol>
+            <li>If an old <strong>OneShot Inventory</strong> profile exists, delete it in Settings → VPN &amp; Device Management, then tap install again.</li>
+            <li>Tap <strong>Install trust profile</strong>, then Settings → <strong>Profile Downloaded</strong> → Install.</li>
+            <li><strong>Required:</strong> Settings → General → About → <strong>Certificate Trust Settings</strong> → enable <strong>OneShot Local CA</strong>.</li>
+            <li>Tap <strong>Open camera dashboard</strong>. It must say <strong>oneshot.local</strong>, not 192.168…</li>
+        </ol>
+        <a class="btn btn-main" href="/oneshot.mobileconfig">Install trust profile</a>
+        <a id="httpsLink" class="btn btn-next" href="#">Open camera dashboard</a>
+    </div>
+    <script>
+        document.getElementById("httpsLink").href =
+            "https://oneshot.local:{{HTTPS_PORT}}/";
+    </script>
+</body>
+</html>

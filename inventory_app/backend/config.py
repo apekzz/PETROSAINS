@@ -1,8 +1,10 @@
 import os
 import socket
 
-# App folder (this file's directory)
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Project root (folder that contains main.py)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
+DATABASE_DIR = os.path.join(BASE_DIR, "database")
 
 # Database (PostgreSQL). Override with a .env file or DATABASE_URL.
 def _load_dotenv():
@@ -24,22 +26,32 @@ DATABASE_URL = os.environ.get(
     "DATABASE_URL",
     "postgresql://oneshot:oneshot@127.0.0.1:5432/oneshot_inventory",
 )
-SQLITE_PATH = os.path.join(BASE_DIR, "inventory.db")
+SQLITE_PATH = os.path.join(DATABASE_DIR, "inventory.db")
 LOW_STOCK_THRESHOLD = 10
 
 # Server — 0.0.0.0 lets phones/laptops on the same Wi-Fi open the dashboard
 HOST = os.environ.get("HOST", "0.0.0.0")
 PORT = int(os.environ.get("PORT", "8000"))
+HTTPS_PORT = int(os.environ.get("HTTPS_PORT", "8443"))
 
 
 def get_lan_ip():
+    """Pick this machine's LAN address without needing the public internet."""
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        sock.connect(("8.8.8.8", 80))
+        sock.connect(("10.255.255.255", 1))
         ip = sock.getsockname()[0]
         sock.close()
         if ip and not ip.startswith("127."):
             return ip
+    except Exception:
+        pass
+    try:
+        hostname = socket.gethostname()
+        for info in socket.getaddrinfo(hostname, None, socket.AF_INET):
+            ip = info[4][0]
+            if ip and not ip.startswith("127."):
+                return ip
     except Exception:
         pass
     return None

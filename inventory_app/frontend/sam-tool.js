@@ -100,7 +100,11 @@
         const response = await fetch(url, { cache: "no-store", ...options });
         const data = await response.json().catch(() => ({}));
         if (!response.ok) {
-            throw new Error(data.detail || `Request failed (${response.status})`);
+            const detail = data.detail;
+            const message = Array.isArray(detail)
+                ? detail.map((item) => item.msg || item).join("; ")
+                : (detail || `Request failed (${response.status})`);
+            throw new Error(message);
         }
         return data;
     }
@@ -386,10 +390,11 @@
     }
 
     async function captureFrozenFrame() {
-        const source = usingLocalCamera ? liveVideo : cameraFeed;
-        const width = usingLocalCamera ? liveVideo.videoWidth : cameraFeed.width;
-        const height = usingLocalCamera ? liveVideo.videoHeight : cameraFeed.height;
-        if (!width || !height) throw new Error("The camera frame is not ready");
+        const videoReady = Boolean(liveVideo && liveVideo.videoWidth);
+        const source = videoReady ? liveVideo : cameraFeed;
+        const width = videoReady ? liveVideo.videoWidth : cameraFeed.width;
+        const height = videoReady ? liveVideo.videoHeight : cameraFeed.height;
+        if (!width || !height) throw new Error("Take a photo first, then open SAM");
         const canvas = document.createElement("canvas");
         canvas.width = width;
         canvas.height = height;

@@ -480,10 +480,66 @@ body::after {
 }
 
 .camera-view video,
+#cameraFeed,
 #landmarkLayer {
     position: absolute;
     inset: 0;
     transform: scaleX(-1);
+}
+
+.camera-view.is-rear video,
+.camera-view.is-rear #cameraFeed,
+.camera-view.is-rear #landmarkLayer {
+    transform: none;
+}
+
+#cameraFeed {
+    z-index: 2;
+}
+
+#cameraUnlock {
+    position: absolute;
+    z-index: 40;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: auto;
+}
+
+.camera-view.has-snapshot #cameraUnlock {
+    top: auto;
+    bottom: 16px;
+    transform: translateX(-50%);
+}
+
+.ios-cam-input {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0.01;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.lan-phone-url {
+    max-width: min(42vw, 320px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--neon-cyan);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    border: 1px solid rgba(0, 212, 200, 0.35);
+    padding: 6px 10px;
+    border-radius: 4px;
+    background: rgba(0, 212, 200, 0.06);
 }
 
 .camera-view video {
@@ -994,7 +1050,9 @@ tbody tr:hover {
 .face-gate.is-hidden,
 .face-toggle-wrap.is-hidden,
 .flow-toggle-wrap.is-hidden,
-.modal-overlay.is-hidden {
+.modal-overlay.is-hidden,
+#cameraUnlock.is-hidden,
+.lan-phone-url.is-hidden {
     display: none;
 }
 

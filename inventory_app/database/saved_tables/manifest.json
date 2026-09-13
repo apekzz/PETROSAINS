@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "exported_at": "2026-09-13T16:16:58",
+  "exported_at": "2026-09-13T22:06:49",
   "tables": {
     "inventory_emb": {
       "file": "inventory_emb.csv",
@@ -29,7 +29,7 @@
         "staff_name",
         "facial_embedding"
       ],
-      "rows": 1
+      "rows": 2
     },
     "check_in_out": {
       "file": "check_in_out.csv",

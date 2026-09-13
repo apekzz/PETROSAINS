@@ -14,6 +14,9 @@ window.ONESHOT_CONFIG = {
     faceRegisterUrl: "/api/face/register",
     faceClearUrl: "/api/face/clear",
     facePollMs: 220,
+    mediapipeVisionUrl: "/vendor/mediapipe/vision_bundle.mjs",
+    mediapipeWasmUrl: "/vendor/mediapipe/wasm",
+    mediapipeFaceModelUrl: "/vendor/mediapipe/models/face_landmarker.task",
 
     searchDebounceMs: 150,
     cameraPollMs: 2000,

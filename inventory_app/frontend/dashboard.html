@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OneShot Inventory</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/fonts.css">
     <link rel="stylesheet" href="/theme.css">
     <link rel="stylesheet" href="/dashboard.css">
     <link rel="stylesheet" href="/sam-tool.css">
@@ -32,6 +32,7 @@
             <p class="brand-sub">Inventory System</p>
         </div>
         <div class="header-tools">
+            <a id="lanPhoneUrl" class="lan-phone-url is-hidden" href="#"></a>
             <div id="dbStatusBadge" class="status-badge connecting">
                 <div class="status-dot"></div>
                 <span id="dbStatusText">CONNECTING TO DATABASE...</span>
@@ -114,7 +115,10 @@
                     </div>
                 </div>
                 <div class="camera-view is-gating">
-                    <video id="liveVideo" autoplay playsinline muted></video>
+                    <video id="liveVideo" autoplay playsinline muted webkit-playsinline></video>
+                    <input id="iosCamUser" class="ios-cam-input" type="file" accept="image/*" capture="user">
+                    <input id="iosCamEnv" class="ios-cam-input" type="file" accept="image/*" capture="environment">
+                    <button id="cameraUnlock" type="button" class="catalog-import-btn is-hidden">Take a photo</button>
                     <canvas id="cameraFeed" class="is-hidden" width="640" height="480"></canvas>
                     <canvas id="landmarkLayer" width="640" height="480"></canvas>
                     <div id="faceGate" class="face-gate">

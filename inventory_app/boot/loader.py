@@ -44,7 +44,7 @@ def set_progress(percent, stage):
     sys.stdout.flush()
 
 
-def finish(dashboard_url, lan_url=None):
+def finish(dashboard_url, lan_setup=None, lan_https=None):
     set_progress(100, "systems online")
     print("\n")
     print(f"  {GREEN}●{RESET}  database connected")
@@ -53,11 +53,12 @@ def finish(dashboard_url, lan_url=None):
     print(f"  {GREEN}●{RESET}  camera live")
     print()
     print(f"  {PURPLE}{BOLD}This Mac{RESET}        {CYAN}{dashboard_url}{RESET}")
-    if lan_url:
-        print(f"  {PURPLE}{BOLD}Other devices{RESET}   {CYAN}{lan_url}{RESET}")
-        print(f"  {DIM}Same Wi-Fi as this Mac. Allow Python in Firewall if asked.{RESET}")
+    if lan_setup:
+        print(f"  {PURPLE}{BOLD}iPhone{RESET}           {CYAN}{lan_setup}{RESET}")
+        print(f"  {DIM}Open that exact address (http, port 8000). Never use https.{RESET}")
+        print(f"  {DIM}Tap the camera button and take a photo. Allow Python in Firewall if asked.{RESET}")
     else:
-        print(f"  {DIM}Could not detect LAN IP. Other devices: http://<this-mac-ip>:{dashboard_url.rsplit(':', 1)[-1]}{RESET}")
+        print(f"  {DIM}Could not detect LAN IP.{RESET}")
     print()
     sys.stdout.write(SHOW)
     sys.stdout.flush()

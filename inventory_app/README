@@ -1,17 +1,13 @@
 # OneShot Inventory - Setup & Run Notes
 
 ## File Structure
-- **`main.py`** -> **[RUN THIS]**: Starts the server. Also starts Postgres if needed, creates missing tables, and loads models.
-- **`sql.py`** -> SQL helpers used by `main.py`. Do not run it yourself.
-- **`db.py`** -> Thin wrappers around `sql.py`.
-- **`api.py`** -> The API layer (endpoints like `/api/inventory`, `/api/stats`).
-- **`config.py`** -> Configuration (Postgres URL, camera, port).
+- **`main.py`** -> **[RUN THIS]**: Stays at the project root. Starts the server, Postgres, tables, and models.
+- **`backend/`** -> App modules (`config.py`, `api.py`, `infer.py`, `face.py`, `sam_tool.py`, catalog import).
+- **`database/`** -> SQL helpers (`sql.py`, `db.py`), `setup_db.py`, SQLite copy, and `saved_tables/`.
+- **`frontend/`** -> Dashboard HTML/CSS/JS and logo.
+- **`boot/`** -> Startup progress loader.
+- **`models/`** -> YOLO, SAM, OpenCLIP, and face weights.
 - **`.env`** -> Local secrets (copy from `.env.example`). Not committed.
-- **`dashboard.html`** -> The main frontend page.
-- **`dashboard.css`** -> Styling for the dashboard.
-- **`dashboard.js`** -> Frontend logic.
-- **`theme.css`** -> Color palette and variables (Neon theme).
-- **`config.js`** -> Frontend API endpoints and delay settings.
 
 ---
 

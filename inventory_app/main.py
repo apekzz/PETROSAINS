@@ -1,6 +1,12 @@
 import os
 import sys
 import time
+
+_APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+for _sub in ("backend", "database", "boot"):
+    _path = os.path.join(_APP_ROOT, _sub)
+    if _path not in sys.path:
+        sys.path.insert(0, _path)
 import queue
 import base64
 import asyncio
@@ -20,6 +26,7 @@ import infer
 
 from fastapi import FastAPI, File, Form, Request, UploadFile
 from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles
 from fastapi.responses import StreamingResponse, HTMLResponse, JSONResponse, FileResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
@@ -51,7 +58,7 @@ from sam_tool import (
     sam_status,
 )
 from config import (
-    BASE_DIR, HOST, PORT, CAMERA_INDEX, CAMERA_WIDTH, CAMERA_HEIGHT,
+    BASE_DIR, FRONTEND_DIR, HOST, PORT, CAMERA_INDEX, CAMERA_WIDTH, CAMERA_HEIGHT,
     TARGET_FPS, JPEG_QUALITY, MODEL_PATH, OPENCLIP_CHECKPOINT,
     MODEL_CONFIDENCE, MODEL_IMAGE_SIZE,
     TRIGGER_ENABLED, CHANGE_AREA_PERCENT, SETTLE_FRAMES,
@@ -132,9 +139,33 @@ def load_model():
     MODEL_DEVICE = infer.model_device()
 
 
+def _clip_callable_preprocess(created):
+    if not isinstance(created, (tuple, list)):
+        return None
+    for item in reversed(created[1:]):
+        if callable(item):
+            return item
+    return None
+
+
+def _fallback_clip_preprocess(image_size=224):
+    from torchvision import transforms
+
+    size = int(image_size) if image_size else 224
+    return transforms.Compose([
+        transforms.Resize(size, interpolation=transforms.InterpolationMode.BICUBIC),
+        transforms.CenterCrop(size),
+        transforms.ToTensor(),
+        transforms.Normalize(
+            (0.48145466, 0.4578275, 0.40821073),
+            (0.26862954, 0.26130258, 0.27577711),
+        ),
+    ])
+
+
 def _load_clip_weights():
     global embed_model, embed_backend, embed_preprocess, embed_device
-    if embed_model is not None:
+    if embed_model is not None and callable(embed_preprocess):
         return
     import open_clip
 
@@ -143,10 +174,50 @@ def _load_clip_weights():
             f"OpenCLIP checkpoint not found: {OPENCLIP_CHECKPOINT}"
         )
     embed_device = "cuda" if torch.cuda.is_available() else "cpu"
-    embed_model, _, embed_preprocess = open_clip.create_model_and_transforms(
-        "ViT-B-32",
-        pretrained=OPENCLIP_CHECKPOINT,
-    )
+    created = None
+    try:
+        created = open_clip.create_model_and_transforms(
+            "ViT-B-32",
+            pretrained=OPENCLIP_CHECKPOINT,
+        )
+        embed_model = created[0]
+    except Exception as exc:
+        print(f"[EMBED] Direct checkpoint load failed ({exc}); retrying state_dict")
+        created = open_clip.create_model_and_transforms(
+            "ViT-B-32",
+            pretrained=False,
+        )
+        embed_model = created[0]
+        state = torch.load(OPENCLIP_CHECKPOINT, map_location="cpu")
+        if isinstance(state, dict):
+            if "state_dict" in state:
+                state = state["state_dict"]
+            elif "model" in state and isinstance(state["model"], dict):
+                state = state["model"]
+        embed_model.load_state_dict(state, strict=False)
+
+    embed_preprocess = _clip_callable_preprocess(created)
+    if not callable(embed_preprocess):
+        visual = getattr(embed_model, "visual", None)
+        image_size = getattr(visual, "image_size", EMBED_IMAGE_SIZE)
+        if isinstance(image_size, (tuple, list)):
+            image_size = image_size[0]
+        mean = getattr(visual, "image_mean", None)
+        std = getattr(visual, "image_std", None)
+        try:
+            embed_preprocess = open_clip.image_transform(
+                image_size,
+                is_train=False,
+                mean=mean,
+                std=std,
+            )
+        except Exception:
+            embed_preprocess = None
+    if not callable(embed_preprocess):
+        embed_preprocess = _fallback_clip_preprocess(EMBED_IMAGE_SIZE)
+    if embed_model is None or not callable(embed_preprocess):
+        raise RuntimeError("OpenCLIP did not return a usable model or preprocess")
+
     embed_model = embed_model.to(embed_device).eval()
     embed_backend = "openclip-ViT-B-32-laion2b_s34b_b79k"
     print(
@@ -182,6 +253,12 @@ def face_crop_to_embedding(image_bytes):
 
 
 def _encode_images(images):
+    if embed_model is None or not callable(embed_preprocess):
+        raise RuntimeError(
+            "OpenCLIP encoder is not ready. Check the boot log for [EMBED] errors."
+        )
+    if not callable(getattr(embed_model, "encode_image", None)):
+        raise RuntimeError("OpenCLIP model has no encode_image(); the checkpoint may be incomplete.")
     tensors = torch.stack([
         embed_preprocess(image.convert("RGB")) for image in images
     ]).to(embed_device)
@@ -198,6 +275,7 @@ def _encode_image(image):
 def _encode_worker_loop():
     from PIL import Image
 
+    init_error = None
     try:
         _load_clip_weights()
         dummy = Image.new("RGB", (EMBED_IMAGE_SIZE, EMBED_IMAGE_SIZE), (28, 32, 40))
@@ -205,6 +283,7 @@ def _encode_worker_loop():
         _encode_image(dummy)
         print(f"[EMBED] Warmup encode {time.perf_counter() - started:.2f}s")
     except Exception as exc:
+        init_error = exc
         print("[EMBED] Worker init failed:", exc)
     _encode_ready.set()
 
@@ -214,6 +293,10 @@ def _encode_worker_loop():
             break
         reply = job.get("reply")
         try:
+            if init_error is not None:
+                raise RuntimeError(
+                    f"OpenCLIP encoder failed to start: {init_error}"
+                ) from init_error
             images = job.get("images")
             if images is None:
                 images = [_prepare_embed_image(job["bytes"])]
@@ -854,7 +937,7 @@ def set_yolo_overlay(detections, hold_frame=None, hold_seconds=0):
             annotated_hold_until = hold_until
 
 
-def run_yolo_preview(frame):
+def run_yolo_preview(frame, client_id=None):
     global preview_pending, last_capture, last_detections, last_classes
     global cooldown_until
     try:
@@ -862,22 +945,28 @@ def run_yolo_preview(frame):
             return
         detections = parse_yolo_boxes(predict_frame(frame), frame)
         logged_count, class_names = log_yolo_detections(detections)
+        overlay = [] if logged_count or face_detection_active() else detections
+        set_yolo_overlay(overlay)
+        if client_id:
+            sess = get_device(client_id)
+            sess["yolo_boxes"] = overlay
+            sess["yolo_labels"] = detection_labels(overlay)
+            if logged_count:
+                sess["state"] = "COOLDOWN"
+                sess["cooldown_until"] = time.monotonic() + TRIGGER_COOLDOWN
         if logged_count:
             last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             last_detections = logged_count
             last_classes = class_names
             cooldown_until = time.monotonic() + TRIGGER_COOLDOWN
             set_trigger_state("COOLDOWN")
-            set_yolo_overlay([])
-        else:
-            set_yolo_overlay([] if face_detection_active() else detections)
     except Exception as exc:
         print("[YOLO] Preview error:", exc)
     finally:
         preview_pending = False
 
 
-def maybe_start_yolo_preview(frame, state):
+def maybe_start_yolo_preview(frame, state, client_id=None):
     global preview_pending, last_preview_at
     if not other_models_allowed():
         return
@@ -898,7 +987,7 @@ def maybe_start_yolo_preview(frame, state):
     last_preview_at = now
     threading.Thread(
         target=run_yolo_preview,
-        args=(frame.copy(),),
+        args=(frame.copy(), client_id),
         name="YoloPreview",
         daemon=True,
     ).start()
@@ -907,63 +996,86 @@ def maybe_start_yolo_preview(frame, state):
 scan_warmup_count = 0
 scan_settle_count = 0
 scan_ingest_lock = threading.Lock()
+device_lock = threading.Lock()
+device_sessions = {}
 
 
-def ingest_scan_frame(frame):
+def get_device(client_id):
+    cid = (client_id or "default").strip() or "default"
+    with device_lock:
+        sess = device_sessions.get(cid)
+        if sess is None:
+            sess = {
+                "id": cid,
+                "warmup": 0,
+                "settle": 0,
+                "bg": None,
+                "state": "WARMUP",
+                "cooldown_until": 0.0,
+                "yolo_boxes": [],
+                "yolo_labels": [],
+                "last_seen": time.monotonic(),
+            }
+            device_sessions[cid] = sess
+        sess["last_seen"] = time.monotonic()
+        return sess
+
+
+def ingest_scan_frame(frame, client_id="default"):
     """Run motion trigger + YOLO on a browser-captured frame. No OpenCV camera."""
-    global scan_warmup_count, scan_settle_count, scan_session, cooldown_until
-
     if frame is None:
         return
+    sess = get_device(client_id)
     with scan_ingest_lock:
-        if bg_subtractor is None:
-            reset_background_subtractor()
-            scan_warmup_count = 0
-            scan_settle_count = 0
-        if not scan_session:
-            scan_session = datetime.now().strftime("%Y%m%d_%H%M%S")
-
+        if sess["bg"] is None:
+            sess["bg"] = cv2.createBackgroundSubtractorMOG2(
+                history=MOG2_HISTORY,
+                varThreshold=MOG2_VAR_THRESHOLD,
+                detectShadows=MOG2_DETECT_SHADOWS,
+            )
+            sess["warmup"] = 0
+            sess["settle"] = 0
+            sess["state"] = "WARMUP"
         now = time.monotonic()
-        state = get_trigger_state()
-        if TRIGGER_ENABLED and bg_subtractor is not None:
+        state = sess["state"]
+        if TRIGGER_ENABLED and sess["bg"] is not None:
             try:
-                mask = bg_subtractor.apply(frame)
+                mask = sess["bg"].apply(frame)
                 changed, _change_percent = significant_change(mask)
 
                 if state == "WARMUP":
-                    scan_warmup_count += 1
-                    if scan_warmup_count >= WARMUP_FRAMES:
-                        scan_warmup_count = 0
-                        set_trigger_state("WAITING")
-                        print("[TRIGGER] Warming complete. State = WAITING")
+                    sess["warmup"] += 1
+                    if sess["warmup"] >= WARMUP_FRAMES:
+                        sess["warmup"] = 0
+                        sess["state"] = "WAITING"
+                        print(f"[TRIGGER] {sess['id'][:8]} warming complete")
 
                 elif state == "WAITING":
                     if changed:
-                        scan_settle_count = 0
-                        set_trigger_state("SETTLING")
-                        print("[TRIGGER] Change detected → SETTLING")
+                        sess["settle"] = 0
+                        sess["state"] = "SETTLING"
+                        print(f"[TRIGGER] {sess['id'][:8]} change → SETTLING")
 
                 elif state == "SETTLING":
-                    scan_settle_count += 1
-                    if scan_settle_count >= SETTLE_FRAMES:
-                        set_trigger_state("CAPTURING")
-                        print("[TRIGGER] Object settled → CAPTURING")
+                    sess["settle"] += 1
+                    if sess["settle"] >= SETTLE_FRAMES:
+                        sess["state"] = "CAPTURING"
+                        print(f"[TRIGGER] {sess['id'][:8]} settled → CAPTURING")
                         threading.Thread(
                             target=run_backend_capture,
-                            args=(frame.copy(),),
+                            args=(frame.copy(), client_id),
                             name="BackendCapture",
                             daemon=True,
                         ).start()
 
                 elif state == "COOLDOWN":
-                    if now >= cooldown_until:
-                        scan_settle_count = 0
-                        set_trigger_state("WAITING")
-                        print("[TRIGGER] Cooldown complete. State = WAITING")
+                    if now >= sess["cooldown_until"]:
+                        sess["settle"] = 0
+                        sess["state"] = "WAITING"
             except Exception as exc:
                 print("[TRIGGER] Browser-frame error:", exc)
 
-        maybe_start_yolo_preview(frame, get_trigger_state())
+        maybe_start_yolo_preview(frame, sess["state"], client_id)
 
 
 def significant_change(mask):
@@ -1299,7 +1411,7 @@ def log_yolo_detections(detections):
 # BACKEND CAPTURE (YOLO off the live stream)
 # ============================================================
 
-def run_backend_capture(frame):
+def run_backend_capture(frame, client_id=None):
     """Run YOLO + DB log without blocking the MJPEG camera thread."""
     global last_capture, last_detections, last_classes, cooldown_until
 
@@ -1310,7 +1422,12 @@ def run_backend_capture(frame):
         last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         last_detections = logged_count
         last_classes = class_names
-        set_yolo_overlay([] if logged_count or face_detection_active() else detections)
+        overlay = [] if logged_count or face_detection_active() else detections
+        set_yolo_overlay(overlay)
+        if client_id:
+            sess = get_device(client_id)
+            sess["yolo_boxes"] = overlay
+            sess["yolo_labels"] = detection_labels(overlay)
     except Exception as exc:
         print("[MODEL] Inference error:", exc)
         last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -1320,6 +1437,10 @@ def run_backend_capture(frame):
     finally:
         cooldown_until = time.monotonic() + TRIGGER_COOLDOWN
         set_trigger_state("COOLDOWN")
+        if client_id:
+            sess = get_device(client_id)
+            sess["state"] = "COOLDOWN"
+            sess["cooldown_until"] = cooldown_until
         print("[TRIGGER] Capture done → COOLDOWN")
 
 def camera_capture_loop():
@@ -1579,28 +1700,27 @@ def _maybe_exit_after_leave():
     _exit_app("dashboard leave")
 
 
+class ClientPingBody(BaseModel):
+    client_id: str = "default"
+
+
 @app.post("/api/client/hello")
-def dashboard_hello():
-    global dashboard_clients, _last_heartbeat
+def dashboard_hello(body: ClientPingBody = ClientPingBody()):
     _cancel_app_exit()
+    sess = get_device(body.client_id)
     with dashboard_clients_lock:
-        dashboard_clients = 1
-    _last_heartbeat = time.monotonic()
-    return JSONResponse({"ok": True, "clients": dashboard_clients})
+        count = len(device_sessions)
+    return JSONResponse({"ok": True, "clients": count, "client_id": sess["id"]})
 
 
 @app.post("/api/client/leave")
-def dashboard_leave():
-    global dashboard_clients, _exit_timer, _last_heartbeat
-    with dashboard_clients_lock:
-        dashboard_clients = 0
-    _last_heartbeat = 0.0
-    _cancel_app_exit()
-    timer = threading.Timer(3.0, _maybe_exit_after_leave)
-    timer.daemon = True
-    _exit_timer = timer
-    timer.start()
-    return JSONResponse({"ok": True, "clients": 0})
+def dashboard_leave(body: ClientPingBody = ClientPingBody()):
+    cid = (body.client_id or "").strip()
+    with device_lock:
+        device_sessions.pop(cid, None)
+        count = len(device_sessions)
+    print(f"[APP] Client left ({cid[:8] or 'unknown'}). Remaining: {count}")
+    return JSONResponse({"ok": True, "clients": count})
 
 
 # ============================================================
@@ -1628,6 +1748,14 @@ def camera_status():
 # ============================================================
 # DETECTION MODE API
 # ============================================================
+
+@app.get("/api/lan_url")
+def lan_url():
+    ip = get_lan_ip()
+    if not ip:
+        return JSONResponse({"url": None, "port": PORT})
+    return JSONResponse({"url": f"http://{ip}:{PORT}", "port": PORT})
+
 
 @app.get("/api/mode")
 def get_mode():
@@ -1907,9 +2035,11 @@ def api_start_camera():
 
 
 @app.post("/api/scan/frame")
-async def ingest_browser_scan(file: UploadFile = File(...)):
-    if face_detection_active():
-        return JSONResponse({"ok": True, "skipped": "face"})
+async def ingest_browser_scan(
+    file: UploadFile = File(...),
+    client_id: str = Form("default"),
+    facing: str = Form("user"),
+):
     image_bytes = await file.read()
     if not image_bytes:
         return JSONResponse({"detail": "Empty frame"}, status_code=400)
@@ -1917,8 +2047,15 @@ async def ingest_browser_scan(file: UploadFile = File(...)):
     frame = cv2.imdecode(array, cv2.IMREAD_COLOR)
     if frame is None:
         return JSONResponse({"detail": "Could not decode frame"}, status_code=400)
-    ingest_scan_frame(cv2.flip(frame, 1))
-    return JSONResponse({"ok": True, "state": get_trigger_state()})
+    if (facing or "user").lower() != "environment":
+        frame = cv2.flip(frame, 1)
+    ingest_scan_frame(frame, client_id)
+    sess = get_device(client_id)
+    return JSONResponse({
+        "ok": True,
+        "state": sess["state"],
+        "client_id": sess["id"],
+    })
 
 
 @app.post("/api/face/clear")
@@ -2047,9 +2184,11 @@ async def select_and_import_catalog():
 # ============================================================
 
 @app.get("/api/trigger_status")
-def trigger_status():
+def trigger_status(client_id: str = ""):
+    sess = get_device(client_id) if client_id else None
     with yolo_overlay_lock:
-        labels = list(yolo_labels)
+        labels = list(sess["yolo_labels"] if sess else yolo_labels)
+        source_boxes = sess["yolo_boxes"] if sess else yolo_boxes
         boxes = [
             {
                 "name": item.get("name") or "object",
@@ -2061,12 +2200,15 @@ def trigger_status():
                 ),
                 "box": [round(float(value), 5) for value in item.get("box_norm", ())],
             }
-            for item in yolo_boxes
+            for item in source_boxes
             if len(item.get("box_norm", ())) == 4
         ]
     with inventory_revision_lock:
         revision = inventory_revision
-    state = "FACE" if face_detection_active() else get_trigger_state()
+    if sess:
+        state = sess["state"]
+    else:
+        state = "FACE" if face_detection_active() else get_trigger_state()
     return JSONResponse({
         "state": state,
         "last_capture": last_capture,
@@ -2208,8 +2350,8 @@ def video_frame():
 # ============================================================
 
 @app.get("/", response_class=HTMLResponse)
-def serve_dashboard():
-    dashboard_path = os.path.join(BASE_DIR, "dashboard.html")
+def serve_dashboard(request: Request):
+    dashboard_path = os.path.join(FRONTEND_DIR, "dashboard.html")
     if not os.path.exists(dashboard_path):
         return HTMLResponse("<h1>dashboard.html not found</h1>", status_code=500)
     with open(dashboard_path, "r", encoding="utf-8") as file:
@@ -2219,6 +2361,7 @@ def serve_dashboard():
 
 FRONTEND_FILES = {
     "theme.css": "text/css",
+    "fonts.css": "text/css",
     "dashboard.css": "text/css",
     "sam-tool.css": "text/css",
     "config.js": "application/javascript",
@@ -2233,10 +2376,22 @@ def serve_frontend_file(filename: str):
     media_type = FRONTEND_FILES.get(filename)
     if media_type is None:
         return JSONResponse({"detail": "Not found"}, status_code=404)
-    file_path = os.path.join(BASE_DIR, filename)
+    file_path = os.path.join(FRONTEND_DIR, filename)
     if not os.path.exists(file_path):
         return JSONResponse({"detail": f"{filename} not found"}, status_code=404)
     return FileResponse(file_path, media_type=media_type)
+
+
+import mimetypes
+mimetypes.add_type("application/javascript", ".mjs")
+mimetypes.add_type("application/wasm", ".wasm")
+mimetypes.add_type("application/octet-stream", ".task")
+_fonts_dir = os.path.join(FRONTEND_DIR, "fonts")
+_vendor_dir = os.path.join(FRONTEND_DIR, "vendor")
+if os.path.isdir(_fonts_dir):
+    app.mount("/fonts", StaticFiles(directory=_fonts_dir), name="fonts")
+if os.path.isdir(_vendor_dir):
+    app.mount("/vendor", StaticFiles(directory=_vendor_dir), name="vendor")
 
 
 # ============================================================
@@ -2289,8 +2444,8 @@ def run_high_end_boot():
         boot_done = True
         lan_ip = get_lan_ip()
         local_url = f"http://127.0.0.1:{PORT}"
-        lan_url = f"http://{lan_ip}:{PORT}" if lan_ip else None
-        loader.finish(local_url, lan_url)
+        lan_setup = f"http://{lan_ip}:{PORT}" if lan_ip else None
+        loader.finish(local_url, lan_setup, None)
     except Exception as exc:
         boot_ready = True
         loader.fail(str(exc))
@@ -2382,4 +2537,10 @@ if __name__ == "__main__":
         name="OpenChrome",
         daemon=True,
     ).start()
-    uvicorn.run(app, host=HOST, port=PORT, reload=False, log_level="warning")
+    uvicorn.run(
+        app,
+        host=HOST,
+        port=PORT,
+        reload=False,
+        log_level="warning",
+    )

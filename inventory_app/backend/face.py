@@ -81,14 +81,18 @@ def ensure_face_model():
     last_error = None
     for url in YUNET_URLS:
         try:
-            print("[FACE] Downloading YuNet face model...")
+            print("[FACE] YuNet missing; downloading once (needs internet)...")
             urllib.request.urlretrieve(url, YUNET_PATH)
             if os.path.isfile(YUNET_PATH) and os.path.getsize(YUNET_PATH) > 50_000:
                 print("[FACE] Saved", YUNET_PATH)
                 return YUNET_PATH
         except Exception as exc:
             last_error = exc
-    raise FileNotFoundError(f"Could not download YuNet model: {last_error}")
+    raise FileNotFoundError(
+        f"YuNet model not found at {YUNET_PATH}. "
+        "Copy face_detection_yunet_2023mar.onnx into models/ for offline use."
+        + (f" Download error: {last_error}" if last_error else "")
+    )
 
 
 def _inside_gate(x, y):
