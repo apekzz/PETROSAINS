@@ -1,6 +1,7 @@
 window.ONESHOT_CONFIG = {
     statsUrl: "/api/stats",
     inventoryUrl: "/api/inventory",
+    movementsUrl: "/api/movements",
     searchUrl: "/api/search",
     cameraStatusUrl: "/camera_status",
     videoFeedUrl: "/video_feed",
@@ -8,6 +9,11 @@ window.ONESHOT_CONFIG = {
     triggerStatusUrl: "/api/trigger_status",
     dbStatusUrl: "/db_status",
     embeddingUrl: "/api/objects/embedding",
+    faceStatusUrl: "/api/face/status",
+    faceModeUrl: "/api/face/mode",
+    faceRegisterUrl: "/api/face/register",
+    faceClearUrl: "/api/face/clear",
+    facePollMs: 220,
 
     searchDebounceMs: 150,
     cameraPollMs: 2000,

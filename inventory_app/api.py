@@ -6,18 +6,26 @@ from db import (
     fetch_detections_today,
     fetch_inventory,
     fetch_item,
+    fetch_item_summary,
+    fetch_movements,
+    fetch_staff,
     fetch_stats,
-    init_schema,
 )
 
 router = APIRouter(prefix="/api", tags=["Inventory API"])
-
-init_schema()
 
 
 @router.get("/inventory")
 def get_inventory():
     return fetch_inventory()
+
+
+@router.get("/movements")
+def get_movements(
+    limit: int = Query(200, ge=1, le=1000),
+    staff_name: str = Query(""),
+):
+    return fetch_movements(limit, staff_name)
 
 
 @router.get("/stats")
@@ -41,6 +49,14 @@ def get_item(item_id: int):
     return item
 
 
+@router.get("/item-summary")
+def get_item_summary(name: str = Query(..., min_length=1)):
+    summary = fetch_item_summary(name)
+    if summary is None:
+        raise HTTPException(status_code=404, detail="Item not found")
+    return summary
+
+
 @router.get("/detections")
 def get_detections(limit: int = Query(100, ge=1, le=1000)):
     return fetch_detections(limit)
@@ -54,3 +70,8 @@ def get_detections_summary():
 @router.get("/detections/today")
 def get_detections_today():
     return fetch_detections_today()
+
+
+@router.get("/staff")
+def get_staff_list():
+    return fetch_staff()

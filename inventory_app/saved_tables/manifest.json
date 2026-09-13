@@ -1,0 +1,49 @@
+{
+  "format": 1,
+  "exported_at": "2026-09-13T16:16:58",
+  "tables": {
+    "inventory_emb": {
+      "file": "inventory_emb.csv",
+      "columns": [
+        "id",
+        "inventory_name",
+        "inventory_embedding"
+      ],
+      "rows": 4355
+    },
+    "main_inventory": {
+      "file": "main_inventory.csv",
+      "columns": [
+        "id",
+        "inventory_name",
+        "orig_quantity",
+        "available_quantity",
+        "registered_date"
+      ],
+      "rows": 109
+    },
+    "staff": {
+      "file": "staff.csv",
+      "columns": [
+        "staff_id",
+        "staff_name",
+        "facial_embedding"
+      ],
+      "rows": 1
+    },
+    "check_in_out": {
+      "file": "check_in_out.csv",
+      "columns": [
+        "id",
+        "inventory_name",
+        "staff_name",
+        "out_staff_name",
+        "in_staff_name",
+        "quantity",
+        "out_dt",
+        "in_dt"
+      ],
+      "rows": 0
+    }
+  }
+}

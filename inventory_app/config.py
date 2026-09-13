@@ -51,8 +51,13 @@ CAMERA_HEIGHT = 480  # Lowered for faster AI processing
 TARGET_FPS = 25
 JPEG_QUALITY = 85
 
-# AI Model (YOUR ORIGINAL MODEL)
-MODEL_PATH = os.path.join(BASE_DIR, "models", "best.pt")
+# AI Model — YOLO11l-seg v2 (BCE + Dice) from train_v2
+MODEL_PATH = os.path.join(BASE_DIR, "models", "yolo11l_seg_object_bce_dice.pt")
+MODEL_FALLBACK_PATH = os.path.join(BASE_DIR, "models", "best.pt")
+OPENCLIP_CHECKPOINT = os.environ.get(
+    "OPENCLIP_CHECKPOINT",
+    os.path.join(BASE_DIR, "models", "open_clip_pytorch_model.bin"),
+)
 MODEL_CONFIDENCE = 0.25
 MODEL_IMAGE_SIZE = 640
 
@@ -71,3 +76,8 @@ WARMUP_FRAMES = 30
 YOLO_PREVIEW_ENABLED = True
 YOLO_PREVIEW_INTERVAL = 0.28
 YOLO_HOLD_SECONDS = 4
+
+# Face gate (register / recognize)
+FACE_MATCH_THRESHOLD = float(os.environ.get("FACE_MATCH_THRESHOLD", "0.90"))
+FACE_MATCH_STREAK = int(os.environ.get("FACE_MATCH_STREAK", "4"))
+FACE_EMBED_INTERVAL = 0.28

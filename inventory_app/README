@@ -1,9 +1,9 @@
 # OneShot Inventory - Setup & Run Notes
 
 ## File Structure
-- **`main.py`** -> **[RUN THIS]**: Starts the server and camera. (Entry point)
-- **`setup_db.py`** -> **[RUN ONCE]**: Creates the Postgres database, tables, and sample/imported inventory.
-- **`db.py`** -> Database access (PostgreSQL).
+- **`main.py`** -> **[RUN THIS]**: Starts the server. Also starts Postgres if needed, creates missing tables, and loads models.
+- **`sql.py`** -> SQL helpers used by `main.py`. Do not run it yourself.
+- **`db.py`** -> Thin wrappers around `sql.py`.
 - **`api.py`** -> The API layer (endpoints like `/api/inventory`, `/api/stats`).
 - **`config.py`** -> Configuration (Postgres URL, camera, port).
 - **`.env`** -> Local secrets (copy from `.env.example`). Not committed.
@@ -44,29 +44,15 @@ echo 'export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-### Create the database (one time)
+### Daily use
 
 From this folder:
 
 ```bash
-cp .env.example .env
-python3 -m pip install -r requirements.txt
-python3 setup_db.py
+python main.py
 ```
 
-`setup_db.py` will:
-
-1. Start/check Postgres
-2. Create the `oneshot` user and `oneshot_inventory` database if missing
-3. Create tables (`inventory`, `transactions`, `detections`)
-4. Copy unique items from the old `inventory.db` if Postgres is empty
-5. Seed sample items only if both are empty
-
-### Daily use
-
-```bash
-python3 main.py
-```
+`main.py` will start Postgres if needed, create the `oneshot` user / `oneshot_inventory` database if missing, and create only tables that do not exist yet (`main_inventory`, `check_in_out`, `staff`, `inventory_emb`).
 
 Open:
 
@@ -85,8 +71,9 @@ Useful commands inside `psql`:
 
 ```sql
 \dt
-SELECT id, item_name, quantity, status, last_seen FROM inventory ORDER BY id;
-SELECT * FROM detections ORDER BY id DESC LIMIT 20;
+SELECT id, inventory_name, orig_quantity, registered_date FROM main_inventory ORDER BY id;
+SELECT * FROM check_in_out ORDER BY id DESC LIMIT 20;
+SELECT staff_id, staff_name FROM staff;
 \q
 ```
 
@@ -105,8 +92,7 @@ psql postgresql://oneshot:oneshot@127.0.0.1:5432/oneshot_inventory < backup.sql
 ### Reset tables (keeps the database)
 
 ```bash
-psql postgresql://oneshot:oneshot@127.0.0.1:5432/oneshot_inventory -c "TRUNCATE detections, transactions, inventory RESTART IDENTITY;"
-python3 setup_db.py
+psql postgresql://oneshot:oneshot@127.0.0.1:5432/oneshot_inventory -c "TRUNCATE check_in_out, inventory_emb, staff, main_inventory RESTART IDENTITY;"
 ```
 
 ### Stop / start the database service
@@ -122,9 +108,8 @@ brew services list
 ## How to Run (MacBook)
 
 ```bash
-pip3 install -r requirements.txt
-python3 setup_db.py
-python3 main.py
+pip install -r requirements.txt
+python main.py
 ```
 
 Dashboard: http://127.0.0.1:8000

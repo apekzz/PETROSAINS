@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/Haqkiem/OneDrive/UNIKL/July-2026/Competition/AIIC/PETROSAINS/train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts
+end_time: 1789213475143
+entry_point_name: ''
+experiment_id: '432051828201252182'
+lifecycle_stage: active
+run_id: 8fc512b6ba5d4af2aacca93355c36a12
+run_name: yolo11l_seg_object_dice
+run_uuid: 8fc512b6ba5d4af2aacca93355c36a12
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1789194168749
+status: 3
+tags: []
+user_id: Haqkiem

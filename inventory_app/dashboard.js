@@ -2,6 +2,11 @@ const CONFIG = window.ONESHOT_CONFIG;
 
 let statsReady = false;
 let lastIdentifiedNames = [];
+let selectedItemName = "";
+let inventoryItemNames = [];
+let inventoryDisplayToOriginal = Object.create(null);
+let inventoryOriginalToDisplay = Object.create(null);
+let currentRecognizedStaffName = "";
 
 function animateValue(obj, start, end, duration) {
     const target = Number(end) || 0;
@@ -29,6 +34,10 @@ function setStatValue(id, value) {
 }
 
 async function fetchStats(animate = false) {
+    if (selectedItemName) {
+        await fetchSelectedItemStats(selectedItemName);
+        return;
+    }
     try {
         const response = await fetch(CONFIG.statsUrl, { cache: "no-store" });
         if (!response.ok) throw new Error("Stats request failed");
@@ -56,97 +65,635 @@ async function fetchStats(animate = false) {
     } catch (error) { console.error("Stats error:", error); }
 }
 
-function currentInventoryQuery() {
-    return document.getElementById("searchInput").value.trim();
+function setGlobalStatTitles() {
+    document.getElementById("statTitleTotal").textContent = "Total unique items";
+    document.getElementById("statTitleAvailable").textContent = "Staff registered";
+    document.getElementById("statTitleChecked").textContent = "Checkout sessions";
+    document.getElementById("lowStockCard").classList.remove("is-hidden");
+    document.querySelector(".stats-row").classList.remove("is-item-focus");
 }
 
-async function fetchInventory(query = currentInventoryQuery()) {
+async function fetchSelectedItemStats(name) {
     try {
-        let url = CONFIG.inventoryUrl;
-        if (query) url = `${CONFIG.searchUrl}?query=${encodeURIComponent(query)}`;
-        const response = await fetch(url, { cache: "no-store" });
-        if (!response.ok) throw new Error("Inventory request failed");
-        renderInventory(await response.json());
-    } catch (error) { console.error("Inventory error:", error); }
+        const response = await fetch(
+            `/api/item-summary?name=${encodeURIComponent(name)}`,
+            { cache: "no-store" },
+        );
+        if (!response.ok) throw new Error("Item summary request failed");
+        const data = await response.json();
+        document.getElementById("statTitleTotal").textContent = "Original stock";
+        document.getElementById("statTitleAvailable").textContent = "Available stock";
+        document.getElementById("statTitleChecked").textContent = "Frequency of checkout";
+        document.getElementById("lowStockCard").classList.add("is-hidden");
+        document.querySelector(".stats-row").classList.add("is-item-focus");
+        setStatValue("total-items", data.original_stock);
+        setStatValue("available-items", data.available_stock);
+        setStatValue("checked-items", data.checkout_frequency);
+    } catch (error) {
+        console.error("Item summary error:", error);
+    }
 }
 
-function normalizeName(name) {
-    return String(name || "").replace(/_/g, " ").replace(/\s+/g, " ").trim().toLowerCase();
+async function loadItemOptions() {
+    try {
+        const response = await fetch(CONFIG.inventoryUrl || "/api/inventory", {
+            cache: "no-store",
+        });
+        if (!response.ok) throw new Error("Inventory names request failed");
+        const rows = await response.json();
+        inventoryItemNames = [...new Set(
+            rows.map((row) => row.inventory_name).filter(Boolean),
+        )].sort((left, right) => left.localeCompare(right));
+        inventoryDisplayToOriginal = Object.create(null);
+        inventoryOriginalToDisplay = Object.create(null);
+        inventoryItemNames.forEach((originalName) => {
+            const displayName = toDisplayItemName(originalName);
+            inventoryOriginalToDisplay[originalName] = displayName;
+            inventoryDisplayToOriginal[displayName.toLocaleLowerCase()] = originalName;
+        });
+        renderItemOptions();
+    } catch (error) {
+        console.error("Item options error:", error);
+    }
 }
 
-function isFreshScan(item) {
-    const identified = new Set(lastIdentifiedNames.map(normalizeName));
-    if (identified.has(normalizeName(item.item_name))) return true;
-    if (!item.last_seen) return false;
-    const scannedAt = Date.parse(String(item.last_seen).replace(" ", "T"));
-    if (Number.isNaN(scannedAt)) return false;
-    return Date.now() - scannedAt < 20000;
+function toDisplayItemName(name) {
+    return String(name || "").replace(
+        /\S+/g,
+        (word) => word.charAt(0).toLocaleUpperCase() + word.slice(1).toLocaleLowerCase(),
+    );
 }
 
-function renderInventory(items) {
-    const table = document.getElementById("inventoryTable");
-    table.innerHTML = "";
-    if (!items.length) {
-        table.innerHTML = `<tr class="empty-row"><td colspan="5">No matching items</td></tr>`;
+function setItemOptionsOpen(open) {
+    const list = document.getElementById("itemOptions");
+    const input = document.getElementById("itemSelector");
+    const visible = Boolean(open && list.childElementCount);
+    list.classList.toggle("is-open", visible);
+    input.setAttribute("aria-expanded", visible ? "true" : "false");
+}
+
+function renderItemOptions(query = "") {
+    const list = document.getElementById("itemOptions");
+    const needle = String(query || "").trim().toLocaleLowerCase();
+    const matches = inventoryItemNames.filter((originalName) => {
+        const displayName = inventoryOriginalToDisplay[originalName] || originalName;
+        return (
+            !needle
+            || originalName.toLocaleLowerCase().includes(needle)
+            || displayName.toLocaleLowerCase().includes(needle)
+        );
+    });
+    list.replaceChildren(...matches.slice(0, 60).map((originalName) => {
+        const option = document.createElement("button");
+        option.type = "button";
+        option.className = "item-option";
+        option.setAttribute("role", "option");
+        option.dataset.originalName = originalName;
+        option.textContent = inventoryOriginalToDisplay[originalName] || originalName;
+        return option;
+    }));
+    setItemOptionsOpen(document.activeElement === document.getElementById("itemSelector"));
+}
+
+function selectInventoryItem(name) {
+    const query = String(name || "").trim();
+    if (!query) return;
+    const mapped = inventoryDisplayToOriginal[query.toLocaleLowerCase()];
+    const exact = inventoryItemNames.find(
+        (item) => item.toLocaleLowerCase() === query.toLocaleLowerCase(),
+    );
+    const substring = inventoryItemNames.find(
+        (item) => (
+            item.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+            || (inventoryOriginalToDisplay[item] || item)
+                .toLocaleLowerCase()
+                .includes(query.toLocaleLowerCase())
+        ),
+    );
+    selectedItemName = mapped || exact || substring || "";
+    if (!selectedItemName) return;
+    document.getElementById("itemSelector").value =
+        inventoryOriginalToDisplay[selectedItemName] || selectedItemName;
+    document.getElementById("btnClearItem").classList.remove("is-hidden");
+    setItemOptionsOpen(false);
+    fetchSelectedItemStats(selectedItemName);
+}
+
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+}
+
+let knownMovementIds = new Set();
+let movementsPrimed = false;
+
+async function fetchInventory() {
+    if (!currentRecognizedStaffName) {
+        renderMovements([]);
         return;
     }
-    items.forEach((item) => {
-        const status = item.status || "Available";
-        const statusClass = status.toLowerCase().replace(" ", "-");
-        const fresh = isFreshScan(item);
-        table.innerHTML += `
-            <tr class="${fresh ? "is-new" : ""}">
-                <td>${item.item_name}${fresh ? ' <span class="new-tag">new</span>' : ""}</td>
-                <td>${item.quantity}</td>
-                <td>${item.unit_type || "—"}</td>
-                <td>${item.location || "—"}</td>
-                <td><span class="status-pill ${statusClass}">${status}</span></td>
+    try {
+        const base = CONFIG.movementsUrl || "/api/movements";
+        const response = await fetch(
+            `${base}?staff_name=${encodeURIComponent(currentRecognizedStaffName)}`,
+            { cache: "no-store" },
+        );
+        if (!response.ok) throw new Error("Movements request failed");
+        renderMovements(await response.json());
+    } catch (error) { console.error("Movements error:", error); }
+}
+
+function renderMovements(rows) {
+    const table = document.getElementById("inventoryTable");
+    if (!rows.length) {
+        table.innerHTML = `<tr class="empty-row"><td colspan="7">No movements for the recognized staff</td></tr>`;
+        knownMovementIds = new Set();
+        movementsPrimed = true;
+        return;
+    }
+    const incoming = new Set();
+    table.innerHTML = rows.map((row) => {
+        incoming.add(row.id);
+        const isNew = movementsPrimed && !knownMovementIds.has(row.id);
+        return `
+            <tr class="${isNew ? "is-enter" : ""}" data-id="${row.id}">
+                <td>${escapeHtml(row.id)}</td>
+                <td>${escapeHtml(row.inventory_name)}</td>
+                <td>${escapeHtml(row.out_staff_name ?? "")}</td>
+                <td>${escapeHtml(row.in_staff_name ?? "")}</td>
+                <td>${escapeHtml(row.quantity)}</td>
+                <td>${escapeHtml(row.out_dt || "")}</td>
+                <td>${escapeHtml(row.in_dt || "")}</td>
             </tr>`;
-    });
-    const wrap = document.querySelector(".inventory-table-wrap");
-    if (wrap) wrap.scrollTop = 0;
+    }).join("");
+    if (movementsPrimed) {
+        const wrap = document.querySelector(".inventory-table-wrap");
+        if (wrap && [...incoming].some((id) => !knownMovementIds.has(id))) {
+            wrap.scrollTop = 0;
+        }
+    }
+    knownMovementIds = incoming;
+    movementsPrimed = true;
 }
 
 const cameraFeed = document.getElementById("cameraFeed");
-const cameraStatus = document.getElementById("cameraStatus");
+const liveVideo = document.getElementById("liveVideo");
+const landmarkLayer = document.getElementById("landmarkLayer");
+const cameraCtx = cameraFeed.getContext("2d", { alpha: false });
+const faceToggleWrap = document.getElementById("faceToggleWrap");
+const flowToggleWrap = document.getElementById("flowToggleWrap");
+const flowModeToggle = document.getElementById("flowModeToggle");
+let flowArmed = false;
+const landmarkCtx = landmarkLayer.getContext("2d");
+let localStream = null;
+let usingLocalCamera = false;
+let faceAnalyzeEnabled = true;
+let scanIngestEnabled = false;
+let analyzeBusy = false;
+let scanBusy = false;
+let faceLandmarker = null;
+let FaceLandmarkerClass = null;
+let pendingFaceBlob = null;
+let facePreviewObjectUrl = "";
+let capturedForModal = false;
+const COVERAGE_READY = 0.90;
+const GATE_OVAL = { cx: 0.50, cy: 0.50, rx: 0.115, ry: 0.195 };
+const FACE_OVAL_IDX = [
+    10, 338, 297, 332, 284, 251, 389, 356, 454, 323, 361, 288,
+    397, 365, 379, 378, 400, 377, 152, 148, 176, 149, 150, 136,
+    172, 58, 132, 93, 234, 127, 162, 21, 54, 103, 67, 109,
+];
+const FACE_CONTOURS = [
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+    [17, 18, 19, 20, 21],
+    [22, 23, 24, 25, 26],
+    [27, 28, 29, 30, 31, 32, 33, 34, 35],
+    [36, 37, 38, 39, 40, 41, 36],
+    [42, 43, 44, 45, 46, 47, 42],
+    [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 48],
+];
 
-// FORCE FRESH STREAM (Bypasses browser cache)
-cameraFeed.src = `${CONFIG.videoFeedUrl}?t=${Date.now()}`;
-
-function updateCameraStatus() {
-    fetch(CONFIG.cameraStatusUrl, { cache: "no-store" })
-        .then((response) => { if (!response.ok) throw new Error("Camera status request failed"); return response.json(); })
-        .then((data) => {
-            if (data.ok) {
-                cameraStatus.textContent = `CAMERA ONLINE • ${data.width} × ${data.height}`;
-                cameraStatus.classList.remove("error");
-            } else {
-                cameraStatus.textContent = "CAMERA ERROR: " + (data.error || "Unable to read camera");
-                cameraStatus.classList.add("error");
-            }
-        })
-        .catch((error) => {
-            console.error("Camera status error:", error);
-            cameraStatus.textContent = "SERVER CONNECTION ERROR";
-            cameraStatus.classList.add("error");
-        });
+function updateFacePreviews(blob) {
+    if (!blob) return;
+    const previousUrl = facePreviewObjectUrl;
+    facePreviewObjectUrl = URL.createObjectURL(blob);
+    const registerPreview = document.getElementById("registerFacePreview");
+    const recognizedPreview = document.getElementById("recognizedFacePreview");
+    if (registerPreview) registerPreview.src = facePreviewObjectUrl;
+    if (recognizedPreview) recognizedPreview.src = facePreviewObjectUrl;
+    if (previousUrl) URL.revokeObjectURL(previousUrl);
 }
 
-cameraFeed.onerror = function () {
-    cameraStatus.textContent = "VIDEO FEED DISCONNECTED — RETRYING...";
-    cameraStatus.classList.add("error");
-    setTimeout(() => {
-        cameraFeed.src = `${CONFIG.videoFeedUrl}?t=${Date.now()}`;
-        updateCameraStatus();
-    }, CONFIG.cameraRetryMs);
-};
+function base64JpegToBlob(value) {
+    const binary = atob(value);
+    const bytes = new Uint8Array(binary.length);
+    for (let index = 0; index < binary.length; index += 1) {
+        bytes[index] = binary.charCodeAt(index);
+    }
+    return new Blob([bytes], { type: "image/jpeg" });
+}
 
-let searchTimer = null;
-document.getElementById("searchInput").addEventListener("input", (event) => {
-    const query = event.target.value.trim();
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => { fetchInventory(query); }, CONFIG.searchDebounceMs);
-});
+function sizeOverlayToVideo() {
+    const width = liveVideo.videoWidth || 640;
+    const height = liveVideo.videoHeight || 480;
+    if (landmarkLayer.width !== width || landmarkLayer.height !== height) {
+        landmarkLayer.width = width;
+        landmarkLayer.height = height;
+    }
+}
+
+function pointInGate(x, y) {
+    const dx = (x - GATE_OVAL.cx) / GATE_OVAL.rx;
+    const dy = (y - GATE_OVAL.cy) / GATE_OVAL.ry;
+    return dx * dx + dy * dy <= 1;
+}
+
+function faceCoverage(landmarks) {
+    if (!landmarks || !landmarks.length) return 0;
+    let inside = 0;
+    landmarks.forEach((point) => {
+        if (pointInGate(point.x, point.y)) inside += 1;
+    });
+    return inside / landmarks.length;
+}
+
+function updateCoverageLabel(ratio) {
+    const el = document.getElementById("faceCoverage");
+    if (!el) return;
+    const pct = Math.round(Math.max(0, Math.min(1, ratio)) * 100);
+    el.textContent = `${pct}%`;
+    el.classList.toggle("is-ready", ratio >= COVERAGE_READY);
+}
+
+async function grabSegmentedFace(landmarks) {
+    if (!liveVideo.videoWidth || !landmarks || !landmarks.length) return null;
+    const width = liveVideo.videoWidth;
+    const height = liveVideo.videoHeight;
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(liveVideo, 0, 0);
+    ctx.globalCompositeOperation = "destination-in";
+    ctx.beginPath();
+    FACE_OVAL_IDX.forEach((index, step) => {
+        const point = landmarks[index];
+        if (!point) return;
+        const x = point.x * width;
+        const y = point.y * height;
+        if (step === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+    ctx.fill();
+
+    let minX = width;
+    let minY = height;
+    let maxX = 0;
+    let maxY = 0;
+    FACE_OVAL_IDX.forEach((index) => {
+        const point = landmarks[index];
+        if (!point) return;
+        const x = point.x * width;
+        const y = point.y * height;
+        minX = Math.min(minX, x);
+        minY = Math.min(minY, y);
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y);
+    });
+    const pad = 8;
+    minX = Math.max(0, Math.floor(minX - pad));
+    minY = Math.max(0, Math.floor(minY - pad));
+    maxX = Math.min(width, Math.ceil(maxX + pad));
+    maxY = Math.min(height, Math.ceil(maxY + pad));
+    if (maxX - minX < 24 || maxY - minY < 24) return null;
+
+    const FACE_EMBED_SIZE = 224;
+    const crop = document.createElement("canvas");
+    crop.width = FACE_EMBED_SIZE;
+    crop.height = FACE_EMBED_SIZE;
+    crop.getContext("2d").drawImage(
+        canvas,
+        minX,
+        minY,
+        maxX - minX,
+        maxY - minY,
+        0,
+        0,
+        FACE_EMBED_SIZE,
+        FACE_EMBED_SIZE,
+    );
+    return new Promise((resolve) => crop.toBlob(resolve, "image/jpeg", 0.82));
+}
+
+function drawMediaPipeLandmarks(landmarks) {
+    sizeOverlayToVideo();
+    landmarkCtx.clearRect(0, 0, landmarkLayer.width, landmarkLayer.height);
+    const width = landmarkLayer.width;
+    const height = landmarkLayer.height;
+    landmarkCtx.strokeStyle = "rgba(0, 212, 200, 0.55)";
+    landmarkCtx.fillStyle = "rgba(62, 224, 176, 0.95)";
+    landmarkCtx.lineWidth = 1;
+    const groups = FaceLandmarkerClass
+        ? [
+            FaceLandmarkerClass.FACE_LANDMARKS_TESSELATION,
+            FaceLandmarkerClass.FACE_LANDMARKS_FACE_OVAL,
+            FaceLandmarkerClass.FACE_LANDMARKS_LEFT_EYE,
+            FaceLandmarkerClass.FACE_LANDMARKS_RIGHT_EYE,
+            FaceLandmarkerClass.FACE_LANDMARKS_LIPS,
+        ].filter(Boolean)
+        : [];
+    groups.forEach((connections) => {
+        connections.forEach((pair) => {
+            const start = landmarks[pair.start];
+            const end = landmarks[pair.end];
+            if (!start || !end) return;
+            landmarkCtx.beginPath();
+            landmarkCtx.moveTo(start.x * width, start.y * height);
+            landmarkCtx.lineTo(end.x * width, end.y * height);
+            landmarkCtx.stroke();
+        });
+    });
+    landmarks.forEach((point) => {
+        landmarkCtx.beginPath();
+        landmarkCtx.arc(point.x * width, point.y * height, 1.4, 0, Math.PI * 2);
+        landmarkCtx.fill();
+    });
+}
+
+function applyLocalFace(ready, detected, coverage) {
+    updateCoverageLabel(coverage || 0);
+    if (detected && ready) {
+        lastFaceReady = true;
+        setFaceHint(
+            faceUiMode === "register"
+                ? "Face captured — enter staff name and ID"
+                : "Face in outline"
+        );
+        return;
+    }
+    lastFaceReady = false;
+    if (registerModalOpen && faceUiMode === "register") {
+        return;
+    }
+    if (!detected) setFaceHint("Looking for a face");
+    else if ((coverage || 0) < COVERAGE_READY) {
+        setFaceHint(`Fill the outline · ${Math.round((coverage || 0) * 100)}%`);
+    } else {
+        setFaceHint("Move your face into the outline");
+    }
+}
+
+async function sendSegmentedEmbed(blob) {
+    if (!blob) return false;
+    const body = new FormData();
+    body.append("file", blob, "face.jpg");
+    body.append("mode", faceUiMode);
+    const response = await fetch("/api/face/embed", { method: "POST", body, cache: "no-store" });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+        throw new Error(data.detail || "Could not store the captured face");
+    }
+    return data;
+}
+
+async function captureReadyFace(landmarks) {
+    const blob = await grabSegmentedFace(landmarks);
+    if (!blob) return false;
+    pendingFaceBlob = blob;
+    updateFacePreviews(blob);
+    if (faceUiMode === "register") {
+        if (!registerModalOpen) showRegisterModal(true);
+        return true;
+    }
+    try {
+        const status = await sendSegmentedEmbed(blob);
+        applyFaceStatus(status);
+        if (faceUiMode === "recognize" && !status.recognized) {
+            setFaceHint(status.message || "Face not found in staff registry");
+        }
+    } catch (error) {
+        console.error("Capture embed error:", error);
+        const statusEl = document.getElementById("registerStatus");
+        if (statusEl) statusEl.textContent = error.message || "Could not store the captured face.";
+        return false;
+    }
+    return true;
+}
+
+function runBrowserFaceLoop() {
+    if (!faceAnalyzeEnabled || !liveVideo.videoWidth || !faceLandmarker) {
+        window.requestAnimationFrame(runBrowserFaceLoop);
+        return;
+    }
+    try {
+        const result = faceLandmarker.detectForVideo(liveVideo, performance.now());
+        const landmarks = result && result.faceLandmarks && result.faceLandmarks[0];
+        if (landmarks && landmarks.length) {
+            const coverage = faceCoverage(landmarks);
+            const ready = coverage >= COVERAGE_READY;
+            if (coverage >= 0.4) {
+                drawMediaPipeLandmarks(landmarks);
+            } else {
+                landmarkCtx.clearRect(0, 0, landmarkLayer.width, landmarkLayer.height);
+            }
+            applyLocalFace(ready, true, coverage);
+            if (ready && !capturedForModal) {
+                capturedForModal = true;
+                captureReadyFace(landmarks);
+            }
+            if (!ready && !registerModalOpen) {
+                capturedForModal = false;
+                pendingFaceBlob = null;
+            }
+        } else {
+            landmarkCtx.clearRect(0, 0, landmarkLayer.width, landmarkLayer.height);
+            applyLocalFace(false, false, 0);
+            if (!registerModalOpen) {
+                capturedForModal = false;
+                pendingFaceBlob = null;
+            }
+        }
+    } catch (error) {
+        console.error("Browser face loop error:", error);
+    }
+    window.requestAnimationFrame(runBrowserFaceLoop);
+}
+
+async function startBrowserFaceLandmarker() {
+    try {
+        const vision = await import("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs");
+        FaceLandmarkerClass = vision.FaceLandmarker;
+        const fileset = await vision.FilesetResolver.forVisionTasks(
+            "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm"
+        );
+        const modelUrl =
+            "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task";
+        try {
+            faceLandmarker = await FaceLandmarkerClass.createFromOptions(fileset, {
+                baseOptions: { modelAssetPath: modelUrl, delegate: "GPU" },
+                runningMode: "VIDEO",
+                numFaces: 1,
+            });
+        } catch (gpuError) {
+            faceLandmarker = await FaceLandmarkerClass.createFromOptions(fileset, {
+                baseOptions: { modelAssetPath: modelUrl, delegate: "CPU" },
+                runningMode: "VIDEO",
+                numFaces: 1,
+            });
+        }
+        console.log("[FACE] Browser Face Landmarker ready");
+        window.requestAnimationFrame(runBrowserFaceLoop);
+    } catch (error) {
+        console.error("[FACE] Browser Face Landmarker failed, using server YuNet:", error);
+        setInterval(analyzeLocalFrame, 140);
+    }
+}
+
+function drawLandmarks(points, mesh, inRegion) {
+    sizeOverlayToVideo();
+    landmarkCtx.clearRect(0, 0, landmarkLayer.width, landmarkLayer.height);
+    if (!inRegion || (!(points && points.length) && !(mesh && mesh.length))) {
+        return;
+    }
+    const width = landmarkLayer.width;
+    const height = landmarkLayer.height;
+    landmarkCtx.strokeStyle = "rgba(0, 212, 200, 0.95)";
+    landmarkCtx.fillStyle = "rgba(62, 224, 176, 1)";
+    landmarkCtx.lineWidth = 2;
+    if (mesh && mesh.length) {
+        FACE_CONTOURS.forEach((loop) => {
+            landmarkCtx.beginPath();
+            loop.forEach((index, step) => {
+                if (index >= mesh.length) return;
+                const x = mesh[index].x * width;
+                const y = mesh[index].y * height;
+                if (step === 0) landmarkCtx.moveTo(x, y);
+                else landmarkCtx.lineTo(x, y);
+            });
+            landmarkCtx.stroke();
+        });
+    }
+    (points || []).forEach((point) => {
+        landmarkCtx.beginPath();
+        landmarkCtx.arc(point.x * width, point.y * height, 4.5, 0, Math.PI * 2);
+        landmarkCtx.fill();
+    });
+}
+
+async function grabLocalFrame() {
+    if (!liveVideo.videoWidth) return null;
+    const canvas = document.createElement("canvas");
+    canvas.width = liveVideo.videoWidth;
+    canvas.height = liveVideo.videoHeight;
+    canvas.getContext("2d").drawImage(liveVideo, 0, 0);
+    return new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.85));
+}
+
+async function analyzeLocalFrame() {
+    if (!usingLocalCamera || !faceAnalyzeEnabled || analyzeBusy || document.hidden) return;
+    const blob = await grabLocalFrame();
+    if (!blob) return;
+    analyzeBusy = true;
+    try {
+        const body = new FormData();
+        body.append("file", blob, "frame.jpg");
+        const response = await fetch("/api/face/analyze", { method: "POST", body, cache: "no-store" });
+        if (!response.ok) return;
+        const data = await response.json();
+        if (data.in_region && data.face_preview_b64 && !capturedForModal) {
+            const faceBlob = base64JpegToBlob(data.face_preview_b64);
+            pendingFaceBlob = faceBlob;
+            capturedForModal = true;
+            updateFacePreviews(faceBlob);
+            if (faceUiMode === "register" && !registerModalOpen) {
+                showRegisterModal(true);
+            }
+        } else if (!data.in_region && !registerModalOpen) {
+            capturedForModal = false;
+            pendingFaceBlob = null;
+        }
+        drawLandmarks(data.points || [], data.mesh || [], Boolean(data.in_region));
+        applyFaceStatus(data);
+    } catch (error) {
+        console.error("Face analyze error:", error);
+    } finally {
+        analyzeBusy = false;
+    }
+}
+
+async function ingestScanFrame() {
+    if (!usingLocalCamera || !scanIngestEnabled || scanBusy || document.hidden) return;
+    const blob = await grabLocalFrame();
+    if (!blob) return;
+    scanBusy = true;
+    try {
+        const body = new FormData();
+        body.append("file", blob, "frame.jpg");
+        await fetch("/api/scan/frame", { method: "POST", body, cache: "no-store" });
+    } catch (error) {
+        console.error("Scan frame error:", error);
+    } finally {
+        scanBusy = false;
+    }
+}
+
+async function startLocalCamera() {
+    try {
+        localStream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } },
+            audio: false,
+        });
+        liveVideo.srcObject = localStream;
+        await liveVideo.play();
+        usingLocalCamera = true;
+        liveVideo.classList.remove("is-hidden");
+        cameraFeed.classList.add("is-hidden");
+        startBrowserFaceLandmarker();
+        setInterval(ingestScanFrame, 140);
+    } catch (error) {
+        console.error("getUserMedia error:", error);
+        setFaceHint("Allow camera access in Chrome");
+    }
+}
+
+function stopLocalCamera() {
+    usingLocalCamera = false;
+    if (localStream) {
+        localStream.getTracks().forEach((track) => track.stop());
+        localStream = null;
+    }
+    liveVideo.srcObject = null;
+    landmarkCtx.clearRect(0, 0, landmarkLayer.width, landmarkLayer.height);
+}
+
+async function pumpVideo() {
+    if (usingLocalCamera) {
+        window.setTimeout(pumpVideo, 200);
+        return;
+    }
+    try {
+        const response = await fetch(`/video_frame?t=${Date.now()}`, { cache: "no-store" });
+        if (response.ok) {
+            const blob = await response.blob();
+            const bitmap = await createImageBitmap(blob);
+            if (cameraFeed.width !== bitmap.width || cameraFeed.height !== bitmap.height) {
+                cameraFeed.width = bitmap.width;
+                cameraFeed.height = bitmap.height;
+            }
+            cameraCtx.drawImage(bitmap, 0, 0);
+            bitmap.close();
+        }
+    } catch (error) {
+        console.error("Video pump error:", error);
+    }
+    window.setTimeout(pumpVideo, 33);
+}
+
+startLocalCamera();
 
 async function setMode(mode) {
     try {
@@ -176,25 +723,9 @@ async function loadCurrentMode() {
 }
 
 function applyMode(mode) {
-    document.querySelectorAll(".mode-btn").forEach((btn) => {
-        btn.classList.remove("active");
-    });
-    const buttonMap = {
-        IN: "btnIn",
-        SCAN: "btnScan",
-        OUT: "btnOut",
-    };
-    const buttonId = buttonMap[mode];
-    if (buttonId) {
-        document.getElementById(buttonId).classList.add("active");
+    if (flowModeToggle) {
+        flowModeToggle.checked = mode === "OUT";
     }
-    const modeCopy = {
-        IN: "locked in · IN · stock goes up",
-        SCAN: "locked in · SCAN · view only",
-        OUT: "locked in · OUT · stock goes down",
-    };
-    document.getElementById("modeStatus").textContent =
-        modeCopy[mode] || `locked in · ${mode}`;
 }
 
 let lastSeenCapture = null;
@@ -208,16 +739,46 @@ async function updateTriggerStatus() {
         const state = (data.state || "WAITING").toUpperCase();
         const statusEl = document.getElementById("triggerStatus");
         const textEl = document.getElementById("triggerStatusText");
-        const cssClass = state.toLowerCase();
-
-        statusEl.className = `trigger-status ${cssClass}`;
-        textEl.textContent = state;
+        if (state === "FACE") {
+            statusEl.className = "trigger-status face";
+            textEl.textContent = "FACE";
+        } else {
+            statusEl.className = `trigger-status ${state.toLowerCase()}`;
+            textEl.textContent = state;
+        }
 
         const yoloEl = document.getElementById("yoloDetections");
         const labels = data.yolo_labels || [];
         yoloEl.innerHTML = labels
             .map((label) => `<span class="yolo-chip">${label}</span>`)
             .join("");
+
+        const overlay = document.getElementById("objectDetectionOverlay");
+        const boxes = data.yolo_boxes || [];
+        overlay.innerHTML = boxes.map((item) => {
+            const box = item.box || [];
+            if (box.length !== 4) return "";
+            const left = Math.max(0, Math.min(1, Number(box[0]) || 0)) * 100;
+            const top = Math.max(0, Math.min(1, Number(box[1]) || 0)) * 100;
+            const right = Math.max(0, Math.min(1, Number(box[2]) || 0)) * 100;
+            const bottom = Math.max(0, Math.min(1, Number(box[3]) || 0)) * 100;
+            const confidence = Math.round((Number(item.confidence) || 0) * 100);
+            const similarity = item.similarity == null
+                ? "—"
+                : `${Math.round(Number(item.similarity) * 100)}%`;
+            return `
+                <div class="object-detection-box" style="
+                    left:${left}%; top:${top}%;
+                    width:${Math.max(0, right - left)}%;
+                    height:${Math.max(0, bottom - top)}%;
+                ">
+                    <div class="object-detection-label">
+                        <strong>${escapeHtml(item.name || "object")}</strong>
+                        <span>DET ${confidence}%</span>
+                        <span>SIM ${similarity}</span>
+                    </div>
+                </div>`;
+        }).join("");
 
         const identified = data.last_classes || [];
         if (identified.length) {
@@ -245,10 +806,53 @@ async function updateTriggerStatus() {
 
 fetchStats(true);
 fetchInventory();
-updateCameraStatus();
+loadItemOptions();
+setInterval(() => fetchStats(false), 1000);
+document.getElementById("itemSelector").addEventListener("change", (event) => {
+    selectInventoryItem(event.target.value);
+});
+document.getElementById("itemSelector").addEventListener("input", (event) => {
+    renderItemOptions(event.target.value);
+    if (event.target.value) return;
+    selectedItemName = "";
+    document.getElementById("btnClearItem").classList.add("is-hidden");
+    setGlobalStatTitles();
+    fetchStats(false);
+});
+document.getElementById("itemSelector").addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        selectInventoryItem(event.target.value);
+    } else if (event.key === "Escape") {
+        setItemOptionsOpen(false);
+    } else if (event.key === "ArrowDown") {
+        event.preventDefault();
+        document.querySelector("#itemOptions .item-option")?.focus();
+    }
+});
+document.getElementById("itemSelector").addEventListener("focus", (event) => {
+    renderItemOptions(event.target.value);
+});
+document.getElementById("itemOptions").addEventListener("pointerdown", (event) => {
+    event.preventDefault();
+});
+document.getElementById("itemOptions").addEventListener("click", (event) => {
+    const option = event.target.closest(".item-option");
+    if (option) selectInventoryItem(option.dataset.originalName);
+});
+document.getElementById("btnClearItem").addEventListener("click", () => {
+    selectedItemName = "";
+    document.getElementById("itemSelector").value = "";
+    document.getElementById("btnClearItem").classList.add("is-hidden");
+    setItemOptionsOpen(false);
+    setGlobalStatTitles();
+    fetchStats(false);
+});
+document.addEventListener("pointerdown", (event) => {
+    if (!event.target.closest(".item-selector")) setItemOptionsOpen(false);
+});
 loadCurrentMode();
 updateTriggerStatus();
-setInterval(updateCameraStatus, CONFIG.cameraPollMs);
 setInterval(updateTriggerStatus, CONFIG.triggerPollMs || 500);
 
 const bootOverlay = document.getElementById("bootOverlay");
@@ -284,89 +888,6 @@ async function pollBootStatus() {
 
 pollBootStatus();
 
-let capturedFrameBlob = null;
-let capturedPreviewUrl = null;
-
-function setEmbedStatus(message, kind = "") {
-    const statusEl = document.getElementById("embedStatus");
-    statusEl.textContent = message;
-    statusEl.className = `embed-status ${kind}`.trim();
-}
-
-function updateEmbedButton() {
-    const ready = Boolean(capturedFrameBlob) && Boolean(document.getElementById("objectName").value.trim());
-    document.getElementById("btnEmbed").disabled = !ready;
-}
-
-async function captureFromCamera() {
-    const feed = document.getElementById("cameraFeed");
-    const preview = document.getElementById("capturePreview");
-    const wrap = preview.parentElement;
-    try {
-        if (!feed.naturalWidth) {
-            throw new Error("Live camera frame is not ready");
-        }
-        const canvas = document.createElement("canvas");
-        canvas.width = feed.naturalWidth;
-        canvas.height = feed.naturalHeight;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(feed, 0, 0);
-        const blob = await new Promise((resolve, reject) => {
-            canvas.toBlob((result) => {
-                if (result) resolve(result);
-                else reject(new Error("Could not encode captured frame"));
-            }, "image/jpeg", 0.92);
-        });
-        capturedFrameBlob = blob;
-        if (capturedPreviewUrl) URL.revokeObjectURL(capturedPreviewUrl);
-        capturedPreviewUrl = URL.createObjectURL(blob);
-        preview.src = capturedPreviewUrl;
-        wrap.classList.add("has-frame");
-        setEmbedStatus("Frame captured. Name the object, then create the embedding.");
-        updateEmbedButton();
-    } catch (error) {
-        console.error("Capture error:", error);
-        setEmbedStatus(error.message || "Could not capture the camera frame.", "error");
-    }
-}
-
-async function createEmbedding() {
-    const objectName = document.getElementById("objectName").value.trim();
-    if (!capturedFrameBlob || !objectName) {
-        setEmbedStatus("Capture a frame and enter an object name first.", "error");
-        return;
-    }
-    const button = document.getElementById("btnEmbed");
-    button.disabled = true;
-    setEmbedStatus("Creating embedding…", "busy");
-    try {
-        const body = new FormData();
-        body.append("file", capturedFrameBlob, "capture.jpg");
-        body.append("object_name", objectName);
-        const response = await fetch(CONFIG.embeddingUrl, {
-            method: "POST",
-            body,
-            cache: "no-store",
-        });
-        const data = await response.json();
-        if (!response.ok) {
-            const detail = data.detail;
-            const message = typeof detail === "string" ? detail : "Embedding request failed";
-            throw new Error(message);
-        }
-        setEmbedStatus(`✅ Embedding saved for ${data.object_name}`, "ok");
-    } catch (error) {
-        console.error("Embedding error:", error);
-        setEmbedStatus(error.message || "Could not save embedding.", "error");
-    } finally {
-        updateEmbedButton();
-    }
-}
-
-document.getElementById("btnCapture").addEventListener("click", captureFromCamera);
-document.getElementById("objectName").addEventListener("input", updateEmbedButton);
-document.getElementById("btnEmbed").addEventListener("click", createEmbedding);
-
 function setDbBadge(state, text) {
     const badge = document.getElementById("dbStatusBadge");
     const label = document.getElementById("dbStatusText");
@@ -391,3 +912,376 @@ async function updateDbStatus() {
 }
 
 updateDbStatus();
+
+const faceGate = document.getElementById("faceGate");
+const faceGateHint = document.getElementById("faceGateHint");
+const faceModeToggle = document.getElementById("faceModeToggle");
+const registerModal = document.getElementById("registerModal");
+const recognizedStaffEl = document.getElementById("recognizedStaff");
+let faceUiMode = "recognize";
+let registerModalOpen = false;
+let lastFaceReady = false;
+
+function setFaceHint(message) {
+    if (faceGateHint) faceGateHint.textContent = message || "Position your face in the outline";
+}
+
+function showRegisterModal(show) {
+    registerModalOpen = Boolean(show);
+    registerModal.classList.toggle("is-hidden", !show);
+    registerModal.setAttribute("aria-hidden", show ? "false" : "true");
+    if (show) {
+        document.getElementById("registerStatus").textContent = "";
+        const progress = document.getElementById("registerProgress");
+        if (progress) progress.classList.add("is-hidden");
+        setRegisterProgress(0);
+        updateRegisterSave();
+        document.getElementById("staffName").focus();
+    }
+}
+
+function updateRegisterSave() {
+    const name = document.getElementById("staffName").value.trim();
+    const staffId = document.getElementById("staffId").value.trim();
+    document.getElementById("btnRegisterSave").disabled = !(name && staffId && lastFaceReady);
+}
+
+function renderRecognized(staff, unknownStaff = false, matchScore = null) {
+    const viewer = document.getElementById("recognizedViewer");
+    const viewerName = document.getElementById("recognizedViewerName");
+    const viewerMeta = document.getElementById("recognizedViewerMeta");
+    const viewerKicker = viewer ? viewer.querySelector(".recognized-viewer-kicker") : null;
+    if (unknownStaff) {
+        const confidence = Math.max(0, Math.round((Number(matchScore) || 0) * 100));
+        if (recognizedStaffEl) {
+            recognizedStaffEl.textContent = "UNKNOWN STAFF";
+            recognizedStaffEl.classList.remove("is-hidden");
+            recognizedStaffEl.classList.add("is-unknown");
+        }
+        if (viewerKicker) viewerKicker.textContent = "Identity rejected";
+        if (viewerName) viewerName.textContent = "UNKNOWN STAFF";
+        if (viewerMeta) viewerMeta.textContent = `${confidence}% similarity · 90% required`;
+        if (viewer) {
+            viewer.classList.remove("is-hidden");
+            viewer.classList.add("is-unknown");
+        }
+        return;
+    }
+    if (!staff) {
+        if (recognizedStaffEl) {
+            recognizedStaffEl.textContent = "";
+            recognizedStaffEl.classList.add("is-hidden");
+            recognizedStaffEl.classList.remove("is-unknown");
+        }
+        if (viewer) {
+            viewer.classList.add("is-hidden");
+            viewer.classList.remove("is-unknown");
+        }
+        return;
+    }
+    const confidence = Math.round((Number(staff.score) || 0) * 100);
+    const staffChanged = currentRecognizedStaffName !== staff.staff_name;
+    currentRecognizedStaffName = staff.staff_name;
+    if (recognizedStaffEl) {
+        recognizedStaffEl.textContent = `Staff · ${staff.staff_name}`;
+        recognizedStaffEl.classList.remove("is-hidden");
+        recognizedStaffEl.classList.remove("is-unknown");
+    }
+    if (viewerKicker) viewerKicker.textContent = "Identity verified";
+    if (viewerName) viewerName.textContent = staff.staff_name;
+    if (viewerMeta) {
+        viewerMeta.textContent = `${staff.staff_id} · ${confidence}% similarity`;
+    }
+    if (viewer) {
+        viewer.classList.remove("is-hidden");
+        viewer.classList.remove("is-unknown");
+    }
+    if (staffChanged) fetchInventory();
+}
+
+async function setFaceMode(mode) {
+    faceUiMode = mode;
+    faceModeToggle.checked = mode === "register";
+    capturedForModal = false;
+    pendingFaceBlob = null;
+    lastFaceReady = false;
+    try {
+        const response = await fetch(CONFIG.faceModeUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ mode }),
+            cache: "no-store",
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.detail || "Face mode failed");
+        applyFaceStatus(data);
+    } catch (error) {
+        console.error("Face mode error:", error);
+        setFaceHint(error.message || "Could not change face mode");
+    }
+}
+
+function applyFaceStatus(data) {
+    const visible = !data.recognized;
+    const unknownStaff = Boolean(data.unknown_staff);
+    const view = document.querySelector(".camera-view");
+    faceGate.classList.toggle("is-hidden", !visible);
+    if (view) view.classList.toggle("is-gating", visible);
+    if (view) view.classList.toggle("is-unknown-staff", unknownStaff);
+    faceGate.classList.toggle(
+        "is-ready",
+        Boolean(!unknownStaff && (lastFaceReady || data.recognized)),
+    );
+    faceGate.classList.toggle("is-warn", visible && (unknownStaff || !lastFaceReady));
+    if (!faceLandmarker) setFaceHint(data.message);
+    renderRecognized(data.recognized, unknownStaff, data.match_score);
+    if (data.recognized) {
+        faceAnalyzeEnabled = false;
+        scanIngestEnabled = true;
+        landmarkCtx.clearRect(0, 0, landmarkLayer.width, landmarkLayer.height);
+        if (faceToggleWrap) faceToggleWrap.classList.add("is-hidden");
+        if (flowToggleWrap) flowToggleWrap.classList.remove("is-hidden");
+        if (!flowArmed) {
+            flowArmed = true;
+            setMode("OUT");
+        }
+    } else if (data.mode === "register" || data.mode === "recognize") {
+        faceAnalyzeEnabled = true;
+        scanIngestEnabled = false;
+        flowArmed = false;
+        if (faceToggleWrap) faceToggleWrap.classList.remove("is-hidden");
+        if (flowToggleWrap) flowToggleWrap.classList.add("is-hidden");
+    }
+    if (data.mode === "register" || faceUiMode === "register") {
+        faceUiMode = "register";
+        faceModeToggle.checked = true;
+    } else if (data.mode === "recognize") {
+        faceUiMode = "recognize";
+        faceModeToggle.checked = false;
+        if (registerModalOpen) showRegisterModal(false);
+    }
+    if (registerModalOpen) updateRegisterSave();
+}
+
+async function pollFaceStatus() {
+    if (usingLocalCamera && faceAnalyzeEnabled) return;
+    try {
+        const response = await fetch(CONFIG.faceStatusUrl, { cache: "no-store" });
+        if (!response.ok) throw new Error("Face status failed");
+        applyFaceStatus(await response.json());
+    } catch (error) {
+        console.error("Face status error:", error);
+    }
+}
+
+function setRegisterProgress(pct, message) {
+    const fill = document.getElementById("registerProgressFill");
+    const label = document.getElementById("registerProgressPct");
+    const statusEl = document.getElementById("registerStatus");
+    const clamped = Math.max(0, Math.min(100, Math.round(pct)));
+    if (fill) fill.style.width = `${clamped}%`;
+    if (label) label.textContent = `${clamped}%`;
+    if (message && statusEl) statusEl.textContent = `${message} · ${clamped}%`;
+}
+
+async function blobToBase64(blob) {
+    const buffer = await blob.arrayBuffer();
+    const bytes = new Uint8Array(buffer);
+    let binary = "";
+    const step = 0x8000;
+    for (let i = 0; i < bytes.length; i += step) {
+        binary += String.fromCharCode(...bytes.subarray(i, i + step));
+    }
+    return btoa(binary);
+}
+
+async function submitFaceRegister() {
+    const staffName = document.getElementById("staffName").value.trim();
+    const staffId = document.getElementById("staffId").value.trim();
+    const statusEl = document.getElementById("registerStatus");
+    if (!staffName || !staffId) {
+        statusEl.textContent = "Fill in both fields.";
+        return;
+    }
+    if (!lastFaceReady) {
+        statusEl.textContent = "Keep a complete face in the outline.";
+        return;
+    }
+    const button = document.getElementById("btnRegisterSave");
+    const progress = document.getElementById("registerProgress");
+    button.disabled = true;
+    progress.classList.remove("is-hidden");
+    progress.setAttribute("aria-hidden", "false");
+    setRegisterProgress(25, "Saving staff record");
+    try {
+        const crop = pendingFaceBlob || await grabLocalFrame();
+        const image_b64 = crop ? await blobToBase64(crop) : "";
+        setRegisterProgress(70, "Writing staff record");
+        const response = await fetch(CONFIG.faceRegisterUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                staff_id: staffId,
+                staff_name: staffName,
+                image_b64,
+            }),
+            cache: "no-store",
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.detail || "Register failed");
+        setRegisterProgress(100, `Saved ${data.staff_name}`);
+        fetchStats(false);
+        document.getElementById("staffName").value = "";
+        document.getElementById("staffId").value = "";
+        setTimeout(() => {
+            showRegisterModal(false);
+            progress.classList.add("is-hidden");
+            setRegisterProgress(0);
+        }, 700);
+    } catch (error) {
+        console.error("Register error:", error);
+        statusEl.textContent = error.message || "Could not save the face.";
+        progress.classList.add("is-hidden");
+        setRegisterProgress(0);
+    } finally {
+        updateRegisterSave();
+    }
+}
+
+faceModeToggle.addEventListener("change", () => {
+    setFaceMode(faceModeToggle.checked ? "register" : "recognize");
+});
+document.querySelectorAll("#faceToggleWrap > span").forEach((label) => {
+    label.addEventListener("click", () => {
+        const mode = label.textContent.trim().toLowerCase() === "register"
+            ? "register"
+            : "recognize";
+        faceModeToggle.checked = mode === "register";
+        setFaceMode(mode);
+    });
+});
+if (flowModeToggle) {
+    flowModeToggle.addEventListener("change", () => {
+        setMode(flowModeToggle.checked ? "OUT" : "IN");
+    });
+}
+document.querySelectorAll("#flowToggleWrap > span").forEach((label) => {
+    label.addEventListener("click", () => {
+        const checkout = label.textContent.trim().toLowerCase() === "check out";
+        flowModeToggle.checked = checkout;
+        setMode(checkout ? "OUT" : "IN");
+    });
+});
+document.getElementById("btnRegisterCancel").addEventListener("click", () => {
+    showRegisterModal(false);
+    capturedForModal = false;
+    pendingFaceBlob = null;
+    lastFaceReady = false;
+    setFaceMode("recognize");
+    faceModeToggle.checked = false;
+    faceUiMode = "recognize";
+});
+document.getElementById("btnRegisterSave").addEventListener("click", submitFaceRegister);
+document.getElementById("staffName").addEventListener("input", updateRegisterSave);
+document.getElementById("staffId").addEventListener("input", updateRegisterSave);
+
+const catalogImportModal = document.getElementById("catalogImportModal");
+const btnImportCatalog = document.getElementById("btnImportCatalog");
+const btnCatalogClose = document.getElementById("btnCatalogClose");
+let catalogPollTimer = null;
+
+function showCatalogImportModal(show) {
+    catalogImportModal.classList.toggle("is-hidden", !show);
+    catalogImportModal.setAttribute("aria-hidden", show ? "false" : "true");
+}
+
+function renderCatalogImport(state) {
+    const stage = state.stage || "idle";
+    const percent = Math.max(0, Math.min(100, Number(state.percent) || 0));
+    const stageEl = document.getElementById("catalogImportStage");
+    const currentEl = document.getElementById("catalogImportCurrent");
+    const summaryEl = document.getElementById("catalogImportSummary");
+    document.getElementById("catalogImportFill").style.width = `${percent}%`;
+    document.getElementById("catalogImportPct").textContent = `${percent}%`;
+    stageEl.textContent = stage === "selecting"
+        ? "Select images/train, then labels/train"
+        : stage;
+    const counts = state.total
+        ? `${state.processed || 0} / ${state.total}`
+        : "";
+    currentEl.textContent = [counts, state.current || ""].filter(Boolean).join(" · ");
+    btnImportCatalog.disabled = Boolean(state.running);
+    btnCatalogClose.disabled = Boolean(state.running);
+
+    if (stage === "complete" && state.result) {
+        const result = state.result;
+        summaryEl.textContent =
+            `${result.embeddings} mask embeddings saved · ${result.unique_items} unique items`;
+        fetchStats();
+        fetchInventory();
+        loadItemOptions();
+    } else if (stage === "failed") {
+        summaryEl.textContent = state.error || "Catalog import failed.";
+    } else if (state.running) {
+        summaryEl.textContent = stage === "database"
+            ? "Replacing inventory_emb and rebuilding main_inventory…"
+            : `${state.embedded || 0} embeddings prepared`;
+    }
+
+    if (!state.running && catalogPollTimer) {
+        window.clearInterval(catalogPollTimer);
+        catalogPollTimer = null;
+    }
+}
+
+async function pollCatalogImport() {
+    try {
+        const response = await fetch("/api/catalog/import/status", { cache: "no-store" });
+        if (response.ok) renderCatalogImport(await response.json());
+    } catch (error) {
+        console.error("Catalog status error:", error);
+    }
+}
+
+btnImportCatalog.addEventListener("click", async () => {
+    showCatalogImportModal(true);
+    renderCatalogImport({ running: true, stage: "selecting", percent: 2 });
+    try {
+        const response = await fetch("/api/catalog/import/select", {
+            method: "POST",
+            cache: "no-store",
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.detail || "Could not start catalog import.");
+        renderCatalogImport(data);
+        if (!catalogPollTimer) {
+            catalogPollTimer = window.setInterval(pollCatalogImport, 500);
+        }
+    } catch (error) {
+        renderCatalogImport({
+            running: false,
+            stage: "failed",
+            percent: 0,
+            error: error.message || "Could not start catalog import.",
+        });
+    }
+});
+
+btnCatalogClose.addEventListener("click", () => showCatalogImportModal(false));
+
+pollFaceStatus();
+setInterval(pollFaceStatus, CONFIG.facePollMs || 220);
+
+function pingClientHello() {
+    fetch("/api/client/hello", { method: "POST", cache: "no-store", keepalive: true }).catch(() => {});
+}
+
+pingClientHello();
+setInterval(pingClientHello, 2000);
+window.addEventListener("pagehide", (event) => {
+    if (event.persisted) return;
+    navigator.sendBeacon("/api/client/leave");
+});
+window.addEventListener("beforeunload", () => {
+    navigator.sendBeacon("/api/client/leave");
+});

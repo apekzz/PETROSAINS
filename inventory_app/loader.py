@@ -47,9 +47,10 @@ def set_progress(percent, stage):
 def finish(dashboard_url, lan_url=None):
     set_progress(100, "systems online")
     print("\n")
-    print(f"  {GREEN}●{RESET}  model locked")
+    print(f"  {GREEN}●{RESET}  database connected")
+    print(f"  {GREEN}●{RESET}  models locked")
+    print(f"  {GREEN}●{RESET}  face gate ready")
     print(f"  {GREEN}●{RESET}  camera live")
-    print(f"  {GREEN}●{RESET}  capture pipeline on backend")
     print()
     print(f"  {PURPLE}{BOLD}This Mac{RESET}        {CYAN}{dashboard_url}{RESET}")
     if lan_url:

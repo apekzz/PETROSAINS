@@ -9,9 +9,12 @@ import sys
 import psycopg
 
 from config import BASE_DIR, DATABASE_URL, SQLITE_PATH
-from db import fetch_inventory, fetch_stats, init_schema
+from sql import connect_and_prepare, fetch_inventory, fetch_stats, table_status
 
-ADMIN_URL = os.environ.get("POSTGRES_ADMIN_URL", "postgresql:///postgres")
+ADMIN_URL = os.environ.get(
+    "POSTGRES_ADMIN_URL",
+    "postgresql://postgres:ai_squad@127.0.0.1:5432/postgres",
+)
 
 
 def _run(cmd):
@@ -19,6 +22,27 @@ def _run(cmd):
 
 
 def ensure_postgres_running():
+    try:
+        with psycopg.connect(DATABASE_URL, connect_timeout=3) as conn:
+            conn.execute("SELECT 1")
+        return
+    except Exception:
+        pass
+
+    _run(["docker", "start", "petrosains-pg"])
+    for _ in range(20):
+        try:
+            with psycopg.connect(
+                "postgresql://postgres:ai_squad@127.0.0.1:5432/postgres",
+                connect_timeout=2,
+            ) as conn:
+                conn.execute("SELECT 1")
+            return
+        except Exception:
+            import time
+
+            time.sleep(1)
+
     result = _run(["pg_isready"])
     if result.returncode == 0:
         return
@@ -27,9 +51,9 @@ def ensure_postgres_running():
     result = _run(["pg_isready"])
     if result.returncode != 0:
         print("PostgreSQL is not running.")
-        print("Install and start it with:")
-        print("  brew install postgresql@16")
-        print("  brew services start postgresql@16")
+        print("Start the Docker DB used by this repo:")
+        print("  docker start petrosains-pg")
+        print("Or install Postgres and start the service, then retry.")
         sys.exit(1)
 
 
@@ -69,7 +93,10 @@ def ensure_database():
             print("Created database: oneshot_inventory")
         admin.execute("GRANT ALL PRIVILEGES ON DATABASE oneshot_inventory TO oneshot")
 
-    with psycopg.connect("postgresql:///oneshot_inventory", autocommit=True) as inventory_admin:
+    with psycopg.connect(
+        "postgresql://postgres:ai_squad@127.0.0.1:5432/oneshot_inventory",
+        autocommit=True,
+    ) as inventory_admin:
         inventory_admin.execute("GRANT ALL ON SCHEMA public TO oneshot")
         inventory_admin.execute("GRANT ALL ON ALL TABLES IN SCHEMA public TO oneshot")
         inventory_admin.execute("GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO oneshot")
@@ -105,7 +132,7 @@ def migrate_sqlite_inventory():
     if not rows:
         return 0
 
-    from db import get_db
+    from sql import get_db
 
     seen = set()
     copied = 0
@@ -117,27 +144,21 @@ def migrate_sqlite_inventory():
                 continue
             seen.add(key)
             exists = conn.execute(
-                "SELECT id FROM inventory WHERE LOWER(item_name) = LOWER(%s)",
+                """
+                SELECT id FROM main_inventory
+                WHERE LOWER(inventory_name) = LOWER(%s)
+                """,
                 (name,),
             ).fetchone()
             if exists:
                 continue
             conn.execute(
                 """
-                INSERT INTO inventory
-                    (item_name, category, quantity, unit_type, location, status, owner, last_seen)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO main_inventory
+                    (inventory_name, orig_quantity, registered_date)
+                VALUES (%s, %s, CURRENT_TIMESTAMP)
                 """,
-                (
-                    name,
-                    row["category"],
-                    row["quantity"],
-                    row["unit_type"],
-                    row["location"],
-                    row["status"],
-                    row["owner"],
-                    row["last_seen"],
-                ),
+                (name, row["quantity"] or 0),
             )
             copied += 1
     return copied
@@ -146,19 +167,30 @@ def migrate_sqlite_inventory():
 if __name__ == "__main__":
     ensure_postgres_running()
     ensure_database()
-    init_schema(seed=False)
+    connect_and_prepare()
     copied = migrate_sqlite_inventory()
-    init_schema()
     stats = fetch_stats()
     print("PostgreSQL is ready.")
     print("URL:", DATABASE_URL)
+    print("Required tables:", table_status())
     if copied:
         print(f"Copied {copied} unique items from the old SQLite file.")
     print("Inventory stats:", stats)
-    from db import get_db
+    from sql import get_db
     with get_db() as conn:
-        embed_count = conn.execute(
-            "SELECT COUNT(*) AS n FROM object_embeddings"
-        ).fetchone()["n"]
-    print("object_embeddings rows:", embed_count)
+        present = {
+            row["table_name"]
+            for row in conn.execute(
+                """
+                SELECT table_name FROM information_schema.tables
+                WHERE table_schema = 'public'
+                """
+            ).fetchall()
+        }
+        emb_count = 0
+        if "inventory_emb" in present:
+            emb_count = conn.execute(
+                "SELECT COUNT(*) AS n FROM inventory_emb"
+            ).fetchone()["n"]
+    print("inventory_emb rows:", emb_count)
     print("Project folder:", BASE_DIR)

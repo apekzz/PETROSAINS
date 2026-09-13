@@ -13,7 +13,7 @@ from utils.dataset import build_embedding_dataframe
 from utils.gdrive import drive_folder
 from utils.visualize import list_images
 
-OUTPUT_PATH = ROOT / "train_official.parquet"
+OUTPUT_PATH = ROOT / "test_pg" / "train_official.parquet"
 
 
 def main() -> None:

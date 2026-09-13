@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/theme.css">
     <link rel="stylesheet" href="/dashboard.css">
+    <link rel="stylesheet" href="/sam-tool.css">
 </head>
 
 <body>
@@ -30,106 +31,161 @@
             <span class="brand-divider"></span>
             <p class="brand-sub">Inventory System</p>
         </div>
-        <div id="dbStatusBadge" class="status-badge connecting">
-            <div class="status-dot"></div>
-            <span id="dbStatusText">CONNECTING TO DATABASE...</span>
+        <div class="header-tools">
+            <div id="dbStatusBadge" class="status-badge connecting">
+                <div class="status-dot"></div>
+                <span id="dbStatusText">CONNECTING TO DATABASE...</span>
+            </div>
         </div>
     </div>
 
     <div class="container">
+        <section class="inventory-search-panel" aria-labelledby="inventorySearchTitle">
+            <div class="inventory-search-copy">
+                <h2 id="inventorySearchTitle">Inventory lookup</h2>
+                <p>Search by full or partial item name</p>
+            </div>
+            <div class="item-selector">
+                <input
+                    id="itemSelector"
+                    type="search"
+                    placeholder="Search inventory item…"
+                    autocomplete="off"
+                    aria-label="Search and select an inventory item"
+                    aria-autocomplete="list"
+                    aria-controls="itemOptions"
+                    aria-expanded="false"
+                >
+                <div id="itemOptions" class="item-options" role="listbox"></div>
+                <button id="btnClearItem" type="button" class="item-selector-clear is-hidden">×</button>
+            </div>
+        </section>
         <div class="stats-row">
             <div class="stat-card">
-                <h3>Total items</h3>
+                <h3 id="statTitleTotal">Total unique items</h3>
                 <p id="total-items">0</p>
             </div>
             <div class="stat-card">
-                <h3>Available</h3>
+                <h3 id="statTitleAvailable">Staff registered</h3>
                 <p id="available-items" class="stat-available">0</p>
             </div>
             <div class="stat-card">
-                <h3>Checked out</h3>
+                <h3 id="statTitleChecked">Checkout sessions</h3>
                 <p id="checked-items" class="stat-checked">0</p>
             </div>
-            <div class="stat-card">
-                <h3>Low stock</h3>
+            <div id="lowStockCard" class="stat-card">
+                <h3 id="statTitleLow">Low stock</h3>
                 <p id="low-stock" class="stat-low">0</p>
             </div>
-        </div>
-
-        <div class="action-row">
-            <div class="add-item-card">
-                <h2>Add new item</h2>
-                <div class="embed-preview-wrap">
-                    <img id="capturePreview" alt="Captured frame">
-                    <p class="embed-preview-hint">no frame</p>
-                </div>
-                <button id="btnCapture" type="button" class="embed-btn">📸 Capture</button>
-                <input
-                    type="text"
-                    id="objectName"
-                    class="embed-input"
-                    placeholder="Object Name"
-                    autocomplete="off"
-                >
-                <button id="btnEmbed" type="button" class="embed-btn embed-btn-primary" disabled>🧠 Embed</button>
-                <p id="embedStatus" class="embed-status">Capture, name, embed.</p>
-            </div>
-            <div class="ai-training-card">
-                <div>
-                    <h2>AI Training</h2>
-                    <p class="coming-soon">coming soon</p>
-                </div>
-                <div class="ai-circle"></div>
-            </div>
-        </div>
-
-        <div class="card mode-card">
-            <h2>Detection mode</h2>
-            <div class="mode-buttons">
-                <button id="btnIn" class="mode-btn" onclick="setMode('IN')">IN</button>
-                <button id="btnScan" class="mode-btn active" onclick="setMode('SCAN')">SCAN</button>
-                <button id="btnOut" class="mode-btn" onclick="setMode('OUT')">OUT</button>
-            </div>
-            <p id="modeStatus">locked in · SCAN · view only</p>
         </div>
 
         <div class="workspace">
             <div class="card camera-card">
                 <div class="card-head">
                     <h2>Live Camera</h2>
-                    <p id="triggerStatus" class="trigger-status waiting">
-                        <span class="trigger-dot"></span>
-                        <span id="triggerStatusText">WARMUP</span>
-                    </p>
-                </div>
-                <div class="camera-view">
-                    <img id="cameraFeed" alt="Live Camera Feed">
-                    <div id="yoloDetections" class="yolo-detections"></div>
-                    <div id="cameraStatus" class="camera-status">
-                        CONNECTING TO CAMERA...
+                    <div class="camera-head-tools">
+                        <p id="recognizedStaff" class="staff-chip is-hidden"></p>
+                        <div id="faceToggleWrap" class="face-toggle-wrap" title="Choose face register or recognize">
+                            <span>Recognize</span>
+                            <label class="face-switch">
+                                <input type="checkbox" id="faceModeToggle" aria-label="Register face instead of recognize">
+                                <span class="face-switch-slider"></span>
+                            </label>
+                            <span>Register</span>
+                        </div>
+                        <div id="flowToggleWrap" class="face-toggle-wrap flow-toggle-wrap is-hidden" title="Check in or check out scanned items">
+                            <span>Check in</span>
+                            <label class="face-switch">
+                                <input type="checkbox" id="flowModeToggle" aria-label="Switch to checkout">
+                                <span class="face-switch-slider flow-switch-slider"></span>
+                            </label>
+                            <span>Check out</span>
+                        </div>
+                        <button id="btnSamRegister" type="button" class="catalog-import-btn sam-launch-btn" title="Freeze the camera and register a precise SAM mask">
+                            ✦ SAM register
+                        </button>
+                        <button id="btnImportCatalog" type="button" class="catalog-import-btn" title="Import OpenCLIP catalog from train folders">
+                            Import train
+                        </button>
+                        <p id="triggerStatus" class="trigger-status waiting">
+                            <span class="trigger-dot"></span>
+                            <span id="triggerStatusText">WARMUP</span>
+                        </p>
                     </div>
+                </div>
+                <div class="camera-view is-gating">
+                    <video id="liveVideo" autoplay playsinline muted></video>
+                    <canvas id="cameraFeed" class="is-hidden" width="640" height="480"></canvas>
+                    <canvas id="landmarkLayer" width="640" height="480"></canvas>
+                    <div id="faceGate" class="face-gate">
+                        <svg class="face-gate-svg" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                            <defs>
+                                <path id="humanFace" d="M320 36
+                                    C358 36 392 46 412 72
+                                    C428 94 436 120 434 146
+                                    C444 156 450 172 444 188
+                                    C436 198 426 206 420 220
+                                    C414 246 406 272 390 298
+                                    C376 322 358 344 340 356
+                                    C332 362 326 364 320 365
+                                    C314 364 308 362 300 356
+                                    C282 344 264 322 250 298
+                                    C234 272 226 246 220 220
+                                    C214 206 204 198 196 188
+                                    C190 172 196 156 206 146
+                                    C204 120 212 94 228 72
+                                    C248 46 282 36 320 36 Z"/>
+                                <mask id="faceHoleMask">
+                                    <rect width="640" height="480" fill="white"/>
+                                    <use href="#humanFace" fill="black" transform="translate(320 240) scale(0.52) translate(-320 -205)"/>
+                                </mask>
+                                <clipPath id="faceClip">
+                                    <use href="#humanFace"/>
+                                </clipPath>
+                            </defs>
+                            <rect class="face-gate-veil" width="640" height="480" mask="url(#faceHoleMask)"/>
+                            <g class="face-anchor" transform="translate(320 240) scale(0.52) translate(-320 -205)">
+                                <g class="face-float">
+                                    <use href="#humanFace" class="face-gate-outline"/>
+                                    <g clip-path="url(#faceClip)">
+                                        <rect class="face-gate-scan" x="196" y="48" width="248" height="4">
+                                            <animate attributeName="y" values="48;360;48" dur="2.2s" repeatCount="indefinite"/>
+                                        </rect>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                        <p id="faceCoverage" class="face-coverage">0%</p>
+                        <p id="faceGateHint" class="face-gate-hint">Position your face in the outline</p>
+                    </div>
+                    <div id="recognizedViewer" class="recognized-viewer is-hidden" aria-live="polite">
+                        <img id="recognizedFacePreview" class="recognized-face-preview" alt="Segmented recognized face">
+                        <div class="recognized-viewer-copy">
+                            <span class="recognized-viewer-kicker">Identity verified</span>
+                            <strong id="recognizedViewerName"></strong>
+                            <span id="recognizedViewerMeta"></span>
+                        </div>
+                    </div>
+                    <div id="objectDetectionOverlay" class="object-detection-overlay" aria-hidden="true"></div>
+                    <div id="yoloDetections" class="yolo-detections"></div>
                 </div>
             </div>
 
             <div class="card inventory-card">
                 <div class="card-head">
-                    <h2>Inventory</h2>
+                    <h2>Check in / Check out</h2>
                 </div>
-                <input
-                    type="text"
-                    class="search-bar"
-                    id="searchInput"
-                    placeholder="search anything…"
-                >
                 <div class="inventory-table-wrap">
                     <table>
                         <thead>
                             <tr>
-                                <th>Item</th>
-                                <th>Qty</th>
-                                <th>Unit</th>
-                                <th>Spot</th>
-                                <th>Status</th>
+                                <th>id</th>
+                                <th>inventory_name</th>
+                                <th>checked_out_by</th>
+                                <th>checked_in_by</th>
+                                <th>quantity</th>
+                                <th>out_dt</th>
+                                <th>in_dt</th>
                             </tr>
                         </thead>
                         <tbody id="inventoryTable"></tbody>
@@ -139,8 +195,167 @@
         </div>
     </div>
 
+    <div id="registerModal" class="modal-overlay is-hidden" aria-hidden="true">
+        <div class="modal-card register-modal-card" role="dialog" aria-labelledby="registerTitle">
+            <h2 id="registerTitle">Register staff face</h2>
+            <p class="modal-copy">Landmarks must be complete. Only the face region is stored.</p>
+            <div class="register-modal-layout">
+                <figure class="register-face-preview-wrap">
+                    <img id="registerFacePreview" alt="Cropped face ready for registration">
+                    <figcaption>Captured face region</figcaption>
+                </figure>
+                <div class="register-modal-form">
+                    <label class="modal-field">
+                        <span>Staff name</span>
+                        <input type="text" id="staffName" autocomplete="name" placeholder="Full name">
+                    </label>
+                    <label class="modal-field">
+                        <span>Staff ID</span>
+                        <input type="text" id="staffId" autocomplete="off" placeholder="e.g. S-1042">
+                    </label>
+                    <p id="registerStatus" class="modal-status"></p>
+                    <div id="registerProgress" class="register-progress is-hidden" aria-hidden="true">
+                        <div class="register-progress-track">
+                            <div id="registerProgressFill" class="register-progress-fill"></div>
+                        </div>
+                        <span id="registerProgressPct">0%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" id="btnRegisterCancel" class="embed-btn">Cancel</button>
+                <button type="button" id="btnRegisterSave" class="embed-btn embed-btn-primary" disabled>Save face</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="catalogImportModal" class="modal-overlay is-hidden" aria-hidden="true">
+        <div class="modal-card catalog-import-card" role="dialog" aria-labelledby="catalogImportTitle">
+            <h2 id="catalogImportTitle">Import train catalog</h2>
+            <p class="modal-copy">
+                Select <strong>images/train</strong>, then <strong>labels/train</strong>.
+                Polygon masks are cut out and encoded with OpenCLIP.
+            </p>
+            <p id="catalogImportStage" class="catalog-import-stage">Waiting for folders…</p>
+            <p id="catalogImportCurrent" class="catalog-import-current"></p>
+            <div class="register-progress catalog-import-progress" aria-hidden="false">
+                <div class="register-progress-track">
+                    <div id="catalogImportFill" class="register-progress-fill"></div>
+                </div>
+                <span id="catalogImportPct" class="register-progress-pct">0%</span>
+            </div>
+            <p id="catalogImportSummary" class="modal-status"></p>
+            <div class="modal-actions">
+                <button type="button" id="btnCatalogClose" class="embed-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="samModal" class="sam-modal is-hidden" aria-hidden="true">
+        <div class="sam-shell" role="dialog" aria-modal="true" aria-labelledby="samTitle">
+            <header class="sam-header">
+                <div>
+                    <span class="sam-kicker">Interactive segmentation</span>
+                    <h2 id="samTitle">Register inventory with SAM</h2>
+                </div>
+                <div class="sam-header-actions">
+                    <span id="samRuntime" class="sam-runtime">SAM · checking</span>
+                    <button id="samClose" type="button" class="sam-icon-btn" aria-label="Close SAM editor">×</button>
+                </div>
+            </header>
+            <div class="sam-workspace">
+                <aside class="sam-tools">
+                    <section>
+                        <span class="sam-section-label">Point prompts</span>
+                        <div class="sam-tool-grid">
+                            <button id="samFg" type="button" class="sam-tool active">＋ Foreground</button>
+                            <button id="samBg" type="button" class="sam-tool negative">− Background</button>
+                        </div>
+                        <button id="samGenerate" type="button" class="sam-wide sam-primary" disabled>Generate mask</button>
+                        <button id="samClearPoints" type="button" class="sam-wide" disabled>Clear points</button>
+                    </section>
+                    <section>
+                        <span class="sam-section-label">Refine mask</span>
+                        <div class="sam-tool-grid">
+                            <button id="samBrush" type="button" class="sam-tool">Brush</button>
+                            <button id="samEraser" type="button" class="sam-tool negative">Eraser</button>
+                        </div>
+                        <label class="sam-slider-label">
+                            <span>Brush size</span>
+                            <output id="samBrushValue">24 px</output>
+                        </label>
+                        <input id="samBrushSize" type="range" min="2" max="120" value="24">
+                        <label class="sam-slider-label">
+                            <span>Mask opacity</span>
+                            <output id="samOpacityValue">55%</output>
+                        </label>
+                        <input id="samOpacity" type="range" min="10" max="90" value="55">
+                    </section>
+                    <section>
+                        <span class="sam-section-label">History</span>
+                        <div class="sam-tool-grid sam-tool-grid-three">
+                            <button id="samUndo" type="button" disabled>Undo</button>
+                            <button id="samRedo" type="button" disabled>Redo</button>
+                            <button id="samReset" type="button" disabled>Reset</button>
+                        </div>
+                    </section>
+                </aside>
+                <section class="sam-editor-column">
+                    <div class="sam-editor-head">
+                        <strong id="samMode">Mode · foreground point</strong>
+                        <span id="samCoordinates">X — · Y —</span>
+                    </div>
+                    <div id="samStage" class="sam-stage" tabindex="0">
+                        <canvas id="samEditor"></canvas>
+                        <div id="samLoading" class="sam-loading">
+                            <span class="sam-spinner"></span>
+                            <strong id="samLoadingText">Freezing camera frame…</strong>
+                        </div>
+                    </div>
+                    <div class="sam-editor-footer">
+                        <span id="samMessage">Capture a frame to begin.</span>
+                        <span id="samMaskState">Mask · empty</span>
+                    </div>
+                </section>
+                <aside class="sam-preview-panel">
+                    <span class="sam-section-label">Segmented object</span>
+                    <div class="sam-preview-stage">
+                        <canvas id="samPreview"></canvas>
+                        <span id="samPreviewEmpty">Mask preview</span>
+                    </div>
+                    <button id="samProceed" type="button" class="sam-wide sam-confirm" disabled>Proceed to embedding</button>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <div id="samDetailsModal" class="modal-overlay is-hidden" aria-hidden="true">
+        <div class="modal-card sam-details-card" role="dialog" aria-modal="true" aria-labelledby="samDetailsTitle">
+            <h2 id="samDetailsTitle">Register segmented object</h2>
+            <p class="modal-copy">Confirm the precise region and enter its inventory class name.</p>
+            <div class="sam-details-layout">
+                <figure class="sam-details-preview">
+                    <img id="samDetailsImage" alt="Segmented inventory object">
+                    <figcaption>OpenCLIP input region</figcaption>
+                </figure>
+                <div class="sam-details-form">
+                    <label class="modal-field">
+                        <span>Inventory class name</span>
+                        <input id="samObjectName" type="text" maxlength="200" placeholder="Example: Caliper" autocomplete="off">
+                    </label>
+                    <p id="samSaveStatus" class="modal-status"></p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="samBack" type="button" class="embed-btn">Back to refine</button>
+                <button id="samSave" type="button" class="embed-btn embed-btn-primary" disabled>Embed & save</button>
+            </div>
+        </div>
+    </div>
+
     <script src="/config.js"></script>
     <script src="/dashboard.js"></script>
+    <script src="/sam-tool.js"></script>
 </body>
 
 </html>
