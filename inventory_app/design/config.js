@@ -8,6 +8,8 @@ window.ONESHOT_CONFIG = {
     triggerStatusUrl: "/api/trigger_status",
     dbStatusUrl: "/db_status",
     embeddingUrl: "/api/objects/embedding",
+    previewUrl: "/api/objects/preview",
+    captureFrameUrl: "/api/capture_frame",
 
     searchDebounceMs: 150,
     cameraPollMs: 2000,

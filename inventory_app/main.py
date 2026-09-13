@@ -1,4 +1,11 @@
 import os
+
+_BASE = os.path.dirname(os.path.abspath(__file__))
+os.environ["HF_HOME"] = os.path.join(_BASE, "models", "hf_cache")
+os.environ["TRANSFORMERS_OFFLINE"] = "1"
+os.environ["HF_HUB_OFFLINE"] = "1"
+os.environ["YOLO_OFFLINE"] = "1"
+
 import sys
 import time
 import threading
@@ -13,13 +20,20 @@ import torch
 from ultralytics import YOLO
 
 from fastapi import FastAPI, File, Form, UploadFile
-from fastapi.responses import StreamingResponse, HTMLResponse, JSONResponse, FileResponse
+from fastapi.responses import StreamingResponse, HTMLResponse, JSONResponse, FileResponse, Response
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from database.api import router as api_router
 from boot import loader
-from database.db import init_schema, record_yolo_capture, normalize_item_name, check_db, save_object_embedding
+from database.db import (
+    init_schema,
+    record_yolo_capture,
+    normalize_item_name,
+    check_db,
+    register_added_items,
+)
 from config import (
     BASE_DIR, HOST, PORT, CAMERA_INDEX, CAMERA_WIDTH, CAMERA_HEIGHT,
     TARGET_FPS, JPEG_QUALITY, MODEL_PATH, MODEL_CONFIDENCE, MODEL_IMAGE_SIZE,
@@ -49,6 +63,12 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+)
+
+app.mount(
+    "/fonts",
+    StaticFiles(directory=os.path.join(BASE_DIR, "design", "fonts")),
+    name="fonts",
 )
 
 app.include_router(api_router)
@@ -92,6 +112,8 @@ def load_embed_model():
         except Exception as exc:
             print("[EMBED] CLIP unavailable, using ResNet50 fallback:", exc)
 
+        # Offline note: ResNet50_Weights.DEFAULT may download from download.pytorch.org
+        # if CLIP is missing. Cache it once online, or keep CLIP in models/hf_cache.
         from torchvision.models import resnet50, ResNet50_Weights
         backbone = resnet50(weights=ResNet50_Weights.DEFAULT)
         backbone.fc = torch.nn.Identity()
@@ -142,6 +164,7 @@ camera_lock = threading.Lock()
 camera_thread = None
 camera_running = False
 latest_frame = None
+latest_live_frame = None
 camera_ok = False
 camera_error = "Camera has not started."
 scan_session = None
@@ -173,6 +196,9 @@ last_preview_at = 0.0
 BOX_COLOR = (200, 212, 0)
 LABEL_BG = (12, 21, 16)
 TEXT_COLOR = (246, 240, 232)
+HUMAN_CLASS_NAMES = {
+    "person", "human", "people", "man", "woman", "boy", "girl",
+}
 
 boot_ready = False
 boot_stage = "standby"
@@ -222,6 +248,33 @@ def encode_jpeg(frame):
     return None
 
 
+def jpeg_bytes_to_bgr(image_bytes):
+    array = np.frombuffer(image_bytes, dtype=np.uint8)
+    frame = cv2.imdecode(array, cv2.IMREAD_COLOR)
+    return frame
+
+
+def crop_detection_jpeg(frame, xyxy, pad=12):
+    height, width = frame.shape[:2]
+    x1, y1, x2, y2 = xyxy
+    x1 = max(0, int(x1) - pad)
+    y1 = max(0, int(y1) - pad)
+    x2 = min(width, int(x2) + pad)
+    y2 = min(height, int(y2) + pad)
+    if x2 <= x1 or y2 <= y1:
+        return None
+    return encode_jpeg(frame[y1:y2, x1:x2])
+
+
+def detect_items_in_jpeg(image_bytes):
+    if model is None:
+        load_model()
+    frame = jpeg_bytes_to_bgr(image_bytes)
+    if frame is None:
+        return None, []
+    return frame, parse_yolo_boxes(predict_frame(frame))
+
+
 def predict_frame(frame):
     with model_lock:
         return model.predict(
@@ -231,6 +284,15 @@ def predict_frame(frame):
             device=MODEL_DEVICE,
             verbose=False,
         )
+
+
+def is_human_class(name):
+    label = normalize_item_name(name).lower()
+    if not label:
+        return False
+    if label in HUMAN_CLASS_NAMES:
+        return True
+    return "person" in label or label.endswith(" human")
 
 
 def parse_yolo_boxes(results):
@@ -248,11 +310,14 @@ def parse_yolo_boxes(results):
 
     detections = []
     for box, confidence, class_id in zip(xyxy, confidences, class_ids):
+        name = normalize_item_name(names[int(class_id)])
+        if is_human_class(name):
+            continue
         x1, y1, x2, y2 = [int(value) for value in box]
         detections.append({
             "xyxy": (x1, y1, x2, y2),
             "confidence": float(confidence),
-            "name": normalize_item_name(names[int(class_id)]),
+            "name": name,
         })
     return _nms_detections(detections)
 
@@ -272,17 +337,24 @@ def _box_iou(a, b):
 
 
 def _nms_detections(detections, iou_thresh=0.45):
-    """Keep the highest-confidence box when two overlap (same item)."""
-    ranked = sorted(detections, key=lambda item: item["confidence"], reverse=True)
+    """Keep the highest-confidence box when two of the SAME class overlap."""
+    by_class = defaultdict(list)
+    for item in detections:
+        by_class[item["name"]].append(item)
+
     kept = []
-    for item in ranked:
-        overlap = False
-        for other in kept:
-            if _box_iou(item["xyxy"], other["xyxy"]) >= iou_thresh:
-                overlap = True
-                break
-        if not overlap:
-            kept.append(item)
+    for group in by_class.values():
+        ranked = sorted(group, key=lambda item: item["confidence"], reverse=True)
+        chosen = []
+        for item in ranked:
+            overlap = False
+            for other in chosen:
+                if _box_iou(item["xyxy"], other["xyxy"]) >= iou_thresh:
+                    overlap = True
+                    break
+            if not overlap:
+                chosen.append(item)
+        kept.extend(chosen)
     return kept
 
 
@@ -658,32 +730,22 @@ def open_camera():
 # YOLO DETECTION LOGGING + INVENTORY UPDATES
 # ============================================================
 
-def log_yolo_detections(results):
+def log_yolo_detections(detections):
     """
     Insert one detections row per class found in this capture.
-    New classes are added to inventory; IN / OUT update stock.
+    Every non-human box is counted. IN / SCAN / OUT update inventory.
     Newest captured items stay at the top of the list.
     Never crash the camera.
     Returns (logged_count, class_names).
     """
     global inventory_revision
     try:
-        if not results:
+        if not detections:
             return 0, []
-
-        result = results[0]
-        boxes = getattr(result, "boxes", None)
-        if boxes is None or len(boxes) == 0:
-            return 0, []
-
-        class_ids = boxes.cls.cpu().numpy()
-        confidences = boxes.conf.cpu().numpy()
-        names = result.names if getattr(result, "names", None) else model.names
 
         grouped = defaultdict(list)
-        for class_id, confidence in zip(class_ids, confidences):
-            class_name = names[int(class_id)]
-            grouped[class_name].append(float(confidence))
+        for item in detections:
+            grouped[item["name"]].append(float(item["confidence"]))
 
         if not grouped:
             return 0, []
@@ -691,7 +753,7 @@ def log_yolo_detections(results):
         mode = get_detection_mode()
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         session_id = scan_session or datetime.now().strftime("%Y%m%d_%H%M%S")
-        class_names = list(grouped.keys())
+        class_names = [item["name"] for item in detections]
 
         record_yolo_capture(
             grouped,
@@ -704,7 +766,8 @@ def log_yolo_detections(results):
             inventory_revision += 1
 
         print(
-            f"[DETECTION] Mode={mode} | Logged {len(class_names)} classes at {timestamp}"
+            f"[DETECTION] Mode={mode} | {len(class_names)} objects "
+            f"({len(grouped)} classes) at {timestamp}"
         )
         return len(class_names), class_names
 
@@ -724,7 +787,7 @@ def run_backend_capture(frame):
     try:
         results = predict_frame(frame)
         detections = parse_yolo_boxes(results)
-        logged_count, class_names = log_yolo_detections(results)
+        logged_count, class_names = log_yolo_detections(detections)
         last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         last_detections = logged_count
         last_classes = class_names
@@ -741,7 +804,7 @@ def run_backend_capture(frame):
         print("[TRIGGER] Capture done → COOLDOWN")
 
 def camera_capture_loop():
-    global latest_frame, camera_ok, camera_error, camera_running
+    global latest_frame, latest_live_frame, camera_ok, camera_error, camera_running
     global last_capture, last_detections, last_classes, bg_subtractor, cooldown_until
 
     frame_interval = 1.0 / TARGET_FPS
@@ -770,6 +833,8 @@ def camera_capture_loop():
             continue
 
         live_frame = cv2.flip(frame, 1)
+        with camera_lock:
+            latest_live_frame = live_frame.copy()
         now = time.monotonic()
         state = get_trigger_state()
 
@@ -868,7 +933,7 @@ def start_camera():
 
 
 def stop_camera():
-    global camera_running, camera, latest_frame
+    global camera_running, camera, latest_frame, latest_live_frame
     camera_running = False
     if camera_thread is not None and camera_thread.is_alive():
         camera_thread.join(timeout=2)
@@ -880,6 +945,7 @@ def stop_camera():
                 pass
             camera = None
         latest_frame = None
+        latest_live_frame = None
     print("[CAMERA] Stopped.")
 
 
@@ -955,6 +1021,7 @@ def trigger_status():
         revision = inventory_revision
     return JSONResponse({
         "state": get_trigger_state(),
+        "mode": get_detection_mode(),
         "last_capture": last_capture,
         "last_detections": last_detections,
         "last_classes": last_classes,
@@ -982,11 +1049,45 @@ def db_status():
     return JSONResponse({"connected": False, "error": error})
 
 
+@app.get("/api/capture_frame")
+def capture_live_frame():
+    with camera_lock:
+        frame = None if latest_live_frame is None else latest_live_frame.copy()
+    if frame is None:
+        return JSONResponse({"detail": "Live camera frame is not ready"}, status_code=503)
+    encoded = encode_jpeg(frame)
+    if not encoded:
+        return JSONResponse({"detail": "Could not encode camera frame"}, status_code=500)
+    return Response(content=encoded, media_type="image/jpeg")
+
+
+@app.post("/api/objects/preview")
+async def preview_object_capture(file: UploadFile = File(...)):
+    image_bytes = await file.read()
+    if not image_bytes:
+        return JSONResponse({"detail": "Image file is empty"}, status_code=400)
+    try:
+        _frame, detections = detect_items_in_jpeg(image_bytes)
+    except Exception as exc:
+        print("[EMBED] Preview error:", exc)
+        return JSONResponse(
+            {"detail": f"Could not detect objects: {exc}"},
+            status_code=500,
+        )
+    labels = [item["name"] for item in detections]
+    return JSONResponse({
+        "count": len(detections),
+        "labels": labels,
+        "classes": sorted(set(labels)),
+    })
+
+
 @app.post("/api/objects/embedding")
 async def create_object_embedding(
     file: UploadFile = File(...),
     object_name: str = Form(...),
 ):
+    global inventory_revision
     name = normalize_item_name(object_name)
     if not name:
         return JSONResponse(
@@ -1000,18 +1101,61 @@ async def create_object_embedding(
             status_code=400,
         )
     try:
-        embedding = image_to_embedding(image_bytes)
-        save_object_embedding(name, embedding)
+        frame, detections = detect_items_in_jpeg(image_bytes)
+    except Exception as exc:
+        print("[EMBED] Detect error:", exc)
+        return JSONResponse(
+            {"detail": f"Could not detect objects: {exc}"},
+            status_code=500,
+        )
+    if frame is None:
+        return JSONResponse({"detail": "Could not read the captured image"}, status_code=400)
+    if not detections:
+        return JSONResponse(
+            {
+                "detail": "No item detected. Humans are ignored. Point the camera at an object, then Capture again.",
+            },
+            status_code=400,
+        )
+
+    if len(detections) == 1:
+        requested_names = [name]
+    else:
+        requested_names = [f"{name} {index}" for index in range(1, len(detections) + 1)]
+
+    named_embeddings = []
+    try:
+        for detection, requested in zip(detections, requested_names):
+            crop_bytes = crop_detection_jpeg(frame, detection["xyxy"])
+            if not crop_bytes:
+                continue
+            embedding = image_to_embedding(crop_bytes)
+            named_embeddings.append((requested, embedding))
     except Exception as exc:
         print("[EMBED] Error:", exc)
         return JSONResponse(
             {"detail": f"Could not create embedding: {exc}"},
             status_code=500,
         )
+
+    if not named_embeddings:
+        return JSONResponse(
+            {"detail": "Detected items could not be cropped from the frame."},
+            status_code=400,
+        )
+
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    saved = register_added_items(named_embeddings, timestamp, SCAN_OPERATOR)
+    with inventory_revision_lock:
+        inventory_revision += 1
+
+    saved_names = [row["item_name"] for row in saved]
     return JSONResponse({
         "status": "saved",
-        "object_name": name,
-        "embedding_size": len(embedding),
+        "count": len(saved),
+        "object_name": saved_names[0] if len(saved_names) == 1 else name,
+        "item_names": saved_names,
+        "embedding_size": 512,
     })
 
 

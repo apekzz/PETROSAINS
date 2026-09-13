@@ -189,9 +189,9 @@ function applyMode(mode) {
         document.getElementById(buttonId).classList.add("active");
     }
     const modeCopy = {
-        IN: "locked in · IN · stock goes up",
-        SCAN: "locked in · SCAN · view only",
-        OUT: "locked in · OUT · stock goes down",
+        IN: "locked in · IN · stock goes up for every object seen",
+        SCAN: "locked in · SCAN · new items added · known items last-seen only",
+        OUT: "locked in · OUT · stock goes down · unknown items ignored",
     };
     document.getElementById("modeStatus").textContent =
         modeCopy[mode] || `locked in · ${mode}`;
@@ -222,6 +222,10 @@ async function updateTriggerStatus() {
         const identified = data.last_classes || [];
         if (identified.length) {
             lastIdentifiedNames = identified;
+        }
+
+        if (data.mode) {
+            applyMode(data.mode);
         }
 
         const revision = data.inventory_revision;
@@ -286,6 +290,7 @@ pollBootStatus();
 
 let capturedFrameBlob = null;
 let capturedPreviewUrl = null;
+let capturedObjectCount = 0;
 
 function setEmbedStatus(message, kind = "") {
     const statusEl = document.getElementById("embedStatus");
@@ -294,7 +299,9 @@ function setEmbedStatus(message, kind = "") {
 }
 
 function updateEmbedButton() {
-    const ready = Boolean(capturedFrameBlob) && Boolean(document.getElementById("objectName").value.trim());
+    const ready = Boolean(capturedFrameBlob)
+        && capturedObjectCount > 0
+        && Boolean(document.getElementById("objectName").value.trim());
     document.getElementById("btnEmbed").disabled = !ready;
 }
 
@@ -302,31 +309,51 @@ async function captureFromCamera() {
     const feed = document.getElementById("cameraFeed");
     const preview = document.getElementById("capturePreview");
     const wrap = preview.parentElement;
+    capturedObjectCount = 0;
     try {
         if (!feed.naturalWidth) {
             throw new Error("Live camera frame is not ready");
         }
-        const canvas = document.createElement("canvas");
-        canvas.width = feed.naturalWidth;
-        canvas.height = feed.naturalHeight;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(feed, 0, 0);
-        const blob = await new Promise((resolve, reject) => {
-            canvas.toBlob((result) => {
-                if (result) resolve(result);
-                else reject(new Error("Could not encode captured frame"));
-            }, "image/jpeg", 0.92);
-        });
+        const snap = await fetch(CONFIG.captureFrameUrl, { cache: "no-store" });
+        if (!snap.ok) {
+            throw new Error("Live camera frame is not ready");
+        }
+        const blob = await snap.blob();
         capturedFrameBlob = blob;
         if (capturedPreviewUrl) URL.revokeObjectURL(capturedPreviewUrl);
         capturedPreviewUrl = URL.createObjectURL(blob);
         preview.src = capturedPreviewUrl;
         wrap.classList.add("has-frame");
-        setEmbedStatus("Frame captured. Name the object, then create the embedding.");
+        setEmbedStatus("Detecting objects…", "busy");
+        updateEmbedButton();
+
+        const body = new FormData();
+        body.append("file", blob, "capture.jpg");
+        const response = await fetch(CONFIG.previewUrl, {
+            method: "POST",
+            body,
+            cache: "no-store",
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(typeof data.detail === "string" ? data.detail : "Detect failed");
+        }
+        capturedObjectCount = Number(data.count) || 0;
+        if (!capturedObjectCount) {
+            throw new Error("No item detected. Humans are ignored. Point the camera at an object.");
+        }
+        const labels = (data.labels || []).join(", ");
+        const suffix = capturedObjectCount === 1 ? "" : " Name them, then Save.";
+        setEmbedStatus(
+            `Detected ${capturedObjectCount} item(s): ${labels}.${suffix || " Name it, then Save."}`,
+            "ok"
+        );
         updateEmbedButton();
     } catch (error) {
         console.error("Capture error:", error);
+        capturedObjectCount = 0;
         setEmbedStatus(error.message || "Could not capture the camera frame.", "error");
+        updateEmbedButton();
     }
 }
 
@@ -336,9 +363,13 @@ async function createEmbedding() {
         setEmbedStatus("Capture a frame and enter an object name first.", "error");
         return;
     }
+    if (!capturedObjectCount) {
+        setEmbedStatus("No item detected yet. Capture an object first.", "error");
+        return;
+    }
     const button = document.getElementById("btnEmbed");
     button.disabled = true;
-    setEmbedStatus("Creating embedding…", "busy");
+    setEmbedStatus("Saving detected items…", "busy");
     try {
         const body = new FormData();
         body.append("file", capturedFrameBlob, "capture.jpg");
@@ -351,13 +382,18 @@ async function createEmbedding() {
         const data = await response.json();
         if (!response.ok) {
             const detail = data.detail;
-            const message = typeof detail === "string" ? detail : "Embedding request failed";
+            const message = typeof detail === "string" ? detail : "Save request failed";
             throw new Error(message);
         }
-        setEmbedStatus(`✅ Embedding saved for ${data.object_name}`, "ok");
+        const names = (data.item_names || [data.object_name]).filter(Boolean);
+        setEmbedStatus(`Saved ${names.length} item(s): ${names.join(", ")}`, "ok");
+        document.getElementById("objectName").value = "";
+        capturedObjectCount = 0;
+        fetchInventory();
+        fetchStats(false);
     } catch (error) {
         console.error("Embedding error:", error);
-        setEmbedStatus(error.message || "Could not save embedding.", "error");
+        setEmbedStatus(error.message || "Could not save items.", "error");
     } finally {
         updateEmbedButton();
     }

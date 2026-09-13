@@ -1,5 +1,42 @@
 /* KAILA-style command center, PETRONAS teal. */
 
+@font-face {
+    font-family: "Rajdhani";
+    src: url("/fonts/Rajdhani-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Rajdhani";
+    src: url("/fonts/Rajdhani-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Rajdhani";
+    src: url("/fonts/Rajdhani-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-display: swap;
+}
+
 :root {
     --bg-dark: #0a1219;
     --bg-panel: #101b26;

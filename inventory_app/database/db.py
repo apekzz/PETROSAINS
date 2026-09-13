@@ -239,6 +239,18 @@ def _get_item_by_name(conn, item_name):
     ).fetchone()
 
 
+def unique_item_name(conn, desired):
+    name = normalize_item_name(desired)
+    if not name:
+        return ""
+    if _get_item_by_name(conn, name) is None:
+        return name
+    index = 2
+    while _get_item_by_name(conn, f"{name} {index}") is not None:
+        index += 1
+    return f"{name} {index}"
+
+
 def apply_capture_to_inventory(conn, class_name, count, mode, timestamp, operator):
     item_name = normalize_item_name(class_name)
     if not item_name or count <= 0:
@@ -249,9 +261,9 @@ def apply_capture_to_inventory(conn, class_name, count, mode, timestamp, operato
 
     if row is None:
         if mode == "OUT":
-            quantity = 0
-        else:
-            quantity = count
+            print(f"[INVENTORY] OUT refused, unknown item: {item_name}")
+            return None
+        quantity = count
         status = status_for_quantity(quantity)
         inserted = conn.execute(
             """
@@ -352,14 +364,51 @@ def check_db():
         return False, str(exc)
 
 
-def save_object_embedding(object_name, embedding):
+def _save_object_embedding_conn(conn, object_name, embedding):
     import json
 
+    conn.execute(
+        """
+        INSERT INTO object_embeddings (object_name, embedding)
+        VALUES (%s, %s)
+        """,
+        (object_name, json.dumps(embedding)),
+    )
+
+
+def save_object_embedding(object_name, embedding):
     with get_db() as conn:
-        conn.execute(
-            """
-            INSERT INTO object_embeddings (object_name, embedding)
-            VALUES (%s, %s)
-            """,
-            (object_name, json.dumps(embedding)),
-        )
+        _save_object_embedding_conn(conn, object_name, embedding)
+
+
+def register_added_items(named_embeddings, timestamp, operator="System"):
+    """
+    Insert each (item_name, embedding) as quantity 1 in inventory.
+    Names are made unique if they already exist.
+    """
+    saved = []
+    with get_db() as conn:
+        for requested_name, embedding in named_embeddings:
+            item_name = unique_item_name(conn, requested_name)
+            if not item_name:
+                continue
+            inserted = conn.execute(
+                """
+                INSERT INTO inventory
+                    (item_name, category, quantity, unit_type, location, status, last_seen)
+                VALUES (%s, 'Added', 1, 'Single', 'Camera', 'Available', %s)
+                RETURNING id
+                """,
+                (item_name, timestamp),
+            ).fetchone()
+            conn.execute(
+                """
+                INSERT INTO transactions (item_id, action, acted_by, timestamp)
+                VALUES (%s, %s, %s, %s)
+                """,
+                (inserted["id"], "add", operator, timestamp),
+            )
+            _save_object_embedding_conn(conn, item_name, embedding)
+            saved.append({"id": inserted["id"], "item_name": item_name})
+            print(f"[INVENTORY] ADDED {item_name} | qty=1")
+    return saved

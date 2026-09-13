@@ -34,6 +34,7 @@ PORT = int(os.environ.get("PORT", "8000"))
 
 def get_lan_ip():
     try:
+        # UDP trick to read this machine's LAN IP. No HTTP; works offline.
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sock.connect(("8.8.8.8", 80))
         ip = sock.getsockname()[0]
