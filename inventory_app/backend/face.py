@@ -139,14 +139,16 @@ def landmarks_complete(points5, box=None):
 
 
 def face_in_region(points5, box=None):
+    """True when a face is visible anywhere in the camera frame."""
     if box is not None:
         x, y, bw, bh = box
-        if _inside_gate(x + bw / 2.0, y + bh / 2.0):
-            return True
+        if bw >= MIN_FACE_WIDTH and bh >= MIN_FACE_HEIGHT:
+            cx, cy = x + bw / 2.0, y + bh / 2.0
+            return _in_frame(cx, cy)
     if not points5:
         return False
-    inside = sum(1 for x, y in points5 if _inside_gate(x, y))
-    return (inside / len(points5)) >= IN_REGION_RATIO
+    visible = sum(1 for x, y in points5 if _in_frame(x, y))
+    return visible >= 3
 
 
 def _align_template(points5):

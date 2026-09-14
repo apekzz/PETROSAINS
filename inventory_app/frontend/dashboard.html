@@ -3,12 +3,31 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a1219">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>OneShot Inventory</title>
+    <script>
+        (function () {
+            var ua = navigator.userAgent || "";
+            var platform = navigator.platform || "";
+            var touch = navigator.maxTouchPoints || 0;
+            var cls = "is-desktop";
+            if (/iPhone|iPod/.test(ua)) cls = "is-iphone is-phone";
+            else if (/iPad/.test(ua) || (platform === "MacIntel" && touch > 1)) cls = "is-ipad is-tablet";
+            else if (/Android/.test(ua)) cls = /Mobile/.test(ua) ? "is-android is-phone" : "is-android is-tablet";
+            else if (/Win/.test(platform) || /Windows NT/.test(ua)) cls = "is-windows is-desktop";
+            else if (/Mac/.test(platform) || /Mac OS X/.test(ua)) cls = "is-mac is-desktop";
+            cls.split(" ").forEach(function (name) {
+                if (name) document.documentElement.classList.add(name);
+            });
+        })();
+    </script>
     <link rel="stylesheet" href="/fonts.css">
-    <link rel="stylesheet" href="/theme.css">
-    <link rel="stylesheet" href="/dashboard.css">
-    <link rel="stylesheet" href="/sam-tool.css">
+    <link rel="stylesheet" href="/theme.css?v=face2">
+    <link rel="stylesheet" href="/dashboard.css?v=face2">
+    <link rel="stylesheet" href="/sam-tool.css?v=face2">
 </head>
 
 <body>
@@ -122,45 +141,7 @@
                     <canvas id="cameraFeed" class="is-hidden" width="640" height="480"></canvas>
                     <canvas id="landmarkLayer" width="640" height="480"></canvas>
                     <div id="faceGate" class="face-gate">
-                        <svg class="face-gate-svg" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-                            <defs>
-                                <path id="humanFace" d="M320 36
-                                    C358 36 392 46 412 72
-                                    C428 94 436 120 434 146
-                                    C444 156 450 172 444 188
-                                    C436 198 426 206 420 220
-                                    C414 246 406 272 390 298
-                                    C376 322 358 344 340 356
-                                    C332 362 326 364 320 365
-                                    C314 364 308 362 300 356
-                                    C282 344 264 322 250 298
-                                    C234 272 226 246 220 220
-                                    C214 206 204 198 196 188
-                                    C190 172 196 156 206 146
-                                    C204 120 212 94 228 72
-                                    C248 46 282 36 320 36 Z"/>
-                                <mask id="faceHoleMask">
-                                    <rect width="640" height="480" fill="white"/>
-                                    <use href="#humanFace" fill="black" transform="translate(320 240) scale(0.52) translate(-320 -205)"/>
-                                </mask>
-                                <clipPath id="faceClip">
-                                    <use href="#humanFace"/>
-                                </clipPath>
-                            </defs>
-                            <rect class="face-gate-veil" width="640" height="480" mask="url(#faceHoleMask)"/>
-                            <g class="face-anchor" transform="translate(320 240) scale(0.52) translate(-320 -205)">
-                                <g class="face-float">
-                                    <use href="#humanFace" class="face-gate-outline"/>
-                                    <g clip-path="url(#faceClip)">
-                                        <rect class="face-gate-scan" x="196" y="48" width="248" height="4">
-                                            <animate attributeName="y" values="48;360;48" dur="2.2s" repeatCount="indefinite"/>
-                                        </rect>
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
-                        <p id="faceCoverage" class="face-coverage">0%</p>
-                        <p id="faceGateHint" class="face-gate-hint">Position your face in the outline</p>
+                        <p id="faceGateHint" class="face-gate-hint">Look at the camera</p>
                     </div>
                     <div id="recognizedViewer" class="recognized-viewer is-hidden" aria-live="polite">
                         <img id="recognizedFacePreview" class="recognized-face-preview" alt="Segmented recognized face">
@@ -202,7 +183,7 @@
     <div id="registerModal" class="modal-overlay is-hidden" aria-hidden="true">
         <div class="modal-card register-modal-card" role="dialog" aria-labelledby="registerTitle">
             <h2 id="registerTitle">Register staff face</h2>
-            <p class="modal-copy">Landmarks must be complete. Only the face region is stored.</p>
+            <p class="modal-copy">A visible face is enough. Only the face region is stored.</p>
             <div class="register-modal-layout">
                 <figure class="register-face-preview-wrap">
                     <img id="registerFacePreview" alt="Cropped face ready for registration">
@@ -320,6 +301,7 @@
                         <span id="samMessage">Capture a frame to begin.</span>
                         <span id="samMaskState">Mask · empty</span>
                     </div>
+                    <div id="samPhoneBar" class="sam-phone-bar"></div>
                 </section>
                 <aside class="sam-preview-panel">
                     <span class="sam-section-label">Segmented object</span>
@@ -357,9 +339,9 @@
         </div>
     </div>
 
-    <script src="/config.js"></script>
-    <script src="/dashboard.js"></script>
-    <script src="/sam-tool.js"></script>
+    <script src="/config.js?v=face3"></script>
+    <script src="/dashboard.js?v=face3"></script>
+    <script src="/sam-tool.js?v=face3"></script>
 </body>
 
 </html>

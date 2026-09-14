@@ -31,6 +31,7 @@
         preview: byId("samPreview"),
         previewStage: document.querySelector(".sam-preview-stage"),
         proceed: byId("samProceed"),
+        phoneBar: byId("samPhoneBar"),
         detailsModal: byId("samDetailsModal"),
         detailsImage: byId("samDetailsImage"),
         objectName: byId("samObjectName"),
@@ -67,6 +68,38 @@
         previousRuntime: null,
         transform: { scale: 1, x: 0, y: 0 },
     };
+
+    const generateHome = ui.generate.parentElement;
+    const generateSlot = ui.generate.nextSibling;
+    const proceedHome = ui.proceed.parentElement;
+    let autoGenerateTimer = 0;
+
+    function isPhoneLayout() {
+        return document.documentElement.classList.contains("is-phone");
+    }
+
+    function syncPhoneActions() {
+        if (!ui.phoneBar) return;
+        if (isPhoneLayout()) {
+            ui.phoneBar.append(ui.generate, ui.proceed);
+            return;
+        }
+        if (generateHome && ui.generate.parentElement !== generateHome) {
+            generateHome.insertBefore(ui.generate, generateSlot);
+        }
+        if (proceedHome && ui.proceed.parentElement !== proceedHome) {
+            proceedHome.append(ui.proceed);
+        }
+    }
+
+    function queueAutoGenerate() {
+        if (!isPhoneLayout()) return;
+        if (!state.points.some((point) => point.label === 1)) return;
+        window.clearTimeout(autoGenerateTimer);
+        autoGenerateTimer = window.setTimeout(() => {
+            generateMask();
+        }, 280);
+    }
 
     function setMessage(message, error = false) {
         ui.message.textContent = message;
@@ -434,6 +467,8 @@
         scanIngestEnabled = false;
         ui.modal.classList.remove("is-hidden");
         ui.modal.setAttribute("aria-hidden", "false");
+        document.documentElement.classList.add("sam-open");
+        syncPhoneActions();
         ui.detailsModal.classList.add("is-hidden");
         setBusy(true, "Freezing camera frame…");
         setMessage("Freezing the current camera frame.");
@@ -453,7 +488,12 @@
             ui.runtime.classList.remove("error");
             setBusy(false);
             selectTool("fg");
-            setMessage("Frame ready. Add foreground and optional background points.");
+            requestAnimationFrame(resizeDisplay);
+            setMessage(
+                isPhoneLayout()
+                    ? "Tap the object once. The mask generates automatically."
+                    : "Frame ready. Add foreground and optional background points.",
+            );
         } catch (error) {
             setBusy(false);
             ui.runtime.textContent = "SAM · unavailable";
@@ -469,6 +509,8 @@
         ui.detailsModal.classList.add("is-hidden");
         ui.modal.classList.add("is-hidden");
         ui.modal.setAttribute("aria-hidden", "true");
+        document.documentElement.classList.remove("sam-open");
+        window.clearTimeout(autoGenerateTimer);
         if (sessionId) {
             fetch(`/api/sam/session/${encodeURIComponent(sessionId)}`, {
                 method: "DELETE",
@@ -476,11 +518,14 @@
             }).catch(() => {});
         }
         if (state.previousRuntime) {
-            faceAnalyzeEnabled = state.previousRuntime.faceAnalyzeEnabled;
-            scanIngestEnabled = state.previousRuntime.scanIngestEnabled;
+            faceAnalyzeEnabled = true;
+            scanIngestEnabled = true;
         }
         if (usingLocalCamera && liveVideo.paused) {
             liveVideo.play().catch(() => {});
+        }
+        if (typeof rearmFaceCapture === "function") {
+            rearmFaceCapture();
         }
     }
 
@@ -542,6 +587,7 @@
             updateControls();
             render();
             setMessage(`${tool === "fg" ? "Foreground" : "Background"} prompt added.`);
+            queueAutoGenerate();
             return;
         }
         pushHistory();
@@ -686,6 +732,11 @@
             ui.undo.click();
         }
     });
+    window.addEventListener("resize", () => {
+        syncPhoneActions();
+        resizeDisplay();
+    });
+    syncPhoneActions();
     new ResizeObserver(resizeDisplay).observe(ui.stage);
     resizeDisplay();
     updateControls();

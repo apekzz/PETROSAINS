@@ -384,3 +384,126 @@
         grid-template-columns: 1fr;
     }
 }
+
+html.is-windows .sam-shell {
+    width: min(1680px, calc(100vw - 48px));
+    height: min(920px, calc(100vh - 48px));
+}
+
+html.is-mac .sam-shell {
+    width: min(1420px, calc(100vw - 36px));
+    height: min(820px, calc(100vh - 36px));
+}
+
+html.is-ipad .sam-modal {
+    padding: 12px;
+}
+
+html.is-ipad .sam-shell {
+    width: min(1100px, calc(100vw - 24px));
+    height: min(920px, calc(100dvh - 24px));
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+html.is-phone .sam-modal {
+    display: block;
+    padding: 0;
+    overflow: hidden;
+    height: 100svh;
+    max-height: 100svh;
+    place-items: unset;
+}
+
+html.is-phone .sam-shell {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+html.is-phone .sam-workspace,
+html.is-ipad .sam-workspace {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    min-height: 0;
+    overflow: visible;
+    grid-template-columns: none;
+}
+
+@media (min-width: 1100px) {
+    html.is-ipad .sam-workspace {
+        display: grid;
+        overflow: hidden;
+        flex: 1;
+        grid-template-columns: 200px minmax(0, 1fr) 220px;
+    }
+}
+
+html.is-phone .sam-tools,
+html.is-phone .sam-preview-panel {
+    overflow: visible;
+    min-height: auto;
+    border: 0;
+}
+
+html.is-phone .sam-editor-column {
+    min-height: 0;
+    flex: 0 0 auto;
+    order: -1;
+}
+
+html.is-ipad .sam-editor-column {
+    min-height: 0;
+    flex: 0 0 auto;
+}
+
+html.is-phone .sam-stage {
+    flex: none;
+    height: min(52svh, 420px);
+    min-height: 240px;
+    touch-action: none;
+}
+
+.sam-phone-bar {
+    display: none;
+}
+
+html.is-phone .sam-phone-bar {
+    display: flex;
+    position: sticky;
+    bottom: 0;
+    z-index: 40;
+    gap: 8px;
+    padding: 10px 12px calc(12px + env(safe-area-inset-bottom));
+    background: #08131c;
+    border-top: 1px solid var(--border-soft);
+}
+
+html.is-phone .sam-phone-bar .sam-wide {
+    flex: 1;
+    margin: 0;
+}
+
+html.is-phone .sam-details-layout,
+html.is-phone .sam-header {
+    grid-template-columns: 1fr;
+}
+
+html.is-phone .sam-header {
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+html.is-phone .sam-tool,
+html.is-phone .sam-wide,
+html.is-phone .sam-tool-grid button {
+    min-height: 44px;
+}

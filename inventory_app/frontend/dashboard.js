@@ -1,4 +1,9 @@
 const CONFIG = window.ONESHOT_CONFIG;
+if (document.body && document.documentElement) {
+    document.documentElement.classList.forEach((name) => {
+        if (name.startsWith("is-")) document.body.classList.add(name);
+    });
+}
 
 let statsReady = false;
 let lastIdentifiedNames = [];
@@ -261,6 +266,7 @@ let FaceLandmarkerClass = null;
 let pendingFaceBlob = null;
 let facePreviewObjectUrl = "";
 let capturedForModal = false;
+let lastFaceCaptureAt = 0;
 const COVERAGE_READY = 0.90;
 const GATE_OVAL = { cx: 0.50, cy: 0.50, rx: 0.115, ry: 0.195 };
 const FACE_OVAL_IDX = [
@@ -307,19 +313,19 @@ function sizeOverlayToVideo() {
     }
 }
 
-function pointInGate(x, y) {
-    const dx = (x - GATE_OVAL.cx) / GATE_OVAL.rx;
-    const dy = (y - GATE_OVAL.cy) / GATE_OVAL.ry;
-    return dx * dx + dy * dy <= 1;
-}
-
-function faceCoverage(landmarks) {
-    if (!landmarks || !landmarks.length) return 0;
-    let inside = 0;
+function faceVisibleEnough(landmarks) {
+    if (!landmarks || !landmarks.length) return false;
+    let minX = 1;
+    let minY = 1;
+    let maxX = 0;
+    let maxY = 0;
     landmarks.forEach((point) => {
-        if (pointInGate(point.x, point.y)) inside += 1;
+        minX = Math.min(minX, point.x);
+        minY = Math.min(minY, point.y);
+        maxX = Math.max(maxX, point.x);
+        maxY = Math.max(maxY, point.y);
     });
-    return inside / landmarks.length;
+    return (maxX - minX) >= 0.08 && (maxY - minY) >= 0.10;
 }
 
 function updateCoverageLabel(ratio) {
@@ -426,14 +432,14 @@ function drawMediaPipeLandmarks(landmarks) {
     });
 }
 
-function applyLocalFace(ready, detected, coverage) {
-    updateCoverageLabel(coverage || 0);
+function applyLocalFace(ready, detected) {
+    updateCoverageLabel(detected && ready ? 1 : 0);
     if (detected && ready) {
         lastFaceReady = true;
         setFaceHint(
             faceUiMode === "register"
                 ? "Face captured — enter staff name and ID"
-                : "Face in outline"
+                : "Face detected"
         );
         return;
     }
@@ -442,11 +448,7 @@ function applyLocalFace(ready, detected, coverage) {
         return;
     }
     if (!detected) setFaceHint("Looking for a face");
-    else if ((coverage || 0) < COVERAGE_READY) {
-        setFaceHint(`Fill the outline · ${Math.round((coverage || 0) * 100)}%`);
-    } else {
-        setFaceHint("Move your face into the outline");
-    }
+    else setFaceHint("Hold still — face found");
 }
 
 async function sendSegmentedEmbed(blob) {
@@ -495,17 +497,16 @@ function runBrowserFaceLoop() {
         const result = faceLandmarker.detectForVideo(liveVideo, performance.now());
         const landmarks = result && result.faceLandmarks && result.faceLandmarks[0];
         if (landmarks && landmarks.length) {
-            const coverage = faceCoverage(landmarks);
-            const ready = coverage >= COVERAGE_READY;
-            if (coverage >= 0.4) {
-                drawMediaPipeLandmarks(landmarks);
-            } else {
-                landmarkCtx.clearRect(0, 0, landmarkLayer.width, landmarkLayer.height);
-            }
-            applyLocalFace(ready, true, coverage);
-            if (ready && !capturedForModal) {
-                capturedForModal = true;
-                captureReadyFace(landmarks);
+            const ready = faceVisibleEnough(landmarks);
+            drawMediaPipeLandmarks(landmarks);
+            applyLocalFace(ready, true);
+            if (ready) {
+                const now = Date.now();
+                if (!capturedForModal || now - lastFaceCaptureAt > 1200) {
+                    capturedForModal = true;
+                    lastFaceCaptureAt = now;
+                    captureReadyFace(landmarks);
+                }
             }
             if (!ready && !registerModalOpen) {
                 capturedForModal = false;
@@ -513,7 +514,7 @@ function runBrowserFaceLoop() {
             }
         } else {
             landmarkCtx.clearRect(0, 0, landmarkLayer.width, landmarkLayer.height);
-            applyLocalFace(false, false, 0);
+            applyLocalFace(false, false);
             if (!registerModalOpen) {
                 capturedForModal = false;
                 pendingFaceBlob = null;
@@ -556,10 +557,10 @@ async function startBrowserFaceLandmarker() {
     }
 }
 
-function drawLandmarks(points, mesh, inRegion) {
+function drawLandmarks(points, mesh, _inRegion) {
     sizeOverlayToVideo();
     landmarkCtx.clearRect(0, 0, landmarkLayer.width, landmarkLayer.height);
-    if (!inRegion || (!(points && points.length) && !(mesh && mesh.length))) {
+    if (!(points && points.length) && !(mesh && mesh.length)) {
         return;
     }
     const width = landmarkLayer.width;
@@ -612,15 +613,19 @@ async function analyzeLocalFrame() {
         const response = await fetch("/api/face/analyze", { method: "POST", body, cache: "no-store" });
         if (!response.ok) return;
         const data = await response.json();
-        if (data.in_region && data.face_preview_b64 && !capturedForModal) {
-            const faceBlob = base64JpegToBlob(data.face_preview_b64);
-            pendingFaceBlob = faceBlob;
-            capturedForModal = true;
-            updateFacePreviews(faceBlob);
-            if (faceUiMode === "register" && !registerModalOpen) {
-                showRegisterModal(true);
+        if ((data.in_region || data.detected) && data.face_preview_b64) {
+            const now = Date.now();
+            if (!capturedForModal || now - lastFaceCaptureAt > 1200) {
+                const faceBlob = base64JpegToBlob(data.face_preview_b64);
+                pendingFaceBlob = faceBlob;
+                capturedForModal = true;
+                lastFaceCaptureAt = now;
+                updateFacePreviews(faceBlob);
+                if (faceUiMode === "register" && !registerModalOpen) {
+                    showRegisterModal(true);
+                }
             }
-        } else if (!data.in_region && !registerModalOpen) {
+        } else if (!data.in_region && !data.detected && !registerModalOpen) {
             capturedForModal = false;
             pendingFaceBlob = null;
         }
@@ -683,7 +688,7 @@ function needsCaptureFallback() {
 }
 
 function preferredCameraFacing() {
-    if (faceAnalyzeEnabled && !scanIngestEnabled) return "user";
+    if (faceAnalyzeEnabled) return "user";
     return isPhoneDevice() ? "environment" : "user";
 }
 
@@ -774,6 +779,7 @@ async function startLocalCamera(facing) {
             await liveVideo.play();
             usingLocalCamera = true;
             captureFallback = false;
+            scanIngestEnabled = true;
             liveVideo.classList.remove("is-hidden");
             cameraFeed.classList.add("is-hidden");
             if (cameraUnlock) cameraUnlock.classList.add("is-hidden");
@@ -1060,7 +1066,7 @@ let registerModalOpen = false;
 let lastFaceReady = false;
 
 function setFaceHint(message) {
-    if (faceGateHint) faceGateHint.textContent = message || "Position your face in the outline";
+    if (faceGateHint) faceGateHint.textContent = message || "Look at the camera";
 }
 
 function showRegisterModal(show) {
@@ -1158,6 +1164,28 @@ async function setFaceMode(mode) {
     }
 }
 
+function rearmFaceCapture() {
+    capturedForModal = false;
+    pendingFaceBlob = null;
+    lastFaceReady = false;
+    lastFaceCaptureAt = 0;
+    if (usingLocalCamera && liveVideo && liveVideo.paused) {
+        liveVideo.play().catch(() => {});
+    }
+    faceAnalyzeEnabled = true;
+    scanIngestEnabled = true;
+    startLocalCamera("user");
+    fetch(CONFIG.faceModeUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mode: faceUiMode === "register" ? "register" : "recognize" }),
+        cache: "no-store",
+    })
+        .then((response) => response.json())
+        .then((data) => applyFaceStatus(data))
+        .catch((error) => console.error("Face rearm error:", error));
+}
+
 function applyFaceStatus(data) {
     const visible = !data.recognized;
     const unknownStaff = Boolean(data.unknown_staff);
@@ -1185,7 +1213,7 @@ function applyFaceStatus(data) {
         startLocalCamera(preferredCameraFacing());
     } else if (data.mode === "register" || data.mode === "recognize") {
         faceAnalyzeEnabled = true;
-        scanIngestEnabled = false;
+        scanIngestEnabled = true;
         flowArmed = false;
         if (faceToggleWrap) faceToggleWrap.classList.remove("is-hidden");
         if (flowToggleWrap) flowToggleWrap.classList.add("is-hidden");

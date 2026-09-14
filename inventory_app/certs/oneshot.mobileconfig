@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>PayloadContent</key>
+  <array>
+    <dict>
+      <key>PayloadCertificateFileName</key>
+      <string>OneShotLocalCA.cer</string>
+      <key>PayloadContent</key>
+      <data>MIIDJzCCAg+gAwIBAgIUVTYtkHl83n2BCVKgxYCYdJESYyYwDQYJKoZIhvcNAQELBQAwGzEZMBcGA1UEAwwQT25lU2hvdCBMb2NhbCBDQTAeFw0yNjA5MTMxMzIyNTJaFw0zNjA5MTAxMzIyNTJaMBsxGTAXBgNVBAMMEE9uZVNob3QgTG9jYWwgQ0EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDK97iHmyqEyWTPErSFA5VWwINwLgSQn8tfNGnA02oGV8ZLEecxpD27gHS7KXdK1JC8B8YLT/9d75lfoEbKT5/RNionI4BblInTb9ve6ysa21VNOqWy1mbpgbcOW28hFeiubeeDWm0mbbaKJPtJkDKgFLyZ14fx/R54SemfazJvWBDblYmDY/PIxs8uFh1lCsROPCmDMcd6tktJM5Fndri874BA1bX3b5EVrfs+pPWJhiO1mXbxfN5Q5Vqe/fn5FEvpRqZ6kyZNhKaeQueQpOKU8tpBfiMHzUqjqIr1ZXiCoyl9cn2eqvhlGqU7DtflVWOYgnw5GoI9+EE1x33WaMNXAgMBAAGjYzBhMB0GA1UdDgQWBBSWGZJNTOiqsSxLlu/0u2hPX8PU1TAfBgNVHSMEGDAWgBSWGZJNTOiqsSxLlu/0u2hPX8PU1TAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBhjANBgkqhkiG9w0BAQsFAAOCAQEAwmZ8Ngp4j7/V4vT28RMKTVzV0wQVK8LVfQNMIJgmy3VDg0ynjigyDegpSnYbgtVO+Ky8QNQNuzDh8iRoDbJDJBHd5Udh1T//0hBLvQFTjDhGlzqqaZYL6qU59gKsXwPyWJ+1xW6UgjJxoFlggFd390I+BvGToencW6v+FF1f2ee6RCX5fH8A3KtSFNilradnO0VwT8y4oA0zGMRSIaKwBEmYMqJ0EifgFjrJuAnHUrMQOHXTJIrVKBYE3CvP/ZAX9hXD9DYDaLXV4R33em4+LUGXwegLDytj+e8AlIP/M87nO3kFGGp+fVaHs10lytiRE0UJRGMRs/JoaOn7M/uUXg==</data>
+      <key>PayloadDescription</key>
+      <string>Trust OneShot on this Wi-Fi so Safari can use the camera.</string>
+      <key>PayloadDisplayName</key>
+      <string>OneShot Local CA</string>
+      <key>PayloadIdentifier</key>
+      <string>com.oneshot.inventory.ca</string>
+      <key>PayloadType</key>
+      <string>com.apple.security.root</string>
+      <key>PayloadUUID</key>
+      <string>5E092C65-0D99-4C45-BD7D-5DF57F8F5FB0</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+    </dict>
+  </array>
+  <key>PayloadDescription</key>
+  <string>Install once, then enable trust in Certificate Trust Settings.</string>
+  <key>PayloadDisplayName</key>
+  <string>OneShot Inventory</string>
+  <key>PayloadIdentifier</key>
+  <string>com.oneshot.inventory.profile</string>
+  <key>PayloadRemovalDisallowed</key>
+  <false/>
+  <key>PayloadType</key>
+  <string>Configuration</string>
+  <key>PayloadUUID</key>
+  <string>734E047E-4DF9-42DC-BB32-5CB19E72DAAE</string>
+  <key>PayloadVersion</key>
+  <integer>1</integer>
+</dict>
+</plist>

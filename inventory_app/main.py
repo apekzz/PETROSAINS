@@ -163,11 +163,32 @@ def _fallback_clip_preprocess(image_size=224):
     ])
 
 
+_open_clip_install_attempted = False
+
+
+def _import_open_clip():
+    global _open_clip_install_attempted
+    try:
+        import open_clip
+        return open_clip
+    except ModuleNotFoundError:
+        if _open_clip_install_attempted:
+            raise
+        _open_clip_install_attempted = True
+        print("[EMBED] open_clip is missing — installing open-clip-torch")
+        subprocess.check_call(
+            [sys.executable, "-m", "pip", "install", "open-clip-torch"]
+        )
+        import importlib
+        importlib.invalidate_caches()
+        return importlib.import_module("open_clip")
+
+
 def _load_clip_weights():
     global embed_model, embed_backend, embed_preprocess, embed_device
     if embed_model is not None and callable(embed_preprocess):
         return
-    import open_clip
+    open_clip = _import_open_clip()
 
     if not os.path.isfile(OPENCLIP_CHECKPOINT):
         raise RuntimeError(
@@ -276,15 +297,21 @@ def _encode_worker_loop():
     from PIL import Image
 
     init_error = None
-    try:
-        _load_clip_weights()
-        dummy = Image.new("RGB", (EMBED_IMAGE_SIZE, EMBED_IMAGE_SIZE), (28, 32, 40))
-        started = time.perf_counter()
-        _encode_image(dummy)
-        print(f"[EMBED] Warmup encode {time.perf_counter() - started:.2f}s")
-    except Exception as exc:
-        init_error = exc
-        print("[EMBED] Worker init failed:", exc)
+
+    def warmup():
+        nonlocal init_error
+        try:
+            _load_clip_weights()
+            dummy = Image.new("RGB", (EMBED_IMAGE_SIZE, EMBED_IMAGE_SIZE), (28, 32, 40))
+            started = time.perf_counter()
+            _encode_image(dummy)
+            print(f"[EMBED] Warmup encode {time.perf_counter() - started:.2f}s")
+            init_error = None
+        except Exception as exc:
+            init_error = exc
+            print("[EMBED] Worker init failed:", exc)
+
+    warmup()
     _encode_ready.set()
 
     while True:
@@ -293,6 +320,8 @@ def _encode_worker_loop():
             break
         reply = job.get("reply")
         try:
+            if init_error is not None or embed_model is None or not callable(embed_preprocess):
+                warmup()
             if init_error is not None:
                 raise RuntimeError(
                     f"OpenCLIP encoder failed to start: {init_error}"
@@ -455,12 +484,12 @@ def set_face_mode(new_mode):
             face_message = "Face gate idle"
         elif mode == "register":
             face_gate_visible = True
-            face_message = "Place your face in the outline to register"
+            face_message = "Look at the camera to register"
         else:
             recognized_staff = None
             SCAN_OPERATOR = "System"
             face_gate_visible = True
-            face_message = "Place your face in the outline to check out"
+            face_message = "Look at the camera to check out"
     print(f"[FACE] Mode → {mode}")
     return mode
 
@@ -568,14 +597,14 @@ def handle_face_info(info):
             face_match_streak = 0
             return
         if not in_region:
-            face_message = "Move your face into the outline"
+            face_message = "Look at the camera"
             ready_to_register = False
             return
         if crop_bytes:
             pending_face_crop = crop_bytes
         if mode == "register":
             ready_to_register = True
-            face_message = "Face in outline — enter staff name and ID"
+            face_message = "Face captured — enter staff name and ID"
         elif not complete:
             face_message = "Hold still — facial landmarks are incomplete"
 
@@ -677,7 +706,7 @@ face_gate_visible = True
 face_detected = False
 landmarks_complete = False
 face_in_region = False
-face_message = "Place your face in the outline"
+face_message = "Look at the camera"
 recognized_staff = None
 pending_face_embedding = None
 pending_face_crop = None
@@ -823,16 +852,11 @@ def parse_yolo_boxes(results, frame=None):
         )
         crop = infer.crop_masked_bgr(frame, item) if frame is not None else None
         named, identity_score = match_inventory_name(crop)
+        item["identity_score"] = identity_score
+        item["matched"] = bool(named)
         if named:
             item["name"] = named
-            item["identity_score"] = identity_score
-            accepted.append(item)
-        else:
-            print(
-                "[INFER] Detection rejected: "
-                f"similarity={identity_score:.3f} "
-                f"(required {INVENTORY_MATCH_THRESHOLD:.2f})"
-            )
+        accepted.append(item)
     return accepted
 
 
@@ -944,8 +968,11 @@ def run_yolo_preview(frame, client_id=None):
         if model is None:
             return
         detections = parse_yolo_boxes(predict_frame(frame), frame)
-        logged_count, class_names = log_yolo_detections(detections)
-        overlay = [] if logged_count or face_detection_active() else detections
+        if face_detection_active():
+            logged_count, class_names = 0, []
+        else:
+            logged_count, class_names = log_yolo_detections(detections)
+        overlay = [] if logged_count else detections
         set_yolo_overlay(overlay)
         if client_id:
             sess = get_device(client_id)
@@ -968,11 +995,9 @@ def run_yolo_preview(frame, client_id=None):
 
 def maybe_start_yolo_preview(frame, state, client_id=None):
     global preview_pending, last_preview_at
-    if not other_models_allowed():
-        return
     if not YOLO_PREVIEW_ENABLED or model is None:
         return
-    if state in {"CAPTURING", "WARMUP"}:
+    if state in {"CAPTURING"}:
         return
     with yolo_overlay_lock:
         holding = annotated_hold_jpeg and time.monotonic() < annotated_hold_until
@@ -1365,6 +1390,8 @@ def log_yolo_detections(detections):
 
         grouped = defaultdict(list)
         for item in detections:
+            if not item.get("matched"):
+                continue
             grouped[item["name"]].append(float(item["confidence"]))
 
         if not grouped:
@@ -1422,7 +1449,7 @@ def run_backend_capture(frame, client_id=None):
         last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         last_detections = logged_count
         last_classes = class_names
-        overlay = [] if logged_count or face_detection_active() else detections
+        overlay = [] if logged_count else detections
         set_yolo_overlay(overlay)
         if client_id:
             sess = get_device(client_id)
@@ -1529,31 +1556,29 @@ def camera_capture_loop():
             except Exception as exc:
                 print("[TRIGGER] State machine error:", exc)
 
-        if not face_active:
-            maybe_start_yolo_preview(live_frame, state)
+        maybe_start_yolo_preview(live_frame, state)
 
         display_frame = live_frame
         hold_jpeg = None
         hold_until = 0.0
         boxes = []
+        with yolo_overlay_lock:
+            hold_jpeg = annotated_hold_jpeg
+            hold_until = annotated_hold_until
+            boxes = list(yolo_boxes)
         if face_active:
             with face_draw_lock:
                 mesh = last_face_mesh
                 points5 = last_face_points
             if mesh or points5:
-                display_frame = draw_landmarks(live_frame, mesh or [], points5 or [])
-        else:
-            with yolo_overlay_lock:
-                hold_jpeg = annotated_hold_jpeg
-                hold_until = annotated_hold_until
-                boxes = list(yolo_boxes)
+                display_frame = draw_landmarks(display_frame, mesh or [], points5 or [])
 
         now = time.monotonic()
         if hold_jpeg and now < hold_until:
             encoded = hold_jpeg
         else:
             if boxes:
-                display_frame = draw_yolo_boxes(live_frame, boxes)
+                display_frame = draw_yolo_boxes(display_frame, boxes)
             encoded = encode_jpeg(display_frame)
         if encoded is not None:
             with frame_lock:
@@ -1929,7 +1954,7 @@ def _register_staff_face(staff_id, staff_name, crop_bytes=None):
     if embedding is None:
         return JSONResponse(
             {
-                "detail": "Face crop was not captured. Put your face in the outline again.",
+                "detail": "Face crop was not captured. Look at the camera again.",
             },
             status_code=400,
         )
@@ -2356,7 +2381,10 @@ def serve_dashboard(request: Request):
         return HTMLResponse("<h1>dashboard.html not found</h1>", status_code=500)
     with open(dashboard_path, "r", encoding="utf-8") as file:
         html = file.read()
-    return HTMLResponse(content=html)
+    return HTMLResponse(
+        content=html,
+        headers={"Cache-Control": "no-store, no-cache, must-revalidate"},
+    )
 
 
 FRONTEND_FILES = {
@@ -2379,7 +2407,11 @@ def serve_frontend_file(filename: str):
     file_path = os.path.join(FRONTEND_DIR, filename)
     if not os.path.exists(file_path):
         return JSONResponse({"detail": f"{filename} not found"}, status_code=404)
-    return FileResponse(file_path, media_type=media_type)
+    return FileResponse(
+        file_path,
+        media_type=media_type,
+        headers={"Cache-Control": "no-store, no-cache, must-revalidate"},
+    )
 
 
 import mimetypes

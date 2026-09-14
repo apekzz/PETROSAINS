@@ -80,16 +80,25 @@ def parse_detections(results, default_name="object"):
         return []
     xyxy = boxes.xyxy.cpu().numpy()
     confidences = boxes.conf.cpu().numpy()
+    classes = boxes.cls.cpu().numpy() if getattr(boxes, "cls", None) is not None else None
+    names = getattr(result, "names", None) or {}
     masks = getattr(result, "masks", None)
     polygons = list(getattr(masks, "xy", []) or [])
     detections = []
     for index, (box, confidence) in enumerate(zip(xyxy, confidences)):
         x1, y1, x2, y2 = [int(value) for value in box]
         polygon = polygons[index] if index < len(polygons) else None
+        class_id = int(classes[index]) if classes is not None else None
+        label = default_name
+        if class_id is not None:
+            if isinstance(names, dict):
+                label = str(names.get(class_id, default_name))
+            elif isinstance(names, (list, tuple)) and 0 <= class_id < len(names):
+                label = str(names[class_id])
         detections.append({
             "xyxy": (x1, y1, x2, y2),
             "confidence": float(confidence),
-            "name": default_name,
+            "name": label,
             "mask_xy": (
                 np.asarray(polygon, dtype=np.int32)
                 if polygon is not None and len(polygon) >= 3
