@@ -849,6 +849,7 @@ def parse_yolo_boxes(results, frame=None, identify=True):
     detections = infer.parse_detections(results)
     if not detections:
         return []
+    infer.mark_nested_parts(detections)
     frame_height, frame_width = frame.shape[:2] if frame is not None else (1, 1)
     prepared = []
     prepared_indexes = []
@@ -862,7 +863,7 @@ def parse_yolo_boxes(results, frame=None, identify=True):
         )
         item["identity_score"] = -1.0
         item["matched"] = False
-        if not identify or frame is None:
+        if not identify or frame is None or item.get("hidden"):
             continue
         crop = infer.crop_masked_bgr(frame, item)
         if crop is None:
@@ -890,7 +891,7 @@ def parse_yolo_boxes(results, frame=None, identify=True):
 
 def detection_labels(detections):
     labels = []
-    for item in detections:
+    for item in infer.visible_detections(detections):
         confidence = int(item["confidence"] * 100)
         similarity = item.get("identity_score", -1)
         suffix = (
@@ -904,7 +905,7 @@ def detection_labels(detections):
 
 def draw_yolo_boxes(frame, detections):
     vis = frame.copy()
-    for item in detections:
+    for item in infer.visible_detections(detections):
         x1, y1, x2, y2 = item["xyxy"]
         identity_score = item.get("identity_score", -1)
         confidence = int(item["confidence"] * 100)
@@ -1407,7 +1408,7 @@ def log_yolo_detections(detections):
 
         grouped = defaultdict(list)
         for item in detections:
-            if not item.get("matched"):
+            if item.get("hidden") or not item.get("matched"):
                 continue
             grouped[item["name"]].append(float(item["confidence"]))
 
@@ -2239,7 +2240,7 @@ def trigger_status(client_id: str = ""):
                 ),
                 "box": [round(float(value), 5) for value in item.get("box_norm", ())],
             }
-            for item in source_boxes
+            for item in infer.visible_detections(source_boxes)
             if len(item.get("box_norm", ())) == 4
         ]
     with inventory_revision_lock:

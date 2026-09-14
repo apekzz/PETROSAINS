@@ -9,11 +9,20 @@ from __future__ import annotations
 
 import os
 
+import cv2
 import numpy as np
 import torch
 from ultralytics import YOLO
 
-from config import BASE_DIR, MODEL_CONFIDENCE, MODEL_IMAGE_SIZE, MODEL_IOU, MODEL_MAX_DET
+from config import (
+    BASE_DIR,
+    MODEL_CONFIDENCE,
+    MODEL_IMAGE_SIZE,
+    MODEL_IOU,
+    MODEL_MAX_DET,
+    NESTED_PART_CONTAIN,
+    NESTED_PART_MAX_AREA_RATIO,
+)
 
 WEIGHT_NAME = "yolo11l_seg_object_bce_dice.pt"
 WEIGHT_PATH = os.path.join(BASE_DIR, "models", WEIGHT_NAME)
@@ -106,8 +115,119 @@ def parse_detections(results, default_name="object"):
                 if polygon is not None and len(polygon) >= 3
                 else None
             ),
+            "hidden": False,
+            "nested": False,
         })
     return detections
+
+
+def _detection_area(detection):
+    polygon = detection.get("mask_xy")
+    if polygon is not None and len(polygon) >= 3:
+        area = float(cv2.contourArea(np.asarray(polygon, dtype=np.int32)))
+        if area > 0:
+            return area
+    x1, y1, x2, y2 = detection["xyxy"]
+    return float(max(1, (x2 - x1) * (y2 - y1)))
+
+
+def _bbox_containment(inner, outer):
+    ix1, iy1, ix2, iy2 = inner["xyxy"]
+    ox1, oy1, ox2, oy2 = outer["xyxy"]
+    x1 = max(ix1, ox1)
+    y1 = max(iy1, oy1)
+    x2 = min(ix2, ox2)
+    y2 = min(iy2, oy2)
+    if x2 <= x1 or y2 <= y1:
+        return 0.0
+    inter = (x2 - x1) * (y2 - y1)
+    inner_area = max(1, (ix2 - ix1) * (iy2 - iy1))
+    return inter / inner_area
+
+
+def _mask_containment(inner, outer):
+    """Fraction of the inner mask that lies inside the outer mask."""
+    inner_poly = inner.get("mask_xy")
+    outer_poly = outer.get("mask_xy")
+    if (
+        inner_poly is None
+        or outer_poly is None
+        or len(inner_poly) < 3
+        or len(outer_poly) < 3
+    ):
+        return _bbox_containment(inner, outer)
+
+    ix1, iy1, ix2, iy2 = inner["xyxy"]
+    width = max(1, ix2 - ix1)
+    height = max(1, iy2 - iy1)
+    scale = 1.0
+    max_side = 160
+    if max(width, height) > max_side:
+        scale = max_side / max(width, height)
+    raster_w = max(1, int(round(width * scale)))
+    raster_h = max(1, int(round(height * scale)))
+
+    def _shift(polygon):
+        points = np.asarray(polygon, dtype=np.float32)
+        points[:, 0] = (points[:, 0] - ix1) * scale
+        points[:, 1] = (points[:, 1] - iy1) * scale
+        return points.astype(np.int32)
+
+    inner_mask = np.zeros((raster_h, raster_w), dtype=np.uint8)
+    outer_mask = np.zeros((raster_h, raster_w), dtype=np.uint8)
+    cv2.fillPoly(inner_mask, [_shift(inner_poly)], 1)
+    cv2.fillPoly(outer_mask, [_shift(outer_poly)], 1)
+    inner_count = int(inner_mask.sum())
+    if inner_count == 0:
+        return _bbox_containment(inner, outer)
+    return float(np.logical_and(inner_mask, outer_mask).sum()) / inner_count
+
+
+def mark_nested_parts(
+    detections,
+    contain_frac=None,
+    max_area_ratio=None,
+):
+    """Flag small detections that sit inside a larger object's mask.
+
+    YOLO still keeps the box. Callers hide flagged items from the UI / log
+    so a phone camera is not shown or named as a ring.
+    """
+    if len(detections) < 2:
+        for item in detections:
+            item["nested"] = False
+            item["hidden"] = False
+        return detections
+
+    contain_frac = NESTED_PART_CONTAIN if contain_frac is None else contain_frac
+    max_area_ratio = (
+        NESTED_PART_MAX_AREA_RATIO if max_area_ratio is None else max_area_ratio
+    )
+    areas = [_detection_area(item) for item in detections]
+    nested = [False] * len(detections)
+    for i, inner in enumerate(detections):
+        for j, outer in enumerate(detections):
+            if i == j or areas[j] <= 0:
+                continue
+            if areas[i] >= areas[j] * max_area_ratio:
+                continue
+            if _bbox_containment(inner, outer) < contain_frac:
+                continue
+            if _mask_containment(inner, outer) >= contain_frac:
+                nested[i] = True
+                break
+    hidden_count = 0
+    for item, is_nested in zip(detections, nested):
+        item["nested"] = is_nested
+        item["hidden"] = is_nested
+        hidden_count += int(is_nested)
+    if hidden_count:
+        print(f"[YOLO] Hid {hidden_count} nested part(s) inside a larger object")
+    return detections
+
+
+def visible_detections(detections):
+    return [item for item in detections if not item.get("hidden")]
 
 
 def crop_bgr(frame, xyxy, pad=6):
@@ -136,8 +256,6 @@ def crop_masked_bgr(frame, detection, pad=2):
     polygon[:, 0] = np.clip(polygon[:, 0], 0, width - 1)
     polygon[:, 1] = np.clip(polygon[:, 1], 0, height - 1)
     mask = np.zeros((height, width), dtype=np.uint8)
-    import cv2
-
     cv2.fillPoly(mask, [polygon], 255)
     x, y, w, h = cv2.boundingRect(polygon)
     x1 = max(0, x - pad)

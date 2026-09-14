@@ -74,6 +74,10 @@ MODEL_CONFIDENCE = 0.15
 MODEL_IMAGE_SIZE = 640
 MODEL_IOU = 0.45
 MODEL_MAX_DET = 100
+# Hide small parts that sit inside a larger object (iPhone camera, buttons).
+# YOLO still produces those boxes; they are just not shown or logged.
+NESTED_PART_CONTAIN = 0.80
+NESTED_PART_MAX_AREA_RATIO = 0.30
 
 # Image-difference trigger (YOLO capture stays off the live camera thread)
 TRIGGER_ENABLED = True
