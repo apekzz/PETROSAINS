@@ -70,24 +70,26 @@ OPENCLIP_CHECKPOINT = os.environ.get(
     "OPENCLIP_CHECKPOINT",
     os.path.join(BASE_DIR, "models", "open_clip_pytorch_model.bin"),
 )
-MODEL_CONFIDENCE = 0.25
+MODEL_CONFIDENCE = 0.15
 MODEL_IMAGE_SIZE = 640
+MODEL_IOU = 0.45
+MODEL_MAX_DET = 100
 
 # Image-difference trigger (YOLO capture stays off the live camera thread)
 TRIGGER_ENABLED = True
 DIFF_THRESHOLD = 25          # MOG2 varThreshold
-CHANGE_AREA_PERCENT = 5      # % of frame area that must change
-SETTLE_FRAMES = 15           # frames to wait after trigger
-TRIGGER_COOLDOWN = 5         # seconds between triggers
+CHANGE_AREA_PERCENT = 3      # % of frame area that must change
+SETTLE_FRAMES = 6            # frames to wait after trigger
+TRIGGER_COOLDOWN = 2         # seconds between triggers
 MOG2_HISTORY = 500
 MOG2_VAR_THRESHOLD = DIFF_THRESHOLD
 MOG2_DETECT_SHADOWS = False
-WARMUP_FRAMES = 30
+WARMUP_FRAMES = 12
 
 # Live YOLO boxes (preview runs on a background thread so MJPEG stays smooth)
 YOLO_PREVIEW_ENABLED = True
-YOLO_PREVIEW_INTERVAL = 0.28
-YOLO_HOLD_SECONDS = 4
+YOLO_PREVIEW_INTERVAL = 0.12
+YOLO_HOLD_SECONDS = 2.5
 
 # Face gate (register / recognize)
 FACE_MATCH_THRESHOLD = float(os.environ.get("FACE_MATCH_THRESHOLD", "0.90"))

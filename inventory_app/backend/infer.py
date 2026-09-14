@@ -13,7 +13,7 @@ import numpy as np
 import torch
 from ultralytics import YOLO
 
-from config import BASE_DIR, MODEL_CONFIDENCE, MODEL_IMAGE_SIZE
+from config import BASE_DIR, MODEL_CONFIDENCE, MODEL_IMAGE_SIZE, MODEL_IOU, MODEL_MAX_DET
 
 WEIGHT_NAME = "yolo11l_seg_object_bce_dice.pt"
 WEIGHT_PATH = os.path.join(BASE_DIR, "models", WEIGHT_NAME)
@@ -56,7 +56,7 @@ def load_model():
     return _model
 
 
-def predict_frame(frame, conf=None, imgsz=None):
+def predict_frame(frame, conf=None, imgsz=None, iou=None, max_det=None, retina_masks=True):
     """Run the v2 segmentation model. Same call shape as the notebook."""
     engine = load_model()
     if engine is None or frame is None:
@@ -65,9 +65,11 @@ def predict_frame(frame, conf=None, imgsz=None):
         source=frame,
         imgsz=imgsz or MODEL_IMAGE_SIZE,
         conf=conf if conf is not None else MODEL_CONFIDENCE,
+        iou=iou if iou is not None else MODEL_IOU,
+        max_det=max_det if max_det is not None else MODEL_MAX_DET,
         device=_device,
         verbose=False,
-        retina_masks=True,
+        retina_masks=retina_masks,
     )
 
 

@@ -1172,17 +1172,29 @@ function rearmFaceCapture() {
     if (usingLocalCamera && liveVideo && liveVideo.paused) {
         liveVideo.play().catch(() => {});
     }
-    faceAnalyzeEnabled = true;
-    scanIngestEnabled = true;
-    startLocalCamera("user");
-    fetch(CONFIG.faceModeUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mode: faceUiMode === "register" ? "register" : "recognize" }),
-        cache: "no-store",
-    })
+    fetch(CONFIG.faceStatusUrl, { cache: "no-store" })
         .then((response) => response.json())
-        .then((data) => applyFaceStatus(data))
+        .then((data) => {
+            if (data.recognized) {
+                faceAnalyzeEnabled = false;
+                scanIngestEnabled = true;
+                applyFaceStatus(data);
+                return;
+            }
+            faceAnalyzeEnabled = true;
+            scanIngestEnabled = true;
+            startLocalCamera("user");
+            return fetch(CONFIG.faceModeUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    mode: faceUiMode === "register" ? "register" : "recognize",
+                }),
+                cache: "no-store",
+            })
+                .then((response) => response.json())
+                .then((status) => applyFaceStatus(status));
+        })
         .catch((error) => console.error("Face rearm error:", error));
 }
 
@@ -1209,8 +1221,8 @@ function applyFaceStatus(data) {
         if (!flowArmed) {
             flowArmed = true;
             setMode("OUT");
+            startLocalCamera(preferredCameraFacing());
         }
-        startLocalCamera(preferredCameraFacing());
     } else if (data.mode === "register" || data.mode === "recognize") {
         faceAnalyzeEnabled = true;
         scanIngestEnabled = true;

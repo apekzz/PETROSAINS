@@ -107,8 +107,10 @@ catalog_import_state = {
 inventory_catalog_lock = threading.Lock()
 inventory_catalog_cache = None
 INVENTORY_MATCH_THRESHOLD = float(
-    os.environ.get("INVENTORY_MATCH_THRESHOLD", "0.60")
+    os.environ.get("INVENTORY_MATCH_THRESHOLD", "0.52")
 )
+INVENTORY_MATCH_MARGIN = float(os.environ.get("INVENTORY_MATCH_MARGIN", "0.04"))
+INVENTORY_MATCH_FLOOR = float(os.environ.get("INVENTORY_MATCH_FLOOR", "0.48"))
 
 
 # ============================================================
@@ -483,13 +485,17 @@ def set_face_mode(new_mode):
             face_gate_visible = False
             face_message = "Face gate idle"
         elif mode == "register":
-            face_gate_visible = True
-            face_message = "Look at the camera to register"
-        else:
             recognized_staff = None
             SCAN_OPERATOR = "System"
             face_gate_visible = True
+            face_message = "Look at the camera to register"
+        elif recognized_staff is None:
+            SCAN_OPERATOR = "System"
+            face_gate_visible = True
             face_message = "Look at the camera to check out"
+        else:
+            face_gate_visible = False
+            face_message = f"Recognized {recognized_staff['staff_name']}"
     print(f"[FACE] Mode → {mode}")
     return mode
 
@@ -768,11 +774,11 @@ def encode_jpeg(frame):
     return None
 
 
-def predict_frame(frame):
+def predict_frame(frame, **kwargs):
     if model is None or catalog_import_active():
         return []
     with model_lock:
-        return infer.predict_frame(frame)
+        return infer.predict_frame(frame, **kwargs)
 
 
 def refresh_inventory_catalog_cache():
@@ -800,6 +806,31 @@ def get_inventory_catalog():
     return cached or []
 
 
+def match_inventory_embedding(embedding):
+    catalog = get_inventory_catalog()
+    if not catalog or embedding is None:
+        return None, -1.0
+    vec = np.asarray(embedding, dtype=np.float32).reshape(-1)
+    norm = float(np.linalg.norm(vec)) or 1.0
+    vec = vec / norm
+    by_name = defaultdict(list)
+    for name, vector in catalog:
+        other = np.asarray(vector, dtype=np.float32).reshape(-1)
+        other_norm = float(np.linalg.norm(other)) or 1.0
+        by_name[name].append(float(np.dot(vec, other / other_norm)))
+    ranked = sorted(
+        ((max(scores), name) for name, scores in by_name.items()),
+        reverse=True,
+    )
+    best_score, best_name = ranked[0]
+    second = ranked[1][0] if len(ranked) > 1 else -1.0
+    if best_score >= INVENTORY_MATCH_THRESHOLD:
+        return normalize_item_name(best_name), best_score
+    if best_score >= INVENTORY_MATCH_FLOOR and (best_score - second) >= INVENTORY_MATCH_MARGIN:
+        return normalize_item_name(best_name), best_score
+    return None, best_score
+
+
 def match_inventory_name(crop):
     if crop is None:
         return None, -1.0
@@ -811,38 +842,17 @@ def match_inventory_name(crop):
     except Exception as exc:
         print("[INFER] Crop embed error:", exc)
         return None, -1.0
-    ranking = sorted(
-        (
-            (cosine_similarity(embedding, vector), name)
-            for name, vector in get_inventory_catalog()
-        ),
-        reverse=True,
-    )[:100]
-    grouped = defaultdict(list)
-    for score, name in ranking:
-        grouped[name].append(score)
-    supported = [
-        (float(np.mean(scores)), name)
-        for name, scores in grouped.items()
-        if len(scores) >= 3
-    ]
-    if not supported and ranking:
-        supported = [(ranking[0][0], ranking[0][1])]
-    if not supported:
-        return None, -1.0
-    best_score, best_name = max(supported)
-    if best_score <= INVENTORY_MATCH_THRESHOLD:
-        return None, best_score
-    return normalize_item_name(best_name), best_score
+    return match_inventory_embedding(embedding)
 
 
-def parse_yolo_boxes(results, frame=None):
+def parse_yolo_boxes(results, frame=None, identify=True):
     detections = infer.parse_detections(results)
     if not detections:
         return []
     frame_height, frame_width = frame.shape[:2] if frame is not None else (1, 1)
-    accepted = []
-    for item in detections:
+    prepared = []
+    prepared_indexes = []
+    for index, item in enumerate(detections):
         x1, y1, x2, y2 = item["xyxy"]
         item["box_norm"] = (
             max(0.0, min(1.0, x1 / frame_width)),
@@ -850,14 +860,32 @@ def parse_yolo_boxes(results, frame=None):
             max(0.0, min(1.0, x2 / frame_width)),
             max(0.0, min(1.0, y2 / frame_height)),
         )
-        crop = infer.crop_masked_bgr(frame, item) if frame is not None else None
-        named, identity_score = match_inventory_name(crop)
-        item["identity_score"] = identity_score
-        item["matched"] = bool(named)
+        item["identity_score"] = -1.0
+        item["matched"] = False
+        if not identify or frame is None:
+            continue
+        crop = infer.crop_masked_bgr(frame, item)
+        if crop is None:
+            continue
+        ok, encoded = cv2.imencode(".jpg", crop, [cv2.IMWRITE_JPEG_QUALITY, 90])
+        if not ok:
+            continue
+        prepared.append(_prepare_embed_image(encoded.tobytes()))
+        prepared_indexes.append(index)
+    if not prepared:
+        return detections
+    try:
+        vectors = images_to_embeddings(prepared)
+    except Exception as exc:
+        print("[INFER] Batch crop embed error:", exc)
+        return detections
+    for index, vector in zip(prepared_indexes, vectors):
+        named, identity_score = match_inventory_embedding(vector)
+        detections[index]["identity_score"] = identity_score
+        detections[index]["matched"] = bool(named)
         if named:
-            item["name"] = named
-        accepted.append(item)
-    return accepted
+            detections[index]["name"] = named
+    return detections
 
 
 def detection_labels(detections):
@@ -962,31 +990,20 @@ def set_yolo_overlay(detections, hold_frame=None, hold_seconds=0):
 
 
 def run_yolo_preview(frame, client_id=None):
-    global preview_pending, last_capture, last_detections, last_classes
-    global cooldown_until
+    global preview_pending
     try:
         if model is None:
             return
-        detections = parse_yolo_boxes(predict_frame(frame), frame)
-        if face_detection_active():
-            logged_count, class_names = 0, []
-        else:
-            logged_count, class_names = log_yolo_detections(detections)
-        overlay = [] if logged_count else detections
-        set_yolo_overlay(overlay)
+        detections = parse_yolo_boxes(
+            predict_frame(frame, retina_masks=False),
+            frame,
+            identify=False,
+        )
+        set_yolo_overlay(detections)
         if client_id:
             sess = get_device(client_id)
-            sess["yolo_boxes"] = overlay
-            sess["yolo_labels"] = detection_labels(overlay)
-            if logged_count:
-                sess["state"] = "COOLDOWN"
-                sess["cooldown_until"] = time.monotonic() + TRIGGER_COOLDOWN
-        if logged_count:
-            last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            last_detections = logged_count
-            last_classes = class_names
-            cooldown_until = time.monotonic() + TRIGGER_COOLDOWN
-            set_trigger_state("COOLDOWN")
+            sess["yolo_boxes"] = detections
+            sess["yolo_labels"] = detection_labels(detections)
     except Exception as exc:
         print("[YOLO] Preview error:", exc)
     finally:
@@ -1420,13 +1437,11 @@ def log_yolo_detections(detections):
         with inventory_revision_lock:
             inventory_revision += 1
 
+        total_items = sum(len(scores) for scores in grouped.values())
         print(
-            f"[DETECTION] Mode={mode} | Logged {len(inserted_names)} "
-            f"classes at {timestamp}"
+            f"[DETECTION] Mode={mode} | Logged {total_items} item(s) "
+            f"across {len(inserted_names)} class(es) at {timestamp}"
         )
-        set_yolo_overlay([])
-        set_face_mode("recognize")
-        print("[DETECTION] Movement saved — face recognition re-armed")
         return len(inserted_names), inserted_names
 
     except Exception as exc:
@@ -1443,18 +1458,17 @@ def run_backend_capture(frame, client_id=None):
     global last_capture, last_detections, last_classes, cooldown_until
 
     try:
-        results = predict_frame(frame)
-        detections = parse_yolo_boxes(results, frame)
+        results = predict_frame(frame, retina_masks=True)
+        detections = parse_yolo_boxes(results, frame, identify=True)
         logged_count, class_names = log_yolo_detections(detections)
         last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         last_detections = logged_count
         last_classes = class_names
-        overlay = [] if logged_count else detections
-        set_yolo_overlay(overlay)
+        set_yolo_overlay(detections, hold_frame=frame, hold_seconds=YOLO_HOLD_SECONDS)
         if client_id:
             sess = get_device(client_id)
-            sess["yolo_boxes"] = overlay
-            sess["yolo_labels"] = detection_labels(overlay)
+            sess["yolo_boxes"] = detections
+            sess["yolo_labels"] = detection_labels(detections)
     except Exception as exc:
         print("[MODEL] Inference error:", exc)
         last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
