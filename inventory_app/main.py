@@ -1,6 +1,12 @@
 import os
 import sys
 import time
+
+_APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+for _sub in ("backend", "database", "boot"):
+    _path = os.path.join(_APP_ROOT, _sub)
+    if _path not in sys.path:
+        sys.path.insert(0, _path)
 import queue
 import base64
 import asyncio
@@ -32,6 +38,7 @@ from db import (
     normalize_item_name,
     check_db,
     clear_check_in_out,
+    clear_staff_embeddings,
     save_object_embedding,
     fetch_staff_embeddings,
     fetch_inventory_embeddings,
@@ -51,7 +58,7 @@ from sam_tool import (
     sam_status,
 )
 from config import (
-    BASE_DIR, HOST, PORT, CAMERA_INDEX, CAMERA_WIDTH, CAMERA_HEIGHT,
+    BASE_DIR, FRONTEND_DIR, HOST, PORT, CAMERA_INDEX, CAMERA_WIDTH, CAMERA_HEIGHT,
     TARGET_FPS, JPEG_QUALITY, MODEL_PATH, OPENCLIP_CHECKPOINT,
     MODEL_CONFIDENCE, MODEL_IMAGE_SIZE,
     TRIGGER_ENABLED, CHANGE_AREA_PERCENT, SETTLE_FRAMES,
@@ -378,6 +385,9 @@ def set_face_mode(new_mode):
             face_gate_visible = False
             face_message = "Face gate idle"
         elif mode == "register":
+            # Reset live face session only — staff DB / enrolled faces stay.
+            recognized_staff = None
+            SCAN_OPERATOR = "System"
             face_gate_visible = True
             face_message = "Place your face in the outline to register"
         else:
@@ -545,7 +555,7 @@ def handle_face_info(info):
             face_match_candidate = None
             return
         if not in_region:
-            face_message = "Move your face into the outline"
+            face_message = "Center your face in the middle of the outline"
             ready_to_register = False
             return
         if crop_bytes:
@@ -782,25 +792,16 @@ def match_inventory_name(crop):
     except Exception as exc:
         print("[INFER] Crop embed error:", exc)
         return None, -1.0
-    ranking = sorted(
-        (
-            (cosine_similarity(embedding, vector), name)
-            for name, vector in get_inventory_catalog()
-        ),
-        reverse=True,
-    )[:100]
-    grouped = defaultdict(list)
-    for score, name in ranking:
-        grouped[name].append(score)
-    supported = [
-        (float(np.mean(scores)), name)
-        for name, scores in grouped.items()
-        if len(scores) >= 3
-    ]
-    if not supported and ranking:
-        supported = [(ranking[0][0], ranking[0][1])]
-    if not supported:
+    # Per-name top-3 mean so SAM one-shot rows (e.g. Mouse×1) can win.
+    by_name = defaultdict(list)
+    for name, vector in get_inventory_catalog():
+        by_name[name].append(cosine_similarity(embedding, vector))
+    if not by_name:
         return None, -1.0
+    supported = [
+        (float(np.mean(sorted(scores, reverse=True)[:3])), name)
+        for name, scores in by_name.items()
+    ]
     best_score, best_name = max(supported)
     if best_score <= INVENTORY_MATCH_THRESHOLD:
         return None, best_score
@@ -1518,11 +1519,16 @@ def camera_capture_loop():
         hold_until = 0.0
         boxes = []
         if face_active:
-            with face_draw_lock:
-                mesh = last_face_mesh
-                points5 = last_face_points
-            if mesh or points5:
-                display_frame = draw_landmarks(live_frame, mesh or [], points5 or [])
+            with face_state_lock:
+                staff_locked = recognized_staff is not None
+            if not staff_locked:
+                with face_draw_lock:
+                    mesh = last_face_mesh
+                    points5 = last_face_points
+                if mesh or points5:
+                    display_frame = draw_landmarks(
+                        live_frame, mesh or [], points5 or []
+                    )
         else:
             with yolo_overlay_lock:
                 hold_jpeg = annotated_hold_jpeg
@@ -1598,10 +1604,11 @@ def startup_event():
         return
     bootstrap_database()
     clear_check_in_out()
+    clear_staff_embeddings()
     if model is None:
         load_model()
     load_embed_model()
-    load_sam_model()
+    # SAM deferred to first capture/register (see run_high_end_boot).
     load_face_gate()
     set_face_mode("recognize")
     boot_ready = True
@@ -2008,8 +2015,10 @@ def api_start_camera():
     return JSONResponse({"ok": True, "camera_ok": True, "preview": "browser"})
 
 
+
 @app.post("/api/detection/arm")
 def arm_object_detection():
+    """Press Start → arm + warmup (normal flow)."""
     global scan_warmup_count, scan_settle_count, scan_session
     with face_state_lock:
         staff = dict(recognized_staff) if recognized_staff else None
@@ -2026,11 +2035,12 @@ def arm_object_detection():
     reset_background_subtractor()
     set_yolo_overlay([])
     set_trigger_state("WARMUP")
-    print(f"[DETECTION] Armed by {staff['staff_name']}")
+    print(f"[DETECTION] Armed by {staff['staff_name']} (warmup)")
     return JSONResponse({
         "ok": True,
         "detection_armed": True,
         "state": get_trigger_state(),
+        "staff": staff["staff_name"],
     })
 
 
@@ -2221,6 +2231,7 @@ def trigger_status():
         "yolo_labels": labels,
         "yolo_boxes": boxes,
         "inventory_revision": revision,
+        "mode": get_detection_mode(),
     })
 
 
@@ -2372,7 +2383,7 @@ def video_frame():
 
 @app.get("/", response_class=HTMLResponse)
 def serve_dashboard():
-    dashboard_path = os.path.join(BASE_DIR, "dashboard.html")
+    dashboard_path = os.path.join(FRONTEND_DIR, "dashboard.html")
     if not os.path.exists(dashboard_path):
         return HTMLResponse("<h1>dashboard.html not found</h1>", status_code=500)
     with open(dashboard_path, "r", encoding="utf-8") as file:
@@ -2388,6 +2399,7 @@ FRONTEND_FILES = {
     "dashboard.js": "application/javascript",
     "sam-tool.js": "application/javascript",
     "petronas-logo.svg": "image/svg+xml",
+    "petrosains-logo.svg": "image/svg+xml",
 }
 
 
@@ -2396,7 +2408,7 @@ def serve_frontend_file(filename: str):
     media_type = FRONTEND_FILES.get(filename)
     if media_type is None:
         return JSONResponse({"detail": "Not found"}, status_code=404)
-    file_path = os.path.join(BASE_DIR, filename)
+    file_path = os.path.join(FRONTEND_DIR, filename)
     if not os.path.exists(file_path):
         return JSONResponse({"detail": f"{filename} not found"}, status_code=404)
     return FileResponse(file_path, media_type=media_type)
@@ -2420,6 +2432,7 @@ def run_high_end_boot():
         set_boot(6, "connecting to database")
         bootstrap_database()
         clear_check_in_out()
+        clear_staff_embeddings()
         loader.pulse(0.15)
 
         set_boot(18, "preparing inventory tables")
@@ -2435,11 +2448,8 @@ def run_high_end_boot():
         set_boot(58, "warming embedding encoder")
         loader.pulse(0.08)
 
-        set_boot(64, "loading Segment Anything")
-        load_sam_model()
-        loader.pulse(0.12)
-
-        set_boot(78, "loading face recognition")
+        # SAM loads on first /api/sam/* use — skips ~10–30s cold boot.
+        set_boot(70, "loading face recognition")
         load_face_gate()
         loader.pulse(0.12)
 
