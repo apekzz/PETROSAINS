@@ -1253,7 +1253,7 @@ async function openRegisterPopup() {
     updateRegisterSave();
 }
 
-function renderRecognized(staff, unknownStaff = false, matchScore = null) {
+function renderRecognized(staff, unknownStaff = false, matchScore = null, matchThreshold = 0.78) {
     const viewer = document.getElementById("recognizedViewer");
     const viewerName = document.getElementById("recognizedViewerName");
     const viewerMeta = document.getElementById("recognizedViewerMeta");
@@ -1267,7 +1267,10 @@ function renderRecognized(staff, unknownStaff = false, matchScore = null) {
         }
         if (viewerKicker) viewerKicker.textContent = "Identity rejected";
         if (viewerName) viewerName.textContent = "UNKNOWN STAFF";
-        if (viewerMeta) viewerMeta.textContent = `${confidence}% similarity · 90% required`;
+        if (viewerMeta) {
+            const need = Math.round((Number(matchThreshold) || 0.78) * 100);
+            viewerMeta.textContent = `${confidence}% similarity · ${need}% required`;
+        }
         if (viewer) {
             viewer.classList.remove("is-hidden");
             viewer.classList.add("is-unknown");
@@ -1341,7 +1344,12 @@ function applyFaceStatus(data) {
     );
     faceGate.classList.toggle("is-warn", visible && (unknownStaff || !lastFaceReady));
     if (!faceLandmarker) setFaceHint(data.message);
-    renderRecognized(data.recognized, unknownStaff, data.match_score);
+    renderRecognized(
+        data.recognized,
+        unknownStaff,
+        data.match_score,
+        data.match_threshold,
+    );
     if (!data.recognized) {
         applyObjectRecognitionState(false, false);
     }

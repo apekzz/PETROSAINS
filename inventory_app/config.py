@@ -78,6 +78,8 @@ YOLO_PREVIEW_INTERVAL = 0.28
 YOLO_HOLD_SECONDS = 6
 
 # Face gate (register / recognize)
+# Histogram embeds (restored staff.csv). Margin+streak cut wrong flips.
 FACE_MATCH_THRESHOLD = float(os.environ.get("FACE_MATCH_THRESHOLD", "0.90"))
-FACE_MATCH_STREAK = int(os.environ.get("FACE_MATCH_STREAK", "4"))
+FACE_MATCH_MARGIN = float(os.environ.get("FACE_MATCH_MARGIN", "0.025"))
+FACE_MATCH_STREAK = int(os.environ.get("FACE_MATCH_STREAK", "3"))
 FACE_EMBED_INTERVAL = 0.28

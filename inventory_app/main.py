@@ -57,7 +57,7 @@ from config import (
     TRIGGER_ENABLED, CHANGE_AREA_PERCENT, SETTLE_FRAMES,
     TRIGGER_COOLDOWN, MOG2_HISTORY, MOG2_VAR_THRESHOLD, MOG2_DETECT_SHADOWS,
     WARMUP_FRAMES, YOLO_PREVIEW_ENABLED, YOLO_PREVIEW_INTERVAL, YOLO_HOLD_SECONDS,
-    FACE_MATCH_THRESHOLD, FACE_MATCH_STREAK, FACE_EMBED_INTERVAL,
+    FACE_MATCH_THRESHOLD, FACE_MATCH_MARGIN, FACE_MATCH_STREAK, FACE_EMBED_INTERVAL,
     get_lan_ip,
 )
 
@@ -165,7 +165,7 @@ def _prepare_embed_image(image_bytes):
 
 
 def face_crop_to_embedding(image_bytes):
-    """Fast CPU 512-d face vector. No CUDA, no CLIP, no extra threads."""
+    """CPU 512-d face vector matching saved staff.csv (grid + RGB hist)."""
     image = _prepare_embed_image(image_bytes)
     arr = np.asarray(image, dtype=np.float32) / 255.0
     gray = arr.mean(axis=2)
@@ -326,18 +326,23 @@ def cosine_similarity(left, right):
 def match_staff_embedding(embedding):
     best = None
     best_score = -1.0
+    second_score = -1.0
     for row in fetch_staff_embeddings():
         score = cosine_similarity(embedding, row["facial_embedding"])
         if score > best_score:
+            second_score = best_score
             best_score = score
             best = row
+        elif score > second_score:
+            second_score = score
     if best is None:
-        return None, best_score
+        return None, best_score, 0.0
+    margin = best_score - second_score if second_score >= 0 else best_score
     return {
         "staff_id": best["staff_id"],
         "staff_name": best["staff_name"],
         "score": round(best_score, 4),
-    }, best_score
+    }, best_score, margin
 
 
 def face_detection_active():
@@ -355,8 +360,8 @@ def other_models_allowed():
 
 def set_face_mode(new_mode):
     global face_mode, face_gate_visible, recognized_staff, pending_face_embedding
-    global pending_face_crop, ready_to_register, face_match_streak, face_message
-    global face_match_score, SCAN_OPERATOR
+    global pending_face_crop, ready_to_register, face_match_streak, face_match_candidate
+    global face_message, face_match_score, SCAN_OPERATOR
     mode = (new_mode or "off").strip().lower()
     if mode not in VALID_FACE_MODES:
         raise ValueError("Invalid face mode")
@@ -367,6 +372,7 @@ def set_face_mode(new_mode):
         pending_face_crop = None
         ready_to_register = False
         face_match_streak = 0
+        face_match_candidate = None
         face_match_score = None
         if mode == "off":
             face_gate_visible = False
@@ -397,6 +403,8 @@ def face_status_payload():
             "embed_ready": pending_face_embedding is not None,
             "recognized": staff,
             "match_score": face_match_score,
+            "match_threshold": FACE_MATCH_THRESHOLD,
+            "match_margin": FACE_MATCH_MARGIN,
             "unknown_staff": (
                 face_mode == "recognize"
                 and face_match_score is not None
@@ -411,7 +419,7 @@ def face_status_payload():
 
 def _apply_face_embedding(embedding, mode):
     global pending_face_embedding, ready_to_register, recognized_staff
-    global face_match_streak, face_gate_visible, face_message
+    global face_match_streak, face_match_candidate, face_gate_visible, face_message
     global face_match_score, SCAN_OPERATOR
 
     with face_state_lock:
@@ -423,7 +431,7 @@ def _apply_face_embedding(embedding, mode):
         print("[FACE] Embedding ready for register")
         return
 
-    match, score = match_staff_embedding(embedding)
+    match, score, margin = match_staff_embedding(embedding)
     with face_state_lock:
         current_id = recognized_staff["staff_id"] if recognized_staff else None
         chosen = choose_staff_match(
@@ -432,32 +440,69 @@ def _apply_face_embedding(embedding, mode):
             current_id,
             FACE_MATCH_THRESHOLD,
             FACE_MATCH_THRESHOLD * 0.85,
+            margin,
+            FACE_MATCH_MARGIN,
         )
         face_match_score = round(score, 4) if score is not None and score >= 0 else None
         if chosen:
-            face_match_streak = 1
-            recognized_staff = chosen
-            SCAN_OPERATOR = chosen["staff_name"]
-            face_gate_visible = False
-            face_message = f"Recognized {chosen['staff_name']}"
-            print(
-                f"[FACE] Recognized {chosen['staff_name']} "
-                f"({chosen['staff_id']}) similarity={score:.3f}"
-            )
-        else:
-            face_match_streak = 0
-            pending_face_embedding = None
-            ready_to_register = False
-            recognized_staff = None
-            SCAN_OPERATOR = "System"
-            face_gate_visible = True
-            if score is not None and score >= 0:
-                face_message = (
-                    f"UNKNOWN STAFF · {int(score * 100)}% "
-                    f"(requires {int(FACE_MATCH_THRESHOLD * 100)}%)"
+            cid = str(chosen["staff_id"])
+            if face_match_candidate == cid:
+                face_match_streak += 1
+            else:
+                face_match_candidate = cid
+                face_match_streak = 1
+            if (
+                recognized_staff
+                and str(recognized_staff["staff_id"]) == cid
+            ):
+                # Already locked — refresh sticky identity
+                recognized_staff = chosen
+                SCAN_OPERATOR = chosen["staff_name"]
+                face_gate_visible = False
+                face_message = f"Recognized {chosen['staff_name']}"
+            elif face_match_streak >= FACE_MATCH_STREAK:
+                recognized_staff = chosen
+                SCAN_OPERATOR = chosen["staff_name"]
+                face_gate_visible = False
+                face_message = f"Recognized {chosen['staff_name']}"
+                print(
+                    f"[FACE] Recognized {chosen['staff_name']} "
+                    f"({chosen['staff_id']}) similarity={score:.3f} "
+                    f"margin={margin:.3f} streak={face_match_streak}"
                 )
             else:
-                face_message = "No enrolled staff yet — switch to Register"
+                face_message = (
+                    f"Confirming {chosen['staff_name']}… "
+                    f"{face_match_streak}/{FACE_MATCH_STREAK} "
+                    f"({int(score * 100)}%, gap {int(margin * 100)}%)"
+                )
+        else:
+            face_match_streak = 0
+            face_match_candidate = None
+            pending_face_embedding = None
+            ready_to_register = False
+            if recognized_staff and score is not None and score >= FACE_MATCH_THRESHOLD * 0.85:
+                # Keep sticky lock on soft miss
+                face_gate_visible = False
+                face_message = f"Recognized {recognized_staff['staff_name']}"
+            else:
+                recognized_staff = None
+                SCAN_OPERATOR = "System"
+                face_gate_visible = True
+                if score is not None and score >= 0 and match:
+                    face_message = (
+                        f"Ambiguous · top {match['staff_name']} "
+                        f"{int(score * 100)}% gap {int(margin * 100)}% "
+                        f"(need {int(FACE_MATCH_THRESHOLD * 100)}%+"
+                        f" / gap {int(FACE_MATCH_MARGIN * 100)}%)"
+                    )
+                elif score is not None and score >= 0:
+                    face_message = (
+                        f"UNKNOWN STAFF · {int(score * 100)}% "
+                        f"(requires {int(FACE_MATCH_THRESHOLD * 100)}%)"
+                    )
+                else:
+                    face_message = "No enrolled staff yet — switch to Register"
 
 
 def _face_embed_worker(crop_bytes, mode):
@@ -473,7 +518,7 @@ def _face_embed_worker(crop_bytes, mode):
 def handle_face_info(info):
     global face_detected, landmarks_complete, face_in_region, face_message
     global pending_face_embedding, pending_face_crop, ready_to_register, face_match_streak
-    global face_embed_pending, last_face_mesh, last_face_points
+    global face_match_candidate, face_embed_pending, last_face_mesh, last_face_points
 
     with face_draw_lock:
         last_face_mesh = info.get("mesh")
@@ -497,6 +542,7 @@ def handle_face_info(info):
             pending_face_embedding = None
             pending_face_crop = None
             face_match_streak = 0
+            face_match_candidate = None
             return
         if not in_region:
             face_message = "Move your face into the outline"
@@ -616,6 +662,7 @@ pending_face_embedding = None
 pending_face_crop = None
 ready_to_register = False
 face_match_streak = 0
+face_match_candidate = None
 face_match_score = None
 last_face_embed_at = 0.0
 face_embed_pending = False

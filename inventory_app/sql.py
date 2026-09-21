@@ -1070,13 +1070,14 @@ def insert_staff(staff_id, staff_name, embedding):
     name = " ".join(str(staff_name or "").split())
     if not sid or not name:
         raise ValueError("staff_id and staff_name are required")
-    if get_staff(sid):
-        raise ValueError(f"staff_id '{sid}' already exists")
     with get_db() as conn:
         conn.execute(
             """
             INSERT INTO staff (staff_id, staff_name, facial_embedding)
             VALUES (%s, %s, %s)
+            ON CONFLICT (staff_id) DO UPDATE
+            SET staff_name = EXCLUDED.staff_name,
+                facial_embedding = EXCLUDED.facial_embedding
             """,
             (sid, name, _embedding_to_text(embedding)),
         )

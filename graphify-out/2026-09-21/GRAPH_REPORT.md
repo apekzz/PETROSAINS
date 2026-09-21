@@ -1,12 +1,12 @@
 # Graph Report - PETROSAINS  (2026-09-21)
 
 ## Corpus Check
-- 49 files · ~1,370,652 words
+- 49 files · ~1,370,647 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 486 file(s) not represented in the graph (top: (none) 413, .ipynb 19, .pt 19)
 
 ## Summary
-- 841 nodes · 1825 edges · 46 communities (42 shown, 4 thin omitted)
+- 841 nodes · 1826 edges · 44 communities (40 shown, 4 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 63 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
@@ -28,14 +28,12 @@
 - api.py
 - sam-tool.js
 - db.py
-- connect_and_prepare
+- sql.py
 - detectron2_recipe.py
 - get
-- sql.py
 - tables
 - download_dataset.py
 - dice_loss.py
-- get_db
 - sam_tool.py
 - post
 - run_high_end_boot
@@ -89,7 +87,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (46 total, 4 thin omitted)
+## Communities (44 total, 4 thin omitted)
 
 ### Community 0 - "dashboard.js"
 Cohesion: 0.04
@@ -124,20 +122,20 @@ Cohesion: 0.18
 Nodes (10): Daily use (after first setup), Files, Folders, How to run the inventory app, PETROSAINS, Root layout, Steps, `test_pg/` (similarity pipeline) (+2 more)
 
 ### Community 9 - "api.py"
-Cohesion: 0.27
-Nodes (12): fastapi, get_detections(), get_detections_summary(), get_detections_today(), get_inventory(), get_item(), get_item_summary(), get_movements() (+4 more)
+Cohesion: 0.12
+Nodes (25): fastapi, get_detections(), get_detections_summary(), get_detections_today(), get_inventory(), get_item(), get_item_summary(), get_movements() (+17 more)
 
 ### Community 10 - "sam-tool.js"
 Cohesion: 0.19
 Nodes (21): calculateTransform(), captureFrozenFrame(), endStroke(), exportMask(), generateMask(), loadSourceCanvas(), maskBytes(), normalizeMask() (+13 more)
 
 ### Community 11 - "db.py"
-Cohesion: 0.18
-Nodes (18): Compatibility wrappers. All SQL lives in sql.py., clear_check_in_out(), _embedding_to_text(), fetch_item_summary(), insert_check_in_out(), insert_staff(), normalize_item_name(), Rebuild summary counts from inventory_emb. Keeps existing registered_date. (+10 more)
+Cohesion: 0.17
+Nodes (23): Compatibility wrappers. All SQL lives in sql.py., clear_check_in_out(), _embedding_from_text(), _embedding_to_text(), fetch_inventory_embeddings(), fetch_item_summary(), fetch_staff_embeddings(), get_db() (+15 more)
 
-### Community 12 - "connect_and_prepare"
-Cohesion: 0.14
-Nodes (14): connect_and_prepare(), _copy_table_to_file(), ensure_schema_columns(), export_table_snapshots(), _export(), _open_connection(), Safely migrate existing installations without dropping data., Reject incompatible existing tables without deleting or replacing them. (+6 more)
+### Community 12 - "sql.py"
+Cohesion: 0.13
+Nodes (20): contextlib, check_db(), close_boot_connection(), connect_and_prepare(), _copy_table_to_file(), ensure_schema_columns(), export_table_snapshots(), _export() (+12 more)
 
 ### Community 13 - "detectron2_recipe.py"
 Cohesion: 0.10
@@ -146,10 +144,6 @@ Nodes (19): copy, detectron2, detectron2_config, detectron2_data, detectron2_dat
 ### Community 14 - "get"
 Cohesion: 0.14
 Nodes (15): camera_status(), catalog_import_status(), db_status(), detection_preview(), generate_frames(), get_detection_mode(), get_mode(), get_sam_status() (+7 more)
-
-### Community 15 - "sql.py"
-Cohesion: 0.18
-Nodes (14): contextlib, check_db(), _checkout_as_detection(), close_boot_connection(), fetch_detections(), fetch_detections_today(), fetch_item(), fetch_movements() (+6 more)
 
 ### Community 16 - "tables"
 Cohesion: 0.10
@@ -162,10 +156,6 @@ Nodes (37): main(), Export the full train image catalog to train_official.parque
 ### Community 18 - "dice_loss.py"
 Cohesion: 0.15
 Nodes (16): Tensor, torch, torch_nn_functional, Label-aware Ultralytics train() kwargs. Aggressive geometry (mosaic, mixup,…, apply_bce_dice_mask_loss(), apply_dice_mask_loss(), bce_dice_single_mask_loss(), dice_single_mask_loss() (+8 more)
-
-### Community 19 - "get_db"
-Cohesion: 0.28
-Nodes (9): migrate_sqlite_inventory(), _embedding_from_text(), fetch_detections_summary(), fetch_inventory(), fetch_inventory_embeddings(), fetch_staff(), fetch_staff_embeddings(), get_db() (+1 more)
 
 ### Community 20 - "sam_tool.py"
 Cohesion: 0.10
@@ -192,8 +182,8 @@ Cohesion: 0.22
 Nodes (5): HookBase, CloseMosaicHook, EarlyStopHook, MLflowHook, YOLO-style patience on val mask AP50 (one eval = one epoch).
 
 ### Community 28 - "setup_db.py"
-Cohesion: 0.20
-Nodes (10): inventory_app_config, ensure_database(), ensure_postgres_running(), Create the Postgres role/database, tables, and optional SQLite import., Create role + database if this machine can admin Postgres locally., _run(), fetch_stats(), psycopg (+2 more)
+Cohesion: 0.22
+Nodes (9): inventory_app_config, ensure_database(), ensure_postgres_running(), Create the Postgres role/database, tables, and optional SQLite import., Create role + database if this machine can admin Postgres locally., _run(), psycopg, sqlite3 (+1 more)
 
 ### Community 29 - "fetchStats"
 Cohesion: 0.22

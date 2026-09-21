@@ -78,9 +78,9 @@
     "semantic_hash": "727b9efdda116ca7c7dd6fd610b04f4f"
   },
   "inventory_app/saved_tables/manifest.json": {
-    "mtime": 1789976674.8038275,
-    "seen": 1789976693.320099,
-    "ast_hash": "eaac1e68a8fc28f5c6767cd9feb76495",
+    "mtime": 1789976280.178652,
+    "seen": 1789976326.636204,
+    "ast_hash": "a7baf0ae5ca3bea1e05fe7cbcc0af885",
     "semantic_hash": ""
   },
   "inventory_app/setup_db.py": {
@@ -90,10 +90,10 @@
     "semantic_hash": "e9a7770f73c0cb217a51f283ddbf0af7"
   },
   "inventory_app/sql.py": {
-    "mtime": 1789976687.71477,
-    "seen": 1789976693.3201191,
-    "ast_hash": "174f6db9ad266f725d69f7eb9be0a90a",
-    "semantic_hash": ""
+    "mtime": 1789968070.9017935,
+    "seen": 1789968658.561412,
+    "ast_hash": "c5449cee25eb1689ce35375ac5e4fa5e",
+    "semantic_hash": "c5449cee25eb1689ce35375ac5e4fa5e"
   },
   "test_normal_yolo.py": {
     "mtime": 1789373000.363115,

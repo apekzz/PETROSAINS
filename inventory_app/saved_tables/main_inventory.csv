@@ -22,6 +22,8 @@ id,inventory_name,orig_quantity,available_quantity,registered_date
 82,glue stick,27,27,2026-09-13 05:45:49.286787
 83,Paper Clip,104,104,2026-09-13 05:45:49.286787
 71,Rocker Switch 2pin Black,155,155,2026-09-13 05:45:49.286787
+99,LED Blue,115,115,2026-09-13 05:45:49.286787
+102,tongue depressor,22,22,2026-09-13 05:45:49.286787
 93,key ring,28,28,2026-09-13 05:45:49.286787
 94,needle,31,31,2026-09-13 05:45:49.286787
 95,Motor Shield,41,41,2026-09-13 05:45:49.286787
@@ -30,10 +32,8 @@ id,inventory_name,orig_quantity,available_quantity,registered_date
 98,gloves,27,27,2026-09-13 05:45:49.286787
 100,Infrared IR Proximity Sensor module,60,60,2026-09-13 05:45:49.286787
 101,electric thermometer,24,24,2026-09-13 05:45:49.286787
-102,tongue depressor,22,22,2026-09-13 05:45:49.286787
 103,HC SR04 Ultrasonic Sensor,79,79,2026-09-13 05:45:49.286787
 104,ribbon,26,26,2026-09-13 05:45:49.286787
-99,LED Blue,115,115,2026-09-13 05:45:49.286787
 27,N20 Mini Micro Metal Gear,98,98,2026-09-13 05:45:49.286787
 25,CR2032 battery holder,13,13,2026-09-13 05:45:49.286787
 42,Node MCU,98,98,2026-09-13 05:45:49.286787

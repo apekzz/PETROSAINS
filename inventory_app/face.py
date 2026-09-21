@@ -146,17 +146,31 @@ def face_in_region(points5, box=None):
     return visible >= 3
 
 
-def choose_staff_match(best, score, current_id, threshold=0.90, hold=0.75):
+def choose_staff_match(
+    best,
+    score,
+    current_id,
+    threshold=0.90,
+    hold=0.75,
+    margin=None,
+    min_margin=0.025,
+):
     """One face at a time, matched against every enrolled staff.
 
-    A full-threshold hit can switch to any person. A softer score only
-    keeps the person already on screen, so a blink does not drop them.
+    Full-threshold hits need a margin over the runner-up before switching
+    (or locking on cold start). Soft hold keeps the person already on screen.
     """
     if not best or score is None or score < 0:
         return None
+    best_id = str(best.get("staff_id"))
+    same = current_id is not None and best_id == str(current_id)
     if score >= threshold:
+        if same:
+            return best
+        if margin is not None and margin < min_margin:
+            return None
         return best
-    if current_id and str(best.get("staff_id")) == str(current_id) and score >= hold:
+    if same and score >= hold:
         return best
     return None
 
@@ -373,9 +387,17 @@ def _self_check():
     assert not face_in_region([(0.5, 0.5)], (0.0, 0.0, 0.02, 0.02))
     ali = {"staff_id": "1", "staff_name": "Ali"}
     sara = {"staff_id": "2", "staff_name": "Sara"}
-    assert choose_staff_match(sara, 0.93, "1")["staff_name"] == "Sara"
-    assert choose_staff_match(ali, 0.80, "1")["staff_id"] == "1"
-    assert choose_staff_match(sara, 0.80, "1") is None
+    # Cold start: needs margin over runner-up
+    assert choose_staff_match(sara, 0.93, None, margin=0.08)["staff_name"] == "Sara"
+    assert choose_staff_match(sara, 0.93, None, margin=0.01) is None
+    # Same person: no margin required
+    assert choose_staff_match(ali, 0.93, "1", margin=0.0)["staff_id"] == "1"
+    # Soft hold keeps current person
+    assert choose_staff_match(ali, 0.76, "1")["staff_id"] == "1"
+    assert choose_staff_match(sara, 0.76, "1") is None
+    # Switch needs margin
+    assert choose_staff_match(sara, 0.93, "1", margin=0.01) is None
+    assert choose_staff_match(sara, 0.93, "1", margin=0.08)["staff_name"] == "Sara"
     assert choose_staff_match(None, -1, None) is None
 
 
