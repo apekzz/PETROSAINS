@@ -1,0 +1,39 @@
+YOLO11L SEGMENTATION EVALUATION
+========================================
+Generated: 2026-09-14T00:21:14
+Weights: C:\Users\Haqkiem\OneDrive\UNIKL\July-2026\Competition\AIIC\PETROSAINS\train_v2\runs\v2\yolo11l_seg_object_bce_dice\weights\best.pt
+Device: 0
+
+EVALUATION DATA
+Validation images: 403
+Test images: 414
+Merged images: 817
+Ground-truth instances: 1711
+Missing label files: 0
+
+BOX METRICS
+Precision: 0.815027
+Recall: 0.651666
+F1: 0.724249
+mAP@0.50: 0.743920
+mAP@0.50:0.95: 0.619473
+
+MASK METRICS
+Precision: 0.795291
+Recall: 0.635885
+F1: 0.706711
+mAP@0.50: 0.703911
+mAP@0.50:0.95: 0.538311
+
+EFFICIENCY
+Wall-clock evaluation time: 932.112 s
+Wall-clock throughput: 0.877 images/s
+Preprocess latency: 38.961 ms/image
+Inference latency: 774.512 ms/image
+Postprocess latency: 52.618 ms/image
+Model pipeline latency: 866.091 ms/image
+Model pipeline throughput: 1.155 images/s
+
+NOTE
+Plain classification accuracy is not defined for object detection/segmentation.
+Precision, recall, F1, and mAP are the relevant predictive metrics.

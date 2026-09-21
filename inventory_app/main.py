@@ -350,7 +350,7 @@ def face_detection_active():
 
 
 def other_models_allowed():
-    return not face_detection_active()
+    return not face_detection_active() and is_object_detection_armed()
 
 
 def set_face_mode(new_mode):
@@ -360,6 +360,7 @@ def set_face_mode(new_mode):
     mode = (new_mode or "off").strip().lower()
     if mode not in VALID_FACE_MODES:
         raise ValueError("Invalid face mode")
+    set_object_detection_armed(False)
     with face_state_lock:
         face_mode = mode
         pending_face_embedding = None
@@ -403,6 +404,8 @@ def face_status_payload():
             ),
             "message": face_message,
             "models_paused": face_detection_active(),
+            "detection_armed": is_object_detection_armed(),
+            "detection_preview_active": detection_preview_active(),
         }
 
 
@@ -559,6 +562,8 @@ SCAN_OPERATOR = "System"
 VALID_MODES = {"IN", "OUT", "SCAN"}
 detection_mode = "SCAN"
 detection_mode_lock = threading.Lock()
+object_detection_armed = False
+object_detection_arm_lock = threading.Lock()
 
 trigger_state = "WARMUP"
 trigger_state_lock = threading.Lock()
@@ -620,6 +625,26 @@ VALID_FACE_MODES = {"off", "recognize", "register"}
 def get_detection_mode():
     with detection_mode_lock:
         return detection_mode
+
+
+def is_object_detection_armed():
+    with object_detection_arm_lock:
+        return object_detection_armed
+
+
+def set_object_detection_armed(armed):
+    global object_detection_armed
+    with object_detection_arm_lock:
+        object_detection_armed = bool(armed)
+        return object_detection_armed
+
+
+def detection_preview_active():
+    with yolo_overlay_lock:
+        return bool(
+            annotated_hold_jpeg
+            and time.monotonic() < annotated_hold_until
+        )
 
 
 def set_trigger_state(new_state):
@@ -858,9 +883,11 @@ def run_yolo_preview(frame):
     global preview_pending, last_capture, last_detections, last_classes
     global cooldown_until
     try:
-        if model is None:
+        if model is None or not is_object_detection_armed():
             return
         detections = parse_yolo_boxes(predict_frame(frame), frame)
+        if not is_object_detection_armed():
+            return
         logged_count, class_names = log_yolo_detections(detections)
         if logged_count:
             last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -868,7 +895,11 @@ def run_yolo_preview(frame):
             last_classes = class_names
             cooldown_until = time.monotonic() + TRIGGER_COOLDOWN
             set_trigger_state("COOLDOWN")
-            set_yolo_overlay([])
+            set_yolo_overlay(
+                detections,
+                hold_frame=frame,
+                hold_seconds=YOLO_HOLD_SECONDS,
+            )
         else:
             set_yolo_overlay([] if face_detection_active() else detections)
     except Exception as exc:
@@ -913,7 +944,7 @@ def ingest_scan_frame(frame):
     """Run motion trigger + YOLO on a browser-captured frame. No OpenCV camera."""
     global scan_warmup_count, scan_settle_count, scan_session, cooldown_until
 
-    if frame is None:
+    if frame is None or not is_object_detection_armed():
         return
     with scan_ingest_lock:
         if bg_subtractor is None:
@@ -1248,7 +1279,7 @@ def log_yolo_detections(detections):
     """
     global inventory_revision
     try:
-        if not detections:
+        if not detections or not is_object_detection_armed():
             return 0, []
 
         grouped = defaultdict(list)
@@ -1285,9 +1316,9 @@ def log_yolo_detections(detections):
             f"[DETECTION] Mode={mode} | Logged {len(inserted_names)} "
             f"classes at {timestamp}"
         )
-        set_yolo_overlay([])
-        set_face_mode("recognize")
-        print("[DETECTION] Movement saved — face recognition re-armed")
+        set_object_detection_armed(False)
+        set_trigger_state("WAITING")
+        print("[DETECTION] Movement saved — object recognition disarmed")
         return len(inserted_names), inserted_names
 
     except Exception as exc:
@@ -1310,7 +1341,14 @@ def run_backend_capture(frame):
         last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         last_detections = logged_count
         last_classes = class_names
-        set_yolo_overlay([] if logged_count or face_detection_active() else detections)
+        if logged_count:
+            set_yolo_overlay(
+                detections,
+                hold_frame=frame,
+                hold_seconds=YOLO_HOLD_SECONDS,
+            )
+        else:
+            set_yolo_overlay([] if face_detection_active() else detections)
     except Exception as exc:
         print("[MODEL] Inference error:", exc)
         last_capture = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -1364,7 +1402,13 @@ def camera_capture_loop():
         if face_active:
             maybe_start_face_job(live_frame)
 
-        if TRIGGER_ENABLED and bg_subtractor is not None and not face_active:
+        detection_armed = is_object_detection_armed()
+        if (
+            TRIGGER_ENABLED
+            and bg_subtractor is not None
+            and not face_active
+            and detection_armed
+        ):
             try:
                 mask = bg_subtractor.apply(live_frame)
                 changed, _change_percent = significant_change(mask)
@@ -1408,7 +1452,7 @@ def camera_capture_loop():
             except Exception as exc:
                 print("[TRIGGER] State machine error:", exc)
 
-        if not face_active:
+        if not face_active and detection_armed:
             maybe_start_yolo_preview(live_frame, state)
 
         display_frame = live_frame
@@ -1906,8 +1950,36 @@ def api_start_camera():
     return JSONResponse({"ok": True, "camera_ok": True, "preview": "browser"})
 
 
+@app.post("/api/detection/arm")
+def arm_object_detection():
+    global scan_warmup_count, scan_settle_count, scan_session
+    with face_state_lock:
+        staff = dict(recognized_staff) if recognized_staff else None
+    if not staff:
+        return JSONResponse(
+            {"detail": "Recognize a staff member before starting object recognition."},
+            status_code=409,
+        )
+
+    set_object_detection_armed(True)
+    scan_warmup_count = 0
+    scan_settle_count = 0
+    scan_session = datetime.now().strftime("%Y%m%d_%H%M%S")
+    reset_background_subtractor()
+    set_yolo_overlay([])
+    set_trigger_state("WARMUP")
+    print(f"[DETECTION] Armed by {staff['staff_name']}")
+    return JSONResponse({
+        "ok": True,
+        "detection_armed": True,
+        "state": get_trigger_state(),
+    })
+
+
 @app.post("/api/scan/frame")
 async def ingest_browser_scan(file: UploadFile = File(...)):
+    if not is_object_detection_armed():
+        return JSONResponse({"ok": True, "skipped": "not_armed"})
     if face_detection_active():
         return JSONResponse({"ok": True, "skipped": "face"})
     image_bytes = await file.read()
@@ -2049,6 +2121,8 @@ async def select_and_import_catalog():
 @app.get("/api/trigger_status")
 def trigger_status():
     with yolo_overlay_lock:
+        preview_remaining = max(0.0, annotated_hold_until - time.monotonic())
+        preview_active = bool(annotated_hold_jpeg and preview_remaining > 0)
         labels = list(yolo_labels)
         boxes = [
             {
@@ -2066,9 +2140,23 @@ def trigger_status():
         ]
     with inventory_revision_lock:
         revision = inventory_revision
-    state = "FACE" if face_detection_active() else get_trigger_state()
+    with face_state_lock:
+        can_arm_detection = recognized_staff is not None
+    detection_armed = is_object_detection_armed()
+    if face_detection_active():
+        state = "FACE"
+    elif preview_active:
+        state = "PREVIEW"
+    elif can_arm_detection and not detection_armed:
+        state = "READY"
+    else:
+        state = get_trigger_state()
     return JSONResponse({
         "state": state,
+        "detection_armed": detection_armed,
+        "can_arm_detection": can_arm_detection,
+        "preview_active": preview_active,
+        "preview_remaining_ms": round(preview_remaining * 1000),
         "last_capture": last_capture,
         "last_detections": last_detections,
         "last_classes": last_classes,
@@ -2076,6 +2164,23 @@ def trigger_status():
         "yolo_boxes": boxes,
         "inventory_revision": revision,
     })
+
+
+@app.get("/api/detection/preview")
+def detection_preview():
+    with yolo_overlay_lock:
+        active = bool(
+            annotated_hold_jpeg
+            and time.monotonic() < annotated_hold_until
+        )
+        frame_bytes = annotated_hold_jpeg if active else None
+    if frame_bytes is None:
+        return JSONResponse({"detail": "No detection preview is active."}, status_code=404)
+    return Response(
+        content=frame_bytes,
+        media_type="image/jpeg",
+        headers={"Cache-Control": "no-store, no-cache, must-revalidate"},
+    )
 
 
 @app.get("/api/boot_status")

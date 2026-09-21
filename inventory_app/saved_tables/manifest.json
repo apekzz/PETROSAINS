@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "exported_at": "2026-09-13T16:16:58",
+  "exported_at": "2026-09-17T14:35:35",
   "tables": {
     "inventory_emb": {
       "file": "inventory_emb.csv",
@@ -9,7 +9,7 @@
         "inventory_name",
         "inventory_embedding"
       ],
-      "rows": 4355
+      "rows": 4357
     },
     "main_inventory": {
       "file": "main_inventory.csv",
@@ -20,7 +20,7 @@
         "available_quantity",
         "registered_date"
       ],
-      "rows": 109
+      "rows": 110
     },
     "staff": {
       "file": "staff.csv",

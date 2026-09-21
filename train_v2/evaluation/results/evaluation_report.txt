@@ -1,0 +1,122 @@
+MODEL EVALUATION REPORT
+=======================
+Generated: 2026-09-14
+Hardware: NVIDIA GeForce RTX 4050 Laptop GPU (6 GB)
+Evaluation data: merged validation + test splits
+
+IMPORTANT MODEL IDENTIFICATION
+------------------------------
+Despite the training notebook filename train_rtdetr_l_v2.ipynb, the evaluated
+checkpoint is YOLO11l-seg trained for one-class object detection and instance
+segmentation with BCE + Dice mask loss.
+
+1. YOLO11L DETECTION AND SEGMENTATION
+-------------------------------------
+Dataset:
+- Validation images: 403
+- Test images: 414
+- Total evaluated images: 817
+- Evaluated ground-truth instances: 1,711
+- One duplicate annotation was removed automatically by Ultralytics.
+
+Bounding-box quality:
+- Precision: 81.50%
+- Recall: 65.17%
+- F1: 72.42%
+- mAP@0.50: 74.39%
+- mAP@0.50:0.95: 61.95%
+
+Segmentation-mask quality:
+- Precision: 79.53%
+- Recall: 63.59%
+- F1: 70.67%
+- mAP@0.50: 70.39%
+- mAP@0.50:0.95: 53.83%
+
+Efficiency:
+- Evaluation wall time: 932.11 seconds
+- Wall throughput: 0.877 images/second
+- Mean preprocessing latency: 38.96 ms/image
+- Mean model inference latency: 774.51 ms/image
+- Mean postprocessing latency: 52.62 ms/image
+- Mean model-pipeline latency: 866.09 ms/image
+- Model-pipeline throughput: 1.155 images/second
+
+Interpretation:
+- Precision is substantially higher than recall, so accepted detections are
+  generally reliable but the model still misses a meaningful number of objects.
+- mAP is the appropriate accuracy measure for detection and segmentation.
+  Plain classification accuracy is not defined for this one-class detector.
+
+2. OPENCLIP MASKED-CROP CLASSIFICATION
+--------------------------------------
+Method:
+- Ground-truth segmentation polygons were used to isolate embedding quality
+  from YOLO mask errors.
+- Each object was tightly cropped with all non-object pixels set to black.
+- OpenCLIP ViT-B-32 generated normalized 512-dimensional embeddings.
+- Queries were matched against 4,355 training catalog embeddings from 109
+  classes.
+- Final ranking replicated inventory_app: top 100 neighbors, mean similarity
+  per class with at least three supporting embeddings, and rejection at <=60%.
+
+Dataset:
+- Validation images: 403
+- Test images: 414
+- Evaluated mask crops: 1,712
+- True classes: 109
+- Classes absent from catalog: 0
+- Invalid crops skipped: 0
+
+Classification quality:
+- Top-1 accuracy including rejections as errors: 78.04%
+- Top-5 accuracy: 95.09%
+- Coverage above 60% threshold: 96.38%
+- Accuracy among accepted predictions: 80.97%
+- Macro precision: 83.13%
+- Macro recall: 79.98%
+- Macro F1: 80.31%
+- Weighted F1: 79.66%
+- Micro precision: 80.97%
+- Micro recall: 78.04%
+- Micro F1: 79.48%
+- Accepted predictions: 1,650 / 1,712
+- Rejected predictions: 62 / 1,712
+
+Similarity:
+- Mean best similarity: 75.44%
+- Mean best similarity for correct predictions: 76.36%
+- Mean best similarity for incorrect/rejected predictions: 72.17%
+- Mean top-1 versus top-2 similarity margin: 4.64 percentage points
+
+Efficiency:
+- Model load time: 28.25 seconds
+- Evaluation wall time: 3,238.53 seconds
+- End-to-end throughput: 0.529 crops/second
+- Mean full-resolution mask-crop latency: 1,759.19 ms/crop
+- Mean OpenCLIP preprocessing latency: 63.74 ms/crop
+- Mean OpenCLIP inference latency: 59.00 ms/crop
+- Mean similarity-search latency: 9.14 ms/crop
+- Mean measured pipeline latency: 1,891.07 ms/crop
+- OpenCLIP encoder-only throughput: approximately 16.95 crops/second
+
+Interpretation:
+- The catalog contains every evaluated class and achieves strong top-5
+  retrieval, but top-1 confusion remains significant.
+- The largest efficiency bottleneck is full-resolution image loading and mask
+  crop construction, not OpenCLIP inference or similarity search.
+- The observed throughput includes files stored inside a OneDrive workspace,
+  so local-disk deployment may materially reduce crop preparation latency.
+
+OUTPUT FILES
+------------
+Segmentation:
+- train_v2/evaluation/results/segmentation/report.txt
+- train_v2/evaluation/results/segmentation/metrics.json
+- train_v2/evaluation/results/segmentation/ultralytics_run/
+
+Embedding:
+- train_v2/evaluation/results/embedding/report.txt
+- train_v2/evaluation/results/embedding/metrics.json
+- train_v2/evaluation/results/embedding/predictions.csv
+- train_v2/evaluation/results/embedding/per_class_metrics.csv

@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-09-14T00:21:14",
+  "weights": "C:\\Users\\Haqkiem\\OneDrive\\UNIKL\\July-2026\\Competition\\AIIC\\PETROSAINS\\train_v2\\runs\\v2\\yolo11l_seg_object_bce_dice\\weights\\best.pt",
+  "dataset": {
+    "path": "C:\\Users\\Haqkiem\\OneDrive\\UNIKL\\July-2026\\Competition\\AIIC\\PETROSAINS\\train_v2\\dataset",
+    "val_images": 403,
+    "test_images": 414,
+    "merged_images": 817,
+    "instances": 1711,
+    "missing_labels": 0
+  },
+  "runtime": {
+    "device": "0",
+    "torch": "2.11.0+cu128",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "python": "3.10.0",
+    "image_size": 640,
+    "batch_size": 4
+  },
+  "quality": {
+    "box_precision": 0.8150266689753083,
+    "box_recall": 0.6516656925774401,
+    "box_f1": 0.7242485644973161,
+    "box_map50": 0.7439201331928916,
+    "box_map50_95": 0.6194730512995609,
+    "mask_precision": 0.795290597170525,
+    "mask_recall": 0.635885447106955,
+    "mask_f1": 0.7067107068816859,
+    "mask_map50": 0.7039108789792206,
+    "mask_map50_95": 0.5383107330131247
+  },
+  "efficiency": {
+    "wall_seconds": 932.1121777999797,
+    "wall_images_per_second": 0.8765039439011799,
+    "preprocess_ms_per_image": 38.96120624192688,
+    "inference_ms_per_image": 774.5119286417525,
+    "postprocess_ms_per_image": 52.617819216960164,
+    "pipeline_ms_per_image": 866.0909541006396,
+    "pipeline_images_per_second": 1.1546131445725736
+  }
+}

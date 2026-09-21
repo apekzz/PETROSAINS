@@ -1194,6 +1194,53 @@ tbody tr:hover {
     pointer-events: none;
 }
 
+.object-recognition-gate {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 7px;
+    border: 1px solid rgba(0, 212, 200, 0.55);
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(5, 18, 20, 0.96), rgba(7, 12, 18, 0.92));
+    box-shadow: 0 0 18px rgba(0, 212, 200, 0.14);
+    backdrop-filter: blur(10px);
+}
+
+.object-recognition-gate.is-hidden {
+    display: none;
+}
+
+.object-recognition-gate span {
+    color: var(--text-dim);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.object-recognition-gate button {
+    padding: 6px 11px;
+    border: 1px solid rgba(62, 224, 176, 0.75);
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(62, 224, 176, 0.24), rgba(0, 212, 200, 0.12));
+    color: var(--neon-green);
+    font-family: "Rajdhani", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+}
+
+.object-recognition-gate button:hover {
+    border-color: var(--neon-green);
+    box-shadow: 0 0 16px rgba(62, 224, 176, 0.22);
+}
+
+.object-recognition-gate button:disabled {
+    cursor: wait;
+    opacity: 0.6;
+}
+
 .recognized-face-preview {
     width: 42px;
     height: 42px;

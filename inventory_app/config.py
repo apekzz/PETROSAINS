@@ -75,7 +75,7 @@ WARMUP_FRAMES = 30
 # Live YOLO boxes (preview runs on a background thread so MJPEG stays smooth)
 YOLO_PREVIEW_ENABLED = True
 YOLO_PREVIEW_INTERVAL = 0.28
-YOLO_HOLD_SECONDS = 4
+YOLO_HOLD_SECONDS = 6
 
 # Face gate (register / recognize)
 FACE_MATCH_THRESHOLD = float(os.environ.get("FACE_MATCH_THRESHOLD", "0.90"))

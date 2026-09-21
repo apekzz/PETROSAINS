@@ -246,7 +246,15 @@ const cameraCtx = cameraFeed.getContext("2d", { alpha: false });
 const faceToggleWrap = document.getElementById("faceToggleWrap");
 const flowToggleWrap = document.getElementById("flowToggleWrap");
 const flowModeToggle = document.getElementById("flowModeToggle");
+const objectRecognitionGate = document.getElementById("objectRecognitionGate");
+const btnStartObjectRecognition = document.getElementById("btnStartObjectRecognition");
+const objectRecognitionGateText = objectRecognitionGate
+    ? objectRecognitionGate.querySelector("span")
+    : null;
 let flowArmed = false;
+let objectArmBusy = false;
+let detectionPreviewShowing = false;
+let detectionPreviewTimer = null;
 const landmarkCtx = landmarkLayer.getContext("2d");
 let localStream = null;
 let usingLocalCamera = false;
@@ -695,6 +703,101 @@ async function pumpVideo() {
 
 startLocalCamera();
 
+function applyObjectRecognitionState(canArm, armed, previewActive = false) {
+    const readyForClick = Boolean(canArm && !armed && !previewActive);
+    scanIngestEnabled = Boolean(canArm && armed);
+    if (objectRecognitionGate) {
+        objectRecognitionGate.classList.toggle("is-hidden", !readyForClick);
+    }
+    if (btnStartObjectRecognition && !objectArmBusy) {
+        btnStartObjectRecognition.disabled = false;
+        btnStartObjectRecognition.textContent = "Start object recognition";
+    }
+    if (objectRecognitionGateText && !objectArmBusy) {
+        objectRecognitionGateText.textContent = "Object recognition is paused";
+    }
+}
+
+function restoreLiveDetectionStream() {
+    if (detectionPreviewTimer) {
+        clearTimeout(detectionPreviewTimer);
+        detectionPreviewTimer = null;
+    }
+    detectionPreviewShowing = false;
+    if (usingLocalCamera) {
+        cameraFeed.classList.add("is-hidden");
+        liveVideo.classList.remove("is-hidden");
+        landmarkLayer.classList.remove("is-hidden");
+    }
+}
+
+async function showFrozenDetectionPreview(remainingMs) {
+    if (detectionPreviewShowing) return;
+    detectionPreviewShowing = true;
+    try {
+        const response = await fetch(
+            `/api/detection/preview?t=${Date.now()}`,
+            { cache: "no-store" },
+        );
+        if (!response.ok) throw new Error("Detection preview is unavailable");
+        const bitmap = await createImageBitmap(await response.blob());
+        cameraFeed.width = bitmap.width;
+        cameraFeed.height = bitmap.height;
+        cameraCtx.drawImage(bitmap, 0, 0);
+        bitmap.close();
+        liveVideo.classList.add("is-hidden");
+        landmarkLayer.classList.add("is-hidden");
+        cameraFeed.classList.remove("is-hidden");
+        detectionPreviewTimer = window.setTimeout(
+            restoreLiveDetectionStream,
+            Math.max(100, Number(remainingMs) || 6000) + 75,
+        );
+    } catch (error) {
+        console.error("Detection preview error:", error);
+        restoreLiveDetectionStream();
+    }
+}
+
+async function startObjectRecognition() {
+    if (objectArmBusy) return;
+    objectArmBusy = true;
+    if (btnStartObjectRecognition) {
+        btnStartObjectRecognition.disabled = true;
+        btnStartObjectRecognition.textContent = "Starting…";
+    }
+    if (objectRecognitionGateText) {
+        objectRecognitionGateText.textContent = "Preparing detection";
+    }
+    try {
+        const response = await fetch("/api/detection/arm", {
+            method: "POST",
+            cache: "no-store",
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+            throw new Error(data.detail || "Could not start object recognition");
+        }
+        applyObjectRecognitionState(true, Boolean(data.detection_armed), false);
+    } catch (error) {
+        console.error("Object recognition start error:", error);
+        applyObjectRecognitionState(true, false);
+        if (objectRecognitionGateText) {
+            objectRecognitionGateText.textContent =
+                error.message || "Could not start detection";
+        }
+    } finally {
+        objectArmBusy = false;
+        if (btnStartObjectRecognition) {
+            btnStartObjectRecognition.disabled = false;
+            btnStartObjectRecognition.textContent = "Start object recognition";
+        }
+    }
+}
+
+if (btnStartObjectRecognition) {
+    btnStartObjectRecognition.addEventListener("click", startObjectRecognition);
+}
+
 async function setMode(mode) {
     try {
         const response = await fetch(`/api/mode/${mode}`, {
@@ -737,11 +840,30 @@ async function updateTriggerStatus() {
         if (!response.ok) throw new Error("Trigger status request failed");
         const data = await response.json();
         const state = (data.state || "WAITING").toUpperCase();
+        const detectionArmed = Boolean(data.detection_armed);
+        const previewActive = Boolean(data.preview_active);
+        applyObjectRecognitionState(
+            Boolean(data.can_arm_detection),
+            detectionArmed,
+            previewActive,
+        );
+        if (previewActive) {
+            showFrozenDetectionPreview(data.preview_remaining_ms);
+        } else if (detectionPreviewShowing) {
+            restoreLiveDetectionStream();
+        }
         const statusEl = document.getElementById("triggerStatus");
         const textEl = document.getElementById("triggerStatusText");
         if (state === "FACE") {
             statusEl.className = "trigger-status face";
             textEl.textContent = "FACE";
+        } else if (state === "READY") {
+            statusEl.className = "trigger-status waiting";
+            textEl.textContent = "READY";
+        } else if (state === "PREVIEW") {
+            statusEl.className = "trigger-status capturing";
+            textEl.textContent =
+                `PREVIEW ${Math.max(1, Math.ceil((data.preview_remaining_ms || 0) / 1000))}S`;
         } else {
             statusEl.className = `trigger-status ${state.toLowerCase()}`;
             textEl.textContent = state;
@@ -754,7 +876,9 @@ async function updateTriggerStatus() {
             .join("");
 
         const overlay = document.getElementById("objectDetectionOverlay");
-        const boxes = data.yolo_boxes || [];
+        const boxes = detectionArmed && !previewActive
+            ? (data.yolo_boxes || [])
+            : [];
         overlay.innerHTML = boxes.map((item) => {
             const box = item.box || [];
             if (box.length !== 4) return "";
@@ -1035,9 +1159,16 @@ function applyFaceStatus(data) {
     faceGate.classList.toggle("is-warn", visible && (unknownStaff || !lastFaceReady));
     if (!faceLandmarker) setFaceHint(data.message);
     renderRecognized(data.recognized, unknownStaff, data.match_score);
+    if (!data.recognized) {
+        applyObjectRecognitionState(false, false);
+    }
     if (data.recognized) {
         faceAnalyzeEnabled = false;
-        scanIngestEnabled = true;
+        applyObjectRecognitionState(
+            true,
+            Boolean(data.detection_armed),
+            Boolean(data.detection_preview_active),
+        );
         landmarkCtx.clearRect(0, 0, landmarkLayer.width, landmarkLayer.height);
         if (faceToggleWrap) faceToggleWrap.classList.add("is-hidden");
         if (flowToggleWrap) flowToggleWrap.classList.remove("is-hidden");
@@ -1047,7 +1178,7 @@ function applyFaceStatus(data) {
         }
     } else if (data.mode === "register" || data.mode === "recognize") {
         faceAnalyzeEnabled = true;
-        scanIngestEnabled = false;
+        applyObjectRecognitionState(false, false);
         flowArmed = false;
         if (faceToggleWrap) faceToggleWrap.classList.remove("is-hidden");
         if (flowToggleWrap) flowToggleWrap.classList.add("is-hidden");

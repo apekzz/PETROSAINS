@@ -183,8 +183,11 @@ def create_mask(session_id: str, points, labels) -> dict:
         masks, boxes = predictor.inference_features(
             predictor.features,
             current["image"].shape[:2],
-            points=coords,
-            labels=prompt_labels,
+            # Ultralytics interprets (N, 2) as N separate single-point
+            # objects. Add a batch dimension so all clicks describe one
+            # object: (1, N, 2) points with (1, N) labels.
+            points=coords[None, ...],
+            labels=prompt_labels[None, ...],
             multimask_output=True,
         )
     if masks is None or not len(masks):

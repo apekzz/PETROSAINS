@@ -1,0 +1,55 @@
+OPENCLIP MASKED-CROP CLASSIFICATION EVALUATION
+================================================
+Generated: 2026-09-14T01:56:32
+Checkpoint: C:\Users\Haqkiem\OneDrive\UNIKL\July-2026\Competition\AIIC\PETROSAINS\inventory_app\models\open_clip_pytorch_model.bin
+Catalog: C:\Users\Haqkiem\OneDrive\UNIKL\July-2026\Competition\AIIC\PETROSAINS\inventory_app\saved_tables\inventory_emb.csv
+Device: cuda
+
+EVALUATION DATA
+Validation images: 403
+Test images: 414
+Merged mask instances evaluated: 1712
+True classes: 109
+Catalog embeddings: 4355
+Catalog classes: 109
+True classes absent from catalog: 0
+Skipped invalid crops: 0
+
+CLASSIFICATION QUALITY
+Threshold: > 0.600
+Top-1 accuracy (rejections incorrect): 0.780374
+Top-5 accuracy: 0.950935
+Coverage: 0.963785
+Accepted-only accuracy: 0.809697
+Macro precision: 0.831286
+Macro recall: 0.799835
+Macro F1: 0.803093
+Weighted F1: 0.796615
+Micro precision: 0.809697
+Micro recall: 0.780374
+Micro F1: 0.794765
+Accepted: 1650 / 1712
+Rejected: 62 / 1712
+
+SIMILARITY
+Mean best similarity: 0.754369
+Mean correct best similarity: 0.763566
+Mean incorrect/rejected best similarity: 0.721691
+Mean top-1/top-2 margin: 0.046386
+
+EFFICIENCY
+Model load time: 28.248 s
+Evaluation wall time: 3238.533 s
+End-to-end throughput: 0.529 crops/s
+Mask crop latency: 1759.191 ms/crop
+Preprocess latency: 63.741 ms/crop
+OpenCLIP inference latency: 58.997 ms/crop
+Similarity search latency: 9.139 ms/crop
+Measured pipeline latency: 1891.067 ms/crop
+
+METHODOLOGY
+Ground-truth segmentation polygons isolate embedding/classification quality.
+Non-object pixels are black and crops are tight, matching catalog creation.
+Final ranking replicates inventory_app: top 100 embedding matches, class mean
+requires at least 3 supporting embeddings, then threshold rejection.
+Catalog embeddings were produced from train split masks; val+test are queries.

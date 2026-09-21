@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OneShot Inventory</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/theme.css">
-    <link rel="stylesheet" href="/dashboard.css">
-    <link rel="stylesheet" href="/sam-tool.css">
+    <link rel="stylesheet" href="/theme.css?v=20260914-detection-preview">
+    <link rel="stylesheet" href="/dashboard.css?v=20260914-detection-preview">
+    <link rel="stylesheet" href="/sam-tool.css?v=20260914-detection-preview">
 </head>
 
 <body>
@@ -100,6 +100,12 @@
                                 <span class="face-switch-slider flow-switch-slider"></span>
                             </label>
                             <span>Check out</span>
+                        </div>
+                        <div id="objectRecognitionGate" class="object-recognition-gate is-hidden" aria-live="polite">
+                            <span>Object recognition is paused</span>
+                            <button id="btnStartObjectRecognition" type="button">
+                                Start object recognition
+                            </button>
                         </div>
                         <button id="btnSamRegister" type="button" class="catalog-import-btn sam-launch-btn" title="Freeze the camera and register a precise SAM mask">
                             ✦ SAM register
@@ -353,9 +359,9 @@
         </div>
     </div>
 
-    <script src="/config.js"></script>
-    <script src="/dashboard.js"></script>
-    <script src="/sam-tool.js"></script>
+    <script src="/config.js?v=20260914-detection-preview"></script>
+    <script src="/dashboard.js?v=20260914-detection-preview"></script>
+    <script src="/sam-tool.js?v=20260914-detection-preview"></script>
 </body>
 
 </html>
