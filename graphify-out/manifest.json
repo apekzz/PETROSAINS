@@ -78,10 +78,10 @@
     "semantic_hash": "727b9efdda116ca7c7dd6fd610b04f4f"
   },
   "inventory_app/saved_tables/manifest.json": {
-    "mtime": 1789968074.6393535,
-    "seen": 1789968658.5614111,
-    "ast_hash": "76251c18614b60840a328ef5541b511a",
-    "semantic_hash": "76251c18614b60840a328ef5541b511a"
+    "mtime": 1789969300.9843063,
+    "seen": 1789969323.702529,
+    "ast_hash": "79997345aab41d8ec738e59206d9c591",
+    "semantic_hash": ""
   },
   "inventory_app/setup_db.py": {
     "mtime": 1789968070.9016871,
@@ -268,5 +268,935 @@
     "seen": 1789968658.561425,
     "ast_hash": "fac849098c2fafc06f205a7ea16ef145",
     "semantic_hash": "fac849098c2fafc06f205a7ea16ef145"
+  },
+  "README.md": {
+    "mtime": 1789372998.897275,
+    "seen": 1789969323.70335,
+    "ast_hash": "45a9ac1c680d273dbd77b86eaa9994cf",
+    "semantic_hash": ""
+  },
+  "aiic_model_handoff/data.yaml": {
+    "mtime": 1789372998.9884522,
+    "seen": 1789969323.70335,
+    "ast_hash": "e729b7564a7338ae9dd406a8e76d98cf",
+    "semantic_hash": ""
+  },
+  "inventory_app/dashboard.html": {
+    "mtime": 1789968798.6175253,
+    "seen": 1789969323.703351,
+    "ast_hash": "5923da8ec431e60442062a4a3153ec4f",
+    "semantic_hash": ""
+  },
+  "inventory_app/requirements.txt": {
+    "mtime": 1789373000.35185,
+    "seen": 1789969323.703351,
+    "ast_hash": "be562d79c42329db561c0885bb437461",
+    "semantic_hash": ""
+  },
+  "inventory_app/saved_tables/README.md": {
+    "mtime": 1789968070.774675,
+    "seen": 1789969323.703352,
+    "ast_hash": "671f9c401a4a415eb9feafa57ccef982",
+    "semantic_hash": ""
+  },
+  "test_pg/L001_test_tubes__L001_TEST_TUBE_L001_04.txt": {
+    "mtime": 1789373000.3669422,
+    "seen": 1789969323.703352,
+    "ast_hash": "469a30ee7ad2e1fd89f62957511b7cec",
+    "semantic_hash": ""
+  },
+  "test_pg/README.md": {
+    "mtime": 1789373000.3670883,
+    "seen": 1789969323.7033532,
+    "ast_hash": "e8ed9da9265fd84e5832c9445961582a",
+    "semantic_hash": ""
+  },
+  "test_pg/embed_failures.txt": {
+    "mtime": 1789373000.3671775,
+    "seen": 1789969323.7033532,
+    "ast_hash": "dbc83f4a134c4e0a37882b241ef3cf45",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/embedding/report.txt": {
+    "mtime": 1789968071.0346937,
+    "seen": 1789969323.7033541,
+    "ast_hash": "74fc642216944f837e529ca77cdeca51",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/evaluation_report.txt": {
+    "mtime": 1789968071.0350661,
+    "seen": 1789969323.7033541,
+    "ast_hash": "39a3b602fed328a8d0ba431d78264b73",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/merged_test_val.yaml": {
+    "mtime": 1789968071.0354774,
+    "seen": 1789969323.7033541,
+    "ast_hash": "bd13b1abc74319c18f641f47fa8b2126",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/report.txt": {
+    "mtime": 1789968071.0363345,
+    "seen": 1789969323.7033548,
+    "ast_hash": "04f2b3e206951239c5860f15c43fe4bc",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/0/meta.yaml": {
+    "mtime": 1789373000.4318407,
+    "seen": 1789969323.7033548,
+    "ast_hash": "b6f0b399576bd5fafd8a8e6ae8db19cc",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/args.yaml": {
+    "mtime": 1789373000.434879,
+    "seen": 1789969323.7033558,
+    "ast_hash": "87cf7cd41cc44d8e9255639dd7dc1fa2",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/meta.yaml": {
+    "mtime": 1789373000.5657861,
+    "seen": 1789969323.7033558,
+    "ast_hash": "b7a718ba138eefec3aef103f6d79dad9",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/meta.yaml": {
+    "mtime": 1789373000.578922,
+    "seen": 1789969323.703357,
+    "ast_hash": "a5a29d3a99ba751e064fd7c9a5e65985",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/args.yaml": {
+    "mtime": 1789373000.5814571,
+    "seen": 1789969323.703357,
+    "ast_hash": "dc0637ca599383627502fb4b997efcf6",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/meta.yaml": {
+    "mtime": 1789373000.6926785,
+    "seen": 1789969323.703358,
+    "ast_hash": "944e64e5f8f76e481312ff90c44f3c49",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/meta.yaml": {
+    "mtime": 1789373000.7059643,
+    "seen": 1789969323.703358,
+    "ast_hash": "fb7510d44b117b7f7abca4b59999ecde",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/953274521984964925/deb7dd3f3736467480530d355c5d5163/meta.yaml": {
+    "mtime": 1789373000.7061212,
+    "seen": 1789969323.703359,
+    "ast_hash": "24ba4129d00eb5e719289114f61f114c",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/953274521984964925/meta.yaml": {
+    "mtime": 1789373000.7174735,
+    "seen": 1789969323.703359,
+    "ast_hash": "b1d81e453cac4cc62bc2cc06ae9b37de",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/args.yaml": {
+    "mtime": 1789373000.7197976,
+    "seen": 1789969323.70336,
+    "ast_hash": "dc0637ca599383627502fb4b997efcf6",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v3/yolo11l_seg_object_bce_dice_copy_paste/args.yaml": {
+    "mtime": 1789373000.8076375,
+    "seen": 1789969323.70336,
+    "ast_hash": "4124f66c25b1265ad145ed013e598d3a",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/args.yaml": {
+    "mtime": 1789373001.2541635,
+    "seen": 1789969323.70336,
+    "ast_hash": "87cf7cd41cc44d8e9255639dd7dc1fa2",
+    "semantic_hash": ""
+  },
+  "inventory_app/petronas-logo.svg": {
+    "mtime": 1789968070.7741306,
+    "seen": 1789969323.703361,
+    "ast_hash": "e9371c7e85bae8b762de7114176a8da9",
+    "semantic_hash": ""
+  },
+  "test_pg/L001_test_tubes__L001_TEST_TUBE_L001_04.jpg": {
+    "mtime": 1789373000.3667245,
+    "seen": 1789969323.703361,
+    "ast_hash": "440aa11dba5905c2ef292cd274324441",
+    "semantic_hash": ""
+  },
+  "test_pg/overlay.png": {
+    "mtime": 1789373000.3696332,
+    "seen": 1789969323.703362,
+    "ast_hash": "06bc46224ccdb2e1b0fbd1e7199b00d5",
+    "semantic_hash": ""
+  },
+  "train result 1 2/BoxF1_curve.png": {
+    "mtime": 1789373000.399954,
+    "seen": 1789969323.703362,
+    "ast_hash": "5299691188560fb6df5a76a4bd1d3bbc",
+    "semantic_hash": ""
+  },
+  "train result 1 2/BoxPR_curve.png": {
+    "mtime": 1789373000.400507,
+    "seen": 1789969323.7033632,
+    "ast_hash": "62b8948acfaab3db81bf1f4a19d6b0eb",
+    "semantic_hash": ""
+  },
+  "train result 1 2/BoxP_curve.png": {
+    "mtime": 1789373000.402556,
+    "seen": 1789969323.7033632,
+    "ast_hash": "ed7f5823e6edc55acd11681a1ee5655a",
+    "semantic_hash": ""
+  },
+  "train result 1 2/BoxR_curve.png": {
+    "mtime": 1789373000.404084,
+    "seen": 1789969323.7033641,
+    "ast_hash": "bf7d012cc066ae812b2f19afd6320817",
+    "semantic_hash": ""
+  },
+  "train result 1 2/MaskF1_curve.png": {
+    "mtime": 1789373000.4062464,
+    "seen": 1789969323.7033641,
+    "ast_hash": "39a24f520731440850902ac6b610b7e0",
+    "semantic_hash": ""
+  },
+  "train result 1 2/MaskPR_curve.png": {
+    "mtime": 1789373000.4067326,
+    "seen": 1789969323.7033641,
+    "ast_hash": "7fcccc4e166ee3110a49909844015516",
+    "semantic_hash": ""
+  },
+  "train result 1 2/MaskP_curve.png": {
+    "mtime": 1789373000.408822,
+    "seen": 1789969323.703365,
+    "ast_hash": "37e193229a7e47f65efa8fd82256c6b8",
+    "semantic_hash": ""
+  },
+  "train result 1 2/MaskR_curve.png": {
+    "mtime": 1789373000.4105797,
+    "seen": 1789969323.7033658,
+    "ast_hash": "24a41f64c3747bd1e3362337922d679a",
+    "semantic_hash": ""
+  },
+  "train result 1 2/confusion_matrix.png": {
+    "mtime": 1789373000.4125543,
+    "seen": 1789969323.7033658,
+    "ast_hash": "71601bae930e5b30df7ab88173546d72",
+    "semantic_hash": ""
+  },
+  "train result 1 2/confusion_matrix_normalized.png": {
+    "mtime": 1789373000.414599,
+    "seen": 1789969323.7033658,
+    "ast_hash": "5427eaf1eb95f0053150af95d3e1c756",
+    "semantic_hash": ""
+  },
+  "train result 1 2/labels.jpg": {
+    "mtime": 1789373000.4153585,
+    "seen": 1789969323.703367,
+    "ast_hash": "e607272621bd97de384dbb12688fe895",
+    "semantic_hash": ""
+  },
+  "train result 1 2/results.png": {
+    "mtime": 1789373000.4164102,
+    "seen": 1789969323.703367,
+    "ast_hash": "18d5b4a5e47c3ad7aab6c00ffbadf031",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/BoxF1_curve.png": {
+    "mtime": 1789968071.0371604,
+    "seen": 1789969323.703368,
+    "ast_hash": "ab6f3301cdc4003edfc131bb9af6cabc",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/BoxPR_curve.png": {
+    "mtime": 1789968071.0378065,
+    "seen": 1789969323.703368,
+    "ast_hash": "c7471e4ebab684c8e0eed297739ccf09",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/BoxP_curve.png": {
+    "mtime": 1789968071.038643,
+    "seen": 1789969323.703369,
+    "ast_hash": "ed668b0df04ccf888e61ef452a136808",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/BoxR_curve.png": {
+    "mtime": 1789968071.0390346,
+    "seen": 1789969323.70337,
+    "ast_hash": "3a9e5e28e69ee5a5cc348d187f6a8551",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/MaskF1_curve.png": {
+    "mtime": 1789968071.0394084,
+    "seen": 1789969323.70337,
+    "ast_hash": "68ee61b524bb804780e51c5b4619a56c",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/MaskPR_curve.png": {
+    "mtime": 1789968071.0397565,
+    "seen": 1789969323.703371,
+    "ast_hash": "60776aa6f318169f55b439b9f3f95f03",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/MaskP_curve.png": {
+    "mtime": 1789968071.0401185,
+    "seen": 1789969323.703371,
+    "ast_hash": "6a11c79da99ffcad71c41cebea1a7679",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/MaskR_curve.png": {
+    "mtime": 1789968071.040667,
+    "seen": 1789969323.703371,
+    "ast_hash": "f70a8155d90c98373282769189bb0930",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/confusion_matrix.png": {
+    "mtime": 1789968071.0415213,
+    "seen": 1789969323.703372,
+    "ast_hash": "b2c6196fdcc9881271827d4ed2d03a8a",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/confusion_matrix_normalized.png": {
+    "mtime": 1789968071.0422046,
+    "seen": 1789969323.703372,
+    "ast_hash": "7113db1cf6e4ce95696f16205ef99cd0",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/val_batch0_labels.jpg": {
+    "mtime": 1789968071.0431895,
+    "seen": 1789969323.703373,
+    "ast_hash": "245922ce11de236aef84c0b6947d7a11",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/val_batch0_pred.jpg": {
+    "mtime": 1789968071.0451384,
+    "seen": 1789969323.703373,
+    "ast_hash": "a303ef923857e111b9027af52a53d3d1",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/val_batch1_labels.jpg": {
+    "mtime": 1789968071.046553,
+    "seen": 1789969323.7033741,
+    "ast_hash": "3999c2a9a5a85ceabc88aa7fe81fd0a7",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/val_batch1_pred.jpg": {
+    "mtime": 1789968071.0475287,
+    "seen": 1789969323.7033741,
+    "ast_hash": "195c1c6bcb6ceb661417d907fa2897fe",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/val_batch2_labels.jpg": {
+    "mtime": 1789968071.0488052,
+    "seen": 1789969323.7033741,
+    "ast_hash": "7cb7229a841162ec6234b04261a15bc7",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/segmentation/ultralytics_run/val_batch2_pred.jpg": {
+    "mtime": 1789968071.0498173,
+    "seen": 1789969323.703375,
+    "ast_hash": "7734bd936a1ef92fd5ef3aed99876c10",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/visualizations/embedding_confusion_matrix.png": {
+    "mtime": 1789968071.0522938,
+    "seen": 1789969323.703375,
+    "ast_hash": "f1f2e5d9215cf37ad2e3ac88a3e7ac9e",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/visualizations/latency_breakdown.png": {
+    "mtime": 1789968071.0529706,
+    "seen": 1789969323.7033758,
+    "ast_hash": "4aee064fd7e65dc5899ae9b2cfb9604e",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/visualizations/performance_summary.png": {
+    "mtime": 1789968071.053872,
+    "seen": 1789969323.7033758,
+    "ast_hash": "4c6620dc637b109fc0b19435e7109cee",
+    "semantic_hash": ""
+  },
+  "train_v2/evaluation/results/visualizations/top_embedding_confusions.png": {
+    "mtime": 1789968071.0551696,
+    "seen": 1789969323.703377,
+    "ast_hash": "6443db4a371527fb42f634684f327978",
+    "semantic_hash": ""
+  },
+  "train_v2/object_area_histograms.png": {
+    "mtime": 1789373000.416676,
+    "seen": 1789969323.703377,
+    "ast_hash": "1ac36f338956234d9ec81816ab07224c",
+    "semantic_hash": ""
+  },
+  "train_v2/preview_seg.jpg": {
+    "mtime": 1789373000.4302464,
+    "seen": 1789969323.703378,
+    "ast_hash": "946264f4784763fdc6e36534c41d0a61",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/BoxF1_curve.png": {
+    "mtime": 1789373000.432271,
+    "seen": 1789969323.703378,
+    "ast_hash": "e2daa11cfd509efca87293f41f88ef00",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/BoxPR_curve.png": {
+    "mtime": 1789373000.4326134,
+    "seen": 1789969323.703379,
+    "ast_hash": "81d7b44638ef7c519e8546e75cce33e6",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/BoxP_curve.png": {
+    "mtime": 1789373000.4330606,
+    "seen": 1789969323.703379,
+    "ast_hash": "707b82220baf6c608914cb41142f3048",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/BoxR_curve.png": {
+    "mtime": 1789373000.4334252,
+    "seen": 1789969323.7033799,
+    "ast_hash": "3e480fd26ff422e78109032177ffcab7",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/MaskF1_curve.png": {
+    "mtime": 1789373000.4337883,
+    "seen": 1789969323.7033799,
+    "ast_hash": "1119dcfba304568d3c17305c61de2774",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/MaskPR_curve.png": {
+    "mtime": 1789373000.434089,
+    "seen": 1789969323.703381,
+    "ast_hash": "6030c04a8134920f89066f05d5505030",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/MaskP_curve.png": {
+    "mtime": 1789373000.434463,
+    "seen": 1789969323.703381,
+    "ast_hash": "b32de9df87dbdddfc1850978380e1d98",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/MaskR_curve.png": {
+    "mtime": 1789373000.434786,
+    "seen": 1789969323.703381,
+    "ast_hash": "da2ea0d3d867f590d456f22d765a47b3",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/confusion_matrix.png": {
+    "mtime": 1789373000.4351487,
+    "seen": 1789969323.703382,
+    "ast_hash": "a8197a1c6f2146a57240fe21f91d7be4",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/confusion_matrix_normalized.png": {
+    "mtime": 1789373000.436139,
+    "seen": 1789969323.703382,
+    "ast_hash": "dc7bd64e90fb48048bef3a26970933a0",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/labels.jpg": {
+    "mtime": 1789373000.436693,
+    "seen": 1789969323.703383,
+    "ast_hash": "c8adf1aa7ccf19e52b8aa9279b9a0424",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/results.png": {
+    "mtime": 1789373000.4378395,
+    "seen": 1789969323.703383,
+    "ast_hash": "8ccb09763740fb8126f3482bbd3cb136",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/train_batch0.jpg": {
+    "mtime": 1789373000.4385183,
+    "seen": 1789969323.7033842,
+    "ast_hash": "0995a9af2323a87004a24f25fce2d659",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/train_batch1.jpg": {
+    "mtime": 1789373000.439151,
+    "seen": 1789969323.7033842,
+    "ast_hash": "4abb448959da74a881bcb4ad20f031da",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/train_batch2.jpg": {
+    "mtime": 1789373000.439815,
+    "seen": 1789969323.703385,
+    "ast_hash": "05ae53bbd237e713e05edbd8e779cce3",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/val_batch0_labels.jpg": {
+    "mtime": 1789373000.4408886,
+    "seen": 1789969323.703385,
+    "ast_hash": "4136e28d5d5f303f8e36287064cecb33",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/val_batch0_pred.jpg": {
+    "mtime": 1789373000.4419456,
+    "seen": 1789969323.703386,
+    "ast_hash": "270fb8ee8a8b60327c97f437548dad79",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/val_batch1_labels.jpg": {
+    "mtime": 1789373000.44308,
+    "seen": 1789969323.703386,
+    "ast_hash": "ce7dd07bc299bf3adb395cc12c0ecb7f",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/val_batch1_pred.jpg": {
+    "mtime": 1789373000.4441926,
+    "seen": 1789969323.7033868,
+    "ast_hash": "5de81cfcef49f86e33e28b0cd5985bf6",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/val_batch2_labels.jpg": {
+    "mtime": 1789373000.4450462,
+    "seen": 1789969323.7033868,
+    "ast_hash": "bfa8ef3a936580a3cb241f4559c9d5e1",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/432051828201252182/8fc512b6ba5d4af2aacca93355c36a12/artifacts/val_batch2_pred.jpg": {
+    "mtime": 1789373000.4458919,
+    "seen": 1789969323.703388,
+    "ast_hash": "8a93c4aed8604ebe259cdcd2a7cf7b29",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/BoxF1_curve.png": {
+    "mtime": 1789373000.579328,
+    "seen": 1789969323.703388,
+    "ast_hash": "b43dcec1805ac50c2c0f5a9d3b5a2443",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/BoxPR_curve.png": {
+    "mtime": 1789373000.579603,
+    "seen": 1789969323.703389,
+    "ast_hash": "2be8e6c8617efff0dc102ef48a130db1",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/BoxP_curve.png": {
+    "mtime": 1789373000.5798895,
+    "seen": 1789969323.703389,
+    "ast_hash": "1b774095846bc74c47c5f28dafc56b59",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/BoxR_curve.png": {
+    "mtime": 1789373000.5801888,
+    "seen": 1789969323.703389,
+    "ast_hash": "e0de3d292d56133760366e43a5e72b0b",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/MaskF1_curve.png": {
+    "mtime": 1789373000.5804803,
+    "seen": 1789969323.70339,
+    "ast_hash": "267c7d575419120c8258dec6de35f20d",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/MaskPR_curve.png": {
+    "mtime": 1789373000.5807574,
+    "seen": 1789969323.70339,
+    "ast_hash": "2a70b3e39b3ccb5609aec259018970c1",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/MaskP_curve.png": {
+    "mtime": 1789373000.5810525,
+    "seen": 1789969323.703391,
+    "ast_hash": "289aa92b950548d7dba491690b39e34e",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/MaskR_curve.png": {
+    "mtime": 1789373000.5813684,
+    "seen": 1789969323.703391,
+    "ast_hash": "d55ee7ed86ad0b16fda7df5c7aa32751",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/confusion_matrix.png": {
+    "mtime": 1789373000.581745,
+    "seen": 1789969323.703392,
+    "ast_hash": "cc573171bdb04b25f48a49e81890d96b",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/confusion_matrix_normalized.png": {
+    "mtime": 1789373000.5820165,
+    "seen": 1789969323.703392,
+    "ast_hash": "4dcb0dcd32ac670686a24a70afc2ab1f",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/labels.jpg": {
+    "mtime": 1789373000.5825667,
+    "seen": 1789969323.703393,
+    "ast_hash": "c8adf1aa7ccf19e52b8aa9279b9a0424",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/results.png": {
+    "mtime": 1789373000.5838244,
+    "seen": 1789969323.703393,
+    "ast_hash": "15824b6c37db18bf901055cd701387e8",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/train_batch0.jpg": {
+    "mtime": 1789373000.584601,
+    "seen": 1789969323.703393,
+    "ast_hash": "159561773aa7895fe4de4d1cf24547c5",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/train_batch1.jpg": {
+    "mtime": 1789373000.5852349,
+    "seen": 1789969323.703394,
+    "ast_hash": "7ff006af02c954a40207736ee59926b4",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/train_batch2.jpg": {
+    "mtime": 1789373000.5860045,
+    "seen": 1789969323.703394,
+    "ast_hash": "d61845c02fb9329520007090ebed1123",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/train_batch90820.jpg": {
+    "mtime": 1789373000.5865803,
+    "seen": 1789969323.7033951,
+    "ast_hash": "dede0b2921dd426ab4c30069ad0b573b",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/train_batch90821.jpg": {
+    "mtime": 1789373000.5872145,
+    "seen": 1789969323.7033951,
+    "ast_hash": "bbd1afab83d3338e5429b27691330711",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/train_batch90822.jpg": {
+    "mtime": 1789373000.587811,
+    "seen": 1789969323.703396,
+    "ast_hash": "c18bb5613ae44c63bb717135e277b534",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/val_batch0_labels.jpg": {
+    "mtime": 1789373000.5888288,
+    "seen": 1789969323.703396,
+    "ast_hash": "4136e28d5d5f303f8e36287064cecb33",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/val_batch0_pred.jpg": {
+    "mtime": 1789373000.5905337,
+    "seen": 1789969323.703397,
+    "ast_hash": "7b4aac5938090725c4ceda4c4ad66298",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/val_batch1_labels.jpg": {
+    "mtime": 1789373000.5916505,
+    "seen": 1789969323.703397,
+    "ast_hash": "ce7dd07bc299bf3adb395cc12c0ecb7f",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/val_batch1_pred.jpg": {
+    "mtime": 1789373000.5930047,
+    "seen": 1789969323.703398,
+    "ast_hash": "d41ae9d657e2b33ee0784dbad9dafce0",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/val_batch2_labels.jpg": {
+    "mtime": 1789373000.5938153,
+    "seen": 1789969323.703398,
+    "ast_hash": "bfa8ef3a936580a3cb241f4559c9d5e1",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/mlflow/526263230962730940/628130f409484c97b43bcb43fcc9fc5f/artifacts/val_batch2_pred.jpg": {
+    "mtime": 1789373000.5953245,
+    "seen": 1789969323.703398,
+    "ast_hash": "8c96ed449a290ded448b07ee60ca8035",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/BoxF1_curve.png": {
+    "mtime": 1789373000.7178247,
+    "seen": 1789969323.703399,
+    "ast_hash": "b43dcec1805ac50c2c0f5a9d3b5a2443",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/BoxPR_curve.png": {
+    "mtime": 1789373000.7180908,
+    "seen": 1789969323.703399,
+    "ast_hash": "2be8e6c8617efff0dc102ef48a130db1",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/BoxP_curve.png": {
+    "mtime": 1789373000.7183669,
+    "seen": 1789969323.7034,
+    "ast_hash": "1b774095846bc74c47c5f28dafc56b59",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/BoxR_curve.png": {
+    "mtime": 1789373000.7186506,
+    "seen": 1789969323.7034,
+    "ast_hash": "e0de3d292d56133760366e43a5e72b0b",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/MaskF1_curve.png": {
+    "mtime": 1789373000.7189233,
+    "seen": 1789969323.7034009,
+    "ast_hash": "267c7d575419120c8258dec6de35f20d",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/MaskPR_curve.png": {
+    "mtime": 1789373000.7191713,
+    "seen": 1789969323.7034009,
+    "ast_hash": "2a70b3e39b3ccb5609aec259018970c1",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/MaskP_curve.png": {
+    "mtime": 1789373000.719449,
+    "seen": 1789969323.7034009,
+    "ast_hash": "289aa92b950548d7dba491690b39e34e",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/MaskR_curve.png": {
+    "mtime": 1789373000.719729,
+    "seen": 1789969323.703402,
+    "ast_hash": "d55ee7ed86ad0b16fda7df5c7aa32751",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/confusion_matrix.png": {
+    "mtime": 1789373000.7200391,
+    "seen": 1789969323.703402,
+    "ast_hash": "cc573171bdb04b25f48a49e81890d96b",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/confusion_matrix_normalized.png": {
+    "mtime": 1789373000.720277,
+    "seen": 1789969323.703403,
+    "ast_hash": "4dcb0dcd32ac670686a24a70afc2ab1f",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/labels.jpg": {
+    "mtime": 1789373000.7207992,
+    "seen": 1789969323.703403,
+    "ast_hash": "c8adf1aa7ccf19e52b8aa9279b9a0424",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/results.png": {
+    "mtime": 1789373000.7218733,
+    "seen": 1789969323.703404,
+    "ast_hash": "15824b6c37db18bf901055cd701387e8",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/train_batch0.jpg": {
+    "mtime": 1789373000.7221282,
+    "seen": 1789969323.703404,
+    "ast_hash": "159561773aa7895fe4de4d1cf24547c5",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/train_batch1.jpg": {
+    "mtime": 1789373000.7227287,
+    "seen": 1789969323.7034051,
+    "ast_hash": "7ff006af02c954a40207736ee59926b4",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/train_batch2.jpg": {
+    "mtime": 1789373000.723583,
+    "seen": 1789969323.7034051,
+    "ast_hash": "d61845c02fb9329520007090ebed1123",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/train_batch90820.jpg": {
+    "mtime": 1789373000.7241497,
+    "seen": 1789969323.703406,
+    "ast_hash": "dede0b2921dd426ab4c30069ad0b573b",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/train_batch90821.jpg": {
+    "mtime": 1789373000.7249625,
+    "seen": 1789969323.703406,
+    "ast_hash": "bbd1afab83d3338e5429b27691330711",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/train_batch90822.jpg": {
+    "mtime": 1789373000.7255418,
+    "seen": 1789969323.703406,
+    "ast_hash": "c18bb5613ae44c63bb717135e277b534",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/val_batch0_labels.jpg": {
+    "mtime": 1789373000.726553,
+    "seen": 1789969323.703407,
+    "ast_hash": "4136e28d5d5f303f8e36287064cecb33",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/val_batch0_pred.jpg": {
+    "mtime": 1789373000.727574,
+    "seen": 1789969323.703407,
+    "ast_hash": "7b4aac5938090725c4ceda4c4ad66298",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/val_batch1_labels.jpg": {
+    "mtime": 1789373000.7287273,
+    "seen": 1789969323.703409,
+    "ast_hash": "ce7dd07bc299bf3adb395cc12c0ecb7f",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/val_batch1_pred.jpg": {
+    "mtime": 1789373000.7305932,
+    "seen": 1789969323.703409,
+    "ast_hash": "d41ae9d657e2b33ee0784dbad9dafce0",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/val_batch2_labels.jpg": {
+    "mtime": 1789373000.7314231,
+    "seen": 1789969323.70341,
+    "ast_hash": "bfa8ef3a936580a3cb241f4559c9d5e1",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v2/yolo11l_seg_object_bce_dice/val_batch2_pred.jpg": {
+    "mtime": 1789373000.732249,
+    "seen": 1789969323.70341,
+    "ast_hash": "8c96ed449a290ded448b07ee60ca8035",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v3/yolo11l_seg_object_bce_dice_copy_paste/labels.jpg": {
+    "mtime": 1789373000.808164,
+    "seen": 1789969323.70341,
+    "ast_hash": "c8adf1aa7ccf19e52b8aa9279b9a0424",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v3/yolo11l_seg_object_bce_dice_copy_paste/train_batch0.jpg": {
+    "mtime": 1789373000.8084056,
+    "seen": 1789969323.7034109,
+    "ast_hash": "ccce9fa668d4ef34c6719b9246b8df3c",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v3/yolo11l_seg_object_bce_dice_copy_paste/train_batch1.jpg": {
+    "mtime": 1789373000.8090177,
+    "seen": 1789969323.703412,
+    "ast_hash": "7ff006af02c954a40207736ee59926b4",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/v3/yolo11l_seg_object_bce_dice_copy_paste/train_batch2.jpg": {
+    "mtime": 1789373000.809179,
+    "seen": 1789969323.703412,
+    "ast_hash": "525fcedbfa316cbc7fc0c08ec01fe57a",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/BoxF1_curve.png": {
+    "mtime": 1789373001.2520251,
+    "seen": 1789969323.703413,
+    "ast_hash": "e2daa11cfd509efca87293f41f88ef00",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/BoxPR_curve.png": {
+    "mtime": 1789373001.252321,
+    "seen": 1789969323.703413,
+    "ast_hash": "81d7b44638ef7c519e8546e75cce33e6",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/BoxP_curve.png": {
+    "mtime": 1789373001.2526128,
+    "seen": 1789969323.703414,
+    "ast_hash": "707b82220baf6c608914cb41142f3048",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/BoxR_curve.png": {
+    "mtime": 1789373001.252931,
+    "seen": 1789969323.703414,
+    "ast_hash": "3e480fd26ff422e78109032177ffcab7",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/MaskF1_curve.png": {
+    "mtime": 1789373001.2532165,
+    "seen": 1789969323.7034152,
+    "ast_hash": "1119dcfba304568d3c17305c61de2774",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/MaskPR_curve.png": {
+    "mtime": 1789373001.253486,
+    "seen": 1789969323.7034152,
+    "ast_hash": "6030c04a8134920f89066f05d5505030",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/MaskP_curve.png": {
+    "mtime": 1789373001.2537796,
+    "seen": 1789969323.7034152,
+    "ast_hash": "b32de9df87dbdddfc1850978380e1d98",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/MaskR_curve.png": {
+    "mtime": 1789373001.2540743,
+    "seen": 1789969323.703416,
+    "ast_hash": "da2ea0d3d867f590d456f22d765a47b3",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/confusion_matrix.png": {
+    "mtime": 1789373001.254405,
+    "seen": 1789969323.703416,
+    "ast_hash": "a8197a1c6f2146a57240fe21f91d7be4",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/confusion_matrix_normalized.png": {
+    "mtime": 1789373001.2546506,
+    "seen": 1789969323.703417,
+    "ast_hash": "dc7bd64e90fb48048bef3a26970933a0",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/labels.jpg": {
+    "mtime": 1789373001.255254,
+    "seen": 1789969323.703417,
+    "ast_hash": "c8adf1aa7ccf19e52b8aa9279b9a0424",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/results.png": {
+    "mtime": 1789373001.2563522,
+    "seen": 1789969323.703418,
+    "ast_hash": "8ccb09763740fb8126f3482bbd3cb136",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/train_batch0.jpg": {
+    "mtime": 1789373001.2570565,
+    "seen": 1789969323.703418,
+    "ast_hash": "0995a9af2323a87004a24f25fce2d659",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/train_batch1.jpg": {
+    "mtime": 1789373001.257689,
+    "seen": 1789969323.703419,
+    "ast_hash": "4abb448959da74a881bcb4ad20f031da",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/train_batch2.jpg": {
+    "mtime": 1789373001.2583206,
+    "seen": 1789969323.703419,
+    "ast_hash": "05ae53bbd237e713e05edbd8e779cce3",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/val_batch0_labels.jpg": {
+    "mtime": 1789373001.2593412,
+    "seen": 1789969323.70342,
+    "ast_hash": "4136e28d5d5f303f8e36287064cecb33",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/val_batch0_pred.jpg": {
+    "mtime": 1789373001.2604206,
+    "seen": 1789969323.70342,
+    "ast_hash": "270fb8ee8a8b60327c97f437548dad79",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/val_batch1_labels.jpg": {
+    "mtime": 1789373001.2615685,
+    "seen": 1789969323.7034209,
+    "ast_hash": "ce7dd07bc299bf3adb395cc12c0ecb7f",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/val_batch1_pred.jpg": {
+    "mtime": 1789373001.2626576,
+    "seen": 1789969323.7034209,
+    "ast_hash": "5de81cfcef49f86e33e28b0cd5985bf6",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/val_batch2_labels.jpg": {
+    "mtime": 1789373001.263569,
+    "seen": 1789969323.703422,
+    "ast_hash": "bfa8ef3a936580a3cb241f4559c9d5e1",
+    "semantic_hash": ""
+  },
+  "train_v2/runs/yolo11l_seg_object_dice/val_batch2_pred.jpg": {
+    "mtime": 1789373001.2643993,
+    "seen": 1789969323.703422,
+    "ast_hash": "8a93c4aed8604ebe259cdcd2a7cf7b29",
+    "semantic_hash": ""
   }
 }
