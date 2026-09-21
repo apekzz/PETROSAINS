@@ -78,9 +78,9 @@
     "semantic_hash": "727b9efdda116ca7c7dd6fd610b04f4f"
   },
   "inventory_app/saved_tables/manifest.json": {
-    "mtime": 1789976674.8038275,
-    "seen": 1789976693.320099,
-    "ast_hash": "eaac1e68a8fc28f5c6767cd9feb76495",
+    "mtime": 1789976737.981956,
+    "seen": 1789976901.578646,
+    "ast_hash": "68d77f9bb3dbd4a6b3ccdeb8b9df4ef7",
     "semantic_hash": ""
   },
   "inventory_app/setup_db.py": {
