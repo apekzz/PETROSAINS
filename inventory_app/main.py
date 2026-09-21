@@ -40,7 +40,7 @@ from db import (
     close_boot_connection,
 )
 from sql import bootstrap_database
-from face import FaceGate, draw_landmarks
+from face import FaceGate, draw_landmarks, choose_staff_match
 from sam_tool import (
     clear_sessions as clear_sam_sessions,
     create_mask as create_sam_mask,
@@ -331,7 +331,7 @@ def match_staff_embedding(embedding):
         if score > best_score:
             best_score = score
             best = row
-    if best is None or best_score < FACE_MATCH_THRESHOLD:
+    if best is None:
         return None, best_score
     return {
         "staff_id": best["staff_id"],
@@ -378,7 +378,7 @@ def set_face_mode(new_mode):
             recognized_staff = None
             SCAN_OPERATOR = "System"
             face_gate_visible = True
-            face_message = "Place your face in the outline to check out"
+            face_message = "Look at the camera"
     print(f"[FACE] Mode → {mode}")
     return mode
 
@@ -425,22 +425,33 @@ def _apply_face_embedding(embedding, mode):
 
     match, score = match_staff_embedding(embedding)
     with face_state_lock:
-        face_match_score = round(score, 4)
-        if match:
+        current_id = recognized_staff["staff_id"] if recognized_staff else None
+        chosen = choose_staff_match(
+            match,
+            score,
+            current_id,
+            FACE_MATCH_THRESHOLD,
+            FACE_MATCH_THRESHOLD * 0.85,
+        )
+        face_match_score = round(score, 4) if score is not None and score >= 0 else None
+        if chosen:
             face_match_streak = 1
-            recognized_staff = match
-            SCAN_OPERATOR = match["staff_name"]
+            recognized_staff = chosen
+            SCAN_OPERATOR = chosen["staff_name"]
             face_gate_visible = False
-            face_message = f"Recognized {match['staff_name']}"
+            face_message = f"Recognized {chosen['staff_name']}"
             print(
-                f"[FACE] Recognized {match['staff_name']} "
-                f"({match['staff_id']}) similarity={score:.3f}"
+                f"[FACE] Recognized {chosen['staff_name']} "
+                f"({chosen['staff_id']}) similarity={score:.3f}"
             )
         else:
             face_match_streak = 0
             pending_face_embedding = None
             ready_to_register = False
-            if score >= 0:
+            recognized_staff = None
+            SCAN_OPERATOR = "System"
+            face_gate_visible = True
+            if score is not None and score >= 0:
                 face_message = (
                     f"UNKNOWN STAFF · {int(score * 100)}% "
                     f"(requires {int(FACE_MATCH_THRESHOLD * 100)}%)"
@@ -594,7 +605,7 @@ boot_percent = 0
 boot_done = False
 
 face_gate = None
-face_mode = "register"
+face_mode = "recognize"
 face_gate_visible = True
 face_detected = False
 landmarks_complete = False
@@ -1545,7 +1556,7 @@ def startup_event():
     load_embed_model()
     load_sam_model()
     load_face_gate()
-    set_face_mode("register")
+    set_face_mode("recognize")
     boot_ready = True
     boot_done = True
 
@@ -2386,7 +2397,7 @@ def run_high_end_boot():
         loader.pulse(0.12)
 
         set_boot(88, "arming face gate")
-        set_face_mode("register")
+        set_face_mode("recognize")
         loader.pulse(0.1)
 
         set_boot(100, "systems online")

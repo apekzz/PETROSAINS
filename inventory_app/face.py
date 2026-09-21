@@ -135,14 +135,30 @@ def landmarks_complete(points5, box=None):
 
 
 def face_in_region(points5, box=None):
+    """True when a face is visible anywhere in the frame, not only the oval."""
     if box is not None:
         x, y, bw, bh = box
-        if _inside_gate(x + bw / 2.0, y + bh / 2.0):
-            return True
+        if bw >= MIN_FACE_WIDTH and bh >= MIN_FACE_HEIGHT:
+            return _in_frame(x + bw / 2.0, y + bh / 2.0)
     if not points5:
         return False
-    inside = sum(1 for x, y in points5 if _inside_gate(x, y))
-    return (inside / len(points5)) >= IN_REGION_RATIO
+    visible = sum(1 for x, y in points5 if _in_frame(x, y))
+    return visible >= 3
+
+
+def choose_staff_match(best, score, current_id, threshold=0.90, hold=0.75):
+    """One face at a time, matched against every enrolled staff.
+
+    A full-threshold hit can switch to any person. A softer score only
+    keeps the person already on screen, so a blink does not drop them.
+    """
+    if not best or score is None or score < 0:
+        return None
+    if score >= threshold:
+        return best
+    if current_id and str(best.get("staff_id")) == str(current_id) and score >= hold:
+        return best
+    return None
 
 
 def _align_template(points5):
@@ -241,7 +257,7 @@ class FaceGate:
                 (320, 320),
                 score_threshold=0.35,
                 nms_threshold=0.3,
-                top_k=3,
+                top_k=10,
             )
             self.backend = "yunet"
             print("[FACE] Loaded OpenCV YuNet face detector")
@@ -266,17 +282,14 @@ class FaceGate:
         _, faces = self.detector.detect(frame)
         if faces is None or len(faces) == 0:
             return None
-        cx, cy = OVAL_CX * width, OVAL_CY * height
         best = None
         best_rank = -1e9
         for face in faces:
             score = float(face[-1])
             if score < MIN_DETECT_SCORE:
                 continue
-            fcx = float(face[0] + face[2] / 2)
-            fcy = float(face[1] + face[3] / 2)
-            dist = ((fcx - cx) / width) ** 2 + ((fcy - cy) / height) ** 2
-            rank = score - 0.4 * dist
+            area = float(face[2]) * float(face[3])
+            rank = area * (0.5 + score)
             if rank > best_rank:
                 best_rank = rank
                 best = face
@@ -353,3 +366,19 @@ class FaceGate:
         self.detector = None
         self.cascade = None
         self._input_size = None
+
+
+def _self_check():
+    assert face_in_region([(0.2, 0.3), (0.4, 0.3), (0.3, 0.5)], (0.15, 0.2, 0.3, 0.4))
+    assert not face_in_region([(0.5, 0.5)], (0.0, 0.0, 0.02, 0.02))
+    ali = {"staff_id": "1", "staff_name": "Ali"}
+    sara = {"staff_id": "2", "staff_name": "Sara"}
+    assert choose_staff_match(sara, 0.93, "1")["staff_name"] == "Sara"
+    assert choose_staff_match(ali, 0.80, "1")["staff_id"] == "1"
+    assert choose_staff_match(sara, 0.80, "1") is None
+    assert choose_staff_match(None, -1, None) is None
+
+
+if __name__ == "__main__":
+    _self_check()
+    print("face checks ok")

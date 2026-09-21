@@ -329,6 +329,27 @@ function faceCoverage(landmarks) {
     return inside / landmarks.length;
 }
 
+function faceSpan(landmarks) {
+    let minX = 1;
+    let minY = 1;
+    let maxX = 0;
+    let maxY = 0;
+    landmarks.forEach((point) => {
+        minX = Math.min(minX, point.x);
+        minY = Math.min(minY, point.y);
+        maxX = Math.max(maxX, point.x);
+        maxY = Math.max(maxY, point.y);
+    });
+    return { w: maxX - minX, h: maxY - minY };
+}
+
+function faceReady(landmarks) {
+    if (!landmarks || !landmarks.length) return false;
+    if (faceUiMode === "register") return faceCoverage(landmarks) >= COVERAGE_READY;
+    const span = faceSpan(landmarks);
+    return span.w >= 0.08 && span.h >= 0.1;
+}
+
 function updateCoverageLabel(ratio) {
     const el = document.getElementById("faceCoverage");
     if (!el) return;
@@ -441,7 +462,7 @@ function applyLocalFace(ready, detected, coverage) {
         setFaceHint(
             faceUiMode === "register"
                 ? "Face captured — enter staff name and ID"
-                : "Face in outline"
+                : "Recognizing current face"
         );
         return;
     }
@@ -496,6 +517,9 @@ async function captureReadyFace(landmarks) {
     return true;
 }
 
+let recognizeBusy = false;
+let lastRecognizeAt = 0;
+
 function runBrowserFaceLoop() {
     if (!faceAnalyzeEnabled || !liveVideo.videoWidth || !faceLandmarker) {
         window.requestAnimationFrame(runBrowserFaceLoop);
@@ -507,18 +531,27 @@ function runBrowserFaceLoop() {
         if (landmarks && landmarks.length) {
             lastLandmarks = landmarks;
             const coverage = faceCoverage(landmarks);
-            const ready = coverage >= COVERAGE_READY;
-            if (coverage >= 0.4) {
+            const ready = faceReady(landmarks);
+            if (coverage >= 0.4 || ready) {
                 drawMediaPipeLandmarks(landmarks);
             } else {
                 landmarkCtx.clearRect(0, 0, landmarkLayer.width, landmarkLayer.height);
             }
             applyLocalFace(ready, true, coverage);
-            if (ready && !capturedForModal) {
+            if (ready && faceUiMode === "recognize") {
+                const now = performance.now();
+                if (!recognizeBusy && now - lastRecognizeAt > 1000) {
+                    lastRecognizeAt = now;
+                    recognizeBusy = true;
+                    captureReadyFace(landmarks).finally(() => {
+                        recognizeBusy = false;
+                    });
+                }
+            } else if (ready && !capturedForModal) {
                 capturedForModal = true;
                 captureReadyFace(landmarks);
             }
-            if (!ready && !registerModalOpen) {
+            if (!ready && !registerModalOpen && faceUiMode !== "recognize") {
                 capturedForModal = false;
                 pendingFaceBlob = null;
             }
@@ -526,7 +559,7 @@ function runBrowserFaceLoop() {
             lastLandmarks = null;
             landmarkCtx.clearRect(0, 0, landmarkLayer.width, landmarkLayer.height);
             applyLocalFace(false, false, 0);
-            if (!registerModalOpen) {
+            if (!registerModalOpen && faceUiMode !== "recognize") {
                 capturedForModal = false;
                 pendingFaceBlob = null;
             }
@@ -599,12 +632,17 @@ function drawLandmarks(points, mesh, inRegion) {
 }
 
 async function grabLocalFrame() {
-    if (!liveVideo.videoWidth) return null;
-    const canvas = document.createElement("canvas");
-    canvas.width = liveVideo.videoWidth;
-    canvas.height = liveVideo.videoHeight;
-    canvas.getContext("2d").drawImage(liveVideo, 0, 0);
-    return new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.85));
+    if (liveVideo.videoWidth) {
+        const canvas = document.createElement("canvas");
+        canvas.width = liveVideo.videoWidth;
+        canvas.height = liveVideo.videoHeight;
+        canvas.getContext("2d").drawImage(liveVideo, 0, 0);
+        return new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.85));
+    }
+    if (snapshotReady && cameraFeed.width) {
+        return new Promise((resolve) => cameraFeed.toBlob(resolve, "image/jpeg", 0.85));
+    }
+    return null;
 }
 
 async function analyzeLocalFrame() {
@@ -657,23 +695,133 @@ async function ingestScanFrame() {
     }
 }
 
-async function startLocalCamera() {
-    try {
-        localStream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } },
-            audio: false,
-        });
-        liveVideo.srcObject = localStream;
-        await liveVideo.play();
-        usingLocalCamera = true;
-        liveVideo.classList.remove("is-hidden");
-        cameraFeed.classList.add("is-hidden");
-        startBrowserFaceLandmarker();
-        setInterval(ingestScanFrame, 140);
-    } catch (error) {
-        console.error("getUserMedia error:", error);
-        setFaceHint("Allow camera access in Chrome");
+let cameraFacing = "user";
+let cameraStartPromise = null;
+let captureFallback = false;
+let snapshotReady = false;
+
+function isPhoneDevice() {
+    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent || "");
+}
+
+function isLoopbackHost() {
+    const host = (location.hostname || "").toLowerCase();
+    return host === "localhost" || host === "127.0.0.1" || host === "::1";
+}
+
+function needsCaptureFallback() {
+    return isPhoneDevice() && location.protocol === "http:" && !isLoopbackHost();
+}
+
+async function refreshCameraList(activeId) {
+    const select = document.getElementById("cameraSource");
+    if (!select || !navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) return;
+    const devices = (await navigator.mediaDevices.enumerateDevices())
+        .filter((device) => device.kind === "videoinput");
+    const current = activeId || select.value;
+    select.replaceChildren();
+    const auto = document.createElement("option");
+    auto.value = "";
+    auto.textContent = isPhoneDevice() ? "This phone" : "Default camera";
+    select.appendChild(auto);
+    devices.forEach((device, index) => {
+        const option = document.createElement("option");
+        option.value = device.deviceId;
+        option.textContent = device.label || `Camera ${index + 1}`;
+        select.appendChild(option);
+    });
+    if (current && [...select.options].some((option) => option.value === current)) {
+        select.value = current;
     }
+}
+
+function enableCaptureFallback() {
+    const cameraUnlock = document.getElementById("cameraUnlock");
+    const cameraView = document.querySelector(".camera-view");
+    captureFallback = true;
+    usingLocalCamera = true;
+    liveVideo.classList.add("is-hidden");
+    if (cameraUnlock) {
+        cameraUnlock.textContent = cameraFacing === "environment" ? "Rear camera" : "Front camera";
+        cameraUnlock.classList.remove("is-hidden");
+    }
+    if (cameraView) cameraView.classList.toggle("is-rear", cameraFacing === "environment");
+    setFaceHint("Safari blocks live camera on http. Tap the button and take a photo.");
+}
+
+function applyCapturedPhoto(file) {
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+        cameraFeed.width = img.naturalWidth;
+        cameraFeed.height = img.naturalHeight;
+        cameraCtx.drawImage(img, 0, 0);
+        snapshotReady = true;
+        usingLocalCamera = true;
+        cameraFeed.classList.remove("is-hidden");
+        liveVideo.classList.add("is-hidden");
+        URL.revokeObjectURL(url);
+        sizeOverlayToVideo();
+        setFaceHint("Photo ready. Tap again for a new shot.");
+        analyzeLocalFrame();
+    };
+    img.onerror = () => URL.revokeObjectURL(url);
+    img.src = url;
+}
+
+function openNativeCamera() {
+    const input = cameraFacing === "environment"
+        ? document.getElementById("iosCamEnv")
+        : document.getElementById("iosCamUser");
+    if (input) input.click();
+}
+
+async function startLocalCamera(deviceId, facing) {
+    const want = facing || cameraFacing || "user";
+    cameraFacing = want;
+    if (needsCaptureFallback()) {
+        enableCaptureFallback();
+        return;
+    }
+    if (cameraStartPromise) return cameraStartPromise;
+    cameraStartPromise = (async () => {
+        try {
+            if (localStream) {
+                localStream.getTracks().forEach((track) => track.stop());
+                localStream = null;
+            }
+            const video = deviceId
+                ? { deviceId: { exact: deviceId }, width: { ideal: 1280 }, height: { ideal: 720 } }
+                : { facingMode: { ideal: want }, width: { ideal: 1280 }, height: { ideal: 720 } };
+            localStream = await navigator.mediaDevices.getUserMedia({ video, audio: false });
+            const track = localStream.getVideoTracks()[0];
+            const activeId = track && track.getSettings ? track.getSettings().deviceId : deviceId;
+            liveVideo.srcObject = localStream;
+            liveVideo.setAttribute("playsinline", "true");
+            liveVideo.muted = true;
+            await liveVideo.play();
+            usingLocalCamera = true;
+            captureFallback = false;
+            snapshotReady = false;
+            liveVideo.classList.remove("is-hidden");
+            cameraFeed.classList.add("is-hidden");
+            const cameraUnlock = document.getElementById("cameraUnlock");
+            if (cameraUnlock) cameraUnlock.classList.add("is-hidden");
+            if (!faceLandmarker && !FaceLandmarkerClass) startBrowserFaceLandmarker();
+            if (!window._oneshotScanTimer) {
+                window._oneshotScanTimer = setInterval(ingestScanFrame, 140);
+            }
+            await refreshCameraList(activeId || "");
+            setFaceHint("Camera ready");
+        } catch (error) {
+            console.error("getUserMedia error:", error);
+            enableCaptureFallback();
+        } finally {
+            cameraStartPromise = null;
+        }
+    })();
+    return cameraStartPromise;
 }
 
 function stopLocalCamera() {
@@ -1050,7 +1198,7 @@ const faceGateHint = document.getElementById("faceGateHint");
 const faceModeToggle = document.getElementById("faceModeToggle");
 const registerModal = document.getElementById("registerModal");
 const recognizedStaffEl = document.getElementById("recognizedStaff");
-let faceUiMode = "register";
+let faceUiMode = "recognize";
 let registerModalOpen = false;
 let lastFaceReady = false;
 
@@ -1198,7 +1346,7 @@ function applyFaceStatus(data) {
         applyObjectRecognitionState(false, false);
     }
     if (data.recognized) {
-        faceAnalyzeEnabled = false;
+        faceAnalyzeEnabled = faceUiMode !== "register";
         applyObjectRecognitionState(
             true,
             Boolean(data.detection_armed),
@@ -1437,8 +1585,40 @@ btnImportCatalog.addEventListener("click", async () => {
 btnCatalogClose.addEventListener("click", () => showCatalogImportModal(false));
 
 pollFaceStatus();
-setFaceMode("register");
+setFaceMode("recognize");
 setInterval(pollFaceStatus, CONFIG.facePollMs || 220);
+
+const cameraSource = document.getElementById("cameraSource");
+const cameraFlip = document.getElementById("cameraFlip");
+const cameraUnlock = document.getElementById("cameraUnlock");
+if (cameraSource) {
+    cameraSource.addEventListener("change", () => {
+        startLocalCamera(cameraSource.value, cameraFacing);
+    });
+}
+if (cameraFlip) {
+    cameraFlip.addEventListener("click", () => {
+        cameraFacing = cameraFacing === "environment" ? "user" : "environment";
+        if (cameraSource) cameraSource.value = "";
+        if (captureFallback) {
+            enableCaptureFallback();
+            return;
+        }
+        startLocalCamera("", cameraFacing);
+    });
+}
+if (cameraUnlock) {
+    cameraUnlock.addEventListener("click", openNativeCamera);
+}
+["iosCamUser", "iosCamEnv"].forEach((id) => {
+    const input = document.getElementById(id);
+    if (!input) return;
+    input.addEventListener("change", () => {
+        const file = input.files && input.files[0];
+        applyCapturedPhoto(file);
+        input.value = "";
+    });
+});
 
 function pingClientHello() {
     fetch("/api/client/hello", { method: "POST", cache: "no-store", keepalive: true }).catch(() => {});

@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OneShot Inventory</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/theme.css?v=20260921-header-register">
-    <link rel="stylesheet" href="/dashboard.css?v=20260921-header-register">
-    <link rel="stylesheet" href="/sam-tool.css?v=20260921-header-register">
+    <link rel="stylesheet" href="/theme.css?v=20260921-camera-face">
+    <link rel="stylesheet" href="/dashboard.css?v=20260921-camera-face2">
+    <link rel="stylesheet" href="/sam-tool.css?v=20260921-camera-face">
 </head>
 
 <body>
@@ -87,11 +87,19 @@
                 <div class="card-head">
                     <h2>Live Camera</h2>
                     <div class="camera-head-tools">
+                        <label class="camera-source" title="Mac camera, iPhone, or this phone">
+                            <select id="cameraSource" aria-label="Choose camera">
+                                <option value="">Default camera</option>
+                            </select>
+                        </label>
+                        <button id="cameraFlip" type="button" class="catalog-import-btn" title="Switch front and back camera">
+                            Flip
+                        </button>
                         <p id="recognizedStaff" class="staff-chip is-hidden"></p>
                         <div id="faceToggleWrap" class="face-toggle-wrap" title="Choose face register or recognize">
                             <span>Recognize</span>
                             <label class="face-switch">
-                                <input type="checkbox" id="faceModeToggle" checked aria-label="Register face instead of recognize">
+                                <input type="checkbox" id="faceModeToggle" aria-label="Register face instead of recognize">
                                 <span class="face-switch-slider"></span>
                             </label>
                             <span>Register</span>
@@ -124,6 +132,9 @@
                 </div>
                 <div class="camera-view is-gating">
                     <video id="liveVideo" autoplay playsinline muted></video>
+                    <input id="iosCamUser" class="ios-cam-input" type="file" accept="image/*" capture="user">
+                    <input id="iosCamEnv" class="ios-cam-input" type="file" accept="image/*" capture="environment">
+                    <button id="cameraUnlock" type="button" class="catalog-import-btn is-hidden">Use phone camera</button>
                     <canvas id="cameraFeed" class="is-hidden" width="640" height="480"></canvas>
                     <canvas id="landmarkLayer" width="640" height="480"></canvas>
                     <div id="faceGate" class="face-gate">
@@ -363,7 +374,7 @@
     </div>
 
     <script src="/config.js?v=20260921-header-register"></script>
-    <script src="/dashboard.js?v=20260921-header-register"></script>
+    <script src="/dashboard.js?v=20260921-camera-face"></script>
     <script src="/sam-tool.js?v=20260921-header-register"></script>
 </body>
 

@@ -974,6 +974,23 @@ tbody tr:hover {
     justify-content: flex-end;
 }
 
+.camera-source select {
+    max-width: 180px;
+    padding: 5px 8px;
+    border: 1px solid rgba(79, 212, 232, 0.38);
+    border-radius: var(--radius-sm);
+    background: rgba(8, 14, 18, 0.85);
+    color: var(--neon-cyan);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.ios-cam-input,
+#cameraUnlock.is-hidden {
+    display: none;
+}
+
 .staff-chip {
     margin: 0;
     padding: 4px 10px;
