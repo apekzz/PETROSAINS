@@ -54,6 +54,25 @@ body::after {
     gap: 12px;
 }
 
+.header-register-btn {
+    padding: 6px 12px;
+    border: 1px solid rgba(62, 224, 176, 0.55);
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, rgba(62, 224, 176, 0.22), rgba(0, 212, 200, 0.10));
+    color: var(--neon-green);
+    font-family: "Rajdhani", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.header-register-btn:hover {
+    border-color: var(--neon-green);
+    box-shadow: 0 0 14px rgba(62, 224, 176, 0.22);
+}
+
 .item-selector {
     position: relative;
     display: flex;

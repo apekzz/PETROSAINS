@@ -594,7 +594,7 @@ boot_percent = 0
 boot_done = False
 
 face_gate = None
-face_mode = "recognize"
+face_mode = "register"
 face_gate_visible = True
 face_detected = False
 landmarks_complete = False
@@ -1545,7 +1545,7 @@ def startup_event():
     load_embed_model()
     load_sam_model()
     load_face_gate()
-    set_face_mode("recognize")
+    set_face_mode("register")
     boot_ready = True
     boot_done = True
 
@@ -2386,7 +2386,7 @@ def run_high_end_boot():
         loader.pulse(0.12)
 
         set_boot(88, "arming face gate")
-        set_face_mode("recognize")
+        set_face_mode("register")
         loader.pulse(0.1)
 
         set_boot(100, "systems online")

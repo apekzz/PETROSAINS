@@ -265,6 +265,7 @@ let scanBusy = false;
 let faceLandmarker = null;
 let FaceLandmarkerClass = null;
 let pendingFaceBlob = null;
+let lastLandmarks = null;
 let facePreviewObjectUrl = "";
 let capturedForModal = false;
 const COVERAGE_READY = 0.90;
@@ -436,6 +437,7 @@ function applyLocalFace(ready, detected, coverage) {
     updateCoverageLabel(coverage || 0);
     if (detected && ready) {
         lastFaceReady = true;
+        if (registerModalOpen) updateRegisterSave();
         setFaceHint(
             faceUiMode === "register"
                 ? "Face captured — enter staff name and ID"
@@ -443,10 +445,10 @@ function applyLocalFace(ready, detected, coverage) {
         );
         return;
     }
-    lastFaceReady = false;
     if (registerModalOpen && faceUiMode === "register") {
         return;
     }
+    lastFaceReady = false;
     if (!detected) setFaceHint("Looking for a face");
     else if ((coverage || 0) < COVERAGE_READY) {
         setFaceHint(`Fill the outline · ${Math.round((coverage || 0) * 100)}%`);
@@ -472,9 +474,11 @@ async function captureReadyFace(landmarks) {
     const blob = await grabSegmentedFace(landmarks);
     if (!blob) return false;
     pendingFaceBlob = blob;
+    lastFaceReady = true;
     updateFacePreviews(blob);
     if (faceUiMode === "register") {
         if (!registerModalOpen) showRegisterModal(true);
+        updateRegisterSave();
         return true;
     }
     try {
@@ -501,6 +505,7 @@ function runBrowserFaceLoop() {
         const result = faceLandmarker.detectForVideo(liveVideo, performance.now());
         const landmarks = result && result.faceLandmarks && result.faceLandmarks[0];
         if (landmarks && landmarks.length) {
+            lastLandmarks = landmarks;
             const coverage = faceCoverage(landmarks);
             const ready = coverage >= COVERAGE_READY;
             if (coverage >= 0.4) {
@@ -518,6 +523,7 @@ function runBrowserFaceLoop() {
                 pendingFaceBlob = null;
             }
         } else {
+            lastLandmarks = null;
             landmarkCtx.clearRect(0, 0, landmarkLayer.width, landmarkLayer.height);
             applyLocalFace(false, false, 0);
             if (!registerModalOpen) {
@@ -616,10 +622,12 @@ async function analyzeLocalFrame() {
             const faceBlob = base64JpegToBlob(data.face_preview_b64);
             pendingFaceBlob = faceBlob;
             capturedForModal = true;
+            lastFaceReady = true;
             updateFacePreviews(faceBlob);
             if (faceUiMode === "register" && !registerModalOpen) {
                 showRegisterModal(true);
             }
+            updateRegisterSave();
         } else if (!data.in_region && !registerModalOpen) {
             capturedForModal = false;
             pendingFaceBlob = null;
@@ -1042,7 +1050,7 @@ const faceGateHint = document.getElementById("faceGateHint");
 const faceModeToggle = document.getElementById("faceModeToggle");
 const registerModal = document.getElementById("registerModal");
 const recognizedStaffEl = document.getElementById("recognizedStaff");
-let faceUiMode = "recognize";
+let faceUiMode = "register";
 let registerModalOpen = false;
 let lastFaceReady = false;
 
@@ -1064,10 +1072,37 @@ function showRegisterModal(show) {
     }
 }
 
+function hasCapturedRegisterFace() {
+    return Boolean(pendingFaceBlob || lastFaceReady);
+}
+
 function updateRegisterSave() {
     const name = document.getElementById("staffName").value.trim();
     const staffId = document.getElementById("staffId").value.trim();
-    document.getElementById("btnRegisterSave").disabled = !(name && staffId && lastFaceReady);
+    document.getElementById("btnRegisterSave").disabled = !(
+        name && staffId && hasCapturedRegisterFace()
+    );
+}
+
+async function openRegisterPopup() {
+    if (faceUiMode !== "register") {
+        await setFaceMode("register");
+    }
+    if (!pendingFaceBlob && lastLandmarks) {
+        const blob = await grabSegmentedFace(lastLandmarks);
+        if (blob) {
+            pendingFaceBlob = blob;
+            lastFaceReady = true;
+            capturedForModal = true;
+            updateFacePreviews(blob);
+        }
+    }
+    showRegisterModal(true);
+    const statusEl = document.getElementById("registerStatus");
+    if (statusEl && !pendingFaceBlob) {
+        statusEl.textContent = "Stay in the outline until a face is captured, then fill in both fields.";
+    }
+    updateRegisterSave();
 }
 
 function renderRecognized(staff, unknownStaff = false, matchScore = null) {
@@ -1234,7 +1269,7 @@ async function submitFaceRegister() {
         statusEl.textContent = "Fill in both fields.";
         return;
     }
-    if (!lastFaceReady) {
+    if (!hasCapturedRegisterFace()) {
         statusEl.textContent = "Keep a complete face in the outline.";
         return;
     }
@@ -1308,13 +1343,14 @@ document.getElementById("btnRegisterCancel").addEventListener("click", () => {
     capturedForModal = false;
     pendingFaceBlob = null;
     lastFaceReady = false;
-    setFaceMode("recognize");
-    faceModeToggle.checked = false;
-    faceUiMode = "recognize";
 });
 document.getElementById("btnRegisterSave").addEventListener("click", submitFaceRegister);
 document.getElementById("staffName").addEventListener("input", updateRegisterSave);
 document.getElementById("staffId").addEventListener("input", updateRegisterSave);
+const btnHeaderRegisterFace = document.getElementById("btnHeaderRegisterFace");
+if (btnHeaderRegisterFace) {
+    btnHeaderRegisterFace.addEventListener("click", openRegisterPopup);
+}
 
 const catalogImportModal = document.getElementById("catalogImportModal");
 const btnImportCatalog = document.getElementById("btnImportCatalog");
@@ -1401,6 +1437,7 @@ btnImportCatalog.addEventListener("click", async () => {
 btnCatalogClose.addEventListener("click", () => showCatalogImportModal(false));
 
 pollFaceStatus();
+setFaceMode("register");
 setInterval(pollFaceStatus, CONFIG.facePollMs || 220);
 
 function pingClientHello() {

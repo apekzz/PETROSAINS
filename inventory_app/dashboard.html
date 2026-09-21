@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OneShot Inventory</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/theme.css?v=20260914-detection-preview">
-    <link rel="stylesheet" href="/dashboard.css?v=20260914-detection-preview">
-    <link rel="stylesheet" href="/sam-tool.css?v=20260914-detection-preview">
+    <link rel="stylesheet" href="/theme.css?v=20260921-header-register">
+    <link rel="stylesheet" href="/dashboard.css?v=20260921-header-register">
+    <link rel="stylesheet" href="/sam-tool.css?v=20260921-header-register">
 </head>
 
 <body>
@@ -32,6 +32,9 @@
             <p class="brand-sub">Inventory System</p>
         </div>
         <div class="header-tools">
+            <button id="btnHeaderRegisterFace" type="button" class="header-register-btn" title="Open the staff face registration box">
+                Register face
+            </button>
             <div id="dbStatusBadge" class="status-badge connecting">
                 <div class="status-dot"></div>
                 <span id="dbStatusText">CONNECTING TO DATABASE...</span>
@@ -88,7 +91,7 @@
                         <div id="faceToggleWrap" class="face-toggle-wrap" title="Choose face register or recognize">
                             <span>Recognize</span>
                             <label class="face-switch">
-                                <input type="checkbox" id="faceModeToggle" aria-label="Register face instead of recognize">
+                                <input type="checkbox" id="faceModeToggle" checked aria-label="Register face instead of recognize">
                                 <span class="face-switch-slider"></span>
                             </label>
                             <span>Register</span>
@@ -359,9 +362,9 @@
         </div>
     </div>
 
-    <script src="/config.js?v=20260914-detection-preview"></script>
-    <script src="/dashboard.js?v=20260914-detection-preview"></script>
-    <script src="/sam-tool.js?v=20260914-detection-preview"></script>
+    <script src="/config.js?v=20260921-header-register"></script>
+    <script src="/dashboard.js?v=20260921-header-register"></script>
+    <script src="/sam-tool.js?v=20260921-header-register"></script>
 </body>
 
 </html>
