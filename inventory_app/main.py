@@ -59,7 +59,7 @@ from sam_tool import (
 )
 from config import (
     BASE_DIR, FRONTEND_DIR, HOST, PORT, CAMERA_INDEX, CAMERA_WIDTH, CAMERA_HEIGHT,
-    TARGET_FPS, JPEG_QUALITY, MODEL_PATH, OPENCLIP_CHECKPOINT,
+    TARGET_FPS, JPEG_QUALITY, MODEL_PATH,
     MODEL_CONFIDENCE, MODEL_IMAGE_SIZE,
     TRIGGER_ENABLED, CHANGE_AREA_PERCENT, SETTLE_FRAMES,
     TRIGGER_COOLDOWN, MOG2_HISTORY, MOG2_VAR_THRESHOLD, MOG2_DETECT_SHADOWS,
@@ -145,20 +145,31 @@ def _load_clip_weights():
         return
     import open_clip
 
-    if not os.path.isfile(OPENCLIP_CHECKPOINT):
-        raise RuntimeError(
-            f"OpenCLIP checkpoint not found: {OPENCLIP_CHECKPOINT}"
-        )
+    # Use NVIDIA CUDA when available; otherwise fall back to CPU.
     embed_device = "cuda" if torch.cuda.is_available() else "cpu"
+    model_name = "MobileCLIP2-S2"
+    pretrained = "dfndr2b"
+
     embed_model, _, embed_preprocess = open_clip.create_model_and_transforms(
-        "ViT-B-32",
-        pretrained=OPENCLIP_CHECKPOINT,
+        model_name,
+        pretrained=pretrained,
     )
-    embed_model = embed_model.to(embed_device).eval()
-    embed_backend = "openclip-ViT-B-32-laion2b_s34b_b79k"
+    embed_model = embed_model.eval()
+
+    # MobileCLIP2 contains reparameterizable blocks. Fuse them for inference
+    # when timm exposes the helper; the model still works if this step is skipped.
+    try:
+        from timm.utils.model import reparameterize_model
+        embed_model = reparameterize_model(embed_model, inplace=True)
+        print("[EMBED] MobileCLIP2 reparameterized for inference")
+    except Exception as exc:
+        print(f"[EMBED] Reparameterization skipped: {exc}")
+
+    embed_model = embed_model.to(embed_device)
+    embed_backend = "mobileclip2-S2-dfndr2b"
     print(
-        f"[EMBED] Loaded OpenCLIP ViT-B-32 from {OPENCLIP_CHECKPOINT} "
-        f"(512-d)  device={embed_device}"
+        f"[EMBED] Loaded MobileCLIP2-S2 pretrained={pretrained} "
+        f"(512-d) device={embed_device}"
     )
 
 
@@ -169,6 +180,14 @@ def _prepare_embed_image(image_bytes):
     if image.size != (EMBED_IMAGE_SIZE, EMBED_IMAGE_SIZE):
         image = image.resize((EMBED_IMAGE_SIZE, EMBED_IMAGE_SIZE), Image.BILINEAR)
     return image
+
+
+def _prepare_inventory_model_image(image_bytes):
+    from PIL import Image
+
+    # Let MobileCLIP2's own preprocessing handle its required resize/crop.
+    # Do not force inventory crops to the face routine's 224x224 shape.
+    return Image.open(BytesIO(image_bytes)).convert("RGB")
 
 
 def face_crop_to_embedding(image_bytes):
@@ -223,7 +242,11 @@ def _encode_worker_loop():
         try:
             images = job.get("images")
             if images is None:
-                images = [_prepare_embed_image(job["bytes"])]
+                # Face jobs set mode and keep 224 prep; inventory bytes use model native size.
+                if job.get("mode"):
+                    images = [_prepare_embed_image(job["bytes"])]
+                else:
+                    images = [_prepare_inventory_model_image(job["bytes"])]
             started = time.perf_counter()
             vectors = _encode_images(images)
             elapsed = time.perf_counter() - started
@@ -252,7 +275,7 @@ def _encode_worker_loop():
 
 
 def load_embed_model():
-    """Load CLIP once on a dedicated encode thread and keep it there."""
+    """Load MobileCLIP2 once on a dedicated encode thread and keep it there."""
     global _encode_thread
     if embed_model is not None and _encode_ready.is_set():
         return
@@ -287,7 +310,7 @@ def images_to_embeddings(images, timeout=120.0):
     try:
         result = reply.get(timeout=timeout)
     except queue.Empty as exc:
-        raise TimeoutError("OpenCLIP batch embedding timed out") from exc
+        raise TimeoutError("MobileCLIP2 batch embedding timed out") from exc
     if isinstance(result, Exception):
         raise result
     return result
