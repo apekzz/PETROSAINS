@@ -1,5 +1,8 @@
+import json
 import os
 import socket
+import subprocess
+import sys
 
 # Project root (folder that contains main.py)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,8 +49,29 @@ def get_lan_ip():
         pass
     return None
 
-# Camera
-CAMERA_INDEX = int(os.environ.get("CAMERA_INDEX", "0"))
+# Camera — default to laptop FaceTime even if Camo/Continuity is OS index 0
+def _default_camera_index() -> int:
+    raw = os.environ.get("CAMERA_INDEX")
+    if raw is not None and str(raw).strip() != "":
+        return int(raw)
+    if sys.platform == "darwin":
+        try:
+            payload = subprocess.check_output(
+                ["system_profiler", "SPCameraDataType", "-json"],
+                text=True,
+                timeout=8,
+            )
+            cameras = (json.loads(payload) or {}).get("SPCameraDataType") or []
+            for index, camera in enumerate(cameras):
+                name = str(camera.get("_name") or "").lower()
+                if "facetime" in name or "built-in" in name or "built in" in name:
+                    return index
+        except Exception:
+            pass
+    return 0
+
+
+CAMERA_INDEX = _default_camera_index()
 CAMERA_WIDTH = 640   # Lowered for faster AI processing (fixes black screen lag)
 CAMERA_HEIGHT = 480  # Lowered for faster AI processing
 TARGET_FPS = 25

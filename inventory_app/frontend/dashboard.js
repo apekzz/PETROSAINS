@@ -796,7 +796,7 @@ async function refreshCameraList(activeId) {
     select.replaceChildren();
     const auto = document.createElement("option");
     auto.value = "";
-    auto.textContent = isPhoneDevice() ? "This phone" : "Default camera";
+    auto.textContent = isPhoneDevice() ? "This phone" : "Laptop camera";
     select.appendChild(auto);
     devices.forEach((device, index) => {
         const option = document.createElement("option");
@@ -866,6 +866,22 @@ function openNativeCamera() {
     if (input) input.click();
 }
 
+async function preferLaptopDeviceId() {
+    if (isPhoneDevice() || !navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+        return "";
+    }
+    try {
+        const devices = (await navigator.mediaDevices.enumerateDevices())
+            .filter((device) => device.kind === "videoinput");
+        const laptop = devices.find((device) =>
+            /facetime|built-?in|macbook|laptop/i.test(device.label || ""),
+        );
+        return laptop ? laptop.deviceId : "";
+    } catch (error) {
+        return "";
+    }
+}
+
 async function startLocalCamera(deviceId, facing) {
     const want = facing || cameraFacing || "user";
     cameraFacing = want;
@@ -880,12 +896,16 @@ async function startLocalCamera(deviceId, facing) {
                 localStream.getTracks().forEach((track) => track.stop());
                 localStream = null;
             }
-            const video = deviceId
-                ? { deviceId: { exact: deviceId }, width: { ideal: 1280 }, height: { ideal: 720 } }
+            let chosenId = deviceId || "";
+            if (!chosenId && !isPhoneDevice()) {
+                chosenId = await preferLaptopDeviceId();
+            }
+            const video = chosenId
+                ? { deviceId: { exact: chosenId }, width: { ideal: 1280 }, height: { ideal: 720 } }
                 : { facingMode: { ideal: want }, width: { ideal: 1280 }, height: { ideal: 720 } };
             localStream = await navigator.mediaDevices.getUserMedia({ video, audio: false });
             const track = localStream.getVideoTracks()[0];
-            const activeId = track && track.getSettings ? track.getSettings().deviceId : deviceId;
+            const activeId = track && track.getSettings ? track.getSettings().deviceId : chosenId;
             liveVideo.srcObject = localStream;
             liveVideo.setAttribute("playsinline", "true");
             liveVideo.muted = true;

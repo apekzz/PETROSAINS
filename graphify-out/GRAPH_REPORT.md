@@ -1,17 +1,17 @@
 # Graph Report - hilman_21Sep  (2026-09-22)
 
 ## Corpus Check
-- 50 files · ~1,373,106 words
+- 50 files · ~1,373,257 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 487 file(s) not represented in the graph (top: (none) 414, .ipynb 19, .pt 19)
 
 ## Summary
-- 868 nodes · 1846 edges · 46 communities (40 shown, 6 thin omitted)
+- 870 nodes · 1854 edges · 45 communities (39 shown, 6 thin omitted)
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 93 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f43439f6`
+- Built from commit: `345ebceb`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -20,46 +20,45 @@
 - face.py
 - evaluate_embedding_similarity.py
 - main.py
-- _catalog_import_job
+- updateTriggerStatus
 - camera_capture_loop
+- get_trigger_state
 - PETROSAINS
 - sam-tool.js
-- get_db
-- applyFaceStatus
+- api.py
+- analyzeLocalFrame
 - tables
 - sql.py
 - detectron2_recipe.py
-- face_status_payload
+- _encode_worker_loop
 - eval.py
 - dataset_importer.py
 - download_dataset.py
-- dice_loss.py
 - run_high_end_boot
-- ensure_tables
 - sam_tool.py
 - embed.py
 - post
+- db.py
 - analyze_object_areas.py
 - EarlyStopHook
 - setup_db.py
 - fetchStats
+- _clear_session_movements
 - runBrowserFaceLoop
-- updateTriggerStatus
+- capture_sam_frame
 - V2DatasetMapper
 - .__init__
-- enableCaptureFallback
+- applyFaceStatus
 - ObjectTrainer
 - PETROSAINS inventory similarity (`test_pg`)
 - EpochMetricPrinter
-- bootstrap_database
-- export_table_snapshots
 - OneShot Inventory (`inventory_app`)
 - MosaicProb
 - saved_tables/README.md
 - test_sahi.py
 - apply_bce_dice_mask_loss
 - inventory_app_config
-- db.py
+- normalize_item_name
 - inventory_app_sam_tool
 
 ## God Nodes (most connected - your core abstractions)
@@ -81,39 +80,43 @@
   test_pg/README.md → utils_db/cache.py
 - `C. Generate training embeddings with OpenCLIP` --references--> `bbox_xyxy()`  [INFERRED]
   test_pg/README.md → utils/dataset.py
-- `run_high_end_boot()` --calls--> `get_lan_ip()`  [INFERRED]
-  inventory_app/main.py → inventory_app/backend/config.py
 - `main()` --calls--> `load_clip_model()`  [EXTRACTED]
   test_pg/predict_labeled_image.py → utils/embed.py
+- `_drive_folder()` --calls--> `drive_folder()`  [EXTRACTED]
+  train_v2/utils/download_dataset.py → utils/gdrive.py
 
 ## Import Cycles
 - None detected.
 
-## Communities (46 total, 6 thin omitted)
+## Communities (45 total, 6 thin omitted)
 
 ### Community 0 - "dashboard.js"
 Cohesion: 0.04
 Nodes (47): applyMode(), bootFill, bootOverlay, bootPct, bootStage, bootStartedAt, btnCatalogClose, btnHeaderRegisterFace (+39 more)
 
 ### Community 1 - "face.py"
-Cohesion: 0.06
-Nodes (33): cv2, get_lan_ip(), _align_template(), choose_staff_match(), crop_from_box(), draw_landmarks(), encode_crop(), ensure_face_model() (+25 more)
+Cohesion: 0.13
+Nodes (19): _align_template(), crop_from_box(), draw_landmarks(), encode_crop(), ensure_face_model(), face_in_region(), FaceGate, _five_from_yunet() (+11 more)
 
 ### Community 2 - "evaluate_embedding_similarity.py"
-Cohesion: 0.08
-Nodes (41): csv, datetime, json, matplotlib_pyplot, platform, build_samples(), canonical_name(), classification_metrics() (+33 more)
+Cohesion: 0.07
+Nodes (44): datetime, platform, Tensor, torch, torch_nn_functional, build_samples(), canonical_name(), classification_metrics() (+36 more)
 
 ### Community 3 - "main.py"
-Cohesion: 0.08
-Nodes (39): asyncio, delete, fastapi_middleware_cors, fastapi_responses, infer, boot_status(), camera_status(), _cancel_app_exit() (+31 more)
+Cohesion: 0.09
+Nodes (34): asyncio, delete, fastapi_middleware_cors, fastapi_responses, infer, camera_status(), _catalog_import_job(), catalog_import_status() (+26 more)
 
-### Community 4 - "_catalog_import_job"
-Cohesion: 0.28
-Nodes (9): _catalog_import_job(), _catalog_progress(), create_object_embedding(), get_inventory_catalog(), image_to_embedding(), match_inventory_name(), parse_yolo_boxes(), refresh_inventory_catalog_cache() (+1 more)
+### Community 4 - "updateTriggerStatus"
+Cohesion: 0.24
+Nodes (11): applyObjectRecognitionState(), escapeHtml(), fetchInventory(), maybeToastCapture(), renderMovements(), renderRecognized(), restoreLiveDetectionStream(), showCaptureAlert() (+3 more)
 
 ### Community 5 - "camera_capture_loop"
 Cohesion: 0.14
-Nodes (30): arm_object_detection(), camera_capture_loop(), catalog_import_active(), detection_labels(), draw_yolo_boxes(), encode_jpeg(), face_detection_active(), get_trigger_state() (+22 more)
+Nodes (26): camera_capture_loop(), catalog_import_active(), detection_labels(), draw_yolo_boxes(), encode_jpeg(), face_detection_active(), ingest_scan_frame(), is_object_detection_armed() (+18 more)
+
+### Community 6 - "get_trigger_state"
+Cohesion: 0.50
+Nodes (4): boot_status(), get_trigger_state(), ingest_browser_scan(), UploadFile
 
 ### Community 7 - "PETROSAINS"
 Cohesion: 0.18
@@ -123,33 +126,33 @@ Nodes (10): Daily use (after first setup), Files, Folders, How to run the invent
 Cohesion: 0.19
 Nodes (21): calculateTransform(), captureFrozenFrame(), endStroke(), exportMask(), generateMask(), loadSourceCanvas(), maskBytes(), normalizeMask() (+13 more)
 
-### Community 9 - "get_db"
-Cohesion: 0.14
-Nodes (25): fastapi, get_detections(), get_detections_summary(), get_detections_today(), get_inventory(), get_item(), get_movements(), get_staff_list() (+17 more)
+### Community 9 - "api.py"
+Cohesion: 0.11
+Nodes (26): fastapi, get_detections(), get_detections_summary(), get_detections_today(), get_inventory(), get_item(), get_item_summary(), get_movements() (+18 more)
 
-### Community 10 - "applyFaceStatus"
-Cohesion: 0.15
-Nodes (25): analyzeLocalFrame(), applyCapturedPhoto(), applyFaceStatus(), applyLocalFace(), base64JpegToBlob(), blobToBase64(), captureReadyFace(), drawLandmarks() (+17 more)
+### Community 10 - "analyzeLocalFrame"
+Cohesion: 0.18
+Nodes (17): analyzeLocalFrame(), applyCapturedPhoto(), base64JpegToBlob(), blobToBase64(), captureReadyFace(), drawLandmarks(), grabLocalFrame(), grabSegmentedFace() (+9 more)
 
 ### Community 11 - "tables"
 Cohesion: 0.10
 Nodes (19): columns, file, rows, exported_at, format, columns, file, rows (+11 more)
 
 ### Community 12 - "sql.py"
-Cohesion: 0.11
-Nodes (23): contextlib, check_db(), close_boot_connection(), connect_and_prepare(), _embedding_from_text(), ensure_postgres_running(), ensure_schema_columns(), fetch_inventory_embeddings() (+15 more)
+Cohesion: 0.10
+Nodes (24): contextlib, connect_and_prepare(), _copy_table_to_file(), ensure_postgres_running(), ensure_schema_columns(), ensure_tables(), _apply(), existing_tables() (+16 more)
 
 ### Community 13 - "detectron2_recipe.py"
 Cohesion: 0.10
 Nodes (19): copy, detectron2, detectron2_config, detectron2_data, detectron2_data_datasets, detectron2_engine, detectron2_engine_hooks, detectron2_engine_train_loop (+11 more)
 
-### Community 14 - "face_status_payload"
-Cohesion: 0.11
-Nodes (22): analyze_face_frame(), _apply_face_embedding(), cosine_similarity(), detection_preview_active(), embed_captured_face(), _encode_image(), _encode_images(), _encode_worker_loop() (+14 more)
+### Community 14 - "_encode_worker_loop"
+Cohesion: 0.15
+Nodes (16): choose_staff_match(), One face at a time, matched against every enrolled staff. Full-threshold hits…, _apply_face_embedding(), cosine_similarity(), embed_captured_face(), _encode_image(), _encode_images(), _encode_worker_loop() (+8 more)
 
 ### Community 15 - "eval.py"
-Cohesion: 0.07
-Nodes (61): argparse, dataclasses, numpy, pgvector_psycopg, Series, sys, main(), parse_args() (+53 more)
+Cohesion: 0.05
+Nodes (73): argparse, dataclasses, pathlib, pgvector_psycopg, pickle, Series, sys, main() (+65 more)
 
 ### Community 16 - "dataset_importer.py"
 Cohesion: 0.22
@@ -159,29 +162,25 @@ Nodes (15): choose_folder(), import_train_catalog(), inventory_name_from_filenam
 Cohesion: 0.14
 Nodes (21): _bar(), finish(), set_progress(), start(), _width(), shutil, time, _copy_tree() (+13 more)
 
-### Community 18 - "dice_loss.py"
-Cohesion: 0.15
-Nodes (16): Tensor, torch, torch_nn_functional, Label-aware Ultralytics train() kwargs. Aggressive geometry (mosaic, mixup,…, apply_bce_dice_mask_loss(), apply_dice_mask_loss(), bce_dice_single_mask_loss(), dice_single_mask_loss() (+8 more)
-
 ### Community 19 - "run_high_end_boot"
-Cohesion: 0.22
-Nodes (11): images_to_embeddings(), load_embed_model(), load_face_gate(), load_model(), queue_face_embedding(), Load MobileCLIP2 once on a dedicated encode thread and keep it there., Encode on the CLIP thread without blocking the API., run_high_end_boot() (+3 more)
-
-### Community 20 - "ensure_tables"
-Cohesion: 0.33
-Nodes (5): ensure_tables(), _apply(), existing_tables(), Create only required tables that are not already in the database., table_status()
+Cohesion: 0.14
+Nodes (18): get_lan_ip(), init_schema(), Boot helper — create missing tables only. Never seeds or overwrites., bootstrap_database(), clear_check_in_out(), ensure_database(), Create the oneshot role and oneshot_inventory database if they are missing., Called from main.py boot. Starts Postgres, creates missing DB/tables only. (+10 more)
 
 ### Community 22 - "sam_tool.py"
-Cohesion: 0.14
-Nodes (18): base64, collections, create_mask(), create_masked_crop(), create_session(), _decode_data_url(), _decode_image_bytes(), _get_session() (+10 more)
+Cohesion: 0.06
+Nodes (44): base64, collections, csv, cv2, crop_bgr(), crop_masked_bgr(), load_model(), predict_frame() (+36 more)
 
 ### Community 23 - "embed.py"
-Cohesion: 0.06
-Nodes (79): collections_abc, colorsys, main(), Export the full train image catalog to train_official.parquet (no embeddings)., google_colab, math, matplotlib, matplotlib_patches (+71 more)
+Cohesion: 0.05
+Nodes (78): collections_abc, colorsys, main(), Export the full train image catalog to train_official.parquet (no embeddings)., google_colab, math, matplotlib, matplotlib_patches (+70 more)
 
 ### Community 24 - "post"
-Cohesion: 0.15
-Nodes (19): BaseModel, sam_status(), api_start_camera(), capture_sam_frame(), FaceModeBody, generate_sam_mask(), get_sam_status(), post_face_clear() (+11 more)
+Cohesion: 0.14
+Nodes (19): analyze_face_frame(), api_start_camera(), arm_object_detection(), _cancel_app_exit(), dashboard_hello(), dashboard_leave(), detection_preview_active(), _face_detect_job() (+11 more)
+
+### Community 25 - "db.py"
+Cohesion: 0.20
+Nodes (17): Compatibility wrappers. All SQL lives in sql.py., check_db(), clear_staff_embeddings(), close_boot_connection(), _embedding_from_text(), export_table_snapshots(), fetch_inventory_embeddings(), fetch_staff_embeddings() (+9 more)
 
 ### Community 26 - "analyze_object_areas.py"
 Cohesion: 0.19
@@ -192,20 +191,24 @@ Cohesion: 0.22
 Nodes (5): HookBase, CloseMosaicHook, EarlyStopHook, MLflowHook, YOLO-style patience on val mask AP50 (one eval = one epoch).
 
 ### Community 28 - "setup_db.py"
-Cohesion: 0.20
-Nodes (10): config, ensure_database(), ensure_postgres_running(), Create the Postgres role/database, tables, and optional SQLite import., Create role + database if this machine can admin Postgres locally., _run(), os, psycopg (+2 more)
+Cohesion: 0.25
+Nodes (8): config, ensure_database(), ensure_postgres_running(), Create the Postgres role/database, tables, and optional SQLite import., Create role + database if this machine can admin Postgres locally., _run(), psycopg, sqlite3
 
 ### Community 29 - "fetchStats"
 Cohesion: 0.22
 Nodes (11): animateValue(), fetchSelectedItemStats(), fetchStats(), loadItemOptions(), pollCatalogImport(), renderCatalogImport(), renderItemOptions(), selectInventoryItem() (+3 more)
 
-### Community 31 - "runBrowserFaceLoop"
-Cohesion: 0.22
-Nodes (10): drawMediaPipeLandmarks(), faceCenteredInGate(), faceCentroid(), faceCoverage(), faceReady(), faceSpan(), pointInGate(), runBrowserFaceLoop() (+2 more)
+### Community 30 - "_clear_session_movements"
+Cohesion: 0.33
+Nodes (7): _clear_session_movements(), _exit_app(), _force_close(), _maybe_exit_after_leave(), shutdown_event(), stop_camera(), on_event
 
-### Community 32 - "updateTriggerStatus"
-Cohesion: 0.24
-Nodes (11): applyObjectRecognitionState(), escapeHtml(), fetchInventory(), maybeToastCapture(), renderMovements(), renderRecognized(), restoreLiveDetectionStream(), showCaptureAlert() (+3 more)
+### Community 31 - "runBrowserFaceLoop"
+Cohesion: 0.20
+Nodes (12): applyLocalFace(), drawMediaPipeLandmarks(), faceCenteredInGate(), faceCentroid(), faceCoverage(), faceReady(), faceSpan(), pointInGate() (+4 more)
+
+### Community 32 - "capture_sam_frame"
+Cohesion: 0.18
+Nodes (11): BaseModel, sam_status(), capture_sam_frame(), generate_sam_mask(), get_sam_status(), post_face_register(), _register_staff_face(), SamMaskBody (+3 more)
 
 ### Community 33 - "V2DatasetMapper"
 Cohesion: 0.29
@@ -215,29 +218,21 @@ Nodes (7): _ensure_bbox_mode(), _hsv_jitter(), ndarray, YOLO-v2-like augs: HSV, 
 Cohesion: 0.25
 Nodes (5): AMPTrainer, ClsGainWrapper, ModernAMPTrainer, Detectron2 0.6 still calls torch.cuda.amp, which PyTorch 2.4+ warns on every…, Scale Detectron2 loss_cls to match YOLO cls=0.4 without breaking…
 
-### Community 35 - "enableCaptureFallback"
-Cohesion: 0.29
-Nodes (8): captureButtonLabel(), enableCaptureFallback(), isLoopbackHost(), isPhoneDevice(), needsCaptureFallback(), openNativeCamera(), preferredCameraFacing(), refreshCameraList()
+### Community 35 - "applyFaceStatus"
+Cohesion: 0.24
+Nodes (15): applyFaceStatus(), captureButtonLabel(), enableCaptureFallback(), isLoopbackHost(), isPhoneDevice(), needsCaptureFallback(), openNativeCamera(), openRegisterPopup() (+7 more)
 
 ### Community 37 - "ObjectTrainer"
 Cohesion: 0.25
 Nodes (3): DefaultTrainer, ObjectTrainer, Same Detectron2 loop, plus YOLO-style patience.
 
 ### Community 39 - "PETROSAINS inventory similarity (`test_pg`)"
-Cohesion: 0.10
-Nodes (20): pickle, 1. Start Postgres with Docker, 2. Load catalog vectors into pgvector, 3. Evaluate on val / test, A. Dataset and Google Drive, B. Extract inventory as a catalog parquet, D. Development mode: prediction and evaluation, E. Predict one image (`predict_labeled_image.py`) (+12 more)
+Cohesion: 0.20
+Nodes (9): A. Dataset and Google Drive, B. Extract inventory as a catalog parquet, E. Predict one image (`predict_labeled_image.py`), How to run, Input, Output, PETROSAINS inventory similarity (`test_pg`), Share the same Postgres catalog with the team (+1 more)
 
 ### Community 40 - "EpochMetricPrinter"
 Cohesion: 0.29
 Nodes (3): CommonMetricPrinter, EpochMetricPrinter, Detectron2 is iter-based; print the matching YOLO-style epoch next to iter.
-
-### Community 41 - "bootstrap_database"
-Cohesion: 0.33
-Nodes (6): init_schema(), Boot helper — create missing tables only. Never seeds or overwrites., bootstrap_database(), ensure_database(), Create the oneshot role and oneshot_inventory database if they are missing., Called from main.py boot. Starts Postgres, creates missing DB/tables only.
-
-### Community 42 - "export_table_snapshots"
-Cohesion: 0.33
-Nodes (6): clear_staff_embeddings(), _copy_table_to_file(), export_table_snapshots(), _export(), Export supported application tables to atomic CSV snapshots. only: optional…, Wipe enrolled faces every boot. Also clear staff.csv so restore cannot revive…
 
 ### Community 43 - "OneShot Inventory (`inventory_app`)"
 Cohesion: 0.50
@@ -247,13 +242,13 @@ Nodes (3): Layout, OneShot Inventory (`inventory_app`), Run
 Cohesion: 0.33
 Nodes (3): setter, MosaicProb, Process-shared mosaic probability so close_mosaic works with DataLoader workers.
 
-### Community 49 - "db.py"
-Cohesion: 0.16
-Nodes (20): get_item_summary(), Compatibility wrappers. All SQL lives in sql.py., clear_check_in_out(), _embedding_to_text(), fetch_item_summary(), get_staff(), insert_check_in_out(), insert_staff() (+12 more)
+### Community 49 - "normalize_item_name"
+Cohesion: 0.21
+Nodes (16): _embedding_to_text(), normalize_item_name(), Rebuild summary counts from inventory_emb. Keeps existing registered_date., Atomically replace the catalog and rebuild unique inventory counts., recalculate_available_quantities(), refresh_main_inventory(), _refresh(), replace_inventory_embeddings() (+8 more)
 
 ## Knowledge Gaps
 - **72 isolated node(s):** `format`, `exported_at`, `file`, `columns`, `rows` (+67 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 290 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 291 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
@@ -270,6 +265,6 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `dashboard.js` be split into smaller, more focused modules?**
   _Cohesion score 0.039057239057239054 - nodes in this community are weakly interconnected._
 - **Should `face.py` be split into smaller, more focused modules?**
-  _Cohesion score 0.06376811594202898 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.12615384615384614 - nodes in this community are weakly interconnected._
 - **Should `evaluate_embedding_similarity.py` be split into smaller, more focused modules?**
-  _Cohesion score 0.08484848484848485 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06775510204081632 - nodes in this community are weakly interconnected._
