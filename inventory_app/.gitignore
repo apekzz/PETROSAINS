@@ -5,3 +5,4 @@ __pycache__/
 inventory.db-wal
 inventory.db-shm
 noise_captures/
+.cache/

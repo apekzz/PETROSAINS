@@ -180,6 +180,10 @@ def capture_laptop_noise_profile(
     )
 
 
+# Pixel MAE floor when crop residual already ≥ laptop avg (cannot "raise" score).
+_MIN_PIXEL_DELTA = 0.25
+
+
 def apply_noise_to_image(pil_rgb: Image.Image, profile: NoiseProfile) -> Image.Image:
     """Stamp laptop residual grain onto RGB crop; clip to uint8."""
     rgb = np.asarray(pil_rgb.convert("RGB"), dtype=np.float32)
@@ -199,18 +203,28 @@ def apply_noise_to_image(pil_rgb: Image.Image, profile: NoiseProfile) -> Image.I
     target = profile.avg_noise
     clean_gray = cv2.cvtColor(np.clip(rgb, 0, 255).astype(np.uint8), cv2.COLOR_RGB2GRAY)
     clean_score = noise_score(clean_gray)
-    if abs(got - target) > max(TARGET_ABS_TOL, TARGET_REL_TOL * target):
-        if got > 1e-6:
-            scale *= target / got
-        grain = centered * scale
-        candidate = np.clip(rgb + grain[:, :, None], 0, 255).astype(np.uint8)
-        gray = cv2.cvtColor(candidate, cv2.COLOR_RGB2GRAY)
-        got = noise_score(gray)
-    if got <= clean_score + 0.05:
-        raise RuntimeError(
-            f"Noise apply failed gate: residual did not rise "
-            f"(clean={clean_score:.3f}, got={got:.3f}, target={target:.3f})."
-        )
+    # Quiet crops: steer residual toward FaceTime avg. Busy crops: stamp only.
+    # ponytail: photo texture often > laptop grain; residual-rise gate cannot hold.
+    if clean_score < target - 0.5:
+        if abs(got - target) > max(TARGET_ABS_TOL, TARGET_REL_TOL * target):
+            if got > 1e-6:
+                scale *= target / got
+            grain = centered * scale
+            candidate = np.clip(rgb + grain[:, :, None], 0, 255).astype(np.uint8)
+            gray = cv2.cvtColor(candidate, cv2.COLOR_RGB2GRAY)
+            got = noise_score(gray)
+        if got <= clean_score + 0.05:
+            raise RuntimeError(
+                f"Noise apply failed gate: residual did not rise "
+                f"(clean={clean_score:.3f}, got={got:.3f}, target={target:.3f})."
+            )
+    else:
+        delta = float(np.mean(np.abs(candidate.astype(np.float32) - rgb)))
+        if delta < _MIN_PIXEL_DELTA:
+            raise RuntimeError(
+                f"Noise apply failed gate: grain no-op "
+                f"(pixel_delta={delta:.3f}, clean={clean_score:.3f}, target={target:.3f})."
+            )
     return Image.fromarray(candidate, mode="RGB")
 
 
@@ -220,18 +234,28 @@ def assert_noise_applied(
     profile: NoiseProfile,
 ) -> None:
     """Fail if apply was a no-op or missed target band."""
-    clean_g = cv2.cvtColor(np.asarray(clean.convert("RGB")), cv2.COLOR_RGB2GRAY)
-    noised_g = cv2.cvtColor(np.asarray(noised.convert("RGB")), cv2.COLOR_RGB2GRAY)
+    clean_rgb = np.asarray(clean.convert("RGB"), dtype=np.float32)
+    noised_rgb = np.asarray(noised.convert("RGB"), dtype=np.float32)
+    clean_g = cv2.cvtColor(clean_rgb.astype(np.uint8), cv2.COLOR_RGB2GRAY)
+    noised_g = cv2.cvtColor(noised_rgb.astype(np.uint8), cv2.COLOR_RGB2GRAY)
     c_score = noise_score(clean_g)
     n_score = noise_score(noised_g)
-    if n_score <= c_score + 0.05:
-        raise RuntimeError(
-            f"Noised residual {n_score:.3f} not above clean {c_score:.3f}."
-        )
     target = profile.avg_noise
-    if n_score < min(c_score + 0.2, target * 0.4):
+    if c_score < target - 0.5:
+        if n_score <= c_score + 0.05:
+            raise RuntimeError(
+                f"Noised residual {n_score:.3f} not above clean {c_score:.3f}."
+            )
+        if n_score < min(c_score + 0.2, target * 0.4):
+            raise RuntimeError(
+                f"Noised residual {n_score:.3f} far from target {target:.3f}."
+            )
+        return
+    delta = float(np.mean(np.abs(noised_rgb - clean_rgb)))
+    if delta < _MIN_PIXEL_DELTA:
         raise RuntimeError(
-            f"Noised residual {n_score:.3f} far from target {target:.3f}."
+            f"Noised pixel_delta {delta:.3f} below floor {_MIN_PIXEL_DELTA} "
+            f"(clean residual already {c_score:.3f} ≥ target {target:.3f})."
         )
 
 

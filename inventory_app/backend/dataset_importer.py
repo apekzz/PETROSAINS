@@ -50,7 +50,8 @@ def validate_train_folders(
         raise ValueError("Both selected folders must exist.")
     if images.name.lower() != "train" or images.parent.name.lower() != "images":
         raise ValueError("Select the dataset images/train folder.")
-    if labels.name.lower() != "train" or labels.parent.name.lower() != "labels":
+    # Accept labels/ or Label/ (local Dataset uses Label; resolve() follows symlinks).
+    if labels.name.lower() != "train" or labels.parent.name.lower() not in {"labels", "label"}:
         raise ValueError("Select the dataset labels/train folder.")
     if images.parent.parent != labels.parent.parent:
         raise ValueError("Image and label folders must belong to the same dataset.")

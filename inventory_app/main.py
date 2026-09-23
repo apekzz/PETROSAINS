@@ -2217,6 +2217,52 @@ def catalog_import_status():
         return JSONResponse(dict(catalog_import_state))
 
 
+def _start_catalog_import(image_dir: str, label_dir: str):
+    """Shared start for picker + path APIs. Caller must own the lock check."""
+    _catalog_progress(
+        running=True,
+        stage="queued",
+        percent=1,
+        processed=0,
+        total=0,
+        embedded=0,
+        current="",
+        error="",
+        result=None,
+        noise_avg=None,
+        noise_frames=None,
+        noise_camera_index=None,
+        noise_capture_dir=None,
+    )
+    threading.Thread(
+        target=_catalog_import_job,
+        args=(image_dir, label_dir),
+        name="CatalogImport",
+        daemon=True,
+    ).start()
+    with catalog_import_lock:
+        return JSONResponse(dict(catalog_import_state))
+
+
+@app.post("/api/catalog/import/paths")
+async def import_catalog_paths(payload: dict):
+    """Import without folder picker — body: {image_dir, label_dir}."""
+    image_dir = str(payload.get("image_dir") or "").strip()
+    label_dir = str(payload.get("label_dir") or "").strip()
+    if not image_dir or not label_dir:
+        return JSONResponse(
+            {"detail": "image_dir and label_dir required."},
+            status_code=400,
+        )
+    with catalog_import_lock:
+        if catalog_import_state["running"]:
+            return JSONResponse(
+                {"detail": "A catalog import is already running."},
+                status_code=409,
+            )
+    return _start_catalog_import(image_dir, label_dir)
+
+
 @app.post("/api/catalog/import/select")
 async def select_and_import_catalog():
     with catalog_import_lock:
@@ -2256,14 +2302,7 @@ async def select_and_import_catalog():
         _catalog_progress(running=False, stage="idle", error="Folder selection cancelled.")
         return JSONResponse({"detail": "Label folder selection cancelled."}, status_code=400)
 
-    threading.Thread(
-        target=_catalog_import_job,
-        args=(image_dir, label_dir),
-        name="CatalogImport",
-        daemon=True,
-    ).start()
-    with catalog_import_lock:
-        return JSONResponse(dict(catalog_import_state))
+    return _start_catalog_import(image_dir, label_dir)
 
 
 # ============================================================
