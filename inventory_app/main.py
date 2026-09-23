@@ -33,6 +33,7 @@ import uvicorn
 from api import router as api_router
 import loader
 from dataset_importer import choose_folder, import_train_catalog
+from noise_transfer import capture_laptop_noise_profile
 from db import (
     record_yolo_capture,
     normalize_item_name,
@@ -103,6 +104,9 @@ catalog_import_state = {
     "current": "",
     "error": "",
     "result": None,
+    "noise_avg": None,
+    "noise_frames": None,
+    "noise_camera_index": None,
 }
 inventory_catalog_lock = threading.Lock()
 inventory_catalog_cache = None
@@ -2038,6 +2042,33 @@ def api_start_camera():
     return JSONResponse({"ok": True, "camera_ok": True, "preview": "browser"})
 
 
+@app.post("/api/noise/capture")
+def api_noise_capture():
+    """FaceTime still + blur-residual result.txt under noise_captures/."""
+    try:
+        profile = capture_laptop_noise_profile(
+            CAMERA_INDEX,
+            size=(CAMERA_WIDTH, CAMERA_HEIGHT),
+        )
+    except Exception as exc:
+        print("[NOISE] Capture failed:", exc)
+        return JSONResponse({"ok": False, "detail": str(exc)}, status_code=500)
+    print(
+        f"[NOISE] Captured avg={profile.avg_noise:.3f} → {profile.capture_dir}"
+    )
+    return JSONResponse(
+        {
+            "ok": True,
+            "avg_noise": profile.avg_noise,
+            "frames": profile.frames,
+            "camera_index": profile.camera_index,
+            "width": profile.width,
+            "height": profile.height,
+            "folder": profile.capture_dir,
+            "formula": "blur_residual",
+        }
+    )
+
 
 @app.post("/api/detection/arm")
 def arm_object_detection():
@@ -2108,8 +2139,10 @@ def _catalog_progress(**changes):
         ratio = min(1.0, processed / total)
         if stage == "selecting":
             percent = 2
+        elif stage == "noise_capture":
+            percent = 4
         elif stage == "cropping":
-            percent = 5 + round(ratio * 20)
+            percent = 8 + round(ratio * 17)
         elif stage == "embedding":
             percent = 25 + round(ratio * 68)
         elif stage == "database":
@@ -2125,12 +2158,39 @@ def _catalog_progress(**changes):
 
 def _catalog_import_job(image_dir, label_dir):
     try:
+        _catalog_progress(
+            stage="noise_capture",
+            processed=0,
+            total=1,
+            current="laptop FaceTime",
+            error="",
+        )
+        print(f"[CATALOG] Capturing laptop noise from camera {CAMERA_INDEX}…")
+        noise_profile = capture_laptop_noise_profile(
+            CAMERA_INDEX,
+            size=(CAMERA_WIDTH, CAMERA_HEIGHT),
+        )
+        _catalog_progress(
+            noise_avg=noise_profile.avg_noise,
+            noise_frames=noise_profile.frames,
+            noise_camera_index=noise_profile.camera_index,
+        )
+        print(
+            "[CATALOG] Noise profile: "
+            f"avg={noise_profile.avg_noise:.3f} "
+            f"frames={noise_profile.frames} "
+            f"size={noise_profile.width}x{noise_profile.height}"
+        )
+        if noise_profile.capture_dir:
+            print(f"[CATALOG] Noise captures saved → {noise_profile.capture_dir}")
+            _catalog_progress(noise_capture_dir=noise_profile.capture_dir)
         result = import_train_catalog(
             image_dir,
             label_dir,
             images_to_embeddings,
             replace_inventory_embeddings,
             _catalog_progress,
+            noise_profile=noise_profile,
         )
         refresh_inventory_catalog_cache()
         _catalog_progress(
@@ -2143,7 +2203,8 @@ def _catalog_import_job(image_dir, label_dir):
         print(
             "[CATALOG] Complete: "
             f"{result['embeddings']} embeddings, "
-            f"{result['unique_items']} unique items"
+            f"{result['unique_items']} unique items, "
+            f"noise_avg={result.get('noise_avg')}"
         )
     except Exception as exc:
         print("[CATALOG] Import failed:", exc)

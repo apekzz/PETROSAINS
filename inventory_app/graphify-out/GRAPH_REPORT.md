@@ -1,84 +1,85 @@
-# Graph Report - inventory_app  (2026-09-22)
+# Graph Report - inventory_app  (2026-09-23)
 
 ## Corpus Check
-- 17 files · ~25,389 words
+- 18 files · ~26,416 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 17 file(s) not represented in the graph (top: .csv 4, .pt 4, .css 3)
 
 ## Summary
-- 516 nodes · 1071 edges · 23 communities (21 shown, 2 thin omitted)
-- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 77 edges (avg confidence: 0.85)
+- 544 nodes · 1136 edges · 24 communities (22 shown, 2 thin omitted)
+- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 79 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e05c8407`
+- Built from commit: `18a757f4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - dashboard.js
-- _encode_worker_loop
+- _apply_face_embedding
 - run_high_end_boot
 - sam-tool.js
 - camera_capture_loop
 - face.py
 - analyzeLocalFrame
 - tables
-- BaseModel
+- _clear_session_movements
 - sql.py
 - updateTriggerStatus
 - main.py
-- infer.py
+- loader.py
 - api.py
 - sam_tool.py
+- noise_transfer.py
 - runBrowserFaceLoop
 - fetchStats
 - applyFaceStatus
 - OneShot Inventory (`inventory_app`)
 - saved_tables/README.md
-- face_crop_to_embedding
 - post
+- capture_sam_frame
 
 ## God Nodes (most connected - your core abstractions)
 1. `get_db()` - 28 edges
 2. `connect_and_prepare()` - 15 edges
 3. `camera_capture_loop()` - 14 edges
-4. `applyFaceStatus()` - 13 edges
-5. `normalize_item_name()` - 11 edges
-6. `analyzeLocalFrame()` - 11 edges
-7. `startLocalCamera()` - 11 edges
-8. `face_status_payload()` - 11 edges
-9. `import_train_catalog()` - 10 edges
-10. `generateMask()` - 10 edges
+4. `import_train_catalog()` - 13 edges
+5. `applyFaceStatus()` - 13 edges
+6. `capture_laptop_noise_profile()` - 12 edges
+7. `normalize_item_name()` - 11 edges
+8. `analyzeLocalFrame()` - 11 edges
+9. `startLocalCamera()` - 11 edges
+10. `face_status_payload()` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `get_inventory()` --calls--> `fetch_inventory()`  [INFERRED]
-  inventory_app/backend/api.py → inventory_app/database/sql.py
+  backend/api.py → database/sql.py
 - `get_movements()` --calls--> `fetch_movements()`  [INFERRED]
-  inventory_app/backend/api.py → inventory_app/database/sql.py
+  backend/api.py → database/sql.py
 - `get_stats()` --calls--> `fetch_stats()`  [INFERRED]
-  inventory_app/backend/api.py → inventory_app/database/sql.py
+  backend/api.py → database/sql.py
 - `search_inventory()` --calls--> `fetch_inventory()`  [INFERRED]
-  inventory_app/backend/api.py → inventory_app/database/sql.py
+  backend/api.py → database/sql.py
 - `get_item()` --calls--> `fetch_item()`  [INFERRED]
-  inventory_app/backend/api.py → inventory_app/database/sql.py
+  backend/api.py → database/sql.py
 
 ## Import Cycles
 - None detected.
 
-## Communities (23 total, 2 thin omitted)
+## Communities (24 total, 2 thin omitted)
 
 ### Community 0 - "dashboard.js"
 Cohesion: 0.04
-Nodes (48): applyMode(), bootFill, bootOverlay, bootPct, bootStage, bootStartedAt, btnCatalogClose, btnHeaderRegisterFace (+40 more)
+Nodes (47): applyMode(), bootFill, bootOverlay, bootPct, bootStage, bootStartedAt, btnCatalogClose, btnHeaderRegisterFace (+39 more)
 
-### Community 1 - "_encode_worker_loop"
-Cohesion: 0.18
-Nodes (12): _apply_face_embedding(), cosine_similarity(), _encode_image(), _encode_images(), _encode_worker_loop(), get_inventory_catalog(), image_to_embedding(), _load_clip_weights() (+4 more)
+### Community 1 - "_apply_face_embedding"
+Cohesion: 0.15
+Nodes (13): _apply_face_embedding(), cosine_similarity(), face_crop_to_embedding(), _face_detect_job(), _face_embed_worker(), get_inventory_catalog(), handle_face_info(), match_inventory_name() (+5 more)
 
 ### Community 2 - "run_high_end_boot"
-Cohesion: 0.14
-Nodes (17): get_lan_ip(), _clear_session_movements(), _exit_app(), _force_close(), images_to_embeddings(), load_embed_model(), load_face_gate(), load_model() (+9 more)
+Cohesion: 0.15
+Nodes (16): get_lan_ip(), _encode_image(), _encode_images(), _encode_worker_loop(), images_to_embeddings(), _load_clip_weights(), load_embed_model(), load_face_gate() (+8 more)
 
 ### Community 3 - "sam-tool.js"
 Cohesion: 0.19
@@ -86,11 +87,11 @@ Nodes (21): calculateTransform(), captureFrozenFrame(), endStroke(), exportMask(
 
 ### Community 4 - "camera_capture_loop"
 Cohesion: 0.14
-Nodes (30): arm_object_detection(), camera_capture_loop(), catalog_import_active(), detection_labels(), draw_yolo_boxes(), encode_jpeg(), face_detection_active(), get_trigger_state() (+22 more)
+Nodes (30): arm_object_detection(), camera_capture_loop(), detection_labels(), draw_yolo_boxes(), encode_jpeg(), face_detection_active(), get_detection_mode(), get_trigger_state() (+22 more)
 
 ### Community 5 - "face.py"
-Cohesion: 0.12
-Nodes (21): _align_template(), choose_staff_match(), crop_from_box(), draw_landmarks(), encode_crop(), ensure_face_model(), face_in_region(), FaceGate (+13 more)
+Cohesion: 0.06
+Nodes (38): argparse, _align_template(), choose_staff_match(), crop_from_box(), draw_landmarks(), encode_crop(), ensure_face_model(), face_in_region() (+30 more)
 
 ### Community 6 - "analyzeLocalFrame"
 Cohesion: 0.18
@@ -100,9 +101,9 @@ Nodes (17): analyzeLocalFrame(), applyCapturedPhoto(), base64JpegToBlob(), blobT
 Cohesion: 0.10
 Nodes (19): columns, file, rows, exported_at, format, columns, file, rows (+11 more)
 
-### Community 8 - "BaseModel"
-Cohesion: 0.22
-Nodes (9): BaseModel, FaceModeBody, generate_sam_mask(), post_face_register(), _register_staff_face(), SamMaskBody, SamRegisterBody, StaffRegisterBody (+1 more)
+### Community 8 - "_clear_session_movements"
+Cohesion: 0.33
+Nodes (7): _clear_session_movements(), _exit_app(), _force_close(), _maybe_exit_after_leave(), shutdown_event(), stop_camera(), on_event
 
 ### Community 9 - "sql.py"
 Cohesion: 0.05
@@ -113,20 +114,24 @@ Cohesion: 0.24
 Nodes (11): applyObjectRecognitionState(), escapeHtml(), fetchInventory(), maybeToastCapture(), renderMovements(), renderRecognized(), restoreLiveDetectionStream(), showCaptureAlert() (+3 more)
 
 ### Community 11 - "main.py"
-Cohesion: 0.08
-Nodes (36): api, asyncio, dataset_importer, delete, face, fastapi_middleware_cors, fastapi_responses, infer (+28 more)
-
-### Community 12 - "infer.py"
 Cohesion: 0.07
-Nodes (24): argparse, crop_bgr(), crop_masked_bgr(), load_model(), predict_frame(), YOLO11l-seg inference for OneShot inventory. Derived from…, Tight object cutout using the predicted segmentation polygon., Run the v2 segmentation model. Same call shape as the notebook. (+16 more)
+Nodes (39): api, asyncio, dataset_importer, delete, face, fastapi_middleware_cors, fastapi_responses, infer (+31 more)
+
+### Community 12 - "loader.py"
+Cohesion: 0.24
+Nodes (8): _bar(), finish(), set_progress(), start(), _width(), shutil, sys, time
 
 ### Community 13 - "api.py"
 Cohesion: 0.24
 Nodes (13): get_detections(), get_detections_summary(), get_detections_today(), get_inventory(), get_item(), get_item_summary(), get_movements(), get_staff_list() (+5 more)
 
 ### Community 14 - "sam_tool.py"
-Cohesion: 0.07
-Nodes (40): choose_folder(), import_train_catalog(), inventory_name_from_filename(), masked_crops(), _polygon_rows(), ndarray, Import YOLO-seg train crops into the inventory embedding catalog., Mask-crop, OpenCLIP-encode, and atomically replace catalog rows. (+32 more)
+Cohesion: 0.14
+Nodes (18): create_mask(), create_masked_crop(), create_session(), _decode_data_url(), _decode_image_bytes(), _get_session(), load_sam_model(), _mask_data_url() (+10 more)
+
+### Community 15 - "noise_transfer.py"
+Cohesion: 0.08
+Nodes (46): choose_folder(), import_train_catalog(), inventory_name_from_filename(), masked_crops(), _polygon_rows(), Image, ndarray, Path (+38 more)
 
 ### Community 16 - "runBrowserFaceLoop"
 Cohesion: 0.20
@@ -144,33 +149,33 @@ Nodes (15): applyFaceStatus(), captureButtonLabel(), enableCaptureFallback(), is
 Cohesion: 0.50
 Nodes (3): Layout, OneShot Inventory (`inventory_app`), Run
 
-### Community 23 - "face_crop_to_embedding"
-Cohesion: 0.29
-Nodes (7): face_crop_to_embedding(), _face_detect_job(), _face_embed_worker(), handle_face_info(), maybe_start_face_job(), _prepare_embed_image(), CPU 512-d face vector matching saved staff.csv (grid + RGB hist).
-
 ### Community 24 - "post"
-Cohesion: 0.14
-Nodes (20): sam_status(), analyze_face_frame(), api_start_camera(), _cancel_app_exit(), capture_sam_frame(), dashboard_hello(), dashboard_leave(), detection_preview_active() (+12 more)
+Cohesion: 0.15
+Nodes (19): analyze_face_frame(), api_noise_capture(), api_start_camera(), _cancel_app_exit(), dashboard_hello(), dashboard_leave(), detection_preview_active(), embed_captured_face() (+11 more)
+
+### Community 30 - "capture_sam_frame"
+Cohesion: 0.22
+Nodes (9): sam_status(), BaseModel, capture_sam_frame(), generate_sam_mask(), get_sam_status(), SamMaskBody, SamRegisterBody, StaffRegisterBody (+1 more)
 
 ## Knowledge Gaps
-- **58 isolated node(s):** `format`, `exported_at`, `file`, `columns`, `rows` (+53 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 160 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **57 isolated node(s):** `format`, `exported_at`, `file`, `columns`, `rows` (+52 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 171 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `_catalog_import_job()` connect `sam_tool.py` to `sql.py`, `run_high_end_boot`, `main.py`?**
-  _High betweenness centrality (0.013) - this node is a cross-community bridge._
+- **Why does `_catalog_import_job()` connect `noise_transfer.py` to `sql.py`, `run_high_end_boot`, `main.py`?**
+  _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **Why does `FaceGate` connect `face.py` to `run_high_end_boot`?**
   _High betweenness centrality (0.012) - this node is a cross-community bridge._
 - **Are the 3 inferred relationships involving `camera_capture_loop()` (e.g. with `draw_landmarks()` and `run_backend_capture()`) actually correct?**
   _`camera_capture_loop()` has 3 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 2 inferred relationships involving `import_train_catalog()` (e.g. with `NoiseProfile` and `_catalog_import_job()`) actually correct?**
+  _`import_train_catalog()` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `format`, `exported_at`, `file` to the rest of the system?**
-  _58 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _57 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `dashboard.js` be split into smaller, more focused modules?**
   _Cohesion score 0.039057239057239054 - nodes in this community are weakly interconnected._
-- **Should `run_high_end_boot` be split into smaller, more focused modules?**
-  _Cohesion score 0.13970588235294118 - nodes in this community are weakly interconnected._
 - **Should `camera_capture_loop` be split into smaller, more focused modules?**
-  _Cohesion score 0.135632183908046 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.14022988505747128 - nodes in this community are weakly interconnected._

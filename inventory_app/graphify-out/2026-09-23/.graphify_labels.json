@@ -1,6 +1,6 @@
 {
   "0": "dashboard.js",
-  "1": "_apply_face_embedding",
+  "1": "_encode_worker_loop",
   "2": "run_high_end_boot",
   "3": "sam-tool.js",
   "4": "camera_capture_loop",
@@ -17,10 +17,19 @@
   "15": "noise_transfer.py",
   "16": "runBrowserFaceLoop",
   "17": "fetchStats",
+  "18": "free_port",
   "19": "applyFaceStatus",
   "20": "OneShot Inventory (`inventory_app`)",
   "21": "saved_tables/README.md",
   "22": "config.js",
+  "23": "db.py",
   "24": "post",
-  "30": "capture_sam_frame"
+  "25": "normalize_item_name",
+  "26": "connect_and_prepare",
+  "27": "setup_db.py",
+  "28": "clear_check_in_out",
+  "29": "export_table_snapshots",
+  "30": "BaseModel",
+  "31": "bootstrap_database",
+  "32": "ensure_tables"
 }

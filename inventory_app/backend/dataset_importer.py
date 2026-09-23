@@ -10,8 +10,11 @@ from typing import Callable
 import numpy as np
 from PIL import Image, ImageDraw
 
+from noise_transfer import NoiseProfile, apply_noise_to_image, assert_noise_applied
 
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
+# Spot-check first N noised crops so silent no-op cannot ship.
+_NOISE_GATE_SAMPLES = 3
 
 
 def choose_folder(title: str, initial_dir: str | Path) -> str:
@@ -106,8 +109,14 @@ def import_train_catalog(
     replace_rows: Callable[[list[tuple[str, list[float]]]], None],
     update: Callable[..., None],
     batch_size: int = 8,
+    noise_profile: NoiseProfile | None = None,
 ) -> dict:
-    """Mask-crop, OpenCLIP-encode, and atomically replace catalog rows."""
+    """Mask-crop, transfer laptop noise, encode, atomically replace catalog."""
+    if noise_profile is None:
+        raise ValueError(
+            "noise_profile required — capture laptop FaceTime grain before import."
+        )
+
     images_dir, labels_dir = validate_train_folders(image_dir, label_dir)
     image_paths = sorted(
         path for path in images_dir.iterdir()
@@ -116,7 +125,15 @@ def import_train_catalog(
     if not image_paths:
         raise ValueError("No supported images found in images/train.")
 
-    update(stage="cropping", total=len(image_paths), processed=0, embedded=0)
+    update(
+        stage="cropping",
+        total=len(image_paths),
+        processed=0,
+        embedded=0,
+        noise_avg=noise_profile.avg_noise,
+        noise_frames=noise_profile.frames,
+        noise_camera_index=noise_profile.camera_index,
+    )
     missing_labels = 0
     total_crops = 0
     for index, image_path in enumerate(image_paths, 1):
@@ -138,6 +155,7 @@ def import_train_catalog(
 
     rows: list[tuple[str, list[float]]] = []
     pending: list[tuple[str, Image.Image]] = []
+    gated = 0
     update(stage="embedding", total=total_crops, processed=0, embedded=0)
     for image_path in image_paths:
         label_path = labels_dir / f"{image_path.stem}.txt"
@@ -146,7 +164,12 @@ def import_train_catalog(
         with Image.open(image_path) as source:
             image = source.convert("RGB")
             name = inventory_name_from_filename(image_path)
-            pending.extend((name, crop) for crop in masked_crops(image, label_path))
+            for crop in masked_crops(image, label_path):
+                noised = apply_noise_to_image(crop, noise_profile)
+                if gated < _NOISE_GATE_SAMPLES:
+                    assert_noise_applied(crop, noised, noise_profile)
+                    gated += 1
+                pending.append((name, noised))
         while len(pending) >= batch_size:
             batch, pending = pending[:batch_size], pending[batch_size:]
             vectors = encode_batch([crop for _name, crop in batch])
@@ -180,6 +203,9 @@ def import_train_catalog(
             current=pending[-1][0],
         )
 
+    if gated < 1:
+        raise RuntimeError("No crops available to verify noise transfer.")
+
     update(
         stage="database",
         total=total_crops,
@@ -195,4 +221,7 @@ def import_train_catalog(
         "missing_labels": missing_labels,
         "image_dir": str(images_dir),
         "label_dir": str(labels_dir),
+        "noise_avg": noise_profile.avg_noise,
+        "noise_frames": noise_profile.frames,
+        "noise_camera_index": noise_profile.camera_index,
     }
