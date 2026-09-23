@@ -64,10 +64,30 @@ REQUIRED_TABLES = {
             inventory_embedding TEXT NOT NULL
         )
     """,
+    "inventory_emb_mobileclip2": """
+        CREATE TABLE inventory_emb_mobileclip2 (
+            id SERIAL PRIMARY KEY,
+            inventory_name TEXT NOT NULL,
+            inventory_embedding TEXT NOT NULL
+        )
+    """,
+    "inventory_emb_noise": """
+        CREATE TABLE inventory_emb_noise (
+            id SERIAL PRIMARY KEY,
+            inventory_name TEXT NOT NULL,
+            inventory_embedding TEXT NOT NULL
+        )
+    """,
 }
+
+# Live dual-match uses mobileclip2 + noise. Legacy inventory_emb stays loaded but unused for live.
+LIVE_EMB_TABLES = ("inventory_emb_mobileclip2", "inventory_emb_noise")
+ALL_EMB_TABLES = ("inventory_emb", "inventory_emb_mobileclip2", "inventory_emb_noise")
 
 TABLE_COLUMNS = {
     "inventory_emb": ("id", "inventory_name", "inventory_embedding"),
+    "inventory_emb_mobileclip2": ("id", "inventory_name", "inventory_embedding"),
+    "inventory_emb_noise": ("id", "inventory_name", "inventory_embedding"),
     "main_inventory": (
         "id",
         "inventory_name",
@@ -527,7 +547,9 @@ def connect_and_prepare():
         ensure_schema_columns(_boot_conn)
         validate_required_schema(_boot_conn)
         restored = restore_empty_tables_from_snapshots(_boot_conn)
-        if "main_inventory" in restored or restored.get("inventory_emb"):
+        if "main_inventory" in restored or any(
+            restored.get(t) for t in ALL_EMB_TABLES
+        ):
             refresh_main_inventory(_boot_conn)
         recalculate_available_quantities(_boot_conn)
         _boot_conn.commit()
@@ -541,8 +563,11 @@ def connect_and_prepare():
             )
             print("[SQL] Restored empty tables from snapshots:", summary)
         try:
-            # Never rewrite inventory_emb.csv on boot (multi‑MB COPY stalls startup).
-            stale = [t for t in _stale_snapshot_tables(_boot_conn) if t != "inventory_emb"]
+            # Never rewrite multi‑MB emb CSVs on boot.
+            stale = [
+                t for t in _stale_snapshot_tables(_boot_conn)
+                if t not in ALL_EMB_TABLES
+            ]
             if stale:
                 exported = export_table_snapshots(_boot_conn, only=stale)
                 summary = ", ".join(
@@ -691,26 +716,32 @@ def fetch_stats():
 
 
 def refresh_main_inventory(conn=None):
-    """Rebuild summary counts from inventory_emb. Keeps existing registered_date."""
+    """Rebuild summary from mobileclip2 (abubu rule); fallback legacy inventory_emb."""
 
     def _refresh(cur):
+        source_table = "inventory_emb_mobileclip2"
+        new_count = cur.execute(
+            "SELECT COUNT(*) AS count FROM inventory_emb_mobileclip2"
+        ).fetchone()["count"]
+        if not new_count:
+            source_table = "inventory_emb"
         cur.execute(
-            """
+            f"""
             INSERT INTO main_inventory
                 (inventory_name, orig_quantity, available_quantity, registered_date)
             SELECT inventory_name, COUNT(*)::int, COUNT(*)::int, CURRENT_TIMESTAMP
-            FROM inventory_emb
+            FROM {source_table}
             GROUP BY inventory_name
             ON CONFLICT (inventory_name) DO UPDATE
             SET orig_quantity = EXCLUDED.orig_quantity
             """
         )
         cur.execute(
-            """
+            f"""
             DELETE FROM main_inventory AS m
             WHERE NOT EXISTS (
                 SELECT 1
-                FROM inventory_emb AS e
+                FROM {source_table} AS e
                 WHERE e.inventory_name = m.inventory_name
             )
             """
@@ -750,13 +781,14 @@ def recalculate_available_quantities(conn, inventory_name=None):
 
 
 def save_inventory_embedding(inventory_name, embedding):
+    """SAM / one-shot register → mobileclip2 (abubu live primary)."""
     name = normalize_item_name(inventory_name)
     if not name:
         raise ValueError("inventory_name is required")
     with get_db() as conn:
         conn.execute(
             """
-            INSERT INTO inventory_emb (inventory_name, inventory_embedding)
+            INSERT INTO inventory_emb_mobileclip2 (inventory_name, inventory_embedding)
             VALUES (%s, %s)
             """,
             (name, _embedding_to_text(embedding)),
@@ -770,7 +802,7 @@ def save_object_embedding(object_name, embedding):
 
 
 def replace_inventory_embeddings(rows):
-    """Atomically replace the catalog and rebuild unique inventory counts."""
+    """Noise train import → replace inventory_emb_noise only (leave friend catalogs)."""
     prepared = [
         (normalize_item_name(name), _embedding_to_text(embedding))
         for name, embedding in rows
@@ -779,16 +811,21 @@ def replace_inventory_embeddings(rows):
     if not prepared:
         raise ValueError("No inventory embeddings to save")
     with get_db() as conn:
-        conn.execute("DELETE FROM inventory_emb")
+        conn.execute("DELETE FROM inventory_emb_noise")
         with conn.cursor() as cursor:
             cursor.executemany(
                 """
-                INSERT INTO inventory_emb (inventory_name, inventory_embedding)
+                INSERT INTO inventory_emb_noise (inventory_name, inventory_embedding)
                 VALUES (%s, %s)
                 """,
                 prepared,
             )
+        # Keep main_inventory on mobileclip2 preference; still refresh counts.
         refresh_main_inventory(conn)
+        try:
+            export_table_snapshots(conn, only=("inventory_emb_noise",))
+        except Exception as exc:
+            print(f"[SQL] Could not snapshot inventory_emb_noise.csv: {exc}")
     return len(prepared)
 
 
@@ -1090,10 +1127,15 @@ def fetch_staff():
         return [dict(row) for row in rows]
 
 
-def fetch_inventory_embeddings():
+def fetch_inventory_embeddings(table="inventory_emb_mobileclip2"):
+    """Fetch one emb table. Default = friend mobileclip2 (abubu)."""
+    if table not in ALL_EMB_TABLES:
+        raise ValueError(f"Unknown embedding table: {table}")
     with get_db() as conn:
         rows = conn.execute(
-            "SELECT inventory_name, inventory_embedding FROM inventory_emb"
+            pg_sql.SQL(
+                "SELECT inventory_name, inventory_embedding FROM {}"
+            ).format(pg_sql.Identifier(table))
         ).fetchall()
         return [
             {
@@ -1102,6 +1144,137 @@ def fetch_inventory_embeddings():
             }
             for row in rows
         ]
+
+
+def fetch_live_dual_embeddings():
+    """mobileclip2 + noise catalogs for dual live match (legacy unused)."""
+    return {
+        "mobileclip2": fetch_inventory_embeddings("inventory_emb_mobileclip2"),
+        "noise": fetch_inventory_embeddings("inventory_emb_noise"),
+    }
+
+
+def mean_name_vectors(rows):
+    """Average embedding per inventory_name (for compare)."""
+    buckets = {}
+    for row in rows:
+        name = normalize_item_name(row["inventory_name"])
+        if not name:
+            continue
+        vec = row["inventory_embedding"]
+        buckets.setdefault(name, []).append(vec)
+    out = {}
+    for name, vectors in buckets.items():
+        stacked = [list(v) for v in vectors]
+        dim = len(stacked[0])
+        means = [sum(row[i] for row in stacked) / len(stacked) for i in range(dim)]
+        out[name] = means
+    return out
+
+
+def compare_mobileclip2_vs_noise():
+    """Per-name compare: mobileclip2 vs noise (mean vectors).
+
+    Returns crop counts, cosine similarity, and difference (= 1 − cosine).
+    """
+    dual = fetch_live_dual_embeddings()
+    left_counts = {}
+    right_counts = {}
+    for row in dual["mobileclip2"]:
+        name = normalize_item_name(row["inventory_name"])
+        if name:
+            left_counts[name] = left_counts.get(name, 0) + 1
+    for row in dual["noise"]:
+        name = normalize_item_name(row["inventory_name"])
+        if name:
+            right_counts[name] = right_counts.get(name, 0) + 1
+    left = mean_name_vectors(dual["mobileclip2"])
+    right = mean_name_vectors(dual["noise"])
+    shared = sorted(set(left) & set(right))
+    rows = []
+    for name in shared:
+        a = left[name]
+        b = right[name]
+        dot = sum(x * y for x, y in zip(a, b))
+        na = sum(x * x for x in a) ** 0.5
+        nb = sum(y * y for y in b) ** 0.5
+        sim = float(dot / (na * nb)) if na and nb else 0.0
+        diff = float(1.0 - sim)
+        # L2 between unit-ish means (extra distance signal)
+        l2 = sum((x - y) ** 2 for x, y in zip(a, b)) ** 0.5
+        rows.append(
+            {
+                "inventory_name": name,
+                "mc2_crops": int(left_counts.get(name, 0)),
+                "noise_crops": int(right_counts.get(name, 0)),
+                "cosine": round(sim, 6),
+                "difference": round(diff, 6),
+                "l2": round(float(l2), 6),
+                # tiny preview of mean vectors (not full 512-d dump)
+                "mc2_preview": [round(float(v), 4) for v in a[:6]],
+                "noise_preview": [round(float(v), 4) for v in b[:6]],
+            }
+        )
+    rows.sort(key=lambda r: r["cosine"])
+    diffs = [r["difference"] for r in rows]
+    return {
+        "mobileclip2_rows": len(dual["mobileclip2"]),
+        "noise_rows": len(dual["noise"]),
+        "shared_names": len(shared),
+        "only_mobileclip2": sorted(set(left) - set(right)),
+        "only_noise": sorted(set(right) - set(left)),
+        "diff_min": round(min(diffs), 6) if diffs else None,
+        "diff_max": round(max(diffs), 6) if diffs else None,
+        "diff_mean": round(sum(diffs) / len(diffs), 6) if diffs else None,
+        "pairs": rows,
+    }
+
+
+def reload_embedding_snapshots_from_csv(tables=None):
+    """TRUNCATE listed emb tables and COPY from saved_tables CSVs (vectors as-is)."""
+    wanted = tuple(tables) if tables else ALL_EMB_TABLES
+    for table in wanted:
+        if table not in ALL_EMB_TABLES:
+            raise ValueError(f"Unknown embedding table: {table}")
+    manifest_path = SNAPSHOT_DIR / SNAPSHOT_MANIFEST
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    saved = manifest.get("tables", {})
+    loaded = {}
+    with get_db() as conn:
+        for table in wanted:
+            details = saved.get(table) or {
+                "file": f"{table}.csv",
+                "columns": list(TABLE_COLUMNS[table]),
+            }
+            columns = tuple(details.get("columns") or TABLE_COLUMNS[table])
+            source = SNAPSHOT_DIR / str(details.get("file") or f"{table}.csv")
+            if not source.is_file():
+                raise FileNotFoundError(f"Missing snapshot CSV: {source}")
+            conn.execute(
+                pg_sql.SQL("TRUNCATE {} RESTART IDENTITY").format(
+                    pg_sql.Identifier(table)
+                )
+            )
+            statement = pg_sql.SQL(
+                "COPY {} ({}) FROM STDIN WITH (FORMAT CSV, HEADER TRUE)"
+            ).format(
+                pg_sql.Identifier(table),
+                pg_sql.SQL(", ").join(map(pg_sql.Identifier, columns)),
+            )
+            with source.open("rb") as input_file:
+                with conn.cursor().copy(statement) as copy:
+                    while chunk := input_file.read(1024 * 1024):
+                        copy.write(chunk)
+            _reset_serial_sequence(conn, table)
+            loaded[table] = int(
+                conn.execute(
+                    pg_sql.SQL("SELECT COUNT(*) AS count FROM {}").format(
+                        pg_sql.Identifier(table)
+                    )
+                ).fetchone()["count"]
+            )
+        refresh_main_inventory(conn)
+    return loaded
 
 
 def fetch_staff_embeddings():

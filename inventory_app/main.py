@@ -46,6 +46,7 @@ from db import (
     insert_staff,
     replace_inventory_embeddings,
     close_boot_connection,
+    compare_mobileclip2_vs_noise,
 )
 from sql import bootstrap_database
 from face import FaceGate, draw_landmarks, choose_staff_match
@@ -2303,6 +2304,16 @@ async def select_and_import_catalog():
         return JSONResponse({"detail": "Label folder selection cancelled."}, status_code=400)
 
     return _start_catalog_import(image_dir, label_dir)
+
+
+@app.get("/api/catalog/compare")
+def catalog_compare():
+    """Embed-only: compare inventory_emb_mobileclip2 vs inventory_emb_noise."""
+    try:
+        payload = compare_mobileclip2_vs_noise()
+    except Exception as exc:
+        return JSONResponse({"detail": str(exc)}, status_code=500)
+    return JSONResponse({"ok": True, **payload})
 
 
 # ============================================================

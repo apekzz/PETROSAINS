@@ -1,9 +1,27 @@
 {
   "format": 1,
-  "exported_at": "2026-09-23T15:08:29",
+  "exported_at": "2026-09-23T17:00:52",
   "tables": {
     "inventory_emb": {
       "file": "inventory_emb.csv",
+      "columns": [
+        "id",
+        "inventory_name",
+        "inventory_embedding"
+      ],
+      "rows": 4357
+    },
+    "inventory_emb_mobileclip2": {
+      "file": "inventory_emb_mobileclip2.csv",
+      "columns": [
+        "id",
+        "inventory_name",
+        "inventory_embedding"
+      ],
+      "rows": 4355
+    },
+    "inventory_emb_noise": {
+      "file": "inventory_emb_noise.csv",
       "columns": [
         "id",
         "inventory_name",
@@ -20,7 +38,7 @@
         "available_quantity",
         "registered_date"
       ],
-      "rows": 116
+      "rows": 109
     },
     "staff": {
       "file": "staff.csv",

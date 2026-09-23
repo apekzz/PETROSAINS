@@ -1747,6 +1747,73 @@ btnImportCatalog.addEventListener("click", async () => {
     }
 });
 
+const catalogCompareModal = document.getElementById("catalogCompareModal");
+const btnCompareCatalogs = document.getElementById("btnCompareCatalogs");
+
+function showCompareModal(show) {
+    catalogCompareModal.classList.toggle("is-hidden", !show);
+    catalogCompareModal.setAttribute("aria-hidden", show ? "false" : "true");
+}
+
+async function loadCatalogCompare() {
+    const summaryEl = document.getElementById("catalogCompareSummary");
+    const bodyEl = document.getElementById("catalogCompareBody");
+    summaryEl.textContent = "Loading…";
+    bodyEl.innerHTML = "";
+    try {
+        const response = await fetch("/api/catalog/compare", { cache: "no-store" });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.detail || "Compare failed");
+        const pairs = data.pairs || [];
+        const low = pairs.slice(0, 20);
+        const high = pairs.slice(-10).reverse();
+        summaryEl.textContent =
+            `object(mc2)=${data.mobileclip2_rows} · noise=${data.noise_rows} · shared=${data.shared_names}` +
+            (data.diff_mean != null
+                ? ` · diff mean=${data.diff_mean} min=${data.diff_min} max=${data.diff_max}`
+                : "") +
+            (pairs.length
+                ? ` · cos min=${pairs[0].cosine} max=${pairs[pairs.length - 1].cosine}`
+                : "");
+        const seen = new Set();
+        const rows = [];
+        for (const p of low) {
+            rows.push({ ...p, tag: "low (most different)" });
+            seen.add(p.inventory_name);
+        }
+        for (const p of high) {
+            if (seen.has(p.inventory_name)) continue;
+            rows.push({ ...p, tag: "high (most alike)" });
+        }
+        const fmtPreview = (arr) =>
+            Array.isArray(arr) ? arr.map((v) => Number(v).toFixed(3)).join(", ") : "—";
+        bodyEl.innerHTML = rows.map((p) => `
+            <tr>
+                <td>${escapeHtml(p.inventory_name)}<br><small>${escapeHtml(p.tag || "")}</small></td>
+                <td>${p.mc2_crops ?? "—"}</td>
+                <td>${p.noise_crops ?? "—"}</td>
+                <td>${Number(p.cosine).toFixed(4)}</td>
+                <td><strong>${Number(p.difference ?? (1 - p.cosine)).toFixed(4)}</strong></td>
+                <td>${p.l2 != null ? Number(p.l2).toFixed(4) : "—"}</td>
+                <td style="font-family:monospace;font-size:11px;">${fmtPreview(p.mc2_preview)}</td>
+                <td style="font-family:monospace;font-size:11px;">${fmtPreview(p.noise_preview)}</td>
+            </tr>`).join("");
+    } catch (error) {
+        summaryEl.textContent = error.message || "Compare failed";
+    }
+}
+
+if (btnCompareCatalogs) {
+    btnCompareCatalogs.addEventListener("click", () => {
+        showCompareModal(true);
+        loadCatalogCompare();
+    });
+}
+const btnCompareClose = document.getElementById("btnCompareClose");
+const btnCompareRefresh = document.getElementById("btnCompareRefresh");
+if (btnCompareClose) btnCompareClose.addEventListener("click", () => showCompareModal(false));
+if (btnCompareRefresh) btnCompareRefresh.addEventListener("click", loadCatalogCompare);
+
 btnCatalogClose.addEventListener("click", () => showCatalogImportModal(false));
 
 pollFaceStatus();
