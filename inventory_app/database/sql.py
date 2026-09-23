@@ -801,8 +801,51 @@ def save_object_embedding(object_name, embedding):
     return save_inventory_embedding(object_name, embedding)
 
 
+def _mobileclip2_id_skeleton(conn):
+    """Read-only (id, name) from mobileclip2 — never write that table.
+
+    Prefer live PG rows; fall back to saved CSV if table empty.
+    """
+    with conn.cursor() as cursor:
+        cursor.execute(
+            """
+            SELECT id, inventory_name
+            FROM inventory_emb_mobileclip2
+            ORDER BY inventory_name, id
+            """
+        )
+        rows = cursor.fetchall()
+    if rows:
+        return [
+            (int(row["id"]), normalize_item_name(row["inventory_name"]))
+            for row in rows
+            if normalize_item_name(row["inventory_name"])
+        ]
+    csv_path = SNAPSHOT_DIR / "inventory_emb_mobileclip2.csv"
+    if not csv_path.is_file():
+        raise ValueError(
+            "inventory_emb_mobileclip2 empty and CSV missing — cannot align noise ids."
+        )
+    import csv
+
+    out = []
+    with csv_path.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            name = normalize_item_name(row.get("inventory_name"))
+            if not name:
+                continue
+            out.append((int(row["id"]), name))
+    out.sort(key=lambda item: (item[1], item[0]))
+    return out
+
+
 def replace_inventory_embeddings(rows):
-    """Noise train import → replace inventory_emb_noise only (leave friend catalogs)."""
+    """Noise train import → replace inventory_emb_noise only (leave friend catalogs).
+
+    Aligns to mobileclip2 (id, inventory_name) skeleton; new vectors only.
+    """
+    from collections import defaultdict
+
     prepared = [
         (normalize_item_name(name), _embedding_to_text(embedding))
         for name, embedding in rows
@@ -810,15 +853,58 @@ def replace_inventory_embeddings(rows):
     ]
     if not prepared:
         raise ValueError("No inventory embeddings to save")
+    by_name: dict[str, list[str]] = defaultdict(list)
+    for name, emb_text in prepared:
+        by_name[name].append(emb_text)
+
     with get_db() as conn:
+        skeleton = _mobileclip2_id_skeleton(conn)
+        skel_by_name: dict[str, list[int]] = defaultdict(list)
+        for row_id, name in skeleton:
+            skel_by_name[name].append(row_id)
+
+        missing = sorted(set(skel_by_name) - set(by_name))
+        extra = sorted(set(by_name) - set(skel_by_name))
+        if missing or extra:
+            raise ValueError(
+                "Noise name set ≠ mobileclip2 skeleton "
+                f"(missing={missing[:5]}{'…' if len(missing) > 5 else ''}, "
+                f"extra={extra[:5]}{'…' if len(extra) > 5 else ''})."
+            )
+        mismatches = [
+            name
+            for name, ids in skel_by_name.items()
+            if len(by_name[name]) != len(ids)
+        ]
+        if mismatches:
+            sample = mismatches[0]
+            raise ValueError(
+                "Per-name crop count ≠ mobileclip2 "
+                f"({sample}: got {len(by_name[sample])} vs {len(skel_by_name[sample])} ids)."
+            )
+
+        aligned = []
+        for name, ids in skel_by_name.items():
+            for row_id, emb_text in zip(ids, by_name[name]):
+                aligned.append((row_id, name, emb_text))
+
         conn.execute("DELETE FROM inventory_emb_noise")
         with conn.cursor() as cursor:
             cursor.executemany(
                 """
-                INSERT INTO inventory_emb_noise (inventory_name, inventory_embedding)
-                VALUES (%s, %s)
+                INSERT INTO inventory_emb_noise
+                    (id, inventory_name, inventory_embedding)
+                VALUES (%s, %s, %s)
                 """,
-                prepared,
+                aligned,
+            )
+            cursor.execute(
+                """
+                SELECT setval(
+                    pg_get_serial_sequence('inventory_emb_noise', 'id'),
+                    COALESCE((SELECT MAX(id) FROM inventory_emb_noise), 1)
+                )
+                """
             )
         # Keep main_inventory on mobileclip2 preference; still refresh counts.
         refresh_main_inventory(conn)
@@ -826,7 +912,7 @@ def replace_inventory_embeddings(rows):
             export_table_snapshots(conn, only=("inventory_emb_noise",))
         except Exception as exc:
             print(f"[SQL] Could not snapshot inventory_emb_noise.csv: {exc}")
-    return len(prepared)
+    return len(aligned)
 
 
 def insert_check_in_out(inventory_name, staff_name, quantity, direction):

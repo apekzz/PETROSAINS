@@ -17,8 +17,8 @@
   "15": "sql.py",
   "16": "applyFaceStatus",
   "17": "noise_transfer.py",
-  "18": "visualize_results.py",
-  "19": "face_status_payload",
+  "18": "analyze_object_areas.py",
+  "19": "_encode_worker_loop",
   "20": "setup_db.py",
   "21": "startLocalCamera",
   "22": "embed.py",
@@ -36,7 +36,7 @@
   "34": "ObjectTrainer",
   "35": "ensure_tables",
   "36": "EpochMetricPrinter",
-  "37": "backend/infer.py",
+  "37": "dice_loss.py",
   "38": "MosaicProb",
   "39": "OneShot Inventory (`inventory_app`)",
   "40": "utils_db/infer.py",
@@ -52,5 +52,6 @@
   "50": "export_table_snapshots",
   "51": "analyzeLocalFrame",
   "52": "applyMode",
-  "53": "reload_embedding_snapshots_from_csv"
+  "53": "crop_labeled_objects",
+  "54": "yolo_to_coco.py"
 }

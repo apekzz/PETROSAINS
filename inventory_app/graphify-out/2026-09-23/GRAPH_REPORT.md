@@ -1,12 +1,12 @@
 # Graph Report - inventory_app  (2026-09-23)
 
 ## Corpus Check
-- 18 files · ~28,014 words
+- 18 files · ~27,706 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 19 file(s) not represented in the graph (top: .csv 6, .pt 4, .css 3)
 
 ## Summary
-- 579 nodes · 1194 edges · 35 communities (33 shown, 2 thin omitted)
+- 575 nodes · 1185 edges · 35 communities (33 shown, 2 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 80 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
@@ -17,7 +17,7 @@
 
 ## Community Hubs (Navigation)
 - dashboard.js
-- get
+- _encode_worker_loop
 - run_high_end_boot
 - sam-tool.js
 - camera_capture_loop
@@ -25,7 +25,7 @@
 - applyFaceStatus
 - tables
 - connect_and_prepare
-- db.py
+- reload_embedding_snapshots_from_csv
 - updateTriggerStatus
 - main.py
 - loader.py
@@ -34,19 +34,19 @@
 - noise_transfer.py
 - runBrowserFaceLoop
 - fetchStats
-- setup_db.py
+- get_db
 - startLocalCamera
 - OneShot Inventory (`inventory_app`)
 - Saved PostgreSQL tables
 - sql.py
 - post
-- normalize_item_name
+- compare_mobileclip2_vs_noise
 - export_table_snapshots
 - analyzeLocalFrame
-- refresh_main_inventory
-- close_boot_connection
+- db.py
+- _clear_session_movements
 - _catalog_import_job
-- refresh_inventory_catalog_cache
+- register_sam_embedding
 - bootstrap_database
 - ensure_tables
 - applyMode
@@ -64,8 +64,6 @@
 10. `face_status_payload()` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `_prep()` --calls--> `normalize_item_name()`  [INFERRED]
-  main.py → database/sql.py
 - `get_inventory()` --calls--> `fetch_inventory()`  [INFERRED]
   backend/api.py → database/sql.py
 - `get_movements()` --calls--> `fetch_movements()`  [INFERRED]
@@ -73,6 +71,8 @@
 - `get_stats()` --calls--> `fetch_stats()`  [INFERRED]
   backend/api.py → database/sql.py
 - `search_inventory()` --calls--> `fetch_inventory()`  [INFERRED]
+  backend/api.py → database/sql.py
+- `get_item()` --calls--> `fetch_item()`  [INFERRED]
   backend/api.py → database/sql.py
 
 ## Import Cycles
@@ -82,11 +82,11 @@
 
 ### Community 0 - "dashboard.js"
 Cohesion: 0.04
-Nodes (46): bootFill, bootOverlay, bootPct, bootStage, bootStartedAt, btnCatalogClose, btnCompareCatalogs, btnHeaderRegisterFace (+38 more)
+Nodes (48): bootFill, bootOverlay, bootPct, bootStage, bootStartedAt, btnCatalogClose, btnCompareCatalogs, btnCompareClose (+40 more)
 
-### Community 1 - "get"
-Cohesion: 0.14
-Nodes (16): camera_status(), catalog_compare(), catalog_import_status(), db_status(), detection_preview(), generate_frames(), get_detection_mode(), get_mode() (+8 more)
+### Community 1 - "_encode_worker_loop"
+Cohesion: 0.13
+Nodes (19): analyze_face_frame(), _apply_face_embedding(), cosine_similarity(), embed_captured_face(), _encode_image(), _encode_images(), _encode_worker_loop(), face_crop_to_embedding() (+11 more)
 
 ### Community 2 - "run_high_end_boot"
 Cohesion: 0.22
@@ -97,8 +97,8 @@ Cohesion: 0.19
 Nodes (21): calculateTransform(), captureFrozenFrame(), endStroke(), exportMask(), generateMask(), loadSourceCanvas(), maskBytes(), normalizeMask() (+13 more)
 
 ### Community 4 - "camera_capture_loop"
-Cohesion: 0.13
-Nodes (31): arm_object_detection(), boot_status(), camera_capture_loop(), catalog_import_active(), detection_labels(), draw_yolo_boxes(), encode_jpeg(), face_detection_active() (+23 more)
+Cohesion: 0.14
+Nodes (30): arm_object_detection(), camera_capture_loop(), catalog_import_active(), detection_labels(), draw_yolo_boxes(), encode_jpeg(), face_detection_active(), get_trigger_state() (+22 more)
 
 ### Community 5 - "face.py"
 Cohesion: 0.06
@@ -113,12 +113,12 @@ Cohesion: 0.07
 Nodes (27): columns, file, rows, exported_at, format, columns, file, columns (+19 more)
 
 ### Community 8 - "connect_and_prepare"
-Cohesion: 0.18
-Nodes (11): check_db(), connect_and_prepare(), ensure_schema_columns(), _lock(), _open_connection(), Safely migrate existing installations without dropping data., Reject incompatible existing tables without deleting or replacing them., Tables whose CSV is missing or row-count differs from Postgres. (+3 more)
-
-### Community 9 - "db.py"
 Cohesion: 0.22
-Nodes (14): Compatibility wrappers. All SQL lives in sql.py., clear_staff_embeddings(), _embedding_from_text(), fetch_detections_summary(), fetch_inventory_embeddings(), fetch_staff(), fetch_staff_embeddings(), get_db() (+6 more)
+Nodes (9): connect_and_prepare(), ensure_schema_columns(), _open_connection(), Safely migrate existing installations without dropping data., Reject incompatible existing tables without deleting or replacing them., Tables whose CSV is missing or row-count differs from Postgres., Open the database at boot, keep a live connection, create missing tables., _stale_snapshot_tables() (+1 more)
+
+### Community 9 - "reload_embedding_snapshots_from_csv"
+Cohesion: 0.40
+Nodes (5): TRUNCATE listed emb tables and COPY from saved_tables CSVs (vectors as-is)., Restore CSV data only into currently empty supported tables., reload_embedding_snapshots_from_csv(), _reset_serial_sequence(), restore_empty_tables_from_snapshots()
 
 ### Community 10 - "updateTriggerStatus"
 Cohesion: 0.21
@@ -126,7 +126,7 @@ Nodes (12): applyObjectRecognitionState(), escapeHtml(), fetchInventory(), loadC
 
 ### Community 11 - "main.py"
 Cohesion: 0.07
-Nodes (41): api, asyncio, dataset_importer, delete, face, fastapi_middleware_cors, fastapi_responses, infer (+33 more)
+Nodes (39): api, asyncio, dataset_importer, delete, face, fastapi_middleware_cors, fastapi_responses, infer (+31 more)
 
 ### Community 12 - "loader.py"
 Cohesion: 0.24
@@ -152,9 +152,9 @@ Nodes (12): applyLocalFace(), drawMediaPipeLandmarks(), faceCenteredInGate(), fa
 Cohesion: 0.22
 Nodes (11): animateValue(), fetchSelectedItemStats(), fetchStats(), loadItemOptions(), pollCatalogImport(), renderCatalogImport(), renderItemOptions(), selectInventoryItem() (+3 more)
 
-### Community 18 - "setup_db.py"
-Cohesion: 0.20
-Nodes (11): config, ensure_database(), ensure_postgres_running(), migrate_sqlite_inventory(), Create the Postgres role/database, tables, and optional SQLite import., Create role + database if this machine can admin Postgres locally., _run(), fetch_inventory() (+3 more)
+### Community 18 - "get_db"
+Cohesion: 0.15
+Nodes (17): config, ensure_database(), ensure_postgres_running(), migrate_sqlite_inventory(), Create the Postgres role/database, tables, and optional SQLite import., Create role + database if this machine can admin Postgres locally., _run(), fetch_detections_summary() (+9 more)
 
 ### Community 19 - "startLocalCamera"
 Cohesion: 0.31
@@ -165,40 +165,40 @@ Cohesion: 0.50
 Nodes (3): Layout, OneShot Inventory (`inventory_app`), Run
 
 ### Community 23 - "sql.py"
-Cohesion: 0.19
-Nodes (13): contextlib, _checkout_as_detection(), ensure_postgres_running(), fetch_detections(), fetch_detections_today(), fetch_item(), fetch_movements(), _format_dt() (+5 more)
+Cohesion: 0.18
+Nodes (14): contextlib, check_db(), _checkout_as_detection(), close_boot_connection(), ensure_postgres_running(), fetch_detections(), fetch_detections_today(), fetch_movements() (+6 more)
 
 ### Community 24 - "post"
-Cohesion: 0.12
-Nodes (24): sam_status(), BaseModel, analyze_face_frame(), api_noise_capture(), api_start_camera(), capture_sam_frame(), detection_preview_active(), embed_captured_face() (+16 more)
+Cohesion: 0.10
+Nodes (25): sam_status(), BaseModel, api_noise_capture(), api_start_camera(), _cancel_app_exit(), capture_sam_frame(), dashboard_hello(), dashboard_leave() (+17 more)
 
-### Community 25 - "normalize_item_name"
-Cohesion: 0.19
-Nodes (14): compare_mobileclip2_vs_noise(), fetch_item_summary(), fetch_live_dual_embeddings(), mean_name_vectors(), normalize_item_name(), mobileclip2 + noise catalogs for dual live match (legacy unused)., Average embedding per inventory_name (for compare)., Per-name compare: mobileclip2 vs noise (mean vectors). Returns crop counts,… (+6 more)
+### Community 25 - "compare_mobileclip2_vs_noise"
+Cohesion: 0.20
+Nodes (10): compare_mobileclip2_vs_noise(), _embedding_from_text(), fetch_inventory_embeddings(), fetch_live_dual_embeddings(), fetch_staff_embeddings(), mean_name_vectors(), Fetch one emb table. Default = friend mobileclip2 (abubu)., mobileclip2 + noise catalogs for dual live match (legacy unused). (+2 more)
 
 ### Community 26 - "export_table_snapshots"
-Cohesion: 0.29
-Nodes (8): _copy_table_to_file(), _embedding_to_text(), export_table_snapshots(), _export(), insert_staff(), Export supported application tables to atomic CSV snapshots. only: optional…, Noise train import → replace inventory_emb_noise only (leave friend catalogs)., replace_inventory_embeddings()
+Cohesion: 0.33
+Nodes (6): clear_staff_embeddings(), _copy_table_to_file(), export_table_snapshots(), _export(), Export supported application tables to atomic CSV snapshots. only: optional…, Wipe enrolled faces every boot. Also clear staff.csv so restore cannot revive…
 
 ### Community 27 - "analyzeLocalFrame"
 Cohesion: 0.32
 Nodes (8): analyzeLocalFrame(), applyCapturedPhoto(), base64JpegToBlob(), drawLandmarks(), grabLocalFrame(), ingestScanFrame(), sizeOverlayToVideo(), updateFacePreviews()
 
-### Community 28 - "refresh_main_inventory"
-Cohesion: 0.18
-Nodes (11): clear_check_in_out(), TRUNCATE listed emb tables and COPY from saved_tables CSVs (vectors as-is)., Restore CSV data only into currently empty supported tables., Rebuild summary from mobileclip2 (abubu rule); fallback legacy inventory_emb., Clear transient movement history without touching catalog/staff tables., recalculate_available_quantities(), refresh_main_inventory(), _refresh() (+3 more)
+### Community 28 - "db.py"
+Cohesion: 0.17
+Nodes (19): Compatibility wrappers. All SQL lives in sql.py., clear_check_in_out(), _embedding_to_text(), fetch_item_summary(), insert_check_in_out(), insert_staff(), normalize_item_name(), Rebuild summary from mobileclip2 (abubu rule); fallback legacy inventory_emb. (+11 more)
 
-### Community 29 - "close_boot_connection"
-Cohesion: 0.24
-Nodes (11): close_boot_connection(), _cancel_app_exit(), _clear_session_movements(), dashboard_hello(), dashboard_leave(), _exit_app(), _force_close(), _maybe_exit_after_leave() (+3 more)
+### Community 29 - "_clear_session_movements"
+Cohesion: 0.33
+Nodes (7): _clear_session_movements(), _exit_app(), _force_close(), _maybe_exit_after_leave(), shutdown_event(), stop_camera(), on_event
 
 ### Community 30 - "_catalog_import_job"
 Cohesion: 0.38
 Nodes (7): _catalog_import_job(), _catalog_progress(), import_catalog_paths(), Shared start for picker + path APIs. Caller must own the lock check., Import without folder picker — body: {image_dir, label_dir}., select_and_import_catalog(), _start_catalog_import()
 
-### Community 31 - "refresh_inventory_catalog_cache"
-Cohesion: 0.22
-Nodes (9): catalog_dual_status(), get_inventory_catalog(), get_inventory_catalogs(), match_inventory_name(), parse_yolo_boxes(), Backward-compat: mobileclip2 rows only., Dual live: score mobileclip2 + noise. Accept if either clears threshold., refresh_inventory_catalog_cache() (+1 more)
+### Community 31 - "register_sam_embedding"
+Cohesion: 0.32
+Nodes (8): create_object_embedding(), get_inventory_catalog(), image_to_embedding(), match_inventory_name(), parse_yolo_boxes(), refresh_inventory_catalog_cache(), register_sam_embedding(), SamRegisterBody
 
 ### Community 32 - "bootstrap_database"
 Cohesion: 0.33
@@ -213,14 +213,14 @@ Cohesion: 0.67
 Nodes (3): applyMode(), loadCurrentMode(), setMode()
 
 ## Knowledge Gaps
-- **65 isolated node(s):** `format`, `exported_at`, `file`, `columns`, `rows` (+60 more)
+- **67 isolated node(s):** `format`, `exported_at`, `file`, `columns`, `rows` (+62 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 191 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `_catalog_import_job()` connect `_catalog_import_job` to `run_high_end_boot`, `main.py`, `noise_transfer.py`, `export_table_snapshots`, `refresh_inventory_catalog_cache`?**
+- **Why does `_catalog_import_job()` connect `_catalog_import_job` to `run_high_end_boot`, `main.py`, `noise_transfer.py`, `db.py`, `register_sam_embedding`?**
   _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **Why does `import_train_catalog()` connect `noise_transfer.py` to `_catalog_import_job`?**
   _High betweenness centrality (0.011) - this node is a cross-community bridge._
@@ -229,8 +229,8 @@ _Questions this graph is uniquely positioned to answer:_
 - **Are the 3 inferred relationships involving `camera_capture_loop()` (e.g. with `draw_landmarks()` and `run_backend_capture()`) actually correct?**
   _`camera_capture_loop()` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `format`, `exported_at`, `file` to the rest of the system?**
-  _65 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _67 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `dashboard.js` be split into smaller, more focused modules?**
-  _Cohesion score 0.03771043771043771 - nodes in this community are weakly interconnected._
-- **Should `get` be split into smaller, more focused modules?**
-  _Cohesion score 0.14166666666666666 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.03634085213032581 - nodes in this community are weakly interconnected._
+- **Should `_encode_worker_loop` be split into smaller, more focused modules?**
+  _Cohesion score 0.1286549707602339 - nodes in this community are weakly interconnected._

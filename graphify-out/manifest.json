@@ -6,9 +6,9 @@
     "semantic_hash": "5b4375de3d415bff187683b2723bd7bc"
   },
   "inventory_app/main.py": {
-    "mtime": 1790153920.7527225,
-    "seen": 1790153988.4902852,
-    "ast_hash": "22586b729e91849613d07053199b5600",
+    "mtime": 1790164232.2202313,
+    "seen": 1790164249.655874,
+    "ast_hash": "e70a11edf9b2bf0bb306366d1929b926",
     "semantic_hash": ""
   },
   "test_normal_yolo.py": {
@@ -1146,9 +1146,9 @@
     "semantic_hash": ""
   },
   "inventory_app/database/saved_tables/manifest.json": {
-    "mtime": 1790154052.8123305,
-    "seen": 1790163008.222042,
-    "ast_hash": "31aaa2d5ad0dee2fecf901fb3710da9f",
+    "mtime": 1790167817.0782633,
+    "seen": 1790169459.47103,
+    "ast_hash": "a239d597dd4814b5fbca4a0742591c65",
     "semantic_hash": ""
   },
   "inventory_app/database/setup_db.py": {
@@ -1158,9 +1158,9 @@
     "semantic_hash": "e9a7770f73c0cb217a51f283ddbf0af7"
   },
   "inventory_app/database/sql.py": {
-    "mtime": 1790153426.4934106,
-    "seen": 1790153455.7812648,
-    "ast_hash": "fc1c72719fa47ca1851f39cf5d25dc2d",
+    "mtime": 1790164226.8381348,
+    "seen": 1790164249.655798,
+    "ast_hash": "bf840b0e638b715266f8a2f90bfb6866",
     "semantic_hash": ""
   },
   "inventory_app/frontend/config.js": {
@@ -1194,9 +1194,9 @@
     "semantic_hash": ""
   },
   "inventory_app/frontend/dashboard.html": {
-    "mtime": 1790153941.868822,
-    "seen": 1790153988.491423,
-    "ast_hash": "f4efec798d2f114c9016077cd5251249",
+    "mtime": 1790167804.226127,
+    "seen": 1790169459.472206,
+    "ast_hash": "845e6ca5f26dc9b3c3d9fba52845c404",
     "semantic_hash": ""
   },
   "inventory_app/frontend/petronas-logo.svg": {
@@ -1212,9 +1212,21 @@
     "semantic_hash": ""
   },
   "inventory_app/backend/noise_transfer.py": {
-    "mtime": 1790143266.352613,
-    "seen": 1790144563.734405,
-    "ast_hash": "4a8ca11432d4bbf2c248905b33b6c92e",
+    "mtime": 1790164196.2731993,
+    "seen": 1790164249.655663,
+    "ast_hash": "b688ab2752c43481abbb045d70d57a4e",
+    "semantic_hash": ""
+  },
+  "inventory_app/database/saved_tables/compare_mc2_vs_noise_sample.json": {
+    "mtime": 1790169015.9838867,
+    "seen": 1790169459.471029,
+    "ast_hash": "7d1ad2c87eb70d610a49f3613639223d",
+    "semantic_hash": ""
+  },
+  "inventory_app/database/saved_tables/compare_metrics_for_lecturer.txt": {
+    "mtime": 1790169361.6277454,
+    "seen": 1790169459.472206,
+    "ast_hash": "8786aca37dcbcd4a6a0a1b2265d7157a",
     "semantic_hash": ""
   }
 }

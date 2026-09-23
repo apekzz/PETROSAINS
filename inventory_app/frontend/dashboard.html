@@ -313,7 +313,7 @@
     </div>
 
     <div id="catalogCompareModal" class="modal-overlay is-hidden" aria-hidden="true">
-        <div class="modal-card catalog-import-card" role="dialog" aria-labelledby="catalogCompareTitle" style="max-width:960px;">
+        <div class="modal-card catalog-import-card" role="dialog" aria-labelledby="catalogCompareTitle" style="max-width:min(1400px, 96vw); width:96vw;">
             <h2 id="catalogCompareTitle">Compare embeddings</h2>
             <p class="modal-copy">
                 <strong>Embedded object</strong> = <code>inventory_emb_mobileclip2</code>
@@ -322,7 +322,7 @@
                 Live match still uses mobileclip2 only.
             </p>
             <p id="catalogCompareSummary" class="modal-status">Loading…</p>
-            <div style="max-height:420px; overflow:auto; margin:12px 0;">
+            <div style="max-height:min(70vh, 720px); overflow:auto; margin:12px 0;">
                 <table class="data-table" style="width:100%; font-size:12px;">
                     <thead>
                         <tr>

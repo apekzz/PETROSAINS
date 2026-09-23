@@ -1,8 +1,8 @@
 {
   "main.py": {
-    "mtime": 1790153920.7527225,
-    "seen": 1790153989.4551182,
-    "ast_hash": "22586b729e91849613d07053199b5600",
+    "mtime": 1790164232.2202313,
+    "seen": 1790164250.6721568,
+    "ast_hash": "e70a11edf9b2bf0bb306366d1929b926",
     "semantic_hash": ""
   },
   "requirements.txt": {
@@ -60,9 +60,9 @@
     "semantic_hash": ""
   },
   "database/saved_tables/manifest.json": {
-    "mtime": 1790154052.8123305,
-    "seen": 1790163008.859971,
-    "ast_hash": "31aaa2d5ad0dee2fecf901fb3710da9f",
+    "mtime": 1790167817.0782633,
+    "seen": 1790169460.1451368,
+    "ast_hash": "a239d597dd4814b5fbca4a0742591c65",
     "semantic_hash": ""
   },
   "database/setup_db.py": {
@@ -72,9 +72,9 @@
     "semantic_hash": ""
   },
   "database/sql.py": {
-    "mtime": 1790153426.4934106,
-    "seen": 1790153456.704658,
-    "ast_hash": "fc1c72719fa47ca1851f39cf5d25dc2d",
+    "mtime": 1790164226.8381348,
+    "seen": 1790164250.6721542,
+    "ast_hash": "bf840b0e638b715266f8a2f90bfb6866",
     "semantic_hash": ""
   },
   "frontend/config.js": {
@@ -108,9 +108,9 @@
     "semantic_hash": ""
   },
   "frontend/dashboard.html": {
-    "mtime": 1790153941.868822,
-    "seen": 1790153989.4551198,
-    "ast_hash": "f4efec798d2f114c9016077cd5251249",
+    "mtime": 1790167804.226127,
+    "seen": 1790167806.381533,
+    "ast_hash": "845e6ca5f26dc9b3c3d9fba52845c404",
     "semantic_hash": ""
   },
   "frontend/petronas-logo.svg": {
@@ -126,9 +126,21 @@
     "semantic_hash": ""
   },
   "backend/noise_transfer.py": {
-    "mtime": 1790143266.352613,
-    "seen": 1790144564.7158751,
-    "ast_hash": "4a8ca11432d4bbf2c248905b33b6c92e",
+    "mtime": 1790164196.2731993,
+    "seen": 1790164250.6721501,
+    "ast_hash": "b688ab2752c43481abbb045d70d57a4e",
+    "semantic_hash": ""
+  },
+  "database/saved_tables/compare_mc2_vs_noise_sample.json": {
+    "mtime": 1790169015.9838867,
+    "seen": 1790169460.145136,
+    "ast_hash": "7d1ad2c87eb70d610a49f3613639223d",
+    "semantic_hash": ""
+  },
+  "database/saved_tables/compare_metrics_for_lecturer.txt": {
+    "mtime": 1790169361.6277454,
+    "seen": 1790169460.145142,
+    "ast_hash": "8786aca37dcbcd4a6a0a1b2265d7157a",
     "semantic_hash": ""
   }
 }

@@ -109,6 +109,45 @@ def _save_capture_bundle(
     return {"folder": str(run_dir), "avg_noise": avg_noise, "frame": "frame.jpg"}
 
 
+def load_noise_profile_from_capture(capture_dir: str | Path) -> NoiseProfile:
+    """Rebuild profile from ``frame.jpg`` (+ optional ``result.txt`` avg).
+
+    Capture folders do not store residual_map.npy — grain map is the still's
+    blur residual. Avg prefers ``blur_residual_avg`` in result.txt when present.
+    """
+    run_dir = Path(capture_dir)
+    frame_path = run_dir / "frame.jpg"
+    if not frame_path.is_file():
+        raise FileNotFoundError(f"No frame.jpg in capture dir: {run_dir}")
+    bgr = cv2.imread(str(frame_path), cv2.IMREAD_COLOR)
+    if bgr is None:
+        raise RuntimeError(f"Could not read capture frame: {frame_path}")
+    gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
+    res = residual_map(gray)
+    avg = float(np.mean(res))
+    result_path = run_dir / "result.txt"
+    if result_path.is_file():
+        for line in result_path.read_text(encoding="utf-8").splitlines():
+            if line.startswith("blur_residual_avg:"):
+                avg = float(line.split(":", 1)[1].strip())
+                break
+    if avg < MIN_AVG_NOISE or avg > MAX_AVG_NOISE:
+        raise RuntimeError(
+            f"Capture avg {avg:.3f} outside sane band "
+            f"[{MIN_AVG_NOISE}, {MAX_AVG_NOISE}]."
+        )
+    h, w = gray.shape
+    return NoiseProfile(
+        avg_noise=avg,
+        residual_map=res.astype(np.float32),
+        width=w,
+        height=h,
+        frames=1,
+        camera_index=-1,
+        capture_dir=str(run_dir.resolve()),
+    )
+
+
 def capture_laptop_noise_profile(
     camera_index: int,
     seconds: float = DEFAULT_SECONDS,

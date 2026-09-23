@@ -18,6 +18,7 @@ import signal
 from collections import defaultdict
 from datetime import datetime
 from io import BytesIO
+from pathlib import Path
 
 import cv2
 import numpy as np
@@ -33,7 +34,10 @@ import uvicorn
 from api import router as api_router
 import loader
 from dataset_importer import choose_folder, import_train_catalog
-from noise_transfer import capture_laptop_noise_profile
+from noise_transfer import (
+    capture_laptop_noise_profile,
+    load_noise_profile_from_capture,
+)
 from db import (
     record_yolo_capture,
     normalize_item_name,
@@ -2157,7 +2161,7 @@ def _catalog_progress(**changes):
         catalog_import_state["percent"] = percent
 
 
-def _catalog_import_job(image_dir, label_dir):
+def _catalog_import_job(image_dir, label_dir, noise_capture_dir=None):
     try:
         _catalog_progress(
             stage="noise_capture",
@@ -2166,11 +2170,15 @@ def _catalog_import_job(image_dir, label_dir):
             current="laptop FaceTime",
             error="",
         )
-        print(f"[CATALOG] Capturing laptop noise from camera {CAMERA_INDEX}…")
-        noise_profile = capture_laptop_noise_profile(
-            CAMERA_INDEX,
-            size=(CAMERA_WIDTH, CAMERA_HEIGHT),
-        )
+        if noise_capture_dir:
+            print(f"[CATALOG] Loading noise profile from {noise_capture_dir}…")
+            noise_profile = load_noise_profile_from_capture(noise_capture_dir)
+        else:
+            print(f"[CATALOG] Capturing laptop noise from camera {CAMERA_INDEX}…")
+            noise_profile = capture_laptop_noise_profile(
+                CAMERA_INDEX,
+                size=(CAMERA_WIDTH, CAMERA_HEIGHT),
+            )
         _catalog_progress(
             noise_avg=noise_profile.avg_noise,
             noise_frames=noise_profile.frames,
@@ -2218,7 +2226,7 @@ def catalog_import_status():
         return JSONResponse(dict(catalog_import_state))
 
 
-def _start_catalog_import(image_dir: str, label_dir: str):
+def _start_catalog_import(image_dir: str, label_dir: str, noise_capture_dir=None):
     """Shared start for picker + path APIs. Caller must own the lock check."""
     _catalog_progress(
         running=True,
@@ -2237,7 +2245,7 @@ def _start_catalog_import(image_dir: str, label_dir: str):
     )
     threading.Thread(
         target=_catalog_import_job,
-        args=(image_dir, label_dir),
+        args=(image_dir, label_dir, noise_capture_dir),
         name="CatalogImport",
         daemon=True,
     ).start()
@@ -2247,12 +2255,18 @@ def _start_catalog_import(image_dir: str, label_dir: str):
 
 @app.post("/api/catalog/import/paths")
 async def import_catalog_paths(payload: dict):
-    """Import without folder picker — body: {image_dir, label_dir}."""
+    """Import without folder picker — body: {image_dir, label_dir, noise_capture_dir?}."""
     image_dir = str(payload.get("image_dir") or "").strip()
     label_dir = str(payload.get("label_dir") or "").strip()
+    noise_capture_dir = str(payload.get("noise_capture_dir") or "").strip() or None
     if not image_dir or not label_dir:
         return JSONResponse(
             {"detail": "image_dir and label_dir required."},
+            status_code=400,
+        )
+    if noise_capture_dir and not Path(noise_capture_dir).is_dir():
+        return JSONResponse(
+            {"detail": f"noise_capture_dir not found: {noise_capture_dir}"},
             status_code=400,
         )
     with catalog_import_lock:
@@ -2261,7 +2275,7 @@ async def import_catalog_paths(payload: dict):
                 {"detail": "A catalog import is already running."},
                 status_code=409,
             )
-    return _start_catalog_import(image_dir, label_dir)
+    return _start_catalog_import(image_dir, label_dir, noise_capture_dir)
 
 
 @app.post("/api/catalog/import/select")
