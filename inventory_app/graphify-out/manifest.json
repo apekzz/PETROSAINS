@@ -60,9 +60,9 @@
     "semantic_hash": ""
   },
   "database/saved_tables/manifest.json": {
-    "mtime": 1790153645.7135828,
-    "seen": 1790153989.455115,
-    "ast_hash": "41c814ef60914ba3fbea326fea3e7db1",
+    "mtime": 1790154052.8123305,
+    "seen": 1790163008.859971,
+    "ast_hash": "31aaa2d5ad0dee2fecf901fb3710da9f",
     "semantic_hash": ""
   },
   "database/setup_db.py": {
