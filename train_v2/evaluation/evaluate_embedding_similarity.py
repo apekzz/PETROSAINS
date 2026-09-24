@@ -250,6 +250,82 @@ def classification_metrics(records: list[dict], true_classes: list[str]) -> dict
     }
 
 
+def quality_by_split(records: list[dict]) -> dict:
+    """Overall accuracy for validation and test, counted per mask object."""
+    grouped = {}
+    for split in ("val", "test"):
+        subset = [record for record in records if record["split"] == split]
+        classes = sorted({record["true_key"] for record in subset})
+        quality = classification_metrics(subset, classes)
+        quality.pop("per_class")
+        quality["images"] = len({record["image"] for record in subset})
+        grouped[split] = quality
+    return grouped
+
+
+def load_prediction_records(path: Path) -> list[dict]:
+    records = []
+    with path.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            accepted = row["accepted"].strip().lower() == "true"
+            records.append(
+                {
+                    "split": row["split"],
+                    "image": row["image"],
+                    "true_key": canonical_name(row["true_name"]),
+                    "pred_key": (
+                        canonical_name(row["predicted_name"]) if accepted else ""
+                    ),
+                    "similarity": float(row["similarity"]),
+                    "accepted": accepted,
+                    "correct": row["correct"].strip().lower() == "true",
+                    "top5_correct": row["top5_correct"].strip().lower() == "true",
+                }
+            )
+    if not records:
+        raise RuntimeError(f"No prediction rows found in {path}")
+    return records
+
+
+def percent(value: float) -> str:
+    return f"{value * 100:.2f}%"
+
+
+def score_lines(report: dict) -> list[str]:
+    quality = report["quality"]
+    by_split = report.get("by_split", {})
+    lines = ["ACCURACY"]
+    labels = (("val", "Validation"), ("test", "Test"))
+    for split, label in labels:
+        split_quality = by_split.get(split)
+        if split_quality:
+            lines.append(
+                f"{label}: {percent(split_quality['top1_accuracy_with_rejections'])}"
+            )
+    lines.append(f"Overall: {percent(quality['top1_accuracy_with_rejections'])}")
+    return lines
+
+
+def refresh_saved_report(predictions: Path, output: Path) -> None:
+    """Add val/test accuracy to an existing run without re-embedding."""
+    metrics_path = output / "metrics.json"
+    if not metrics_path.is_file():
+        raise FileNotFoundError(f"Existing metrics not found: {metrics_path}")
+    report = json.loads(metrics_path.read_text(encoding="utf-8"))
+    records = load_prediction_records(predictions)
+    classes = sorted({record["true_key"] for record in records})
+    quality = classification_metrics(records, classes)
+    quality.pop("per_class")
+    report["quality"] = quality
+    report["by_split"] = quality_by_split(records)
+    metrics_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    write_text_report(output / "report.txt", report)
+    note = "\n".join(score_lines(report)) + "\n"
+    (output / "accuracy.txt").write_text(note, encoding="utf-8")
+    print(note, end="")
+    print(f"Wrote {output / 'accuracy.txt'}")
+
+
 def write_records(path: Path, records: list[dict]) -> None:
     columns = [
         "split",
@@ -286,6 +362,8 @@ def write_text_report(path: Path, report: dict) -> None:
     data = report["dataset"]
     similarity = report["similarity"]
     lines = [
+        *score_lines(report),
+        "",
         "OPENCLIP MASKED-CROP CLASSIFICATION EVALUATION",
         "=" * 48,
         f"Generated: {report['generated_at']}",
@@ -319,6 +397,27 @@ def write_text_report(path: Path, report: dict) -> None:
         f"Accepted: {quality['accepted']} / {quality['samples']}",
         f"Rejected: {quality['rejected']} / {quality['samples']}",
         "",
+    ]
+    for split, title in (("val", "VALIDATION"), ("test", "TEST")):
+        split_quality = report.get("by_split", {}).get(split)
+        if not split_quality:
+            continue
+        lines.extend(
+            [
+                title,
+                f"Images: {split_quality['images']}",
+                f"Mask objects: {split_quality['samples']}",
+                f"Top-1 accuracy (rejections incorrect): {split_quality['top1_accuracy_with_rejections']:.6f}",
+                f"Top-5 accuracy: {split_quality['top5_accuracy']:.6f}",
+                f"Coverage: {split_quality['coverage']:.6f}",
+                f"Accepted-only accuracy: {split_quality['accepted_accuracy']:.6f}",
+                f"Accepted: {split_quality['accepted']} / {split_quality['samples']}",
+                f"Rejected: {split_quality['rejected']} / {split_quality['samples']}",
+                "",
+            ]
+        )
+    lines.extend(
+        [
         "SIMILARITY",
         f"Mean best similarity: {similarity['mean_best']:.6f}",
         f"Mean correct best similarity: {similarity['mean_correct']:.6f}",
@@ -340,8 +439,12 @@ def write_text_report(path: Path, report: dict) -> None:
         "Non-object pixels are black and crops are tight, matching catalog creation.",
         "Final ranking replicates inventory_app: top 100 embedding matches, class mean",
         "requires at least 3 supporting embeddings, then threshold rejection.",
-        "Catalog embeddings were produced from train split masks; val+test are queries.",
+        "Catalog embeddings were produced from train split masks; val and test are queries.",
+        "One sample is one ground-truth mask object. Top-1 accuracy is correct class",
+        "matches divided by all objects. A match below the similarity threshold is rejected",
+        "and counted incorrect. Top-5 ignores that threshold.",
     ]
+    )
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -356,7 +459,20 @@ def main() -> None:
     parser.add_argument("--batch", type=int, default=16)
     parser.add_argument("--threshold", type=float, default=0.60)
     parser.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
+    parser.add_argument(
+        "--from-predictions",
+        type=Path,
+        default=None,
+        help="Rebuild val/test accuracy from predictions.csv without re-embedding.",
+    )
     args = parser.parse_args()
+
+    if args.from_predictions is not None:
+        refresh_saved_report(
+            args.from_predictions.resolve(),
+            args.output.resolve(),
+        )
+        return
 
     dataset = args.dataset.resolve()
     catalog_path = args.catalog.resolve()
@@ -538,6 +654,7 @@ def main() -> None:
             "batch_size": args.batch,
         },
         "quality": quality,
+        "by_split": quality_by_split(records),
         "similarity": {
             "threshold": args.threshold,
             "mean_best": float(np.mean(best_scores)),
@@ -566,8 +683,10 @@ def main() -> None:
         encoding="utf-8",
     )
     write_text_report(output / "report.txt", report)
-    print(json.dumps(report, indent=2))
-    print(f"Wrote {output / 'report.txt'}")
+    note = "\n".join(score_lines(report)) + "\n"
+    (output / "accuracy.txt").write_text(note, encoding="utf-8")
+    print(note, end="")
+    print(f"Wrote {output / 'accuracy.txt'}")
 
 
 if __name__ == "__main__":
