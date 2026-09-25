@@ -1,0 +1,316 @@
+{
+  "communities": {
+    "0": [
+      "inventory_app_design_dashboard",
+      "inventory_app_design_dashboard_animatevalue",
+      "inventory_app_design_dashboard_applymode",
+      "inventory_app_design_dashboard_bootfill",
+      "inventory_app_design_dashboard_bootoverlay",
+      "inventory_app_design_dashboard_bootpct",
+      "inventory_app_design_dashboard_bootstage",
+      "inventory_app_design_dashboard_bootstartedat",
+      "inventory_app_design_dashboard_camerafeed",
+      "inventory_app_design_dashboard_camerastatus",
+      "inventory_app_design_dashboard_capturefromcamera",
+      "inventory_app_design_dashboard_createembedding",
+      "inventory_app_design_dashboard_currentinventoryquery",
+      "inventory_app_design_dashboard_fetchinventory",
+      "inventory_app_design_dashboard_fetchstats",
+      "inventory_app_design_dashboard_hidebootoverlay",
+      "inventory_app_design_dashboard_isfreshscan",
+      "inventory_app_design_dashboard_lastidentifiednames",
+      "inventory_app_design_dashboard_loadcurrentmode",
+      "inventory_app_design_dashboard_normalizename",
+      "inventory_app_design_dashboard_pollbootstatus",
+      "inventory_app_design_dashboard_renderinventory",
+      "inventory_app_design_dashboard_setdbbadge",
+      "inventory_app_design_dashboard_setembedstatus",
+      "inventory_app_design_dashboard_setmode",
+      "inventory_app_design_dashboard_setstatvalue",
+      "inventory_app_design_dashboard_updatecamerastatus",
+      "inventory_app_design_dashboard_updatedbstatus",
+      "inventory_app_design_dashboard_updateembedbutton",
+      "inventory_app_design_dashboard_updatetriggerstatus"
+    ],
+    "1": [
+      "config",
+      "contextlib",
+      "fastapi",
+      "inventory_app_database_api",
+      "inventory_app_database_api_get_detections",
+      "inventory_app_database_api_get_detections_summary",
+      "inventory_app_database_api_get_detections_today",
+      "inventory_app_database_api_get_inventory",
+      "inventory_app_database_api_get_item",
+      "inventory_app_database_api_get_stats",
+      "inventory_app_database_api_py_get",
+      "inventory_app_database_api_search_inventory",
+      "inventory_app_database_db",
+      "inventory_app_database_db_apply_capture_to_inventory",
+      "inventory_app_database_db_fetch_detections",
+      "inventory_app_database_db_fetch_detections_summary",
+      "inventory_app_database_db_fetch_detections_today",
+      "inventory_app_database_db_fetch_inventory",
+      "inventory_app_database_db_fetch_item",
+      "inventory_app_database_db_fetch_stats",
+      "inventory_app_database_db_get_db",
+      "inventory_app_database_db_get_item_by_name",
+      "inventory_app_database_db_rationale_309",
+      "inventory_app_database_db_record_yolo_capture",
+      "inventory_app_database_db_status_for_quantity",
+      "inventory_app_setup_db_migrate_sqlite_inventory",
+      "psycopg_rows"
+    ],
+    "2": [
+      "collections",
+      "cv2",
+      "datetime",
+      "fastapi_middleware_cors",
+      "fastapi_responses",
+      "inventory_app_boot_init",
+      "inventory_app_main",
+      "inventory_app_main_generate_frames",
+      "inventory_app_main_make_error_frame",
+      "inventory_app_main_video_feed",
+      "io",
+      "numpy",
+      "platform",
+      "threading",
+      "torch",
+      "ultralytics",
+      "uvicorn"
+    ],
+    "3": [
+      "inventory_app_config",
+      "inventory_app_config_get_lan_ip",
+      "inventory_app_config_load_dotenv",
+      "inventory_app_setup_db",
+      "inventory_app_setup_db_ensure_database",
+      "inventory_app_setup_db_ensure_postgres_running",
+      "inventory_app_setup_db_rationale_2",
+      "inventory_app_setup_db_rationale_37",
+      "inventory_app_setup_db_run",
+      "os",
+      "psycopg",
+      "socket",
+      "sqlite3",
+      "subprocess"
+    ],
+    "4": [
+      "inventory_app_boot_loader",
+      "inventory_app_boot_loader_bar",
+      "inventory_app_boot_loader_fail",
+      "inventory_app_boot_loader_finish",
+      "inventory_app_boot_loader_pulse",
+      "inventory_app_boot_loader_set_progress",
+      "inventory_app_boot_loader_start",
+      "inventory_app_boot_loader_width",
+      "inventory_app_main_run_high_end_boot",
+      "inventory_app_main_set_boot",
+      "shutil",
+      "sys",
+      "time"
+    ],
+    "5": [
+      "inventory_app_database_db_check_db",
+      "inventory_app_main_boot_status",
+      "inventory_app_main_camera_status",
+      "inventory_app_main_db_status",
+      "inventory_app_main_get_trigger_state",
+      "inventory_app_main_py_get",
+      "inventory_app_main_serve_dashboard",
+      "inventory_app_main_serve_frontend_file",
+      "inventory_app_main_trigger_status"
+    ],
+    "6": [
+      "inventory_app_database_db_save_object_embedding",
+      "inventory_app_main_create_object_embedding",
+      "inventory_app_main_image_to_embedding",
+      "inventory_app_main_load_embed_model",
+      "inventory_app_main_rationale_79",
+      "inventory_app_main_set_mode",
+      "post",
+      "uploadfile"
+    ],
+    "7": [
+      "inventory_app_main_camera_capture_loop",
+      "inventory_app_main_encode_jpeg",
+      "inventory_app_main_open_camera",
+      "inventory_app_main_rationale_203",
+      "inventory_app_main_reset_background_subtractor",
+      "inventory_app_main_set_trigger_state",
+      "inventory_app_main_significant_change",
+      "inventory_app_main_start_camera"
+    ],
+    "8": [
+      "inventory_app_database_db_normalize_item_name",
+      "inventory_app_main_maybe_start_yolo_preview",
+      "inventory_app_main_parse_yolo_boxes",
+      "inventory_app_main_predict_frame",
+      "inventory_app_main_rationale_721",
+      "inventory_app_main_run_backend_capture",
+      "inventory_app_main_run_yolo_preview"
+    ],
+    "9": [
+      "inventory_app_database_db_init_schema",
+      "inventory_app_main_load_model",
+      "inventory_app_main_shutdown_event",
+      "inventory_app_main_startup_event",
+      "inventory_app_main_stop_camera",
+      "on_event"
+    ],
+    "10": [
+      "inventory_app_main_detection_labels",
+      "inventory_app_main_draw_yolo_boxes",
+      "inventory_app_main_format_confidence",
+      "inventory_app_main_set_yolo_overlay"
+    ],
+    "11": [
+      "inventory_app_main_get_detection_mode",
+      "inventory_app_main_get_mode",
+      "inventory_app_main_log_yolo_detections",
+      "inventory_app_main_rationale_662"
+    ],
+    "12": [
+      "inventory_app_main_box_iou",
+      "inventory_app_main_nms_detections",
+      "inventory_app_main_rationale_275"
+    ],
+    "13": [
+      "inventory_app_database_init"
+    ],
+    "14": [
+      "inventory_app_design_config"
+    ]
+  },
+  "cohesion": {
+    "0": 0.10114942528735632,
+    "1": 0.15954415954415954,
+    "2": 0.1323529411764706,
+    "3": 0.16483516483516483,
+    "4": 0.24358974358974358,
+    "5": 0.25,
+    "6": 0.25,
+    "7": 0.32142857142857145,
+    "8": 0.3333333333333333,
+    "9": 0.3333333333333333,
+    "10": 0.6666666666666666,
+    "11": 0.5,
+    "12": 0.6666666666666666,
+    "13": 1.0,
+    "14": 1.0
+  },
+  "gods": [
+    {
+      "id": "inventory_app_database_db_get_db",
+      "label": "get_db()",
+      "degree": 13
+    },
+    {
+      "id": "inventory_app_main_camera_capture_loop",
+      "label": "camera_capture_loop()",
+      "degree": 10
+    },
+    {
+      "id": "inventory_app_main_run_high_end_boot",
+      "label": "run_high_end_boot()",
+      "degree": 10
+    },
+    {
+      "id": "inventory_app_main_run_backend_capture",
+      "label": "run_backend_capture()",
+      "degree": 8
+    },
+    {
+      "id": "inventory_app_database_db_fetch_inventory",
+      "label": "fetch_inventory()",
+      "degree": 7
+    },
+    {
+      "id": "inventory_app_database_db_init_schema",
+      "label": "init_schema()",
+      "degree": 6
+    },
+    {
+      "id": "inventory_app_database_db_record_yolo_capture",
+      "label": "record_yolo_capture()",
+      "degree": 6
+    },
+    {
+      "id": "inventory_app_main_set_yolo_overlay",
+      "label": "set_yolo_overlay()",
+      "degree": 6
+    },
+    {
+      "id": "inventory_app_main_create_object_embedding",
+      "label": "create_object_embedding()",
+      "degree": 6
+    },
+    {
+      "id": "inventory_app_database_db_normalize_item_name",
+      "label": "normalize_item_name()",
+      "degree": 5
+    }
+  ],
+  "surprises": [
+    {
+      "source": "run_high_end_boot()",
+      "target": "fail()",
+      "source_files": [
+        "inventory_app/main.py",
+        "inventory_app/boot/loader.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "peripheral node `fail()` unexpectedly reaches hub `run_high_end_boot()`"
+    },
+    {
+      "source": "run_high_end_boot()",
+      "target": "pulse()",
+      "source_files": [
+        "inventory_app/main.py",
+        "inventory_app/boot/loader.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "peripheral node `pulse()` unexpectedly reaches hub `run_high_end_boot()`"
+    },
+    {
+      "source": "run_high_end_boot()",
+      "target": "get_lan_ip()",
+      "source_files": [
+        "inventory_app/main.py",
+        "inventory_app/config.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "create_object_embedding()",
+      "target": "normalize_item_name()",
+      "source_files": [
+        "inventory_app/main.py",
+        "inventory_app/database/db.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "log_yolo_detections()",
+      "target": "record_yolo_capture()",
+      "source_files": [
+        "inventory_app/main.py",
+        "inventory_app/database/db.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

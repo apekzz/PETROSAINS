@@ -1,0 +1,80 @@
+{
+  "boot/__init__.py": {
+    "mtime": 1789987034.6801994,
+    "seen": 1789987085.1800141,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "boot/loader.py": {
+    "mtime": 1789987034.6802912,
+    "seen": 1789987085.180016,
+    "ast_hash": "5e315756407b9adf0be0bad1f21b72ee",
+    "semantic_hash": "5e315756407b9adf0be0bad1f21b72ee"
+  },
+  "config.py": {
+    "mtime": 1789987034.680372,
+    "seen": 1789987085.180017,
+    "ast_hash": "3fe449c33846b09abc3aacd920c6d127",
+    "semantic_hash": "3fe449c33846b09abc3aacd920c6d127"
+  },
+  "database/__init__.py": {
+    "mtime": 1789987034.680437,
+    "seen": 1789987085.180018,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "database/api.py": {
+    "mtime": 1789987034.6805212,
+    "seen": 1789987085.180018,
+    "ast_hash": "04edb8750530bfc53bbd1d9e7cbdbd9e",
+    "semantic_hash": "04edb8750530bfc53bbd1d9e7cbdbd9e"
+  },
+  "database/db.py": {
+    "mtime": 1789987034.680613,
+    "seen": 1789987085.180019,
+    "ast_hash": "9585d408c44d0158c6dcc6df39f6c400",
+    "semantic_hash": "9585d408c44d0158c6dcc6df39f6c400"
+  },
+  "design/config.js": {
+    "mtime": 1789987034.6808336,
+    "seen": 1789987085.180019,
+    "ast_hash": "b66e389ff8b9f7f7fe50b7111455b91a",
+    "semantic_hash": "b66e389ff8b9f7f7fe50b7111455b91a"
+  },
+  "design/dashboard.js": {
+    "mtime": 1789987034.681296,
+    "seen": 1789987085.1800199,
+    "ast_hash": "7e20e309739703853de655ce877a9035",
+    "semantic_hash": "7e20e309739703853de655ce877a9035"
+  },
+  "main.py": {
+    "mtime": 1789987034.6816692,
+    "seen": 1789987085.1800199,
+    "ast_hash": "03cf0c167b0d164e13ddd2d8a4b971db",
+    "semantic_hash": "03cf0c167b0d164e13ddd2d8a4b971db"
+  },
+  "setup_db.py": {
+    "mtime": 1789987034.7339559,
+    "seen": 1789987085.180021,
+    "ast_hash": "724ff80438317d68ba6ae4d33842a2e6",
+    "semantic_hash": "724ff80438317d68ba6ae4d33842a2e6"
+  },
+  "design/dashboard.html": {
+    "mtime": 1789987034.681082,
+    "seen": 1790044582.8081658,
+    "ast_hash": "abe565603c08653308bdc14d1197e5ca",
+    "semantic_hash": ""
+  },
+  "requirements.txt": {
+    "mtime": 1789987034.7338107,
+    "seen": 1790044582.808167,
+    "ast_hash": "05a0161b2547e38232de2f8df7d59aa2",
+    "semantic_hash": ""
+  },
+  "design/petronas-logo.svg": {
+    "mtime": 1789987034.681409,
+    "seen": 1790044582.808167,
+    "ast_hash": "e9371c7e85bae8b762de7114176a8da9",
+    "semantic_hash": ""
+  }
+}

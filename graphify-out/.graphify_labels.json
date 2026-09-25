@@ -1,0 +1,17 @@
+{
+  "0": "dashboard.js",
+  "1": "api.py",
+  "2": "main.py",
+  "3": "config.py",
+  "4": "loader.py",
+  "5": "get",
+  "6": "db.py",
+  "7": "camera_capture_loop",
+  "8": "run_backend_capture",
+  "9": "startup_event",
+  "10": "set_yolo_overlay",
+  "11": "log_yolo_detections",
+  "12": "README.md",
+  "13": "database/__init__.py",
+  "14": "config.js"
+}
