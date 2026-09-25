@@ -1,0 +1,4 @@
+ACCURACY
+Validation: 79.04%
+Test: 77.14%
+Overall: 78.04%

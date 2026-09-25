@@ -147,18 +147,82 @@ def load_predictions() -> list[dict]:
         return list(csv.DictReader(handle))
 
 
-def confusion_matrix(records: list[dict]) -> Path:
+def prediction_label(name: str) -> str:
+    label = canonical(name)
+    return "Unknown" if label.lower() == "unknown" else label
+
+
+def build_confusion(records: list[dict]) -> tuple[list[str], list[str], np.ndarray]:
     true_classes = sorted({canonical(row["true_name"]) for row in records})
-    predicted_classes = true_classes + ["Unknown"]
+    predicted_names = [prediction_label(row["predicted_name"]) for row in records]
+    extra = sorted(
+        {
+            name
+            for name in predicted_names
+            if name not in true_classes and name != "Unknown"
+        }
+    )
+    predicted_classes = true_classes + extra
+    if any(name == "Unknown" for name in predicted_names):
+        predicted_classes.append("Unknown")
     true_index = {name: index for index, name in enumerate(true_classes)}
     pred_index = {name: index for index, name in enumerate(predicted_classes)}
     matrix = np.zeros((len(true_classes), len(predicted_classes)), dtype=np.int32)
-    for row in records:
-        true_name = canonical(row["true_name"])
-        predicted_name = canonical(row["predicted_name"])
-        if predicted_name not in pred_index:
-            predicted_name = "Unknown"
+    for true_name, predicted_name in zip(
+        (canonical(row["true_name"]) for row in records),
+        predicted_names,
+    ):
         matrix[true_index[true_name], pred_index[predicted_name]] += 1
+    return true_classes, predicted_classes, matrix
+
+
+def write_matrix_csv(path: Path, rows: list[str], columns: list[str], values: np.ndarray) -> None:
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.writer(handle)
+        writer.writerow(["true_class", *columns])
+        for name, row in zip(rows, values):
+            writer.writerow([name, *row])
+
+
+def draw_confusion(
+    true_classes: list[str],
+    predicted_classes: list[str],
+    values: np.ndarray,
+    path: Path,
+    *,
+    title: str,
+    colorbar_label: str,
+    cmap: str,
+    vmin: float,
+    vmax: float,
+) -> Path:
+    fig, axis = plt.subplots(figsize=(24, 21))
+    image = axis.imshow(values, cmap=cmap, vmin=vmin, vmax=vmax, aspect="auto")
+    axis.set_title(title, fontsize=16, weight="bold", pad=16)
+    axis.set_xlabel("Predicted class", fontsize=12)
+    axis.set_ylabel("True class", fontsize=12)
+    axis.set_xticks(range(len(predicted_classes)))
+    axis.set_xticklabels(predicted_classes, rotation=90, fontsize=4.5)
+    axis.set_yticks(range(len(true_classes)))
+    axis.set_yticklabels(true_classes, fontsize=4.5)
+    colorbar = fig.colorbar(image, ax=axis, fraction=0.022, pad=0.02)
+    colorbar.set_label(colorbar_label, rotation=270, labelpad=18)
+    fig.text(
+        0.5,
+        0.005,
+        "Merged validation + test · one cell per mask object · score at or below 60% is Unknown",
+        ha="center",
+        fontsize=9,
+        color="#555555",
+    )
+    fig.tight_layout(rect=(0, 0.02, 1, 1))
+    fig.savefig(path, dpi=180, bbox_inches="tight")
+    plt.close(fig)
+    return path
+
+
+def confusion_matrix(records: list[dict]) -> list[Path]:
+    true_classes, predicted_classes, matrix = build_confusion(records)
     row_totals = matrix.sum(axis=1, keepdims=True)
     normalized = np.divide(
         matrix,
@@ -166,36 +230,57 @@ def confusion_matrix(records: list[dict]) -> Path:
         out=np.zeros_like(matrix, dtype=np.float64),
         where=row_totals > 0,
     )
+    embedding_dir = RESULTS / "embedding"
+    embedding_dir.mkdir(parents=True, exist_ok=True)
+    OUTPUT.mkdir(parents=True, exist_ok=True)
 
-    fig, axis = plt.subplots(figsize=(24, 21))
-    image = axis.imshow(normalized, cmap="viridis", vmin=0, vmax=1, aspect="auto")
-    axis.set_title(
-        "OpenCLIP Normalized Confusion Matrix — 109 Inventory Classes",
-        fontsize=16,
-        weight="bold",
-        pad=16,
+    count_csv = embedding_dir / "confusion_matrix.csv"
+    normalized_csv = embedding_dir / "confusion_matrix_normalized.csv"
+    write_matrix_csv(count_csv, true_classes, predicted_classes, matrix.tolist())
+    write_matrix_csv(
+        normalized_csv,
+        true_classes,
+        predicted_classes,
+        np.round(normalized, 4).tolist(),
     )
-    axis.set_xlabel("Predicted class", fontsize=12)
-    axis.set_ylabel("True class", fontsize=12)
-    axis.set_xticks(range(len(predicted_classes)))
-    axis.set_xticklabels(predicted_classes, rotation=90, fontsize=4)
-    axis.set_yticks(range(len(true_classes)))
-    axis.set_yticklabels(true_classes, fontsize=4)
-    colorbar = fig.colorbar(image, ax=axis, fraction=0.022, pad=0.02)
-    colorbar.set_label("Fraction of each true class", rotation=270, labelpad=18)
-    fig.text(
-        0.5,
-        0.005,
-        "Source: merged validation + test masked crops · threshold >60%",
-        ha="center",
-        fontsize=9,
-        color="#555555",
+
+    count_png = embedding_dir / "confusion_matrix.png"
+    normalized_png = embedding_dir / "confusion_matrix_normalized.png"
+    draw_confusion(
+        true_classes,
+        predicted_classes,
+        matrix,
+        count_png,
+        title=f"Confusion Matrix — {len(true_classes)} Classes (counts)",
+        colorbar_label="Number of objects",
+        cmap="Blues",
+        vmin=0,
+        vmax=float(matrix.max()) if matrix.size else 1,
     )
-    fig.tight_layout(rect=(0, 0.02, 1, 1))
-    path = OUTPUT / "embedding_confusion_matrix.png"
-    fig.savefig(path, dpi=220, bbox_inches="tight")
-    plt.close(fig)
-    return path
+    draw_confusion(
+        true_classes,
+        predicted_classes,
+        normalized,
+        normalized_png,
+        title=f"Normalized Confusion Matrix — {len(true_classes)} Classes",
+        colorbar_label="Share of each true class",
+        cmap="Blues",
+        vmin=0,
+        vmax=1,
+    )
+    # Keep the older chart path in sync with the normalized matrix.
+    draw_confusion(
+        true_classes,
+        predicted_classes,
+        normalized,
+        OUTPUT / "embedding_confusion_matrix.png",
+        title=f"Normalized Confusion Matrix — {len(true_classes)} Classes",
+        colorbar_label="Share of each true class",
+        cmap="Blues",
+        vmin=0,
+        vmax=1,
+    )
+    return [count_png, normalized_png, count_csv, normalized_csv]
 
 
 def top_confusions(records: list[dict]) -> Path:
@@ -254,7 +339,7 @@ def main() -> None:
     paths = [
         performance_summary(segmentation, embedding),
         latency_breakdown(segmentation, embedding),
-        confusion_matrix(records),
+        *confusion_matrix(records),
         top_confusions(records),
     ]
     for path in paths:
