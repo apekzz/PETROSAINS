@@ -1,0 +1,4 @@
+class,support,true_positive,false_positive,false_negative,precision,recall,f1
+paper cup,5,5,0,0,1.0,1.0,1.0
+thread,6,6,0,0,1.0,1.0,1.0
+tracing paper,5,4,0,1,1.0,0.8,0.888888888888889

@@ -1,0 +1,142 @@
+Indexing val/test samples...
+Indexed 1712 crops (val_images=403 test_images=414)
+Loading catalogs...
+  mc2: 4355 vectors · dim=512
+  noise: 4355 vectors · dim=512
+Noise profile avg=1.237 from /Users/user/Downloads/BACHELOR AI/.apekzz-branch-graphs/PETROSAINS/hilman_21Sep/inventory_app/noise_captures/laptop_20260923_115322
+Loading MobileCLIP2-S2 on mps...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Model ready in 4.6s
+Building clean crops...
+Crops ready: 1712 (skipped invalid 0) in 77.7s
+Encoding clean queries...
+  encoded 32/1712
+  encoded 64/1712
+  encoded 96/1712
+  encoded 128/1712
+  encoded 160/1712
+  encoded 192/1712
+  encoded 224/1712
+  encoded 256/1712
+  encoded 288/1712
+  encoded 320/1712
+  encoded 352/1712
+  encoded 384/1712
+  encoded 416/1712
+  encoded 448/1712
+  encoded 480/1712
+  encoded 512/1712
+  encoded 544/1712
+  encoded 576/1712
+  encoded 608/1712
+  encoded 640/1712
+  encoded 672/1712
+  encoded 704/1712
+  encoded 736/1712
+  encoded 768/1712
+  encoded 800/1712
+  encoded 832/1712
+  encoded 864/1712
+  encoded 896/1712
+  encoded 928/1712
+  encoded 960/1712
+  encoded 992/1712
+  encoded 1024/1712
+  encoded 1056/1712
+  encoded 1088/1712
+  encoded 1120/1712
+  encoded 1152/1712
+  encoded 1184/1712
+  encoded 1216/1712
+  encoded 1248/1712
+  encoded 1280/1712
+  encoded 1312/1712
+  encoded 1344/1712
+  encoded 1376/1712
+  encoded 1408/1712
+  encoded 1440/1712
+  encoded 1472/1712
+  encoded 1504/1712
+  encoded 1536/1712
+  encoded 1568/1712
+  encoded 1600/1712
+  encoded 1632/1712
+  encoded 1664/1712
+  encoded 1696/1712
+  encoded 1712/1712
+Stamping noise onto crops...
+Stamped 1712 / 1712 (failures=0)
+Encoding stamped queries...
+  encoded 32/1712
+  encoded 64/1712
+  encoded 96/1712
+  encoded 128/1712
+  encoded 160/1712
+  encoded 192/1712
+  encoded 224/1712
+  encoded 256/1712
+  encoded 288/1712
+  encoded 320/1712
+  encoded 352/1712
+  encoded 384/1712
+  encoded 416/1712
+  encoded 448/1712
+  encoded 480/1712
+  encoded 512/1712
+  encoded 544/1712
+  encoded 576/1712
+  encoded 608/1712
+  encoded 640/1712
+  encoded 672/1712
+  encoded 704/1712
+  encoded 736/1712
+  encoded 768/1712
+  encoded 800/1712
+  encoded 832/1712
+  encoded 864/1712
+  encoded 896/1712
+  encoded 928/1712
+  encoded 960/1712
+  encoded 992/1712
+  encoded 1024/1712
+  encoded 1056/1712
+  encoded 1088/1712
+  encoded 1120/1712
+  encoded 1152/1712
+  encoded 1184/1712
+  encoded 1216/1712
+  encoded 1248/1712
+  encoded 1280/1712
+  encoded 1312/1712
+  encoded 1344/1712
+  encoded 1376/1712
+  encoded 1408/1712
+  encoded 1440/1712
+  encoded 1472/1712
+  encoded 1504/1712
+  encoded 1536/1712
+  encoded 1568/1712
+  encoded 1600/1712
+  encoded 1632/1712
+  encoded 1664/1712
+  encoded 1696/1712
+  encoded 1712/1712
+Scoring clean/mc2...
+Scoring clean/noise...
+Scoring stamped/mc2...
+Scoring stamped/noise...
+Writing charts...
+
+Done → /Users/user/Downloads/BACHELOR AI/.apekzz-branch-graphs/PETROSAINS/hilman_21Sep/train_v2/evaluation/results/embedding_mc2_noise
+Lecturer report: /Users/user/Downloads/BACHELOR AI/.apekzz-branch-graphs/PETROSAINS/hilman_21Sep/train_v2/evaluation/results/embedding_mc2_noise/report_for_lecturer.txt
+  chart: /Users/user/Downloads/BACHELOR AI/.apekzz-branch-graphs/PETROSAINS/hilman_21Sep/train_v2/evaluation/results/embedding_mc2_noise/charts/e1_side_by_side_metrics.png
+  chart: /Users/user/Downloads/BACHELOR AI/.apekzz-branch-graphs/PETROSAINS/hilman_21Sep/train_v2/evaluation/results/embedding_mc2_noise/charts/e2_coverage_accepted.png
+  chart: /Users/user/Downloads/BACHELOR AI/.apekzz-branch-graphs/PETROSAINS/hilman_21Sep/train_v2/evaluation/results/embedding_mc2_noise/charts/e3_top_confusions_clean_mc2_merged.png
+  chart: /Users/user/Downloads/BACHELOR AI/.apekzz-branch-graphs/PETROSAINS/hilman_21Sep/train_v2/evaluation/results/embedding_mc2_noise/charts/e4_confusion_clean_mc2_merged.png
+  chart: /Users/user/Downloads/BACHELOR AI/.apekzz-branch-graphs/PETROSAINS/hilman_21Sep/train_v2/evaluation/results/embedding_mc2_noise/charts/e3_top_confusions_clean_noise_merged.png
+  chart: /Users/user/Downloads/BACHELOR AI/.apekzz-branch-graphs/PETROSAINS/hilman_21Sep/train_v2/evaluation/results/embedding_mc2_noise/charts/e4_confusion_clean_noise_merged.png
+  chart: /Users/user/Downloads/BACHELOR AI/.apekzz-branch-graphs/PETROSAINS/hilman_21Sep/train_v2/evaluation/results/embedding_mc2_noise/charts/e3_top_confusions_stamped_mc2_merged.png
+  chart: /Users/user/Downloads/BACHELOR AI/.apekzz-branch-graphs/PETROSAINS/hilman_21Sep/train_v2/evaluation/results/embedding_mc2_noise/charts/e4_confusion_stamped_mc2_merged.png
+  chart: /Users/user/Downloads/BACHELOR AI/.apekzz-branch-graphs/PETROSAINS/hilman_21Sep/train_v2/evaluation/results/embedding_mc2_noise/charts/e3_top_confusions_stamped_noise_merged.png
+  chart: /Users/user/Downloads/BACHELOR AI/.apekzz-branch-graphs/PETROSAINS/hilman_21Sep/train_v2/evaluation/results/embedding_mc2_noise/charts/e4_confusion_stamped_noise_merged.png

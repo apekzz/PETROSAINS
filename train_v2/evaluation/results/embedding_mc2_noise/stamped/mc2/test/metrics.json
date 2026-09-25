@@ -1,0 +1,1108 @@
+{
+  "samples": 901,
+  "accepted": 900,
+  "rejected": 1,
+  "coverage": 0.9988901220865705,
+  "top1_accuracy_with_rejections": 0.8690344062153164,
+  "accepted_accuracy": 0.87,
+  "top5_accuracy": 0.9655937846836848,
+  "macro_precision": 0.9077714605080626,
+  "macro_recall": 0.8646548000664369,
+  "macro_f1": 0.8683445547422874,
+  "weighted_f1": 0.8672030368313555,
+  "micro_precision": 0.87,
+  "micro_recall": 0.8690344062153164,
+  "micro_f1": 0.8695169350360912,
+  "per_class": [
+    {
+      "class": "16 2 lcd display",
+      "support": 7,
+      "true_positive": 7,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "a4 colored paper",
+      "support": 5,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1": 0.888888888888889
+    },
+    {
+      "class": "acrylic standee a4 landscape portrait",
+      "support": 4,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 2,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666
+    },
+    {
+      "class": "acrylic table label",
+      "support": 3,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1": 0.8
+    },
+    {
+      "class": "air clay",
+      "support": 4,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "arduino nano",
+      "support": 24,
+      "true_positive": 22,
+      "false_positive": 5,
+      "false_negative": 2,
+      "precision": 0.8148148148148148,
+      "recall": 0.9166666666666666,
+      "f1": 0.8627450980392156
+    },
+    {
+      "class": "arduino uno",
+      "support": 28,
+      "true_positive": 22,
+      "false_positive": 24,
+      "false_negative": 6,
+      "precision": 0.4782608695652174,
+      "recall": 0.7857142857142857,
+      "f1": 0.5945945945945946
+    },
+    {
+      "class": "balloons",
+      "support": 5,
+      "true_positive": 5,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "beakers 1000ml",
+      "support": 2,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "beakers 250ml",
+      "support": 9,
+      "true_positive": 9,
+      "false_positive": 4,
+      "false_negative": 0,
+      "precision": 0.6923076923076923,
+      "recall": 1.0,
+      "f1": 0.8181818181818181
+    },
+    {
+      "class": "binder clip",
+      "support": 19,
+      "true_positive": 17,
+      "false_positive": 1,
+      "false_negative": 2,
+      "precision": 0.9444444444444444,
+      "recall": 0.8947368421052632,
+      "f1": 0.918918918918919
+    },
+    {
+      "class": "breadboard",
+      "support": 44,
+      "true_positive": 14,
+      "false_positive": 3,
+      "false_negative": 30,
+      "precision": 0.8235294117647058,
+      "recall": 0.3181818181818182,
+      "f1": 0.45901639344262296
+    },
+    {
+      "class": "bunsen burner",
+      "support": 4,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "caliper",
+      "support": 4,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "clip board",
+      "support": 3,
+      "true_positive": 3,
+      "false_positive": 1,
+      "false_negative": 0,
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.8571428571428571
+    },
+    {
+      "class": "clothespin",
+      "support": 9,
+      "true_positive": 9,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "conical flask 1000 ml",
+      "support": 6,
+      "true_positive": 4,
+      "false_positive": 1,
+      "false_negative": 2,
+      "precision": 0.8,
+      "recall": 0.6666666666666666,
+      "f1": 0.7272727272727272
+    },
+    {
+      "class": "conical flask 5000ml",
+      "support": 3,
+      "true_positive": 1,
+      "false_positive": 0,
+      "false_negative": 2,
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "f1": 0.5
+    },
+    {
+      "class": "copper ii chloride 2 hydrate",
+      "support": 3,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1": 0.8
+    },
+    {
+      "class": "correction tape",
+      "support": 7,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 3,
+      "precision": 1.0,
+      "recall": 0.5714285714285714,
+      "f1": 0.7272727272727273
+    },
+    {
+      "class": "cr2032 battery holder",
+      "support": 2,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "cutter",
+      "support": 8,
+      "true_positive": 8,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "cutting mat",
+      "support": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "dc motor 3 v",
+      "support": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "dht11 temperature and humidity",
+      "support": 4,
+      "true_positive": 4,
+      "false_positive": 5,
+      "false_negative": 0,
+      "precision": 0.4444444444444444,
+      "recall": 1.0,
+      "f1": 0.6153846153846153
+    },
+    {
+      "class": "electric thermometer",
+      "support": 5,
+      "true_positive": 5,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "eraser",
+      "support": 4,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "fabbxible pla filament",
+      "support": 4,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "gas sensor mq6",
+      "support": 2,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "glass rod",
+      "support": 3,
+      "true_positive": 1,
+      "false_positive": 6,
+      "false_negative": 2,
+      "precision": 0.14285714285714285,
+      "recall": 0.3333333333333333,
+      "f1": 0.2
+    },
+    {
+      "class": "gloves",
+      "support": 5,
+      "true_positive": 5,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "gloves ln",
+      "support": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "glue gun",
+      "support": 6,
+      "true_positive": 6,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "glue gun stick",
+      "support": 8,
+      "true_positive": 7,
+      "false_positive": 3,
+      "false_negative": 1,
+      "precision": 0.7,
+      "recall": 0.875,
+      "f1": 0.7777777777777777
+    },
+    {
+      "class": "glue stick",
+      "support": 6,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 2,
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1": 0.8
+    },
+    {
+      "class": "googly eyes",
+      "support": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "hammer",
+      "support": 4,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "hc sr04 ultrasonic sensor",
+      "support": 2,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "hc sr501 pir motion sensor",
+      "support": 2,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "hydrogen peroxide solution 6",
+      "support": 11,
+      "true_positive": 9,
+      "false_positive": 2,
+      "false_negative": 2,
+      "precision": 0.8181818181818182,
+      "recall": 0.8181818181818182,
+      "f1": 0.8181818181818182
+    },
+    {
+      "class": "infrared ir proximity sensor module",
+      "support": 13,
+      "true_positive": 11,
+      "false_positive": 1,
+      "false_negative": 2,
+      "precision": 0.9166666666666666,
+      "recall": 0.8461538461538461,
+      "f1": 0.8799999999999999
+    },
+    {
+      "class": "jumper wire m f",
+      "support": 8,
+      "true_positive": 5,
+      "false_positive": 7,
+      "false_negative": 3,
+      "precision": 0.4166666666666667,
+      "recall": 0.625,
+      "f1": 0.5
+    },
+    {
+      "class": "jumper wire m m",
+      "support": 21,
+      "true_positive": 13,
+      "false_positive": 3,
+      "false_negative": 8,
+      "precision": 0.8125,
+      "recall": 0.6190476190476191,
+      "f1": 0.7027027027027026
+    },
+    {
+      "class": "key ring",
+      "support": 8,
+      "true_positive": 8,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "led blue",
+      "support": 30,
+      "true_positive": 28,
+      "false_positive": 4,
+      "false_negative": 2,
+      "precision": 0.875,
+      "recall": 0.9333333333333333,
+      "f1": 0.9032258064516129
+    },
+    {
+      "class": "led red",
+      "support": 3,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1": 0.8
+    },
+    {
+      "class": "light dependent resistor ldr",
+      "support": 14,
+      "true_positive": 13,
+      "false_positive": 1,
+      "false_negative": 1,
+      "precision": 0.9285714285714286,
+      "recall": 0.9285714285714286,
+      "f1": 0.9285714285714286
+    },
+    {
+      "class": "lilypad coin cell battery holder",
+      "support": 12,
+      "true_positive": 11,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.9166666666666666,
+      "f1": 0.9565217391304348
+    },
+    {
+      "class": "liquid glue",
+      "support": 4,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "lithium chloride",
+      "support": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "maker line sensor",
+      "support": 21,
+      "true_positive": 21,
+      "false_positive": 1,
+      "false_negative": 0,
+      "precision": 0.9545454545454546,
+      "recall": 1.0,
+      "f1": 0.9767441860465117
+    },
+    {
+      "class": "mallet",
+      "support": 4,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "max30102 heart rate and pulse oximetry sensor",
+      "support": 16,
+      "true_positive": 15,
+      "false_positive": 1,
+      "false_negative": 1,
+      "precision": 0.9375,
+      "recall": 0.9375,
+      "f1": 0.9375
+    },
+    {
+      "class": "measuring tape",
+      "support": 7,
+      "true_positive": 7,
+      "false_positive": 2,
+      "false_negative": 0,
+      "precision": 0.7777777777777778,
+      "recall": 1.0,
+      "f1": 0.8750000000000001
+    },
+    {
+      "class": "melty beads",
+      "support": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "methylated spirit solution 95",
+      "support": 4,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 2,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666
+    },
+    {
+      "class": "micro bit",
+      "support": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "motor shield",
+      "support": 3,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1": 0.8
+    },
+    {
+      "class": "n20 micro metal gear motor",
+      "support": 1,
+      "true_positive": 0,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    {
+      "class": "n20 mini micro metal gear",
+      "support": 4,
+      "true_positive": 4,
+      "false_positive": 7,
+      "false_negative": 0,
+      "precision": 0.36363636363636365,
+      "recall": 1.0,
+      "f1": 0.5333333333333333
+    },
+    {
+      "class": "needle",
+      "support": 8,
+      "true_positive": 7,
+      "false_positive": 3,
+      "false_negative": 1,
+      "precision": 0.7,
+      "recall": 0.875,
+      "f1": 0.7777777777777777
+    },
+    {
+      "class": "node mcu",
+      "support": 18,
+      "true_positive": 14,
+      "false_positive": 0,
+      "false_negative": 4,
+      "precision": 1.0,
+      "recall": 0.7777777777777778,
+      "f1": 0.8750000000000001
+    },
+    {
+      "class": "paper",
+      "support": 4,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 2,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6666666666666666
+    },
+    {
+      "class": "paper clip",
+      "support": 14,
+      "true_positive": 14,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "paper cup",
+      "support": 5,
+      "true_positive": 5,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "pen",
+      "support": 37,
+      "true_positive": 36,
+      "false_positive": 4,
+      "false_negative": 1,
+      "precision": 0.9,
+      "recall": 0.972972972972973,
+      "f1": 0.935064935064935
+    },
+    {
+      "class": "pendrive",
+      "support": 3,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1": 0.8
+    },
+    {
+      "class": "permanent marker",
+      "support": 13,
+      "true_positive": 11,
+      "false_positive": 4,
+      "false_negative": 2,
+      "precision": 0.7333333333333333,
+      "recall": 0.8461538461538461,
+      "f1": 0.7857142857142856
+    },
+    {
+      "class": "petri dishes",
+      "support": 4,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571428571428571
+    },
+    {
+      "class": "pipe cleaner",
+      "support": 12,
+      "true_positive": 12,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "pipettes 10ml",
+      "support": 8,
+      "true_positive": 5,
+      "false_positive": 0,
+      "false_negative": 3,
+      "precision": 1.0,
+      "recall": 0.625,
+      "f1": 0.7692307692307693
+    },
+    {
+      "class": "pipettes 5ml",
+      "support": 5,
+      "true_positive": 5,
+      "false_positive": 2,
+      "false_negative": 0,
+      "precision": 0.7142857142857143,
+      "recall": 1.0,
+      "f1": 0.8333333333333333
+    },
+    {
+      "class": "plier",
+      "support": 3,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1": 0.8
+    },
+    {
+      "class": "pom pom",
+      "support": 7,
+      "true_positive": 7,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "popsicle stick",
+      "support": 5,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1": 0.888888888888889
+    },
+    {
+      "class": "potassium iodide",
+      "support": 3,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1": 0.8
+    },
+    {
+      "class": "rc522 rfid card reader",
+      "support": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "resistor 220",
+      "support": 65,
+      "true_positive": 65,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "ribbon",
+      "support": 4,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "rocker switch 2pin black",
+      "support": 29,
+      "true_positive": 29,
+      "false_positive": 3,
+      "false_negative": 0,
+      "precision": 0.90625,
+      "recall": 1.0,
+      "f1": 0.9508196721311475
+    },
+    {
+      "class": "rocker switch 6pin",
+      "support": 4,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571428571428571
+    },
+    {
+      "class": "ruler",
+      "support": 8,
+      "true_positive": 8,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "safety goggle",
+      "support": 6,
+      "true_positive": 6,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "scissor",
+      "support": 9,
+      "true_positive": 9,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "screw phillips",
+      "support": 5,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 2,
+      "precision": 1.0,
+      "recall": 0.6,
+      "f1": 0.7499999999999999
+    },
+    {
+      "class": "screwdriver",
+      "support": 9,
+      "true_positive": 9,
+      "false_positive": 2,
+      "false_negative": 0,
+      "precision": 0.8181818181818182,
+      "recall": 1.0,
+      "f1": 0.9
+    },
+    {
+      "class": "sellotape",
+      "support": 16,
+      "true_positive": 14,
+      "false_positive": 2,
+      "false_negative": 2,
+      "precision": 0.875,
+      "recall": 0.875,
+      "f1": 0.875
+    },
+    {
+      "class": "smoke absorber",
+      "support": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "soil moisture level sensor",
+      "support": 6,
+      "true_positive": 5,
+      "false_positive": 3,
+      "false_negative": 1,
+      "precision": 0.625,
+      "recall": 0.8333333333333334,
+      "f1": 0.7142857142857143
+    },
+    {
+      "class": "solder pen",
+      "support": 3,
+      "true_positive": 2,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1": 0.8
+    },
+    {
+      "class": "solder wire",
+      "support": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "sound sensor",
+      "support": 8,
+      "true_positive": 7,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.875,
+      "f1": 0.9333333333333333
+    },
+    {
+      "class": "spanner",
+      "support": 10,
+      "true_positive": 9,
+      "false_positive": 0,
+      "false_negative": 1,
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9473684210526316
+    },
+    {
+      "class": "stapler",
+      "support": 7,
+      "true_positive": 5,
+      "false_positive": 0,
+      "false_negative": 2,
+      "precision": 1.0,
+      "recall": 0.7142857142857143,
+      "f1": 0.8333333333333333
+    },
+    {
+      "class": "sticky note",
+      "support": 3,
+      "true_positive": 3,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "strontium chloride 6 hydrate ar",
+      "support": 3,
+      "true_positive": 3,
+      "false_positive": 2,
+      "false_negative": 0,
+      "precision": 0.6,
+      "recall": 1.0,
+      "f1": 0.7499999999999999
+    },
+    {
+      "class": "syringes 10ml",
+      "support": 6,
+      "true_positive": 5,
+      "false_positive": 1,
+      "false_negative": 1,
+      "precision": 0.8333333333333334,
+      "recall": 0.8333333333333334,
+      "f1": 0.8333333333333334
+    },
+    {
+      "class": "syringes 60ml",
+      "support": 4,
+      "true_positive": 3,
+      "false_positive": 1,
+      "false_negative": 1,
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75
+    },
+    {
+      "class": "tack it",
+      "support": 7,
+      "true_positive": 7,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "test tubes",
+      "support": 5,
+      "true_positive": 3,
+      "false_positive": 1,
+      "false_negative": 2,
+      "precision": 0.75,
+      "recall": 0.6,
+      "f1": 0.6666666666666665
+    },
+    {
+      "class": "test tubes rack",
+      "support": 6,
+      "true_positive": 6,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "thermometer",
+      "support": 4,
+      "true_positive": 1,
+      "false_positive": 0,
+      "false_negative": 3,
+      "precision": 1.0,
+      "recall": 0.25,
+      "f1": 0.4
+    },
+    {
+      "class": "thread",
+      "support": 12,
+      "true_positive": 12,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "tongue depressor",
+      "support": 4,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "tracing paper",
+      "support": 3,
+      "true_positive": 3,
+      "false_positive": 2,
+      "false_negative": 0,
+      "precision": 0.6,
+      "recall": 1.0,
+      "f1": 0.7499999999999999
+    },
+    {
+      "class": "universal indicator",
+      "support": 5,
+      "true_positive": 5,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "volumetric flask",
+      "support": 4,
+      "true_positive": 4,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "class": "whiteboard marker",
+      "support": 15,
+      "true_positive": 15,
+      "false_positive": 5,
+      "false_negative": 0,
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.8571428571428571
+    },
+    {
+      "class": "yarn",
+      "support": 10,
+      "true_positive": 10,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  ]
+}

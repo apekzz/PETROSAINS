@@ -1,0 +1,17 @@
+protocol,catalog,split,image,polygon_index,true_name,predicted_name,similarity,second_similarity,margin,accepted,correct,top5_correct
+stamped,mc2,val,C001_tracing_paper__C001_TRACKING PAPER_C001_05.jpg,0,tracing paper,tracing paper,0.8506200909614563,0.765324056148529,0.08529603481292725,True,True,True
+stamped,mc2,val,C001_tracing_paper__C001_TRACKING PAPER_C001_08.jpg,0,tracing paper,tracing paper,0.8948001662890116,0.8176773985226949,0.07712276776631666,True,True,True
+stamped,mc2,val,C001_tracing_paper__C001_TRACKING PAPER_C001_09.jpg,0,tracing paper,beakers 250ml,0.741666853427887,0.7274490793546041,0.01421777407328284,True,False,True
+stamped,mc2,val,C001_tracing_paper__C001_TRACKING PAPER_C001_09.jpg,1,tracing paper,Sellotape,0.7547326485315958,0.735986590385437,0.018746058146158817,True,False,True
+stamped,mc2,val,C001_tracing_paper__C001_TRACKING PAPER_C001_25.jpg,0,tracing paper,tracing paper,0.8916042049725851,0.8648388783137003,0.026765326658884758,True,True,True
+stamped,mc2,val,C002_paper_cup__C002_PAPER CUP_C002_06.jpg,0,paper cup,paper cup,0.9448053439458212,0.5273107886314392,0.41749455531438195,True,True,True
+stamped,mc2,val,C002_paper_cup__C002_PAPER CUP_C002_11.jpg,0,paper cup,paper cup,0.9311933120091757,0.6358516216278076,0.29534169038136804,True,True,True
+stamped,mc2,val,C002_paper_cup__C002_PAPER CUP_C002_14.jpg,0,paper cup,paper cup,0.9552600383758545,0.49674369891484577,0.4585163394610087,True,True,True
+stamped,mc2,val,C002_paper_cup__C002_PAPER CUP_C002_23.jpg,0,paper cup,paper cup,0.9071984688440958,0.6336434284845988,0.27355504035949707,True,True,True
+stamped,mc2,val,C002_paper_cup__C002_PAPER CUP_C002_30.jpg,0,paper cup,paper cup,0.9505913654963175,0.5410837332407633,0.4095076322555542,True,True,True
+stamped,mc2,val,C003_thread__C003_THREAD_C003_06.jpg,0,thread,thread,0.9002151886622111,0.810723602771759,0.08949158589045203,True,True,True
+stamped,mc2,val,C003_thread__C003_THREAD_C003_07.jpg,0,thread,thread,0.9536828796068827,0.7421147227287292,0.21156815687815345,True,True,True
+stamped,mc2,val,C003_thread__C003_THREAD_C003_18.jpg,0,thread,thread,0.897443413734436,0.7402769724527994,0.1571664412816366,True,True,True
+stamped,mc2,val,C003_thread__C003_THREAD_C003_19.jpg,0,thread,thread,0.9568667014439901,0.7209642132123312,0.23590248823165894,True,True,True
+stamped,mc2,val,C003_thread__C003_THREAD_C003_24.jpg,0,thread,thread,0.9632890820503235,0.7614072561264038,0.20188182592391968,True,True,True
+stamped,mc2,val,C003_thread__C003_THREAD_C003_25.jpg,0,thread,thread,0.9440251986185709,0.6996917923291525,0.24433340628941846,True,True,True

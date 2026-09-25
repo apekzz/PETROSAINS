@@ -1,0 +1,41 @@
+MOBILECLIP2 CLASSIFICATION EVAL — mc2 vs noise
+====================================================
+Generated: 2026-09-25T20:07:22
+Device: mps
+Dataset: /Users/user/Downloads/BACHELOR AI/Dataset/yolo_eval
+Noise capture: /Users/user/Downloads/BACHELOR AI/.apekzz-branch-graphs/PETROSAINS/hilman_21Sep/inventory_app/noise_captures/laptop_20260923_115322
+Ranking: live top-3 mean per name · threshold > 0.60
+Samples evaluated (clean): 1712
+Samples stamped: 1712 (failed stamp: 0)
+
+PROTOCOL: CLEAN
+----------------------------------------
+  Catalog: mc2
+    val      top1=0.8779  top5=0.9741  macroF1=0.8749  cov=1.0000  acc_acc=0.8779
+    test     top1=0.8701  top5=0.9678  macroF1=0.8722  cov=0.9989  acc_acc=0.8711
+    merged   top1=0.8738  top5=0.9708  macroF1=0.8716  cov=0.9994  acc_acc=0.8743
+
+  Catalog: noise
+    val      top1=0.8705  top5=0.9741  macroF1=0.8700  cov=1.0000  acc_acc=0.8705
+    test     top1=0.8724  top5=0.9711  macroF1=0.8688  cov=0.9989  acc_acc=0.8733
+    merged   top1=0.8715  top5=0.9725  macroF1=0.8680  cov=0.9994  acc_acc=0.8720
+
+
+PROTOCOL: STAMPED
+----------------------------------------
+  Catalog: mc2
+    val      top1=0.8718  top5=0.9729  macroF1=0.8719  cov=1.0000  acc_acc=0.8718
+    test     top1=0.8690  top5=0.9656  macroF1=0.8683  cov=0.9989  acc_acc=0.8700
+    merged   top1=0.8703  top5=0.9690  macroF1=0.8679  cov=0.9994  acc_acc=0.8708
+
+  Catalog: noise
+    val      top1=0.8681  top5=0.9729  macroF1=0.8695  cov=1.0000  acc_acc=0.8681
+    test     top1=0.8713  top5=0.9667  macroF1=0.8685  cov=0.9989  acc_acc=0.8722
+    merged   top1=0.8697  top5=0.9696  macroF1=0.8670  cov=0.9994  acc_acc=0.8703
+
+
+NOTES
+- clean: GT mask crops, fair same-query compare.
+- stamped: FaceTime residual grain on crops (domain-matched for noise catalog).
+- Catalog-vs-catalog cosine/L2 already in compare_metrics_for_lecturer.txt;
+  this report is held-out classification accuracy.

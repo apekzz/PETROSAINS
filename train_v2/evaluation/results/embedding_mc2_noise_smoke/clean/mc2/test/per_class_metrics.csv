@@ -1,0 +1,4 @@
+class,support,true_positive,false_positive,false_negative,precision,recall,f1
+paper cup,0,0,0,0,0.0,0.0,0.0
+thread,0,0,0,0,0.0,0.0,0.0
+tracing paper,0,0,0,0,0.0,0.0,0.0

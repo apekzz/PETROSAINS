@@ -30,6 +30,32 @@
       "source_location": "L32"
     },
     {
+      "id": "inventory_app_main_facemodebody",
+      "label": "FaceModeBody",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "_encode_worker_loop",
+      "file_type": "code",
+      "norm_label": "facemodebody",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L1798"
+    },
+    {
+      "id": "inventory_app_main_staffregisterbody",
+      "label": "StaffRegisterBody",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "_encode_worker_loop",
+      "file_type": "code",
+      "norm_label": "staffregisterbody",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L1802"
+    },
+    {
       "id": "utils_embed_clipembedder",
       "label": "ClipEmbedder",
       "_callable": true,
@@ -41,6 +67,19 @@
       "norm_label": "clipembedder",
       "source_file": "utils/embed.py",
       "source_location": "L61"
+    },
+    {
+      "id": "inventory_app_main_samregisterbody",
+      "label": "SamRegisterBody",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "register_sam_embedding",
+      "file_type": "code",
+      "norm_label": "samregisterbody",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L1814"
     },
     {
       "id": "inventory_app_main_sammaskbody",
@@ -173,45 +212,6 @@
       "source_location": "L176"
     },
     {
-      "id": "inventory_app_main_facemodebody",
-      "label": "FaceModeBody",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "BaseModel",
-      "file_type": "code",
-      "norm_label": "facemodebody",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L1798"
-    },
-    {
-      "id": "inventory_app_main_samregisterbody",
-      "label": "SamRegisterBody",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "BaseModel",
-      "file_type": "code",
-      "norm_label": "samregisterbody",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L1814"
-    },
-    {
-      "id": "inventory_app_main_staffregisterbody",
-      "label": "StaffRegisterBody",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "BaseModel",
-      "file_type": "code",
-      "norm_label": "staffregisterbody",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L1802"
-    },
-    {
       "id": "inventory_app_backend_face_facegate",
       "label": "FaceGate",
       "_callable": true,
@@ -223,18 +223,6 @@
       "norm_label": "facegate",
       "source_file": "inventory_app/backend/face.py",
       "source_location": "L273"
-    },
-    {
-      "id": "export_train_official_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "export_train_official.py",
-      "source_location": "L19"
     },
     {
       "id": "utils_dataset_build_embedding_dataframe",
@@ -331,18 +319,6 @@
       "norm_label": "_label_path()",
       "source_file": "utils/visualize.py",
       "source_location": "L117"
-    },
-    {
-      "id": "utils_visualize_list_images",
-      "label": "list_images()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
-      "file_type": "code",
-      "norm_label": "list_images()",
-      "source_file": "utils/visualize.py",
-      "source_location": "L20"
     },
     {
       "id": "utils_visualize_load_class_names",
@@ -549,6 +525,90 @@
       "source_location": "L16"
     },
     {
+      "id": "inventory_app_boot_loader_bar",
+      "label": "_bar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "download_dataset.py",
+      "file_type": "code",
+      "norm_label": "_bar()",
+      "source_file": "inventory_app/boot/loader.py",
+      "source_location": "L20"
+    },
+    {
+      "id": "inventory_app_boot_loader_fail",
+      "label": "fail()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "download_dataset.py",
+      "file_type": "code",
+      "norm_label": "fail()",
+      "source_file": "inventory_app/boot/loader.py",
+      "source_location": "L66"
+    },
+    {
+      "id": "inventory_app_boot_loader_finish",
+      "label": "finish()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "download_dataset.py",
+      "file_type": "code",
+      "norm_label": "finish()",
+      "source_file": "inventory_app/boot/loader.py",
+      "source_location": "L47"
+    },
+    {
+      "id": "inventory_app_boot_loader_pulse",
+      "label": "pulse()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "download_dataset.py",
+      "file_type": "code",
+      "norm_label": "pulse()",
+      "source_file": "inventory_app/boot/loader.py",
+      "source_location": "L72"
+    },
+    {
+      "id": "inventory_app_boot_loader_set_progress",
+      "label": "set_progress()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "download_dataset.py",
+      "file_type": "code",
+      "norm_label": "set_progress()",
+      "source_file": "inventory_app/boot/loader.py",
+      "source_location": "L39"
+    },
+    {
+      "id": "inventory_app_boot_loader_start",
+      "label": "start()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "download_dataset.py",
+      "file_type": "code",
+      "norm_label": "start()",
+      "source_file": "inventory_app/boot/loader.py",
+      "source_location": "L25"
+    },
+    {
+      "id": "inventory_app_boot_loader_width",
+      "label": "_width()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "download_dataset.py",
+      "file_type": "code",
+      "norm_label": "_width()",
+      "source_file": "inventory_app/boot/loader.py",
+      "source_location": "L16"
+    },
+    {
       "id": "train_v2_utils_download_dataset_copy_tree",
       "label": "_copy_tree()",
       "_callable": true,
@@ -669,40 +729,16 @@
       "source_location": "L111"
     },
     {
-      "id": "utils_gdrive_drive_folder",
-      "label": "drive_folder()",
+      "id": "utils_dataset_bbox_xyxy",
+      "label": "bbox_xyxy()",
       "_callable": true,
       "_origin": "ast",
-      "community": 10,
-      "community_name": "download_dataset.py",
+      "community": 11,
+      "community_name": "PETROSAINS inventory similarity (`test_pg`)",
       "file_type": "code",
-      "norm_label": "drive_folder()",
-      "source_file": "utils/gdrive.py",
-      "source_location": "L67"
-    },
-    {
-      "id": "utils_gdrive_looks_like_dataset",
-      "label": "_looks_like_dataset()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "download_dataset.py",
-      "file_type": "code",
-      "norm_label": "_looks_like_dataset()",
-      "source_file": "utils/gdrive.py",
-      "source_location": "L27"
-    },
-    {
-      "id": "utils_gdrive_resolve_lnk",
-      "label": "_resolve_lnk()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "download_dataset.py",
-      "file_type": "code",
-      "norm_label": "_resolve_lnk()",
-      "source_file": "utils/gdrive.py",
-      "source_location": "L36"
+      "norm_label": "bbox_xyxy()",
+      "source_file": "utils/dataset.py",
+      "source_location": "L109"
     },
     {
       "id": "utils_db_cache_load_query_objects",
@@ -825,18 +861,6 @@
       "source_location": "L106"
     },
     {
-      "id": "utils_db_eval_embed_split_crops",
-      "label": "embed_split_crops()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "eval.py",
-      "file_type": "code",
-      "norm_label": "embed_split_crops()",
-      "source_file": "utils_db/eval.py",
-      "source_location": "L201"
-    },
-    {
       "id": "utils_db_eval_evaluate_rule",
       "label": "evaluate_rule()",
       "_callable": true,
@@ -883,6 +907,18 @@
       "norm_label": "_matrix_labels()",
       "source_file": "utils_db/eval.py",
       "source_location": "L453"
+    },
+    {
+      "id": "utils_db_eval_pick_query_image",
+      "label": "pick_query_image()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "eval.py",
+      "file_type": "code",
+      "norm_label": "pick_query_image()",
+      "source_file": "utils_db/eval.py",
+      "source_location": "L46"
     },
     {
       "id": "utils_db_eval_plot_confusion_matrix",
@@ -957,30 +993,6 @@
       "source_location": "L182"
     },
     {
-      "id": "inventory_app_database_db_init_schema",
-      "label": "init_schema()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "code",
-      "norm_label": "init_schema()",
-      "source_file": "inventory_app/database/db.py",
-      "source_location": "L39"
-    },
-    {
-      "id": "inventory_app_database_sql_bootstrap_database",
-      "label": "bootstrap_database()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "code",
-      "norm_label": "bootstrap_database()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L517"
-    },
-    {
       "id": "inventory_app_database_sql_check_db",
       "label": "check_db()",
       "_callable": true,
@@ -1005,28 +1017,16 @@
       "source_location": "L586"
     },
     {
-      "id": "inventory_app_database_sql_connect_and_prepare",
-      "label": "connect_and_prepare()",
+      "id": "inventory_app_database_sql_embedding_from_text",
+      "label": "_embedding_from_text()",
       "_callable": true,
       "_origin": "ast",
       "community": 15,
       "community_name": "sql.py",
       "file_type": "code",
-      "norm_label": "connect_and_prepare()",
+      "norm_label": "_embedding_from_text()",
       "source_file": "inventory_app/database/sql.py",
-      "source_location": "L524"
-    },
-    {
-      "id": "inventory_app_database_sql_ensure_database",
-      "label": "ensure_database()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "code",
-      "norm_label": "ensure_database()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L484"
+      "source_location": "L389"
     },
     {
       "id": "inventory_app_database_sql_ensure_postgres_running",
@@ -1041,64 +1041,40 @@
       "source_location": "L455"
     },
     {
-      "id": "inventory_app_database_sql_ensure_schema_columns",
-      "label": "ensure_schema_columns()",
+      "id": "inventory_app_database_sql_fetch_inventory_embeddings",
+      "label": "fetch_inventory_embeddings()",
       "_callable": true,
       "_origin": "ast",
       "community": 15,
       "community_name": "sql.py",
       "file_type": "code",
-      "norm_label": "ensure_schema_columns()",
+      "norm_label": "fetch_inventory_embeddings()",
       "source_file": "inventory_app/database/sql.py",
-      "source_location": "L119"
+      "source_location": "L1216"
     },
     {
-      "id": "inventory_app_database_sql_ensure_tables",
-      "label": "ensure_tables()",
+      "id": "inventory_app_database_sql_fetch_live_dual_embeddings",
+      "label": "fetch_live_dual_embeddings()",
       "_callable": true,
       "_origin": "ast",
       "community": 15,
       "community_name": "sql.py",
       "file_type": "code",
-      "norm_label": "ensure_tables()",
+      "norm_label": "fetch_live_dual_embeddings()",
       "source_file": "inventory_app/database/sql.py",
-      "source_location": "L431"
+      "source_location": "L1235"
     },
     {
-      "id": "inventory_app_database_sql_ensure_tables_apply",
-      "label": "_apply()",
+      "id": "inventory_app_database_sql_fetch_staff_embeddings",
+      "label": "fetch_staff_embeddings()",
       "_callable": true,
       "_origin": "ast",
       "community": 15,
       "community_name": "sql.py",
       "file_type": "code",
-      "norm_label": "_apply()",
+      "norm_label": "fetch_staff_embeddings()",
       "source_file": "inventory_app/database/sql.py",
-      "source_location": "L433"
-    },
-    {
-      "id": "inventory_app_database_sql_existing_tables",
-      "label": "existing_tables()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "code",
-      "norm_label": "existing_tables()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L414"
-    },
-    {
-      "id": "inventory_app_database_sql_existing_tables_read",
-      "label": "_read()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "code",
-      "norm_label": "_read()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L415"
+      "source_location": "L1366"
     },
     {
       "id": "inventory_app_database_sql_inventory_status",
@@ -1137,18 +1113,6 @@
       "source_location": "L610"
     },
     {
-      "id": "inventory_app_database_sql_open_connection",
-      "label": "_open_connection()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "code",
-      "norm_label": "_open_connection()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L397"
-    },
-    {
       "id": "inventory_app_database_sql_run",
       "label": "_run()",
       "_callable": true,
@@ -1159,42 +1123,6 @@
       "norm_label": "_run()",
       "source_file": "inventory_app/database/sql.py",
       "source_location": "L451"
-    },
-    {
-      "id": "inventory_app_database_sql_stale_snapshot_tables",
-      "label": "_stale_snapshot_tables()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "code",
-      "norm_label": "_stale_snapshot_tables()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L198"
-    },
-    {
-      "id": "inventory_app_database_sql_table_status",
-      "label": "table_status()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "code",
-      "norm_label": "table_status()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1414"
-    },
-    {
-      "id": "inventory_app_database_sql_validate_required_schema",
-      "label": "validate_required_schema()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "code",
-      "norm_label": "validate_required_schema()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L155"
     },
     {
       "id": "inventory_app_frontend_dashboard_applyfacestatus",
@@ -1581,54 +1509,6 @@
       "source_location": "L301"
     },
     {
-      "id": "train_v2_utils_yolo_to_coco_convert_dataset",
-      "label": "convert_dataset()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "noise_transfer.py",
-      "file_type": "code",
-      "norm_label": "convert_dataset()",
-      "source_file": "train_v2/utils/yolo_to_coco.py",
-      "source_location": "L113"
-    },
-    {
-      "id": "train_v2_utils_yolo_to_coco_convert_split",
-      "label": "convert_split()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "noise_transfer.py",
-      "file_type": "code",
-      "norm_label": "convert_split()",
-      "source_file": "train_v2/utils/yolo_to_coco.py",
-      "source_location": "L64"
-    },
-    {
-      "id": "train_v2_utils_yolo_to_coco_image_path",
-      "label": "_image_path()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "noise_transfer.py",
-      "file_type": "code",
-      "norm_label": "_image_path()",
-      "source_file": "train_v2/utils/yolo_to_coco.py",
-      "source_location": "L19"
-    },
-    {
-      "id": "train_v2_utils_yolo_to_coco_polygons_from_label",
-      "label": "_polygons_from_label()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "noise_transfer.py",
-      "file_type": "code",
-      "norm_label": "_polygons_from_label()",
-      "source_file": "train_v2/utils/yolo_to_coco.py",
-      "source_location": "L28"
-    },
-    {
       "id": "train_v2_evaluation_visualize_results_canonical",
       "label": "canonical()",
       "_callable": true,
@@ -1725,100 +1605,16 @@
       "source_location": "L201"
     },
     {
-      "id": "train_v2_utils_analyze_object_areas_areas_from_label",
-      "label": "_areas_from_label()",
+      "id": "inventory_app_backend_face_choose_staff_match",
+      "label": "choose_staff_match()",
       "_callable": true,
       "_origin": "ast",
-      "community": 18,
-      "community_name": "visualize_results.py",
+      "community": 19,
+      "community_name": "_encode_worker_loop",
       "file_type": "code",
-      "norm_label": "_areas_from_label()",
-      "source_file": "train_v2/utils/analyze_object_areas.py",
-      "source_location": "L47"
-    },
-    {
-      "id": "train_v2_utils_analyze_object_areas_collect_split_areas",
-      "label": "collect_split_areas()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "visualize_results.py",
-      "file_type": "code",
-      "norm_label": "collect_split_areas()",
-      "source_file": "train_v2/utils/analyze_object_areas.py",
-      "source_location": "L69"
-    },
-    {
-      "id": "train_v2_utils_analyze_object_areas_image_size",
-      "label": "_image_size()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "visualize_results.py",
-      "file_type": "code",
-      "norm_label": "_image_size()",
-      "source_file": "train_v2/utils/analyze_object_areas.py",
-      "source_location": "L34"
-    },
-    {
-      "id": "train_v2_utils_analyze_object_areas_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "visualize_results.py",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "train_v2/utils/analyze_object_areas.py",
-      "source_location": "L160"
-    },
-    {
-      "id": "train_v2_utils_analyze_object_areas_parse_args",
-      "label": "parse_args()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "visualize_results.py",
-      "file_type": "code",
-      "norm_label": "parse_args()",
-      "source_file": "train_v2/utils/analyze_object_areas.py",
-      "source_location": "L153"
-    },
-    {
-      "id": "train_v2_utils_analyze_object_areas_plot_histograms",
-      "label": "plot_histograms()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "visualize_results.py",
-      "file_type": "code",
-      "norm_label": "plot_histograms()",
-      "source_file": "train_v2/utils/analyze_object_areas.py",
-      "source_location": "L106"
-    },
-    {
-      "id": "train_v2_utils_analyze_object_areas_shoelace_area",
-      "label": "_shoelace_area()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "visualize_results.py",
-      "file_type": "code",
-      "norm_label": "_shoelace_area()",
-      "source_file": "train_v2/utils/analyze_object_areas.py",
-      "source_location": "L30"
-    },
-    {
-      "id": "train_v2_utils_analyze_object_areas_summarize",
-      "label": "summarize()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "visualize_results.py",
-      "file_type": "code",
-      "norm_label": "summarize()",
-      "source_file": "train_v2/utils/analyze_object_areas.py",
-      "source_location": "L91"
+      "norm_label": "choose_staff_match()",
+      "source_file": "inventory_app/backend/face.py",
+      "source_location": "L166"
     },
     {
       "id": "inventory_app_main_apply_face_embedding",
@@ -1831,18 +1627,6 @@
       "norm_label": "_apply_face_embedding()",
       "source_file": "inventory_app/main.py",
       "source_location": "L462"
-    },
-    {
-      "id": "inventory_app_main_cosine_similarity",
-      "label": "cosine_similarity()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 19,
-      "community_name": "_encode_worker_loop",
-      "file_type": "code",
-      "norm_label": "cosine_similarity()",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L354"
     },
     {
       "id": "inventory_app_main_encode_image",
@@ -1941,16 +1725,16 @@
       "source_location": "L151"
     },
     {
-      "id": "inventory_app_main_match_staff_embedding",
-      "label": "match_staff_embedding()",
+      "id": "inventory_app_main_post_face_register",
+      "label": "post_face_register()",
       "_callable": true,
       "_origin": "ast",
       "community": 19,
       "community_name": "_encode_worker_loop",
       "file_type": "code",
-      "norm_label": "match_staff_embedding()",
+      "norm_label": "post_face_register()",
       "source_file": "inventory_app/main.py",
-      "source_location": "L365"
+      "source_location": "L1970"
     },
     {
       "id": "inventory_app_main_prepare_embed_image",
@@ -1975,6 +1759,18 @@
       "norm_label": "_prepare_inventory_model_image()",
       "source_file": "inventory_app/main.py",
       "source_location": "L194"
+    },
+    {
+      "id": "inventory_app_main_register_staff_face",
+      "label": "_register_staff_face()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "_encode_worker_loop",
+      "file_type": "code",
+      "norm_label": "_register_staff_face()",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L1922"
     },
     {
       "id": "inventory_app_backend_sam_tool_clear_sessions",
@@ -2121,6 +1917,18 @@
       "source_location": "L24"
     },
     {
+      "id": "inventory_app_database_setup_db_migrate_sqlite_inventory",
+      "label": "migrate_sqlite_inventory()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "setup_db.py",
+      "file_type": "code",
+      "norm_label": "migrate_sqlite_inventory()",
+      "source_file": "inventory_app/database/setup_db.py",
+      "source_location": "L111"
+    },
+    {
       "id": "inventory_app_database_setup_db_run",
       "label": "_run()",
       "_callable": true,
@@ -2253,16 +2061,28 @@
       "source_location": "L885"
     },
     {
-      "id": "test_pg_embed_train_official_main",
-      "label": "main()",
+      "id": "utils_dataset_crop_labeled_objects",
+      "label": "crop_labeled_objects()",
       "_callable": true,
       "_origin": "ast",
       "community": 22,
       "community_name": "embed.py",
       "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "test_pg/embed_train_official.py",
-      "source_location": "L23"
+      "norm_label": "crop_labeled_objects()",
+      "source_file": "utils/dataset.py",
+      "source_location": "L133"
+    },
+    {
+      "id": "utils_db_eval_embed_split_crops",
+      "label": "embed_split_crops()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "embed.py",
+      "file_type": "code",
+      "norm_label": "embed_split_crops()",
+      "source_file": "utils_db/eval.py",
+      "source_location": "L201"
     },
     {
       "id": "utils_embed_build_embedding_df",
@@ -2397,64 +2217,16 @@
       "source_location": "L95"
     },
     {
-      "id": "inventory_app_database_sql_compare_mobileclip2_vs_noise",
-      "label": "compare_mobileclip2_vs_noise()",
+      "id": "inventory_app_main_cosine_similarity",
+      "label": "cosine_similarity()",
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "normalize_item_name",
+      "community_name": "register_sam_embedding",
       "file_type": "code",
-      "norm_label": "compare_mobileclip2_vs_noise()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1261"
-    },
-    {
-      "id": "inventory_app_database_sql_mean_name_vectors",
-      "label": "mean_name_vectors()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "normalize_item_name",
-      "file_type": "code",
-      "norm_label": "mean_name_vectors()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1243"
-    },
-    {
-      "id": "inventory_app_database_sql_normalize_item_name",
-      "label": "normalize_item_name()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "normalize_item_name",
-      "file_type": "code",
-      "norm_label": "normalize_item_name()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L381"
-    },
-    {
-      "id": "inventory_app_database_sql_save_inventory_embedding",
-      "label": "save_inventory_embedding()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "normalize_item_name",
-      "file_type": "code",
-      "norm_label": "save_inventory_embedding()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L783"
-    },
-    {
-      "id": "inventory_app_database_sql_save_object_embedding",
-      "label": "save_object_embedding()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "normalize_item_name",
-      "file_type": "code",
-      "norm_label": "save_object_embedding()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L800"
+      "norm_label": "cosine_similarity()",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L354"
     },
     {
       "id": "inventory_app_main_create_object_embedding",
@@ -2462,7 +2234,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "normalize_item_name",
+      "community_name": "register_sam_embedding",
       "file_type": "code",
       "norm_label": "create_object_embedding()",
       "source_file": "inventory_app/main.py",
@@ -2474,7 +2246,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "normalize_item_name",
+      "community_name": "register_sam_embedding",
       "file_type": "code",
       "norm_label": "get_inventory_catalog()",
       "source_file": "inventory_app/main.py",
@@ -2486,7 +2258,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "normalize_item_name",
+      "community_name": "register_sam_embedding",
       "file_type": "code",
       "norm_label": "image_to_embedding()",
       "source_file": "inventory_app/main.py",
@@ -2498,11 +2270,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "normalize_item_name",
+      "community_name": "register_sam_embedding",
       "file_type": "code",
       "norm_label": "match_inventory_name()",
       "source_file": "inventory_app/main.py",
       "source_location": "L816"
+    },
+    {
+      "id": "inventory_app_main_match_staff_embedding",
+      "label": "match_staff_embedding()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "register_sam_embedding",
+      "file_type": "code",
+      "norm_label": "match_staff_embedding()",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L365"
     },
     {
       "id": "inventory_app_main_refresh_inventory_catalog_cache",
@@ -2510,7 +2294,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "normalize_item_name",
+      "community_name": "register_sam_embedding",
       "file_type": "code",
       "norm_label": "refresh_inventory_catalog_cache()",
       "source_file": "inventory_app/main.py",
@@ -2522,7 +2306,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "normalize_item_name",
+      "community_name": "register_sam_embedding",
       "file_type": "code",
       "norm_label": "register_sam_embedding()",
       "source_file": "inventory_app/main.py",
@@ -2565,18 +2349,6 @@
       "source_location": "L2046"
     },
     {
-      "id": "inventory_app_main_cancel_app_exit",
-      "label": "_cancel_app_exit()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "post",
-      "file_type": "code",
-      "norm_label": "_cancel_app_exit()",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L1688"
-    },
-    {
       "id": "inventory_app_main_capture_sam_frame",
       "label": "capture_sam_frame()",
       "_callable": true,
@@ -2587,30 +2359,6 @@
       "norm_label": "capture_sam_frame()",
       "source_file": "inventory_app/main.py",
       "source_location": "L1826"
-    },
-    {
-      "id": "inventory_app_main_dashboard_hello",
-      "label": "dashboard_hello()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "post",
-      "file_type": "code",
-      "norm_label": "dashboard_hello()",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L1724"
-    },
-    {
-      "id": "inventory_app_main_dashboard_leave",
-      "label": "dashboard_leave()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "post",
-      "file_type": "code",
-      "norm_label": "dashboard_leave()",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L1734"
     },
     {
       "id": "inventory_app_main_detection_preview_active",
@@ -2673,18 +2421,6 @@
       "source_location": "L1906"
     },
     {
-      "id": "inventory_app_main_maybe_exit_after_leave",
-      "label": "_maybe_exit_after_leave()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "post",
-      "file_type": "code",
-      "norm_label": "_maybe_exit_after_leave()",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L1716"
-    },
-    {
       "id": "inventory_app_main_post_face_clear",
       "label": "post_face_clear()",
       "_callable": true,
@@ -2745,28 +2481,52 @@
       "source_location": "L1682"
     },
     {
-      "id": "inventory_app_main_images_to_embeddings",
-      "label": "images_to_embeddings()",
+      "id": "inventory_app_database_db_init_schema",
+      "label": "init_schema()",
       "_callable": true,
       "_origin": "ast",
       "community": 25,
       "community_name": "run_high_end_boot",
       "file_type": "code",
-      "norm_label": "images_to_embeddings()",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L315"
+      "norm_label": "init_schema()",
+      "source_file": "inventory_app/database/db.py",
+      "source_location": "L39"
     },
     {
-      "id": "inventory_app_main_load_embed_model",
-      "label": "load_embed_model()",
+      "id": "inventory_app_database_sql_bootstrap_database",
+      "label": "bootstrap_database()",
       "_callable": true,
       "_origin": "ast",
       "community": 25,
       "community_name": "run_high_end_boot",
       "file_type": "code",
-      "norm_label": "load_embed_model()",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L286"
+      "norm_label": "bootstrap_database()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L517"
+    },
+    {
+      "id": "inventory_app_database_sql_clear_staff_embeddings",
+      "label": "clear_staff_embeddings()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "run_high_end_boot",
+      "file_type": "code",
+      "norm_label": "clear_staff_embeddings()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L1074"
+    },
+    {
+      "id": "inventory_app_database_sql_ensure_database",
+      "label": "ensure_database()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "run_high_end_boot",
+      "file_type": "code",
+      "norm_label": "ensure_database()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L484"
     },
     {
       "id": "inventory_app_main_load_face_gate",
@@ -2793,18 +2553,6 @@
       "source_location": "L143"
     },
     {
-      "id": "inventory_app_main_queue_face_embedding",
-      "label": "queue_face_embedding()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "run_high_end_boot",
-      "file_type": "code",
-      "norm_label": "queue_face_embedding()",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L328"
-    },
-    {
       "id": "inventory_app_main_run_high_end_boot",
       "label": "run_high_end_boot()",
       "_callable": true,
@@ -2815,18 +2563,6 @@
       "norm_label": "run_high_end_boot()",
       "source_file": "inventory_app/main.py",
       "source_location": "L2576"
-    },
-    {
-      "id": "inventory_app_main_set_boot",
-      "label": "set_boot()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "run_high_end_boot",
-      "file_type": "code",
-      "norm_label": "set_boot()",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L2569"
     },
     {
       "id": "inventory_app_main_startup_event",
@@ -3585,6 +3321,18 @@
       "source_location": "L502"
     },
     {
+      "id": "inventory_app_main_cancel_app_exit",
+      "label": "_cancel_app_exit()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "_clear_session_movements",
+      "file_type": "code",
+      "norm_label": "_cancel_app_exit()",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L1688"
+    },
+    {
       "id": "inventory_app_main_clear_session_movements",
       "label": "_clear_session_movements()",
       "_callable": true,
@@ -3595,6 +3343,30 @@
       "norm_label": "_clear_session_movements()",
       "source_file": "inventory_app/main.py",
       "source_location": "L1670"
+    },
+    {
+      "id": "inventory_app_main_dashboard_hello",
+      "label": "dashboard_hello()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "_clear_session_movements",
+      "file_type": "code",
+      "norm_label": "dashboard_hello()",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L1724"
+    },
+    {
+      "id": "inventory_app_main_dashboard_leave",
+      "label": "dashboard_leave()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "_clear_session_movements",
+      "file_type": "code",
+      "norm_label": "dashboard_leave()",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L1734"
     },
     {
       "id": "inventory_app_main_exit_app",
@@ -3619,6 +3391,18 @@
       "norm_label": "_force_close()",
       "source_file": "inventory_app/main.py",
       "source_location": "L2689"
+    },
+    {
+      "id": "inventory_app_main_maybe_exit_after_leave",
+      "label": "_maybe_exit_after_leave()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "_clear_session_movements",
+      "file_type": "code",
+      "norm_label": "_maybe_exit_after_leave()",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L1716"
     },
     {
       "id": "inventory_app_main_shutdown_event",
@@ -3705,52 +3489,280 @@
       "source_location": "L561"
     },
     {
-      "id": "inventory_app_database_sql_embedding_from_text",
-      "label": "_embedding_from_text()",
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_build_samples",
+      "label": "build_samples()",
       "_callable": true,
       "_origin": "ast",
       "community": 35,
-      "community_name": "fetch_inventory_embeddings",
+      "community_name": "evaluate_embedding_mc2_noise.py",
       "file_type": "code",
-      "norm_label": "_embedding_from_text()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L389"
+      "norm_label": "build_samples()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L110"
     },
     {
-      "id": "inventory_app_database_sql_fetch_inventory_embeddings",
-      "label": "fetch_inventory_embeddings()",
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_canonical_name",
+      "label": "canonical_name()",
       "_callable": true,
       "_origin": "ast",
       "community": 35,
-      "community_name": "fetch_inventory_embeddings",
+      "community_name": "evaluate_embedding_mc2_noise.py",
       "file_type": "code",
-      "norm_label": "fetch_inventory_embeddings()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1216"
+      "norm_label": "canonical_name()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L64"
     },
     {
-      "id": "inventory_app_database_sql_fetch_live_dual_embeddings",
-      "label": "fetch_live_dual_embeddings()",
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_confusion_matrix",
+      "label": "chart_confusion_matrix()",
       "_callable": true,
       "_origin": "ast",
       "community": 35,
-      "community_name": "fetch_inventory_embeddings",
+      "community_name": "evaluate_embedding_mc2_noise.py",
       "file_type": "code",
-      "norm_label": "fetch_live_dual_embeddings()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1235"
+      "norm_label": "chart_confusion_matrix()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L542"
     },
     {
-      "id": "inventory_app_database_sql_fetch_staff_embeddings",
-      "label": "fetch_staff_embeddings()",
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_coverage",
+      "label": "chart_coverage()",
       "_callable": true,
       "_origin": "ast",
       "community": 35,
-      "community_name": "fetch_inventory_embeddings",
+      "community_name": "evaluate_embedding_mc2_noise.py",
       "file_type": "code",
-      "norm_label": "fetch_staff_embeddings()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1366"
+      "norm_label": "chart_coverage()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L470"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_side_by_side",
+      "label": "chart_side_by_side()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "chart_side_by_side()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L418"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_top_confusions",
+      "label": "chart_top_confusions()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "chart_top_confusions()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L510"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_classification_metrics",
+      "label": "classification_metrics()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "classification_metrics()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L212"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_encode_batches",
+      "label": "encode_batches()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "encode_batches()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L353"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_filter_split",
+      "label": "filter_split()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "filter_split()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L330"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_inventory_name_from_filename",
+      "label": "inventory_name_from_filename()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "inventory_name_from_filename()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L57"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_load_catalog",
+      "label": "load_catalog()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "load_catalog()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L163"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_load_mobileclip2",
+      "label": "load_mobileclip2()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "load_mobileclip2()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L336"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L650"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_make_masked_crop",
+      "label": "make_masked_crop()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "make_masked_crop()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L90"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_pick_device",
+      "label": "pick_device()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "pick_device()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L68"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_polygon_rows",
+      "label": "polygon_rows()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "polygon_rows()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L78"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_pretty",
+      "label": "pretty()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "pretty()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L414"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_rank_like_live",
+      "label": "rank_like_live()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "rank_like_live()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L187"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_score_queries",
+      "label": "score_queries()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "score_queries()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L290"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_self_check_rank",
+      "label": "self_check_rank()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "self_check_rank()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L621"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_write_class_metrics",
+      "label": "write_class_metrics()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "write_class_metrics()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L404"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_write_lecturer_report",
+      "label": "write_lecturer_report()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "write_lecturer_report()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L580"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_write_records",
+      "label": "write_records()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "write_records()",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L380"
     },
     {
       "id": "train_v2_utils_detectron2_recipe_epochmetricprinter_init",
@@ -3801,52 +3813,76 @@
       "source_location": "L548"
     },
     {
-      "id": "train_v2_utils_dice_loss_apply_bce_dice_mask_loss",
-      "label": "apply_bce_dice_mask_loss()",
+      "id": "export_train_official_main",
+      "label": "main()",
       "_callable": true,
       "_origin": "ast",
       "community": 37,
-      "community_name": "dice_loss.py",
+      "community_name": "drive_folder",
       "file_type": "code",
-      "norm_label": "apply_bce_dice_mask_loss()",
-      "source_file": "train_v2/utils/dice_loss.py",
-      "source_location": "L77"
-    },
-    {
-      "id": "train_v2_utils_dice_loss_apply_dice_mask_loss",
-      "label": "apply_dice_mask_loss()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "dice_loss.py",
-      "file_type": "code",
-      "norm_label": "apply_dice_mask_loss()",
-      "source_file": "train_v2/utils/dice_loss.py",
-      "source_location": "L43"
-    },
-    {
-      "id": "train_v2_utils_dice_loss_bce_dice_single_mask_loss",
-      "label": "bce_dice_single_mask_loss()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "dice_loss.py",
-      "file_type": "code",
-      "norm_label": "bce_dice_single_mask_loss()",
-      "source_file": "train_v2/utils/dice_loss.py",
-      "source_location": "L51"
-    },
-    {
-      "id": "train_v2_utils_dice_loss_dice_single_mask_loss",
-      "label": "dice_single_mask_loss()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "dice_loss.py",
-      "file_type": "code",
-      "norm_label": "dice_single_mask_loss()",
-      "source_file": "train_v2/utils/dice_loss.py",
+      "norm_label": "main()",
+      "source_file": "export_train_official.py",
       "source_location": "L19"
+    },
+    {
+      "id": "test_pg_embed_train_official_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "drive_folder",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "test_pg/embed_train_official.py",
+      "source_location": "L23"
+    },
+    {
+      "id": "utils_gdrive_drive_folder",
+      "label": "drive_folder()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "drive_folder",
+      "file_type": "code",
+      "norm_label": "drive_folder()",
+      "source_file": "utils/gdrive.py",
+      "source_location": "L67"
+    },
+    {
+      "id": "utils_gdrive_looks_like_dataset",
+      "label": "_looks_like_dataset()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "drive_folder",
+      "file_type": "code",
+      "norm_label": "_looks_like_dataset()",
+      "source_file": "utils/gdrive.py",
+      "source_location": "L27"
+    },
+    {
+      "id": "utils_gdrive_resolve_lnk",
+      "label": "_resolve_lnk()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "drive_folder",
+      "file_type": "code",
+      "norm_label": "_resolve_lnk()",
+      "source_file": "utils/gdrive.py",
+      "source_location": "L36"
+    },
+    {
+      "id": "utils_visualize_list_images",
+      "label": "list_images()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "drive_folder",
+      "file_type": "code",
+      "norm_label": "list_images()",
+      "source_file": "utils/visualize.py",
+      "source_location": "L20"
     },
     {
       "id": "train_v2_utils_detectron2_recipe_mosaicprob_init",
@@ -3883,90 +3919,6 @@
       "norm_label": ".__init__()",
       "source_file": "train_v2/utils/detectron2_recipe.py",
       "source_location": "L309"
-    },
-    {
-      "id": "inventory_app_boot_loader_bar",
-      "label": "_bar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "file_type": "code",
-      "norm_label": "_bar()",
-      "source_file": "inventory_app/boot/loader.py",
-      "source_location": "L20"
-    },
-    {
-      "id": "inventory_app_boot_loader_fail",
-      "label": "fail()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "file_type": "code",
-      "norm_label": "fail()",
-      "source_file": "inventory_app/boot/loader.py",
-      "source_location": "L66"
-    },
-    {
-      "id": "inventory_app_boot_loader_finish",
-      "label": "finish()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "file_type": "code",
-      "norm_label": "finish()",
-      "source_file": "inventory_app/boot/loader.py",
-      "source_location": "L47"
-    },
-    {
-      "id": "inventory_app_boot_loader_pulse",
-      "label": "pulse()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "file_type": "code",
-      "norm_label": "pulse()",
-      "source_file": "inventory_app/boot/loader.py",
-      "source_location": "L72"
-    },
-    {
-      "id": "inventory_app_boot_loader_set_progress",
-      "label": "set_progress()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "file_type": "code",
-      "norm_label": "set_progress()",
-      "source_file": "inventory_app/boot/loader.py",
-      "source_location": "L39"
-    },
-    {
-      "id": "inventory_app_boot_loader_start",
-      "label": "start()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "file_type": "code",
-      "norm_label": "start()",
-      "source_file": "inventory_app/boot/loader.py",
-      "source_location": "L25"
-    },
-    {
-      "id": "inventory_app_boot_loader_width",
-      "label": "_width()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "file_type": "code",
-      "norm_label": "_width()",
-      "source_file": "inventory_app/boot/loader.py",
-      "source_location": "L16"
     },
     {
       "id": "train_v2_evaluation_evaluate_embedding_similarity_build_samples",
@@ -4185,40 +4137,52 @@
       "source_location": "L64"
     },
     {
-      "id": "utils_dataset_bbox_xyxy",
-      "label": "bbox_xyxy()",
+      "id": "train_v2_utils_dice_loss_apply_bce_dice_mask_loss",
+      "label": "apply_bce_dice_mask_loss()",
       "_callable": true,
       "_origin": "ast",
-      "community": 40,
-      "community_name": "utils_db/infer.py",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
       "file_type": "code",
-      "norm_label": "bbox_xyxy()",
-      "source_file": "utils/dataset.py",
-      "source_location": "L109"
+      "norm_label": "apply_bce_dice_mask_loss()",
+      "source_file": "train_v2/utils/dice_loss.py",
+      "source_location": "L77"
     },
     {
-      "id": "utils_dataset_crop_labeled_objects",
-      "label": "crop_labeled_objects()",
+      "id": "train_v2_utils_dice_loss_apply_dice_mask_loss",
+      "label": "apply_dice_mask_loss()",
       "_callable": true,
       "_origin": "ast",
-      "community": 40,
-      "community_name": "utils_db/infer.py",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
       "file_type": "code",
-      "norm_label": "crop_labeled_objects()",
-      "source_file": "utils/dataset.py",
-      "source_location": "L133"
+      "norm_label": "apply_dice_mask_loss()",
+      "source_file": "train_v2/utils/dice_loss.py",
+      "source_location": "L43"
     },
     {
-      "id": "utils_db_eval_pick_query_image",
-      "label": "pick_query_image()",
+      "id": "train_v2_utils_dice_loss_bce_dice_single_mask_loss",
+      "label": "bce_dice_single_mask_loss()",
       "_callable": true,
       "_origin": "ast",
-      "community": 40,
-      "community_name": "utils_db/infer.py",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
       "file_type": "code",
-      "norm_label": "pick_query_image()",
-      "source_file": "utils_db/eval.py",
-      "source_location": "L46"
+      "norm_label": "bce_dice_single_mask_loss()",
+      "source_file": "train_v2/utils/dice_loss.py",
+      "source_location": "L51"
+    },
+    {
+      "id": "train_v2_utils_dice_loss_dice_single_mask_loss",
+      "label": "dice_single_mask_loss()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
+      "file_type": "code",
+      "norm_label": "dice_single_mask_loss()",
+      "source_file": "train_v2/utils/dice_loss.py",
+      "source_location": "L19"
     },
     {
       "id": "utils_db_infer_color_for_name",
@@ -4293,28 +4257,100 @@
       "source_location": "L98"
     },
     {
-      "id": "inventory_app_main_post_face_register",
-      "label": "post_face_register()",
+      "id": "inventory_app_database_sql_connect_and_prepare",
+      "label": "connect_and_prepare()",
       "_callable": true,
       "_origin": "ast",
       "community": 44,
-      "community_name": "BaseModel",
+      "community_name": "connect_and_prepare",
       "file_type": "code",
-      "norm_label": "post_face_register()",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L1970"
+      "norm_label": "connect_and_prepare()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L524"
     },
     {
-      "id": "inventory_app_main_register_staff_face",
-      "label": "_register_staff_face()",
+      "id": "inventory_app_database_sql_ensure_schema_columns",
+      "label": "ensure_schema_columns()",
       "_callable": true,
       "_origin": "ast",
       "community": 44,
-      "community_name": "BaseModel",
+      "community_name": "connect_and_prepare",
       "file_type": "code",
-      "norm_label": "_register_staff_face()",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L1922"
+      "norm_label": "ensure_schema_columns()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L119"
+    },
+    {
+      "id": "inventory_app_database_sql_open_connection",
+      "label": "_open_connection()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "connect_and_prepare",
+      "file_type": "code",
+      "norm_label": "_open_connection()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L397"
+    },
+    {
+      "id": "inventory_app_database_sql_reload_embedding_snapshots_from_csv",
+      "label": "reload_embedding_snapshots_from_csv()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "connect_and_prepare",
+      "file_type": "code",
+      "norm_label": "reload_embedding_snapshots_from_csv()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L1319"
+    },
+    {
+      "id": "inventory_app_database_sql_reset_serial_sequence",
+      "label": "_reset_serial_sequence()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "connect_and_prepare",
+      "file_type": "code",
+      "norm_label": "_reset_serial_sequence()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L292"
+    },
+    {
+      "id": "inventory_app_database_sql_restore_empty_tables_from_snapshots",
+      "label": "restore_empty_tables_from_snapshots()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "connect_and_prepare",
+      "file_type": "code",
+      "norm_label": "restore_empty_tables_from_snapshots()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L310"
+    },
+    {
+      "id": "inventory_app_database_sql_stale_snapshot_tables",
+      "label": "_stale_snapshot_tables()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "connect_and_prepare",
+      "file_type": "code",
+      "norm_label": "_stale_snapshot_tables()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L198"
+    },
+    {
+      "id": "inventory_app_database_sql_validate_required_schema",
+      "label": "validate_required_schema()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "connect_and_prepare",
+      "file_type": "code",
+      "norm_label": "validate_required_schema()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L155"
     },
     {
       "id": "inventory_app_main_catalog_import_job",
@@ -4341,6 +4377,18 @@
       "source_location": "L2138"
     },
     {
+      "id": "inventory_app_main_images_to_embeddings",
+      "label": "images_to_embeddings()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "_catalog_import_job",
+      "file_type": "code",
+      "norm_label": "images_to_embeddings()",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L315"
+    },
+    {
       "id": "inventory_app_main_import_catalog_paths",
       "label": "import_catalog_paths()",
       "_callable": true,
@@ -4351,6 +4399,30 @@
       "norm_label": "import_catalog_paths()",
       "source_file": "inventory_app/main.py",
       "source_location": "L2257"
+    },
+    {
+      "id": "inventory_app_main_load_embed_model",
+      "label": "load_embed_model()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "_catalog_import_job",
+      "file_type": "code",
+      "norm_label": "load_embed_model()",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L286"
+    },
+    {
+      "id": "inventory_app_main_queue_face_embedding",
+      "label": "queue_face_embedding()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "_catalog_import_job",
+      "file_type": "code",
+      "norm_label": "queue_face_embedding()",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L328"
     },
     {
       "id": "inventory_app_main_select_and_import_catalog",
@@ -4389,6 +4461,30 @@
       "source_location": "L1066"
     },
     {
+      "id": "inventory_app_database_sql_compare_mobileclip2_vs_noise",
+      "label": "compare_mobileclip2_vs_noise()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "db.py",
+      "file_type": "code",
+      "norm_label": "compare_mobileclip2_vs_noise()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L1261"
+    },
+    {
+      "id": "inventory_app_database_sql_fetch_item_summary",
+      "label": "fetch_item_summary()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "db.py",
+      "file_type": "code",
+      "norm_label": "fetch_item_summary()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L1119"
+    },
+    {
       "id": "inventory_app_database_sql_insert_check_in_out",
       "label": "insert_check_in_out()",
       "_callable": true,
@@ -4399,6 +4495,30 @@
       "norm_label": "insert_check_in_out()",
       "source_file": "inventory_app/database/sql.py",
       "source_location": "L918"
+    },
+    {
+      "id": "inventory_app_database_sql_mean_name_vectors",
+      "label": "mean_name_vectors()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "db.py",
+      "file_type": "code",
+      "norm_label": "mean_name_vectors()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L1243"
+    },
+    {
+      "id": "inventory_app_database_sql_normalize_item_name",
+      "label": "normalize_item_name()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "db.py",
+      "file_type": "code",
+      "norm_label": "normalize_item_name()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L381"
     },
     {
       "id": "inventory_app_database_sql_recalculate_available_quantities",
@@ -4449,40 +4569,28 @@
       "source_location": "L721"
     },
     {
-      "id": "inventory_app_database_sql_reload_embedding_snapshots_from_csv",
-      "label": "reload_embedding_snapshots_from_csv()",
+      "id": "inventory_app_database_sql_save_inventory_embedding",
+      "label": "save_inventory_embedding()",
       "_callable": true,
       "_origin": "ast",
       "community": 49,
       "community_name": "db.py",
       "file_type": "code",
-      "norm_label": "reload_embedding_snapshots_from_csv()",
+      "norm_label": "save_inventory_embedding()",
       "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1319"
+      "source_location": "L783"
     },
     {
-      "id": "inventory_app_database_sql_reset_serial_sequence",
-      "label": "_reset_serial_sequence()",
+      "id": "inventory_app_database_sql_save_object_embedding",
+      "label": "save_object_embedding()",
       "_callable": true,
       "_origin": "ast",
       "community": 49,
       "community_name": "db.py",
       "file_type": "code",
-      "norm_label": "_reset_serial_sequence()",
+      "norm_label": "save_object_embedding()",
       "source_file": "inventory_app/database/sql.py",
-      "source_location": "L292"
-    },
-    {
-      "id": "inventory_app_database_sql_restore_empty_tables_from_snapshots",
-      "label": "restore_empty_tables_from_snapshots()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "db.py",
-      "file_type": "code",
-      "norm_label": "restore_empty_tables_from_snapshots()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L310"
+      "source_location": "L800"
     },
     {
       "id": "inventory_app_backend_sam_tool_sam_status",
@@ -4579,18 +4687,6 @@
       "norm_label": "delete_sam_session()",
       "source_file": "inventory_app/main.py",
       "source_location": "L1900"
-    },
-    {
-      "id": "inventory_app_main_detection_labels",
-      "label": "detection_labels()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "main.py",
-      "file_type": "code",
-      "norm_label": "detection_labels()",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L872"
     },
     {
       "id": "inventory_app_main_detection_preview",
@@ -4713,6 +4809,18 @@
       "source_location": "L2555"
     },
     {
+      "id": "inventory_app_main_set_boot",
+      "label": "set_boot()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "main.py",
+      "file_type": "code",
+      "norm_label": "set_boot()",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L2569"
+    },
+    {
       "id": "inventory_app_main_start_camera",
       "label": "start_camera()",
       "_callable": true,
@@ -4747,18 +4855,6 @@
       "norm_label": "video_frame()",
       "source_file": "inventory_app/main.py",
       "source_location": "L2511"
-    },
-    {
-      "id": "inventory_app_database_sql_clear_staff_embeddings",
-      "label": "clear_staff_embeddings()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "replace_inventory_embeddings",
-      "file_type": "code",
-      "norm_label": "clear_staff_embeddings()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1074"
     },
     {
       "id": "inventory_app_database_sql_copy_table_to_file",
@@ -4977,6 +5073,162 @@
       "source_location": "L1113"
     },
     {
+      "id": "train_v2_utils_analyze_object_areas_areas_from_label",
+      "label": "_areas_from_label()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "analyze_object_areas.py",
+      "file_type": "code",
+      "norm_label": "_areas_from_label()",
+      "source_file": "train_v2/utils/analyze_object_areas.py",
+      "source_location": "L47"
+    },
+    {
+      "id": "train_v2_utils_analyze_object_areas_collect_split_areas",
+      "label": "collect_split_areas()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "analyze_object_areas.py",
+      "file_type": "code",
+      "norm_label": "collect_split_areas()",
+      "source_file": "train_v2/utils/analyze_object_areas.py",
+      "source_location": "L69"
+    },
+    {
+      "id": "train_v2_utils_analyze_object_areas_image_size",
+      "label": "_image_size()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "analyze_object_areas.py",
+      "file_type": "code",
+      "norm_label": "_image_size()",
+      "source_file": "train_v2/utils/analyze_object_areas.py",
+      "source_location": "L34"
+    },
+    {
+      "id": "train_v2_utils_analyze_object_areas_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "analyze_object_areas.py",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "train_v2/utils/analyze_object_areas.py",
+      "source_location": "L160"
+    },
+    {
+      "id": "train_v2_utils_analyze_object_areas_parse_args",
+      "label": "parse_args()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "analyze_object_areas.py",
+      "file_type": "code",
+      "norm_label": "parse_args()",
+      "source_file": "train_v2/utils/analyze_object_areas.py",
+      "source_location": "L153"
+    },
+    {
+      "id": "train_v2_utils_analyze_object_areas_plot_histograms",
+      "label": "plot_histograms()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "analyze_object_areas.py",
+      "file_type": "code",
+      "norm_label": "plot_histograms()",
+      "source_file": "train_v2/utils/analyze_object_areas.py",
+      "source_location": "L106"
+    },
+    {
+      "id": "train_v2_utils_analyze_object_areas_shoelace_area",
+      "label": "_shoelace_area()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "analyze_object_areas.py",
+      "file_type": "code",
+      "norm_label": "_shoelace_area()",
+      "source_file": "train_v2/utils/analyze_object_areas.py",
+      "source_location": "L30"
+    },
+    {
+      "id": "train_v2_utils_analyze_object_areas_summarize",
+      "label": "summarize()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "analyze_object_areas.py",
+      "file_type": "code",
+      "norm_label": "summarize()",
+      "source_file": "train_v2/utils/analyze_object_areas.py",
+      "source_location": "L91"
+    },
+    {
+      "id": "inventory_app_database_sql_ensure_tables",
+      "label": "ensure_tables()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "ensure_tables",
+      "file_type": "code",
+      "norm_label": "ensure_tables()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L431"
+    },
+    {
+      "id": "inventory_app_database_sql_ensure_tables_apply",
+      "label": "_apply()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "ensure_tables",
+      "file_type": "code",
+      "norm_label": "_apply()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L433"
+    },
+    {
+      "id": "inventory_app_database_sql_existing_tables",
+      "label": "existing_tables()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "ensure_tables",
+      "file_type": "code",
+      "norm_label": "existing_tables()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L414"
+    },
+    {
+      "id": "inventory_app_database_sql_existing_tables_read",
+      "label": "_read()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "ensure_tables",
+      "file_type": "code",
+      "norm_label": "_read()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L415"
+    },
+    {
+      "id": "inventory_app_database_sql_table_status",
+      "label": "table_status()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "ensure_tables",
+      "file_type": "code",
+      "norm_label": "table_status()",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L1414"
+    },
+    {
       "id": "inventory_app_backend_api_get_detections",
       "label": "get_detections()",
       "_callable": true,
@@ -5097,18 +5349,6 @@
       "source_location": "L37"
     },
     {
-      "id": "inventory_app_database_setup_db_migrate_sqlite_inventory",
-      "label": "migrate_sqlite_inventory()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "get_db",
-      "file_type": "code",
-      "norm_label": "migrate_sqlite_inventory()",
-      "source_file": "inventory_app/database/setup_db.py",
-      "source_location": "L111"
-    },
-    {
       "id": "inventory_app_database_sql_checkout_as_detection",
       "label": "_checkout_as_detection()",
       "_callable": true,
@@ -5179,18 +5419,6 @@
       "norm_label": "fetch_item()",
       "source_file": "inventory_app/database/sql.py",
       "source_location": "L682"
-    },
-    {
-      "id": "inventory_app_database_sql_fetch_item_summary",
-      "label": "fetch_item_summary()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "get_db",
-      "file_type": "code",
-      "norm_label": "fetch_item_summary()",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1119"
     },
     {
       "id": "inventory_app_database_sql_fetch_movements",
@@ -5311,6 +5539,18 @@
       "norm_label": "camera_capture_loop()",
       "source_file": "inventory_app/main.py",
       "source_location": "L1454"
+    },
+    {
+      "id": "inventory_app_main_detection_labels",
+      "label": "detection_labels()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "camera_capture_loop",
+      "file_type": "code",
+      "norm_label": "detection_labels()",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L872"
     },
     {
       "id": "inventory_app_main_draw_yolo_boxes",
@@ -5937,18 +6177,6 @@
       "source_location": "L195"
     },
     {
-      "id": "inventory_app_backend_face_choose_staff_match",
-      "label": "choose_staff_match()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "face.py",
-      "file_type": "code",
-      "norm_label": "choose_staff_match()",
-      "source_file": "inventory_app/backend/face.py",
-      "source_location": "L166"
-    },
-    {
       "id": "inventory_app_backend_face_crop_from_box",
       "label": "crop_from_box()",
       "_callable": true,
@@ -6249,15 +6477,52 @@
       "source_location": "L38"
     },
     {
-      "id": "export_train_official",
-      "label": "export_train_official.py",
+      "id": "train_v2_utils_yolo_to_coco_convert_dataset",
+      "label": "convert_dataset()",
+      "_callable": true,
       "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
+      "community": 9,
+      "community_name": "face.py",
       "file_type": "code",
-      "norm_label": "export_train_official.py",
-      "source_file": "export_train_official.py",
-      "source_location": "L1"
+      "norm_label": "convert_dataset()",
+      "source_file": "train_v2/utils/yolo_to_coco.py",
+      "source_location": "L113"
+    },
+    {
+      "id": "train_v2_utils_yolo_to_coco_convert_split",
+      "label": "convert_split()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "face.py",
+      "file_type": "code",
+      "norm_label": "convert_split()",
+      "source_file": "train_v2/utils/yolo_to_coco.py",
+      "source_location": "L64"
+    },
+    {
+      "id": "train_v2_utils_yolo_to_coco_image_path",
+      "label": "_image_path()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "face.py",
+      "file_type": "code",
+      "norm_label": "_image_path()",
+      "source_file": "train_v2/utils/yolo_to_coco.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "train_v2_utils_yolo_to_coco_polygons_from_label",
+      "label": "_polygons_from_label()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "face.py",
+      "file_type": "code",
+      "norm_label": "_polygons_from_label()",
+      "source_file": "train_v2/utils/yolo_to_coco.py",
+      "source_location": "L28"
     },
     {
       "id": "utils_dataset",
@@ -6293,17 +6558,6 @@
       "source_location": ""
     },
     {
-      "id": "utils_init",
-      "label": "utils/__init__.py",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
-      "file_type": "code",
-      "norm_label": "utils/__init__.py",
-      "source_file": "utils/__init__.py",
-      "source_location": "L1"
-    },
-    {
       "id": "utils_visualize",
       "label": "visualize.py",
       "_origin": "ast",
@@ -6324,17 +6578,6 @@
       "norm_label": "path",
       "source_file": "",
       "source_location": ""
-    },
-    {
-      "id": "export_train_official_rationale_1",
-      "label": "Export the full train image catalog to train_official.parquet (no embeddings).",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
-      "file_type": "rationale",
-      "norm_label": "export the full train image catalog to train_official.parquet (no embeddings).",
-      "source_file": "export_train_official.py",
-      "source_location": "L1"
     },
     {
       "id": "utils_dataset_rationale_1",
@@ -6379,17 +6622,6 @@
       "norm_label": "preview dataset images with yolo box or segmentation labels drawn on top.",
       "source_file": "utils/visualize.py",
       "source_location": "L1"
-    },
-    {
-      "id": "utils_visualize_rationale_24",
-      "label": "Collect image files under ``image_dir`` (includes train/val/test).",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
-      "file_type": "rationale",
-      "norm_label": "collect image files under ``image_dir`` (includes train/val/test).",
-      "source_file": "utils/visualize.py",
-      "source_location": "L24"
     },
     {
       "id": "utils_visualize_rationale_73",
@@ -6535,6 +6767,17 @@
       "source_location": "L1"
     },
     {
+      "id": "inventory_app_boot_loader",
+      "label": "loader.py",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "download_dataset.py",
+      "file_type": "code",
+      "norm_label": "loader.py",
+      "source_file": "inventory_app/boot/loader.py",
+      "source_location": "L1"
+    },
+    {
       "id": "train_v2_utils_download_dataset",
       "label": "download_dataset.py",
       "_origin": "ast",
@@ -6568,28 +6811,6 @@
       "source_location": ""
     },
     {
-      "id": "utils_gdrive",
-      "label": "gdrive.py",
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "download_dataset.py",
-      "file_type": "code",
-      "norm_label": "gdrive.py",
-      "source_file": "utils/gdrive.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "utils_gdrive_py_path",
-      "label": "Path",
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "download_dataset.py",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
       "id": "train_v2_utils_download_dataset_rationale_1",
       "label": "Copy the existing Drive YOLO dataset into train_v2/dataset. Finds the same\u2026",
       "_origin": "ast",
@@ -6610,39 +6831,6 @@
       "norm_label": "rewrite every yolo class id to 0. keep polygon / box coordinates.",
       "source_file": "train_v2/utils/download_dataset.py",
       "source_location": "L83"
-    },
-    {
-      "id": "utils_gdrive_rationale_1",
-      "label": "Google Drive path helpers for local Drive Desktop and Colab.",
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "download_dataset.py",
-      "file_type": "rationale",
-      "norm_label": "google drive path helpers for local drive desktop and colab.",
-      "source_file": "utils/gdrive.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "utils_gdrive_rationale_37",
-      "label": "Resolve a Windows .lnk (Google Drive shortcuts show up this way).",
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "download_dataset.py",
-      "file_type": "rationale",
-      "norm_label": "resolve a windows .lnk (google drive shortcuts show up this way).",
-      "source_file": "utils/gdrive.py",
-      "source_location": "L37"
-    },
-    {
-      "id": "utils_gdrive_rationale_68",
-      "label": "Find a Drive folder, including Shared-with-me shortcuts saved as .lnk.",
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "download_dataset.py",
-      "file_type": "rationale",
-      "norm_label": "find a drive folder, including shared-with-me shortcuts saved as .lnk.",
-      "source_file": "utils/gdrive.py",
-      "source_location": "L68"
     },
     {
       "id": "utils_db_cache",
@@ -6739,6 +6927,18 @@
       "source_location": "L29"
     },
     {
+      "id": "test_pg_readme_c_generate_training_embeddings_with_openclip",
+      "label": "C. Generate training embeddings with OpenCLIP",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "PETROSAINS inventory similarity (`test_pg`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "c. generate training embeddings with openclip",
+      "source_file": "test_pg/README.md",
+      "source_location": "L45"
+    },
+    {
       "id": "test_pg_readme_d_development_mode_prediction_and_evaluation",
       "label": "D. Development mode: prediction and evaluation",
       "_origin": "ast",
@@ -6833,6 +7033,17 @@
       "norm_label": "what it does",
       "source_file": "test_pg/README.md",
       "source_location": "L150"
+    },
+    {
+      "id": "utils_dataset_rationale_114",
+      "label": "Axis-aligned crop box from a YOLO box or polygon label.",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "PETROSAINS inventory similarity (`test_pg`)",
+      "file_type": "rationale",
+      "norm_label": "axis-aligned crop box from a yolo box or polygon label.",
+      "source_file": "utils/dataset.py",
+      "source_location": "L114"
     },
     {
       "id": "utils_db_cache_rationale_1",
@@ -6976,17 +7187,6 @@
       "norm_label": "cumulative similarity / soft vote over the top ``top_n`` ranks. ``total_score =...",
       "source_file": "utils_db/eval.py",
       "source_location": "L183"
-    },
-    {
-      "id": "utils_db_eval_rationale_202",
-      "label": "Embed every labeled crop in ``split``. Reuses a preloaded OpenCLIP model.",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "eval.py",
-      "file_type": "rationale",
-      "norm_label": "embed every labeled crop in ``split``. reuses a preloaded openclip model.",
-      "source_file": "utils_db/eval.py",
-      "source_location": "L202"
     },
     {
       "id": "utils_db_eval_rationale_248",
@@ -7385,48 +7585,26 @@
       "source_location": "L1"
     },
     {
-      "id": "inventory_app_database_db_rationale_40",
-      "label": "Boot helper \u2014 create missing tables only. Never seeds or overwrites.",
+      "id": "inventory_app_database_sql_rationale_1217",
+      "label": "Fetch one emb table. Default = friend mobileclip2 (abubu).",
       "_origin": "ast",
       "community": 15,
       "community_name": "sql.py",
       "file_type": "rationale",
-      "norm_label": "boot helper \u2014 create missing tables only. never seeds or overwrites.",
-      "source_file": "inventory_app/database/db.py",
-      "source_location": "L40"
+      "norm_label": "fetch one emb table. default = friend mobileclip2 (abubu).",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L1217"
     },
     {
-      "id": "inventory_app_database_sql_rationale_120",
-      "label": "Safely migrate existing installations without dropping data.",
+      "id": "inventory_app_database_sql_rationale_1236",
+      "label": "mobileclip2 + noise catalogs for dual live match (legacy unused).",
       "_origin": "ast",
       "community": 15,
       "community_name": "sql.py",
       "file_type": "rationale",
-      "norm_label": "safely migrate existing installations without dropping data.",
+      "norm_label": "mobileclip2 + noise catalogs for dual live match (legacy unused).",
       "source_file": "inventory_app/database/sql.py",
-      "source_location": "L120"
-    },
-    {
-      "id": "inventory_app_database_sql_rationale_156",
-      "label": "Reject incompatible existing tables without deleting or replacing them.",
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "rationale",
-      "norm_label": "reject incompatible existing tables without deleting or replacing them.",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L156"
-    },
-    {
-      "id": "inventory_app_database_sql_rationale_199",
-      "label": "Tables whose CSV is missing or row-count differs from Postgres.",
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "rationale",
-      "norm_label": "tables whose csv is missing or row-count differs from postgres.",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L199"
+      "source_location": "L1236"
     },
     {
       "id": "inventory_app_database_sql_rationale_2",
@@ -7438,50 +7616,6 @@
       "norm_label": "all inventory_app sql. main.py calls bootstrap_database() at boot. missing...",
       "source_file": "inventory_app/database/sql.py",
       "source_location": "L2"
-    },
-    {
-      "id": "inventory_app_database_sql_rationale_432",
-      "label": "Create only required tables that are not already in the database.",
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "rationale",
-      "norm_label": "create only required tables that are not already in the database.",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L432"
-    },
-    {
-      "id": "inventory_app_database_sql_rationale_485",
-      "label": "Create the oneshot role and oneshot_inventory database if they are missing.",
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "rationale",
-      "norm_label": "create the oneshot role and oneshot_inventory database if they are missing.",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L485"
-    },
-    {
-      "id": "inventory_app_database_sql_rationale_518",
-      "label": "Called from main.py boot. Starts Postgres, creates missing DB/tables only.",
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "rationale",
-      "norm_label": "called from main.py boot. starts postgres, creates missing db/tables only.",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L518"
-    },
-    {
-      "id": "inventory_app_database_sql_rationale_525",
-      "label": "Open the database at boot, keep a live connection, create missing tables.",
-      "_origin": "ast",
-      "community": 15,
-      "community_name": "sql.py",
-      "file_type": "rationale",
-      "norm_label": "open the database at boot, keep a live connection, create missing tables.",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L525"
     },
     {
       "id": "inventory_app_backend_dataset_importer",
@@ -7562,28 +7696,6 @@
     },
     {
       "id": "inventory_app_backend_noise_transfer_py_path",
-      "label": "Path",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "noise_transfer.py",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "train_v2_utils_yolo_to_coco",
-      "label": "yolo_to_coco.py",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "noise_transfer.py",
-      "file_type": "code",
-      "norm_label": "yolo_to_coco.py",
-      "source_file": "train_v2/utils/yolo_to_coco.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "train_v2_utils_yolo_to_coco_py_path",
       "label": "Path",
       "_origin": "ast",
       "community": 17,
@@ -7748,17 +7860,6 @@
       "source_location": "L90"
     },
     {
-      "id": "train_v2_utils_yolo_to_coco_rationale_1",
-      "label": "Convert train_v2 YOLO-seg labels to COCO JSON for Detectron2.",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "noise_transfer.py",
-      "file_type": "rationale",
-      "norm_label": "convert train_v2 yolo-seg labels to coco json for detectron2.",
-      "source_file": "train_v2/utils/yolo_to_coco.py",
-      "source_location": "L1"
-    },
-    {
       "id": "train_v2_evaluation_visualize_results",
       "label": "visualize_results.py",
       "_origin": "ast",
@@ -7781,50 +7882,6 @@
       "source_location": ""
     },
     {
-      "id": "train_v2_utils_analyze_object_areas",
-      "label": "analyze_object_areas.py",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "visualize_results.py",
-      "file_type": "code",
-      "norm_label": "analyze_object_areas.py",
-      "source_file": "train_v2/utils/analyze_object_areas.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "train_v2_utils_analyze_object_areas_py_namespace",
-      "label": "Namespace",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "visualize_results.py",
-      "file_type": "code",
-      "norm_label": "namespace",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "train_v2_utils_analyze_object_areas_py_ndarray",
-      "label": "ndarray",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "visualize_results.py",
-      "file_type": "code",
-      "norm_label": "ndarray",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "train_v2_utils_analyze_object_areas_py_path",
-      "label": "Path",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "visualize_results.py",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
       "id": "train_v2_evaluation_visualize_results_rationale_2",
       "label": "Create report-ready PNG charts from saved evaluation results.",
       "_origin": "ast",
@@ -7836,15 +7893,26 @@
       "source_location": "L2"
     },
     {
-      "id": "train_v2_utils_analyze_object_areas_rationale_1",
-      "label": "Histogram object mask areas (px\u00b2) for train / val / test. YOLO-seg labels are\u2026",
+      "id": "basemodel",
+      "label": "BaseModel",
       "_origin": "ast",
-      "community": 18,
-      "community_name": "visualize_results.py",
+      "community": 19,
+      "community_name": "_encode_worker_loop",
+      "file_type": "code",
+      "norm_label": "basemodel",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "inventory_app_backend_face_rationale_175",
+      "label": "One face at a time, matched against every enrolled staff. Full-threshold hits\u2026",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "_encode_worker_loop",
       "file_type": "rationale",
-      "norm_label": "histogram object mask areas (px2) for train / val / test. yolo-seg labels are...",
-      "source_file": "train_v2/utils/analyze_object_areas.py",
-      "source_location": "L1"
+      "norm_label": "one face at a time, matched against every enrolled staff. full-threshold hits...",
+      "source_file": "inventory_app/backend/face.py",
+      "source_location": "L175"
     },
     {
       "id": "inventory_app_main_rationale_203",
@@ -7957,15 +8025,15 @@
       "source_location": "L61"
     },
     {
-      "id": "test_pg_embed_train_official",
-      "label": "embed_train_official.py",
+      "id": "utils_dataset_py_image",
+      "label": "Image",
       "_origin": "ast",
       "community": 22,
       "community_name": "embed.py",
       "file_type": "code",
-      "norm_label": "embed_train_official.py",
-      "source_file": "test_pg/embed_train_official.py",
-      "source_location": "L1"
+      "norm_label": "image",
+      "source_file": "",
+      "source_location": ""
     },
     {
       "id": "utils_embed",
@@ -8023,15 +8091,37 @@
       "source_location": ""
     },
     {
-      "id": "test_pg_embed_train_official_rationale_1",
-      "label": "Embed every labeled crop from train_official.parquet and save the results.",
+      "id": "utils_init",
+      "label": "utils/__init__.py",
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "embed.py",
+      "file_type": "code",
+      "norm_label": "utils/__init__.py",
+      "source_file": "utils/__init__.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "utils_dataset_rationale_139",
+      "label": "Crop each labeled object from ``image`` and attach bbox metadata.",
       "_origin": "ast",
       "community": 22,
       "community_name": "embed.py",
       "file_type": "rationale",
-      "norm_label": "embed every labeled crop from train_official.parquet and save the results.",
-      "source_file": "test_pg/embed_train_official.py",
-      "source_location": "L1"
+      "norm_label": "crop each labeled object from ``image`` and attach bbox metadata.",
+      "source_file": "utils/dataset.py",
+      "source_location": "L139"
+    },
+    {
+      "id": "utils_db_eval_rationale_202",
+      "label": "Embed every labeled crop in ``split``. Reuses a preloaded OpenCLIP model.",
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "embed.py",
+      "file_type": "rationale",
+      "norm_label": "embed every labeled crop in ``split``. reuses a preloaded openclip model.",
+      "source_file": "utils_db/eval.py",
+      "source_location": "L202"
     },
     {
       "id": "utils_embed_rationale_1",
@@ -8133,39 +8223,6 @@
       "source_location": "L75"
     },
     {
-      "id": "inventory_app_database_sql_rationale_1244",
-      "label": "Average embedding per inventory_name (for compare).",
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "normalize_item_name",
-      "file_type": "rationale",
-      "norm_label": "average embedding per inventory_name (for compare).",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1244"
-    },
-    {
-      "id": "inventory_app_database_sql_rationale_1262",
-      "label": "Per-name compare: mobileclip2 vs noise (mean vectors). Returns crop counts,\u2026",
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "normalize_item_name",
-      "file_type": "rationale",
-      "norm_label": "per-name compare: mobileclip2 vs noise (mean vectors). returns crop counts,...",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1262"
-    },
-    {
-      "id": "inventory_app_database_sql_rationale_784",
-      "label": "SAM / one-shot register \u2192 mobileclip2 (abubu live primary).",
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "normalize_item_name",
-      "file_type": "rationale",
-      "norm_label": "sam / one-shot register \u2192 mobileclip2 (abubu live primary).",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L784"
-    },
-    {
       "id": "post",
       "label": "post",
       "_origin": "ast",
@@ -8210,26 +8267,48 @@
       "source_location": "L2052"
     },
     {
-      "id": "inventory_app_main_rationale_287",
-      "label": "Load MobileCLIP2 once on a dedicated encode thread and keep it there.",
+      "id": "inventory_app_database_db_rationale_40",
+      "label": "Boot helper \u2014 create missing tables only. Never seeds or overwrites.",
       "_origin": "ast",
       "community": 25,
       "community_name": "run_high_end_boot",
       "file_type": "rationale",
-      "norm_label": "load mobileclip2 once on a dedicated encode thread and keep it there.",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L287"
+      "norm_label": "boot helper \u2014 create missing tables only. never seeds or overwrites.",
+      "source_file": "inventory_app/database/db.py",
+      "source_location": "L40"
     },
     {
-      "id": "inventory_app_main_rationale_329",
-      "label": "Encode on the CLIP thread without blocking the API.",
+      "id": "inventory_app_database_sql_rationale_1075",
+      "label": "Wipe enrolled faces every boot. Also clear staff.csv so restore cannot revive\u2026",
       "_origin": "ast",
       "community": 25,
       "community_name": "run_high_end_boot",
       "file_type": "rationale",
-      "norm_label": "encode on the clip thread without blocking the api.",
-      "source_file": "inventory_app/main.py",
-      "source_location": "L329"
+      "norm_label": "wipe enrolled faces every boot. also clear staff.csv so restore cannot revive...",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L1075"
+    },
+    {
+      "id": "inventory_app_database_sql_rationale_485",
+      "label": "Create the oneshot role and oneshot_inventory database if they are missing.",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "run_high_end_boot",
+      "file_type": "rationale",
+      "norm_label": "create the oneshot role and oneshot_inventory database if they are missing.",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L485"
+    },
+    {
+      "id": "inventory_app_database_sql_rationale_518",
+      "label": "Called from main.py boot. Starts Postgres, creates missing DB/tables only.",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "run_high_end_boot",
+      "file_type": "rationale",
+      "norm_label": "called from main.py boot. starts postgres, creates missing db/tables only.",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L518"
     },
     {
       "id": "hookbase",
@@ -8980,26 +9059,125 @@
       "source_location": "L562"
     },
     {
-      "id": "inventory_app_database_sql_rationale_1217",
-      "label": "Fetch one emb table. Default = friend mobileclip2 (abubu).",
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "label": "evaluate_embedding_mc2_noise.py",
       "_origin": "ast",
       "community": 35,
-      "community_name": "fetch_inventory_embeddings",
-      "file_type": "rationale",
-      "norm_label": "fetch one emb table. default = friend mobileclip2 (abubu).",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1217"
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "evaluate_embedding_mc2_noise.py",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L1"
     },
     {
-      "id": "inventory_app_database_sql_rationale_1236",
-      "label": "mobileclip2 + noise catalogs for dual live match (legacy unused).",
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_image",
+      "label": "Image",
       "_origin": "ast",
       "community": 35,
-      "community_name": "fetch_inventory_embeddings",
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "image",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_ndarray",
+      "label": "ndarray",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "ndarray",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_path",
+      "label": "Path",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_192",
+      "label": "Per-name mean of top-3 cosines (live match_inventory_name).",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
       "file_type": "rationale",
-      "norm_label": "mobileclip2 + noise catalogs for dual live match (legacy unused).",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1236"
+      "norm_label": "per-name mean of top-3 cosines (live match_inventory_name).",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L192"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_2",
+      "label": "MobileCLIP2 classification eval: mc2 vs noise catalogs on val+test. Protocols:\u2026",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "rationale",
+      "norm_label": "mobileclip2 classification eval: mc2 vs noise catalogs on val+test. protocols:...",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L2"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_419",
+      "label": "E1: Top-1 / Top-5 / Macro-F1 bars \u2014 mc2 vs noise \u00d7 protocol \u00d7 split.",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "rationale",
+      "norm_label": "e1: top-1 / top-5 / macro-f1 bars \u2014 mc2 vs noise \u00d7 protocol \u00d7 split.",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L419"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_471",
+      "label": "E2: Coverage + accepted-only accuracy.",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "rationale",
+      "norm_label": "e2: coverage + accepted-only accuracy.",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L471"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_511",
+      "label": "E3: top-10 true\u2192pred confusions.",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "rationale",
+      "norm_label": "e3: top-10 true\u2192pred confusions.",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L511"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_543",
+      "label": "E4: full normalized confusion matrix (109 classes \u2014 dense labels).",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "rationale",
+      "norm_label": "e4: full normalized confusion matrix (109 classes \u2014 dense labels).",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L543"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_622",
+      "label": "ponytail: smallest assert that live top-3 ranking stays correct.",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "rationale",
+      "norm_label": "ponytail: smallest assert that live top-3 ranking stays correct.",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L622"
     },
     {
       "id": "commonmetricprinter",
@@ -9024,125 +9202,114 @@
       "source_location": "L446"
     },
     {
-      "id": "tensor",
-      "label": "Tensor",
+      "id": "export_train_official",
+      "label": "export_train_official.py",
       "_origin": "ast",
       "community": 37,
-      "community_name": "dice_loss.py",
+      "community_name": "drive_folder",
       "file_type": "code",
-      "norm_label": "tensor",
+      "norm_label": "export_train_official.py",
+      "source_file": "export_train_official.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "test_pg_embed_train_official",
+      "label": "embed_train_official.py",
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "drive_folder",
+      "file_type": "code",
+      "norm_label": "embed_train_official.py",
+      "source_file": "test_pg/embed_train_official.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "utils_gdrive",
+      "label": "gdrive.py",
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "drive_folder",
+      "file_type": "code",
+      "norm_label": "gdrive.py",
+      "source_file": "utils/gdrive.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "utils_gdrive_py_path",
+      "label": "Path",
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "drive_folder",
+      "file_type": "code",
+      "norm_label": "path",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "train_v2_utils_augment",
-      "label": "augment.py",
+      "id": "export_train_official_rationale_1",
+      "label": "Export the full train image catalog to train_official.parquet (no embeddings).",
       "_origin": "ast",
       "community": 37,
-      "community_name": "dice_loss.py",
-      "file_type": "code",
-      "norm_label": "augment.py",
-      "source_file": "train_v2/utils/augment.py",
+      "community_name": "drive_folder",
+      "file_type": "rationale",
+      "norm_label": "export the full train image catalog to train_official.parquet (no embeddings).",
+      "source_file": "export_train_official.py",
       "source_location": "L1"
     },
     {
-      "id": "train_v2_utils_dice_loss",
-      "label": "dice_loss.py",
+      "id": "test_pg_embed_train_official_rationale_1",
+      "label": "Embed every labeled crop from train_official.parquet and save the results.",
       "_origin": "ast",
       "community": 37,
-      "community_name": "dice_loss.py",
-      "file_type": "code",
-      "norm_label": "dice_loss.py",
-      "source_file": "train_v2/utils/dice_loss.py",
+      "community_name": "drive_folder",
+      "file_type": "rationale",
+      "norm_label": "embed every labeled crop from train_official.parquet and save the results.",
+      "source_file": "test_pg/embed_train_official.py",
       "source_location": "L1"
     },
     {
-      "id": "train_v2_utils_init",
-      "label": "train_v2/utils/__init__.py",
+      "id": "utils_gdrive_rationale_1",
+      "label": "Google Drive path helpers for local Drive Desktop and Colab.",
       "_origin": "ast",
       "community": 37,
-      "community_name": "dice_loss.py",
-      "file_type": "code",
-      "norm_label": "train_v2/utils/__init__.py",
-      "source_file": "train_v2/utils/__init__.py",
+      "community_name": "drive_folder",
+      "file_type": "rationale",
+      "norm_label": "google drive path helpers for local drive desktop and colab.",
+      "source_file": "utils/gdrive.py",
       "source_location": "L1"
     },
     {
-      "id": "train_v2_utils_augment_rationale_1",
-      "label": "Label-aware Ultralytics train() kwargs. Aggressive geometry (mosaic, mixup,\u2026",
+      "id": "utils_gdrive_rationale_37",
+      "label": "Resolve a Windows .lnk (Google Drive shortcuts show up this way).",
       "_origin": "ast",
       "community": 37,
-      "community_name": "dice_loss.py",
+      "community_name": "drive_folder",
       "file_type": "rationale",
-      "norm_label": "label-aware ultralytics train() kwargs. aggressive geometry (mosaic, mixup,...",
-      "source_file": "train_v2/utils/augment.py",
-      "source_location": "L1"
+      "norm_label": "resolve a windows .lnk (google drive shortcuts show up this way).",
+      "source_file": "utils/gdrive.py",
+      "source_location": "L37"
     },
     {
-      "id": "train_v2_utils_dice_loss_rationale_1",
-      "label": "Pure Dice instance-mask loss for Ultralytics YOLO-seg. Patches\u2026",
+      "id": "utils_gdrive_rationale_68",
+      "label": "Find a Drive folder, including Shared-with-me shortcuts saved as .lnk.",
       "_origin": "ast",
       "community": 37,
-      "community_name": "dice_loss.py",
+      "community_name": "drive_folder",
       "file_type": "rationale",
-      "norm_label": "pure dice instance-mask loss for ultralytics yolo-seg. patches...",
-      "source_file": "train_v2/utils/dice_loss.py",
-      "source_location": "L1"
+      "norm_label": "find a drive folder, including shared-with-me shortcuts saved as .lnk.",
+      "source_file": "utils/gdrive.py",
+      "source_location": "L68"
     },
     {
-      "id": "train_v2_utils_dice_loss_rationale_26",
-      "label": "Dice loss for one image's assigned instances. ``area`` is unused.",
+      "id": "utils_visualize_rationale_24",
+      "label": "Collect image files under ``image_dir`` (includes train/val/test).",
       "_origin": "ast",
       "community": 37,
-      "community_name": "dice_loss.py",
+      "community_name": "drive_folder",
       "file_type": "rationale",
-      "norm_label": "dice loss for one image's assigned instances. ``area`` is unused.",
-      "source_file": "train_v2/utils/dice_loss.py",
-      "source_location": "L26"
-    },
-    {
-      "id": "train_v2_utils_dice_loss_rationale_44",
-      "label": "Replace Ultralytics BCE mask loss with pure Dice for this process.",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "dice_loss.py",
-      "file_type": "rationale",
-      "norm_label": "replace ultralytics bce mask loss with pure dice for this process.",
-      "source_file": "train_v2/utils/dice_loss.py",
-      "source_location": "L44"
-    },
-    {
-      "id": "train_v2_utils_dice_loss_rationale_58",
-      "label": "0.5 BCE + 0.5 Dice. BCE is cropped in-place on a fresh tensor; Dice uses a\u2026",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "dice_loss.py",
-      "file_type": "rationale",
-      "norm_label": "0.5 bce + 0.5 dice. bce is cropped in-place on a fresh tensor; dice uses a...",
-      "source_file": "train_v2/utils/dice_loss.py",
-      "source_location": "L58"
-    },
-    {
-      "id": "train_v2_utils_dice_loss_rationale_78",
-      "label": "Replace Ultralytics BCE mask loss with 0.5 BCE + 0.5 Dice.",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "dice_loss.py",
-      "file_type": "rationale",
-      "norm_label": "replace ultralytics bce mask loss with 0.5 bce + 0.5 dice.",
-      "source_file": "train_v2/utils/dice_loss.py",
-      "source_location": "L78"
-    },
-    {
-      "id": "train_v2_utils_init_rationale_1",
-      "label": "Helpers for train_v2: dataset copy, Dice mask loss, label-aware augs.",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "dice_loss.py",
-      "file_type": "rationale",
-      "norm_label": "helpers for train_v2: dataset copy, dice mask loss, label-aware augs.",
-      "source_file": "train_v2/utils/__init__.py",
-      "source_location": "L1"
+      "norm_label": "collect image files under ``image_dir`` (includes train/val/test).",
+      "source_file": "utils/visualize.py",
+      "source_location": "L24"
     },
     {
       "id": "setter",
@@ -9215,15 +9382,15 @@
       "source_location": "L17"
     },
     {
-      "id": "inventory_app_boot_loader",
-      "label": "loader.py",
+      "id": "tensor",
+      "label": "Tensor",
       "_origin": "ast",
       "community": 4,
       "community_name": "evaluate_embedding_similarity.py",
       "file_type": "code",
-      "norm_label": "loader.py",
-      "source_file": "inventory_app/boot/loader.py",
-      "source_location": "L1"
+      "norm_label": "tensor",
+      "source_file": "",
+      "source_location": ""
     },
     {
       "id": "train_v2_evaluation_evaluate_embedding_similarity",
@@ -9292,6 +9459,39 @@
       "source_location": ""
     },
     {
+      "id": "train_v2_utils_augment",
+      "label": "augment.py",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
+      "file_type": "code",
+      "norm_label": "augment.py",
+      "source_file": "train_v2/utils/augment.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "train_v2_utils_dice_loss",
+      "label": "dice_loss.py",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
+      "file_type": "code",
+      "norm_label": "dice_loss.py",
+      "source_file": "train_v2/utils/dice_loss.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "train_v2_utils_init",
+      "label": "train_v2/utils/__init__.py",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
+      "file_type": "code",
+      "norm_label": "train_v2/utils/__init__.py",
+      "source_file": "train_v2/utils/__init__.py",
+      "source_location": "L1"
+    },
+    {
       "id": "train_v2_evaluation_evaluate_embedding_similarity_rationale_145",
       "label": "Replicate top-100, >=3-support, mean-score production matching.",
       "_origin": "ast",
@@ -9336,15 +9536,81 @@
       "source_location": "L2"
     },
     {
-      "id": "utils_dataset_py_image",
-      "label": "Image",
+      "id": "train_v2_utils_augment_rationale_1",
+      "label": "Label-aware Ultralytics train() kwargs. Aggressive geometry (mosaic, mixup,\u2026",
       "_origin": "ast",
-      "community": 40,
-      "community_name": "utils_db/infer.py",
-      "file_type": "code",
-      "norm_label": "image",
-      "source_file": "",
-      "source_location": ""
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
+      "file_type": "rationale",
+      "norm_label": "label-aware ultralytics train() kwargs. aggressive geometry (mosaic, mixup,...",
+      "source_file": "train_v2/utils/augment.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "train_v2_utils_dice_loss_rationale_1",
+      "label": "Pure Dice instance-mask loss for Ultralytics YOLO-seg. Patches\u2026",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
+      "file_type": "rationale",
+      "norm_label": "pure dice instance-mask loss for ultralytics yolo-seg. patches...",
+      "source_file": "train_v2/utils/dice_loss.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "train_v2_utils_dice_loss_rationale_26",
+      "label": "Dice loss for one image's assigned instances. ``area`` is unused.",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
+      "file_type": "rationale",
+      "norm_label": "dice loss for one image's assigned instances. ``area`` is unused.",
+      "source_file": "train_v2/utils/dice_loss.py",
+      "source_location": "L26"
+    },
+    {
+      "id": "train_v2_utils_dice_loss_rationale_44",
+      "label": "Replace Ultralytics BCE mask loss with pure Dice for this process.",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
+      "file_type": "rationale",
+      "norm_label": "replace ultralytics bce mask loss with pure dice for this process.",
+      "source_file": "train_v2/utils/dice_loss.py",
+      "source_location": "L44"
+    },
+    {
+      "id": "train_v2_utils_dice_loss_rationale_58",
+      "label": "0.5 BCE + 0.5 Dice. BCE is cropped in-place on a fresh tensor; Dice uses a\u2026",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
+      "file_type": "rationale",
+      "norm_label": "0.5 bce + 0.5 dice. bce is cropped in-place on a fresh tensor; dice uses a...",
+      "source_file": "train_v2/utils/dice_loss.py",
+      "source_location": "L58"
+    },
+    {
+      "id": "train_v2_utils_dice_loss_rationale_78",
+      "label": "Replace Ultralytics BCE mask loss with 0.5 BCE + 0.5 Dice.",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
+      "file_type": "rationale",
+      "norm_label": "replace ultralytics bce mask loss with 0.5 bce + 0.5 dice.",
+      "source_file": "train_v2/utils/dice_loss.py",
+      "source_location": "L78"
+    },
+    {
+      "id": "train_v2_utils_init_rationale_1",
+      "label": "Helpers for train_v2: dataset copy, Dice mask loss, label-aware augs.",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
+      "file_type": "rationale",
+      "norm_label": "helpers for train_v2: dataset copy, dice mask loss, label-aware augs.",
+      "source_file": "train_v2/utils/__init__.py",
+      "source_location": "L1"
     },
     {
       "id": "utils_db_infer",
@@ -9389,40 +9655,6 @@
       "norm_label": "path",
       "source_file": "",
       "source_location": ""
-    },
-    {
-      "id": "test_pg_readme_c_generate_training_embeddings_with_openclip",
-      "label": "C. Generate training embeddings with OpenCLIP",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "utils_db/infer.py",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "c. generate training embeddings with openclip",
-      "source_file": "test_pg/README.md",
-      "source_location": "L45"
-    },
-    {
-      "id": "utils_dataset_rationale_114",
-      "label": "Axis-aligned crop box from a YOLO box or polygon label.",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "utils_db/infer.py",
-      "file_type": "rationale",
-      "norm_label": "axis-aligned crop box from a yolo box or polygon label.",
-      "source_file": "utils/dataset.py",
-      "source_location": "L114"
-    },
-    {
-      "id": "utils_dataset_rationale_139",
-      "label": "Crop each labeled object from ``image`` and attach bbox metadata.",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "utils_db/infer.py",
-      "file_type": "rationale",
-      "norm_label": "crop each labeled object from ``image`` and attach bbox metadata.",
-      "source_file": "utils/dataset.py",
-      "source_location": "L139"
     },
     {
       "id": "utils_db_infer_rationale_1",
@@ -9516,15 +9748,70 @@
       "source_location": "L1"
     },
     {
-      "id": "basemodel",
-      "label": "BaseModel",
+      "id": "inventory_app_database_sql_rationale_120",
+      "label": "Safely migrate existing installations without dropping data.",
       "_origin": "ast",
       "community": 44,
-      "community_name": "BaseModel",
-      "file_type": "code",
-      "norm_label": "basemodel",
-      "source_file": "",
-      "source_location": ""
+      "community_name": "connect_and_prepare",
+      "file_type": "rationale",
+      "norm_label": "safely migrate existing installations without dropping data.",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L120"
+    },
+    {
+      "id": "inventory_app_database_sql_rationale_1320",
+      "label": "TRUNCATE listed emb tables and COPY from saved_tables CSVs (vectors as-is).",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "connect_and_prepare",
+      "file_type": "rationale",
+      "norm_label": "truncate listed emb tables and copy from saved_tables csvs (vectors as-is).",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L1320"
+    },
+    {
+      "id": "inventory_app_database_sql_rationale_156",
+      "label": "Reject incompatible existing tables without deleting or replacing them.",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "connect_and_prepare",
+      "file_type": "rationale",
+      "norm_label": "reject incompatible existing tables without deleting or replacing them.",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L156"
+    },
+    {
+      "id": "inventory_app_database_sql_rationale_199",
+      "label": "Tables whose CSV is missing or row-count differs from Postgres.",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "connect_and_prepare",
+      "file_type": "rationale",
+      "norm_label": "tables whose csv is missing or row-count differs from postgres.",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L199"
+    },
+    {
+      "id": "inventory_app_database_sql_rationale_311",
+      "label": "Restore CSV data only into currently empty supported tables.",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "connect_and_prepare",
+      "file_type": "rationale",
+      "norm_label": "restore csv data only into currently empty supported tables.",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L311"
+    },
+    {
+      "id": "inventory_app_database_sql_rationale_525",
+      "label": "Open the database at boot, keep a live connection, create missing tables.",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "connect_and_prepare",
+      "file_type": "rationale",
+      "norm_label": "open the database at boot, keep a live connection, create missing tables.",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L525"
     },
     {
       "id": "inventory_app_main_rationale_2230",
@@ -9547,6 +9834,28 @@
       "norm_label": "import without folder picker \u2014 body: {image_dir, label_dir, noise_capture_dir?}.",
       "source_file": "inventory_app/main.py",
       "source_location": "L2258"
+    },
+    {
+      "id": "inventory_app_main_rationale_287",
+      "label": "Load MobileCLIP2 once on a dedicated encode thread and keep it there.",
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "_catalog_import_job",
+      "file_type": "rationale",
+      "norm_label": "load mobileclip2 once on a dedicated encode thread and keep it there.",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L287"
+    },
+    {
+      "id": "inventory_app_main_rationale_329",
+      "label": "Encode on the CLIP thread without blocking the API.",
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "_catalog_import_job",
+      "file_type": "rationale",
+      "norm_label": "encode on the clip thread without blocking the api.",
+      "source_file": "inventory_app/main.py",
+      "source_location": "L329"
     },
     {
       "id": "inventory_app_frontend_config",
@@ -9604,26 +9913,26 @@
       "source_location": "L1067"
     },
     {
-      "id": "inventory_app_database_sql_rationale_1320",
-      "label": "TRUNCATE listed emb tables and COPY from saved_tables CSVs (vectors as-is).",
+      "id": "inventory_app_database_sql_rationale_1244",
+      "label": "Average embedding per inventory_name (for compare).",
       "_origin": "ast",
       "community": 49,
       "community_name": "db.py",
       "file_type": "rationale",
-      "norm_label": "truncate listed emb tables and copy from saved_tables csvs (vectors as-is).",
+      "norm_label": "average embedding per inventory_name (for compare).",
       "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1320"
+      "source_location": "L1244"
     },
     {
-      "id": "inventory_app_database_sql_rationale_311",
-      "label": "Restore CSV data only into currently empty supported tables.",
+      "id": "inventory_app_database_sql_rationale_1262",
+      "label": "Per-name compare: mobileclip2 vs noise (mean vectors). Returns crop counts,\u2026",
       "_origin": "ast",
       "community": 49,
       "community_name": "db.py",
       "file_type": "rationale",
-      "norm_label": "restore csv data only into currently empty supported tables.",
+      "norm_label": "per-name compare: mobileclip2 vs noise (mean vectors). returns crop counts,...",
       "source_file": "inventory_app/database/sql.py",
-      "source_location": "L311"
+      "source_location": "L1262"
     },
     {
       "id": "inventory_app_database_sql_rationale_719",
@@ -9635,6 +9944,17 @@
       "norm_label": "rebuild summary from mobileclip2 (abubu rule); fallback legacy inventory_emb.",
       "source_file": "inventory_app/database/sql.py",
       "source_location": "L719"
+    },
+    {
+      "id": "inventory_app_database_sql_rationale_784",
+      "label": "SAM / one-shot register \u2192 mobileclip2 (abubu live primary).",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "db.py",
+      "file_type": "rationale",
+      "norm_label": "sam / one-shot register \u2192 mobileclip2 (abubu live primary).",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L784"
     },
     {
       "id": "delete",
@@ -9692,17 +10012,6 @@
       "source_location": "L2654"
     },
     {
-      "id": "inventory_app_database_sql_rationale_1075",
-      "label": "Wipe enrolled faces every boot. Also clear staff.csv so restore cannot revive\u2026",
-      "_origin": "ast",
-      "community": 50,
-      "community_name": "replace_inventory_embeddings",
-      "file_type": "rationale",
-      "norm_label": "wipe enrolled faces every boot. also clear staff.csv so restore cannot revive...",
-      "source_file": "inventory_app/database/sql.py",
-      "source_location": "L1075"
-    },
-    {
       "id": "inventory_app_database_sql_rationale_224",
       "label": "Export supported application tables to atomic CSV snapshots. only: optional\u2026",
       "_origin": "ast",
@@ -9734,6 +10043,72 @@
       "norm_label": "noise train import \u2192 replace inventory_emb_noise only (leave friend catalogs)....",
       "source_file": "inventory_app/database/sql.py",
       "source_location": "L843"
+    },
+    {
+      "id": "train_v2_utils_analyze_object_areas",
+      "label": "analyze_object_areas.py",
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "analyze_object_areas.py",
+      "file_type": "code",
+      "norm_label": "analyze_object_areas.py",
+      "source_file": "train_v2/utils/analyze_object_areas.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "train_v2_utils_analyze_object_areas_py_namespace",
+      "label": "Namespace",
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "analyze_object_areas.py",
+      "file_type": "code",
+      "norm_label": "namespace",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "train_v2_utils_analyze_object_areas_py_ndarray",
+      "label": "ndarray",
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "analyze_object_areas.py",
+      "file_type": "code",
+      "norm_label": "ndarray",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "train_v2_utils_analyze_object_areas_py_path",
+      "label": "Path",
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "analyze_object_areas.py",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "train_v2_utils_analyze_object_areas_rationale_1",
+      "label": "Histogram object mask areas (px\u00b2) for train / val / test. YOLO-seg labels are\u2026",
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "analyze_object_areas.py",
+      "file_type": "rationale",
+      "norm_label": "histogram object mask areas (px2) for train / val / test. yolo-seg labels are...",
+      "source_file": "train_v2/utils/analyze_object_areas.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "inventory_app_database_sql_rationale_432",
+      "label": "Create only required tables that are not already in the database.",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "ensure_tables",
+      "file_type": "rationale",
+      "norm_label": "create only required tables that are not already in the database.",
+      "source_file": "inventory_app/database/sql.py",
+      "source_location": "L432"
     },
     {
       "id": "inventory_app_backend_api",
@@ -9868,6 +10243,28 @@
       "source_location": "L1"
     },
     {
+      "id": "train_v2_utils_yolo_to_coco",
+      "label": "yolo_to_coco.py",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "face.py",
+      "file_type": "code",
+      "norm_label": "yolo_to_coco.py",
+      "source_file": "train_v2/utils/yolo_to_coco.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "train_v2_utils_yolo_to_coco_py_path",
+      "label": "Path",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "face.py",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
       "id": "inventory_app_backend_face_rationale_1",
       "label": "Face gate: landmarks, oval-region check, and background-free face crops. Uses\u2026",
       "_origin": "ast",
@@ -9899,17 +10296,6 @@
       "norm_label": "true only when the face is centered in the middle of the gate oval.",
       "source_file": "inventory_app/backend/face.py",
       "source_location": "L147"
-    },
-    {
-      "id": "inventory_app_backend_face_rationale_175",
-      "label": "One face at a time, matched against every enrolled staff. Full-threshold hits\u2026",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "face.py",
-      "file_type": "rationale",
-      "norm_label": "one face at a time, matched against every enrolled staff. full-threshold hits...",
-      "source_file": "inventory_app/backend/face.py",
-      "source_location": "L175"
     },
     {
       "id": "inventory_app_backend_face_rationale_207",
@@ -9956,6 +10342,17 @@
       "source_location": "L60"
     },
     {
+      "id": "train_v2_utils_yolo_to_coco_rationale_1",
+      "label": "Convert train_v2 YOLO-seg labels to COCO JSON for Detectron2.",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "face.py",
+      "file_type": "rationale",
+      "norm_label": "convert train_v2 yolo-seg labels to coco json for detectron2.",
+      "source_file": "train_v2/utils/yolo_to_coco.py",
+      "source_location": "L1"
+    },
+    {
       "id": "collections_abc",
       "label": "collections_abc",
       "_origin": "semantic",
@@ -9992,6 +10389,18 @@
       "type": "external"
     },
     {
+      "id": "tqdm",
+      "label": "tqdm",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "visualize.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "tqdm",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "argparse",
       "label": "argparse",
       "_origin": "semantic",
@@ -10000,6 +10409,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "argparse",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "numpy",
+      "label": "numpy",
+      "_origin": "semantic",
+      "community": 1,
+      "community_name": "pathlib",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "numpy",
       "source_file": "",
       "type": "external"
     },
@@ -10028,18 +10449,6 @@
       "type": "external"
     },
     {
-      "id": "sys",
-      "label": "sys",
-      "_origin": "semantic",
-      "community": 1,
-      "community_name": "pathlib",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "sys",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "utils_db",
       "label": "utils_db",
       "_origin": "semantic",
@@ -10052,26 +10461,26 @@
       "type": "external"
     },
     {
-      "id": "google_colab",
-      "label": "google_colab",
+      "id": "shutil",
+      "label": "shutil",
       "_origin": "semantic",
       "community": 10,
       "community_name": "download_dataset.py",
       "external": true,
       "file_type": "concept",
-      "norm_label": "google_colab",
+      "norm_label": "shutil",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "re",
-      "label": "re",
+      "id": "time",
+      "label": "time",
       "_origin": "semantic",
       "community": 10,
       "community_name": "download_dataset.py",
       "external": true,
       "file_type": "concept",
-      "norm_label": "re",
+      "norm_label": "time",
       "source_file": "",
       "type": "external"
     },
@@ -10304,42 +10713,6 @@
       "type": "external"
     },
     {
-      "id": "numpy",
-      "label": "numpy",
-      "_origin": "semantic",
-      "community": 17,
-      "community_name": "noise_transfer.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "numpy",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "pil",
-      "label": "pil",
-      "_origin": "semantic",
-      "community": 17,
-      "community_name": "noise_transfer.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "pil",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "tqdm",
-      "label": "tqdm",
-      "_origin": "semantic",
-      "community": 17,
-      "community_name": "noise_transfer.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "tqdm",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "typing",
       "label": "typing",
       "_origin": "semantic",
@@ -10352,18 +10725,6 @@
       "type": "external"
     },
     {
-      "id": "collections",
-      "label": "collections",
-      "_origin": "semantic",
-      "community": 18,
-      "community_name": "visualize_results.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "collections",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "csv",
       "label": "csv",
       "_origin": "semantic",
@@ -10372,18 +10733,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "csv",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "matplotlib",
-      "label": "matplotlib",
-      "_origin": "semantic",
-      "community": 18,
-      "community_name": "visualize_results.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "matplotlib",
       "source_file": "",
       "type": "external"
     },
@@ -10408,6 +10757,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "base64",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "collections",
+      "label": "collections",
+      "_origin": "semantic",
+      "community": 2,
+      "community_name": "sam_tool.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "collections",
       "source_file": "",
       "type": "external"
     },
@@ -10484,18 +10845,6 @@
       "type": "external"
     },
     {
-      "id": "pandas",
-      "label": "pandas",
-      "_origin": "semantic",
-      "community": 22,
-      "community_name": "embed.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "pandas",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "ref_https_cdn_jsdelivr_net_npm_mediapipe_tasks_vision_0_10_14_vision_bundle_mjs",
       "label": "ref_https_cdn_jsdelivr_net_npm_mediapipe_tasks_vision_0_10_14_vision_bundle_mjs",
       "_origin": "semantic",
@@ -10508,50 +10857,50 @@
       "type": "external"
     },
     {
-      "id": "torch",
-      "label": "torch",
+      "id": "google_colab",
+      "label": "google_colab",
       "_origin": "semantic",
       "community": 37,
-      "community_name": "dice_loss.py",
+      "community_name": "drive_folder",
       "external": true,
       "file_type": "concept",
-      "norm_label": "torch",
+      "norm_label": "google_colab",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "torch_nn_functional",
-      "label": "torch_nn_functional",
+      "id": "pandas",
+      "label": "pandas",
       "_origin": "semantic",
       "community": 37,
-      "community_name": "dice_loss.py",
+      "community_name": "drive_folder",
       "external": true,
       "file_type": "concept",
-      "norm_label": "torch_nn_functional",
+      "norm_label": "pandas",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "ultralytics_utils_loss",
-      "label": "ultralytics_utils_loss",
+      "id": "re",
+      "label": "re",
       "_origin": "semantic",
       "community": 37,
-      "community_name": "dice_loss.py",
+      "community_name": "drive_folder",
       "external": true,
       "file_type": "concept",
-      "norm_label": "ultralytics_utils_loss",
+      "norm_label": "re",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "ultralytics_utils_ops",
-      "label": "ultralytics_utils_ops",
+      "id": "sys",
+      "label": "sys",
       "_origin": "semantic",
       "community": 37,
-      "community_name": "dice_loss.py",
+      "community_name": "drive_folder",
       "external": true,
       "file_type": "concept",
-      "norm_label": "ultralytics_utils_ops",
+      "norm_label": "sys",
       "source_file": "",
       "type": "external"
     },
@@ -10568,18 +10917,6 @@
       "type": "external"
     },
     {
-      "id": "json",
-      "label": "json",
-      "_origin": "semantic",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "json",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "platform",
       "label": "platform",
       "_origin": "semantic",
@@ -10592,26 +10929,50 @@
       "type": "external"
     },
     {
-      "id": "shutil",
-      "label": "shutil",
+      "id": "torch",
+      "label": "torch",
       "_origin": "semantic",
       "community": 4,
       "community_name": "evaluate_embedding_similarity.py",
       "external": true,
       "file_type": "concept",
-      "norm_label": "shutil",
+      "norm_label": "torch",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "time",
-      "label": "time",
+      "id": "torch_nn_functional",
+      "label": "torch_nn_functional",
       "_origin": "semantic",
       "community": 4,
       "community_name": "evaluate_embedding_similarity.py",
       "external": true,
       "file_type": "concept",
-      "norm_label": "time",
+      "norm_label": "torch_nn_functional",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ultralytics_utils_loss",
+      "label": "ultralytics_utils_loss",
+      "_origin": "semantic",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ultralytics_utils_loss",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "ultralytics_utils_ops",
+      "label": "ultralytics_utils_ops",
+      "_origin": "semantic",
+      "community": 4,
+      "community_name": "evaluate_embedding_similarity.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "ultralytics_utils_ops",
       "source_file": "",
       "type": "external"
     },
@@ -10628,6 +10989,18 @@
       "type": "external"
     },
     {
+      "id": "matplotlib",
+      "label": "matplotlib",
+      "_origin": "semantic",
+      "community": 40,
+      "community_name": "utils_db/infer.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "matplotlib",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "matplotlib_patches",
       "label": "matplotlib_patches",
       "_origin": "semantic",
@@ -10636,6 +11009,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "matplotlib_patches",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "pil",
+      "label": "pil",
+      "_origin": "semantic",
+      "community": 40,
+      "community_name": "utils_db/infer.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "pil",
       "source_file": "",
       "type": "external"
     },
@@ -10828,6 +11213,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "cv2",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "json",
+      "label": "json",
+      "_origin": "semantic",
+      "community": 9,
+      "community_name": "face.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "json",
       "source_file": "",
       "type": "external"
     },
@@ -16102,6 +16499,318 @@
       "weight": 1.0
     },
     {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_build_samples",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_polygon_rows",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L131",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_build_samples",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_inventory_name_from_filename",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L140",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_confusion_matrix",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_pretty",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L544",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_top_confusions",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_pretty",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L516",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_self_check_rank",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L668",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_canonical_name",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L684",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_side_by_side",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L692",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_coverage",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L693",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_filter_split",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L702",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_top_confusions",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L704",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_confusion_matrix",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L707",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_pick_device",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L713",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_build_samples",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L722",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_load_catalog",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L734",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_load_mobileclip2",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L751",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_make_masked_crop",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L765",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_encode_batches",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L783",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_score_queries",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L832",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_classification_metrics",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L846",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_write_records",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L855",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_write_class_metrics",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L856",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_write_lecturer_report",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L889",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_rank_like_live",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_canonical_name",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L197",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_score_queries",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_rank_like_live",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L301",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_score_queries",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_canonical_name",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L305",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_self_check_rank",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_rank_like_live",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L640",
+      "weight": 1.0
+    },
+    {
       "source": "train_v2_evaluation_evaluate_embedding_similarity_build_samples",
       "target": "train_v2_evaluation_evaluate_embedding_similarity_inventory_name_from_filename",
       "relation": "calls",
@@ -18778,6 +19487,30 @@
       "weight": 1.0
     },
     {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_encode_batches",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_image",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L353",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_load_catalog",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_ndarray",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
       "source": "train_v2_evaluation_evaluate_embedding_similarity_load_catalog",
       "target": "train_v2_evaluation_evaluate_embedding_similarity_py_ndarray",
       "relation": "references",
@@ -20384,6 +21117,138 @@
       "context": "import",
       "source_file": "test_pg/setup_pgvector.py",
       "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "argparse",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "csv",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "json",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "platform",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "re",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "sys",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "time",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "matplotlib",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "numpy",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "torch",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -22499,6 +23364,54 @@
       "weight": 1.0
     },
     {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "collections",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "datetime",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "pil",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
       "source": "train_v2_evaluation_evaluate_embedding_similarity",
       "target": "collections",
       "relation": "imports_from",
@@ -23651,6 +24564,114 @@
       "weight": 1.0
     },
     {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_build_samples",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L110",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_inventory_name_from_filename",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L57",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_load_catalog",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_polygon_rows",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L78",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_rank_like_live",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_ndarray",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L187",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_score_queries",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_ndarray",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L290",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_write_class_metrics",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L404",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_write_lecturer_report",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L580",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_write_records",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L380",
+      "weight": 1.0
+    },
+    {
       "source": "train_v2_evaluation_evaluate_embedding_similarity_build_samples",
       "target": "train_v2_evaluation_evaluate_embedding_similarity_py_path",
       "relation": "references",
@@ -24428,6 +25449,78 @@
       "context": "return_type",
       "source_file": "test_pg/setup_pgvector.py",
       "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_confusion_matrix",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L542",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_coverage",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L470",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_side_by_side",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L418",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_top_confusions",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L510",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_encode_batches",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_ndarray",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L353",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_make_masked_crop",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_py_image",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L90",
       "weight": 1.0
     },
     {
@@ -29445,6 +30538,259 @@
       "weight": 1.0
     },
     {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_build_samples",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L110",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_load_catalog",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_rank_like_live",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L187",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_classification_metrics",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L212",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_score_queries",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L290",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_filter_split",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L330",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_load_mobileclip2",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L336",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_encode_batches",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L353",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_write_records",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L380",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_write_class_metrics",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L404",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_pretty",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L414",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_side_by_side",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L418",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_coverage",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L470",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_top_confusions",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L510",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_confusion_matrix",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L542",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_inventory_name_from_filename",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L57",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_write_lecturer_report",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L580",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_self_check_rank",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L621",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_canonical_name",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L650",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_pick_device",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_polygon_rows",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L78",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_make_masked_crop",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
       "source": "train_v2_evaluation_evaluate_embedding_similarity",
       "target": "train_v2_evaluation_evaluate_embedding_similarity_load_catalog",
       "relation": "contains",
@@ -32061,6 +33407,83 @@
       "weight": 1.0
     },
     {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_192",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_rank_like_live",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L192",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_2",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_419",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_side_by_side",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L419",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_471",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_coverage",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L471",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_511",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_top_confusions",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L511",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_543",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_chart_confusion_matrix",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L543",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_622",
+      "target": "train_v2_evaluation_evaluate_embedding_mc2_noise_self_check_rank",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L622",
+      "weight": 1.0
+    },
+    {
       "source": "train_v2_evaluation_evaluate_embedding_similarity_rationale_145",
       "target": "train_v2_evaluation_evaluate_embedding_similarity_rank_like_inventory_app",
       "relation": "rationale_for",
@@ -33737,6 +35160,30 @@
       "weight": 1.0
     },
     {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "inventory_app_backend_noise_transfer_load_noise_profile_from_capture",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L742",
+      "weight": 1.0
+    },
+    {
+      "source": "train_v2_evaluation_evaluate_embedding_mc2_noise_main",
+      "target": "inventory_app_backend_noise_transfer_apply_noise_to_image",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
+      "source_location": "L794",
+      "weight": 1.0
+    },
+    {
       "source": "inventory_app_main_face_status_payload",
       "target": "inventory_app_backend_face_landmarks_complete",
       "relation": "indirect_call",
@@ -33929,5 +35376,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "dc015b9092f8ec09d69443d42dfc708288dd7e05"
+  "built_at_commit": "b0def74acbf5d37ad5a8274ff7343c408e86d4f0"
 }

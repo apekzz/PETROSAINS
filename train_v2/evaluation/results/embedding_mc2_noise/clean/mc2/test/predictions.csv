@@ -1,0 +1,902 @@
+protocol,catalog,split,image,polygon_index,true_name,predicted_name,similarity,second_similarity,margin,accepted,correct,top5_correct
+clean,mc2,test,C001_tracing_paper__C001_TRACKING PAPER_C001_01.jpg,0,tracing paper,tracing paper,0.8333327770233154,0.803388257821401,0.029944519201914432,True,True,True
+clean,mc2,test,C001_tracing_paper__C001_TRACKING PAPER_C001_04.jpg,0,tracing paper,tracing paper,0.7623037695884705,0.7522966066996256,0.010007162888844845,True,True,True
+clean,mc2,test,C001_tracing_paper__C001_TRACKING PAPER_C001_21.jpg,0,tracing paper,tracing paper,0.9077485799789429,0.8822174469629923,0.025531133015950558,True,True,True
+clean,mc2,test,C002_paper_cup__C002_PAPER CUP_C002_01.jpg,0,paper cup,paper cup,0.8713167905807495,0.7871315677960714,0.0841852227846781,True,True,True
+clean,mc2,test,C002_paper_cup__C002_PAPER CUP_C002_18.jpg,0,paper cup,paper cup,0.9755723675092062,0.5154945055643717,0.46007786194483447,True,True,True
+clean,mc2,test,C002_paper_cup__C002_PAPER CUP_C002_25.jpg,0,paper cup,paper cup,0.9500426650047302,0.5728369951248169,0.37720566987991333,True,True,True
+clean,mc2,test,C002_paper_cup__C002_PAPER CUP_C002_26.jpg,0,paper cup,paper cup,0.9585917194684347,0.5293382008870443,0.4292535185813904,True,True,True
+clean,mc2,test,C002_paper_cup__C002_PAPER CUP_C002_28(1).jpg,0,paper cup,paper cup,0.9591437776883444,0.5853905081748962,0.3737532695134481,True,True,True
+clean,mc2,test,C003_thread__C003_THREAD_C003_03.jpg,0,thread,thread,0.930762509504954,0.796947717666626,0.133814791838328,True,True,True
+clean,mc2,test,C003_thread__C003_THREAD_C003_05.jpg,0,thread,thread,0.9135990738868713,0.7995595335960388,0.11403954029083252,True,True,True
+clean,mc2,test,C003_thread__C003_THREAD_C003_13.jpg,0,thread,thread,0.9506708979606628,0.716673751672109,0.23399714628855384,True,True,True
+clean,mc2,test,C003_thread__C003_THREAD_C003_13.jpg,1,thread,thread,0.9794816573460897,0.7683325608571371,0.21114909648895264,True,True,True
+clean,mc2,test,C003_thread__C003_THREAD_C003_13.jpg,2,thread,thread,0.9498061339060465,0.7841834425926208,0.16562269131342566,True,True,True
+clean,mc2,test,C003_thread__C003_THREAD_C003_13.jpg,3,thread,thread,0.9179097215334574,0.7269657055536906,0.19094401597976685,True,True,True
+clean,mc2,test,C003_thread__C003_THREAD_C003_13.jpg,4,thread,thread,0.8726719617843628,0.7023934324582418,0.17027852932612098,True,True,True
+clean,mc2,test,C003_thread__C003_THREAD_C003_15.jpg,0,thread,thread,0.8877546389897665,0.718302845954895,0.16945179303487146,True,True,True
+clean,mc2,test,C003_thread__C003_THREAD_C003_37.jpg,0,thread,thread,0.9320502082506815,0.7248088916142782,0.20724131663640333,True,True,True
+clean,mc2,test,C003_thread__C003_THREAD_C003_42.jpg,0,thread,thread,0.9708670775095621,0.7801725467046102,0.1906945308049519,True,True,True
+clean,mc2,test,C003_thread__C003_THREAD_C003_45.jpg,0,thread,thread,0.9304254849751791,0.7460590998331705,0.18436638514200854,True,True,True
+clean,mc2,test,C003_thread__C003_THREAD_C003_49.jpg,0,thread,thread,0.8935824433962504,0.6854340036710104,0.20814843972524,True,True,True
+clean,mc2,test,C004_needle__C004_NEEDLE_C004_12.jpg,0,needle,needle,0.9104100465774536,0.8968711694081625,0.013538877169291141,True,True,True
+clean,mc2,test,C004_needle__C004_NEEDLE_C004_13.jpg,0,needle,needle,0.9504428108533224,0.8823606769243876,0.06808213392893481,True,True,True
+clean,mc2,test,C004_needle__C004_NEEDLE_C004_19.jpg,0,needle,needle,0.9318293531735738,0.8893641630808512,0.04246519009272265,True,True,True
+clean,mc2,test,C004_needle__C004_NEEDLE_C004_19.jpg,1,needle,needle,0.9602569142977396,0.8880923986434937,0.07216451565424598,True,True,True
+clean,mc2,test,C004_needle__C004_NEEDLE_C004_19.jpg,2,needle,needle,0.9559897581736246,0.9101520379384359,0.04583772023518873,True,True,True
+clean,mc2,test,C004_needle__C004_NEEDLE_C004_19.jpg,3,needle,needle,0.9148247043291727,0.8337307969729105,0.08109390735626221,True,True,True
+clean,mc2,test,C004_needle__C004_NEEDLE_C004_28.jpg,0,needle,needle,0.9408257802327474,0.8877768913904825,0.053048888842264885,True,True,True
+clean,mc2,test,C004_needle__C004_NEEDLE_C004_29.jpg,0,needle,glue gun stick,0.9180135925610861,0.9067238966623942,0.011289695898691887,True,False,True
+clean,mc2,test,C005_yarn__C005_YARN_C005_01.jpg,0,yarn,yarn,0.9745665192604065,0.7830382784207662,0.19152824083964026,True,True,True
+clean,mc2,test,C005_yarn__C005_YARN_C005_12.jpg,0,yarn,yarn,0.9400050044059753,0.7764583428700765,0.1635466615358988,True,True,True
+clean,mc2,test,C005_yarn__C005_YARN_C005_13.jpg,0,yarn,yarn,0.9526843627293905,0.8002479871114095,0.15243637561798096,True,True,True
+clean,mc2,test,C005_yarn__C005_YARN_C005_18.jpg,0,yarn,yarn,0.9536697268486023,0.783032238483429,0.17063748836517334,True,True,True
+clean,mc2,test,C005_yarn__C005_YARN_C005_29.jpg,0,yarn,yarn,0.9613940914471945,0.8000954190889994,0.16129867235819506,True,True,True
+clean,mc2,test,C005_yarn__C005_YARN_C005_29.jpg,1,yarn,yarn,0.968933641910553,0.7905361851056417,0.17839745680491126,True,True,True
+clean,mc2,test,C005_yarn__C005_YARN_C005_31.jpg,0,yarn,yarn,0.969162106513977,0.8339795668919882,0.1351825396219889,True,True,True
+clean,mc2,test,C005_yarn__C005_YARN_C005_31.jpg,1,yarn,yarn,0.9247591694196066,0.7334488034248352,0.19131036599477136,True,True,True
+clean,mc2,test,C005_yarn__C005_YARN_C005_31.jpg,2,yarn,yarn,0.8983869353930155,0.7250286539395651,0.17335828145345045,True,True,True
+clean,mc2,test,C005_yarn__C005_YARN_C005_34.jpg,0,yarn,yarn,0.9258116881052653,0.7378333608309428,0.1879783272743225,True,True,True
+clean,mc2,test,C006_air_clay__C006_AIR CLAY_C006_04.jpg,0,air clay,air clay,0.9552796483039856,0.703872541586558,0.2514071067174276,True,True,True
+clean,mc2,test,C006_air_clay__C006_AIR CLAY_C006_15.jpg,0,air clay,Whiteboard Marker,0.7015182375907898,0.6938250859578451,0.007693151632944706,True,False,False
+clean,mc2,test,C006_air_clay__C006_AIR CLAY_C006_17.jpg,0,air clay,air clay,0.9265493353207906,0.7193226019541422,0.20722673336664843,True,True,True
+clean,mc2,test,C006_air_clay__C006_AIR CLAY_C006_23.jpg,0,air clay,air clay,0.8885037700335184,0.6881006558736166,0.20040311415990186,True,True,True
+clean,mc2,test,C007_acrylic_standee_A4_landscape_portrait__C007_ACRYLIC STANDEE LANDSCAPE_PORTRAIT_C007_03.jpg,0,acrylic standee A4 landscape portrait,acrylic standee A4 landscape portrait,0.7093217770258585,0.6624849041302999,0.0468368728955586,True,True,True
+clean,mc2,test,C007_acrylic_standee_A4_landscape_portrait__C007_ACRYLIC STANDEE LANDSCAPE_PORTRAIT_C007_03.jpg,1,acrylic standee A4 landscape portrait,Arduino Uno,0.6817644635836283,0.6592057148615519,0.022558748722076416,True,False,False
+clean,mc2,test,C007_acrylic_standee_A4_landscape_portrait__C007_ACRYLIC STANDEE LANDSCAPE_PORTRAIT_C007_11.jpg,0,acrylic standee A4 landscape portrait,acrylic standee A4 landscape portrait,0.7293494542439779,0.7054781516393026,0.023871302604675293,True,True,True
+clean,mc2,test,C007_acrylic_standee_A4_landscape_portrait__C007_ACRYLIC STANDEE LANDSCAPE_PORTRAIT_C007_17.jpg,0,acrylic standee A4 landscape portrait,tracing paper,0.7728108962376913,0.7507649064064026,0.022045989831288693,True,False,False
+clean,mc2,test,C008_acrylic_table_label__C008_ACRYLIC TABLE LABEL_C008_02.jpg,0,acrylic table label,acrylic table label,0.8685280481974283,0.8424673875172933,0.026060660680135017,True,True,True
+clean,mc2,test,C008_acrylic_table_label__C008_ACRYLIC TABLE LABEL_C008_04.jpg,0,acrylic table label,acrylic table label,0.7839627464612325,0.7625579436620077,0.021404802799224854,True,True,True
+clean,mc2,test,C008_acrylic_table_label__C008_ACRYLIC TABLE LABEL_C008_21.jpg,0,acrylic table label,acrylic table label,0.8200715780258179,0.817307710647583,0.0027638673782348633,True,True,True
+clean,mc2,test,C009_popsicle_stick__C009_POPSICLE STICK_C009_01.jpg,0,popsicle stick,popsicle stick,0.8571919997533163,0.6564083496729533,0.20078365008036303,True,True,True
+clean,mc2,test,C009_popsicle_stick__C009_POPSICLE STICK_C009_03.jpg,0,popsicle stick,Pen,0.7808419267336527,0.7679610252380371,0.012880901495615604,True,False,True
+clean,mc2,test,C009_popsicle_stick__C009_POPSICLE STICK_C009_04.jpg,0,popsicle stick,popsicle stick,0.9562923709551493,0.7907668352127075,0.16552553574244178,True,True,True
+clean,mc2,test,C009_popsicle_stick__C009_POPSICLE STICK_C009_25.jpg,0,popsicle stick,popsicle stick,0.9346245725949606,0.7290520866711935,0.2055724859237671,True,True,True
+clean,mc2,test,C009_popsicle_stick__C009_POPSICLE STICK_C009_30.jpg,0,popsicle stick,popsicle stick,0.8539985617001852,0.632472574710846,0.22152598698933923,True,True,True
+clean,mc2,test,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_02.jpg,0,Fabbxible PLA filament,Fabbxible PLA filament,0.9434320330619812,0.6987281243006388,0.2447039087613424,True,True,True
+clean,mc2,test,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_11.jpg,0,Fabbxible PLA filament,Fabbxible PLA filament,0.9156703551610311,0.6986599763234457,0.21701037883758545,True,True,True
+clean,mc2,test,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_24.jpg,0,Fabbxible PLA filament,DC Motor 3 V,0.6764940818150839,0.6680110295613607,0.008483052253723145,True,False,False
+clean,mc2,test,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_26.jpg,0,Fabbxible PLA filament,Fabbxible PLA filament,0.9383851885795593,0.6991964975992838,0.2391886909802755,True,True,True
+clean,mc2,test,C011_glue_stick__C011_GLUE STICK_C011_07.jpg,0,glue stick,glue stick,0.9198282559712728,0.6625709533691406,0.2572573026021322,True,True,True
+clean,mc2,test,C011_glue_stick__C011_GLUE STICK_C011_09.jpg,0,glue stick,glue stick,0.9251968065897623,0.6614716053009033,0.263725201288859,True,True,True
+clean,mc2,test,C011_glue_stick__C011_GLUE STICK_C011_22.jpg,0,glue stick,glue stick,0.8911579052607218,0.7627463936805725,0.1284115115801493,True,True,True
+clean,mc2,test,C011_glue_stick__C011_GLUE STICK_C011_22.jpg,1,glue stick,glue stick,0.9134703477223715,0.5942764282226562,0.3191939194997152,True,True,True
+clean,mc2,test,C011_glue_stick__C011_GLUE STICK_C011_23.jpg,0,glue stick,Permanent Marker,0.8152233362197876,0.7664421995480856,0.04878113667170203,True,False,False
+clean,mc2,test,C011_glue_stick__C011_GLUE STICK_C011_23.jpg,1,glue stick,Permanent Marker,0.7753021518389384,0.7658727367719015,0.009429415067036873,True,False,True
+clean,mc2,test,C012_pipe_cleaner__C012_PIPE CLEANER_C012_05.jpg,0,pipe cleaner,pipe cleaner,0.8404185771942139,0.6320451498031616,0.20837342739105225,True,True,True
+clean,mc2,test,C012_pipe_cleaner__C012_PIPE CLEANER_C012_11.jpg,0,pipe cleaner,pipe cleaner,0.9278595248858134,0.6985499064127604,0.22930961847305298,True,True,True
+clean,mc2,test,C012_pipe_cleaner__C012_PIPE CLEANER_C012_11.jpg,1,pipe cleaner,pipe cleaner,0.8715946475664774,0.7690342863400778,0.10256036122639967,True,True,True
+clean,mc2,test,C012_pipe_cleaner__C012_PIPE CLEANER_C012_11.jpg,2,pipe cleaner,pipe cleaner,0.9358652631441752,0.7298203905423483,0.2060448726018269,True,True,True
+clean,mc2,test,C012_pipe_cleaner__C012_PIPE CLEANER_C012_11.jpg,3,pipe cleaner,pipe cleaner,0.9432184298833212,0.761804978052775,0.18141345183054614,True,True,True
+clean,mc2,test,C012_pipe_cleaner__C012_PIPE CLEANER_C012_16.jpg,0,pipe cleaner,pipe cleaner,0.9470576842625936,0.7404919862747192,0.20656569798787439,True,True,True
+clean,mc2,test,C012_pipe_cleaner__C012_PIPE CLEANER_C012_16.jpg,1,pipe cleaner,pipe cleaner,0.9087230165799459,0.8377243479092916,0.0709986686706543,True,True,True
+clean,mc2,test,C012_pipe_cleaner__C012_PIPE CLEANER_C012_16.jpg,2,pipe cleaner,pipe cleaner,0.8305569092432658,0.7462343772252401,0.08432253201802564,True,True,True
+clean,mc2,test,C012_pipe_cleaner__C012_PIPE CLEANER_C012_16.jpg,3,pipe cleaner,pipe cleaner,0.8110713164011637,0.7671259840329488,0.04394533236821485,True,True,True
+clean,mc2,test,C012_pipe_cleaner__C012_PIPE CLEANER_C012_19.jpg,0,pipe cleaner,pipe cleaner,0.9225830435752869,0.7399895985921224,0.18259344498316443,True,True,True
+clean,mc2,test,C012_pipe_cleaner__C012_PIPE CLEANER_C012_24.jpg,0,pipe cleaner,pipe cleaner,0.9488759239514669,0.7279280026753744,0.22094792127609253,True,True,True
+clean,mc2,test,C012_pipe_cleaner__C012_PIPE CLEANER_C012_29.jpg,0,pipe cleaner,pipe cleaner,0.8746903737386068,0.7363366087277731,0.13835376501083374,True,True,True
+clean,mc2,test,C013_pom_pom__C013_POM POM_C013_14.jpg,0,pom pom,pom pom,0.8521513342857361,0.6101961533228556,0.2419551809628805,True,True,True
+clean,mc2,test,C013_pom_pom__C013_POM POM_C013_18.jpg,0,pom pom,pom pom,0.885201096534729,0.6995530327161154,0.18564806381861365,True,True,True
+clean,mc2,test,C013_pom_pom__C013_POM POM_C013_23.jpg,0,pom pom,pom pom,0.8601285417874655,0.7228311896324158,0.13729735215504968,True,True,True
+clean,mc2,test,C013_pom_pom__C013_POM POM_C013_27.jpg,0,pom pom,pom pom,0.9228755831718445,0.6835695703824362,0.23930601278940833,True,True,True
+clean,mc2,test,C013_pom_pom__C013_POM POM_C013_27.jpg,1,pom pom,pom pom,0.9195427695910136,0.660215695699056,0.2593270738919575,True,True,True
+clean,mc2,test,C013_pom_pom__C013_POM POM_C013_27.jpg,2,pom pom,pom pom,0.8823816378911337,0.714015265305837,0.16836637258529663,True,True,True
+clean,mc2,test,C013_pom_pom__C013_POM POM_C013_27.jpg,3,pom pom,pom pom,0.8310609062512716,0.6586942871411642,0.17236661911010742,True,True,True
+clean,mc2,test,C014_A4_colored_paper__C014_A4 COLORED PAPER_C014_05.jpg,0,A4 colored paper,A4 colored paper,0.9001073241233826,0.8147018154462179,0.08540550867716468,True,True,True
+clean,mc2,test,C014_A4_colored_paper__C014_A4 COLORED PAPER_C014_06.jpg,0,A4 colored paper,A4 colored paper,0.9298257827758789,0.8593442837397257,0.0704814990361532,True,True,True
+clean,mc2,test,C014_A4_colored_paper__C014_A4 COLORED PAPER_C014_08.jpg,0,A4 colored paper,A4 colored paper,0.9529868364334106,0.8499329884847006,0.10305384794871009,True,True,True
+clean,mc2,test,C014_A4_colored_paper__C014_A4 COLORED PAPER_C014_20.jpg,0,A4 colored paper,A4 colored paper,0.8998078107833862,0.8270804683367411,0.07272734244664514,True,True,True
+clean,mc2,test,C014_A4_colored_paper__C014_A4 COLORED PAPER_C014_24.jpg,0,A4 colored paper,A4 colored paper,0.8883606394131979,0.7823348442713419,0.10602579514185595,True,True,True
+clean,mc2,test,C015_ribbon__C015_RIBBON_C015_03.jpg,0,ribbon,ribbon,0.8546711802482605,0.5932877063751221,0.2613834738731384,True,True,True
+clean,mc2,test,C015_ribbon__C015_RIBBON_C015_09.jpg,0,ribbon,ribbon,0.8935452103614807,0.6907294591267904,0.2028157512346903,True,True,True
+clean,mc2,test,C015_ribbon__C015_RIBBON_C015_11.jpg,0,ribbon,ribbon,0.9258935650189718,0.668944239616394,0.25694932540257776,True,True,True
+clean,mc2,test,C015_ribbon__C015_RIBBON_C015_13.jpg,0,ribbon,ribbon,0.7022031346956888,0.6405948201815287,0.061608314514160156,True,True,True
+clean,mc2,test,C016_balloons__C016_BALLOONS_C016_07.jpg,0,balloons,balloons,0.8646112680435181,0.7344751755396525,0.1301360925038656,True,True,True
+clean,mc2,test,C016_balloons__C016_BALLOONS_C016_09.jpg,0,balloons,balloons,0.8704709410667419,0.6153930226961771,0.2550779183705648,True,True,True
+clean,mc2,test,C016_balloons__C016_BALLOONS_C016_13.jpg,0,balloons,balloons,0.8756068746248881,0.5442685087521871,0.33133836587270094,True,True,True
+clean,mc2,test,C016_balloons__C016_BALLOONS_C016_19.jpg,0,balloons,balloons,0.8333442409833273,0.6616621017456055,0.1716821392377218,True,True,True
+clean,mc2,test,C016_balloons__C016_BALLOONS_C016_19.jpg,1,balloons,balloons,0.7993110418319702,0.6327508687973022,0.16656017303466797,True,True,True
+clean,mc2,test,C017_key_ring__C017_KEY RING_C017_05.jpg,0,key ring,key ring,0.9024146199226379,0.6217202544212341,0.2806943655014038,True,True,True
+clean,mc2,test,C017_key_ring__C017_KEY RING_C017_07.jpg,0,key ring,key ring,0.9416063030560812,0.6244336167971293,0.3171726862589519,True,True,True
+clean,mc2,test,C017_key_ring__C017_KEY RING_C017_14.jpg,0,key ring,key ring,0.9025147954622904,0.668803850809733,0.23371094465255737,True,True,True
+clean,mc2,test,C017_key_ring__C017_KEY RING_C017_14.jpg,1,key ring,key ring,0.903862476348877,0.6363693475723267,0.2674931287765503,True,True,True
+clean,mc2,test,C017_key_ring__C017_KEY RING_C017_14.jpg,2,key ring,key ring,0.9001029332478842,0.6398334503173828,0.26026948293050134,True,True,True
+clean,mc2,test,C017_key_ring__C017_KEY RING_C017_18.jpg,0,key ring,key ring,0.8466266592343649,0.6155257821083069,0.23110087712605798,True,True,True
+clean,mc2,test,C017_key_ring__C017_KEY RING_C017_18.jpg,1,key ring,key ring,0.8663229743639628,0.6706365942955017,0.19568638006846106,True,True,True
+clean,mc2,test,C017_key_ring__C017_KEY RING_C017_18.jpg,2,key ring,key ring,0.881935715675354,0.5999658902486166,0.28196982542673743,True,True,True
+clean,mc2,test,C018_glue_gun_stick__C018_GLUE GUN STICK_C018_06.jpg,0,glue gun stick,glue gun stick,0.8765782515207926,0.7687374552090963,0.1078407963116963,True,True,True
+clean,mc2,test,C018_glue_gun_stick__C018_GLUE GUN STICK_C018_24.jpg,0,glue gun stick,glue gun stick,0.8422228296597799,0.8173807859420776,0.024842043717702267,True,True,True
+clean,mc2,test,C018_glue_gun_stick__C018_GLUE GUN STICK_C018_24.jpg,1,glue gun stick,glue gun stick,0.90769096215566,0.8768691619237264,0.030821800231933594,True,True,True
+clean,mc2,test,C018_glue_gun_stick__C018_GLUE GUN STICK_C018_26.jpg,0,glue gun stick,needle,0.8718454043070475,0.8653847376505533,0.006460666656494141,True,False,True
+clean,mc2,test,C018_glue_gun_stick__C018_GLUE GUN STICK_C018_26.jpg,1,glue gun stick,thermometer,0.8963559071222941,0.8881378173828125,0.008218089739481571,True,False,True
+clean,mc2,test,C018_glue_gun_stick__C018_GLUE GUN STICK_C018_26.jpg,2,glue gun stick,glue gun stick,0.8999601205190023,0.8966779907544454,0.0032821297645568848,True,True,True
+clean,mc2,test,C018_glue_gun_stick__C018_GLUE GUN STICK_C018_29.jpg,0,glue gun stick,glue gun stick,0.8665098150571188,0.8125741879145304,0.05393562714258837,True,True,True
+clean,mc2,test,C018_glue_gun_stick__C018_GLUE GUN STICK_C018_30.jpg,0,glue gun stick,needle,0.8852280974388123,0.8545529643694559,0.03067513306935632,True,False,True
+clean,mc2,test,C019_melty_beads__C019_MELTY BEADS_C019_13.jpg,0,melty beads,melty beads,0.9212275147438049,0.6087693770726522,0.3124581376711527,True,True,True
+clean,mc2,test,C019_melty_beads__C019_MELTY BEADS_C019_16.jpg,0,melty beads,melty beads,0.9641388257344564,0.6530295411745707,0.31110928455988573,True,True,True
+clean,mc2,test,C019_melty_beads__C019_MELTY BEADS_C019_21.jpg,0,melty beads,melty beads,0.9465954899787903,0.6317407290140787,0.31485476096471154,True,True,True
+clean,mc2,test,C020_tongue_depressor__C020_TONGUE DEPRESSOR_C020_15.jpg,0,tongue depressor,tongue depressor,0.8643113772074381,0.6958202322324117,0.16849114497502637,True,True,True
+clean,mc2,test,C020_tongue_depressor__C020_TONGUE DEPRESSOR_C020_17.jpg,0,tongue depressor,tongue depressor,0.9018834630648295,0.839687705039978,0.062195758024851444,True,True,True
+clean,mc2,test,C020_tongue_depressor__C020_TONGUE DEPRESSOR_C020_17.jpg,1,tongue depressor,tongue depressor,0.7956384619077047,0.7527556816736857,0.042882780234019036,True,True,True
+clean,mc2,test,C020_tongue_depressor__C020_TONGUE DEPRESSOR_C020_22.jpg,0,tongue depressor,tongue depressor,0.8451452851295471,0.7067078550656637,0.13843743006388343,True,True,True
+clean,mc2,test,C021_clothespin__C021_CLOTHESPIN_C021_03.jpg,0,clothespin,clothespin,0.8879318038622538,0.7351146737734476,0.15281713008880615,True,True,True
+clean,mc2,test,C021_clothespin__C021_CLOTHESPIN_C021_03.jpg,1,clothespin,clothespin,0.8488439321517944,0.7011370261510214,0.14770690600077307,True,True,True
+clean,mc2,test,C021_clothespin__C021_CLOTHESPIN_C021_03.jpg,2,clothespin,clothespin,0.9112503329912821,0.7903529405593872,0.1208973924318949,True,True,True
+clean,mc2,test,C021_clothespin__C021_CLOTHESPIN_C021_03.jpg,3,clothespin,clothespin,0.9242398937543234,0.7878023584683737,0.1364375352859497,True,True,True
+clean,mc2,test,C021_clothespin__C021_CLOTHESPIN_C021_03.jpg,4,clothespin,clothespin,0.914854884147644,0.7742056647936503,0.14064921935399377,True,True,True
+clean,mc2,test,C021_clothespin__C021_CLOTHESPIN_C021_03.jpg,5,clothespin,clothespin,0.9084946314493815,0.7659563024838766,0.1425383289655049,True,True,True
+clean,mc2,test,C021_clothespin__C021_CLOTHESPIN_C021_03.jpg,6,clothespin,clothespin,0.8992275396982828,0.7640253901481628,0.13520214955012,True,True,True
+clean,mc2,test,C021_clothespin__C021_CLOTHESPIN_C021_09.jpg,0,clothespin,clothespin,0.72681192557017,0.7102084954579672,0.016603430112202888,True,True,True
+clean,mc2,test,C021_clothespin__C021_CLOTHESPIN_C021_16.jpg,0,clothespin,clothespin,0.9092150131861368,0.7191148201624552,0.19010019302368164,True,True,True
+clean,mc2,test,C022_googly_eyes__C022_GOOGLY EYES_C022_07.jpg,0,googly eyes,googly eyes,0.916321595509847,0.6348511775334676,0.2814704179763794,True,True,True
+clean,mc2,test,C022_googly_eyes__C022_GOOGLY EYES_C022_13.jpg,0,googly eyes,googly eyes,0.9341608087221781,0.5817830165227255,0.35237779219945264,True,True,True
+clean,mc2,test,C022_googly_eyes__C022_GOOGLY EYES_C022_14.jpg,0,googly eyes,googly eyes,0.9352485537528992,0.5845706661542257,0.35067788759867347,True,True,True
+clean,mc2,test,C023_liquid_glue__C023_LIQUID GLUE_C023_11.jpg,0,liquid glue,liquid glue,0.8765445947647095,0.6517130136489868,0.22483158111572266,True,True,True
+clean,mc2,test,C023_liquid_glue__C023_LIQUID GLUE_C023_13.jpg,0,liquid glue,liquid glue,0.9357907772064209,0.6819478273391724,0.25384294986724854,True,True,True
+clean,mc2,test,C023_liquid_glue__C023_LIQUID GLUE_C023_22.jpg,0,liquid glue,liquid glue,0.9489156007766724,0.7132178743680319,0.2356977264086405,True,True,True
+clean,mc2,test,C023_liquid_glue__C023_LIQUID GLUE_C023_26.jpg,0,liquid glue,liquid glue,0.9269903103510538,0.7028103868166605,0.2241799235343933,True,True,True
+clean,mc2,test,E001_Arduino_Uno__IMG_6213.jpg,0,Arduino Uno,Arduino Uno,0.9553075234095255,0.8994413812955221,0.055866142114003425,True,True,True
+clean,mc2,test,E001_Arduino_Uno__IMG_6217.jpg,0,Arduino Uno,Arduino Uno,0.9434718092282613,0.8954709966977438,0.04800081253051758,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,0,Arduino Uno,Maker Line Sensor,0.8616112669308981,0.8242498238881429,0.03736144304275513,True,False,False
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,1,Arduino Uno,Arduino Uno,0.8068990111351013,0.7951369285583496,0.011762082576751709,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,2,Arduino Uno,DHT11 Temperature and humidity,0.7996988097826639,0.7922037045160929,0.007495105266571045,True,False,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,3,Arduino Uno,DHT11 Temperature and humidity,0.8227693637212118,0.7899112701416016,0.032858093579610226,True,False,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,4,Arduino Uno,DHT11 Temperature and humidity,0.813067893187205,0.8048418760299683,0.008226017157236698,True,False,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,5,Arduino Uno,DHT11 Temperature and humidity,0.8345914880434672,0.8095213770866394,0.025070110956827762,True,False,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,6,Arduino Uno,Arduino Uno,0.8936294317245483,0.8736432989438375,0.01998613278071082,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,7,Arduino Uno,Arduino Uno,0.8666360179583231,0.8211962381998698,0.04543977975845337,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,8,Arduino Uno,Arduino Uno,0.9246290326118469,0.8618999123573303,0.0627291202545166,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,9,Arduino Uno,Arduino Uno,0.8748692671457926,0.8441998163859049,0.030669450759887695,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,10,Arduino Uno,Arduino Uno,0.9396416544914246,0.8317564527193705,0.10788520177205407,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,11,Arduino Uno,Arduino Uno,0.9211384852727255,0.8490950067838033,0.07204347848892212,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,12,Arduino Uno,Arduino Uno,0.9172846476236979,0.8305937647819519,0.08669088284174598,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,13,Arduino Uno,Arduino Uno,0.922998050848643,0.8438773353894552,0.07912071545918775,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,14,Arduino Uno,Arduino Uno,0.9151384433110555,0.8599308331807455,0.05520761013031006,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,15,Arduino Uno,Arduino Uno,0.9165911277135214,0.8607776165008545,0.055813511212666866,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,16,Arduino Uno,Arduino Uno,0.9182775020599365,0.8521316647529602,0.06614583730697632,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,17,Arduino Uno,Arduino Uno,0.9287470777829488,0.8623724977175394,0.06637458006540942,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,18,Arduino Uno,Arduino Uno,0.9171451727549235,0.843319316705068,0.07382585604985548,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,19,Arduino Uno,Arduino Uno,0.9031297365824381,0.8574438492457072,0.04568588733673096,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,20,Arduino Uno,Arduino Uno,0.8994442025820414,0.8435075481732687,0.05593665440877271,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,21,Arduino Uno,Arduino Uno,0.9259886145591736,0.8533879915873209,0.07260062297185266,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,22,Arduino Uno,Infrared IR Proximity Sensor module,0.8552643259366354,0.8521220088005066,0.0031423171361287805,True,False,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,23,Arduino Uno,Arduino Uno,0.9141202370325724,0.8647645513216654,0.04935568571090698,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,24,Arduino Uno,Arduino Uno,0.8986417651176453,0.8583489259084066,0.04029283920923865,True,True,True
+clean,mc2,test,E001_Arduino_Uno__WhatsApp Image 2026-08-11 at 6.07.43 PM.jpg,25,Arduino Uno,Arduino Uno,0.8779551188151041,0.8573216398557028,0.020633478959401375,True,True,True
+clean,mc2,test,E002_Arduino_Nano__IMG_2291.jpg,0,Arduino Nano,Arduino Nano,0.8815684914588928,0.8288559118906657,0.05271257956822717,True,True,True
+clean,mc2,test,E002_Arduino_Nano__IMG_2295.jpg,0,Arduino Nano,Arduino Nano,0.943605363368988,0.8978115916252136,0.045793771743774414,True,True,True
+clean,mc2,test,E002_Arduino_Nano__IMG_2295.jpg,1,Arduino Nano,Breadboard,0.941137433052063,0.781843105951945,0.15929432710011804,True,False,True
+clean,mc2,test,E002_Arduino_Nano__IMG_6135.jpg,0,Arduino Nano,Arduino Nano,0.9721863468488058,0.8726570208867391,0.09952932596206665,True,True,True
+clean,mc2,test,E002_Arduino_Nano__IMG_6227.jpg,0,Arduino Nano,Arduino Nano,0.9420741200447083,0.8622732162475586,0.07980090379714966,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,0,Arduino Nano,Arduino Nano,0.9571326772371928,0.8802388310432434,0.07689384619394934,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,1,Arduino Nano,Arduino Nano,0.9608896573384603,0.8814547459284464,0.07943491141001391,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,2,Arduino Nano,Arduino Nano,0.894568125406901,0.861393948396047,0.03317417701085401,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,3,Arduino Nano,Arduino Nano,0.900263508160909,0.8785960475603739,0.02166746060053515,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,4,Arduino Nano,Arduino Nano,0.7565953532854716,0.7388302286465963,0.01776512463887525,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,5,Arduino Nano,Arduino Nano,0.8346346815427145,0.8163610299428304,0.018273651599884033,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,6,Arduino Nano,Arduino Nano,0.9454994201660156,0.8880795240402222,0.05741989612579346,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,7,Arduino Nano,Arduino Nano,0.8789743383725485,0.8419605493545532,0.037013789017995236,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,8,Arduino Nano,Arduino Nano,0.8923686544100443,0.8586994012196859,0.033669253190358406,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,9,Arduino Nano,Arduino Nano,0.8899868726730347,0.8555315335591634,0.03445533911387122,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,10,Arduino Nano,Arduino Nano,0.9247080286343893,0.8575365344683329,0.06717149416605639,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,11,Arduino Nano,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.845541755358378,0.8409034808476766,0.004638274510701423,True,False,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,12,Arduino Nano,Arduino Nano,0.8952523668607076,0.8789113561312357,0.016341010729471916,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,13,Arduino Nano,Arduino Nano,0.9549683332443237,0.8938082257906595,0.06116010745366418,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,14,Arduino Nano,Arduino Nano,0.9564976096153259,0.8965335289637247,0.05996408065160119,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,15,Arduino Nano,Arduino Nano,0.9572537740071615,0.8832642833391825,0.073989490667979,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,16,Arduino Nano,Arduino Nano,0.9412065148353577,0.8902712265650431,0.05093528827031457,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,17,Arduino Nano,Arduino Nano,0.9623812437057495,0.8835833668708801,0.07879787683486938,True,True,True
+clean,mc2,test,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.07.15 PM (1).jpg,18,Arduino Nano,Arduino Nano,0.9381471673647562,0.8963182965914408,0.04182887077331543,True,True,True
+clean,mc2,test,E003_Motor_Shield__IMG_2261.jpg,0,Motor Shield,Arduino Uno,0.9025922020276388,0.9010389447212219,0.0015532573064168664,True,False,True
+clean,mc2,test,E003_Motor_Shield__IMG_6181.jpg,0,Motor Shield,Motor Shield,0.9688963095347086,0.9180899659792582,0.05080634355545044,True,True,True
+clean,mc2,test,E003_Motor_Shield__WhatsApp Image 2026-08-11 at 6.07.12 PM (1).jpg,0,Motor Shield,Motor Shield,0.9552921851476034,0.8801133632659912,0.07517882188161218,True,True,True
+clean,mc2,test,E004_Breadboard__IMG_2351.jpg,0,Breadboard,Breadboard,0.9639824628829956,0.7912618319193522,0.17272063096364343,True,True,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,0,Breadboard,Breadboard,0.7589402794837952,0.7471688389778137,0.011771440505981445,True,True,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,1,Breadboard,Breadboard,0.7402277986208597,0.7261735002199808,0.014054298400878906,True,True,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,2,Breadboard,Arduino Uno,0.8225330710411072,0.760285218556722,0.062247852484385136,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,3,Breadboard,N20 Mini Micro Metal Gear,0.8973909616470337,0.8735207915306091,0.02387017011642456,True,False,False
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,4,Breadboard,N20 Mini Micro Metal Gear,0.8633494178454081,0.8412947257359823,0.02205469210942579,True,False,False
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,5,Breadboard,glass rod,0.8989886045455933,0.8950936595598856,0.003894944985707638,True,False,False
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,6,Breadboard,glass rod,0.9015378753344218,0.8824333151181539,0.01910456021626783,True,False,False
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,7,Breadboard,glass rod,0.861929714679718,0.8436313271522522,0.01829838752746582,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,8,Breadboard,glass rod,0.9242184162139893,0.8842849135398865,0.03993350267410278,True,False,False
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,9,Breadboard,glass rod,0.9014025131861368,0.8750870625178019,0.02631545066833496,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,10,Breadboard,Arduino Uno,0.7621713678042094,0.7520598570505778,0.010111510753631592,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,11,Breadboard,Arduino Uno,0.7478929162025452,0.7294114232063293,0.01848149299621582,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,12,Breadboard,Arduino Uno,0.7697221835454305,0.7563638488451639,0.013358334700266594,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,13,Breadboard,Arduino Uno,0.8010599215825399,0.751970648765564,0.04908927281697595,True,False,False
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,14,Breadboard,Arduino Uno,0.7798964381217957,0.7531981666882833,0.026698271433512333,True,False,False
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,15,Breadboard,Arduino Uno,0.7690141598383585,0.7352425853411356,0.0337715744972229,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,16,Breadboard,Arduino Uno,0.7853688597679138,0.7461028099060059,0.03926604986190796,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,17,Breadboard,Arduino Uno,0.7762197653452555,0.7554758787155151,0.02074388662974036,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,18,Breadboard,Soil Moisture Level Sensor,0.7574977080027262,0.7551034688949585,0.002394239107767704,True,False,False
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,19,Breadboard,Arduino Uno,0.7753563523292542,0.7671408851941427,0.008215467135111454,True,False,False
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,20,Breadboard,Arduino Uno,0.8010808825492859,0.7700545191764832,0.031026363372802734,True,False,False
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,21,Breadboard,Arduino Uno,0.7720053195953369,0.7560973962148031,0.015907923380533817,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,22,Breadboard,Arduino Uno,0.7658232649167379,0.7314049998919169,0.03441826502482104,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,23,Breadboard,Arduino Uno,0.7676231861114502,0.7457063396771749,0.021916846434275272,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,24,Breadboard,Arduino Uno,0.7554494738578796,0.7444337209065756,0.01101575295130408,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,25,Breadboard,Arduino Uno,0.7601686716079712,0.7544363538424174,0.005732317765553829,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,26,Breadboard,Arduino Uno,0.7471649845441183,0.7343703905741373,0.01279459396998095,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,27,Breadboard,Arduino Uno,0.7516730825106303,0.7421327431996664,0.009540339310963875,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,28,Breadboard,Light Dependent Resistor LDR,0.7648191253344218,0.7515235543251038,0.013295571009317997,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.13 PM (2).jpg,29,Breadboard,Soil Moisture Level Sensor,0.7674850424130758,0.7558406194051107,0.011644423007965088,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (1).jpg,0,Breadboard,Breadboard,0.9631959001223246,0.7286079327265421,0.23458796739578247,True,True,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (1).jpg,1,Breadboard,Breadboard,0.9731462200482687,0.723963737487793,0.2491824825604757,True,True,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (1).jpg,2,Breadboard,Breadboard,0.9635817011197408,0.7177337010701498,0.24584800004959106,True,True,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (1).jpg,3,Breadboard,Breadboard,0.951553483804067,0.7540463209152222,0.19750716288884484,True,True,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (1).jpg,4,Breadboard,Breadboard,0.9538451631863912,0.7402292887369791,0.2136158744494121,True,True,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (1).jpg,5,Breadboard,Breadboard,0.9448943734169006,0.7464964985847473,0.19839787483215332,True,True,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (1).jpg,6,Breadboard,Breadboard,0.9622135559717814,0.7333593964576721,0.22885415951410926,True,True,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (1).jpg,7,Breadboard,Breadboard,0.9658228158950806,0.7099266250928243,0.25589619080225623,True,True,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (1).jpg,8,Breadboard,Breadboard,0.9778021375338236,0.7511601050694784,0.22664203246434522,True,True,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (1).jpg,9,Breadboard,Breadboard,0.9732189377148946,0.7499070366223654,0.2233119010925293,True,True,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (1).jpg,10,Breadboard,Arduino Nano,0.7808001041412354,0.759260376294454,0.021539727846781376,True,False,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (1).jpg,11,Breadboard,Breadboard,0.754918118317922,0.7422727147738138,0.012645403544108147,True,True,True
+clean,mc2,test,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (1).jpg,12,Breadboard,Soil Moisture Level Sensor,0.6951509316762289,0.6907617648442587,0.004389166831970215,True,False,True
+clean,mc2,test,E005_Gas_Sensor_MQ6__IMG_2278.jpg,0,Gas Sensor MQ6,Gas Sensor MQ6,0.9368935227394104,0.8541654745737711,0.08272804816563928,True,True,True
+clean,mc2,test,E005_Gas_Sensor_MQ6__IMG_6044.jpg,0,Gas Sensor MQ6,Gas Sensor MQ6,0.9286150932312012,0.848677416642507,0.07993767658869422,True,True,True
+clean,mc2,test,E006_NodeMCU__IMG_6229.jpg,0,Node MCU,Node MCU,0.9194819927215576,0.7578826149304708,0.1615993777910868,True,True,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.06 PM (1).jpg,0,Node MCU,Node MCU,0.8902561068534851,0.763917883237203,0.1263382236162821,True,True,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.06 PM (1).jpg,1,Node MCU,Node MCU,0.9251911044120789,0.8418624003728231,0.08332870403925574,True,True,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.06 PM (1).jpg,2,Node MCU,Node MCU,0.9390995502471924,0.8552223245302836,0.08387722571690881,True,True,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.06 PM (1).jpg,3,Node MCU,Arduino Nano,0.9151738484700521,0.8932937979698181,0.021880050500234005,True,False,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.06 PM (1).jpg,4,Node MCU,Node MCU,0.8979265491167704,0.8532040119171143,0.04472253719965613,True,True,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.06 PM (1).jpg,5,Node MCU,Arduino Nano,0.803926150004069,0.7617444197336832,0.04218173027038574,True,False,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.06 PM (1).jpg,6,Node MCU,Rocker Switch 2pin Black,0.8524701595306396,0.8335474332173666,0.018922726313273075,True,False,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.10 PM (2).jpg,0,Node MCU,Node MCU,0.9382985234260559,0.8260901769002279,0.112208346525828,True,True,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.10 PM (2).jpg,1,Node MCU,Node MCU,0.9195679426193237,0.7513828873634338,0.1681850552558899,True,True,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.10 PM (2).jpg,2,Node MCU,Node MCU,0.937436838944753,0.8677697777748108,0.06966706116994226,True,True,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.10 PM (2).jpg,3,Node MCU,Node MCU,0.8935509920120239,0.8015569448471069,0.09199404716491699,True,True,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.10 PM (2).jpg,4,Node MCU,Arduino Nano,0.8063445687294006,0.8008349935213724,0.0055095752080281946,True,False,False
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.10 PM (2).jpg,5,Node MCU,Node MCU,0.8740624984105428,0.7905536492665609,0.08350884914398193,True,True,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.10 PM (2).jpg,6,Node MCU,Node MCU,0.881826380888621,0.8465352058410645,0.03529117504755652,True,True,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.10 PM (2).jpg,7,Node MCU,Node MCU,0.8886052767435709,0.8801476160685221,0.008457660675048828,True,True,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.10 PM (2).jpg,8,Node MCU,Node MCU,0.953157881895701,0.8795494238535563,0.07360845804214478,True,True,True
+clean,mc2,test,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.11 PM.jpg,0,Node MCU,Node MCU,0.9284315705299377,0.7789945205052694,0.14943705002466834,True,True,True
+clean,mc2,test,E007_HC_SR04_Ultrasonic_Sensor__IMG_6059.jpg,0,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9362225532531738,0.8613239328066508,0.07489862044652307,True,True,True
+clean,mc2,test,E007_HC_SR04_Ultrasonic_Sensor__IMG_6061.jpg,0,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9302467505137125,0.8741929332415262,0.05605381727218628,True,True,True
+clean,mc2,test,E008_N20_Mini_Micro_Metal_Gear__IMG_6037.jpg,0,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.8637457489967346,0.7578480839729309,0.10589766502380371,True,True,True
+clean,mc2,test,E008_N20_Mini_Micro_Metal_Gear__IMG_6038.jpg,0,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.8605287075042725,0.8021708925565084,0.05835781494776404,True,True,True
+clean,mc2,test,E008_N20_Mini_Micro_Metal_Gear__IMG_6040.jpg,0,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.8741869330406189,0.803199032942454,0.07098790009816491,True,True,True
+clean,mc2,test,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.10 AM (1).jpg,0,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.7990883986155192,0.7813338836034139,0.017754515012105232,True,True,True
+clean,mc2,test,E009_DC_Motor_3V__IMG_6026.jpg,0,DC Motor 3 V,DC Motor 3 V,0.9133033553759257,0.8301351070404053,0.08316824833552039,True,True,True
+clean,mc2,test,E009_DC_Motor_3V__WhatsApp Image 2026-08-11 at 6.05.11 PM (1).jpg,0,DC Motor 3 V,DC Motor 3 V,0.916485865910848,0.8379687468210856,0.07851711908976244,True,True,True
+clean,mc2,test,E009_DC_Motor_3V__WhatsApp Image 2026-08-11 at 6.05.11 PM (1).jpg,1,DC Motor 3 V,DC Motor 3 V,0.8629467089970907,0.8236502806345621,0.03929642836252856,True,True,True
+clean,mc2,test,E010_N20_Micro_Metal_Gear_Motor__IMG_2244.jpg,0,N20 Micro Metal Gear Motor,N20 Mini Micro Metal Gear,0.9378459850947062,0.8803453246752421,0.05750066041946411,True,False,True
+clean,mc2,test,E011_DHT11_Temperature_and_humidity__IMG_2296.jpg,0,DHT11 Temperature and humidity,DHT11 Temperature and humidity,0.9552081823348999,0.8729769786198934,0.08223120371500647,True,True,True
+clean,mc2,test,E011_DHT11_Temperature_and_humidity__IMG_2300.jpg,0,DHT11 Temperature and humidity,DHT11 Temperature and humidity,0.9395128885904948,0.8501905202865601,0.0893223683039347,True,True,True
+clean,mc2,test,E011_DHT11_Temperature_and_humidity__IMG_2359.jpg,0,DHT11 Temperature and humidity,DHT11 Temperature and humidity,0.9437054395675659,0.893449068069458,0.05025637149810791,True,True,True
+clean,mc2,test,E011_DHT11_Temperature_and_humidity__IMG_6031.jpg,0,DHT11 Temperature and humidity,DHT11 Temperature and humidity,0.9616823792457581,0.8636267781257629,0.09805560111999512,True,True,True
+clean,mc2,test,E012_Infrared_IR_Proximity_Sensor_module__IMG_6054.jpg,0,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9473707477251688,0.8918374379475912,0.055533309777577644,True,True,True
+clean,mc2,test,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.11 PM.jpg,0,Infrared IR Proximity Sensor module,DHT11 Temperature and humidity,0.7464030981063843,0.7282833456993103,0.018119752407073975,True,False,True
+clean,mc2,test,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM.jpg,0,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8542921344439188,0.8151230613390604,0.0391690731048584,True,True,True
+clean,mc2,test,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM.jpg,1,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8983698089917501,0.8577879667282104,0.04058184226353967,True,True,True
+clean,mc2,test,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM.jpg,2,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.917631208896637,0.8721113801002502,0.04551982879638672,True,True,True
+clean,mc2,test,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM.jpg,3,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8824042479197184,0.8663713932037354,0.016032854715983036,True,True,True
+clean,mc2,test,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM.jpg,4,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9178210099538168,0.8835113048553467,0.03430970509847009,True,True,True
+clean,mc2,test,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM.jpg,5,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8712623914082845,0.8318078319231669,0.03945455948511767,True,True,True
+clean,mc2,test,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM.jpg,6,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9125284751256307,0.8965044021606445,0.016024072964986202,True,True,True
+clean,mc2,test,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM.jpg,7,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8860183159510294,0.8582207957903544,0.02779752016067505,True,True,True
+clean,mc2,test,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM.jpg,8,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.953062891960144,0.9154937465985616,0.0375691453615824,True,True,True
+clean,mc2,test,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM.jpg,9,Infrared IR Proximity Sensor module,N20 Mini Micro Metal Gear,0.9042527874310812,0.8870643774668375,0.017188409964243645,True,False,False
+clean,mc2,test,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM.jpg,10,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8263471325238546,0.7995377977689108,0.026809334754943848,True,True,True
+clean,mc2,test,E013_Sound_Sensor__IMG_6065.jpg,0,Sound Sensor,Sound Sensor,0.93023681640625,0.8480945030848185,0.08214231332143151,True,True,True
+clean,mc2,test,E013_Sound_Sensor__WhatsApp Image 2026-08-11 at 6.06.21 PM.jpg,0,Sound Sensor,Sound Sensor,0.950990358988444,0.8963318467140198,0.0546585122744242,True,True,True
+clean,mc2,test,E013_Sound_Sensor__WhatsApp Image 2026-08-11 at 6.06.23 PM.jpg,0,Sound Sensor,Sound Sensor,0.9571861624717712,0.888611912727356,0.06857424974441528,True,True,True
+clean,mc2,test,E013_Sound_Sensor__WhatsApp Image 2026-08-11 at 6.06.23 PM.jpg,1,Sound Sensor,Sound Sensor,0.9623839259147644,0.9164430896441141,0.045940836270650265,True,True,True
+clean,mc2,test,E013_Sound_Sensor__WhatsApp Image 2026-08-11 at 6.06.23 PM.jpg,2,Sound Sensor,Sound Sensor,0.9496273795763651,0.888867457707723,0.0607599218686421,True,True,True
+clean,mc2,test,E013_Sound_Sensor__WhatsApp Image 2026-08-11 at 6.06.23 PM.jpg,3,Sound Sensor,Sound Sensor,0.9616553584734598,0.838630219300588,0.12302513917287183,True,True,True
+clean,mc2,test,E013_Sound_Sensor__WhatsApp Image 2026-08-11 at 6.06.23 PM.jpg,4,Sound Sensor,Arduino Uno,0.7633534868558248,0.730439563592275,0.032913923263549805,True,False,False
+clean,mc2,test,E013_Sound_Sensor__WhatsApp Image 2026-08-11 at 6.06.23 PM.jpg,5,Sound Sensor,Sound Sensor,0.957082192103068,0.8752427101135254,0.0818394819895426,True,True,True
+clean,mc2,test,E014_Lilypad_Coin_Cell_Battery_Holder__IMG_6078.jpg,0,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.8198516567548116,0.5889696677525839,0.23088198900222778,True,True,True
+clean,mc2,test,E014_Lilypad_Coin_Cell_Battery_Holder__WhatsApp Image 2026-08-11 at 6.03.19 PM (1).jpg,0,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.9258553783098856,0.8074215650558472,0.11843381325403846,True,True,True
+clean,mc2,test,E014_Lilypad_Coin_Cell_Battery_Holder__WhatsApp Image 2026-08-11 at 6.03.20 PM (1).jpg,0,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.9613246122996012,0.809197187423706,0.15212742487589515,True,True,True
+clean,mc2,test,E014_Lilypad_Coin_Cell_Battery_Holder__WhatsApp Image 2026-08-11 at 6.03.20 PM (1).jpg,1,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.9599713484446207,0.8036781350771586,0.15629321336746216,True,True,True
+clean,mc2,test,E014_Lilypad_Coin_Cell_Battery_Holder__WhatsApp Image 2026-08-11 at 6.03.20 PM (1).jpg,2,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.9147429664929708,0.6566218733787537,0.25812109311421716,True,True,True
+clean,mc2,test,E014_Lilypad_Coin_Cell_Battery_Holder__WhatsApp Image 2026-08-11 at 6.03.20 PM (1).jpg,3,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.9071008960405985,0.6235337257385254,0.2835671703020731,True,True,True
+clean,mc2,test,E014_Lilypad_Coin_Cell_Battery_Holder__WhatsApp Image 2026-08-11 at 6.03.20 PM (1).jpg,4,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.9143663048744202,0.7706447243690491,0.1437215805053711,True,True,True
+clean,mc2,test,E014_Lilypad_Coin_Cell_Battery_Holder__WhatsApp Image 2026-08-11 at 6.03.20 PM (1).jpg,5,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.9384315808614095,0.8169824481010437,0.12144913276036584,True,True,True
+clean,mc2,test,E014_Lilypad_Coin_Cell_Battery_Holder__WhatsApp Image 2026-08-11 at 6.03.20 PM (1).jpg,6,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.8846364816029867,0.7505192557970682,0.13411722580591845,True,True,True
+clean,mc2,test,E014_Lilypad_Coin_Cell_Battery_Holder__WhatsApp Image 2026-08-11 at 6.03.20 PM (1).jpg,7,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.8802982171376547,0.7177762190500895,0.16252199808756518,True,True,True
+clean,mc2,test,E014_Lilypad_Coin_Cell_Battery_Holder__WhatsApp Image 2026-08-11 at 6.03.20 PM (1).jpg,8,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.9234453042348226,0.8308824300765991,0.09256287415822351,True,True,True
+clean,mc2,test,E014_Lilypad_Coin_Cell_Battery_Holder__WhatsApp Image 2026-08-11 at 6.03.20 PM (1).jpg,9,Lilypad Coin Cell Battery Holder,Rocker Switch 2pin Black,0.8533374667167664,0.8521969517072042,0.0011405150095621375,True,False,True
+clean,mc2,test,E015_Micro_bit__IMG_2249.jpg,0,Micro bit,Micro bit,0.9514036774635315,0.7457366585731506,0.20566701889038086,True,True,True
+clean,mc2,test,E015_Micro_bit__IMG_6083.jpg,0,Micro bit,Micro bit,0.957108736038208,0.7504778504371643,0.2066308856010437,True,True,True
+clean,mc2,test,E015_Micro_bit__WhatsApp Image 2026-08-11 at 6.05.18 PM (2).jpg,0,Micro bit,Micro bit,0.9164023995399475,0.8002098997433981,0.11619249979654944,True,True,True
+clean,mc2,test,E016_CR2032_battery_holder__IMG_2320.jpg,0,CR2032 battery holder,CR2032 battery holder,0.8837469021479288,0.7264991203943888,0.15724778175354004,True,True,True
+clean,mc2,test,E016_CR2032_battery_holder__IMG_2322.jpg,0,CR2032 battery holder,CR2032 battery holder,0.8865987062454224,0.7826034824053446,0.10399522384007776,True,True,True
+clean,mc2,test,E017_RC522_RFID_Card_Reader__IMG_2347.jpg,0,RC522 RFID Card Reader,RC522 RFID Card Reader,0.8750403523445129,0.871622363726298,0.003417988618214962,True,True,True
+clean,mc2,test,E017_RC522_RFID_Card_Reader__IMG_6102.jpg,0,RC522 RFID Card Reader,RC522 RFID Card Reader,0.9681150515874227,0.798862894376119,0.1692521572113037,True,True,True
+clean,mc2,test,E017_RC522_RFID_Card_Reader__WhatsApp Image 2026-08-11 at 6.05.05 PM (2).jpg,0,RC522 RFID Card Reader,RC522 RFID Card Reader,0.9654876391092936,0.7862142125765482,0.17927342653274536,True,True,True
+clean,mc2,test,E018_LED_Red__WhatsApp Image 2026-08-12 at 10.38.01 AM (1).jpg,0,LED Red,LED Red,0.8596480091412863,0.8427566289901733,0.01689138015111291,True,True,True
+clean,mc2,test,E018_LED_Red__WhatsApp Image 2026-08-12 at 10.38.01 AM (1).jpg,1,LED Red,LED Red,0.9167099396387736,0.88736492395401,0.029345015684763553,True,True,True
+clean,mc2,test,E018_LED_Red__WhatsApp Image 2026-08-12 at 10.38.02 AM.jpg,0,LED Red,Breadboard,0.8563851714134216,0.8236231207847595,0.03276205062866211,True,False,True
+clean,mc2,test,E019_LED_Blue__IMG_2232.jpg,0,LED Blue,LED Blue,0.8877430359522501,0.8691010673840841,0.018641968568166023,True,True,True
+clean,mc2,test,E019_LED_Blue__IMG_2252.jpg,0,LED Blue,Breadboard,0.7878389358520508,0.7651601433753967,0.022678792476654053,True,False,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,0,LED Blue,LED Blue,0.9336552222569784,0.8734561006228129,0.06019912163416552,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,1,LED Blue,LED Blue,0.9156989256540934,0.8303968906402588,0.0853020350138346,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,2,LED Blue,LED Blue,0.8841991623242696,0.829045037428538,0.05515412489573168,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,3,LED Blue,LED Blue,0.8876599868138632,0.8796291550000509,0.008030831813812256,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,4,LED Blue,LED Blue,0.9098851283391317,0.8721715807914734,0.03771354754765832,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,5,LED Blue,LED Blue,0.9030598402023315,0.8409391244252523,0.06212071577707923,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,6,LED Blue,LED Blue,0.9443346063296,0.9100571076075236,0.034277498722076416,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,7,LED Blue,LED Blue,0.9362531503041586,0.9078761140505472,0.02837703625361132,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,8,LED Blue,LED Blue,0.9189910491307577,0.8789160450299581,0.04007500410079956,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,9,LED Blue,LED Blue,0.9093753298123678,0.8570437431335449,0.05233158667882287,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,10,LED Blue,LED Blue,0.9240683515866598,0.8461859226226807,0.07788242896397912,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,11,LED Blue,LED Blue,0.9147892594337463,0.8602296312650045,0.054559628168741825,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,12,LED Blue,LED Blue,0.9273423751195272,0.9197134176890055,0.007628957430521721,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,13,LED Blue,LED Blue,0.9514672160148621,0.869732658068339,0.08173455794652307,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,14,LED Blue,LED Blue,0.9009732802708944,0.8588378032048544,0.04213547706604004,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,15,LED Blue,LED Blue,0.954923947652181,0.8502449989318848,0.10467894872029626,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,16,LED Blue,Arduino Uno,0.8641484379768372,0.8347057501475016,0.029442687829335568,True,False,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,17,LED Blue,LED Blue,0.9073008298873901,0.8544722596804301,0.05282857020696008,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,18,LED Blue,LED Blue,0.9315930406252543,0.9153965512911478,0.016196489334106445,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,19,LED Blue,LED Blue,0.8986702958742777,0.8103132645289103,0.08835703134536743,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,20,LED Blue,LED Blue,0.9353722929954529,0.8431147336959839,0.092257559299469,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,21,LED Blue,LED Blue,0.9323542316754659,0.8641933600107828,0.0681608716646831,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,22,LED Blue,LED Blue,0.8464619716008505,0.8003767728805542,0.04608519872029626,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,23,LED Blue,LED Blue,0.9206798672676086,0.8113735715548197,0.10930629571278894,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,24,LED Blue,LED Blue,0.9285654822985331,0.8785589138666788,0.05000656843185425,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,25,LED Blue,LED Blue,0.9179953138033549,0.8035316864649454,0.11446362733840942,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,26,LED Blue,LED Blue,0.9079025785128275,0.8511191805203756,0.05678339799245191,True,True,True
+clean,mc2,test,E019_LED_Blue__WhatsApp Image 2026-08-11 at 6.07.00 PM (1).jpg,27,LED Blue,LED Blue,0.9234138131141663,0.7995285987854004,0.12388521432876587,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__IMG_6170.jpg,0,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.9067550698916117,0.8174509604771932,0.08930410941441846,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__IMG_6170.jpg,1,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.9201263387997946,0.8278486927350363,0.0922776460647583,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.01 PM.jpg,0,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.9337651332219442,0.8335521419843038,0.10021299123764038,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.01 PM.jpg,1,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.9187934796015421,0.7619668046633402,0.1568266749382019,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.01 PM.jpg,2,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.8798922697703043,0.8405152559280396,0.039377013842264774,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.01 PM.jpg,3,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.8829706509908041,0.8081197142601013,0.07485093673070276,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.01 PM.jpg,4,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.9013835390408834,0.8296488920847574,0.07173464695612597,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.02 PM.jpg,0,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.9321268002192179,0.8330104748407999,0.09911632537841797,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.02 PM.jpg,1,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.8899082740147909,0.8032638629277548,0.08664441108703613,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.02 PM.jpg,2,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.8937348326047262,0.7887342969576517,0.10500053564707446,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.02 PM.jpg,3,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.9375301996866862,0.7685477534929911,0.16898244619369507,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.02 PM.jpg,4,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.8930384914080302,0.8191957076390585,0.07384278376897169,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.02 PM.jpg,5,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.9177412986755371,0.8194912672042847,0.09825003147125244,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.02 PM.jpg,6,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.9176417787869772,0.7834205826123556,0.13422119617462158,True,True,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.02 PM.jpg,7,MAX30102 Heart Rate and Pulse Oximetry Sensor,LED Blue,0.8217688401540121,0.7890694737434387,0.03269936641057336,True,False,True
+clean,mc2,test,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.02 PM.jpg,8,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.9336962302525839,0.789970874786377,0.1437253554662069,True,True,True
+clean,mc2,test,E021_Soil_Moisture_Level_Sensor__IMG_2241.jpg,0,Soil Moisture Level Sensor,Soil Moisture Level Sensor,0.7692499160766602,0.7433203856150309,0.02592953046162927,True,True,True
+clean,mc2,test,E021_Soil_Moisture_Level_Sensor__IMG_6120.jpg,0,Soil Moisture Level Sensor,Soil Moisture Level Sensor,0.9456631143887838,0.6962353984514872,0.24942771593729662,True,True,True
+clean,mc2,test,E021_Soil_Moisture_Level_Sensor__WhatsApp Image 2026-08-11 at 6.03.24 PM (1).jpg,0,Soil Moisture Level Sensor,Soil Moisture Level Sensor,0.8373505075772604,0.8096843957901001,0.027666111787160275,True,True,True
+clean,mc2,test,E021_Soil_Moisture_Level_Sensor__WhatsApp Image 2026-08-11 at 6.03.24 PM (3).jpg,0,Soil Moisture Level Sensor,Soil Moisture Level Sensor,0.8979513049125671,0.8322200377782186,0.06573126713434851,True,True,True
+clean,mc2,test,E021_Soil_Moisture_Level_Sensor__WhatsApp Image 2026-08-11 at 6.03.24 PM (3).jpg,1,Soil Moisture Level Sensor,Soil Moisture Level Sensor,0.8806052605311075,0.8224902947743734,0.05811496575673414,True,True,True
+clean,mc2,test,E021_Soil_Moisture_Level_Sensor__WhatsApp Image 2026-08-11 at 6.03.24 PM (3).jpg,2,Soil Moisture Level Sensor,Infrared IR Proximity Sensor module,0.8504993518193563,0.8372975587844849,0.013201793034871456,True,False,False
+clean,mc2,test,E022_Rocker_Switch_6pin__IMG_6161.jpg,0,Rocker Switch 6pin,Rocker Switch 6pin,0.9324781696001688,0.8580197890599569,0.07445838054021192,True,True,True
+clean,mc2,test,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-11 at 6.03.27 PM (1).jpg,0,Rocker Switch 6pin,Rocker Switch 2pin Black,0.8274989326794943,0.8163160681724548,0.011182864507039425,True,False,True
+clean,mc2,test,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-11 at 6.03.27 PM (1).jpg,1,Rocker Switch 6pin,Rocker Switch 6pin,0.8933106064796448,0.8688991069793701,0.024411499500274658,True,True,True
+clean,mc2,test,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-11 at 6.03.27 PM (1).jpg,2,Rocker Switch 6pin,Rocker Switch 2pin Black,0.8404042720794678,0.832208534081777,0.0081957379976908,True,False,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__IMG_2307.jpg,0,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9374807874361674,0.9116081396738688,0.025872647762298584,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,0,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9511575102806091,0.8796377976735433,0.0715197126070658,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,1,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9520084261894226,0.8925478855768839,0.05946054061253869,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,2,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.8869373798370361,0.7816357215245565,0.10530165831247962,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,3,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9598873655001322,0.8873144785563151,0.07257288694381714,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,4,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9478419423103333,0.8775634368260702,0.07027850548426307,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,5,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9369957049687704,0.8660938541094462,0.07090185085932421,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,6,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9666494131088257,0.8878596226374308,0.0787897904713949,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,7,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9430388410886129,0.8697343468666077,0.07330449422200525,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,8,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.8905996481577555,0.8294724225997925,0.061127225557963016,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,9,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.945738951365153,0.8783650596936544,0.06737389167149854,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,10,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9026050170262655,0.829397181669871,0.07320783535639452,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,11,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9067316253980001,0.8795902729034424,0.027141352494557736,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,12,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.83319224913915,0.8207440574963888,0.01244819164276123,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,13,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9450934727986654,0.8873404860496521,0.0577529867490133,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,14,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9491301576296488,0.8901282151540121,0.059001942475636726,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,15,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9092147946357727,0.8577987353006998,0.05141605933507287,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,16,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9451006650924683,0.8674883047739664,0.07761236031850183,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,17,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.8961890538533529,0.8297370076179504,0.06645204623540246,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,18,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9378399054209391,0.8910183310508728,0.04682157437006629,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,19,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.924715499083201,0.861473798751831,0.06324170033137,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,20,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9542227586110433,0.8979407548904419,0.05628200372060144,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,21,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.879492998123169,0.848763664563497,0.030729333559672,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,22,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9584954977035522,0.8896939158439636,0.06880158185958862,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,23,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.909712572892507,0.8739992578824362,0.0357133150100708,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,24,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9738497932751974,0.929328461488088,0.044521331787109375,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,25,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9453456203142802,0.8949832320213318,0.05036238829294837,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM.jpg,26,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9156716267267863,0.8676724632581075,0.04799916346867872,True,True,True
+clean,mc2,test,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.30 PM (2).jpg,0,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.8779406547546387,0.8340288996696472,0.043911755084991455,True,True,True
+clean,mc2,test,E024_Light_Dependent_Resistor_LDR__IMG_2340.jpg,0,Light Dependent Resistor LDR,LED Red,0.7815271814664205,0.7758366068204244,0.005690574645996094,True,False,True
+clean,mc2,test,E024_Light_Dependent_Resistor_LDR__IMG_2341.jpg,0,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.8227009375890096,0.7998990615208944,0.022801876068115234,True,True,True
+clean,mc2,test,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.18 PM (2).jpg,0,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.928750216960907,0.8338075677553812,0.09494264920552575,True,True,True
+clean,mc2,test,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.18 PM (2).jpg,1,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.9784189065297445,0.9216841657956442,0.05673474073410034,True,True,True
+clean,mc2,test,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.18 PM (2).jpg,2,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.9664940436681112,0.8649734059969584,0.10152063767115282,True,True,True
+clean,mc2,test,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.18 PM (2).jpg,3,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.9530420700709025,0.8735377391179403,0.07950433095296217,True,True,True
+clean,mc2,test,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.18 PM (2).jpg,4,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.9729517300923666,0.8937470118204752,0.07920471827189135,True,True,True
+clean,mc2,test,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.18 PM (2).jpg,5,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.9135017593701681,0.8412099083264669,0.07229185104370117,True,True,True
+clean,mc2,test,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.18 PM (2).jpg,6,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.9580219984054565,0.8617101510365804,0.0963118473688761,True,True,True
+clean,mc2,test,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.18 PM (2).jpg,7,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.9184859991073608,0.8038220802942911,0.1146639188130697,True,True,True
+clean,mc2,test,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.19 PM (2).jpg,0,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.9292425513267517,0.8075866301854452,0.12165592114130652,True,True,True
+clean,mc2,test,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.19 PM (2).jpg,1,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.9198576211929321,0.8192144234975179,0.10064319769541419,True,True,True
+clean,mc2,test,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.19 PM (2).jpg,2,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.9167802333831787,0.8122662703196207,0.10451396306355798,True,True,True
+clean,mc2,test,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.19 PM (2).jpg,3,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.9157727956771851,0.865115245183309,0.0506575504938761,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,0,Resistor 220,Resistor 220,0.935834268728892,0.822771430015564,0.113062838713328,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,1,Resistor 220,Resistor 220,0.9560749530792236,0.8178355495134989,0.13823940356572473,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,2,Resistor 220,Resistor 220,0.9656826257705688,0.8556340535481771,0.11004857222239173,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,3,Resistor 220,Resistor 220,0.9521878759066263,0.8102824091911316,0.14190546671549475,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,4,Resistor 220,Resistor 220,0.9523846308390299,0.87798144419988,0.07440318663914991,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,5,Resistor 220,Resistor 220,0.9344097375869751,0.8442148566246033,0.09019488096237183,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,6,Resistor 220,Resistor 220,0.9548101822535197,0.8057195544242859,0.14909062782923377,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,7,Resistor 220,Resistor 220,0.9483430981636047,0.8161363403002421,0.13220675786336267,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,8,Resistor 220,Resistor 220,0.9471197525660197,0.8353282411893209,0.11179151137669874,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,9,Resistor 220,Resistor 220,0.9096994996070862,0.8828903436660767,0.02680915594100952,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,10,Resistor 220,Resistor 220,0.938083271185557,0.8008561531702677,0.1372271180152893,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,11,Resistor 220,Resistor 220,0.9288366436958313,0.801416834195455,0.12741980950037635,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,12,Resistor 220,Resistor 220,0.9499518672625223,0.813506563504537,0.13644530375798536,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,13,Resistor 220,Resistor 220,0.9306758642196655,0.8457666834195455,0.08490918080012,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,14,Resistor 220,Resistor 220,0.9507597088813782,0.7930293877919515,0.15773032108942664,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.24 PM (2).jpg,15,Resistor 220,Resistor 220,0.9381480018297831,0.8609452446301779,0.07720275719960523,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.27 PM (1).jpg,0,Resistor 220,Resistor 220,0.9826147556304932,0.8439550002415975,0.13865975538889563,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.27 PM (1).jpg,1,Resistor 220,Resistor 220,0.9100498755772909,0.831622044245402,0.07842783133188891,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.27 PM (1).jpg,2,Resistor 220,Resistor 220,0.9372870127360026,0.7984354694684347,0.13885154326756788,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.27 PM (1).jpg,3,Resistor 220,Resistor 220,0.9547348817189535,0.8204383254051208,0.13429655631383264,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.27 PM (1).jpg,4,Resistor 220,Resistor 220,0.9474534591039022,0.8347957531611124,0.11265770594278979,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.27 PM (1).jpg,5,Resistor 220,Resistor 220,0.9079279899597168,0.7765458623568217,0.13138212760289514,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.27 PM (1).jpg,6,Resistor 220,Resistor 220,0.9243062337239584,0.8308940529823303,0.09341218074162805,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.27 PM.jpg,0,Resistor 220,Resistor 220,0.9635551969210306,0.8743738532066345,0.08918134371439612,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.27 PM.jpg,1,Resistor 220,Resistor 220,0.9788370132446289,0.7960888346036276,0.18274817864100135,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.27 PM.jpg,2,Resistor 220,Resistor 220,0.9588215152422587,0.7892728447914124,0.16954867045084632,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.27 PM.jpg,3,Resistor 220,Resistor 220,0.9517588019371033,0.8685846130053202,0.08317418893178308,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.27 PM.jpg,4,Resistor 220,Resistor 220,0.9178919394810995,0.8333679040273031,0.08452403545379639,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.27 PM.jpg,5,Resistor 220,Resistor 220,0.9710160891215006,0.8818619052569071,0.0891541838645935,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.27 PM.jpg,6,Resistor 220,Resistor 220,0.9506646394729614,0.8461701273918152,0.10449451208114624,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,0,Resistor 220,Resistor 220,0.9106388886769613,0.7961575587590536,0.11448132991790771,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,1,Resistor 220,Resistor 220,0.9493405818939209,0.8429128328959147,0.10642774899800622,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,2,Resistor 220,Resistor 220,0.9508671164512634,0.8751222689946493,0.07574484745661414,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,3,Resistor 220,Resistor 220,0.9408698479334513,0.8046784996986389,0.13619134823481238,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,4,Resistor 220,Resistor 220,0.920560876528422,0.7892489234606425,0.13131195306777954,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,5,Resistor 220,Resistor 220,0.9576021432876587,0.8229721784591675,0.1346299648284912,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,6,Resistor 220,Resistor 220,0.9339175621668497,0.8995840748151144,0.03433348735173536,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,7,Resistor 220,Resistor 220,0.9417842825253805,0.8077872395515442,0.1339970429738363,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,8,Resistor 220,Resistor 220,0.9453687866528829,0.8148425221443176,0.1305262645085653,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,9,Resistor 220,Resistor 220,0.957928200562795,0.8529618382453918,0.1049663623174032,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,10,Resistor 220,Resistor 220,0.8595452109972636,0.7976715167363485,0.061873694260915046,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,11,Resistor 220,Resistor 220,0.9230769673983256,0.8150652845700582,0.10801168282826734,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,12,Resistor 220,Resistor 220,0.9374493956565857,0.8102939327557882,0.1271554629007975,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,13,Resistor 220,Resistor 220,0.9641830126444498,0.830194354057312,0.13398865858713782,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,14,Resistor 220,Resistor 220,0.9423539638519287,0.8543376525243124,0.08801631132761634,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,15,Resistor 220,Resistor 220,0.9115328391393026,0.8780421614646912,0.033490677674611447,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,16,Resistor 220,Resistor 220,0.9499639868736267,0.8934863011042277,0.056477685769399044,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,17,Resistor 220,Resistor 220,0.9439616998036703,0.8502707084019979,0.09369099140167236,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,18,Resistor 220,Resistor 220,0.9508154193560282,0.8585460186004639,0.09226940075556433,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,19,Resistor 220,Resistor 220,0.9171424905459086,0.7972007393836975,0.11994175116221106,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,20,Resistor 220,Resistor 220,0.9368546605110168,0.8435463905334473,0.09330826997756958,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,21,Resistor 220,Resistor 220,0.9485176801681519,0.8421703577041626,0.10634732246398926,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,22,Resistor 220,Resistor 220,0.935310939947764,0.8159525791803995,0.1193583607673645,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,23,Resistor 220,Resistor 220,0.9368450244267782,0.8276604811350504,0.10918454329172778,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,24,Resistor 220,Resistor 220,0.9625147978464762,0.9004390637079874,0.06207573413848877,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,25,Resistor 220,Resistor 220,0.862625777721405,0.7347002228101095,0.12792555491129554,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,26,Resistor 220,Resistor 220,0.9355218807856241,0.8036898771921793,0.13183200359344482,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,27,Resistor 220,Resistor 220,0.9296049873034159,0.8874656359354655,0.04213935136795044,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,28,Resistor 220,Resistor 220,0.9357520739237467,0.8191600640614828,0.11659200986226392,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,29,Resistor 220,Resistor 220,0.9590917627016703,0.8748218218485514,0.0842699408531189,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,30,Resistor 220,Resistor 220,0.9495341777801514,0.8402385512987772,0.10929562648137414,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,31,Resistor 220,Resistor 220,0.9525075356165568,0.8829439083735148,0.06956362724304199,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,32,Resistor 220,Resistor 220,0.9383718768755595,0.8301963806152344,0.10817549626032508,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,33,Resistor 220,Resistor 220,0.9619156916936239,0.8756618897120158,0.08625380198160815,True,True,True
+clean,mc2,test,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.43 AM (2).jpg,34,Resistor 220,Resistor 220,0.9494825204213461,0.8438892364501953,0.10559328397115075,True,True,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.02 PM (2).jpg,0,Jumper Wire M M,Jumper Wire M M,0.9007276097933451,0.8973937829335531,0.0033338268597919996,True,True,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.02 PM (2).jpg,1,Jumper Wire M M,Jumper Wire M M,0.9901048938433329,0.9863969683647156,0.0037079254786173133,True,True,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.02 PM (2).jpg,2,Jumper Wire M M,Jumper Wire M M,0.9866796930631002,0.9686309099197388,0.018048783143361447,True,True,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.02 PM (2).jpg,3,Jumper Wire M M,Jumper Wire M M,0.9925949573516846,0.991381843884786,0.0012131134668985633,True,True,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.02 PM (2).jpg,4,Jumper Wire M M,Jumper Wire M M,0.9915615717569987,0.9843235810597738,0.007237990697224861,True,True,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.02 PM (2).jpg,5,Jumper Wire M M,Jumper Wire M M,0.9816978971163431,0.9728449384371439,0.008852958679199219,True,True,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.02 PM (2).jpg,6,Jumper Wire M M,Jumper Wire M F,0.9027985334396362,0.9021815657615662,0.0006169676780700684,True,False,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.02 PM (2).jpg,7,Jumper Wire M M,Jumper Wire M M,0.9755521019299825,0.9545873800913492,0.020964721838633293,True,True,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.02 PM.jpg,0,Jumper Wire M M,Jumper Wire M M,0.8396092851956686,0.7523493965466818,0.08725988864898682,True,True,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.05 PM.jpg,0,Jumper Wire M M,Jumper Wire M F,0.9398066798845927,0.9234113693237305,0.016395310560862186,True,False,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.05 PM.jpg,1,Jumper Wire M M,Jumper Wire M F,0.9475650389989217,0.9450434843699137,0.0025215546290080493,True,False,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.05 PM.jpg,2,Jumper Wire M M,Jumper Wire M M,0.9324267307917277,0.9170744816462199,0.015352249145507812,True,True,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.07 PM.jpg,0,Jumper Wire M M,Jumper Wire M M,0.9705511530240377,0.9693056543668112,0.0012454986572265625,True,True,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.07 PM.jpg,1,Jumper Wire M M,Jumper Wire M M,0.9637924234072367,0.9542783300081888,0.009514093399047852,True,True,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.07 PM.jpg,2,Jumper Wire M M,Jumper Wire M F,0.981010635693868,0.9757370551427206,0.005273580551147461,True,False,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.07 PM.jpg,3,Jumper Wire M M,Jumper Wire M M,0.993022640546163,0.9903304576873779,0.0026921828587850305,True,True,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.07 PM.jpg,4,Jumper Wire M M,Jumper Wire M F,0.9869522452354431,0.9846104184786478,0.0023418267567952844,True,False,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.07 PM.jpg,5,Jumper Wire M M,Jumper Wire M M,0.9783441027005514,0.9712764223416647,0.007067680358886719,True,True,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.07 PM.jpg,6,Jumper Wire M M,Jumper Wire M F,0.893964151541392,0.8904154896736145,0.0035486618677774695,True,False,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.07 PM.jpg,7,Jumper Wire M M,Arduino Uno,0.7635813355445862,0.759904682636261,0.0036766529083251953,True,False,True
+clean,mc2,test,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.07 PM.jpg,8,Jumper Wire M M,Jumper Wire M M,0.9386856555938721,0.904201328754425,0.03448432683944702,True,True,True
+clean,mc2,test,E027_Jumper_Wire_M_F__IMG_2244.jpg,0,Jumper Wire M F,Jumper Wire M F,0.8526758154233297,0.8241832057634989,0.028492609659830803,True,True,True
+clean,mc2,test,E027_Jumper_Wire_M_F__IMG_6201.jpg,0,Jumper Wire M F,Jumper Wire M F,0.8189623157183329,0.7780541181564331,0.040908197561899784,True,True,True
+clean,mc2,test,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.05 PM.jpg,0,Jumper Wire M F,Jumper Wire M F,0.937340259552002,0.9169929027557373,0.02034735679626465,True,True,True
+clean,mc2,test,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.05 PM.jpg,1,Jumper Wire M F,Jumper Wire M F,0.9477516015370687,0.9454268415768942,0.0023247599601745605,True,True,True
+clean,mc2,test,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.05 PM.jpg,2,Jumper Wire M F,Jumper Wire M M,0.9260974923769633,0.9128360152244568,0.013261477152506473,True,False,True
+clean,mc2,test,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.07 PM (1).jpg,0,Jumper Wire M F,Jumper Wire M M,0.9157982071240743,0.9144353667894999,0.0013628403345744555,True,False,True
+clean,mc2,test,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.07 PM (1).jpg,1,Jumper Wire M F,Jumper Wire M M,0.94056636095047,0.9356802503267924,0.004886110623677609,True,False,True
+clean,mc2,test,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.07 PM (1).jpg,2,Jumper Wire M F,Jumper Wire M F,0.8769073088963827,0.8343121012051901,0.04259520769119263,True,True,True
+clean,mc2,test,E028_HC_SR501_PIR_Motion_Sensor__IMG_6143.jpg,0,HC SR501 PIR Motion Sensor,HC SR501 PIR Motion Sensor,0.8965302308400472,0.6253449320793152,0.27118529876073205,True,True,True
+clean,mc2,test,E028_HC_SR501_PIR_Motion_Sensor__IMG_6147.jpg,0,HC SR501 PIR Motion Sensor,HC SR501 PIR Motion Sensor,0.9633200963338217,0.8845610817273458,0.07875901460647583,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__IMG_2329.jpg,0,Maker Line Sensor,Maker Line Sensor,0.8941934506098429,0.7756403485933939,0.11855310201644897,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__IMG_6190.jpg,0,Maker Line Sensor,Maker Line Sensor,0.8462690114974976,0.7641834020614624,0.08208560943603516,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.28 PM (2).jpg,0,Maker Line Sensor,Maker Line Sensor,0.8720685839653015,0.7262911200523376,0.14577746391296387,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.28 PM (2).jpg,1,Maker Line Sensor,Maker Line Sensor,0.8188924988110861,0.698336124420166,0.12055637439092004,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.28 PM (2).jpg,2,Maker Line Sensor,Maker Line Sensor,0.8845093250274658,0.8021926085154215,0.08231671651204431,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.28 PM (2).jpg,3,Maker Line Sensor,Maker Line Sensor,0.8308024803797404,0.6949926018714905,0.13580987850824988,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.28 PM (2).jpg,4,Maker Line Sensor,Maker Line Sensor,0.844152828057607,0.7064222494761149,0.13773057858149218,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.28 PM (2).jpg,5,Maker Line Sensor,Maker Line Sensor,0.9007975459098816,0.8421586553255717,0.05863889058430993,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.28 PM (2).jpg,6,Maker Line Sensor,Maker Line Sensor,0.821784257888794,0.6854166984558105,0.1363675594329834,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.28 PM (2).jpg,7,Maker Line Sensor,Maker Line Sensor,0.8710714181264242,0.7233763138453165,0.14769510428110766,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.28 PM (2).jpg,8,Maker Line Sensor,Maker Line Sensor,0.8790053129196167,0.8503333528836569,0.028671960035959843,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.28 PM (2).jpg,9,Maker Line Sensor,Maker Line Sensor,0.8936617175738016,0.7559506098429362,0.13771110773086548,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.28 PM (2).jpg,10,Maker Line Sensor,Maker Line Sensor,0.9199802478154501,0.8584171334902445,0.06156311432520556,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.28 PM (2).jpg,11,Maker Line Sensor,Maker Line Sensor,0.8472075859705607,0.7504743933677673,0.09673319260279334,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.28 PM (2).jpg,12,Maker Line Sensor,Maker Line Sensor,0.8474370439847311,0.6645198265711466,0.18291721741358447,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.29 PM.jpg,0,Maker Line Sensor,Maker Line Sensor,0.8348139723141988,0.7884554664293925,0.04635850588480639,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.29 PM.jpg,1,Maker Line Sensor,Maker Line Sensor,0.8093117276827494,0.746576984723409,0.06273474295934034,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.29 PM.jpg,2,Maker Line Sensor,Maker Line Sensor,0.798086921374003,0.650822122891744,0.14726479848225904,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.29 PM.jpg,3,Maker Line Sensor,Maker Line Sensor,0.8445926904678345,0.7695822914441427,0.07501039902369178,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.29 PM.jpg,4,Maker Line Sensor,Maker Line Sensor,0.7990588347117106,0.7293488184611002,0.06971001625061035,True,True,True
+clean,mc2,test,E029_Maker_Line_Sensor__WhatsApp Image 2026-08-11 at 6.06.29 PM.jpg,5,Maker Line Sensor,Maker Line Sensor,0.8190874457359314,0.8025802175203959,0.01650722821553552,True,True,True
+clean,mc2,test,E030_16_2_LCD_Display__IMG_6154.jpg,0,16 2 LCD Display,16 2 LCD Display,0.9221705993016561,0.7982048193613688,0.12396577994028735,True,True,True
+clean,mc2,test,E030_16_2_LCD_Display__IMG_6156.jpg,0,16 2 LCD Display,16 2 LCD Display,0.9064768155415853,0.7793600757916769,0.12711673974990845,True,True,True
+clean,mc2,test,E030_16_2_LCD_Display__IMG_6159.jpg,0,16 2 LCD Display,16 2 LCD Display,0.9351970354715983,0.8706754247347513,0.06452161073684692,True,True,True
+clean,mc2,test,E030_16_2_LCD_Display__WhatsApp Image 2026-08-11 at 6.06.23 PM (1).jpg,0,16 2 LCD Display,16 2 LCD Display,0.9645448724428812,0.8466394146283468,0.11790545781453443,True,True,True
+clean,mc2,test,E030_16_2_LCD_Display__WhatsApp Image 2026-08-11 at 6.06.23 PM (1).jpg,1,16 2 LCD Display,16 2 LCD Display,0.980401078859965,0.9143962661425272,0.06600481271743774,True,True,True
+clean,mc2,test,E030_16_2_LCD_Display__WhatsApp Image 2026-08-11 at 6.06.23 PM (1).jpg,2,16 2 LCD Display,16 2 LCD Display,0.9784456888834635,0.8839785655339559,0.09446712334950758,True,True,True
+clean,mc2,test,E030_16_2_LCD_Display__WhatsApp Image 2026-08-11 at 6.06.23 PM (1).jpg,3,16 2 LCD Display,16 2 LCD Display,0.9457042217254639,0.8888623118400574,0.056841909885406494,True,True,True
+clean,mc2,test,L001_test_tubes__L001_TEST TUBE_L001_01.jpg,0,test tubes,N20 Mini Micro Metal Gear,0.8100455204645792,0.7973066171010336,0.012738903363545662,True,False,True
+clean,mc2,test,L001_test_tubes__L001_TEST TUBE_L001_04.jpg,0,test tubes,test tubes,0.8654261827468872,0.8054260810216268,0.06000010172526038,True,True,True
+clean,mc2,test,L001_test_tubes__L001_TEST TUBE_L001_08.jpg,0,test tubes,test tubes,0.7716193993886312,0.727996031443278,0.043623367945353264,True,True,True
+clean,mc2,test,L001_test_tubes__L001_TEST TUBE_L001_16.jpg,0,test tubes,beakers 250ml,0.8296899994214376,0.7873210112253824,0.04236898819605517,True,False,True
+clean,mc2,test,L001_test_tubes__L001_TEST TUBE_L001_22.jpg,0,test tubes,test tubes,0.8541516462961832,0.8052433133125305,0.048908332983652714,True,True,True
+clean,mc2,test,L002_test_tubes_rack__L002_TEST TUBE RACK_L002_07.jpg,0,test tubes rack,test tubes rack,0.8556468486785889,0.6394179463386536,0.2162289023399353,True,True,True
+clean,mc2,test,L002_test_tubes_rack__L002_TEST TUBE RACK_L002_10.jpg,0,test tubes rack,test tubes rack,0.8637486497561137,0.5672011772791544,0.29654747247695923,True,True,True
+clean,mc2,test,L002_test_tubes_rack__L002_TEST TUBE RACK_L002_27.jpg,0,test tubes rack,test tubes rack,0.8668133417765299,0.6200248797734579,0.24678846200307203,True,True,True
+clean,mc2,test,L002_test_tubes_rack__L002_TEST TUBE RACK_L002_32.jpg,0,test tubes rack,test tubes rack,0.9346958796183268,0.5762690305709839,0.3584268490473429,True,True,True
+clean,mc2,test,L002_test_tubes_rack__L002_TEST TUBE RACK_L002_37.jpg,0,test tubes rack,test tubes rack,0.8915862838427225,0.601145346959432,0.29044093688329053,True,True,True
+clean,mc2,test,L002_test_tubes_rack__L002_TEST TUBE RACK_L002_38.jpg,0,test tubes rack,test tubes rack,0.8455705642700195,0.5993690490722656,0.2462015151977539,True,True,True
+clean,mc2,test,L003_beakers_250ml__L003_BEAKERS 250ML_L003_05.jpg,0,beakers 250ml,beakers 250ml,0.883967916170756,0.7970084746678671,0.08695944150288892,True,True,True
+clean,mc2,test,L003_beakers_250ml__L003_BEAKERS 250ML_L003_14.jpg,0,beakers 250ml,beakers 250ml,0.9357213973999023,0.8801246285438538,0.055596768856048584,True,True,True
+clean,mc2,test,L003_beakers_250ml__L003_BEAKERS 250ML_L003_15.jpg,0,beakers 250ml,beakers 250ml,0.9050611853599548,0.8003134528795878,0.10474773248036706,True,True,True
+clean,mc2,test,L003_beakers_250ml__L003_BEAKERS 250ML_L003_36.jpg,0,beakers 250ml,beakers 250ml,0.9478831688563029,0.8673095703125,0.08057359854380286,True,True,True
+clean,mc2,test,L003_beakers_250ml__L003_BEAKERS 250ML_L003_38.jpg,0,beakers 250ml,beakers 250ml,0.9297593037287394,0.8558340867360433,0.07392521699269605,True,True,True
+clean,mc2,test,L003_beakers_250ml__L003_BEAKERS 250ML_L003_49.jpg,0,beakers 250ml,beakers 250ml,0.9002793828646342,0.7352238496144613,0.16505553325017286,True,True,True
+clean,mc2,test,L003_beakers_250ml__L003_BEAKERS 250ML_L003_53.jpg,0,beakers 250ml,beakers 250ml,0.9350355664889017,0.7198519905408224,0.21518357594807935,True,True,True
+clean,mc2,test,L003_beakers_250ml__L003_BEAKERS 250ML_L003_54.jpg,0,beakers 250ml,beakers 250ml,0.9412099123001099,0.7186718781789144,0.22253803412119544,True,True,True
+clean,mc2,test,L003_beakers_250ml__L003_BEAKERS 250ML_L003_56.jpg,0,beakers 250ml,beakers 250ml,0.9333139260609945,0.7428951263427734,0.19041879971822107,True,True,True
+clean,mc2,test,L004_beakers_1000ml__L004_BEAKER 1000ML_L004_15.jpg,0,beakers 1000ml,beakers 1000ml,0.850047767162323,0.838037391503652,0.012010375658671024,True,True,True
+clean,mc2,test,L004_beakers_1000ml__L004_BEAKER 1000ML_L004_16.jpg,0,beakers 1000ml,beakers 1000ml,0.8778602083524069,0.8639124433199564,0.013947765032450432,True,True,True
+clean,mc2,test,L005_conical_flask_1000ML__L005_BEAKER 1000ML_L005_08.jpg,0,conical flask 1000 ML,conical flask 1000 ML,0.905651330947876,0.5794597069422404,0.3261916240056356,True,True,True
+clean,mc2,test,L005_conical_flask_1000ML__L005_BEAKER 1000ML_L005_09.jpg,0,conical flask 1000 ML,conical flask 1000 ML,0.9653371175130209,0.8664451042811075,0.09889201323191332,True,True,True
+clean,mc2,test,L005_conical_flask_1000ML__L005_BEAKER 1000ML_L005_15.jpg,0,conical flask 1000 ML,beakers 250ml,0.883724570274353,0.8044398824373881,0.07928468783696496,True,False,True
+clean,mc2,test,L005_conical_flask_1000ML__L005_BEAKER 1000ML_L005_29.jpg,0,conical flask 1000 ML,conical flask 1000 ML,0.9518303672472636,0.8841211597124735,0.06770920753479004,True,True,True
+clean,mc2,test,L005_conical_flask_1000ML__L005_BEAKER 1000ML_L005_31.jpg,0,conical flask 1000 ML,conical flask 1000 ML,0.9463885625203451,0.8635162313779196,0.08287233114242554,True,True,True
+clean,mc2,test,L005_conical_flask_1000ML__L005_BEAKER 1000ML_L005_34.jpg,0,conical flask 1000 ML,beakers 250ml,0.8962916135787964,0.8163054982821146,0.07998611529668176,True,False,True
+clean,mc2,test,L006_conical_flask_5000ml__L006_CONICAL FLASK 5000ML_L006_12.jpg,0,conical flask 5000ml,conical flask 5000ml,0.8236205379168192,0.7802380919456482,0.043382445971171024,True,True,True
+clean,mc2,test,L006_conical_flask_5000ml__L006_CONICAL FLASK 5000ML_L006_14.jpg,0,conical flask 5000ml,conical flask 1000 ML,0.8516131440798441,0.8455013434092203,0.006111800670623779,True,False,True
+clean,mc2,test,L006_conical_flask_5000ml__L006_CONICAL FLASK 5000ML_L006_19.jpg,0,conical flask 5000ml,beakers 250ml,0.8622679114341736,0.7586398720741272,0.10362803936004639,True,False,True
+clean,mc2,test,L007_pipettes_5ml__L007_PIPETTES 5ML_L007_04.jpg,0,pipettes 5ml,pipettes 5ml,0.9298962155977885,0.9172803362210592,0.012615879376729255,True,True,True
+clean,mc2,test,L007_pipettes_5ml__L007_PIPETTES 5ML_L007_04.jpg,1,pipettes 5ml,pipettes 5ml,0.964115301767985,0.9340407053629557,0.030074596405029297,True,True,True
+clean,mc2,test,L007_pipettes_5ml__L007_PIPETTES 5ML_L007_09.jpg,0,pipettes 5ml,pipettes 5ml,0.9733944733937582,0.9507691264152527,0.02262534697850549,True,True,True
+clean,mc2,test,L007_pipettes_5ml__L007_PIPETTES 5ML_L007_12.jpg,0,pipettes 5ml,pipettes 5ml,0.9193709294001261,0.8994418581326803,0.019929071267445808,True,True,True
+clean,mc2,test,L007_pipettes_5ml__L007_PIPETTES 5ML_L007_18.jpg,0,pipettes 5ml,pipettes 5ml,0.9072540998458862,0.8387984236081442,0.06845567623774207,True,True,True
+clean,mc2,test,L008_pipettes_10ml__L008_PIPETTES 10ML_L008_02.jpg,0,pipettes 10ml,pipettes 10ml,0.9530115524927775,0.9083825747172037,0.04462897777557373,True,True,True
+clean,mc2,test,L008_pipettes_10ml__L008_PIPETTES 10ML_L008_06.jpg,0,pipettes 10ml,needle,0.9432380000750223,0.9393858710924784,0.0038521289825439453,True,False,True
+clean,mc2,test,L008_pipettes_10ml__L008_PIPETTES 10ML_L008_14.jpg,0,pipettes 10ml,pipettes 5ml,0.8830265005429586,0.8816079099973043,0.0014185905456542969,True,False,True
+clean,mc2,test,L008_pipettes_10ml__L008_PIPETTES 10ML_L008_24.jpg,0,pipettes 10ml,pipettes 10ml,0.964727779229482,0.9309179981549581,0.033809781074523926,True,True,True
+clean,mc2,test,L008_pipettes_10ml__L008_PIPETTES 10ML_L008_24.jpg,1,pipettes 10ml,pipettes 10ml,0.9751911560694376,0.9264196157455444,0.04877154032389319,True,True,True
+clean,mc2,test,L008_pipettes_10ml__L008_PIPETTES 10ML_L008_24.jpg,2,pipettes 10ml,pipettes 10ml,0.9668676853179932,0.9411946535110474,0.0256730318069458,True,True,True
+clean,mc2,test,L008_pipettes_10ml__L008_PIPETTES 10ML_L008_32.jpg,0,pipettes 10ml,glass rod,0.9346066117286682,0.9167778491973877,0.017828762531280518,True,False,True
+clean,mc2,test,L008_pipettes_10ml__L008_PIPETTES 10ML_L008_33.jpg,0,pipettes 10ml,glue gun stick,0.9614676634470621,0.909148375193278,0.05231928825378418,True,False,False
+clean,mc2,test,L009_electric_thermometer__L009_ELECTRIC THERMOMETER_L009_04.jpg,0,electric thermometer,electric thermometer,0.8904447158177694,0.7221288482348124,0.16831586758295702,True,True,True
+clean,mc2,test,L009_electric_thermometer__L009_ELECTRIC THERMOMETER_L009_10.jpg,0,electric thermometer,electric thermometer,0.8795042037963867,0.6923850973447164,0.1871191064516703,True,True,True
+clean,mc2,test,L009_electric_thermometer__L009_ELECTRIC THERMOMETER_L009_22.jpg,0,electric thermometer,electric thermometer,0.88815971215566,0.6761611501375834,0.21199856201807665,True,True,True
+clean,mc2,test,L009_electric_thermometer__L009_ELECTRIC THERMOMETER_L009_25.jpg,0,electric thermometer,electric thermometer,0.9190966685612997,0.662956436475118,0.25614023208618164,True,True,True
+clean,mc2,test,L009_electric_thermometer__L009_ELECTRIC THERMOMETER_L009_25.jpg,1,electric thermometer,electric thermometer,0.8855293393135071,0.5843982100486755,0.30113112926483154,True,True,True
+clean,mc2,test,L010_thermometer__L010_THERMOMETER_L010_08.jpg,0,thermometer,thermometer,0.9542778134346008,0.8688608805338541,0.0854169329007467,True,True,True
+clean,mc2,test,L010_thermometer__L010_THERMOMETER_L010_13.jpg,0,thermometer,glass rod,0.925767183303833,0.8979058067003886,0.027861376603444454,True,False,False
+clean,mc2,test,L010_thermometer__L010_THERMOMETER_L010_17.jpg,0,thermometer,thermometer,0.9005289872487386,0.8943384091059366,0.006190578142801995,True,True,True
+clean,mc2,test,L010_thermometer__L010_THERMOMETER_L010_18.jpg,0,thermometer,Measuring Tape,0.9011029998461405,0.890632688999176,0.010470310846964481,True,False,True
+clean,mc2,test,L011_gloves__L011_GLOVES_L011_02.jpg,0,gloves,gloves,0.9396281043688456,0.7784932255744934,0.16113487879435218,True,True,True
+clean,mc2,test,L011_gloves__L011_GLOVES_L011_08.jpg,0,gloves,gloves,0.9669979413350424,0.7613470951716105,0.20565084616343188,True,True,True
+clean,mc2,test,L011_gloves__L011_GLOVES_L011_19.jpg,0,gloves,gloves,0.9742687543233236,0.7356786131858826,0.23859014113744104,True,True,True
+clean,mc2,test,L011_gloves__L011_GLOVES_L011_26.jpg,0,gloves,gloves,0.9712439974149069,0.7449668645858765,0.2262771328290304,True,True,True
+clean,mc2,test,L011_gloves__L011_GLOVES_L011_27.jpg,0,gloves,gloves,0.9688834150632223,0.7382511695226034,0.2306322455406189,True,True,True
+clean,mc2,test,L012_gloves_LN__L012_GLOVES LN_L012_04.jpg,0,gloves LN,gloves LN,0.9187426964441935,0.7825487653414408,0.13619393110275269,True,True,True
+clean,mc2,test,L012_gloves_LN__L012_GLOVES LN_L012_05.jpg,0,gloves LN,gloves LN,0.918258011341095,0.7911262512207031,0.12713176012039185,True,True,True
+clean,mc2,test,L012_gloves_LN__L012_GLOVES LN_L012_08.jpg,0,gloves LN,gloves LN,0.9376774430274963,0.6863740881284078,0.2513033548990885,True,True,True
+clean,mc2,test,L013_petri_dishes__L013_PETRI DISHES_L013_05.jpg,0,petri dishes,petri dishes,0.9008965889612833,0.648662249247233,0.2522343397140503,True,True,True
+clean,mc2,test,L013_petri_dishes__L013_PETRI DISHES_L013_11.jpg,0,petri dishes,petri dishes,0.8678634564081827,0.6467234293619791,0.2211400270462036,True,True,True
+clean,mc2,test,L013_petri_dishes__L013_PETRI DISHES_L013_15.jpg,0,petri dishes,Breadboard,0.7626627087593079,0.7619460026423136,0.000716706116994259,True,False,False
+clean,mc2,test,L013_petri_dishes__L013_PETRI DISHES_L013_21.jpg,0,petri dishes,petri dishes,0.879210909207662,0.7426749666531881,0.13653594255447388,True,True,True
+clean,mc2,test,L014_syringes_10ml__L014_SYRINGES 10ML_L014_05.jpg,0,syringes 10ml,syringes 10ml,0.9000482559204102,0.8620672424634298,0.03798101345698035,True,True,True
+clean,mc2,test,L014_syringes_10ml__L014_SYRINGES 10ML_L014_06.jpg,0,syringes 10ml,syringes 10ml,0.9412414828936259,0.8951592246691386,0.046082258224487305,True,True,True
+clean,mc2,test,L014_syringes_10ml__L014_SYRINGES 10ML_L014_16.jpg,0,syringes 10ml,syringes 10ml,0.9119667609532675,0.8734572132428488,0.0385095477104187,True,True,True
+clean,mc2,test,L014_syringes_10ml__L014_SYRINGES 10ML_L014_20.jpg,0,syringes 10ml,syringes 10ml,0.9326383074124655,0.9162293871243795,0.016408920288085938,True,True,True
+clean,mc2,test,L014_syringes_10ml__L014_SYRINGES 10ML_L014_26.jpg,0,syringes 10ml,syringes 60ml,0.9281584819157919,0.9194913109143575,0.008667171001434326,True,False,True
+clean,mc2,test,L014_syringes_10ml__L014_SYRINGES 10ML_L014_36.jpg,0,syringes 10ml,syringes 10ml,0.927728017171224,0.8980557123819987,0.029672304789225334,True,True,True
+clean,mc2,test,L015_syringes_60ml__L015_SYRINGES 60ML_L015_09.jpg,0,syringes 60ml,syringes 60ml,0.9482407172520956,0.8855771621068319,0.06266355514526367,True,True,True
+clean,mc2,test,L015_syringes_60ml__L015_SYRINGES 60ML_L015_11.jpg,0,syringes 60ml,syringes 60ml,0.9442510604858398,0.8626230756441752,0.08162798484166467,True,True,True
+clean,mc2,test,L015_syringes_60ml__L015_SYRINGES 60ML_L015_12.jpg,0,syringes 60ml,syringes 60ml,0.9277913570404053,0.8408786853154501,0.0869126717249552,True,True,True
+clean,mc2,test,L015_syringes_60ml__L015_SYRINGES 60ML_L015_21.jpg,0,syringes 60ml,syringes 10ml,0.9454337954521179,0.8982752561569214,0.04715853929519653,True,False,True
+clean,mc2,test,L016_volumetric_flask__L016_VOLUMETRIC FLASK_L016_05.jpg,0,volumetric flask,volumetric flask,0.8354165554046631,0.7638111511866251,0.07160540421803796,True,True,True
+clean,mc2,test,L016_volumetric_flask__L016_VOLUMETRIC FLASK_L016_12.jpg,0,volumetric flask,volumetric flask,0.9704570174217224,0.8496317068735758,0.1208253105481466,True,True,True
+clean,mc2,test,L016_volumetric_flask__L016_VOLUMETRIC FLASK_L016_19.jpg,0,volumetric flask,volumetric flask,0.8115578095118204,0.7464044690132141,0.06515334049860633,True,True,True
+clean,mc2,test,L016_volumetric_flask__L016_VOLUMETRIC FLASK_L016_22.jpg,0,volumetric flask,volumetric flask,0.973231573899587,0.8324612577756246,0.1407703161239624,True,True,True
+clean,mc2,test,L017_bunsen_burner__L017_BUNSEN BURNER_L017_06.jpg,0,bunsen burner,bunsen burner,0.8324014941851298,0.5195722977320353,0.3128291964530945,True,True,True
+clean,mc2,test,L017_bunsen_burner__L017_BUNSEN BURNER_L017_07.jpg,0,bunsen burner,bunsen burner,0.9291239579518636,0.5447895328203837,0.38433442513148,True,True,True
+clean,mc2,test,L017_bunsen_burner__L017_BUNSEN BURNER_L017_10.jpg,0,bunsen burner,bunsen burner,0.6688856283823649,0.5250672896703085,0.1438183387120564,True,True,True
+clean,mc2,test,L017_bunsen_burner__L017_BUNSEN BURNER_L017_11.jpg,0,bunsen burner,bunsen burner,0.9389776984850565,0.514843761920929,0.42413393656412757,True,True,True
+clean,mc2,test,L018_glass_rod__L018_GLASS ROD_L018_05(1).jpg,0,glass rod,pipettes 5ml,0.9470674196879069,0.9202129443486532,0.02685447533925367,True,False,True
+clean,mc2,test,L018_glass_rod__L018_GLASS ROD_L018_05.jpg,0,glass rod,pipettes 10ml,0.8725845019022623,0.8704480727513632,0.0021364291508991773,True,False,True
+clean,mc2,test,L018_glass_rod__L018_GLASS ROD_L018_21.jpg,0,glass rod,glass rod,0.8697259823481241,0.8645999828974406,0.005125999450683594,True,True,True
+clean,mc2,test,L019_Safety_Goggle__L019_GOGGLE_L019_19.jpg,0,Safety Goggle,Safety Goggle,0.895023504892985,0.7306338946024576,0.16438961029052734,True,True,True
+clean,mc2,test,L019_Safety_Goggle__L019_GOGGLE_L019_25.jpg,0,Safety Goggle,Safety Goggle,0.868496318658193,0.7138082385063171,0.15468808015187585,True,True,True
+clean,mc2,test,L019_Safety_Goggle__L019_GOGGLE_L019_29.jpg,0,Safety Goggle,Safety Goggle,0.8898874322573344,0.6925605535507202,0.19732687870661414,True,True,True
+clean,mc2,test,L019_Safety_Goggle__L019_GOGGLE_L019_30.jpg,0,Safety Goggle,Safety Goggle,0.8177458246548971,0.6432862877845764,0.17445953687032068,True,True,True
+clean,mc2,test,L019_Safety_Goggle__L019_GOGGLE_L019_33.jpg,0,Safety Goggle,Safety Goggle,0.8557733297348022,0.7722793221473694,0.08349400758743286,True,True,True
+clean,mc2,test,L019_Safety_Goggle__L019_GOGGLE_L019_37.jpg,0,Safety Goggle,Safety Goggle,0.8744272987047831,0.6211232542991638,0.25330404440561927,True,True,True
+clean,mc2,test,L020_Potassium_Iodide__L020_POTASSIUM IODIDE_L020_12.jpg,0,Potassium Iodide,Potassium Iodide,0.9855787555376688,0.8215253353118896,0.16405342022577918,True,True,True
+clean,mc2,test,L020_Potassium_Iodide__L020_POTASSIUM IODIDE_L020_13.jpg,0,Potassium Iodide,Potassium Iodide,0.985004742940267,0.8159445325533549,0.1690602103869121,True,True,True
+clean,mc2,test,L020_Potassium_Iodide__L020_POTASSIUM IODIDE_L020_17.jpg,0,Potassium Iodide,Potassium Iodide,0.6687448422114054,0.6647488474845886,0.003995994726816776,True,True,True
+clean,mc2,test,L021_Methylated_Spirit_Solution_95__L021_METHYLATED SPIRIT SOLUTION_L021_01.jpg,0,Methylated Spirit Solution 95,Methylated Spirit Solution 95,0.9448026816050211,0.6624555190404257,0.28234716256459547,True,True,True
+clean,mc2,test,L021_Methylated_Spirit_Solution_95__L021_METHYLATED SPIRIT SOLUTION_L021_03.jpg,0,Methylated Spirit Solution 95,Hydrogen Peroxide Solution 6,0.7424402634302775,0.668983260790507,0.07345700263977051,True,False,True
+clean,mc2,test,L021_Methylated_Spirit_Solution_95__L021_METHYLATED SPIRIT SOLUTION_L021_07.jpg,0,Methylated Spirit Solution 95,Hydrogen Peroxide Solution 6,0.7272069454193115,0.7176318566004435,0.009575088818868038,True,False,True
+clean,mc2,test,L021_Methylated_Spirit_Solution_95__L021_METHYLATED SPIRIT SOLUTION_L021_09.jpg,0,Methylated Spirit Solution 95,Methylated Spirit Solution 95,0.9121201237042745,0.7706824342409769,0.1414376894632976,True,True,True
+clean,mc2,test,L022_Copper_II_Chloride_2_Hydrate__L022_Copper (II) Chloride 2-Hydrate_L022_16.jpg,0,Copper II Chloride 2 Hydrate,Copper II Chloride 2 Hydrate,0.8154846628506979,0.8104331096013387,0.005051553249359131,True,True,True
+clean,mc2,test,L022_Copper_II_Chloride_2_Hydrate__L022_Copper (II) Chloride 2-Hydrate_L022_18.jpg,0,Copper II Chloride 2 Hydrate,Copper II Chloride 2 Hydrate,0.9153769810994467,0.7793081998825073,0.13606878121693933,True,True,True
+clean,mc2,test,L022_Copper_II_Chloride_2_Hydrate__L022_Copper (II) Chloride 2-Hydrate_L022_20.jpg,0,Copper II Chloride 2 Hydrate,Copper II Chloride 2 Hydrate,0.9053682486216227,0.7447754144668579,0.16059283415476477,True,True,True
+clean,mc2,test,L023_Hydrogen_Peroxide_Solution_6__L023_HYDROGEN PEROXIDE SOLUTION 6_L023_02.jpg,0,Hydrogen Peroxide Solution 6,Hydrogen Peroxide Solution 6,0.8674846688906351,0.6880141099294027,0.17947055896123243,True,True,True
+clean,mc2,test,L023_Hydrogen_Peroxide_Solution_6__L023_HYDROGEN PEROXIDE SOLUTION 6_L023_13.jpg,0,Hydrogen Peroxide Solution 6,Hydrogen Peroxide Solution 6,0.9495005011558533,0.7341957092285156,0.21530479192733765,True,True,True
+clean,mc2,test,L023_Hydrogen_Peroxide_Solution_6__L023_HYDROGEN PEROXIDE SOLUTION 6_L023_13.jpg,1,Hydrogen Peroxide Solution 6,Hydrogen Peroxide Solution 6,0.9263897140820821,0.7284232576688131,0.19796645641326904,True,True,True
+clean,mc2,test,L023_Hydrogen_Peroxide_Solution_6__L023_HYDROGEN PEROXIDE SOLUTION 6_L023_13.jpg,2,Hydrogen Peroxide Solution 6,Hydrogen Peroxide Solution 6,0.8130621512730917,0.7300010522206625,0.0830610990524292,True,True,True
+clean,mc2,test,L023_Hydrogen_Peroxide_Solution_6__L023_HYDROGEN PEROXIDE SOLUTION 6_L023_13.jpg,3,Hydrogen Peroxide Solution 6,Hydrogen Peroxide Solution 6,0.7529382308324178,0.7423275907834371,0.010610640048980713,True,True,True
+clean,mc2,test,L023_Hydrogen_Peroxide_Solution_6__L023_HYDROGEN PEROXIDE SOLUTION 6_L023_13.jpg,4,Hydrogen Peroxide Solution 6,Hydrogen Peroxide Solution 6,0.9547083377838135,0.746158222357432,0.20855011542638147,True,True,True
+clean,mc2,test,L023_Hydrogen_Peroxide_Solution_6__L023_HYDROGEN PEROXIDE SOLUTION 6_L023_13.jpg,5,Hydrogen Peroxide Solution 6,Hydrogen Peroxide Solution 6,0.8842838803927103,0.7271709442138672,0.15711293617884314,True,True,True
+clean,mc2,test,L023_Hydrogen_Peroxide_Solution_6__L023_HYDROGEN PEROXIDE SOLUTION 6_L023_13.jpg,6,Hydrogen Peroxide Solution 6,Hydrogen Peroxide Solution 6,0.8544674118359884,0.7505049308141073,0.1039624810218811,True,True,True
+clean,mc2,test,L023_Hydrogen_Peroxide_Solution_6__L023_HYDROGEN PEROXIDE SOLUTION 6_L023_13.jpg,7,Hydrogen Peroxide Solution 6,Whiteboard Marker,0.7771591146787008,0.7466018795967102,0.030557235081990597,True,False,True
+clean,mc2,test,L023_Hydrogen_Peroxide_Solution_6__L023_HYDROGEN PEROXIDE SOLUTION 6_L023_16.jpg,0,Hydrogen Peroxide Solution 6,Hydrogen Peroxide Solution 6,0.8691327969233195,0.7588460246721903,0.11028677225112915,True,True,True
+clean,mc2,test,L023_Hydrogen_Peroxide_Solution_6__L023_HYDROGEN PEROXIDE SOLUTION 6_L023_23.jpg,0,Hydrogen Peroxide Solution 6,Hydrogen Peroxide Solution 6,0.9701333244641622,0.741560697555542,0.22857262690862024,True,True,True
+clean,mc2,test,L024_Strontium_Chloride_6_Hydrate_AR__L024_STRONTIUN CHLORIDE 6-HYDRATE AR_L024_15.jpg,0,Strontium Chloride 6 Hydrate AR,Strontium Chloride 6 Hydrate AR,0.8245472113291422,0.7700961828231812,0.05445102850596106,True,True,True
+clean,mc2,test,L024_Strontium_Chloride_6_Hydrate_AR__L024_STRONTIUN CHLORIDE 6-HYDRATE AR_L024_22.jpg,0,Strontium Chloride 6 Hydrate AR,Strontium Chloride 6 Hydrate AR,0.9204806486765543,0.7704159418741862,0.15006470680236816,True,True,True
+clean,mc2,test,L024_Strontium_Chloride_6_Hydrate_AR__L024_STRONTIUN CHLORIDE 6-HYDRATE AR_L024_25.jpg,0,Strontium Chloride 6 Hydrate AR,Strontium Chloride 6 Hydrate AR,0.9081934690475464,0.7009872992833456,0.2072061697642008,True,True,True
+clean,mc2,test,L025_Lithium_Chloride__L025_LITHIUM CHLORIDE_L025_02.jpg,0,Lithium Chloride,Lithium Chloride,0.9822152058283488,0.8173922300338745,0.16482297579447425,True,True,True
+clean,mc2,test,L025_Lithium_Chloride__L025_LITHIUM CHLORIDE_L025_10.jpg,0,Lithium Chloride,Lithium Chloride,0.86366073290507,0.7275546391805013,0.1361060937245686,True,True,True
+clean,mc2,test,L025_Lithium_Chloride__L025_LITHIUM CHLORIDE_L025_12.jpg,0,Lithium Chloride,Lithium Chloride,0.9813206593195597,0.819977859656016,0.1613427996635437,True,True,True
+clean,mc2,test,L026_universal_indicator__L026_UNIVERSAL INDICATOR_L026_03.jpg,0,universal indicator,universal indicator,0.7484308083852133,0.7006643811861674,0.04776642719904589,True,True,True
+clean,mc2,test,L026_universal_indicator__L026_UNIVERSAL INDICATOR_L026_03.jpg,1,universal indicator,universal indicator,0.9075736800829569,0.736488938331604,0.1710847417513529,True,True,True
+clean,mc2,test,L026_universal_indicator__L026_UNIVERSAL INDICATOR_L026_14.jpg,0,universal indicator,universal indicator,0.9576714237531027,0.6789246400197347,0.2787467837333679,True,True,True
+clean,mc2,test,L026_universal_indicator__L026_UNIVERSAL INDICATOR_L026_24.jpg,0,universal indicator,universal indicator,0.9462313254674276,0.6090132395426432,0.3372180859247844,True,True,True
+clean,mc2,test,L026_universal_indicator__L026_UNIVERSAL INDICATOR_L026_26.jpg,0,universal indicator,universal indicator,0.951693058013916,0.6502053538958231,0.3014877041180929,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155202.jpg,0,Pen,Pen,0.8501007358233134,0.789464553197225,0.060636182626088386,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155202.jpg,1,Pen,Pen,0.835407535235087,0.8046104907989502,0.030797044436136845,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155202.jpg,2,Pen,Pen,0.9084865848223368,0.8203034599622091,0.08818312486012769,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155202.jpg,3,Pen,Pen,0.8349639773368835,0.75846399863561,0.07649997870127356,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155202.jpg,4,Pen,Pen,0.8118342161178589,0.7500265836715698,0.06180763244628906,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155202.jpg,5,Pen,Pen,0.8467135628064474,0.771770695845286,0.07494286696116137,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155202.jpg,6,Pen,Pen,0.8138323028882345,0.7721516688664755,0.04168063402175903,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155202.jpg,7,Pen,Pen,0.8832720716794332,0.7236746946970621,0.1595973769823711,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155202.jpg,8,Pen,needle,0.857377290725708,0.8306812445322672,0.026696046193440792,True,False,True
+clean,mc2,test,S001_Pen__IMG_20260810_155202.jpg,9,Pen,Pen,0.8730123440424601,0.7547526160875956,0.1182597279548645,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155202.jpg,10,Pen,Pen,0.8051586151123047,0.7974938948949178,0.0076647202173868445,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155202.jpg,11,Pen,Pen,0.8953391909599304,0.702639102935791,0.1927000880241394,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155202.jpg,12,Pen,Pen,0.8920069734255472,0.8254092137018839,0.06659775972366333,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155202.jpg,13,Pen,Pen,0.8942587971687317,0.8535849253336588,0.04067387183507287,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155825.jpg,0,Pen,Pen,0.9088385502497355,0.672838032245636,0.2360005180040995,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155825.jpg,1,Pen,Pen,0.9165241916974386,0.5716209610303243,0.34490323066711426,True,True,True
+clean,mc2,test,S001_Pen__IMG_20260810_155825.jpg,2,Pen,Pen,0.9553713202476501,0.7000025908152262,0.25536872943242395,True,True,True
+clean,mc2,test,S001_Pen__IMG_4182.jpg,0,Pen,Pen,0.9078125556310018,0.8040289282798767,0.10378362735112512,True,True,True
+clean,mc2,test,S001_Pen__IMG_4182.jpg,1,Pen,Pen,0.9307622909545898,0.8056662480036417,0.12509604295094812,True,True,True
+clean,mc2,test,S001_Pen__IMG_4182.jpg,2,Pen,Pen,0.9236102898915609,0.8099124630292257,0.1136978268623352,True,True,True
+clean,mc2,test,S001_Pen__IMG_4182.jpg,3,Pen,Pen,0.9265423615773519,0.7688887516657511,0.15765360991160082,True,True,True
+clean,mc2,test,S001_Pen__IMG_4182.jpg,4,Pen,Pen,0.8711767594019572,0.748883068561554,0.1222936908404032,True,True,True
+clean,mc2,test,S001_Pen__IMG_4182.jpg,5,Pen,Pen,0.8510654171307882,0.7274899482727051,0.12357546885808313,True,True,True
+clean,mc2,test,S001_Pen__IMG_4182.jpg,6,Pen,Pen,0.8406901756922404,0.7327651977539062,0.10792497793833411,True,True,True
+clean,mc2,test,S001_Pen__IMG_4182.jpg,7,Pen,Pen,0.8621289730072021,0.7494156161944071,0.11271335681279504,True,True,True
+clean,mc2,test,S001_Pen__IMG_4182.jpg,8,Pen,Pen,0.9074886441230774,0.8007536133130392,0.10673503081003821,True,True,True
+clean,mc2,test,S001_Pen__IMG_4182.jpg,9,Pen,Pen,0.8525124986966451,0.7385781208674113,0.11393437782923388,True,True,True
+clean,mc2,test,S001_Pen__IMG_4182.jpg,10,Pen,Pen,0.8246109286944071,0.8132615884145101,0.01134934027989698,True,True,True
+clean,mc2,test,S001_Pen__IMG_4182.jpg,11,Pen,Pen,0.8369797666867574,0.7443951567014059,0.09258460998535156,True,True,True
+clean,mc2,test,S001_Pen__IMG_4182.jpg,12,Pen,Pen,0.8333314259847006,0.8218237559000651,0.01150767008463549,True,True,True
+clean,mc2,test,S001_Pen__IMG_4182.jpg,13,Pen,Pen,0.8212346434593201,0.7887364228566488,0.03249822060267127,True,True,True
+clean,mc2,test,S001_Pen__IMG_4188.jpg,0,Pen,Pen,0.8596804738044739,0.7059110005696615,0.15376947323481238,True,True,True
+clean,mc2,test,S001_Pen__IMG_4188.jpg,1,Pen,Pen,0.9137178858121237,0.7862891952196757,0.127428690592448,True,True,True
+clean,mc2,test,S001_Pen__IMG_4188.jpg,2,Pen,Pen,0.8547340234120687,0.752101719379425,0.10263230403264367,True,True,True
+clean,mc2,test,S001_Pen__IMG_4188.jpg,3,Pen,Pen,0.8344641129175822,0.6805277665456136,0.1539363463719685,True,True,True
+clean,mc2,test,S001_Pen__IMG_4188.jpg,4,Pen,Pen,0.8331825137138367,0.6620940168698629,0.17108849684397376,True,True,True
+clean,mc2,test,S001_Pen__IMG_4188.jpg,5,Pen,Pen,0.9207542339960734,0.8300455411275228,0.09070869286855054,True,True,True
+clean,mc2,test,S002_PermanentMarker__IMG_4095.jpg,0,Permanent Marker,Permanent Marker,0.8607810338338217,0.8217115998268127,0.03906943400700891,True,True,True
+clean,mc2,test,S002_PermanentMarker__IMG_4095.jpg,1,Permanent Marker,Permanent Marker,0.9190163215001425,0.8252107302347819,0.09380559126536059,True,True,True
+clean,mc2,test,S002_PermanentMarker__IMG_4095.jpg,2,Permanent Marker,Permanent Marker,0.8717266718546549,0.7403556307156881,0.1313710411389668,True,True,True
+clean,mc2,test,S002_PermanentMarker__IMG_4095.jpg,3,Permanent Marker,Permanent Marker,0.8121662934621176,0.6805540521939596,0.13161224126815796,True,True,True
+clean,mc2,test,S002_PermanentMarker__IMG_4095.jpg,4,Permanent Marker,Permanent Marker,0.941250761349996,0.7804352045059204,0.16081555684407556,True,True,True
+clean,mc2,test,S002_PermanentMarker__IMG_4095.jpg,5,Permanent Marker,Permanent Marker,0.9070845246315002,0.8000284830729166,0.10705604155858361,True,True,True
+clean,mc2,test,S002_PermanentMarker__IMG_4170.jpg,0,Permanent Marker,Permanent Marker,0.8664730191230774,0.7338647643725077,0.1326082547505697,True,True,True
+clean,mc2,test,S002_PermanentMarker__IMG_4170.jpg,1,Permanent Marker,Permanent Marker,0.9210236271222433,0.8088476856549581,0.11217594146728516,True,True,True
+clean,mc2,test,S002_PermanentMarker__IMG_4170.jpg,2,Permanent Marker,Permanent Marker,0.8499443729718527,0.7848802208900452,0.06506415208180749,True,True,True
+clean,mc2,test,S002_PermanentMarker__IMG_4170.jpg,3,Permanent Marker,Pen,0.8678441842397054,0.8316477735837301,0.03619641065597534,True,False,True
+clean,mc2,test,S002_PermanentMarker__IMG_4177.jpg,0,Permanent Marker,Permanent Marker,0.9085438450177511,0.8207946022351583,0.08774924278259277,True,True,True
+clean,mc2,test,S002_PermanentMarker__IMG_4177.jpg,1,Permanent Marker,Pen,0.847966214021047,0.8288228710492452,0.019143342971801758,True,False,True
+clean,mc2,test,S002_PermanentMarker__IMG_4177.jpg,2,Permanent Marker,Permanent Marker,0.8880438009897867,0.7646873990694681,0.1233564019203186,True,True,True
+clean,mc2,test,S003_Ruler__IMG_4086.jpg,0,Ruler,Ruler,0.946916401386261,0.8591099182764689,0.08780648310979211,True,True,True
+clean,mc2,test,S003_Ruler__IMG_4123.jpg,0,Ruler,Ruler,0.9203020731608073,0.8254623611768087,0.09483971198399854,True,True,True
+clean,mc2,test,S003_Ruler__IMG_4123.jpg,1,Ruler,Ruler,0.8687230149904887,0.7617997527122498,0.1069232622782389,True,True,True
+clean,mc2,test,S003_Ruler__IMG_4123.jpg,2,Ruler,Ruler,0.9312892953554789,0.9101938605308533,0.021095434824625614,True,True,True
+clean,mc2,test,S003_Ruler__IMG_4123.jpg,3,Ruler,Ruler,0.925081193447113,0.878866970539093,0.04621422290802002,True,True,True
+clean,mc2,test,S003_Ruler__IMG_4123.jpg,4,Ruler,Ruler,0.8894301851590475,0.7549231251080831,0.13450706005096436,True,True,True
+clean,mc2,test,S003_Ruler__IMG_4123.jpg,5,Ruler,Ruler,0.9374712506930033,0.9231500426928202,0.014321208000183105,True,True,True
+clean,mc2,test,S003_Ruler__IMG_4124.jpg,0,Ruler,Ruler,0.9340107242266337,0.8664538661638895,0.06755685806274414,True,True,True
+clean,mc2,test,S004_Paper__20260811_150805.jpg,0,Paper,Clip Board,0.7518875400225321,0.7202110687891642,0.03167647123336792,True,False,False
+clean,mc2,test,S004_Paper__IMG_4103.jpg,0,Paper,UNKNOWN,0.495209276676178,0.4698521097501119,0.0253571669260661,False,False,True
+clean,mc2,test,S004_Paper__IMG_4104.jpg,0,Paper,Paper,0.9286694526672363,0.8474564154942831,0.08121303717295325,True,True,True
+clean,mc2,test,S004_Paper__IMG_4107.jpg,0,Paper,Paper,0.8208459615707397,0.7737657427787781,0.04708021879196167,True,True,True
+clean,mc2,test,S005_StickyNote__IMG_20260810_160655.jpg,0,Sticky Note,Sticky Note,0.9379679560661316,0.8446950117746989,0.09327294429143274,True,True,True
+clean,mc2,test,S005_StickyNote__IMG_20260810_161400.jpg,0,Sticky Note,Sticky Note,0.8442398309707642,0.8182071248690287,0.02603270610173547,True,True,True
+clean,mc2,test,S005_StickyNote__IMG_20260810_162521.jpg,0,Sticky Note,Sticky Note,0.95058673620224,0.8575236399968466,0.09306309620539344,True,True,True
+clean,mc2,test,S006_Stapler__20260811_151550.jpg,0,Stapler,Stapler,0.862411359945933,0.7984609405199686,0.06395041942596436,True,True,True
+clean,mc2,test,S006_Stapler__20260811_151550.jpg,1,Stapler,Stapler,0.8258439302444458,0.7241919040679932,0.10165202617645264,True,True,True
+clean,mc2,test,S006_Stapler__20260811_151550.jpg,2,Stapler,Stapler,0.8701024850209554,0.7781262000401815,0.09197628498077393,True,True,True
+clean,mc2,test,S006_Stapler__IMG_20260810_152047.jpg,0,Stapler,Binder Clip,0.763174573580424,0.7574500838915507,0.005724489688873291,True,False,True
+clean,mc2,test,S006_Stapler__IMG_20260810_152047.jpg,1,Stapler,Stapler,0.8417842189470927,0.7898878852526346,0.05189633369445801,True,True,True
+clean,mc2,test,S006_Stapler__IMG_20260810_152047.jpg,2,Stapler,Binder Clip,0.7996406555175781,0.7822260061899821,0.017414649327596066,True,False,True
+clean,mc2,test,S006_Stapler__IMG_20260810_152356.jpg,0,Stapler,Stapler,0.9061673879623413,0.8156125942866007,0.0905547936757406,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160814.jpg,0,Binder Clip,Binder Clip,0.8200361927350363,0.7330522934595743,0.0869838992754619,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160814.jpg,1,Binder Clip,Binder Clip,0.8588410218556722,0.6516192356745402,0.20722178618113207,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160814.jpg,2,Binder Clip,Binder Clip,0.8918492396672567,0.7634518345197042,0.1283974051475525,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160814.jpg,3,Binder Clip,Binder Clip,0.9470560550689697,0.7164658705393473,0.23059018452962243,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160814.jpg,4,Binder Clip,Binder Clip,0.9318711161613464,0.7554229299227396,0.1764481862386068,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160814.jpg,5,Binder Clip,Binder Clip,0.743979275226593,0.7064329981803894,0.03754627704620361,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160814.jpg,6,Binder Clip,Binder Clip,0.7856134374936422,0.6516539057095846,0.13395953178405762,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160814.jpg,7,Binder Clip,Binder Clip,0.7797518173853556,0.7722561955451965,0.007495621840159061,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160814.jpg,8,Binder Clip,Binder Clip,0.7792644500732422,0.7035620212554932,0.07570242881774902,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160814.jpg,9,Binder Clip,Binder Clip,0.8339964747428894,0.7345256606737772,0.09947081406911218,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160814.jpg,10,Binder Clip,Binder Clip,0.7891918420791626,0.6621161500612894,0.12707569201787317,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160814.jpg,11,Binder Clip,Binder Clip,0.8392830689748129,0.7396323680877686,0.09965070088704431,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160937.jpg,0,Binder Clip,LED Blue,0.7853829860687256,0.7730900645256042,0.012292921543121338,True,False,True
+clean,mc2,test,S007_BinderClip__20260811_160937.jpg,1,Binder Clip,Binder Clip,0.8769235213597616,0.7077794472376505,0.16914407412211108,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160937.jpg,2,Binder Clip,Binder Clip,0.8514632781346639,0.710749626159668,0.14071365197499597,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_160937.jpg,3,Binder Clip,Binder Clip,0.8311253388722738,0.732384184996287,0.09874115387598681,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_161321.jpg,0,Binder Clip,Binder Clip,0.8910162448883057,0.7694726586341858,0.12154358625411987,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_161321.jpg,1,Binder Clip,Binder Clip,0.8365420897801717,0.7825477123260498,0.053994377454121945,True,True,True
+clean,mc2,test,S007_BinderClip__20260811_161321.jpg,2,Binder Clip,Binder Clip,0.7294824520746866,0.6471808751424154,0.08230157693227125,True,True,True
+clean,mc2,test,S008_TackIt__IMG_4283.jpg,0,Tack It,Tack It,0.943021555741628,0.5207923452059428,0.4222292105356853,True,True,True
+clean,mc2,test,S008_TackIt__IMG_4283.jpg,1,Tack It,Tack It,0.7543352643648783,0.5150185227394104,0.2393167416254679,True,True,True
+clean,mc2,test,S008_TackIt__IMG_4283.jpg,2,Tack It,Tack It,0.7217147946357727,0.5004357099533081,0.2212790846824646,True,True,True
+clean,mc2,test,S008_TackIt__IMG_4297.jpg,0,Tack It,Tack It,0.8859454194704691,0.530950665473938,0.35499475399653113,True,True,True
+clean,mc2,test,S008_TackIt__IMG_4297.jpg,1,Tack It,Tack It,0.9188360373179117,0.5261616110801697,0.39267442623774207,True,True,True
+clean,mc2,test,S008_TackIt__IMG_4297.jpg,2,Tack It,Tack It,0.9393506248792013,0.544849177201589,0.3945014476776123,True,True,True
+clean,mc2,test,S008_TackIt__IMG_4300.jpg,0,Tack It,Tack It,0.9327380458513895,0.5478181640307108,0.3849198818206787,True,True,True
+clean,mc2,test,S009_CorrectionTape__20260811_154052.jpg,0,Correction Tape,Correction Tape,0.9404614965120951,0.6481975515683492,0.29226394494374586,True,True,True
+clean,mc2,test,S009_CorrectionTape__20260811_154052.jpg,1,Correction Tape,Correction Tape,0.9572043816248575,0.6147483587265015,0.3424560228983561,True,True,True
+clean,mc2,test,S009_CorrectionTape__20260811_154052.jpg,2,Correction Tape,Correction Tape,0.9444733262062073,0.6319374044736227,0.3125359217325846,True,True,True
+clean,mc2,test,S009_CorrectionTape__20260811_154157.jpg,0,Correction Tape,Correction Tape,0.8517090678215027,0.6267312169075012,0.22497785091400146,True,True,True
+clean,mc2,test,S009_CorrectionTape__20260811_155612.jpg,0,Correction Tape,Sellotape,0.8065943916638693,0.7589813868204752,0.047613004843394036,True,False,False
+clean,mc2,test,S009_CorrectionTape__20260811_155612.jpg,1,Correction Tape,Whiteboard Marker,0.7633651892344157,0.758082648118337,0.005282541116078621,True,False,False
+clean,mc2,test,S009_CorrectionTape__20260811_155612.jpg,2,Correction Tape,Whiteboard Marker,0.7479163805643717,0.7115082939465841,0.036408086617787605,True,False,False
+clean,mc2,test,S010_PaperClip__IMG_4262.jpg,0,Paper Clip,Paper Clip,0.7559495369593302,0.5455969969431559,0.21035254001617432,True,True,True
+clean,mc2,test,S010_PaperClip__IMG_4262.jpg,1,Paper Clip,Paper Clip,0.775716503461202,0.5577390392621359,0.21797746419906616,True,True,True
+clean,mc2,test,S010_PaperClip__IMG_4269.jpg,0,Paper Clip,Paper Clip,0.8717682361602783,0.5340451200803121,0.3377231160799662,True,True,True
+clean,mc2,test,S010_PaperClip__IMG_4269.jpg,1,Paper Clip,Paper Clip,0.8742150664329529,0.5691970189412435,0.30501804749170935,True,True,True
+clean,mc2,test,S010_PaperClip__IMG_4269.jpg,2,Paper Clip,Paper Clip,0.9230167865753174,0.8074489037195841,0.11556788285573327,True,True,True
+clean,mc2,test,S010_PaperClip__IMG_4270.jpg,0,Paper Clip,Paper Clip,0.8867414196332296,0.7864062587420145,0.10033516089121508,True,True,True
+clean,mc2,test,S010_PaperClip__IMG_4270.jpg,1,Paper Clip,Paper Clip,0.8933711449305216,0.7746461232503256,0.11872502168019605,True,True,True
+clean,mc2,test,S010_PaperClip__IMG_4270.jpg,2,Paper Clip,Paper Clip,0.8757262627283732,0.7999923626581827,0.07573390007019043,True,True,True
+clean,mc2,test,S010_PaperClip__IMG_4270.jpg,3,Paper Clip,Paper Clip,0.8343887527783712,0.7501004536946615,0.08428829908370972,True,True,True
+clean,mc2,test,S010_PaperClip__IMG_4270.jpg,4,Paper Clip,Paper Clip,0.8834748466809591,0.7963602542877197,0.08711459239323938,True,True,True
+clean,mc2,test,S010_PaperClip__IMG_4270.jpg,5,Paper Clip,Paper Clip,0.8214011788368225,0.7776554226875305,0.04374575614929199,True,True,True
+clean,mc2,test,S010_PaperClip__IMG_4270.jpg,6,Paper Clip,Paper Clip,0.7953496972719828,0.7707666158676147,0.024583081404368046,True,True,True
+clean,mc2,test,S010_PaperClip__IMG_4270.jpg,7,Paper Clip,Paper Clip,0.812470018863678,0.7767161130905151,0.03575390577316284,True,True,True
+clean,mc2,test,S010_PaperClip__IMG_4270.jpg,8,Paper Clip,Paper Clip,0.8276451428731283,0.7708761890729269,0.056768953800201416,True,True,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_154953.jpg,0,Whiteboard Marker,Whiteboard Marker,0.8558600743611654,0.7308047215143839,0.1250553528467815,True,True,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_154953.jpg,1,Whiteboard Marker,Whiteboard Marker,0.8003500898679098,0.7020696798960367,0.09828040997187304,True,True,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_154953.jpg,2,Whiteboard Marker,Whiteboard Marker,0.7837854425112406,0.6684415340423584,0.1153439084688822,True,True,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_154953.jpg,3,Whiteboard Marker,Whiteboard Marker,0.8051538467407227,0.7070956031481425,0.0980582435925802,True,True,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_154953.jpg,4,Whiteboard Marker,Whiteboard Marker,0.8434481422106425,0.7928545077641805,0.05059363444646192,True,True,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_154953.jpg,5,Whiteboard Marker,Whiteboard Marker,0.8358451128005981,0.6400205294291178,0.19582458337148034,True,True,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_154953.jpg,6,Whiteboard Marker,Whiteboard Marker,0.8464495340983073,0.6522582769393921,0.19419125715891516,True,True,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_155040.jpg,0,Whiteboard Marker,Whiteboard Marker,0.7213427424430847,0.7014295061429342,0.019913236300150516,True,True,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_155159.jpg,0,Whiteboard Marker,Permanent Marker,0.8284905155499777,0.8267912268638611,0.0016992886861165735,True,False,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_155159.jpg,1,Whiteboard Marker,Whiteboard Marker,0.8331039150555929,0.7940672238667806,0.039036691188812256,True,True,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_155159.jpg,2,Whiteboard Marker,Whiteboard Marker,0.8447267810503641,0.8325053453445435,0.012221435705820682,True,True,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_155159.jpg,3,Whiteboard Marker,Whiteboard Marker,0.809363047281901,0.805797298749288,0.0035657485326130445,True,True,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_155159.jpg,4,Whiteboard Marker,Whiteboard Marker,0.8456556797027588,0.7802932262420654,0.06536245346069336,True,True,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_155159.jpg,5,Whiteboard Marker,Whiteboard Marker,0.8245556354522705,0.8090285062789917,0.015527129173278809,True,True,True
+clean,mc2,test,S011_WhiteboardMarker__20260811_155159.jpg,6,Whiteboard Marker,Whiteboard Marker,0.840084969997406,0.8362753391265869,0.003809630870819092,True,True,True
+clean,mc2,test,S012_Sellotape__20260811_154225.jpg,0,Sellotape,Sellotape,0.8945589264233907,0.7712789177894592,0.12328000863393151,True,True,True
+clean,mc2,test,S012_Sellotape__20260811_154225.jpg,1,Sellotape,Sellotape,0.9107156991958618,0.7809446056683859,0.12977109352747596,True,True,True
+clean,mc2,test,S012_Sellotape__20260811_154225.jpg,2,Sellotape,Sellotape,0.9240840276082357,0.7888551950454712,0.13522883256276452,True,True,True
+clean,mc2,test,S012_Sellotape__20260811_154225.jpg,3,Sellotape,Sellotape,0.8668136397997538,0.7739609678586324,0.09285267194112135,True,True,True
+clean,mc2,test,S012_Sellotape__20260811_154225.jpg,4,Sellotape,Sellotape,0.8636458118756613,0.7650965849558512,0.09854922691981005,True,True,True
+clean,mc2,test,S012_Sellotape__20260811_154225.jpg,5,Sellotape,N20 Mini Micro Metal Gear,0.8004931410153707,0.7839091817537943,0.01658395926157641,True,False,True
+clean,mc2,test,S012_Sellotape__20260811_154225.jpg,6,Sellotape,Sellotape,0.8634407718976339,0.7466268936793009,0.116813878218333,True,True,True
+clean,mc2,test,S012_Sellotape__20260811_154225.jpg,7,Sellotape,Sellotape,0.7883473634719849,0.7550615072250366,0.03328585624694824,True,True,True
+clean,mc2,test,S012_Sellotape__20260811_154225.jpg,8,Sellotape,Arduino Uno,0.7837885419527689,0.7232407132784525,0.060547828674316406,True,False,True
+clean,mc2,test,S012_Sellotape__20260811_154225.jpg,9,Sellotape,Sellotape,0.8335338234901428,0.7468507289886475,0.08668309450149536,True,True,True
+clean,mc2,test,S012_Sellotape__20260811_154225.jpg,10,Sellotape,Sellotape,0.8373701969782511,0.7715449333190918,0.0658252636591593,True,True,True
+clean,mc2,test,S012_Sellotape__20260811_154225.jpg,11,Sellotape,Sellotape,0.8866077462832133,0.6214868823687235,0.26512086391448975,True,True,True
+clean,mc2,test,S012_Sellotape__20260811_155727.jpg,0,Sellotape,Sellotape,0.9281567931175232,0.8255359331766764,0.1026208599408468,True,True,True
+clean,mc2,test,S012_Sellotape__20260811_155727.jpg,1,Sellotape,Sellotape,0.9001070857048035,0.8317440748214722,0.0683630108833313,True,True,True
+clean,mc2,test,S012_Sellotape__20260811_155927.jpg,0,Sellotape,Sellotape,0.8740397493044535,0.6118350426355997,0.26220470666885376,True,True,True
+clean,mc2,test,S012_Sellotape__20260811_155927.jpg,1,Sellotape,Sellotape,0.8144308924674988,0.7148887117703756,0.09954218069712317,True,True,True
+clean,mc2,test,S013_ClipBoard__20260811_160035.jpg,0,Clip Board,Clip Board,0.9719415108362833,0.8344883322715759,0.1374531785647074,True,True,True
+clean,mc2,test,S013_ClipBoard__20260811_160427.jpg,0,Clip Board,Clip Board,0.9597647388776144,0.8302531838417053,0.12951155503590905,True,True,True
+clean,mc2,test,S013_ClipBoard__20260811_160444.jpg,0,Clip Board,Clip Board,0.9002587795257568,0.8009766737620035,0.09928210576375329,True,True,True
+clean,mc2,test,S014_Pendrive__IMG_4219.jpg,0,Pendrive,Pen,0.7606054743131002,0.7437229752540588,0.016882499059041378,True,False,True
+clean,mc2,test,S014_Pendrive__IMG_4220.jpg,0,Pendrive,Pendrive,0.8178752660751343,0.6751792232195536,0.14269604285558068,True,True,True
+clean,mc2,test,S014_Pendrive__IMG_4228.jpg,0,Pendrive,Pendrive,0.8927436272303263,0.7100364367167155,0.18270719051361084,True,True,True
+clean,mc2,test,S015_Eraser__IMG_4251.jpg,0,Eraser,Eraser,0.8995151122411092,0.6434255838394165,0.25608952840169275,True,True,True
+clean,mc2,test,S015_Eraser__IMG_4252.jpg,0,Eraser,Eraser,0.9272400538126627,0.7775586644808451,0.14968138933181763,True,True,True
+clean,mc2,test,S015_Eraser__IMG_4252.jpg,1,Eraser,Eraser,0.9176081021626791,0.6802997589111328,0.23730834325154626,True,True,True
+clean,mc2,test,S015_Eraser__IMG_4253.jpg,0,Eraser,Eraser,0.9460137883822123,0.66737828652064,0.27863550186157227,True,True,True
+clean,mc2,test,T001_Scissor__IMG_4030.jpg,0,Scissor,Scissor,0.9592188199361166,0.7211514711380005,0.23806734879811609,True,True,True
+clean,mc2,test,T001_Scissor__IMG_4030.jpg,1,Scissor,Scissor,0.9349188009897867,0.7173752983411154,0.2175435026486714,True,True,True
+clean,mc2,test,T001_Scissor__IMG_4030.jpg,2,Scissor,Scissor,0.921661376953125,0.7124420801798502,0.20921929677327478,True,True,True
+clean,mc2,test,T001_Scissor__IMG_4030.jpg,3,Scissor,Scissor,0.9512697656949362,0.6646858056386312,0.28658396005630493,True,True,True
+clean,mc2,test,T001_Scissor__IMG_4153.jpg,0,Scissor,Scissor,0.8746416568756104,0.6833116213480631,0.19133003552754724,True,True,True
+clean,mc2,test,T001_Scissor__IMG_4157.jpg,0,Scissor,Scissor,0.9324637651443481,0.6721653938293457,0.26029837131500244,True,True,True
+clean,mc2,test,T001_Scissor__IMG_4157.jpg,1,Scissor,Scissor,0.9437764088312784,0.7174284855524699,0.2263479232788086,True,True,True
+clean,mc2,test,T001_Scissor__IMG_4157.jpg,2,Scissor,Scissor,0.9088671803474426,0.7489960392316183,0.15987114111582434,True,True,True
+clean,mc2,test,T001_Scissor__IMG_4157.jpg,3,Scissor,Scissor,0.9307129780451456,0.6852879325548807,0.2454250454902649,True,True,True
+clean,mc2,test,T002_Plier__IMG_4046.jpg,0,Plier,Plier,0.9501952131589254,0.7727793455123901,0.17741586764653527,True,True,True
+clean,mc2,test,T002_Plier__IMG_4146.jpg,0,Plier,Plier,0.9050741593043009,0.6957900921503702,0.20928406715393066,True,True,True
+clean,mc2,test,T002_Plier__IMG_4149.jpg,0,Plier,Paper Clip,0.7399719754854838,0.7177580197652181,0.022213955720265632,True,False,False
+clean,mc2,test,T003_Screwdriver__20260811_150218.jpg,0,Screwdriver,Screwdriver,0.9539606769879659,0.9000107645988464,0.0539499123891195,True,True,True
+clean,mc2,test,T003_Screwdriver__20260811_150218.jpg,1,Screwdriver,Screwdriver,0.962932825088501,0.9470265905062357,0.015906234582265255,True,True,True
+clean,mc2,test,T003_Screwdriver__20260811_150341.jpg,0,Screwdriver,Screwdriver,0.9465512633323669,0.9277849197387695,0.018766343593597412,True,True,True
+clean,mc2,test,T003_Screwdriver__20260811_150341.jpg,1,Screwdriver,Screwdriver,0.9199268817901611,0.8825998902320862,0.03732699155807495,True,True,True
+clean,mc2,test,T003_Screwdriver__IMG_7215.jpg,0,Screwdriver,Screwdriver,0.9544721245765686,0.9338169693946838,0.020655155181884766,True,True,True
+clean,mc2,test,T003_Screwdriver__IMG_7219.jpg,0,Screwdriver,Screwdriver,0.9607466260592142,0.9460586905479431,0.014687935511271122,True,True,True
+clean,mc2,test,T003_Screwdriver__IMG_7221.jpg,0,Screwdriver,Screwdriver,0.708172599474589,0.6636931896209717,0.04447940985361731,True,True,True
+clean,mc2,test,T003_Screwdriver__IMG_7222.jpg,0,Screwdriver,Screwdriver,0.9520727197329203,0.9277985095977783,0.02427421013514197,True,True,True
+clean,mc2,test,T003_Screwdriver__IMG_7228.jpg,0,Screwdriver,Screwdriver,0.938748280207316,0.9154001077016195,0.02334817250569654,True,True,True
+clean,mc2,test,T004_GlueGun__20260811_150052.jpg,0,Glue Gun,Glue Gun,0.9539832274119059,0.5861819386482239,0.367801288763682,True,True,True
+clean,mc2,test,T004_GlueGun__IMG_6808.jpg,0,Glue Gun,Glue Gun,0.845145026842753,0.6789930065472921,0.16615202029546094,True,True,True
+clean,mc2,test,T004_GlueGun__IMG_6810.jpg,0,Glue Gun,Glue Gun,0.8450809518496195,0.6833241979281107,0.1617567539215088,True,True,True
+clean,mc2,test,T004_GlueGun__IMG_6811.jpg,0,Glue Gun,Glue Gun,0.8307725787162781,0.6819559335708618,0.14881664514541626,True,True,True
+clean,mc2,test,T004_GlueGun__IMG_6817.jpg,0,Glue Gun,Glue Gun,0.8448258638381958,0.7133770783742269,0.13144878546396888,True,True,True
+clean,mc2,test,T004_GlueGun__IMG_6820.jpg,0,Glue Gun,Glue Gun,0.8345887263615926,0.662356972694397,0.17223175366719568,True,True,True
+clean,mc2,test,T005_MeasuringTape__IMG_4064.jpg,0,Measuring Tape,Measuring Tape,0.9136975010236105,0.5540050466855367,0.35969245433807373,True,True,True
+clean,mc2,test,T005_MeasuringTape__IMG_4072.jpg,0,Measuring Tape,Measuring Tape,0.9731185436248779,0.6226685841878256,0.35044995943705237,True,True,True
+clean,mc2,test,T005_MeasuringTape__IMG_4076.jpg,0,Measuring Tape,Measuring Tape,0.9771033128102621,0.6355962157249451,0.341507097085317,True,True,True
+clean,mc2,test,T005_MeasuringTape__IMG_7322.jpg,0,Measuring Tape,Measuring Tape,0.7887176871299744,0.5161246061325073,0.27259308099746704,True,True,True
+clean,mc2,test,T005_MeasuringTape__IMG_7327.jpg,0,Measuring Tape,Measuring Tape,0.8522927165031433,0.5502039591471354,0.30208875735600793,True,True,True
+clean,mc2,test,T005_MeasuringTape__IMG_7335.jpg,0,Measuring Tape,Measuring Tape,0.8541272282600403,0.514541765054067,0.33958546320597327,True,True,True
+clean,mc2,test,T005_MeasuringTape__IMG_7337.jpg,0,Measuring Tape,Measuring Tape,0.7341730197270712,0.49561019738515216,0.238562822341919,True,True,True
+clean,mc2,test,T006_Cutter__IMG_4196.jpg,0,Cutter,Cutter,0.8438833753267924,0.6662646730740865,0.17761870225270582,True,True,True
+clean,mc2,test,T006_Cutter__IMG_4199.jpg,0,Cutter,Cutter,0.9195801615715027,0.6838916341463724,0.23568852742513025,True,True,True
+clean,mc2,test,T006_Cutter__IMG_4199.jpg,1,Cutter,Cutter,0.8802339831988016,0.7474786440531412,0.1327553391456604,True,True,True
+clean,mc2,test,T006_Cutter__IMG_4199.jpg,2,Cutter,Cutter,0.9642026623090109,0.7310244639714559,0.23317819833755493,True,True,True
+clean,mc2,test,T006_Cutter__IMG_4199.jpg,3,Cutter,Cutter,0.935700794061025,0.7236680388450623,0.21203275521596276,True,True,True
+clean,mc2,test,T006_Cutter__IMG_4199.jpg,4,Cutter,Cutter,0.9573878645896912,0.7714993357658386,0.18588852882385254,True,True,True
+clean,mc2,test,T006_Cutter__IMG_4202.jpg,0,Cutter,Cutter,0.943898876508077,0.6963587005933126,0.2475401759147644,True,True,True
+clean,mc2,test,T006_Cutter__IMG_4202.jpg,1,Cutter,Cutter,0.8686232169469198,0.7239528298377991,0.14467038710912072,True,True,True
+clean,mc2,test,T007_CuttingMat__20260811_161437.jpg,0,Cutting Mat,Cutting Mat,0.9667458136876425,0.6399996876716614,0.3267461260159811,True,True,True
+clean,mc2,test,T007_CuttingMat__20260811_161447.jpg,0,Cutting Mat,Cutting Mat,0.9012723167737325,0.765280028184255,0.13599228858947754,True,True,True
+clean,mc2,test,T007_CuttingMat__20260811_161639.jpg,0,Cutting Mat,Cutting Mat,0.9464980363845825,0.5961440602938334,0.35035397609074914,True,True,True
+clean,mc2,test,T008_SolderPen__IMG_7369.jpg,0,Solder Pen,Screwdriver,0.7065423130989075,0.696327010790507,0.010215302308400509,True,False,True
+clean,mc2,test,T008_SolderPen__IMG_7370.jpg,0,Solder Pen,Solder Pen,0.7740978797276815,0.7277713418006897,0.04632653792699182,True,True,True
+clean,mc2,test,T008_SolderPen__IMG_7373.jpg,0,Solder Pen,Solder Pen,0.744546910127004,0.6642958919207255,0.08025101820627856,True,True,True
+clean,mc2,test,T009_SolderWire__IMG_7345.jpg,0,Solder Wire,Solder Wire,0.9713162581125895,0.7141022483507792,0.2572140097618103,True,True,True
+clean,mc2,test,T009_SolderWire__IMG_7352.jpg,0,Solder Wire,Solder Wire,0.9676433602968851,0.7421451608339945,0.22549819946289062,True,True,True
+clean,mc2,test,T009_SolderWire__IMG_7355.jpg,0,Solder Wire,Solder Wire,0.9605278174082438,0.7484037677447001,0.2121240496635437,True,True,True
+clean,mc2,test,T010_SmokeAbsorber__IMG_7387.jpg,0,Smoke Absorber,Smoke Absorber,0.8835287690162659,0.5509864489237467,0.33254232009251916,True,True,True
+clean,mc2,test,T010_SmokeAbsorber__IMG_7400.jpg,0,Smoke Absorber,Smoke Absorber,0.9254943529764811,0.6869483987490336,0.2385459542274475,True,True,True
+clean,mc2,test,T010_SmokeAbsorber__IMG_7401.jpg,0,Smoke Absorber,Smoke Absorber,0.8590317567189535,0.5919452706972758,0.2670864860216777,True,True,True
+clean,mc2,test,T011_Hammer__IMG_7165.jpg,0,Hammer,Hammer,0.9396611650784811,0.8912637829780579,0.048397382100423214,True,True,True
+clean,mc2,test,T011_Hammer__IMG_7178.jpg,0,Hammer,Hammer,0.9653239051500956,0.9107900857925415,0.05453381935755408,True,True,True
+clean,mc2,test,T011_Hammer__IMG_7181.jpg,0,Hammer,Hammer,0.9509798089663187,0.8995917042096456,0.0513881047566731,True,True,True
+clean,mc2,test,T011_Hammer__IMG_7182.jpg,0,Hammer,Hammer,0.9115128914515177,0.9017255107561747,0.009787380695343018,True,True,True
+clean,mc2,test,T012_Mallet__IMG_7188.jpg,0,Mallet,Mallet,0.8901292284329733,0.8859279155731201,0.004201312859853146,True,True,True
+clean,mc2,test,T012_Mallet__IMG_7192.jpg,0,Mallet,Mallet,0.8875270883242289,0.829950193564097,0.057576894760131836,True,True,True
+clean,mc2,test,T012_Mallet__IMG_7196.jpg,0,Mallet,Mallet,0.9736150503158569,0.8236898183822632,0.14992523193359375,True,True,True
+clean,mc2,test,T012_Mallet__IMG_7200.jpg,0,Mallet,Mallet,0.9223395586013794,0.8953170379002889,0.027022520701090458,True,True,True
+clean,mc2,test,T013_ScrewPhillips__IMG_7231.jpg,0,Screw Phillips,Screwdriver,0.9342415531476339,0.8703492283821106,0.06389232476552331,True,False,True
+clean,mc2,test,T013_ScrewPhillips__IMG_7231.jpg,1,Screw Phillips,Permanent Marker,0.7809157172838846,0.7702587842941284,0.01065693298975623,True,False,True
+clean,mc2,test,T013_ScrewPhillips__IMG_7235.jpg,0,Screw Phillips,Screw Phillips,0.9377596179644266,0.912495493888855,0.02526412407557166,True,True,True
+clean,mc2,test,T013_ScrewPhillips__IMG_7238.jpg,0,Screw Phillips,Screw Phillips,0.943458080291748,0.9240873058636984,0.019370774428049686,True,True,True
+clean,mc2,test,T013_ScrewPhillips__IMG_7247.jpg,0,Screw Phillips,Screw Phillips,0.946108877658844,0.9333002765973409,0.012808601061503055,True,True,True
+clean,mc2,test,T014_Spanner__IMG_7254.jpg,0,Spanner,Spanner,0.8935410181681315,0.7821835875511169,0.11135743061701453,True,True,True
+clean,mc2,test,T014_Spanner__IMG_7254.jpg,1,Spanner,Spanner,0.9280749956766764,0.774794320265452,0.15328067541122437,True,True,True
+clean,mc2,test,T014_Spanner__IMG_7255.jpg,0,Spanner,Spanner,0.8812915086746216,0.7855175932248434,0.0957739154497782,True,True,True
+clean,mc2,test,T014_Spanner__IMG_7255.jpg,1,Spanner,Spanner,0.8978461027145386,0.7434023022651672,0.15444380044937134,True,True,True
+clean,mc2,test,T014_Spanner__IMG_7259.jpg,0,Spanner,Spanner,0.9342954556147257,0.8012682994206747,0.13302715619405103,True,True,True
+clean,mc2,test,T014_Spanner__IMG_7259.jpg,1,Spanner,Spanner,0.8574227293332418,0.8062514464060465,0.051171282927195305,True,True,True
+clean,mc2,test,T014_Spanner__IMG_7268.jpg,0,Spanner,LED Blue,0.8162624637285868,0.8080591360727946,0.008203327655792236,True,False,False
+clean,mc2,test,T014_Spanner__IMG_7279.jpg,0,Spanner,Spanner,0.9247827927271525,0.6797983249028524,0.24498446782430006,True,True,True
+clean,mc2,test,T014_Spanner__IMG_7279.jpg,1,Spanner,Spanner,0.9217029611269633,0.7388924956321716,0.18281046549479163,True,True,True
+clean,mc2,test,T014_Spanner__IMG_7287.jpg,0,Spanner,Spanner,0.809666653474172,0.774486780166626,0.03517987330754602,True,True,True
+clean,mc2,test,T015_Caliper__IMG_7292.jpg,0,Caliper,Caliper,0.8382261395454407,0.7007203896840414,0.1375057498613993,True,True,True
+clean,mc2,test,T015_Caliper__IMG_7295.jpg,0,Caliper,Caliper,0.9617323279380798,0.7442781925201416,0.21745413541793823,True,True,True
+clean,mc2,test,T015_Caliper__IMG_7297.jpg,0,Caliper,Caliper,0.9141045212745667,0.8809532721837362,0.03315124909083045,True,True,True
+clean,mc2,test,T015_Caliper__IMG_7304.jpg,0,Caliper,Caliper,0.9598576823870341,0.9117717345555624,0.04808594783147169,True,True,True
