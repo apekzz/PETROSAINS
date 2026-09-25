@@ -4,5 +4,5 @@ __pycache__/
 .DS_Store
 inventory.db-wal
 inventory.db-shm
-database/inventory.db-wal
-database/inventory.db-shm
+noise_captures/
+.cache/

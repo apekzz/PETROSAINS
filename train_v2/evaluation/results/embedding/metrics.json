@@ -1,0 +1,96 @@
+{
+  "generated_at": "2026-09-14T01:56:32",
+  "checkpoint": "C:\\Users\\Haqkiem\\OneDrive\\UNIKL\\July-2026\\Competition\\AIIC\\PETROSAINS\\inventory_app\\models\\open_clip_pytorch_model.bin",
+  "catalog": "C:\\Users\\Haqkiem\\OneDrive\\UNIKL\\July-2026\\Competition\\AIIC\\PETROSAINS\\inventory_app\\saved_tables\\inventory_emb.csv",
+  "dataset": {
+    "val_images": 403,
+    "test_images": 414,
+    "missing_labels": 0,
+    "images_without_valid_polygons": 0,
+    "candidate_mask_instances": 1712,
+    "evaluated_samples": 1712,
+    "skipped_invalid_crops": 0,
+    "true_classes": 109,
+    "catalog_embeddings": 4355,
+    "catalog_classes": 109,
+    "classes_absent_from_catalog": 0,
+    "absent_class_names": []
+  },
+  "runtime": {
+    "device": "cuda",
+    "torch": "2.11.0+cu128",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "python": "3.10.0",
+    "batch_size": 16
+  },
+  "quality": {
+    "samples": 1712,
+    "accepted": 1650,
+    "rejected": 62,
+    "coverage": 0.9637850467289719,
+    "top1_accuracy_with_rejections": 0.780373831775701,
+    "accepted_accuracy": 0.8096969696969697,
+    "top5_accuracy": 0.9509345794392523,
+    "macro_precision": 0.8312861729612557,
+    "macro_recall": 0.7998349237085216,
+    "macro_f1": 0.8030933076617015,
+    "weighted_f1": 0.796615113568452,
+    "micro_precision": 0.8096969696969697,
+    "micro_recall": 0.780373831775701,
+    "micro_f1": 0.7947650208209399
+  },
+  "similarity": {
+    "threshold": 0.6,
+    "mean_best": 0.7543691681939187,
+    "mean_correct": 0.7635660016311082,
+    "mean_incorrect": 0.7216910578958206,
+    "mean_margin": 0.04638629031283849
+  },
+  "efficiency": {
+    "model_load_seconds": 28.247893700026907,
+    "wall_seconds": 3238.5331747000455,
+    "samples_per_second": 0.5286343871276126,
+    "crop_ms_per_sample": 1759.190808119388,
+    "preprocess_ms_per_sample": 63.74060432239632,
+    "embedding_ms_per_sample": 58.997052978921715,
+    "matching_ms_per_sample": 9.138951810617021,
+    "pipeline_ms_per_sample": 1891.0674172313231
+  },
+  "by_split": {
+    "val": {
+      "samples": 811,
+      "accepted": 783,
+      "rejected": 28,
+      "coverage": 0.9654747225647349,
+      "top1_accuracy_with_rejections": 0.7903822441430333,
+      "accepted_accuracy": 0.8186462324393359,
+      "top5_accuracy": 0.9420468557336621,
+      "macro_precision": 0.8315582757802608,
+      "macro_recall": 0.8094973593704009,
+      "macro_f1": 0.8018478840652667,
+      "weighted_f1": 0.803008348626569,
+      "micro_precision": 0.8186462324393359,
+      "micro_recall": 0.7903822441430333,
+      "micro_f1": 0.8042659974905897,
+      "images": 403
+    },
+    "test": {
+      "samples": 901,
+      "accepted": 867,
+      "rejected": 34,
+      "coverage": 0.9622641509433962,
+      "top1_accuracy_with_rejections": 0.7713651498335183,
+      "accepted_accuracy": 0.8016147635524798,
+      "top5_accuracy": 0.9589345172031076,
+      "macro_precision": 0.8259084304110862,
+      "macro_recall": 0.8066368454095522,
+      "macro_f1": 0.7952758038616451,
+      "weighted_f1": 0.7906730210999667,
+      "micro_precision": 0.8016147635524798,
+      "micro_recall": 0.7713651498335183,
+      "micro_f1": 0.7861990950226245,
+      "images": 414
+    }
+  }
+}

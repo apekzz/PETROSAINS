@@ -8,3 +8,4 @@ torchvision
 psycopg[binary]
 sentence-transformers
 pillow
+open-clip-torch

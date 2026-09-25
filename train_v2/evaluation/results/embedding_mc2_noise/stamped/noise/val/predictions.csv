@@ -1,0 +1,812 @@
+protocol,catalog,split,image,polygon_index,true_name,predicted_name,similarity,second_similarity,margin,accepted,correct,top5_correct
+stamped,noise,val,C001_tracing_paper__C001_TRACKING PAPER_C001_05.jpg,0,tracing paper,tracing paper,0.8706206281979879,0.8282079696655273,0.04241265853246057,True,True,True
+stamped,noise,val,C001_tracing_paper__C001_TRACKING PAPER_C001_08.jpg,0,tracing paper,tracing paper,0.9120760361353556,0.8301511804262797,0.08192485570907593,True,True,True
+stamped,noise,val,C001_tracing_paper__C001_TRACKING PAPER_C001_09.jpg,0,tracing paper,tracing paper,0.7898401816685995,0.7571002244949341,0.0327399571736654,True,True,True
+stamped,noise,val,C001_tracing_paper__C001_TRACKING PAPER_C001_09.jpg,1,tracing paper,Sellotape,0.7724867860476176,0.7576752106348673,0.014811575412750244,True,False,True
+stamped,noise,val,C001_tracing_paper__C001_TRACKING PAPER_C001_25.jpg,0,tracing paper,tracing paper,0.9272037545839945,0.8608952363332113,0.06630851825078321,True,True,True
+stamped,noise,val,C002_paper_cup__C002_PAPER CUP_C002_06.jpg,0,paper cup,paper cup,0.9486739635467529,0.5245317618052164,0.4241422017415365,True,True,True
+stamped,noise,val,C002_paper_cup__C002_PAPER CUP_C002_11.jpg,0,paper cup,paper cup,0.9354414741198221,0.6382598678270975,0.2971816062927246,True,True,True
+stamped,noise,val,C002_paper_cup__C002_PAPER CUP_C002_14.jpg,0,paper cup,paper cup,0.9562941590944926,0.4888697564601898,0.46742440263430274,True,True,True
+stamped,noise,val,C002_paper_cup__C002_PAPER CUP_C002_23.jpg,0,paper cup,paper cup,0.9213793675104777,0.6314942439397176,0.28988512357076,True,True,True
+stamped,noise,val,C002_paper_cup__C002_PAPER CUP_C002_30.jpg,0,paper cup,paper cup,0.9559830029805502,0.5367286602656046,0.41925434271494555,True,True,True
+stamped,noise,val,C003_thread__C003_THREAD_C003_06.jpg,0,thread,thread,0.9035555521647135,0.8111350933710734,0.09242045879364014,True,True,True
+stamped,noise,val,C003_thread__C003_THREAD_C003_07.jpg,0,thread,thread,0.9538023670514425,0.7391694585482279,0.2146329085032146,True,True,True
+stamped,noise,val,C003_thread__C003_THREAD_C003_18.jpg,0,thread,thread,0.8891925017038981,0.7403559883435568,0.14883651336034132,True,True,True
+stamped,noise,val,C003_thread__C003_THREAD_C003_19.jpg,0,thread,thread,0.9546749591827393,0.7105224132537842,0.24415254592895508,True,True,True
+stamped,noise,val,C003_thread__C003_THREAD_C003_24.jpg,0,thread,thread,0.9722133278846741,0.7598745028177897,0.2123388250668844,True,True,True
+stamped,noise,val,C003_thread__C003_THREAD_C003_25.jpg,0,thread,thread,0.9557488560676575,0.6986027161280314,0.2571461399396261,True,True,True
+stamped,noise,val,C003_thread__C003_THREAD_C003_30.jpg,0,thread,thread,0.9818932016690572,0.7792338331540426,0.20265936851501465,True,True,True
+stamped,noise,val,C003_thread__C003_THREAD_C003_40.jpg,0,thread,thread,0.9543797175089518,0.8138972918192545,0.14048242568969727,True,True,True
+stamped,noise,val,C003_thread__C003_THREAD_C003_50.jpg,0,thread,thread,0.8273588418960571,0.7219033042589823,0.10545553763707483,True,True,True
+stamped,noise,val,C004_needle__C004_NEEDLE_C004_03.jpg,0,needle,needle,0.9441778461138407,0.8981608748435974,0.04601697127024329,True,True,True
+stamped,noise,val,C004_needle__C004_NEEDLE_C004_05.jpg,0,needle,needle,0.9352257251739502,0.9016362428665161,0.03358948230743408,True,True,True
+stamped,noise,val,C004_needle__C004_NEEDLE_C004_08.jpg,0,needle,needle,0.9644830624262491,0.919394870599111,0.04508819182713819,True,True,True
+stamped,noise,val,C004_needle__C004_NEEDLE_C004_16.jpg,0,needle,needle,0.9567491412162781,0.8743912180264791,0.08235792318979895,True,True,True
+stamped,noise,val,C004_needle__C004_NEEDLE_C004_17.jpg,0,needle,pipettes 10ml,0.9284211794535319,0.9231817324956259,0.005239446957906013,True,False,True
+stamped,noise,val,C005_yarn__C005_YARN_C005_08.jpg,0,yarn,yarn,0.9572800596555074,0.8133338491121928,0.1439462105433147,True,True,True
+stamped,noise,val,C005_yarn__C005_YARN_C005_11.jpg,0,yarn,yarn,0.963323732217153,0.7782420516014099,0.18508168061574304,True,True,True
+stamped,noise,val,C005_yarn__C005_YARN_C005_14.jpg,0,yarn,yarn,0.9375171065330505,0.7592619856198629,0.17825512091318763,True,True,True
+stamped,noise,val,C005_yarn__C005_YARN_C005_21.jpg,0,yarn,yarn,0.9716923038164774,0.767613430817922,0.20407887299855543,True,True,True
+stamped,noise,val,C005_yarn__C005_YARN_C005_25.jpg,0,yarn,yarn,0.939383864402771,0.7704414327939352,0.16894243160883582,True,True,True
+stamped,noise,val,C005_yarn__C005_YARN_C005_42.jpg,0,yarn,yarn,0.9678632815678915,0.8080390691757202,0.15982421239217126,True,True,True
+stamped,noise,val,C005_yarn__C005_YARN_C005_44.jpg,0,yarn,yarn,0.9610987901687622,0.81017537911733,0.15092341105143225,True,True,True
+stamped,noise,val,C005_yarn__C005_YARN_C005_46.jpg,0,yarn,yarn,0.9476566910743713,0.7588975628217062,0.18875912825266516,True,True,True
+stamped,noise,val,C006_air_clay__C006_AIR CLAY_C006_03.jpg,0,air clay,air clay,0.9548339049021403,0.7159941991170248,0.23883970578511549,True,True,True
+stamped,noise,val,C006_air_clay__C006_AIR CLAY_C006_08.jpg,0,air clay,air clay,0.7949919104576111,0.6611664295196533,0.13382548093795776,True,True,True
+stamped,noise,val,C006_air_clay__C006_AIR CLAY_C006_19.jpg,0,air clay,air clay,0.9499041438102722,0.6843817432721456,0.2655224005381266,True,True,True
+stamped,noise,val,C007_acrylic_standee_A4_landscape_portrait__C007_ACRYLIC STANDEE LANDSCAPE_PORTRAIT_C007_07.jpg,0,acrylic standee A4 landscape portrait,acrylic table label,0.7674001256624857,0.7523797353108724,0.015020390351613289,True,False,True
+stamped,noise,val,C007_acrylic_standee_A4_landscape_portrait__C007_ACRYLIC STANDEE LANDSCAPE_PORTRAIT_C007_08.jpg,0,acrylic standee A4 landscape portrait,acrylic standee A4 landscape portrait,0.7876406113306681,0.7520088950792948,0.03563171625137329,True,True,True
+stamped,noise,val,C007_acrylic_standee_A4_landscape_portrait__C007_ACRYLIC STANDEE LANDSCAPE_PORTRAIT_C007_09.jpg,0,acrylic standee A4 landscape portrait,acrylic table label,0.8067173957824707,0.7779067754745483,0.028810620307922363,True,False,True
+stamped,noise,val,C007_acrylic_standee_A4_landscape_portrait__C007_ACRYLIC STANDEE LANDSCAPE_PORTRAIT_C007_16.jpg,0,acrylic standee A4 landscape portrait,acrylic standee A4 landscape portrait,0.6966167092323303,0.6311088403066,0.06550786892573035,True,True,True
+stamped,noise,val,C008_acrylic_table_label__C008_ACRYLIC TABLE LABEL_C008_11.jpg,0,acrylic table label,acrylic table label,0.7149490118026733,0.6889704863230387,0.02597852547963464,True,True,True
+stamped,noise,val,C008_acrylic_table_label__C008_ACRYLIC TABLE LABEL_C008_13.jpg,0,acrylic table label,acrylic standee A4 landscape portrait,0.7484862407048544,0.7184034784634908,0.030082762241363525,True,False,True
+stamped,noise,val,C008_acrylic_table_label__C008_ACRYLIC TABLE LABEL_C008_20.jpg,0,acrylic table label,acrylic table label,0.8915704687436422,0.7838592131932577,0.10771125555038452,True,True,True
+stamped,noise,val,C009_popsicle_stick__C009_POPSICLE STICK_C009_06.jpg,0,popsicle stick,popsicle stick,0.9032040437062582,0.7598246534665426,0.14337939023971558,True,True,True
+stamped,noise,val,C009_popsicle_stick__C009_POPSICLE STICK_C009_08.jpg,0,popsicle stick,popsicle stick,0.886785606543223,0.8650011420249939,0.02178446451822913,True,True,True
+stamped,noise,val,C009_popsicle_stick__C009_POPSICLE STICK_C009_08.jpg,1,popsicle stick,popsicle stick,0.9335278471310934,0.7738656401634216,0.15966220696767175,True,True,True
+stamped,noise,val,C009_popsicle_stick__C009_POPSICLE STICK_C009_14.jpg,0,popsicle stick,popsicle stick,0.7738478581110636,0.5433317820231119,0.23051607608795166,True,True,True
+stamped,noise,val,C009_popsicle_stick__C009_POPSICLE STICK_C009_16.jpg,0,popsicle stick,popsicle stick,0.9347210129102071,0.6741992036501566,0.26052180926005053,True,True,True
+stamped,noise,val,C009_popsicle_stick__C009_POPSICLE STICK_C009_28.jpg,0,popsicle stick,popsicle stick,0.881649116675059,0.6428344249725342,0.23881469170252478,True,True,True
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_16.jpg,0,Fabbxible PLA filament,glue gun stick,0.7232081294059753,0.6743300358454386,0.04887809356053674,True,False,False
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_16.jpg,1,Fabbxible PLA filament,Fabbxible PLA filament,0.8503462076187134,0.6676673293113708,0.18267887830734253,True,True,True
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_16.jpg,2,Fabbxible PLA filament,Fabbxible PLA filament,0.886614978313446,0.6954064965248108,0.19120848178863525,True,True,True
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_17.jpg,0,Fabbxible PLA filament,Fabbxible PLA filament,0.9370826880137125,0.6992919445037842,0.23779074350992835,True,True,True
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_19.jpg,0,Fabbxible PLA filament,Fabbxible PLA filament,0.7806333303451538,0.7325341105461121,0.04809921979904175,True,True,True
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_19.jpg,1,Fabbxible PLA filament,Fabbxible PLA filament,0.804479161898295,0.6462105711301168,0.15826859076817823,True,True,True
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_19.jpg,2,Fabbxible PLA filament,Sellotape,0.8508241772651672,0.7998351653416952,0.05098901192347205,True,False,True
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_19.jpg,3,Fabbxible PLA filament,Sellotape,0.8301066954930624,0.7771743337313334,0.052932361761729,True,False,True
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_19.jpg,4,Fabbxible PLA filament,Sellotape,0.8771142959594727,0.8344238599141439,0.04269043604532874,True,False,True
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_19.jpg,5,Fabbxible PLA filament,Fabbxible PLA filament,0.7915958762168884,0.7039583722750345,0.08763750394185388,True,True,True
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_19.jpg,6,Fabbxible PLA filament,Fabbxible PLA filament,0.7380975087483724,0.6846350034077963,0.05346250534057617,True,True,True
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_19.jpg,7,Fabbxible PLA filament,Fabbxible PLA filament,0.7626044948895773,0.690143863360087,0.07246063152949023,True,True,True
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_19.jpg,8,Fabbxible PLA filament,Fabbxible PLA filament,0.8108419974644979,0.7560921112696329,0.05474988619486498,True,True,True
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_19.jpg,9,Fabbxible PLA filament,Fabbxible PLA filament,0.7528747320175171,0.7137385010719299,0.03913623094558716,True,True,True
+stamped,noise,val,C010_Fabbxible_PLA_filament__C010_FILAMENT_C010_22.jpg,0,Fabbxible PLA filament,Fabbxible PLA filament,0.8832909067471822,0.6597302158673605,0.22356069087982178,True,True,True
+stamped,noise,val,C011_glue_stick__C011_GLUE STICK_C011_08.jpg,0,glue stick,glue stick,0.9309569199879965,0.688394029935201,0.2425628900527954,True,True,True
+stamped,noise,val,C011_glue_stick__C011_GLUE STICK_C011_11.jpg,0,glue stick,glue stick,0.9393347104390463,0.7144880692164103,0.22484664122263598,True,True,True
+stamped,noise,val,C011_glue_stick__C011_GLUE STICK_C011_13.jpg,0,glue stick,glue stick,0.8604905803998312,0.5832072297732035,0.2772833506266277,True,True,True
+stamped,noise,val,C011_glue_stick__C011_GLUE STICK_C011_27.jpg,0,glue stick,glue stick,0.8609833916028341,0.7723607222239176,0.0886226693789165,True,True,True
+stamped,noise,val,C011_glue_stick__C011_GLUE STICK_C011_27.jpg,1,glue stick,glue stick,0.8036733667055765,0.6450036565462748,0.15866971015930176,True,True,True
+stamped,noise,val,C012_pipe_cleaner__C012_PIPE CLEANER_C012_01.jpg,0,pipe cleaner,pipe cleaner,0.8792018095652262,0.737204114596049,0.14199769496917725,True,True,True
+stamped,noise,val,C012_pipe_cleaner__C012_PIPE CLEANER_C012_07.jpg,0,pipe cleaner,pipe cleaner,0.9200786153475443,0.7252340912818909,0.19484452406565345,True,True,True
+stamped,noise,val,C012_pipe_cleaner__C012_PIPE CLEANER_C012_09.jpg,0,pipe cleaner,pipe cleaner,0.9404275218645731,0.6821167270342509,0.25831079483032227,True,True,True
+stamped,noise,val,C012_pipe_cleaner__C012_PIPE CLEANER_C012_20.jpg,0,pipe cleaner,pipe cleaner,0.8900000850359598,0.702708105246226,0.1872919797897339,True,True,True
+stamped,noise,val,C012_pipe_cleaner__C012_PIPE CLEANER_C012_34.jpg,0,pipe cleaner,pipe cleaner,0.8245754241943359,0.6932196815808614,0.1313557426134745,True,True,True
+stamped,noise,val,C012_pipe_cleaner__C012_PIPE CLEANER_C012_35.jpg,0,pipe cleaner,pipe cleaner,0.9351138472557068,0.7302735845247904,0.20484026273091638,True,True,True
+stamped,noise,val,C012_pipe_cleaner__C012_PIPE CLEANER_C012_37.jpg,0,pipe cleaner,pipe cleaner,0.8860414226849874,0.7079346776008606,0.17810674508412683,True,True,True
+stamped,noise,val,C013_pom_pom__C013_POM POM_C013_01.jpg,0,pom pom,pom pom,0.9224942326545715,0.6597899397214254,0.2627042929331461,True,True,True
+stamped,noise,val,C013_pom_pom__C013_POM POM_C013_01.jpg,1,pom pom,pom pom,0.9077270030975342,0.6457087794939677,0.2620182236035665,True,True,True
+stamped,noise,val,C013_pom_pom__C013_POM POM_C013_03.jpg,0,pom pom,pom pom,0.912376324335734,0.6823390126228333,0.23003731171290076,True,True,True
+stamped,noise,val,C013_pom_pom__C013_POM POM_C013_04.jpg,0,pom pom,pom pom,0.9335982799530029,0.6697812477747599,0.26381703217824304,True,True,True
+stamped,noise,val,C013_pom_pom__C013_POM POM_C013_04.jpg,1,pom pom,pom pom,0.9347022771835327,0.6968411604563395,0.23786111672719323,True,True,True
+stamped,noise,val,C013_pom_pom__C013_POM POM_C013_05.jpg,0,pom pom,pom pom,0.9225857655207316,0.6531819701194763,0.26940379540125525,True,True,True
+stamped,noise,val,C013_pom_pom__C013_POM POM_C013_05.jpg,1,pom pom,pom pom,0.929294208685557,0.6660133997599283,0.26328080892562866,True,True,True
+stamped,noise,val,C014_A4_colored_paper__C014_A4 COLORED PAPER_C014_01.jpg,0,A4 colored paper,A4 colored paper,0.9291720191637675,0.855898916721344,0.07327310244242347,True,True,True
+stamped,noise,val,C014_A4_colored_paper__C014_A4 COLORED PAPER_C014_14.jpg,0,A4 colored paper,A4 colored paper,0.9055968125661215,0.8254899382591248,0.0801068743069967,True,True,True
+stamped,noise,val,C014_A4_colored_paper__C014_A4 COLORED PAPER_C014_25.jpg,0,A4 colored paper,A4 colored paper,0.8708191315333048,0.7881564299265543,0.08266270160675049,True,True,True
+stamped,noise,val,C014_A4_colored_paper__C014_A4 COLORED PAPER_C014_26.jpg,0,A4 colored paper,A4 colored paper,0.9089066982269287,0.8475417693456014,0.061364928881327274,True,True,True
+stamped,noise,val,C015_ribbon__C015_RIBBON_C015_12.jpg,0,ribbon,Fabbxible PLA filament,0.7794684569040934,0.7435691356658936,0.03589932123819983,True,False,True
+stamped,noise,val,C015_ribbon__C015_RIBBON_C015_17.jpg,0,ribbon,ribbon,0.7641210953394572,0.6994379560152689,0.06468313932418823,True,True,True
+stamped,noise,val,C015_ribbon__C015_RIBBON_C015_21.jpg,0,ribbon,ribbon,0.7728866537412008,0.6827103892962137,0.09017626444498705,True,True,True
+stamped,noise,val,C015_ribbon__C015_RIBBON_C015_26.jpg,0,ribbon,ribbon,0.6780004103978475,0.6032424569129944,0.07475795348485315,True,True,True
+stamped,noise,val,C016_balloons__C016_BALLOONS_C016_01.jpg,0,balloons,balloons,0.7554092009862264,0.5681828260421753,0.18722637494405114,True,True,True
+stamped,noise,val,C016_balloons__C016_BALLOONS_C016_02.jpg,0,balloons,balloons,0.9038892587025961,0.6578890879948934,0.24600017070770264,True,True,True
+stamped,noise,val,C016_balloons__C016_BALLOONS_C016_14.jpg,0,balloons,balloons,0.8923091888427734,0.6104552944501241,0.2818538943926493,True,True,True
+stamped,noise,val,C016_balloons__C016_BALLOONS_C016_17.jpg,0,balloons,balloons,0.8578718701998392,0.6972233255704244,0.1606485446294148,True,True,True
+stamped,noise,val,C016_balloons__C016_BALLOONS_C016_17.jpg,1,balloons,balloons,0.844336986541748,0.6804797649383545,0.16385722160339355,True,True,True
+stamped,noise,val,C017_key_ring__C017_KEY RING_C017_06.jpg,0,key ring,key ring,0.8229730725288391,0.6647995511690775,0.1581735213597616,True,True,True
+stamped,noise,val,C017_key_ring__C017_KEY RING_C017_10.jpg,0,key ring,key ring,0.8018245299657186,0.4886159698168437,0.31320856014887494,True,True,True
+stamped,noise,val,C017_key_ring__C017_KEY RING_C017_13.jpg,0,key ring,key ring,0.8596403400103251,0.6116878191630045,0.24795252084732056,True,True,True
+stamped,noise,val,C017_key_ring__C017_KEY RING_C017_13.jpg,1,key ring,key ring,0.8906353910764059,0.6306119958559672,0.2600233952204387,True,True,True
+stamped,noise,val,C017_key_ring__C017_KEY RING_C017_13.jpg,2,key ring,key ring,0.9032840927441915,0.6349897782007853,0.26829431454340624,True,True,True
+stamped,noise,val,C018_glue_gun_stick__C018_GLUE GUN STICK_C018_03.jpg,0,glue gun stick,glue gun stick,0.9038233359654745,0.74127197265625,0.16255136330922448,True,True,True
+stamped,noise,val,C018_glue_gun_stick__C018_GLUE GUN STICK_C018_10.jpg,0,glue gun stick,glue gun stick,0.8301126559575399,0.7828489144643148,0.0472637414932251,True,True,True
+stamped,noise,val,C018_glue_gun_stick__C018_GLUE GUN STICK_C018_17.jpg,0,glue gun stick,glue gun stick,0.7608249386151632,0.7066826621691386,0.05414227644602465,True,True,True
+stamped,noise,val,C018_glue_gun_stick__C018_GLUE GUN STICK_C018_22.jpg,0,glue gun stick,glue gun stick,0.8747346997261047,0.8325456579526266,0.04218904177347815,True,True,True
+stamped,noise,val,C019_melty_beads__C019_MELTY BEADS_C019_01.jpg,0,melty beads,melty beads,0.9477794567743937,0.6091644167900085,0.33861503998438514,True,True,True
+stamped,noise,val,C019_melty_beads__C019_MELTY BEADS_C019_05.jpg,0,melty beads,melty beads,0.9582464893658956,0.5987372199694315,0.3595092693964641,True,True,True
+stamped,noise,val,C019_melty_beads__C019_MELTY BEADS_C019_08.jpg,0,melty beads,melty beads,0.9503902991612753,0.6434931953748068,0.3068971037864685,True,True,True
+stamped,noise,val,C020_tongue_depressor__C020_TONGUE DEPRESSOR_C020_11.jpg,0,tongue depressor,tongue depressor,0.8634749253590902,0.7666646242141724,0.09681030114491784,True,True,True
+stamped,noise,val,C020_tongue_depressor__C020_TONGUE DEPRESSOR_C020_18.jpg,0,tongue depressor,tongue depressor,0.8497808972994486,0.7930486996968588,0.05673219760258985,True,True,True
+stamped,noise,val,C020_tongue_depressor__C020_TONGUE DEPRESSOR_C020_20.jpg,0,tongue depressor,tongue depressor,0.8885115385055542,0.6981427272160848,0.19036881128946936,True,True,True
+stamped,noise,val,C020_tongue_depressor__C020_TONGUE DEPRESSOR_C020_24.jpg,0,tongue depressor,tongue depressor,0.8714220523834229,0.7585852344830831,0.11283681790033973,True,True,True
+stamped,noise,val,C021_clothespin__C021_CLOTHESPIN_C021_08.jpg,0,clothespin,clothespin,0.8266083796819051,0.705397367477417,0.12121101220448816,True,True,True
+stamped,noise,val,C021_clothespin__C021_CLOTHESPIN_C021_10.jpg,0,clothespin,clothespin,0.748069961865743,0.7471787532170614,0.0008912086486816406,True,True,True
+stamped,noise,val,C021_clothespin__C021_CLOTHESPIN_C021_11.jpg,0,clothespin,clothespin,0.8621598482131958,0.7410155534744263,0.12114429473876953,True,True,True
+stamped,noise,val,C021_clothespin__C021_CLOTHESPIN_C021_25.jpg,0,clothespin,clothespin,0.8673068682352701,0.6891312201817831,0.17817564805348707,True,True,True
+stamped,noise,val,C022_googly_eyes__C022_GOOGLY EYES_C022_01.jpg,0,googly eyes,Clip Board,0.7135045528411865,0.6942809621493021,0.019223590691884396,True,False,False
+stamped,noise,val,C022_googly_eyes__C022_GOOGLY EYES_C022_19.jpg,0,googly eyes,googly eyes,0.8219430049260458,0.7406973441441854,0.08124566078186035,True,True,True
+stamped,noise,val,C022_googly_eyes__C022_GOOGLY EYES_C022_22.jpg,0,googly eyes,googly eyes,0.8642479181289673,0.7804136872291565,0.08383423089981079,True,True,True
+stamped,noise,val,C022_googly_eyes__C022_GOOGLY EYES_C022_23.jpg,0,googly eyes,googly eyes,0.8332181771596273,0.7225101788838705,0.11070799827575684,True,True,True
+stamped,noise,val,C023_liquid_glue__C023_LIQUID GLUE_C023_05.jpg,0,liquid glue,liquid glue,0.8766111731529236,0.7040584286053976,0.172552744547526,True,True,True
+stamped,noise,val,C023_liquid_glue__C023_LIQUID GLUE_C023_06.jpg,0,liquid glue,liquid glue,0.9138070940971375,0.6767917275428772,0.23701536655426025,True,True,True
+stamped,noise,val,C023_liquid_glue__C023_LIQUID GLUE_C023_15.jpg,0,liquid glue,liquid glue,0.936366061369578,0.7023991346359253,0.2339669267336527,True,True,True
+stamped,noise,val,C023_liquid_glue__C023_LIQUID GLUE_C023_20.jpg,0,liquid glue,liquid glue,0.7952024737993876,0.7396450638771057,0.055557409922281864,True,True,True
+stamped,noise,val,E001_Arduino_Uno__IMG_6016.jpg,0,Arduino Uno,Arduino Uno,0.9649968942006429,0.8717360297838846,0.0932608644167583,True,True,True
+stamped,noise,val,E001_Arduino_Uno__IMG_6021.jpg,0,Arduino Uno,Arduino Uno,0.9097977876663208,0.8799040118853251,0.029893775780995724,True,True,True
+stamped,noise,val,E001_Arduino_Uno__WhatsApp Image 2026-08-12 at 11.07.18 AM (1).jpg,0,Arduino Uno,Arduino Uno,0.8806161085764567,0.5915435751279196,0.2890725334485371,True,True,True
+stamped,noise,val,E001_Arduino_Uno__WhatsApp Image 2026-08-12 at 11.07.18 AM (1).jpg,1,Arduino Uno,Arduino Uno,0.8384691675504049,0.6165769298871359,0.22189223766326904,True,True,True
+stamped,noise,val,E001_Arduino_Uno__WhatsApp Image 2026-08-12 at 11.07.18 AM (1).jpg,2,Arduino Uno,Arduino Uno,0.9053043524424235,0.6310277382532755,0.27427661418914795,True,True,True
+stamped,noise,val,E002_Arduino_Nano__IMG_2294.jpg,0,Arduino Nano,Arduino Nano,0.9510312875111898,0.8754400412241617,0.07559124628702807,True,True,True
+stamped,noise,val,E002_Arduino_Nano__IMG_6225.jpg,0,Arduino Nano,Arduino Nano,0.9498676458994547,0.8736908833185831,0.07617676258087158,True,True,True
+stamped,noise,val,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.03.04 PM (1).jpg,0,Arduino Nano,Arduino Nano,0.9101133545239767,0.8903424739837646,0.019770880540212032,True,True,True
+stamped,noise,val,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.03.04 PM (1).jpg,1,Arduino Nano,Arduino Nano,0.915870189666748,0.8855155110359192,0.030354678630828857,True,True,True
+stamped,noise,val,E002_Arduino_Nano__WhatsApp Image 2026-08-11 at 6.03.07 PM.jpg,0,Arduino Nano,Arduino Nano,0.9048765500386556,0.8599276343981425,0.044948915640513176,True,True,True
+stamped,noise,val,E003_Motor_Shield__IMG_2262.jpg,0,Motor Shield,Motor Shield,0.9577990770339966,0.8983647227287292,0.059434354305267334,True,True,True
+stamped,noise,val,E003_Motor_Shield__IMG_6183.jpg,0,Motor Shield,Motor Shield,0.9074099659919739,0.8933499852816263,0.01405998071034753,True,True,True
+stamped,noise,val,E003_Motor_Shield__WhatsApp Image 2026-08-11 at 6.07.11 PM.jpg,0,Motor Shield,Motor Shield,0.9482731024424235,0.9128083984057108,0.035464704036712646,True,True,True
+stamped,noise,val,E003_Motor_Shield__WhatsApp Image 2026-08-11 at 6.07.11 PM.jpg,1,Motor Shield,DHT11 Temperature and humidity,0.8133923411369324,0.7722387512524923,0.04115358988444007,True,False,False
+stamped,noise,val,E003_Motor_Shield__WhatsApp Image 2026-08-11 at 6.07.11 PM.jpg,2,Motor Shield,Motor Shield,0.7745224436124166,0.7566349307696024,0.0178875128428142,True,True,True
+stamped,noise,val,E004_Breadboard__IMG_2350.jpg,0,Breadboard,Breadboard,0.9206531047821045,0.7763725717862447,0.14428053299585974,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (2).jpg,0,Breadboard,Breadboard,0.9636044502258301,0.7502350211143494,0.2133694291114807,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (2).jpg,1,Breadboard,Breadboard,0.9622678160667419,0.7473439375559489,0.2149238785107931,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (2).jpg,2,Breadboard,Breadboard,0.9764823913574219,0.7271720170974731,0.24931037425994873,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (2).jpg,3,Breadboard,Breadboard,0.9767101407051086,0.736149787902832,0.2405603528022766,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (2).jpg,4,Breadboard,Breadboard,0.9772875905036926,0.7224264343579611,0.25486115614573157,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (2).jpg,5,Breadboard,Breadboard,0.965258518854777,0.7491639852523804,0.2160945336023966,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (2).jpg,6,Breadboard,Breadboard,0.9491256276766459,0.7448032100995382,0.20432241757710767,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (2).jpg,7,Breadboard,Breadboard,0.945010224978129,0.7462490399678549,0.19876118501027418,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (2).jpg,8,Breadboard,Breadboard,0.9727378288904825,0.7359670996665955,0.2367707292238871,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (2).jpg,9,Breadboard,Breadboard,0.7942112684249878,0.7681522766749064,0.026058991750081417,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (2).jpg,10,Breadboard,Breadboard,0.79820583264033,0.7665498654047648,0.031655967235565186,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (2).jpg,11,Breadboard,Breadboard,0.7853162487347921,0.7395746310551962,0.04574161767959595,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-11 at 6.07.14 PM (2).jpg,12,Breadboard,Breadboard,0.8024584650993347,0.7730871041615804,0.029371360937754276,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-12 at 11.07.16 AM (1).jpg,0,Breadboard,Breadboard,0.8883026838302612,0.8286476333936056,0.05965505043665564,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-12 at 11.07.16 AM (1).jpg,1,Breadboard,Breadboard,0.9467438658078512,0.8488557537396749,0.09788811206817627,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-12 at 11.07.16 AM (1).jpg,2,Breadboard,Breadboard,0.9176482558250427,0.8371753692626953,0.08047288656234741,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-12 at 11.07.16 AM (1).jpg,3,Breadboard,Breadboard,0.9391101201375326,0.8367209434509277,0.10238917668660485,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-12 at 11.07.16 AM (1).jpg,4,Breadboard,Breadboard,0.8826475342114767,0.8580734332402548,0.024574100971221924,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-12 at 11.07.16 AM (1).jpg,5,Breadboard,Breadboard,0.9260225296020508,0.8302590052286783,0.09576352437337243,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-12 at 11.07.16 AM (1).jpg,6,Breadboard,Breadboard,0.8832581837972006,0.8500356872876486,0.033222496509552,True,True,True
+stamped,noise,val,E004_Breadboard__WhatsApp Image 2026-08-12 at 11.07.16 AM (1).jpg,7,Breadboard,Breadboard,0.9322599371274313,0.8106306195259094,0.12162931760152185,True,True,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__IMG_2279.jpg,0,Gas Sensor MQ6,Gas Sensor MQ6,0.9146199027697245,0.8326645493507385,0.08195535341898597,True,True,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM (1).jpg,0,Gas Sensor MQ6,Gas Sensor MQ6,0.8788164655367533,0.7780845165252686,0.10073194901148474,True,True,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM.jpg,0,Gas Sensor MQ6,Gas Sensor MQ6,0.9170076449712118,0.8120409647623698,0.10496668020884203,True,True,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM.jpg,1,Gas Sensor MQ6,Gas Sensor MQ6,0.9241714477539062,0.8099959095319113,0.114175538221995,True,True,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM.jpg,2,Gas Sensor MQ6,Gas Sensor MQ6,0.9213538765907288,0.8492564757664999,0.07209740082422889,True,True,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM.jpg,3,Gas Sensor MQ6,Gas Sensor MQ6,0.9060529470443726,0.7947678963343302,0.11128505071004235,True,True,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM.jpg,4,Gas Sensor MQ6,Infrared IR Proximity Sensor module,0.8841047684351603,0.8829939961433411,0.0011107722918192175,True,False,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM.jpg,5,Gas Sensor MQ6,Gas Sensor MQ6,0.8949890534083048,0.7961790164311727,0.09881003697713209,True,True,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM.jpg,6,Gas Sensor MQ6,Gas Sensor MQ6,0.9276255567868551,0.8356707294782003,0.09195482730865479,True,True,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM.jpg,7,Gas Sensor MQ6,Infrared IR Proximity Sensor module,0.9208704829216003,0.920367976029714,0.0005025068918863562,True,False,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM.jpg,8,Gas Sensor MQ6,Gas Sensor MQ6,0.8838765025138855,0.7873609662055969,0.09651553630828857,True,True,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM.jpg,9,Gas Sensor MQ6,Gas Sensor MQ6,0.8685179352760315,0.8263583580652872,0.04215957721074426,True,True,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM.jpg,10,Gas Sensor MQ6,Gas Sensor MQ6,0.9196989138921102,0.8857268492380778,0.03397206465403246,True,True,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM.jpg,11,Gas Sensor MQ6,Gas Sensor MQ6,0.9013653993606567,0.7523231307665507,0.14904226859410608,True,True,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM.jpg,12,Gas Sensor MQ6,Gas Sensor MQ6,0.9065129359563192,0.8576133449872335,0.04889959096908569,True,True,True
+stamped,noise,val,E005_Gas_Sensor_MQ6__WhatsApp Image 2026-08-11 at 6.06.25 PM.jpg,13,Gas Sensor MQ6,Gas Sensor MQ6,0.904886265595754,0.8763319849967957,0.02855428059895837,True,True,True
+stamped,noise,val,E006_NodeMCU__IMG_6070.jpg,0,Node MCU,Node MCU,0.9662201007207235,0.8507412473360697,0.1154788533846538,True,True,True
+stamped,noise,val,E006_NodeMCU__IMG_6224.jpg,0,Node MCU,Node MCU,0.9379438161849976,0.8279835184415182,0.10996029774347937,True,True,True
+stamped,noise,val,E006_NodeMCU__IMG_6224.jpg,1,Node MCU,Node MCU,0.8890546361605326,0.7748084863026937,0.11424614985783887,True,True,True
+stamped,noise,val,E006_NodeMCU__WhatsApp Image 2026-08-11 at 6.05.09 PM.jpg,0,Node MCU,Node MCU,0.9683106740315756,0.8104135195414225,0.15789715449015307,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__IMG_2338.jpg,0,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.946414073308309,0.8638220032056173,0.08259207010269165,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__IMG_6058.jpg,0,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9342226982116699,0.8201573292414347,0.11406536897023523,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,0,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9509380658467611,0.8967720866203308,0.054165979226430294,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,1,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9706402818361918,0.8871968587239584,0.0834434231122334,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,2,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9528541564941406,0.842664361000061,0.11018979549407959,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,3,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9654431740442911,0.875278910001119,0.09016426404317213,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,4,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9355061650276184,0.8081920742988586,0.12731409072875977,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,5,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9444554249445597,0.8494793574015299,0.09497606754302979,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,6,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.8816680113474528,0.8481335639953613,0.033534447352091434,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,7,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9617307384808859,0.8955113887786865,0.06621934970219934,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,8,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.8868050972620646,0.8189558386802673,0.06784925858179724,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,9,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9100487033526102,0.7758764425913492,0.134172260761261,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,10,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9212897022565206,0.8329723079999288,0.0883173942565918,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,11,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9394883712132772,0.7980982462565104,0.14139012495676684,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,12,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9482998649279276,0.8804861307144165,0.06781373421351111,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,13,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.946808914343516,0.7921202182769775,0.15468869606653846,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,14,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9519195159276327,0.8415126999219259,0.11040681600570679,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,15,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9641884565353394,0.8851701418558756,0.07901831467946374,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,16,HC SR04 Ultrasonic Sensor,HC SR04 Ultrasonic Sensor,0.9623785813649496,0.8461081186930338,0.11627046267191576,True,True,True
+stamped,noise,val,E007_HC_SR04_Ultrasonic_Sensor__WhatsApp Image 2026-08-11 at 6.03.31 PM (2).jpg,17,HC SR04 Ultrasonic Sensor,Gas Sensor MQ6,0.7549377679824829,0.7462826569875082,0.008655110994974735,True,False,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__IMG_2269.jpg,0,N20 Mini Micro Metal Gear,N20 Micro Metal Gear Motor,0.9089589715003967,0.8577702641487122,0.05118870735168457,True,False,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__IMG_6036.jpg,0,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.8793571591377258,0.7688279747962952,0.11052918434143066,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,0,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.9280293981234232,0.839414378007253,0.08861502011617017,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,1,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.9327310919761658,0.8746430079142252,0.05808808406194055,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,2,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.9125742514928182,0.829770545164744,0.08280370632807421,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,3,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.9472171664237976,0.8479644060134888,0.09925276041030884,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,4,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.9220619996388754,0.848213275273641,0.07384872436523438,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,5,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.948109487692515,0.8482841650644938,0.09982532262802124,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,6,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.936868151028951,0.8746790289878845,0.062189122041066525,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,7,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.9270454446474711,0.9082840879758199,0.01876135667165113,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,8,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.9203603068987528,0.9085951447486877,0.011765162150065067,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,9,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.9353836178779602,0.8662466605504354,0.06913695732752478,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,10,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.9517960151036581,0.8354264696439108,0.11636954545974731,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,11,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.9458479086558024,0.8637683788935343,0.08207952976226807,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,12,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.8839676976203918,0.8574432333310446,0.026524464289347294,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,13,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.8241492907206217,0.7820899883906046,0.04205930233001709,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,14,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.9256601333618164,0.8567595879236857,0.06890054543813073,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,15,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.9209365447362264,0.8487219413121542,0.07221460342407227,True,True,True
+stamped,noise,val,E008_N20_Mini_Micro_Metal_Gear__WhatsApp Image 2026-08-12 at 10.37.13 AM (1).jpg,16,N20 Mini Micro Metal Gear,N20 Mini Micro Metal Gear,0.9317324161529541,0.8404990434646606,0.09123337268829346,True,True,True
+stamped,noise,val,E009_DC_Motor_3V__IMG_2265.jpg,0,DC Motor 3 V,DC Motor 3 V,0.8867998123168945,0.7883621255556742,0.09843768676122033,True,True,True
+stamped,noise,val,E009_DC_Motor_3V__IMG_2267.jpg,0,DC Motor 3 V,DC Motor 3 V,0.8177179098129272,0.7258860270182291,0.09183188279469812,True,True,True
+stamped,noise,val,E009_DC_Motor_3V__WhatsApp Image 2026-08-11 at 6.05.12 PM (1).jpg,0,DC Motor 3 V,DC Motor 3 V,0.916468620300293,0.8073769211769104,0.10909169912338257,True,True,True
+stamped,noise,val,E010_N20_Micro_Metal_Gear_Motor__IMG_2272.jpg,0,N20 Micro Metal Gear Motor,N20 Mini Micro Metal Gear,0.919061521689097,0.8627219398816427,0.05633958180745435,True,False,True
+stamped,noise,val,E011_DHT11_Temperature_and_humidity__IMG_2297.jpg,0,DHT11 Temperature and humidity,DHT11 Temperature and humidity,0.952224870522817,0.8730133573214213,0.07921151320139574,True,True,True
+stamped,noise,val,E011_DHT11_Temperature_and_humidity__IMG_2298.jpg,0,DHT11 Temperature and humidity,DHT11 Temperature and humidity,0.9661081035931905,0.8853649695714315,0.08074313402175903,True,True,True
+stamped,noise,val,E011_DHT11_Temperature_and_humidity__IMG_2357.jpg,0,DHT11 Temperature and humidity,DHT11 Temperature and humidity,0.965912401676178,0.8886300524075826,0.07728234926859534,True,True,True
+stamped,noise,val,E011_DHT11_Temperature_and_humidity__IMG_6032.jpg,0,DHT11 Temperature and humidity,DHT11 Temperature and humidity,0.9449530641237894,0.8707336187362671,0.07421944538752234,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.11 PM (1).jpg,0,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9542408188184103,0.9010003407796224,0.05324047803878784,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.11 PM (1).jpg,1,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8822775284449259,0.8391977747281393,0.04307975371678663,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.11 PM (1).jpg,2,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8800607721010844,0.8074632088343302,0.07259756326675415,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.11 PM (1).jpg,3,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9326578577359518,0.8847090204556783,0.04794883728027344,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.11 PM (1).jpg,4,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9114280343055725,0.8633632659912109,0.04806476831436157,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.11 PM (1).jpg,5,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9278937180836996,0.9023381471633911,0.025555570920308468,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.11 PM (1).jpg,6,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.934912105401357,0.8623399337132772,0.07257217168807983,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.11 PM (1).jpg,7,Infrared IR Proximity Sensor module,Arduino Uno,0.8749502102533976,0.8602896928787231,0.014660517374674442,True,False,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.11 PM (1).jpg,8,Infrared IR Proximity Sensor module,DHT11 Temperature and humidity,0.8374584714571635,0.789659837881724,0.04779863357543945,True,False,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.11 PM (1).jpg,9,Infrared IR Proximity Sensor module,DHT11 Temperature and humidity,0.8602768977483114,0.8412265777587891,0.019050319989522335,True,False,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.11 PM (1).jpg,10,Infrared IR Proximity Sensor module,DHT11 Temperature and humidity,0.8890370925267538,0.8852828741073608,0.0037542184193929407,True,False,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.11 PM (1).jpg,11,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9404658675193787,0.8788724541664124,0.06159341335296631,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.11 PM (1).jpg,12,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9239705006281534,0.9085689385732015,0.015401562054951912,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,0,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.941107173760732,0.9002582629521688,0.04084891080856323,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,1,Infrared IR Proximity Sensor module,Arduino Uno,0.7456261118253072,0.7281427979469299,0.017483313878377316,True,False,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,2,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9240553776423136,0.875530739625295,0.04852463801701856,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,3,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9208227396011353,0.8896126945813497,0.031210045019785526,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,4,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8771476745605469,0.8425956765810648,0.03455199797948205,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,5,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.916368325551351,0.8800309697786967,0.03633735577265429,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,6,Infrared IR Proximity Sensor module,Arduino Uno,0.8520754973093668,0.836991568406423,0.015083928902943855,True,False,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,7,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8642751773198446,0.8584882815678915,0.005786895751953125,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,8,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.940928320089976,0.8984353542327881,0.04249296585718787,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,9,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9438215494155884,0.8999741673469543,0.04384738206863403,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,10,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9109737475713094,0.8835479021072388,0.027425845464070675,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,11,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8967630863189697,0.8737425804138184,0.023020505905151367,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,12,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9538800319035848,0.9048900405565897,0.04898999134699511,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,13,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9083669185638428,0.878572424252828,0.029794494311014774,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.13 PM (2).jpg,14,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8973320921262106,0.8520465691884359,0.04528552293777466,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.14 PM.jpg,0,Infrared IR Proximity Sensor module,DHT11 Temperature and humidity,0.8469487627347311,0.8419028917948405,0.005045870939890618,True,False,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM (1).jpg,0,Infrared IR Proximity Sensor module,DHT11 Temperature and humidity,0.8761774698893229,0.8106613159179688,0.06551615397135413,True,False,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM (1).jpg,1,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9510085582733154,0.913167675336202,0.03784088293711341,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM (1).jpg,2,Infrared IR Proximity Sensor module,Rocker Switch 2pin Black,0.7692186832427979,0.7595994075139364,0.009619275728861454,True,False,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM (1).jpg,3,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9087405403455099,0.8711557586987814,0.037584781646728516,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM (1).jpg,4,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8529714743296305,0.8399732907613119,0.012998183568318611,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM (1).jpg,5,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9229647715886434,0.8891812364260355,0.0337835351626079,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM (1).jpg,6,Infrared IR Proximity Sensor module,Arduino Uno,0.8746254046758016,0.8638529777526855,0.010772426923116085,True,False,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM (1).jpg,7,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.938155730565389,0.8936923344930013,0.044463396072387695,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM (1).jpg,8,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9323710401852926,0.9007227619489034,0.03164827823638916,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM (1).jpg,9,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8222919702529907,0.817110518614451,0.005181451638539669,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM (1).jpg,10,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.8757476409276327,0.8614319562911987,0.014315684636433956,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM (1).jpg,11,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9161874055862427,0.8715059558550516,0.044681449731191036,True,True,True
+stamped,noise,val,E012_Infrared_IR_Proximity_Sensor_module__WhatsApp Image 2026-08-11 at 6.03.15 PM (1).jpg,12,Infrared IR Proximity Sensor module,Infrared IR Proximity Sensor module,0.9267341295878092,0.8876341780026754,0.039099951585133796,True,True,True
+stamped,noise,val,E013_Sound_Sensor__IMG_2242.jpg,0,Sound Sensor,Sound Sensor,0.9537954330444336,0.8883978525797526,0.06539758046468103,True,True,True
+stamped,noise,val,E013_Sound_Sensor__IMG_2288.jpg,0,Sound Sensor,Sound Sensor,0.8827094038327535,0.7778365015983582,0.10487290223439538,True,True,True
+stamped,noise,val,E013_Sound_Sensor__IMG_6063.jpg,0,Sound Sensor,Sound Sensor,0.9444162448247274,0.8578292926152548,0.08658695220947266,True,True,True
+stamped,noise,val,E014_Lilypad_Coin_Cell_Battery_Holder__IMG_2274.jpg,0,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.7241799235343933,0.5624632239341736,0.16171669960021973,True,True,True
+stamped,noise,val,E014_Lilypad_Coin_Cell_Battery_Holder__IMG_2276.jpg,0,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.8296717604001363,0.566283663113912,0.26338809728622437,True,True,True
+stamped,noise,val,E014_Lilypad_Coin_Cell_Battery_Holder__IMG_6079.jpg,0,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.7745362122853597,0.5379249254862467,0.23661128679911303,True,True,True
+stamped,noise,val,E014_Lilypad_Coin_Cell_Battery_Holder__WhatsApp Image 2026-08-11 at 6.03.20 PM (2).jpg,0,Lilypad Coin Cell Battery Holder,Lilypad Coin Cell Battery Holder,0.9136715133984884,0.8069181044896444,0.106753408908844,True,True,True
+stamped,noise,val,E015_Micro_bit__IMG_6218.jpg,0,Micro bit,Micro bit,0.9146329164505005,0.7393476366996765,0.17528527975082397,True,True,True
+stamped,noise,val,E015_Micro_bit__IMG_6220.jpg,0,Micro bit,Micro bit,0.8945306340853373,0.756803035736084,0.1377275983492533,True,True,True
+stamped,noise,val,E015_Micro_bit__WhatsApp Image 2026-08-11 at 6.05.18 PM (1).jpg,0,Micro bit,Micro bit,0.9122281074523926,0.7702341278394064,0.1419939796129862,True,True,True
+stamped,noise,val,E015_Micro_bit__WhatsApp Image 2026-08-11 at 6.05.18 PM (1).jpg,1,Micro bit,Micro bit,0.928995410601298,0.7885151306788126,0.14048027992248535,True,True,True
+stamped,noise,val,E015_Micro_bit__WhatsApp Image 2026-08-11 at 6.05.18 PM (1).jpg,2,Micro bit,Micro bit,0.9238614241282145,0.7674135565757751,0.15644786755243933,True,True,True
+stamped,noise,val,E015_Micro_bit__WhatsApp Image 2026-08-11 at 6.05.18 PM (1).jpg,3,Micro bit,Micro bit,0.9256875316301981,0.8120071490605673,0.11368038256963087,True,True,True
+stamped,noise,val,E015_Micro_bit__WhatsApp Image 2026-08-11 at 6.05.18 PM (1).jpg,4,Micro bit,Micro bit,0.8938721021016439,0.8285457889238993,0.06532631317774462,True,True,True
+stamped,noise,val,E015_Micro_bit__WhatsApp Image 2026-08-11 at 6.05.18 PM (1).jpg,5,Micro bit,Micro bit,0.9649657607078552,0.7740737795829773,0.19089198112487793,True,True,True
+stamped,noise,val,E015_Micro_bit__WhatsApp Image 2026-08-11 at 6.05.18 PM (1).jpg,6,Micro bit,Micro bit,0.8945365150769552,0.7875255346298218,0.10701098044713342,True,True,True
+stamped,noise,val,E015_Micro_bit__WhatsApp Image 2026-08-11 at 6.05.18 PM (1).jpg,7,Micro bit,Micro bit,0.8639897108078003,0.8213459451993307,0.04264376560846961,True,True,True
+stamped,noise,val,E015_Micro_bit__WhatsApp Image 2026-08-11 at 6.05.18 PM (1).jpg,8,Micro bit,Micro bit,0.9217277765274048,0.7959126631418864,0.12581511338551843,True,True,True
+stamped,noise,val,E015_Micro_bit__WhatsApp Image 2026-08-11 at 6.05.18 PM (1).jpg,9,Micro bit,Micro bit,0.9302418828010559,0.7799082398414612,0.15033364295959473,True,True,True
+stamped,noise,val,E016_CR2032_battery_holder__IMG_6174.jpg,0,CR2032 battery holder,CR2032 battery holder,0.8493526379267374,0.7671763102213541,0.0821763277053833,True,True,True
+stamped,noise,val,E016_CR2032_battery_holder__WhatsApp Image 2026-08-11 at 6.05.24 PM (1).jpg,0,CR2032 battery holder,CR2032 battery holder,0.7843167781829834,0.7103331486384074,0.07398362954457605,True,True,True
+stamped,noise,val,E016_CR2032_battery_holder__WhatsApp Image 2026-08-11 at 6.05.24 PM (1).jpg,1,CR2032 battery holder,DC Motor 3 V,0.8093713124593099,0.7835309108098348,0.025840401649475098,True,False,True
+stamped,noise,val,E016_CR2032_battery_holder__WhatsApp Image 2026-08-11 at 6.05.24 PM (1).jpg,2,CR2032 battery holder,Paper Clip,0.8052747249603271,0.8006082971890768,0.00466642777125037,True,False,False
+stamped,noise,val,E017_RC522_RFID_Card_Reader__IMG_2346.jpg,0,RC522 RFID Card Reader,RC522 RFID Card Reader,0.9551900823911031,0.7621800502141317,0.19301003217697144,True,True,True
+stamped,noise,val,E017_RC522_RFID_Card_Reader__WhatsApp Image 2026-08-11 at 6.05.06 PM (2).jpg,0,RC522 RFID Card Reader,RC522 RFID Card Reader,0.9481954177220663,0.7977940042813619,0.15040141344070435,True,True,True
+stamped,noise,val,E017_RC522_RFID_Card_Reader__WhatsApp Image 2026-08-11 at 6.05.06 PM (2).jpg,1,RC522 RFID Card Reader,RC522 RFID Card Reader,0.9487912257512411,0.801380455493927,0.14741077025731408,True,True,True
+stamped,noise,val,E017_RC522_RFID_Card_Reader__WhatsApp Image 2026-08-11 at 6.05.06 PM (2).jpg,2,RC522 RFID Card Reader,HC SR04 Ultrasonic Sensor,0.8636676073074341,0.8605476021766663,0.0031200051307678223,True,False,True
+stamped,noise,val,E017_RC522_RFID_Card_Reader__WhatsApp Image 2026-08-11 at 6.05.06 PM (2).jpg,3,RC522 RFID Card Reader,RC522 RFID Card Reader,0.9449161489804586,0.8082014918327332,0.13671465714772546,True,True,True
+stamped,noise,val,E017_RC522_RFID_Card_Reader__WhatsApp Image 2026-08-11 at 6.05.06 PM (2).jpg,4,RC522 RFID Card Reader,Sound Sensor,0.8375780383745829,0.836210032304128,0.0013680060704548413,True,False,True
+stamped,noise,val,E017_RC522_RFID_Card_Reader__WhatsApp Image 2026-08-11 at 6.05.07 PM.jpg,0,RC522 RFID Card Reader,RC522 RFID Card Reader,0.9533134897549947,0.8325231075286865,0.12079038222630822,True,True,True
+stamped,noise,val,E017_RC522_RFID_Card_Reader__WhatsApp Image 2026-08-11 at 6.05.07 PM.jpg,1,RC522 RFID Card Reader,HC SR04 Ultrasonic Sensor,0.9007838368415833,0.8909671703974406,0.009816666444142697,True,False,True
+stamped,noise,val,E017_RC522_RFID_Card_Reader__WhatsApp Image 2026-08-11 at 6.05.07 PM.jpg,2,RC522 RFID Card Reader,RC522 RFID Card Reader,0.9258233110109965,0.8406367897987366,0.08518652121225989,True,True,True
+stamped,noise,val,E017_RC522_RFID_Card_Reader__WhatsApp Image 2026-08-11 at 6.05.07 PM.jpg,3,RC522 RFID Card Reader,RC522 RFID Card Reader,0.9563279350598654,0.8185317317644755,0.13779620329538989,True,True,True
+stamped,noise,val,E017_RC522_RFID_Card_Reader__WhatsApp Image 2026-08-11 at 6.05.07 PM.jpg,4,RC522 RFID Card Reader,RC522 RFID Card Reader,0.934619148572286,0.8452239632606506,0.08939518531163537,True,True,True
+stamped,noise,val,E017_RC522_RFID_Card_Reader__WhatsApp Image 2026-08-11 at 6.05.07 PM.jpg,5,RC522 RFID Card Reader,HC SR04 Ultrasonic Sensor,0.8858528137207031,0.8715576926867167,0.014295121033986447,True,False,True
+stamped,noise,val,E017_RC522_RFID_Card_Reader__WhatsApp Image 2026-08-11 at 6.05.07 PM.jpg,6,RC522 RFID Card Reader,RC522 RFID Card Reader,0.8828840653101603,0.8573587536811829,0.02552531162897742,True,True,True
+stamped,noise,val,E017_RC522_RFID_Card_Reader__WhatsApp Image 2026-08-11 at 6.05.07 PM.jpg,7,RC522 RFID Card Reader,RC522 RFID Card Reader,0.8666811585426331,0.8618279496828715,0.004853208859761593,True,True,True
+stamped,noise,val,E018_LED_Red__IMG_2253.jpg,0,LED Red,LED Red,0.7587616443634033,0.7277841369311014,0.030977507432301876,True,True,True
+stamped,noise,val,E018_LED_Red__IMG_2313.jpg,0,LED Red,LED Red,0.9024008909861246,0.847968598206838,0.05443229277928663,True,True,True
+stamped,noise,val,E018_LED_Red__WhatsApp Image 2026-08-12 at 10.37.48 AM.jpg,0,LED Red,Light Dependent Resistor LDR,0.9080482522646586,0.9049236377080282,0.0031246145566303785,True,False,True
+stamped,noise,val,E018_LED_Red__WhatsApp Image 2026-08-12 at 10.37.48 AM.jpg,1,LED Red,LED Blue,0.9180333216985067,0.8989479939142863,0.01908532778422045,True,False,True
+stamped,noise,val,E018_LED_Red__WhatsApp Image 2026-08-12 at 10.37.48 AM.jpg,2,LED Red,LED Blue,0.895626982053121,0.8683870434761047,0.02723993857701623,True,False,False
+stamped,noise,val,E019_LED_Blue__IMG_2254.jpg,0,LED Blue,LED Blue,0.7921839753786722,0.7555335362752279,0.03665043910344434,True,True,True
+stamped,noise,val,E019_LED_Blue__IMG_2312.jpg,0,LED Blue,LED Blue,0.8924023906389872,0.872541348139445,0.019861042499542236,True,True,True
+stamped,noise,val,E019_LED_Blue__IMG_2314.jpg,0,LED Blue,LED Blue,0.8749105135599772,0.8630927801132202,0.011817733446756962,True,True,True
+stamped,noise,val,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__IMG_2326.jpg,0,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.9229889512062073,0.848409096399943,0.07457985480626428,True,True,True
+stamped,noise,val,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__IMG_2326.jpg,1,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.8782047033309937,0.814017653465271,0.06418704986572266,True,True,True
+stamped,noise,val,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.02 PM (2).jpg,0,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.8798334995905558,0.8303066690762838,0.04952683051427198,True,True,True
+stamped,noise,val,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.02 PM (2).jpg,1,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.8738215168317159,0.7846008936564127,0.08922062317530322,True,True,True
+stamped,noise,val,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.04 PM.jpg,0,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.9120160142580668,0.8569053212801615,0.05511069297790527,True,True,True
+stamped,noise,val,E020_MAX30102_Heart_Rate_and_Pulse_Oximetry_Sensor__WhatsApp Image 2026-08-11 at 6.05.04 PM.jpg,1,MAX30102 Heart Rate and Pulse Oximetry Sensor,MAX30102 Heart Rate and Pulse Oximetry Sensor,0.9137561321258545,0.8121163249015808,0.10163980722427368,True,True,True
+stamped,noise,val,E021_Soil_Moisture_Level_Sensor__IMG_2334.jpg,0,Soil Moisture Level Sensor,Light Dependent Resistor LDR,0.6250019868214926,0.6215056578318278,0.0034963289896647876,True,False,True
+stamped,noise,val,E021_Soil_Moisture_Level_Sensor__WhatsApp Image 2026-08-11 at 6.03.22 PM.jpg,0,Soil Moisture Level Sensor,Soil Moisture Level Sensor,0.8170398473739624,0.7733577092488607,0.04368213812510169,True,True,True
+stamped,noise,val,E021_Soil_Moisture_Level_Sensor__WhatsApp Image 2026-08-11 at 6.03.22 PM.jpg,1,Soil Moisture Level Sensor,Soil Moisture Level Sensor,0.8127785126368204,0.8015122413635254,0.011266271273295048,True,True,True
+stamped,noise,val,E021_Soil_Moisture_Level_Sensor__WhatsApp Image 2026-08-11 at 6.03.22 PM.jpg,2,Soil Moisture Level Sensor,Soil Moisture Level Sensor,0.8267419139544169,0.759330670038859,0.06741124391555786,True,True,True
+stamped,noise,val,E021_Soil_Moisture_Level_Sensor__WhatsApp Image 2026-08-11 at 6.03.22 PM.jpg,3,Soil Moisture Level Sensor,Soil Moisture Level Sensor,0.8365384340286255,0.7950125336647034,0.04152590036392212,True,True,True
+stamped,noise,val,E021_Soil_Moisture_Level_Sensor__WhatsApp Image 2026-08-11 at 6.03.22 PM.jpg,4,Soil Moisture Level Sensor,Soil Moisture Level Sensor,0.7803340752919515,0.7518110871315002,0.02852298816045129,True,True,True
+stamped,noise,val,E021_Soil_Moisture_Level_Sensor__WhatsApp Image 2026-08-11 at 6.03.23 PM (1).jpg,0,Soil Moisture Level Sensor,Soil Moisture Level Sensor,0.9200104673703512,0.8528781334559122,0.06713233391443896,True,True,True
+stamped,noise,val,E021_Soil_Moisture_Level_Sensor__WhatsApp Image 2026-08-11 at 6.03.23 PM (1).jpg,1,Soil Moisture Level Sensor,Soil Moisture Level Sensor,0.8596290946006775,0.8509984016418457,0.008630692958831787,True,True,True
+stamped,noise,val,E021_Soil_Moisture_Level_Sensor__WhatsApp Image 2026-08-11 at 6.03.23 PM (1).jpg,2,Soil Moisture Level Sensor,Soil Moisture Level Sensor,0.8695549964904785,0.7949729959170023,0.07458200057347619,True,True,True
+stamped,noise,val,E021_Soil_Moisture_Level_Sensor__WhatsApp Image 2026-08-11 at 6.03.23 PM (1).jpg,3,Soil Moisture Level Sensor,Resistor 220,0.8351454337437948,0.8304183681805929,0.004727065563201904,True,False,True
+stamped,noise,val,E022_Rocker_Switch_6pin__IMG_6237.jpg,0,Rocker Switch 6pin,Rocker Switch 6pin,0.8935692310333252,0.7824079791704813,0.11116125186284387,True,True,True
+stamped,noise,val,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-11 at 6.03.27 PM (2).jpg,0,Rocker Switch 6pin,Rocker Switch 6pin,0.8736233512560526,0.8591599464416504,0.014463404814402225,True,True,True
+stamped,noise,val,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-12 at 11.07.18 AM (2).jpg,0,Rocker Switch 6pin,Rocker Switch 6pin,0.9578840533892313,0.9473441044489542,0.0105399489402771,True,True,True
+stamped,noise,val,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-12 at 11.07.18 AM (2).jpg,1,Rocker Switch 6pin,Rocker Switch 6pin,0.9294419288635254,0.9127208590507507,0.016721069812774658,True,True,True
+stamped,noise,val,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-12 at 11.07.18 AM (2).jpg,2,Rocker Switch 6pin,Rocker Switch 6pin,0.9282281398773193,0.9010589718818665,0.02716916799545288,True,True,True
+stamped,noise,val,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-12 at 11.07.18 AM (2).jpg,3,Rocker Switch 6pin,Rocker Switch 6pin,0.848861833413442,0.826497475306193,0.022364358107249016,True,True,True
+stamped,noise,val,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-12 at 11.07.18 AM (2).jpg,4,Rocker Switch 6pin,Rocker Switch 2pin Black,0.8476817409197489,0.8445973793665568,0.0030843615531921387,True,False,True
+stamped,noise,val,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-12 at 11.07.18 AM (2).jpg,5,Rocker Switch 6pin,Rocker Switch 6pin,0.9025839964548746,0.8994107047716776,0.0031732916831970215,True,True,True
+stamped,noise,val,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-12 at 11.07.18 AM (2).jpg,6,Rocker Switch 6pin,Rocker Switch 2pin Black,0.902203381061554,0.8948950171470642,0.007308363914489746,True,False,True
+stamped,noise,val,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-12 at 11.07.18 AM (2).jpg,7,Rocker Switch 6pin,Rocker Switch 6pin,0.9422670801480612,0.9236126144727071,0.018654465675354004,True,True,True
+stamped,noise,val,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-12 at 11.07.18 AM (2).jpg,8,Rocker Switch 6pin,Rocker Switch 2pin Black,0.9298612872759501,0.917425791422526,0.012435495853424072,True,False,True
+stamped,noise,val,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-12 at 11.07.18 AM (2).jpg,9,Rocker Switch 6pin,Rocker Switch 2pin Black,0.8942026694615682,0.870950977007548,0.023251692454020256,True,False,True
+stamped,noise,val,E022_Rocker_Switch_6pin__WhatsApp Image 2026-08-12 at 11.07.18 AM (2).jpg,10,Rocker Switch 6pin,Rocker Switch 6pin,0.9098296364148458,0.9009136160214742,0.008916020393371582,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__IMG_2250.jpg,0,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.782778819402059,0.7560471296310425,0.026731689771016476,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__IMG_2308.jpg,0,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9345633188883463,0.8982096314430237,0.036353687445322636,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,0,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9550105333328247,0.8907670974731445,0.06424343585968018,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,1,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9260438481966654,0.8764856259028116,0.04955822229385376,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,2,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9436779220898946,0.8932995001475016,0.05037842194239306,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,3,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9469793836275736,0.9011109868685404,0.0458683967590332,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,4,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.929515024026235,0.8982579708099365,0.03125705321629846,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,5,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9461237788200378,0.8743147253990173,0.07180905342102051,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,6,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9427309036254883,0.8738401532173157,0.06889075040817261,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,7,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9052994648615519,0.8835996389389038,0.021699825922648075,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,8,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9532310366630554,0.8902537822723389,0.06297725439071655,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,9,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.911643922328949,0.8783607880274454,0.033283134301503536,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,10,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9448017279307047,0.8702401518821716,0.07456157604853308,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,11,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9544021487236023,0.916094442208608,0.038307706514994266,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,12,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.934856653213501,0.8809871673583984,0.05386948585510254,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,13,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.898110568523407,0.8255239129066467,0.07258665561676025,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,14,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9528961181640625,0.9199055035909017,0.03299061457316077,True,True,True
+stamped,noise,val,E023_Rocker_Switch_2pin_Black__WhatsApp Image 2026-08-11 at 6.03.29 PM (2).jpg,15,Rocker Switch 2pin Black,Rocker Switch 2pin Black,0.9172297517458597,0.8942843675613403,0.022945384184519413,True,True,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__IMG_6205.jpg,0,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.8136331637700399,0.75450732310613,0.05912584066390991,True,True,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.15 PM.jpg,0,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.907215416431427,0.8619629144668579,0.04525250196456909,True,True,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.15 PM.jpg,1,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.9053866465886434,0.8665021260579427,0.038884520530700684,True,True,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.15 PM.jpg,2,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.8929605682690939,0.8525269428888956,0.040433625380198235,True,True,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.15 PM.jpg,3,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.8894738157590231,0.8306398193041483,0.05883399645487475,True,True,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.15 PM.jpg,4,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.9243141214052836,0.8996090094248453,0.024705111980438232,True,True,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.15 PM.jpg,5,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.8695399165153503,0.8486113349596659,0.020928581555684445,True,True,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.15 PM.jpg,6,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.8886749744415283,0.874423086643219,0.014251887798309326,True,True,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.15 PM.jpg,7,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.9055375059445699,0.8871703942616781,0.018367111682891846,True,True,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.15 PM.jpg,8,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.8549508651097616,0.8308797081311544,0.024071156978607178,True,True,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.15 PM.jpg,9,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.8415625095367432,0.832716723283132,0.00884578625361121,True,True,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.15 PM.jpg,10,Light Dependent Resistor LDR,LED Blue,0.8239374955495199,0.8226178089777628,0.0013196865717570727,True,False,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.15 PM.jpg,11,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.8317124247550964,0.8179155389467875,0.013796885808308956,True,True,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.15 PM.jpg,12,Light Dependent Resistor LDR,LED Blue,0.84701540072759,0.8426593542098999,0.00435604651769006,True,False,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.06.15 PM.jpg,13,Light Dependent Resistor LDR,Light Dependent Resistor LDR,0.8966811100641886,0.8670535484949747,0.029627561569213867,True,True,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.07.13 PM.jpg,0,Light Dependent Resistor LDR,Resistor 220,0.8534040649731954,0.8150448004404703,0.03835926453272509,True,False,False
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.07.13 PM.jpg,1,Light Dependent Resistor LDR,Resistor 220,0.8446295261383057,0.8387894630432129,0.0058400630950927734,True,False,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.07.13 PM.jpg,2,Light Dependent Resistor LDR,Resistor 220,0.8047030170758566,0.7917290329933167,0.012973984082539913,True,False,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.07.13 PM.jpg,3,Light Dependent Resistor LDR,Resistor 220,0.8407804369926453,0.8112199902534485,0.029560446739196777,True,False,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.07.13 PM.jpg,4,Light Dependent Resistor LDR,LED Blue,0.8770473400751749,0.8708308339118958,0.0062165061632791785,True,False,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.07.13 PM.jpg,5,Light Dependent Resistor LDR,Rocker Switch 2pin Black,0.8069261511166891,0.7985316117604574,0.00839453935623169,True,False,False
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.07.13 PM.jpg,6,Light Dependent Resistor LDR,Arduino Uno,0.8017041683197021,0.7830455104509989,0.018658657868703243,True,False,False
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.07.13 PM.jpg,7,Light Dependent Resistor LDR,Resistor 220,0.7631246248881022,0.7582756479581197,0.004848976929982429,True,False,False
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.07.13 PM.jpg,8,Light Dependent Resistor LDR,Arduino Uno,0.8439805507659912,0.8394451936086019,0.004535357157389286,True,False,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.07.13 PM.jpg,9,Light Dependent Resistor LDR,Arduino Uno,0.7841801643371582,0.7763891816139221,0.007790982723236084,True,False,False
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.07.13 PM.jpg,10,Light Dependent Resistor LDR,Rocker Switch 2pin Black,0.8043206532796224,0.785910427570343,0.018410225709279415,True,False,False
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.07.13 PM.jpg,11,Light Dependent Resistor LDR,Resistor 220,0.8956018686294556,0.8269010782241821,0.06870079040527344,True,False,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.07.13 PM.jpg,12,Light Dependent Resistor LDR,Arduino Uno,0.8529707590738932,0.8181524674097697,0.034818291664123535,True,False,True
+stamped,noise,val,E024_Light_Dependent_Resistor_LDR__WhatsApp Image 2026-08-11 at 6.07.13 PM.jpg,13,Light Dependent Resistor LDR,Resistor 220,0.9028386076291403,0.8538129727045695,0.04902563492457079,True,False,True
+stamped,noise,val,E025_Resistor_220__IMG_6208.jpg,0,Resistor 220,Resistor 220,0.8410423596700033,0.7319889863332113,0.10905337333679199,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,0,Resistor 220,Resistor 220,0.9026867945988973,0.82148810227712,0.08119869232177734,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,1,Resistor 220,Resistor 220,0.8401673833529154,0.7529565294583639,0.08721085389455152,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,2,Resistor 220,Resistor 220,0.9358385999997457,0.8681118488311768,0.06772675116856897,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,3,Resistor 220,Resistor 220,0.9102652271588644,0.8026368618011475,0.10762836535771692,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,4,Resistor 220,Resistor 220,0.9255183339118958,0.8015745878219604,0.1239437460899353,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,5,Resistor 220,Resistor 220,0.9173275033632914,0.7864696184794108,0.13085788488388062,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,6,Resistor 220,Resistor 220,0.8976190884908041,0.8468168576558431,0.05080223083496094,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,7,Resistor 220,Resistor 220,0.9260402321815491,0.869931717713674,0.056108514467875126,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,8,Resistor 220,Resistor 220,0.9159318606058756,0.8430495659510294,0.07288229465484619,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,9,Resistor 220,Resistor 220,0.9428227345148722,0.8818803628285726,0.06094237168629957,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,10,Resistor 220,Resistor 220,0.9209461410840353,0.8748481074968973,0.04609803358713793,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,11,Resistor 220,Resistor 220,0.9230385025342306,0.7968639532725016,0.126174549261729,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,12,Resistor 220,Resistor 220,0.9004429777463278,0.7997448245684305,0.10069815317789721,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,13,Resistor 220,Resistor 220,0.9361049135526022,0.8689759771029154,0.06712893644968676,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,14,Resistor 220,Resistor 220,0.9285735090573629,0.8348416487375895,0.09373186031977343,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-11 at 6.06.23 PM (2).jpg,15,Resistor 220,Resistor 220,0.9175376097361246,0.8050012787183126,0.11253633101781202,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.42 AM.jpg,0,Resistor 220,Resistor 220,0.9549813071886698,0.8356382449467977,0.11934306224187208,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.42 AM.jpg,1,Resistor 220,Resistor 220,0.9473761717478434,0.8210093776384989,0.12636679410934448,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.42 AM.jpg,2,Resistor 220,Resistor 220,0.8854865034421285,0.7566014925638834,0.1288850108782451,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.42 AM.jpg,3,Resistor 220,Resistor 220,0.8956859310468038,0.813128391901652,0.08255753914515185,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.42 AM.jpg,4,Resistor 220,Resistor 220,0.944420595963796,0.8367847204208374,0.10763587554295861,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.42 AM.jpg,5,Resistor 220,Resistor 220,0.9246450265248617,0.8010105888048807,0.12363443771998095,True,True,True
+stamped,noise,val,E025_Resistor_220__WhatsApp Image 2026-08-12 at 10.37.42 AM.jpg,6,Resistor 220,Resistor 220,0.9135467211405436,0.83149786790212,0.08204885323842359,True,True,True
+stamped,noise,val,E026_Jumper_Wire_M_M__IMG_2247.jpg,0,Jumper Wire M M,Jumper Wire M M,0.7913104891777039,0.7420727213223776,0.0492377678553263,True,True,True
+stamped,noise,val,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.07 PM (2).jpg,0,Jumper Wire M M,Jumper Wire M M,0.9951681693394979,0.9429598848025004,0.05220828453699755,True,True,True
+stamped,noise,val,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.07 PM (2).jpg,1,Jumper Wire M M,Jumper Wire M M,0.9817120830217997,0.9150376121203104,0.06667447090148926,True,True,True
+stamped,noise,val,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.07 PM (2).jpg,2,Jumper Wire M M,Jumper Wire M M,0.9862287441889445,0.9217724204063416,0.06445632378260291,True,True,True
+stamped,noise,val,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.07 PM (2).jpg,3,Jumper Wire M M,Jumper Wire M M,0.9157757759094238,0.7630232771237692,0.15275249878565467,True,True,True
+stamped,noise,val,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.07 PM (2).jpg,4,Jumper Wire M M,Jumper Wire M M,0.9469245274861654,0.8824506203333536,0.06447390715281176,True,True,True
+stamped,noise,val,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.09 PM (1)(1).jpg,0,Jumper Wire M M,Jumper Wire M M,0.9347775379816691,0.9220914443333944,0.012686093648274666,True,True,True
+stamped,noise,val,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.09 PM (1)(1).jpg,1,Jumper Wire M M,Jumper Wire M F,0.9532222350438436,0.9498335719108582,0.00338866313298547,True,False,True
+stamped,noise,val,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.09 PM (1)(1).jpg,2,Jumper Wire M M,Jumper Wire M F,0.956114927927653,0.9546070297559103,0.0015078981717426831,True,False,True
+stamped,noise,val,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.09 PM (1)(1).jpg,3,Jumper Wire M M,Jumper Wire M F,0.9529033501942953,0.951972246170044,0.0009311040242513391,True,False,True
+stamped,noise,val,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.09 PM (1)(1).jpg,4,Jumper Wire M M,Jumper Wire M M,0.9118959903717041,0.8868459860483805,0.025050004323323605,True,True,True
+stamped,noise,val,E026_Jumper_Wire_M_M__WhatsApp Image 2026-08-11 at 6.07.09 PM (1)(1).jpg,5,Jumper Wire M M,Jumper Wire M M,0.9654182195663452,0.9562839865684509,0.009134232997894287,True,True,True
+stamped,noise,val,E027_Jumper_Wire_M_F__IMG_6202.jpg,0,Jumper Wire M F,Jumper Wire M F,0.8261411587397257,0.7793380618095398,0.04680309693018592,True,True,True
+stamped,noise,val,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.05 PM (2).jpg,0,Jumper Wire M F,Jumper Wire M M,0.9824391603469849,0.9682563742001852,0.014182786146799686,True,False,True
+stamped,noise,val,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.05 PM (2).jpg,1,Jumper Wire M F,Jumper Wire M M,0.9866936206817627,0.9814151525497437,0.005278468132019043,True,False,True
+stamped,noise,val,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.05 PM (2).jpg,2,Jumper Wire M F,Jumper Wire M M,0.9836787382761637,0.9622484048207601,0.021430333455403572,True,False,True
+stamped,noise,val,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.05 PM (2).jpg,3,Jumper Wire M F,Jumper Wire M M,0.9916083415349325,0.9866849780082703,0.004923363526662228,True,False,True
+stamped,noise,val,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.05 PM (2).jpg,4,Jumper Wire M F,Jumper Wire M M,0.9899965524673462,0.9784049987792969,0.011591553688049316,True,False,True
+stamped,noise,val,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.05 PM (2).jpg,5,Jumper Wire M F,Jumper Wire M M,0.9837498466173807,0.9771982034047445,0.006551643212636238,True,False,True
+stamped,noise,val,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.05 PM (2).jpg,6,Jumper Wire M F,Jumper Wire M F,0.9608888626098633,0.9570150772730509,0.0038737853368123742,True,True,True
+stamped,noise,val,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.05 PM (2).jpg,7,Jumper Wire M F,Jumper Wire M M,0.968998908996582,0.935013989607493,0.033984919389088986,True,False,True
+stamped,noise,val,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.05 PM (2).jpg,8,Jumper Wire M F,Jumper Wire M M,0.9797853231430054,0.9445284406344095,0.03525688250859582,True,False,True
+stamped,noise,val,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.09 PM.jpg,0,Jumper Wire M F,Jumper Wire M F,0.9745142857233683,0.9563810427983602,0.018133242925008064,True,True,True
+stamped,noise,val,E027_Jumper_Wire_M_F__WhatsApp Image 2026-08-11 at 6.07.09 PM.jpg,1,Jumper Wire M F,Jumper Wire M F,0.971997340520223,0.952367345492045,0.01962999502817797,True,True,True
+stamped,noise,val,E028_HC_SR501_PIR_Motion_Sensor__IMG_2356.jpg,0,HC SR501 PIR Motion Sensor,HC SR501 PIR Motion Sensor,0.9405349691708883,0.6338040232658386,0.3067309459050497,True,True,True
+stamped,noise,val,E028_HC_SR501_PIR_Motion_Sensor__IMG_6142.jpg,0,HC SR501 PIR Motion Sensor,HC SR501 PIR Motion Sensor,0.9296200275421143,0.6315228144327799,0.29809721310933435,True,True,True
+stamped,noise,val,E028_HC_SR501_PIR_Motion_Sensor__IMG_6145.jpg,0,HC SR501 PIR Motion Sensor,HC SR501 PIR Motion Sensor,0.918438732624054,0.7360976537068685,0.18234107891718543,True,True,True
+stamped,noise,val,E029_Maker_Line_Sensor__IMG_6185.jpg,0,Maker Line Sensor,Maker Line Sensor,0.9376909335454305,0.8797270059585571,0.05796392758687341,True,True,True
+stamped,noise,val,E029_Maker_Line_Sensor__IMG_6186.jpg,0,Maker Line Sensor,Maker Line Sensor,0.8640784025192261,0.7640661597251892,0.10001224279403687,True,True,True
+stamped,noise,val,E029_Maker_Line_Sensor__IMG_6187.jpg,0,Maker Line Sensor,Maker Line Sensor,0.8982719580332438,0.7984755436579386,0.09979641437530518,True,True,True
+stamped,noise,val,E030_16_2_LCD_Display__IMG_6246.jpg,0,16 2 LCD Display,16 2 LCD Display,0.8959574699401855,0.848091701666514,0.047865768273671505,True,True,True
+stamped,noise,val,E030_16_2_LCD_Display__WhatsApp Image 2026-08-11 at 6.06.27 PM (2).jpg,0,16 2 LCD Display,16 2 LCD Display,0.9576200246810913,0.8082680503527323,0.149351974328359,True,True,True
+stamped,noise,val,E030_16_2_LCD_Display__WhatsApp Image 2026-08-11 at 6.06.27 PM (2).jpg,1,16 2 LCD Display,16 2 LCD Display,0.9811244606971741,0.9061688780784607,0.07495558261871338,True,True,True
+stamped,noise,val,E030_16_2_LCD_Display__WhatsApp Image 2026-08-11 at 6.06.27 PM (2).jpg,2,16 2 LCD Display,16 2 LCD Display,0.9801678856213888,0.9116974870363871,0.0684703985850017,True,True,True
+stamped,noise,val,E030_16_2_LCD_Display__WhatsApp Image 2026-08-11 at 6.06.27 PM (2).jpg,3,16 2 LCD Display,16 2 LCD Display,0.9740663369496664,0.8843556642532349,0.08971067269643151,True,True,True
+stamped,noise,val,E030_16_2_LCD_Display__WhatsApp Image 2026-08-11 at 6.06.27 PM (2).jpg,4,16 2 LCD Display,16 2 LCD Display,0.9755781094233195,0.8756786584854126,0.09989945093790686,True,True,True
+stamped,noise,val,E030_16_2_LCD_Display__WhatsApp Image 2026-08-11 at 6.06.27 PM (2).jpg,5,16 2 LCD Display,16 2 LCD Display,0.9569791754086813,0.8790525595347086,0.07792661587397265,True,True,True
+stamped,noise,val,E030_16_2_LCD_Display__WhatsApp Image 2026-08-12 at 10.37.15 AM.jpg,0,16 2 LCD Display,syringes 60ml,0.7721553047498068,0.7605931957562765,0.011562108993530273,True,False,False
+stamped,noise,val,E030_16_2_LCD_Display__WhatsApp Image 2026-08-12 at 10.37.15 AM.jpg,1,16 2 LCD Display,16 2 LCD Display,0.7949073115984598,0.7289599776268005,0.0659473339716593,True,True,True
+stamped,noise,val,E030_16_2_LCD_Display__WhatsApp Image 2026-08-12 at 10.37.15 AM.jpg,2,16 2 LCD Display,16 2 LCD Display,0.802751382191976,0.791202982266744,0.011548399925231934,True,True,True
+stamped,noise,val,E030_16_2_LCD_Display__WhatsApp Image 2026-08-12 at 10.37.15 AM.jpg,3,16 2 LCD Display,HC SR04 Ultrasonic Sensor,0.7613569696744283,0.7587821086247762,0.0025748610496520996,True,False,True
+stamped,noise,val,L001_test_tubes__L001_TEST TUBE_L001_11.jpg,0,test tubes,Pen,0.8019094268480936,0.7910075585047404,0.010901868343353271,True,False,False
+stamped,noise,val,L001_test_tubes__L001_TEST TUBE_L001_18.jpg,0,test tubes,test tubes,0.8794084390004476,0.8637699286142985,0.015638510386149163,True,True,True
+stamped,noise,val,L001_test_tubes__L001_TEST TUBE_L001_20.jpg,0,test tubes,test tubes,0.8733130494753519,0.8626556396484375,0.010657409826914432,True,True,True
+stamped,noise,val,L001_test_tubes__L001_TEST TUBE_L001_25.jpg,0,test tubes,pipettes 5ml,0.8829579552014669,0.8743229111035665,0.00863504409790039,True,False,True
+stamped,noise,val,L002_test_tubes_rack__L002_TEST TUBE RACK_L002_03.jpg,0,test tubes rack,test tubes rack,0.919321596622467,0.5662011106808981,0.353120485941569,True,True,True
+stamped,noise,val,L002_test_tubes_rack__L002_TEST TUBE RACK_L002_12.jpg,0,test tubes rack,test tubes rack,0.8761018315951029,0.6028581261634827,0.27324370543162024,True,True,True
+stamped,noise,val,L002_test_tubes_rack__L002_TEST TUBE RACK_L002_15.jpg,0,test tubes rack,test tubes rack,0.6848171353340149,0.5641505916913351,0.12066654364267981,True,True,True
+stamped,noise,val,L002_test_tubes_rack__L002_TEST TUBE RACK_L002_18.jpg,0,test tubes rack,test tubes rack,0.6659511725107828,0.5303988854090372,0.1355522871017456,True,True,True
+stamped,noise,val,L002_test_tubes_rack__L002_TEST TUBE RACK_L002_23.jpg,0,test tubes rack,test tubes rack,0.8634140292803446,0.575268566608429,0.28814546267191565,True,True,True
+stamped,noise,val,L002_test_tubes_rack__L002_TEST TUBE RACK_L002_36.jpg,0,test tubes rack,test tubes rack,0.919684370358785,0.5399827162424723,0.37970165411631274,True,True,True
+stamped,noise,val,L003_beakers_250ml__L003_BEAKERS 250ML_L003_01.jpg,0,beakers 250ml,beakers 250ml,0.9662111600240072,0.8682700991630554,0.09794106086095178,True,True,True
+stamped,noise,val,L003_beakers_250ml__L003_BEAKERS 250ML_L003_09.jpg,0,beakers 250ml,beakers 250ml,0.9079999128977457,0.8475743532180786,0.06042555967966712,True,True,True
+stamped,noise,val,L003_beakers_250ml__L003_BEAKERS 250ML_L003_10.jpg,0,beakers 250ml,beakers 250ml,0.9080687959988912,0.8362429738044739,0.07182582219441735,True,True,True
+stamped,noise,val,L003_beakers_250ml__L003_BEAKERS 250ML_L003_18.jpg,0,beakers 250ml,beakers 250ml,0.9271532893180847,0.8838995297749838,0.043253759543100956,True,True,True
+stamped,noise,val,L003_beakers_250ml__L003_BEAKERS 250ML_L003_22.jpg,0,beakers 250ml,beakers 250ml,0.8963276942571005,0.8114339709281921,0.08489372332890832,True,True,True
+stamped,noise,val,L003_beakers_250ml__L003_BEAKERS 250ML_L003_35.jpg,0,beakers 250ml,beakers 250ml,0.9047913750012716,0.819686233997345,0.08510514100392663,True,True,True
+stamped,noise,val,L003_beakers_250ml__L003_BEAKERS 250ML_L003_39.jpg,0,beakers 250ml,beakers 250ml,0.9011736512184143,0.8422164718310038,0.05895717938741052,True,True,True
+stamped,noise,val,L003_beakers_250ml__L003_BEAKERS 250ML_L003_50.jpg,0,beakers 250ml,beakers 250ml,0.9052934249242147,0.7423895994822184,0.16290382544199633,True,True,True
+stamped,noise,val,L003_beakers_250ml__L003_BEAKERS 250ML_L003_58.jpg,0,beakers 250ml,beakers 250ml,0.9366079370180765,0.7321126063664755,0.20449533065160108,True,True,True
+stamped,noise,val,L004_beakers_1000ml__L004_BEAKER 1000ML_L004_02.jpg,0,beakers 1000ml,beakers 1000ml,0.9194255471229553,0.8480333487192789,0.07139219840367639,True,True,True
+stamped,noise,val,L004_beakers_1000ml__L004_BEAKER 1000ML_L004_06.jpg,0,beakers 1000ml,beakers 250ml,0.8367603421211243,0.8201144337654114,0.01664590835571289,True,False,True
+stamped,noise,val,L004_beakers_1000ml__L004_BEAKER 1000ML_L004_17.jpg,0,beakers 1000ml,beakers 250ml,0.8646104534467062,0.8549251953760783,0.009685258070627922,True,False,True
+stamped,noise,val,L004_beakers_1000ml__L004_BEAKER 1000ML_L004_17.jpg,1,beakers 1000ml,beakers 250ml,0.8842590649922689,0.8260658780733744,0.058193186918894524,True,False,True
+stamped,noise,val,L004_beakers_1000ml__L004_BEAKER 1000ML_L004_17.jpg,2,beakers 1000ml,beakers 250ml,0.8896632591883341,0.8305965463320414,0.059066712856292725,True,False,True
+stamped,noise,val,L004_beakers_1000ml__L004_BEAKER 1000ML_L004_17.jpg,3,beakers 1000ml,beakers 1000ml,0.8155524333318075,0.8147060672442118,0.0008463660875956958,True,True,True
+stamped,noise,val,L004_beakers_1000ml__L004_BEAKER 1000ML_L004_17.jpg,4,beakers 1000ml,beakers 250ml,0.6936977704366049,0.6770163377126058,0.016681432723999023,True,False,True
+stamped,noise,val,L005_conical_flask_1000ML__L005_BEAKER 1000ML_L005_12.jpg,0,conical flask 1000 ML,conical flask 1000 ML,0.9389674067497253,0.8688188989957174,0.07014850775400794,True,True,True
+stamped,noise,val,L005_conical_flask_1000ML__L005_BEAKER 1000ML_L005_30.jpg,0,conical flask 1000 ML,conical flask 1000 ML,0.9563785195350647,0.8920242190361023,0.0643543004989624,True,True,True
+stamped,noise,val,L005_conical_flask_1000ML__L005_BEAKER 1000ML_L005_33.jpg,0,conical flask 1000 ML,conical flask 1000 ML,0.9349112113316854,0.8558753530184428,0.07903585831324267,True,True,True
+stamped,noise,val,L005_conical_flask_1000ML__L005_BEAKER 1000ML_L005_35.jpg,0,conical flask 1000 ML,conical flask 1000 ML,0.9491489132245382,0.8975028594334921,0.05164605379104614,True,True,True
+stamped,noise,val,L005_conical_flask_1000ML__L005_BEAKER 1000ML_L005_36.jpg,0,conical flask 1000 ML,conical flask 1000 ML,0.9571597377459208,0.8932280341784159,0.06393170356750488,True,True,True
+stamped,noise,val,L005_conical_flask_1000ML__L005_BEAKER 1000ML_L005_38.jpg,0,conical flask 1000 ML,conical flask 1000 ML,0.7984859943389893,0.6868996818860372,0.11158631245295203,True,True,True
+stamped,noise,val,L006_conical_flask_5000ml__L006_CONICAL FLASK 5000ML_L006_02.jpg,0,conical flask 5000ml,conical flask 5000ml,0.8272361556688944,0.7304368615150452,0.09679929415384925,True,True,True
+stamped,noise,val,L006_conical_flask_5000ml__L006_CONICAL FLASK 5000ML_L006_05.jpg,0,conical flask 5000ml,conical flask 1000 ML,0.8920269211133321,0.8587049245834351,0.03332199652989709,True,False,True
+stamped,noise,val,L006_conical_flask_5000ml__L006_CONICAL FLASK 5000ML_L006_10.jpg,0,conical flask 5000ml,conical flask 1000 ML,0.7977636655171713,0.7756617665290833,0.02210189898808801,True,False,True
+stamped,noise,val,L007_pipettes_5ml__L007_PIPETTES 5ML_L007_08.jpg,0,pipettes 5ml,pipettes 5ml,0.9721227884292603,0.912106990814209,0.06001579761505127,True,True,True
+stamped,noise,val,L007_pipettes_5ml__L007_PIPETTES 5ML_L007_14.jpg,0,pipettes 5ml,pipettes 5ml,0.9169721603393555,0.8604923486709595,0.056479811668395996,True,True,True
+stamped,noise,val,L007_pipettes_5ml__L007_PIPETTES 5ML_L007_19.jpg,0,pipettes 5ml,pipettes 5ml,0.884943962097168,0.8656265735626221,0.0193173885345459,True,True,True
+stamped,noise,val,L007_pipettes_5ml__L007_PIPETTES 5ML_L007_28.jpg,0,pipettes 5ml,Pen,0.8233426014582316,0.7776889403661092,0.04565366109212232,True,False,True
+stamped,noise,val,L008_pipettes_10ml__L008_PIPETTES 10ML_L008_10.jpg,0,pipettes 10ml,pipettes 10ml,0.9428095618883768,0.9000742236773173,0.04273533821105957,True,True,True
+stamped,noise,val,L008_pipettes_10ml__L008_PIPETTES 10ML_L008_11.jpg,0,pipettes 10ml,pipettes 10ml,0.7794579267501831,0.7790418465932211,0.0004160801569620398,True,True,True
+stamped,noise,val,L008_pipettes_10ml__L008_PIPETTES 10ML_L008_12.jpg,0,pipettes 10ml,Light Dependent Resistor LDR,0.7535836299260458,0.7435199419657389,0.010063687960306877,True,False,False
+stamped,noise,val,L008_pipettes_10ml__L008_PIPETTES 10ML_L008_15.jpg,0,pipettes 10ml,pipettes 10ml,0.8940891822179159,0.8940418759981791,4.730621973680904e-05,True,True,True
+stamped,noise,val,L008_pipettes_10ml__L008_PIPETTES 10ML_L008_34.jpg,0,pipettes 10ml,pipettes 10ml,0.88966304063797,0.8821808894475301,0.007482151190439823,True,True,True
+stamped,noise,val,L009_electric_thermometer__L009_ELECTRIC THERMOMETER_L009_16.jpg,0,electric thermometer,electric thermometer,0.9047455986340841,0.6892383098602295,0.2155072887738546,True,True,True
+stamped,noise,val,L009_electric_thermometer__L009_ELECTRIC THERMOMETER_L009_17.jpg,0,electric thermometer,electric thermometer,0.9069199959437052,0.6299851536750793,0.27693484226862586,True,True,True
+stamped,noise,val,L009_electric_thermometer__L009_ELECTRIC THERMOMETER_L009_19.jpg,0,electric thermometer,electric thermometer,0.8646343151728312,0.7115447521209717,0.1530895630518595,True,True,True
+stamped,noise,val,L009_electric_thermometer__L009_ELECTRIC THERMOMETER_L009_26.jpg,0,electric thermometer,N20 Mini Micro Metal Gear,0.8098918596903483,0.7986129919687907,0.011278867721557617,True,False,False
+stamped,noise,val,L009_electric_thermometer__L009_ELECTRIC THERMOMETER_L009_26.jpg,1,electric thermometer,volumetric flask,0.8055452307065328,0.8000457684199015,0.00549946228663134,True,False,False
+stamped,noise,val,L010_thermometer__L010_THERMOMETER_L010_03.jpg,0,thermometer,thermometer,0.8903020819028219,0.776000459988912,0.11430162191390991,True,True,True
+stamped,noise,val,L010_thermometer__L010_THERMOMETER_L010_12.jpg,0,thermometer,glass rod,0.923006018002828,0.9210488597551981,0.0019571582476298754,True,False,True
+stamped,noise,val,L010_thermometer__L010_THERMOMETER_L010_21.jpg,0,thermometer,thermometer,0.9214588006337484,0.8351277112960815,0.08633108933766687,True,True,True
+stamped,noise,val,L011_gloves__L011_GLOVES_L011_11.jpg,0,gloves,gloves,0.9738895098368326,0.7850387295087179,0.18885078032811475,True,True,True
+stamped,noise,val,L011_gloves__L011_GLOVES_L011_15.jpg,0,gloves,gloves,0.9686338106791178,0.7320761879285177,0.2365576227506001,True,True,True
+stamped,noise,val,L011_gloves__L011_GLOVES_L011_20.jpg,0,gloves,gloves,0.9653534690539042,0.7451217571894327,0.22023171186447144,True,True,True
+stamped,noise,val,L011_gloves__L011_GLOVES_L011_21.jpg,0,gloves,gloves,0.9666285713513693,0.7389059861501058,0.22772258520126343,True,True,True
+stamped,noise,val,L011_gloves__L011_GLOVES_L011_35.jpg,0,gloves,gloves,0.9716890454292297,0.6670047044754028,0.3046843409538269,True,True,True
+stamped,noise,val,L011_gloves__L011_GLOVES_L011_38.jpg,0,gloves,gloves,0.9633987347284952,0.667471726735433,0.29592700799306226,True,True,True
+stamped,noise,val,L012_gloves_LN__L012_GLOVES LN_L012_09.jpg,0,gloves LN,gloves LN,0.9102162718772888,0.7752399841944376,0.1349762876828512,True,True,True
+stamped,noise,val,L012_gloves_LN__L012_GLOVES LN_L012_18.jpg,0,gloves LN,gloves LN,0.903947909673055,0.7629245320955912,0.14102337757746386,True,True,True
+stamped,noise,val,L012_gloves_LN__L012_GLOVES LN_L012_20.jpg,0,gloves LN,gloves LN,0.9190821846326193,0.7889654239018759,0.1301167607307434,True,True,True
+stamped,noise,val,L013_petri_dishes__L013_PETRI DISHES_L013_03.jpg,0,petri dishes,petri dishes,0.8646522164344788,0.6670598387718201,0.1975923776626587,True,True,True
+stamped,noise,val,L013_petri_dishes__L013_PETRI DISHES_L013_16.jpg,0,petri dishes,petri dishes,0.8158381779988607,0.7170469363530477,0.09879124164581299,True,True,True
+stamped,noise,val,L013_petri_dishes__L013_PETRI DISHES_L013_19.jpg,0,petri dishes,petri dishes,0.8616443077723185,0.6909089088439941,0.17073539892832434,True,True,True
+stamped,noise,val,L014_syringes_10ml__L014_SYRINGES 10ML_L014_02.jpg,0,syringes 10ml,syringes 10ml,0.909524937470754,0.8488797744115194,0.06064516305923462,True,True,True
+stamped,noise,val,L014_syringes_10ml__L014_SYRINGES 10ML_L014_19.jpg,0,syringes 10ml,syringes 10ml,0.9455972711245219,0.9216747681299845,0.023922502994537354,True,True,True
+stamped,noise,val,L014_syringes_10ml__L014_SYRINGES 10ML_L014_25.jpg,0,syringes 10ml,syringes 10ml,0.9204488197962443,0.9000241756439209,0.020424644152323368,True,True,True
+stamped,noise,val,L014_syringes_10ml__L014_SYRINGES 10ML_L014_27.jpg,0,syringes 10ml,syringes 10ml,0.9213842153549194,0.8519037961959839,0.06948041915893555,True,True,True
+stamped,noise,val,L014_syringes_10ml__L014_SYRINGES 10ML_L014_32.jpg,0,syringes 10ml,syringes 10ml,0.9701497554779053,0.8768675724665324,0.09328218301137292,True,True,True
+stamped,noise,val,L015_syringes_60ml__L015_SYRINGES 60ML_L015_02.jpg,0,syringes 60ml,syringes 60ml,0.9338449041048685,0.9181675712267557,0.015677332878112793,True,True,True
+stamped,noise,val,L015_syringes_60ml__L015_SYRINGES 60ML_L015_10.jpg,0,syringes 60ml,syringes 60ml,0.9270062247912089,0.8708584705988566,0.056147754192352295,True,True,True
+stamped,noise,val,L015_syringes_60ml__L015_SYRINGES 60ML_L015_13.jpg,0,syringes 60ml,syringes 60ml,0.9394592444101969,0.8959264159202576,0.043532828489939335,True,True,True
+stamped,noise,val,L016_volumetric_flask__L016_VOLUMETRIC FLASK_L016_10.jpg,0,volumetric flask,glass rod,0.8967349727948507,0.8770762284596761,0.01965874433517456,True,False,True
+stamped,noise,val,L016_volumetric_flask__L016_VOLUMETRIC FLASK_L016_13.jpg,0,volumetric flask,volumetric flask,0.9700797200202942,0.8539770841598511,0.11610263586044312,True,True,True
+stamped,noise,val,L016_volumetric_flask__L016_VOLUMETRIC FLASK_L016_21.jpg,0,volumetric flask,volumetric flask,0.9577347040176392,0.8270489176114401,0.1306857864061991,True,True,True
+stamped,noise,val,L017_bunsen_burner__L017_BUNSEN BURNER_L017_08.jpg,0,bunsen burner,bunsen burner,0.9291840195655823,0.5418912967046102,0.38729272286097205,True,True,True
+stamped,noise,val,L017_bunsen_burner__L017_BUNSEN BURNER_L017_16.jpg,0,bunsen burner,bunsen burner,0.9355776707331339,0.5842698613802592,0.35130780935287476,True,True,True
+stamped,noise,val,L017_bunsen_burner__L017_BUNSEN BURNER_L017_21.jpg,0,bunsen burner,bunsen burner,0.9416813254356384,0.5350823601086935,0.40659896532694495,True,True,True
+stamped,noise,val,L018_glass_rod__L018_GLASS ROD_L018_02.jpg,0,glass rod,glass rod,0.7507021427154541,0.7355002959569296,0.01520184675852454,True,True,True
+stamped,noise,val,L018_glass_rod__L018_GLASS ROD_L018_14.jpg,0,glass rod,glass rod,0.9369915127754211,0.9217660427093506,0.015225470066070557,True,True,True
+stamped,noise,val,L018_glass_rod__L018_GLASS ROD_L018_14.jpg,1,glass rod,glue gun stick,0.9200888077418009,0.9200875560442606,1.2516975402832031e-06,True,False,True
+stamped,noise,val,L018_glass_rod__L018_GLASS ROD_L018_19.jpg,0,glass rod,needle,0.8805462320645651,0.8676825960477194,0.012863636016845703,True,False,True
+stamped,noise,val,L018_glass_rod__L018_GLASS ROD_L018_21(1).jpg,0,glass rod,glass rod,0.8493266900380453,0.8446133534113566,0.004713336626688713,True,True,True
+stamped,noise,val,L019_Safety_Goggle__L019_GOGGLE_L019_07.jpg,0,Safety Goggle,Safety Goggle,0.9453808069229126,0.6291753053665161,0.3162055015563965,True,True,True
+stamped,noise,val,L019_Safety_Goggle__L019_GOGGLE_L019_11.jpg,0,Safety Goggle,Safety Goggle,0.8835424582163492,0.5847867329915365,0.29875572522481275,True,True,True
+stamped,noise,val,L019_Safety_Goggle__L019_GOGGLE_L019_26.jpg,0,Safety Goggle,Safety Goggle,0.9349003235499064,0.6567088564236959,0.27819146712621046,True,True,True
+stamped,noise,val,L019_Safety_Goggle__L019_GOGGLE_L019_27.jpg,0,Safety Goggle,Safety Goggle,0.8963626623153687,0.6328674952189127,0.26349516709645593,True,True,True
+stamped,noise,val,L019_Safety_Goggle__L019_GOGGLE_L019_34.jpg,0,Safety Goggle,Safety Goggle,0.8212860425313314,0.6980533599853516,0.12323268254597985,True,True,True
+stamped,noise,val,L019_Safety_Goggle__L019_GOGGLE_L019_35.jpg,0,Safety Goggle,Safety Goggle,0.9051209688186646,0.6632646520932516,0.24185631672541297,True,True,True
+stamped,noise,val,L020_Potassium_Iodide__L020_POTASSIUM IODIDE_L020_03.jpg,0,Potassium Iodide,Strontium Chloride 6 Hydrate AR,0.7356904943784078,0.734029213587443,0.0016612807909648364,True,False,False
+stamped,noise,val,L020_Potassium_Iodide__L020_POTASSIUM IODIDE_L020_08.jpg,0,Potassium Iodide,Potassium Iodide,0.9523534576098124,0.8154974381128947,0.13685601949691772,True,True,True
+stamped,noise,val,L020_Potassium_Iodide__L020_POTASSIUM IODIDE_L020_22.jpg,0,Potassium Iodide,Potassium Iodide,0.9892234802246094,0.8161784410476685,0.17304503917694092,True,True,True
+stamped,noise,val,L020_Potassium_Iodide__L020_POTASSIUM IODIDE_L020_24.jpg,0,Potassium Iodide,Potassium Iodide,0.893349309762319,0.788632353146871,0.104716956615448,True,True,True
+stamped,noise,val,L021_Methylated_Spirit_Solution_95__L021_METHYLATED SPIRIT SOLUTION_L021_05.jpg,0,Methylated Spirit Solution 95,Methylated Spirit Solution 95,0.8534783522288004,0.6112878123919169,0.24219053983688354,True,True,True
+stamped,noise,val,L021_Methylated_Spirit_Solution_95__L021_METHYLATED SPIRIT SOLUTION_L021_14.jpg,0,Methylated Spirit Solution 95,Methylated Spirit Solution 95,0.9713163177172343,0.6651537219683329,0.30616259574890137,True,True,True
+stamped,noise,val,L021_Methylated_Spirit_Solution_95__L021_METHYLATED SPIRIT SOLUTION_L021_17.jpg,0,Methylated Spirit Solution 95,Methylated Spirit Solution 95,0.9585086703300476,0.6704830328623453,0.28802563746770227,True,True,True
+stamped,noise,val,L022_Copper_II_Chloride_2_Hydrate__L022_Copper (II) Chloride 2-Hydrate_L022_01.jpg,0,Copper II Chloride 2 Hydrate,Copper II Chloride 2 Hydrate,0.9481443762779236,0.7621127168337504,0.18603165944417321,True,True,True
+stamped,noise,val,L022_Copper_II_Chloride_2_Hydrate__L022_Copper (II) Chloride 2-Hydrate_L022_17.jpg,0,Copper II Chloride 2 Hydrate,Copper II Chloride 2 Hydrate,0.9535380005836487,0.7617400487263998,0.1917979518572489,True,True,True
+stamped,noise,val,L022_Copper_II_Chloride_2_Hydrate__L022_Copper (II) Chloride 2-Hydrate_L022_19.jpg,0,Copper II Chloride 2 Hydrate,Copper II Chloride 2 Hydrate,0.9261807600657145,0.7641523281733195,0.16202843189239502,True,True,True
+stamped,noise,val,L022_Copper_II_Chloride_2_Hydrate__L022_Copper (II) Chloride 2-Hydrate_L022_21.jpg,0,Copper II Chloride 2 Hydrate,Copper II Chloride 2 Hydrate,0.9614757100741068,0.7493509451548258,0.212124764919281,True,True,True
+stamped,noise,val,L023_Hydrogen_Peroxide_Solution_6__L023_HYDROGEN PEROXIDE SOLUTION 6_L023_01.jpg,0,Hydrogen Peroxide Solution 6,Hydrogen Peroxide Solution 6,0.9709081252415975,0.7363201578458151,0.23458796739578247,True,True,True
+stamped,noise,val,L023_Hydrogen_Peroxide_Solution_6__L023_HYDROGEN PEROXIDE SOLUTION 6_L023_09.jpg,0,Hydrogen Peroxide Solution 6,Hydrogen Peroxide Solution 6,0.954845666885376,0.7303512692451477,0.22449439764022827,True,True,True
+stamped,noise,val,L023_Hydrogen_Peroxide_Solution_6__L023_HYDROGEN PEROXIDE SOLUTION 6_L023_12.jpg,0,Hydrogen Peroxide Solution 6,Hydrogen Peroxide Solution 6,0.9772715369860331,0.748556931813558,0.2287146051724751,True,True,True
+stamped,noise,val,L024_Strontium_Chloride_6_Hydrate_AR__L024_STRONTIUN CHLORIDE 6-HYDRATE AR_L024_05.jpg,0,Strontium Chloride 6 Hydrate AR,Strontium Chloride 6 Hydrate AR,0.8222646911938986,0.6841802398363749,0.13808445135752367,True,True,True
+stamped,noise,val,L024_Strontium_Chloride_6_Hydrate_AR__L024_STRONTIUN CHLORIDE 6-HYDRATE AR_L024_06.jpg,0,Strontium Chloride 6 Hydrate AR,Strontium Chloride 6 Hydrate AR,0.9059175252914429,0.7305984894434611,0.1753190358479818,True,True,True
+stamped,noise,val,L024_Strontium_Chloride_6_Hydrate_AR__L024_STRONTIUN CHLORIDE 6-HYDRATE AR_L024_16.jpg,0,Strontium Chloride 6 Hydrate AR,Copper II Chloride 2 Hydrate,0.7729288339614868,0.7483238180478414,0.02460501591364539,True,False,True
+stamped,noise,val,L024_Strontium_Chloride_6_Hydrate_AR__L024_STRONTIUN CHLORIDE 6-HYDRATE AR_L024_21.jpg,0,Strontium Chloride 6 Hydrate AR,Strontium Chloride 6 Hydrate AR,0.9547573924064636,0.7616322239240011,0.19312516848246253,True,True,True
+stamped,noise,val,L025_Lithium_Chloride__L025_LITHIUM CHLORIDE_L025_09.jpg,0,Lithium Chloride,Copper II Chloride 2 Hydrate,0.7815099159876505,0.7655740181605021,0.015935897827148438,True,False,True
+stamped,noise,val,L025_Lithium_Chloride__L025_LITHIUM CHLORIDE_L025_11.jpg,0,Lithium Chloride,Lithium Chloride,0.93379278977712,0.792635997136434,0.14115679264068604,True,True,True
+stamped,noise,val,L025_Lithium_Chloride__L025_LITHIUM CHLORIDE_L025_18.jpg,0,Lithium Chloride,Lithium Chloride,0.976655105749766,0.8122695287068685,0.16438557704289747,True,True,True
+stamped,noise,val,L026_universal_indicator__L026_UNIVERSAL INDICATOR_L026_06.jpg,0,universal indicator,universal indicator,0.9497014880180359,0.7249787648518881,0.22472272316614783,True,True,True
+stamped,noise,val,L026_universal_indicator__L026_UNIVERSAL INDICATOR_L026_20.jpg,0,universal indicator,universal indicator,0.6628834207852682,0.6532765428225199,0.009606877962748284,True,True,True
+stamped,noise,val,L026_universal_indicator__L026_UNIVERSAL INDICATOR_L026_25.jpg,0,universal indicator,universal indicator,0.9230854113896688,0.6413739323616028,0.28171147902806604,True,True,True
+stamped,noise,val,L026_universal_indicator__L026_UNIVERSAL INDICATOR_L026_27.jpg,0,universal indicator,universal indicator,0.9386438131332397,0.626390814781189,0.3122529983520508,True,True,True
+stamped,noise,val,S001_Pen__IMG_20260810_155407.jpg,0,Pen,Pen,0.9083032409350077,0.7731093764305115,0.13519386450449622,True,True,True
+stamped,noise,val,S001_Pen__IMG_20260810_155407.jpg,1,Pen,Pen,0.9203776915868124,0.8372726043065389,0.08310508728027344,True,True,True
+stamped,noise,val,S001_Pen__IMG_20260810_155407.jpg,2,Pen,Pen,0.8656397461891174,0.7576594154040018,0.1079803307851156,True,True,True
+stamped,noise,val,S001_Pen__IMG_20260810_155407.jpg,3,Pen,Pen,0.8681433002154032,0.6865850885709127,0.18155821164449049,True,True,True
+stamped,noise,val,S001_Pen__IMG_20260810_155407.jpg,4,Pen,Pen,0.8689364393552145,0.6587031682332357,0.21023327112197876,True,True,True
+stamped,noise,val,S001_Pen__IMG_20260810_155407.jpg,5,Pen,Pen,0.9135997692743937,0.7962628404299418,0.1173369288444519,True,True,True
+stamped,noise,val,S001_Pen__IMG_20260810_155407.jpg,6,Pen,Pen,0.8617534240086874,0.833273688952128,0.02847973505655932,True,True,True
+stamped,noise,val,S001_Pen__IMG_20260810_155407.jpg,7,Pen,Pen,0.8472630778948466,0.7419112324714661,0.1053518454233805,True,True,True
+stamped,noise,val,S001_Pen__IMG_20260810_155407.jpg,8,Pen,Pen,0.8403400977452596,0.7460000514984131,0.09434004624684655,True,True,True
+stamped,noise,val,S001_Pen__IMG_20260810_155407.jpg,9,Pen,Pen,0.8830845753351847,0.8506048917770386,0.03247968355814612,True,True,True
+stamped,noise,val,S001_Pen__IMG_20260810_155407.jpg,10,Pen,Pen,0.9098405838012695,0.7763140400250753,0.13352654377619422,True,True,True
+stamped,noise,val,S001_Pen__IMG_20260810_155407.jpg,11,Pen,Pen,0.8761372367540995,0.7883617679278055,0.08777546882629395,True,True,True
+stamped,noise,val,S001_Pen__IMG_20260810_155407.jpg,12,Pen,Pen,0.873034675916036,0.772035559018453,0.10099911689758301,True,True,True
+stamped,noise,val,S001_Pen__IMG_20260810_155407.jpg,13,Pen,Pen,0.8900467356046041,0.607366700967153,0.28268003463745117,True,True,True
+stamped,noise,val,S001_Pen__IMG_4180.jpg,0,Pen,Pen,0.8505998253822327,0.7698490222295126,0.0807508031527201,True,True,True
+stamped,noise,val,S001_Pen__IMG_4180.jpg,1,Pen,Pen,0.8592715660730997,0.7890932361284891,0.0701783299446106,True,True,True
+stamped,noise,val,S001_Pen__IMG_4180.jpg,2,Pen,Pen,0.8531813621520996,0.8326476812362671,0.02053368091583252,True,True,True
+stamped,noise,val,S001_Pen__IMG_4180.jpg,3,Pen,Pen,0.7983364860216776,0.7659128506978353,0.03242363532384229,True,True,True
+stamped,noise,val,S001_Pen__IMG_4181.jpg,0,Pen,Pen,0.8260313868522644,0.8150396347045898,0.01099175214767456,True,True,True
+stamped,noise,val,S001_Pen__IMG_4181.jpg,1,Pen,Pen,0.8340501586596171,0.8229739665985107,0.011076192061106327,True,True,True
+stamped,noise,val,S001_Pen__IMG_4181.jpg,2,Pen,Pen,0.8338095943133036,0.8142394224802653,0.01957017183303833,True,True,True
+stamped,noise,val,S001_Pen__IMG_4181.jpg,3,Pen,Spanner,0.8158802191416422,0.8137781023979187,0.0021021167437235144,True,False,False
+stamped,noise,val,S002_PermanentMarker__IMG_4098.jpg,0,Permanent Marker,Permanent Marker,0.8534418145815531,0.7956288655598959,0.057812949021657234,True,True,True
+stamped,noise,val,S002_PermanentMarker__IMG_4098.jpg,1,Permanent Marker,Permanent Marker,0.9115212559700012,0.8778660297393799,0.03365522623062134,True,True,True
+stamped,noise,val,S002_PermanentMarker__IMG_4098.jpg,2,Permanent Marker,Permanent Marker,0.8826735615730286,0.8326786756515503,0.04999488592147827,True,True,True
+stamped,noise,val,S002_PermanentMarker__IMG_4098.jpg,3,Permanent Marker,Whiteboard Marker,0.8770848512649536,0.8370534578959147,0.04003139336903894,True,False,True
+stamped,noise,val,S002_PermanentMarker__IMG_4098.jpg,4,Permanent Marker,Whiteboard Marker,0.8294694622357687,0.8265483578046163,0.0029211044311523438,True,False,False
+stamped,noise,val,S002_PermanentMarker__IMG_4166.jpg,0,Permanent Marker,Permanent Marker,0.8899101416269938,0.8088958462079366,0.08101429541905714,True,True,True
+stamped,noise,val,S002_PermanentMarker__IMG_4166.jpg,1,Permanent Marker,Permanent Marker,0.8640044331550598,0.7571169336636862,0.10688749949137366,True,True,True
+stamped,noise,val,S002_PermanentMarker__IMG_4166.jpg,2,Permanent Marker,Permanent Marker,0.8566370606422424,0.7850660085678101,0.07157105207443237,True,True,True
+stamped,noise,val,S002_PermanentMarker__IMG_4166.jpg,3,Permanent Marker,Permanent Marker,0.9227198362350464,0.8095348676045736,0.11318496863047278,True,True,True
+stamped,noise,val,S002_PermanentMarker__IMG_4173.jpg,0,Permanent Marker,Permanent Marker,0.8829315106074015,0.8101802070935568,0.07275130351384473,True,True,True
+stamped,noise,val,S002_PermanentMarker__IMG_4173.jpg,1,Permanent Marker,Permanent Marker,0.8795677622159322,0.7727392911911011,0.10682847102483117,True,True,True
+stamped,noise,val,S002_PermanentMarker__IMG_4173.jpg,2,Permanent Marker,Permanent Marker,0.8625982801119486,0.8370946645736694,0.02550361553827918,True,True,True
+stamped,noise,val,S002_PermanentMarker__IMG_4173.jpg,3,Permanent Marker,LED Blue,0.8693883220354716,0.8644486467043558,0.004939675331115723,True,False,True
+stamped,noise,val,S002_PermanentMarker__IMG_4173.jpg,4,Permanent Marker,Light Dependent Resistor LDR,0.8511876662572225,0.836114784081777,0.015072882175445557,True,False,False
+stamped,noise,val,S002_PermanentMarker__IMG_4173.jpg,5,Permanent Marker,Pen,0.832383930683136,0.8211720188458761,0.011211911837259891,True,False,True
+stamped,noise,val,S002_PermanentMarker__IMG_4173.jpg,6,Permanent Marker,LED Blue,0.8416256705919901,0.834949811299642,0.006675859292348152,True,False,True
+stamped,noise,val,S002_PermanentMarker__IMG_4173.jpg,7,Permanent Marker,Pen,0.8565828005472819,0.843603233496348,0.012979567050933838,True,False,True
+stamped,noise,val,S002_PermanentMarker__IMG_4173.jpg,8,Permanent Marker,Pen,0.8372883598009745,0.823642909526825,0.01364545027414954,True,False,True
+stamped,noise,val,S002_PermanentMarker__IMG_4173.jpg,9,Permanent Marker,Permanent Marker,0.8855209549268087,0.7615254322687784,0.12399552265803027,True,True,True
+stamped,noise,val,S002_PermanentMarker__IMG_4173.jpg,10,Permanent Marker,Permanent Marker,0.8639312783877054,0.7865776220957438,0.07735365629196167,True,True,True
+stamped,noise,val,S003_Ruler__IMG_4083.jpg,0,Ruler,Ruler,0.9252785444259644,0.9029215574264526,0.02235698699951172,True,True,True
+stamped,noise,val,S003_Ruler__IMG_4083.jpg,1,Ruler,Ruler,0.9534220298131307,0.8706711928049723,0.08275083700815844,True,True,True
+stamped,noise,val,S003_Ruler__IMG_4084.jpg,0,Ruler,Ruler,0.8331505258878072,0.7865888675053915,0.04656165838241577,True,True,True
+stamped,noise,val,S003_Ruler__IMG_4084.jpg,1,Ruler,Ruler,0.9130744139353434,0.8748357097307841,0.038238704204559326,True,True,True
+stamped,noise,val,S003_Ruler__IMG_4084.jpg,2,Ruler,Ruler,0.9161999821662903,0.8059882918993632,0.11021169026692712,True,True,True
+stamped,noise,val,S003_Ruler__IMG_4084.jpg,3,Ruler,Ruler,0.8725127776463827,0.7770514488220215,0.0954613288243612,True,True,True
+stamped,noise,val,S003_Ruler__IMG_4084.jpg,4,Ruler,Ruler,0.8329676389694214,0.7558305462201437,0.07713709274927771,True,True,True
+stamped,noise,val,S003_Ruler__IMG_4084.jpg,5,Ruler,Ruler,0.843639095624288,0.7581508358319601,0.08548825979232788,True,True,True
+stamped,noise,val,S003_Ruler__IMG_4120.jpg,0,Ruler,Ruler,0.881482203801473,0.844962477684021,0.03651972611745202,True,True,True
+stamped,noise,val,S003_Ruler__IMG_4120.jpg,1,Ruler,Arduino Uno,0.8287789225578308,0.8119284709294637,0.01685045162836707,True,False,False
+stamped,noise,val,S004_Paper__20260811_151217.jpg,0,Paper,Paper,0.931998610496521,0.8650259176890055,0.0669726928075155,True,True,True
+stamped,noise,val,S004_Paper__IMG_4109.jpg,0,Paper,Clip Board,0.8663732409477234,0.8558040459950765,0.010569194952646854,True,False,True
+stamped,noise,val,S004_Paper__IMG_4113.jpg,0,Paper,Paper,0.8991433580716451,0.8012017806371053,0.0979415774345398,True,True,True
+stamped,noise,val,S005_StickyNote__20260811_145403.jpg,0,Sticky Note,Sticky Note,0.8576275308926901,0.5122929414113363,0.34533458948135376,True,True,True
+stamped,noise,val,S005_StickyNote__20260811_145403.jpg,1,Sticky Note,Sticky Note,0.785204291343689,0.5531206528345743,0.23208363850911462,True,True,True
+stamped,noise,val,S005_StickyNote__20260811_145403.jpg,2,Sticky Note,Sticky Note,0.8720142245292664,0.5682929158210754,0.3037213087081909,True,True,True
+stamped,noise,val,S005_StickyNote__20260811_145403.jpg,3,Sticky Note,Sticky Note,0.8965914249420166,0.5258161028226217,0.3707753221193949,True,True,True
+stamped,noise,val,S005_StickyNote__20260811_145714.jpg,0,Sticky Note,Sticky Note,0.8487518628438314,0.536997377872467,0.3117544849713644,True,True,True
+stamped,noise,val,S005_StickyNote__20260811_145714.jpg,1,Sticky Note,Sticky Note,0.894148071606954,0.6128941774368286,0.28125389417012536,True,True,True
+stamped,noise,val,S005_StickyNote__20260811_145714.jpg,2,Sticky Note,Sticky Note,0.8933203419049581,0.5646595557530721,0.328660786151886,True,True,True
+stamped,noise,val,S005_StickyNote__IMG_20260810_161137.jpg,0,Sticky Note,Sticky Note,0.9464175899823507,0.8901697198549906,0.0562478701273601,True,True,True
+stamped,noise,val,S006_Stapler__IMG_20260810_151649.jpg,0,Stapler,Stapler,0.8759406805038452,0.8210466305414835,0.05489404996236169,True,True,True
+stamped,noise,val,S006_Stapler__IMG_20260810_151649.jpg,1,Stapler,Stapler,0.8674558798472086,0.8298671642939249,0.03758871555328369,True,True,True
+stamped,noise,val,S006_Stapler__IMG_20260810_151649.jpg,2,Stapler,Stapler,0.8647630016009012,0.7445006767908732,0.12026232481002808,True,True,True
+stamped,noise,val,S006_Stapler__IMG_20260810_152308.jpg,0,Stapler,Stapler,0.8230771819750468,0.7480503519376119,0.07502683003743482,True,True,True
+stamped,noise,val,S006_Stapler__IMG_20260810_152534.jpg,0,Stapler,Stapler,0.8508819937705994,0.7734698255856832,0.07741216818491614,True,True,True
+stamped,noise,val,S007_BinderClip__20260811_160909.jpg,0,Binder Clip,Binder Clip,0.8172336022059122,0.6683174173037211,0.14891618490219116,True,True,True
+stamped,noise,val,S007_BinderClip__20260811_160909.jpg,1,Binder Clip,Binder Clip,0.8631201783816019,0.6895463267962137,0.17357385158538818,True,True,True
+stamped,noise,val,S007_BinderClip__20260811_160909.jpg,2,Binder Clip,Binder Clip,0.7676863471666971,0.5977674325307211,0.16991891463597608,True,True,True
+stamped,noise,val,S007_BinderClip__20260811_160909.jpg,3,Binder Clip,Binder Clip,0.8693408767382304,0.7327903707822164,0.13655050595601392,True,True,True
+stamped,noise,val,S007_BinderClip__20260811_160956.jpg,0,Binder Clip,Binder Clip,0.8238407373428345,0.7658363779385885,0.058004359404245975,True,True,True
+stamped,noise,val,S007_BinderClip__20260811_160956.jpg,1,Binder Clip,Paper Clip,0.814474622408549,0.8123150666554769,0.002159555753072029,True,False,True
+stamped,noise,val,S007_BinderClip__20260811_160956.jpg,2,Binder Clip,Binder Clip,0.8704841136932373,0.8127495249112447,0.05773458878199256,True,True,True
+stamped,noise,val,S007_BinderClip__20260811_160956.jpg,3,Binder Clip,Binder Clip,0.76176917552948,0.7335932652155558,0.02817591031392419,True,True,True
+stamped,noise,val,S007_BinderClip__20260811_160956.jpg,4,Binder Clip,Binder Clip,0.8963292837142944,0.7623809576034546,0.13394832611083984,True,True,True
+stamped,noise,val,S007_BinderClip__20260811_160956.jpg,5,Binder Clip,Binder Clip,0.8384494781494141,0.7334545056025187,0.10499497254689538,True,True,True
+stamped,noise,val,S007_BinderClip__20260811_160956.jpg,6,Binder Clip,Binder Clip,0.7959435979525248,0.6939619382222494,0.1019816597302754,True,True,True
+stamped,noise,val,S007_BinderClip__20260811_161252.jpg,0,Binder Clip,Binder Clip,0.7996829748153687,0.7425834139188131,0.057099560896555546,True,True,True
+stamped,noise,val,S008_TackIt__IMG_4280.jpg,0,Tack It,Tack It,0.8654434084892273,0.5274772842725118,0.33796612421671546,True,True,True
+stamped,noise,val,S008_TackIt__IMG_4280.jpg,1,Tack It,Tack It,0.9532538056373596,0.5347705682118734,0.4184832374254862,True,True,True
+stamped,noise,val,S008_TackIt__IMG_4284.jpg,0,Tack It,Tack It,0.9325455625851949,0.5489199360211691,0.3836256265640259,True,True,True
+stamped,noise,val,S008_TackIt__IMG_4284.jpg,1,Tack It,Tack It,0.9352045059204102,0.5162493189175924,0.41895518700281775,True,True,True
+stamped,noise,val,S008_TackIt__IMG_4284.jpg,2,Tack It,Tack It,0.9306404987970988,0.5411054889361063,0.38953500986099243,True,True,True
+stamped,noise,val,S008_TackIt__IMG_4289.jpg,0,Tack It,Tack It,0.9417161146799723,0.5286387006441752,0.4130774140357971,True,True,True
+stamped,noise,val,S009_CorrectionTape__20260811_155509.jpg,0,Correction Tape,Correction Tape,0.8350438674290975,0.665621280670166,0.16942258675893151,True,True,True
+stamped,noise,val,S009_CorrectionTape__20260811_155509.jpg,1,Correction Tape,Correction Tape,0.8851582010587057,0.552773137887319,0.3323850631713867,True,True,True
+stamped,noise,val,S009_CorrectionTape__20260811_155509.jpg,2,Correction Tape,Correction Tape,0.8979560136795044,0.601437489191691,0.29651852448781335,True,True,True
+stamped,noise,val,S009_CorrectionTape__20260811_155637.jpg,0,Correction Tape,Correction Tape,0.7711472709973654,0.7192266980806986,0.05192057291666674,True,True,True
+stamped,noise,val,S009_CorrectionTape__20260811_155637.jpg,1,Correction Tape,Correction Tape,0.8629176815350851,0.6447277665138245,0.21818991502126062,True,True,True
+stamped,noise,val,S009_CorrectionTape__20260811_155637.jpg,2,Correction Tape,Correction Tape,0.874349574247996,0.6838446259498596,0.19050494829813636,True,True,True
+stamped,noise,val,S009_CorrectionTape__20260811_155657.jpg,0,Correction Tape,Correction Tape,0.8276072144508362,0.6433128913243612,0.18429432312647498,True,True,True
+stamped,noise,val,S009_CorrectionTape__20260811_155657.jpg,1,Correction Tape,Correction Tape,0.8355331619580587,0.5669825275739034,0.2685506343841553,True,True,True
+stamped,noise,val,S009_CorrectionTape__20260811_155657.jpg,2,Correction Tape,Correction Tape,0.8749051094055176,0.6468778649965922,0.2280272444089254,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4261.jpg,0,Paper Clip,Paper Clip,0.9309134085973104,0.7856598496437073,0.14525355895360315,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4261.jpg,1,Paper Clip,Paper Clip,0.851282556851705,0.7478201389312744,0.10346241792043054,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4261.jpg,2,Paper Clip,Paper Clip,0.9129151701927185,0.8509829640388489,0.06193220615386963,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4261.jpg,3,Paper Clip,Paper Clip,0.9356560508410136,0.7894639770189921,0.14619207382202148,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4261.jpg,4,Paper Clip,Paper Clip,0.8870455225308737,0.8313120603561401,0.05573346217473352,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4261.jpg,5,Paper Clip,Paper Clip,0.8576788107554117,0.783276359240214,0.07440245151519775,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4261.jpg,6,Paper Clip,Paper Clip,0.9285984436670939,0.7991317510604858,0.12946669260660804,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4261.jpg,7,Paper Clip,Paper Clip,0.8828376531600952,0.7316470742225647,0.15119057893753052,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4261.jpg,8,Paper Clip,Paper Clip,0.8923385938008627,0.7632578015327454,0.1290807922681173,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4274.jpg,0,Paper Clip,Paper Clip,0.9208520452181498,0.7430454889933268,0.177806556224823,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4274.jpg,1,Paper Clip,Paper Clip,0.9084665973981222,0.7280054688453674,0.18046112855275476,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4274.jpg,2,Paper Clip,Paper Clip,0.9104632337888082,0.7840848763783773,0.1263783574104309,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4274.jpg,3,Paper Clip,Paper Clip,0.8875692884127299,0.7370118498802185,0.15055743853251136,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4274.jpg,4,Paper Clip,Paper Clip,0.852302610874176,0.7509030898412069,0.10139952103296912,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4274.jpg,5,Paper Clip,Paper Clip,0.8816726207733154,0.7428165276845297,0.13885609308878577,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4274.jpg,6,Paper Clip,Paper Clip,0.8532086213429769,0.7744812568028768,0.0787273645401001,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4274.jpg,7,Paper Clip,Paper Clip,0.8779768149058024,0.7785591880480448,0.09941762685775757,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4274.jpg,8,Paper Clip,Paper Clip,0.8550901412963867,0.7587791681289673,0.09631097316741943,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4278.jpg,0,Paper Clip,Paper Clip,0.9329339663187662,0.7749082446098328,0.15802572170893348,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4278.jpg,1,Paper Clip,Paper Clip,0.9277005195617676,0.7914242545763651,0.13627626498540246,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4278.jpg,2,Paper Clip,Paper Clip,0.8926793734232584,0.8016819556554159,0.09099741776784254,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4278.jpg,3,Paper Clip,Paper Clip,0.9215272267659506,0.7978842457135519,0.12364298105239868,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4278.jpg,4,Paper Clip,Paper Clip,0.9394482771555582,0.8020712733268738,0.13737700382868445,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4278.jpg,5,Paper Clip,Paper Clip,0.88067626953125,0.8050130605697632,0.07566320896148682,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4278.jpg,6,Paper Clip,Paper Clip,0.8893695672353109,0.778659721215566,0.11070984601974487,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4278.jpg,7,Paper Clip,Paper Clip,0.8979734778404236,0.7621529897054037,0.1358204881350199,True,True,True
+stamped,noise,val,S010_PaperClip__IMG_4278.jpg,8,Paper Clip,Paper Clip,0.9105135202407837,0.7942545215288798,0.11625899871190393,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155023.jpg,0,Whiteboard Marker,Whiteboard Marker,0.7567319273948669,0.6927149891853333,0.06401693820953369,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155023.jpg,1,Whiteboard Marker,Whiteboard Marker,0.8532874385515848,0.8114286859830221,0.04185875256856275,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155023.jpg,2,Whiteboard Marker,Permanent Marker,0.7632920940717062,0.6928859154383341,0.07040617863337206,True,False,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155023.jpg,3,Whiteboard Marker,Whiteboard Marker,0.7475444674491882,0.7350271741549174,0.01251729329427087,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155023.jpg,4,Whiteboard Marker,Whiteboard Marker,0.8517412543296814,0.8338509202003479,0.017890334129333496,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155023.jpg,5,Whiteboard Marker,Whiteboard Marker,0.7529871662457784,0.7107910513877869,0.04219611485799157,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155023.jpg,6,Whiteboard Marker,Permanent Marker,0.7829622626304626,0.7781797250111898,0.004782537619272831,True,False,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155230.jpg,0,Whiteboard Marker,Whiteboard Marker,0.864605168501536,0.8481425444285074,0.016462624073028564,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155230.jpg,1,Whiteboard Marker,Whiteboard Marker,0.8598705728848776,0.7319459716478983,0.12792460123697924,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155230.jpg,2,Whiteboard Marker,Whiteboard Marker,0.8399829467137655,0.7714808185895284,0.06850212812423706,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155230.jpg,3,Whiteboard Marker,Whiteboard Marker,0.879257063070933,0.8539696335792542,0.025287429491678837,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155230.jpg,4,Whiteboard Marker,Whiteboard Marker,0.8222573200861613,0.7773701945940653,0.04488712549209595,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155230.jpg,5,Whiteboard Marker,Whiteboard Marker,0.8345888058344523,0.8068996071815491,0.027689198652903202,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155328.jpg,0,Whiteboard Marker,Whiteboard Marker,0.8758049805959066,0.7394391298294067,0.13636585076649987,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155328.jpg,1,Whiteboard Marker,Whiteboard Marker,0.8056593139966329,0.7186144391695658,0.08704487482706713,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155328.jpg,2,Whiteboard Marker,Whiteboard Marker,0.8819471597671509,0.7413111527760824,0.14063600699106849,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155328.jpg,3,Whiteboard Marker,Whiteboard Marker,0.7704692284266154,0.6986539959907532,0.07181523243586219,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155328.jpg,4,Whiteboard Marker,Whiteboard Marker,0.8498453895250956,0.7105201482772827,0.13932524124781287,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155328.jpg,5,Whiteboard Marker,Whiteboard Marker,0.8488333423932394,0.6455500523249308,0.2032832900683086,True,True,True
+stamped,noise,val,S011_WhiteboardMarker__20260811_155328.jpg,6,Whiteboard Marker,Whiteboard Marker,0.8359454274177551,0.7548628449440002,0.08108258247375488,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_154413.jpg,0,Sellotape,Sellotape,0.7744694948196411,0.6078580816586813,0.16661141316095984,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_154413.jpg,1,Sellotape,Sellotape,0.779917319615682,0.747462789217631,0.03245453039805102,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_154453.jpg,0,Sellotape,Sellotape,0.8691576520601908,0.7571080525716146,0.11204959948857618,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_154453.jpg,1,Sellotape,Sellotape,0.9065356850624084,0.8228020866711935,0.08373359839121497,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_154453.jpg,2,Sellotape,Sellotape,0.9171245694160461,0.8039173086484274,0.11320726076761878,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_154453.jpg,3,Sellotape,Sellotape,0.903569757938385,0.826297402381897,0.07727235555648804,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_154453.jpg,4,Sellotape,Sellotape,0.8927351832389832,0.7885559995969137,0.10417918364206946,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_154453.jpg,5,Sellotape,Sellotape,0.9059358239173889,0.7833636403083801,0.12257218360900879,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_154453.jpg,6,Sellotape,Sellotape,0.862026572227478,0.775471826394399,0.08655474583307898,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_154453.jpg,7,Sellotape,Sellotape,0.8954198956489563,0.6888243357340494,0.20659555991490686,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_154453.jpg,8,Sellotape,Sellotape,0.8498974243799845,0.7060899138450623,0.14380751053492224,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_154453.jpg,9,Sellotape,Sellotape,0.8767204682032267,0.6066467761993408,0.27007369200388587,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_154453.jpg,10,Sellotape,Sellotape,0.8570112586021423,0.7684933741887411,0.08851788441340125,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_155922.jpg,0,Sellotape,Sellotape,0.9063640832901001,0.7512519359588623,0.1551121473312378,True,True,True
+stamped,noise,val,S012_Sellotape__20260811_155922.jpg,1,Sellotape,Sellotape,0.8975772658983866,0.7670649290084839,0.1305123368899027,True,True,True
+stamped,noise,val,S013_ClipBoard__20260811_160409.jpg,0,Clip Board,Clip Board,0.9320834875106812,0.8620562354723612,0.07002725203831994,True,True,True
+stamped,noise,val,S013_ClipBoard__20260811_160603.jpg,0,Clip Board,Clip Board,0.9175569613774618,0.8437622984250387,0.0737946629524231,True,True,True
+stamped,noise,val,S013_ClipBoard__20260811_160643.jpg,0,Clip Board,Permanent Marker,0.8636205395062765,0.8471614122390747,0.01645912726720178,True,False,False
+stamped,noise,val,S014_Pendrive__IMG_4224.jpg,0,Pendrive,Pendrive,0.8676599860191345,0.5865250627199808,0.2811349232991537,True,True,True
+stamped,noise,val,S014_Pendrive__IMG_4226.jpg,0,Pendrive,Pendrive,0.8826305866241455,0.6674467325210571,0.21518385410308838,True,True,True
+stamped,noise,val,S014_Pendrive__IMG_4227.jpg,0,Pendrive,Pendrive,0.8387256662050883,0.6580031116803488,0.1807225545247395,True,True,True
+stamped,noise,val,S015_Eraser__IMG_4240.jpg,0,Eraser,Eraser,0.8516212503115336,0.5967942674954733,0.2548269828160603,True,True,True
+stamped,noise,val,S015_Eraser__IMG_4240.jpg,1,Eraser,Eraser,0.8577391505241394,0.6451500852902731,0.21258906523386634,True,True,True
+stamped,noise,val,S015_Eraser__IMG_4240.jpg,2,Eraser,Eraser,0.6568016409873962,0.5843399961789449,0.0724616448084513,True,True,True
+stamped,noise,val,S015_Eraser__IMG_4254.jpg,0,Eraser,Eraser,0.8053235014279684,0.585452675819397,0.2198708256085714,True,True,True
+stamped,noise,val,S015_Eraser__IMG_4254.jpg,1,Eraser,Eraser,0.8935206333796183,0.6794010599454244,0.21411957343419386,True,True,True
+stamped,noise,val,S015_Eraser__IMG_4254.jpg,2,Eraser,Eraser,0.747161070505778,0.5951251784960429,0.1520358920097351,True,True,True
+stamped,noise,val,S015_Eraser__IMG_4256.jpg,0,Eraser,Eraser,0.8735069433848063,0.7099902629852295,0.16351668039957679,True,True,True
+stamped,noise,val,T001_Scissor__IMG_4033.jpg,0,Scissor,Scissor,0.9174498915672302,0.68211563428243,0.23533425728480017,True,True,True
+stamped,noise,val,T001_Scissor__IMG_4033.jpg,1,Scissor,Scissor,0.8935583631197611,0.7017174561818441,0.191840906937917,True,True,True
+stamped,noise,val,T001_Scissor__IMG_4036.jpg,0,Scissor,Scissor,0.8918960889180502,0.6522332032521566,0.23966288566589355,True,True,True
+stamped,noise,val,T001_Scissor__IMG_4036.jpg,1,Scissor,Scissor,0.9475294351577759,0.7312643130620321,0.21626512209574378,True,True,True
+stamped,noise,val,T001_Scissor__IMG_4036.jpg,2,Scissor,Scissor,0.8093721071879069,0.634719709555308,0.17465239763259888,True,True,True
+stamped,noise,val,T001_Scissor__IMG_4036.jpg,3,Scissor,Scissor,0.9301215012868246,0.7124019265174866,0.217719574769338,True,True,True
+stamped,noise,val,T001_Scissor__IMG_4152.jpg,0,Scissor,Scissor,0.8759932120641073,0.6287340323130289,0.24725917975107836,True,True,True
+stamped,noise,val,T001_Scissor__IMG_4152.jpg,1,Scissor,Scissor,0.9171340266863505,0.6446505387624105,0.27248348792393995,True,True,True
+stamped,noise,val,T002_Plier__IMG_4045.jpg,0,Plier,Plier,0.9218312303225199,0.7280584176381429,0.19377281268437696,True,True,True
+stamped,noise,val,T002_Plier__IMG_4143.jpg,0,Plier,Plier,0.9245749513308207,0.7603986859321594,0.16417626539866126,True,True,True
+stamped,noise,val,T002_Plier__IMG_4147.jpg,0,Plier,Plier,0.8135052522023519,0.7123229106267294,0.10118234157562256,True,True,True
+stamped,noise,val,T003_Screwdriver__20260811_150256.jpg,0,Screwdriver,Screwdriver,0.9463395476341248,0.8693061669667562,0.07703338066736853,True,True,True
+stamped,noise,val,T003_Screwdriver__20260811_150256.jpg,1,Screwdriver,Screwdriver,0.9607423146565756,0.9237797856330872,0.0369625290234884,True,True,True
+stamped,noise,val,T003_Screwdriver__IMG_20260810_153004.jpg,0,Screwdriver,Screwdriver,0.898483395576477,0.8927937348683676,0.005689660708109501,True,True,True
+stamped,noise,val,T003_Screwdriver__IMG_20260810_153004.jpg,1,Screwdriver,Screwdriver,0.9173361857732137,0.9134573141733805,0.0038788715998332446,True,True,True
+stamped,noise,val,T003_Screwdriver__IMG_20260810_153340.jpg,0,Screwdriver,Screwdriver,0.8790923357009888,0.8294851382573446,0.04960719744364417,True,True,True
+stamped,noise,val,T003_Screwdriver__IMG_7209.jpg,0,Screwdriver,Screwdriver,0.9405269424120585,0.8778595328330994,0.06266740957895911,True,True,True
+stamped,noise,val,T003_Screwdriver__IMG_7213.jpg,0,Screwdriver,Screwdriver,0.9141159057617188,0.8804600437482198,0.033655862013498905,True,True,True
+stamped,noise,val,T003_Screwdriver__IMG_7227.jpg,0,Screwdriver,Screwdriver,0.9038772185643514,0.8597561717033386,0.044121046861012814,True,True,True
+stamped,noise,val,T004_GlueGun__20260811_145817.jpg,0,Glue Gun,Glue Gun,0.9340724150339762,0.6134688854217529,0.32060352961222327,True,True,True
+stamped,noise,val,T004_GlueGun__20260811_145826.jpg,0,Glue Gun,Glue Gun,0.942471424738566,0.6137105425198873,0.3287608822186787,True,True,True
+stamped,noise,val,T004_GlueGun__IMG_4054.jpg,0,Glue Gun,Glue Gun,0.9282952547073364,0.6075189709663391,0.3207762837409973,True,True,True
+stamped,noise,val,T004_GlueGun__IMG_6816.jpg,0,Glue Gun,Glue Gun,0.8259526491165161,0.7256165544191996,0.10033609469731652,True,True,True
+stamped,noise,val,T004_GlueGun__IMG_6818.jpg,0,Glue Gun,Glue Gun,0.8518431186676025,0.7858715256055196,0.06597159306208289,True,True,True
+stamped,noise,val,T005_MeasuringTape__IMG_4129.jpg,0,Measuring Tape,Measuring Tape,0.9353458285331726,0.5411237080891927,0.39422212044397986,True,True,True
+stamped,noise,val,T005_MeasuringTape__IMG_4131.jpg,0,Measuring Tape,Measuring Tape,0.9605539838473002,0.621969978014628,0.3385840058326721,True,True,True
+stamped,noise,val,T005_MeasuringTape__IMG_4139.jpg,0,Measuring Tape,Measuring Tape,0.9277581572532654,0.5342394113540649,0.39351874589920044,True,True,True
+stamped,noise,val,T005_MeasuringTape__IMG_7312.jpg,0,Measuring Tape,Measuring Tape,0.8850388526916504,0.5224496722221375,0.36258918046951294,True,True,True
+stamped,noise,val,T005_MeasuringTape__IMG_7312.jpg,1,Measuring Tape,Measuring Tape,0.8401118715604147,0.5256892641385397,0.314422607421875,True,True,True
+stamped,noise,val,T005_MeasuringTape__IMG_7318.jpg,0,Measuring Tape,Measuring Tape,0.8584816455841064,0.6000933249791464,0.2583883206049601,True,True,True
+stamped,noise,val,T005_MeasuringTape__IMG_7329.jpg,0,Measuring Tape,Measuring Tape,0.839668850104014,0.5065998435020447,0.33306900660196936,True,True,True
+stamped,noise,val,T005_MeasuringTape__IMG_7329.jpg,1,Measuring Tape,Measuring Tape,0.9048879345258077,0.5831702748934428,0.321717659632365,True,True,True
+stamped,noise,val,T005_MeasuringTape__IMG_7338.jpg,0,Measuring Tape,Measuring Tape,0.8358585039774576,0.6107302705446879,0.22512823343276978,True,True,True
+stamped,noise,val,T006_Cutter__IMG_4198.jpg,0,Cutter,Cutter,0.906359076499939,0.6936537623405457,0.2127053141593933,True,True,True
+stamped,noise,val,T006_Cutter__IMG_4198.jpg,1,Cutter,Cutter,0.921515683333079,0.7422986626625061,0.17921702067057288,True,True,True
+stamped,noise,val,T006_Cutter__IMG_4204.jpg,0,Cutter,Cutter,0.9233723084131876,0.7072948217391968,0.21607748667399085,True,True,True
+stamped,noise,val,T006_Cutter__IMG_4208.jpg,0,Cutter,Cutter,0.9245347181955973,0.6956777969996134,0.2288569211959839,True,True,True
+stamped,noise,val,T006_Cutter__IMG_4208.jpg,1,Cutter,Cutter,0.9627869923909506,0.7650127212206522,0.19777427117029833,True,True,True
+stamped,noise,val,T006_Cutter__IMG_4208.jpg,2,Cutter,Cutter,0.9112028876940409,0.7726111809412638,0.1385917067527771,True,True,True
+stamped,noise,val,T006_Cutter__IMG_4208.jpg,3,Cutter,Cutter,0.893933117389679,0.711508572101593,0.18242454528808594,True,True,True
+stamped,noise,val,T006_Cutter__IMG_4208.jpg,4,Cutter,Cutter,0.9382206002871195,0.6629225810368856,0.2752980192502339,True,True,True
+stamped,noise,val,T007_CuttingMat__20260811_161455.jpg,0,Cutting Mat,Cutting Mat,0.9452528357505798,0.6325047214825948,0.312748114267985,True,True,True
+stamped,noise,val,T007_CuttingMat__20260811_161505.jpg,0,Cutting Mat,Cutting Mat,0.9724256992340088,0.6104881366093954,0.3619375626246134,True,True,True
+stamped,noise,val,T007_CuttingMat__20260811_161524.jpg,0,Cutting Mat,Cutting Mat,0.945054829120636,0.6302374005317688,0.3148174285888672,True,True,True
+stamped,noise,val,T008_SolderPen__IMG_7363.jpg,0,Solder Pen,Solder Pen,0.7763970891634623,0.725785473982493,0.05061161518096924,True,True,True
+stamped,noise,val,T008_SolderPen__IMG_7365.jpg,0,Solder Pen,needle,0.7598524888356527,0.7381060918172201,0.021746397018432617,True,False,True
+stamped,noise,val,T008_SolderPen__IMG_7376.jpg,0,Solder Pen,Solder Pen,0.7282264431317648,0.7106475035349528,0.017578939596812004,True,True,True
+stamped,noise,val,T009_SolderWire__IMG_7347.jpg,0,Solder Wire,Solder Wire,0.8889836271603903,0.6246074239412943,0.26437620321909594,True,True,True
+stamped,noise,val,T009_SolderWire__IMG_7354.jpg,0,Solder Wire,Solder Wire,0.9702622095743815,0.7600664893786112,0.21019572019577026,True,True,True
+stamped,noise,val,T009_SolderWire__IMG_7356.jpg,0,Solder Wire,Solder Wire,0.9133442044258118,0.7796477476755778,0.133696456750234,True,True,True
+stamped,noise,val,T010_SmokeAbsorber__IMG_7388.jpg,0,Smoke Absorber,Smoke Absorber,0.8495588898658752,0.6104260484377543,0.23913284142812097,True,True,True
+stamped,noise,val,T010_SmokeAbsorber__IMG_7393.jpg,0,Smoke Absorber,Smoke Absorber,0.8510154287020365,0.6615261236826578,0.18948930501937866,True,True,True
+stamped,noise,val,T010_SmokeAbsorber__IMG_7396.jpg,0,Smoke Absorber,Smoke Absorber,0.7054157257080078,0.6540407141049703,0.05137501160303748,True,True,True
+stamped,noise,val,T011_Hammer__IMG_7164.jpg,0,Hammer,Hammer,0.9375141660372416,0.9158669710159302,0.021647195021311405,True,True,True
+stamped,noise,val,T011_Hammer__IMG_7173.jpg,0,Hammer,Hammer,0.9562825759251913,0.8802931706110636,0.07598940531412768,True,True,True
+stamped,noise,val,T011_Hammer__IMG_7186.jpg,0,Hammer,Hammer,0.9272215565045675,0.9007970094680786,0.026424547036488888,True,True,True
+stamped,noise,val,T012_Mallet__IMG_7191.jpg,0,Mallet,Mallet,0.9600444833437601,0.8699870308240255,0.09005745251973463,True,True,True
+stamped,noise,val,T012_Mallet__IMG_7198.jpg,0,Mallet,Mallet,0.9412628014882406,0.8479206562042236,0.09334214528401696,True,True,True
+stamped,noise,val,T012_Mallet__IMG_7206.jpg,0,Mallet,Mallet,0.9502677917480469,0.9085322221120199,0.04173556963602698,True,True,True
+stamped,noise,val,T013_ScrewPhillips__IMG_7240.jpg,0,Screw Phillips,Screw Phillips,0.9621402223904928,0.9397252798080444,0.02241494258244836,True,True,True
+stamped,noise,val,T013_ScrewPhillips__IMG_7245.jpg,0,Screw Phillips,Screw Phillips,0.9519720077514648,0.924736221631368,0.027235786120096805,True,True,True
+stamped,noise,val,T013_ScrewPhillips__IMG_7249.jpg,0,Screw Phillips,Screw Phillips,0.9266997575759888,0.8924181858698527,0.034281571706136105,True,True,True
+stamped,noise,val,T014_Spanner__IMG_7256.jpg,0,Spanner,Spanner,0.8557502230008444,0.7508995334307352,0.10485068957010912,True,True,True
+stamped,noise,val,T014_Spanner__IMG_7256.jpg,1,Spanner,Spanner,0.9254237413406372,0.749731719493866,0.17569202184677124,True,True,True
+stamped,noise,val,T014_Spanner__IMG_7267.jpg,0,Spanner,Spanner,0.9093981782595316,0.6682971119880676,0.241101066271464,True,True,True
+stamped,noise,val,T014_Spanner__IMG_7272.jpg,0,Spanner,Spanner,0.9226230581601461,0.7972876826922098,0.12533537546793627,True,True,True
+stamped,noise,val,T014_Spanner__IMG_7272.jpg,1,Spanner,Spanner,0.8487169742584229,0.7991506059964498,0.049566368261973026,True,True,True
+stamped,noise,val,T014_Spanner__IMG_7280.jpg,0,Spanner,Spanner,0.801844318707784,0.6429508328437805,0.15889348586400354,True,True,True
+stamped,noise,val,T014_Spanner__IMG_7285.jpg,0,Spanner,Spanner,0.8694285353024801,0.8038009206453959,0.06562761465708422,True,True,True
+stamped,noise,val,T015_Caliper__IMG_7301.jpg,0,Caliper,Caliper,0.9487834771474203,0.7287504275639852,0.22003304958343506,True,True,True
+stamped,noise,val,T015_Caliper__IMG_7310.jpg,0,Caliper,Caliper,0.9680911699930826,0.9174811045328776,0.05061006546020508,True,True,True
+stamped,noise,val,T015_Caliper__IMG_7311.jpg,0,Caliper,Caliper,0.9434319138526917,0.7514954805374146,0.1919364333152771,True,True,True

@@ -1,0 +1,17 @@
+protocol,catalog,split,image,polygon_index,true_name,predicted_name,similarity,second_similarity,margin,accepted,correct,top5_correct
+clean,noise,val,C001_tracing_paper__C001_TRACKING PAPER_C001_05.jpg,0,tracing paper,tracing paper,0.856086273988088,0.8013013601303101,0.05478491385777795,True,True,True
+clean,noise,val,C001_tracing_paper__C001_TRACKING PAPER_C001_08.jpg,0,tracing paper,tracing paper,0.889827032883962,0.8221036593119303,0.06772337357203173,True,True,True
+clean,noise,val,C001_tracing_paper__C001_TRACKING PAPER_C001_09.jpg,0,tracing paper,tracing paper,0.7747198144594828,0.748107930024465,0.02661188443501783,True,True,True
+clean,noise,val,C001_tracing_paper__C001_TRACKING PAPER_C001_09.jpg,1,tracing paper,Sellotape,0.7696752746899923,0.7585476438204447,0.0111276308695476,True,False,True
+clean,noise,val,C001_tracing_paper__C001_TRACKING PAPER_C001_25.jpg,0,tracing paper,tracing paper,0.8714892069498698,0.8192021449406942,0.052287062009175544,True,True,True
+clean,noise,val,C002_paper_cup__C002_PAPER CUP_C002_06.jpg,0,paper cup,paper cup,0.9574452837308248,0.5193522373835245,0.4380930463473003,True,True,True
+clean,noise,val,C002_paper_cup__C002_PAPER CUP_C002_11.jpg,0,paper cup,paper cup,0.9346670508384705,0.6310478846232096,0.30361916621526086,True,True,True
+clean,noise,val,C002_paper_cup__C002_PAPER CUP_C002_14.jpg,0,paper cup,paper cup,0.9514015515645345,0.4897260169188182,0.46167553464571637,True,True,True
+clean,noise,val,C002_paper_cup__C002_PAPER CUP_C002_23.jpg,0,paper cup,paper cup,0.921881914138794,0.6160298188527426,0.3058520952860514,True,True,True
+clean,noise,val,C002_paper_cup__C002_PAPER CUP_C002_30.jpg,0,paper cup,paper cup,0.9511885444323221,0.5276885827382406,0.42349996169408155,True,True,True
+clean,noise,val,C003_thread__C003_THREAD_C003_06.jpg,0,thread,thread,0.904284139474233,0.8064250548680624,0.09785908460617065,True,True,True
+clean,noise,val,C003_thread__C003_THREAD_C003_07.jpg,0,thread,thread,0.9545523524284363,0.7389340003331503,0.21561835209528601,True,True,True
+clean,noise,val,C003_thread__C003_THREAD_C003_18.jpg,0,thread,thread,0.899523655573527,0.7378074725468954,0.1617161830266316,True,True,True
+clean,noise,val,C003_thread__C003_THREAD_C003_19.jpg,0,thread,thread,0.9490682284037272,0.6965271234512329,0.25254110495249427,True,True,True
+clean,noise,val,C003_thread__C003_THREAD_C003_24.jpg,0,thread,thread,0.9600326418876648,0.7497613827387491,0.21027125914891565,True,True,True
+clean,noise,val,C003_thread__C003_THREAD_C003_25.jpg,0,thread,thread,0.9005667368570963,0.6516100366910299,0.2489567001660664,True,True,True

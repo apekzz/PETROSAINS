@@ -1,0 +1,56 @@
+{
+  "summary": {
+    "shared": 109,
+    "diff_mean": 0.004594,
+    "diff_min": 0.000213,
+    "diff_max": 0.039978
+  },
+  "most_different": {
+    "inventory_name": "A4 colored paper",
+    "mc2_crops": 21,
+    "noise_crops": 21,
+    "cosine": 0.960022,
+    "difference": 0.039978,
+    "l2": 0.25222,
+    "mc2_preview": [
+      0.0472,
+      -0.0011,
+      -0.0084,
+      0.0206,
+      0.0014,
+      0.0017
+    ],
+    "noise_preview": [
+      0.0798,
+      0.0112,
+      -0.0105,
+      0.0362,
+      0.001,
+      -0.0054
+    ]
+  },
+  "most_similar": {
+    "inventory_name": "Resistor 220",
+    "mc2_crops": 109,
+    "noise_crops": 109,
+    "cosine": 0.999787,
+    "difference": 0.000213,
+    "l2": 0.017993,
+    "mc2_preview": [
+      0.0944,
+      -0.0119,
+      0.0123,
+      -0.0005,
+      -0.0138,
+      0.0073
+    ],
+    "noise_preview": [
+      0.0946,
+      -0.0113,
+      0.0116,
+      -0.0006,
+      -0.0126,
+      0.0075
+    ]
+  }
+}

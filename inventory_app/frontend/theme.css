@@ -1,0 +1,28 @@
+/* KAILA-style command center, PETRONAS teal. */
+
+:root {
+    --bg-dark: #0a1219;
+    --bg-panel: #101b26;
+    --bg-header: #0c151d;
+    --bg-input: #0d1620;
+
+    --neon-cyan: #00d4c8;
+    --neon-purple: #6ec8ff;
+    --neon-green: #3ee0b0;
+    --neon-red: #ff5a6a;
+    --neon-yellow: #f5a54a;
+
+    --text-main: #e8f0f6;
+    --text-dim: #7f93a6;
+
+    --border-soft: rgba(0, 212, 200, 0.22);
+    --border-glow: none;
+
+    --radius-xl: 14px;
+    --radius-lg: 12px;
+    --radius-md: 10px;
+    --radius-sm: 999px;
+
+    --container-max-width: 1440px;
+    --break-mobile: 980px;
+}

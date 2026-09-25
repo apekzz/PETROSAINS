@@ -1,0 +1,17 @@
+Comparison metrics: object (mobileclip2) vs noise embeddings
+109 shared items · mean embedding per item name
+
+METRIC | MEAN | MEDIAN | MIN | MAX
+Cosine similarity | 0.995406 | 0.996863 | 0.960022 | 0.999787
+Difference (1 − cosine) | 0.004594 | 0.003137 | 0.000213 | 0.039978
+L2 distance | 0.074710 | 0.066427 | 0.017000 | 0.252220
+
+Extra
+% items with cosine ≥ 0.99 | 94.5%
+% items with cosine ≥ 0.999 | 11.9%
+
+Most different item
+Item | Cosine | Difference | L2
+A4 colored paper | 0.960022 | 0.039978 | 0.252220
+
+Conclusion: FaceTime noise stamp only shifts embeddings slightly; catalogs remain very similar under MobileCLIP2.

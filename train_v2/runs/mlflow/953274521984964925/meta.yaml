@@ -1,0 +1,6 @@
+artifact_location: file:///c:/Users/Haqkiem/OneDrive/UNIKL/July-2026/Competition/AIIC/PETROSAINS/train_v2/runs/mlflow/953274521984964925
+creation_time: 1789264895583
+experiment_id: '953274521984964925'
+last_update_time: 1789264895583
+lifecycle_stage: active
+name: train_v2_yolo11l_seg_bce_dice_copy_paste
