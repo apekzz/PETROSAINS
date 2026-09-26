@@ -236,8 +236,7 @@
                 var list = document.createElement("ul");
                 lines.forEach(function (item) {
                     var entry = document.createElement("li");
-                    var qty = item.packs == null ? "" : " × " + item.packs;
-                    entry.textContent = item.name + qty;
+                    entry.textContent = itemQty(item);
                     list.appendChild(entry);
                 });
                 card.appendChild(list);
@@ -262,8 +261,7 @@
         summary.textContent = "Full brief";
         more.appendChild(summary);
         var items = (data.items || []).map(function (row) {
-            var qty = row.packs == null ? "qty not on sheet" : "× " + row.packs;
-            return row.offering_id + " " + row.title + ". " + row.name + " " + qty;
+            return row.offering_id + " " + row.title + ". " + itemQty(row);
         });
         var charge = (data.in_charge || []).map(function (row) {
             return row.title + " needs " + row.facilitators + " facilitators.";
@@ -298,12 +296,22 @@
         out.appendChild(more);
     }
 
+    function itemQty(item) {
+        var qty = item.packs == null ? "" : " × " + item.packs;
+        var store = " · not in store";
+        if (item.store_available != null) {
+            store = " · " + item.store_available + " available of " + item.store_total;
+        }
+        return (item.name || "") + qty + store;
+    }
+
     function packFacts(data) {
         lastFacts = {
             intent: "",
             items: data.items || [],
             in_charge: data.in_charge || [],
             constraints: data.constraints_safety || [],
+            warehouse: data.warehouse || { items: [], staff: [], checked_out: [] },
             recommendations: (data.recommendations || []).map(function (row) {
                 return { offering_id: row.offering_id, title: row.title, reason: row.reason };
             })

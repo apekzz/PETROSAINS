@@ -46,6 +46,8 @@ from db import (
     clear_staff_embeddings,
     save_object_embedding,
     fetch_staff_embeddings,
+    fetch_staff,
+    fetch_detections,
     fetch_inventory,
     fetch_inventory_embeddings,
     insert_staff,
@@ -2573,17 +2575,31 @@ def serve_consultant():
         return HTMLResponse(content=file.read())
 
 
+def _consultant_tables():
+    """Live quantity tables. Photo embedding tables have no stock counts."""
+    stock, staff, movements = [], [], []
+    try:
+        stock = fetch_inventory("")
+    except Exception as exc:
+        print(f"[consultant] main_inventory: {exc}")
+    try:
+        staff = fetch_staff()
+    except Exception as exc:
+        print(f"[consultant] staff: {exc}")
+    try:
+        movements = fetch_detections(limit=200)
+    except Exception as exc:
+        print(f"[consultant] check_in_out: {exc}")
+    return stock, staff, movements
+
+
 @app.post("/api/consultant/advise")
 def consultant_advise(body: ConsultantRequest):
     import consultant_model
 
-    stock = []
+    stock, staff, movements = _consultant_tables()
     try:
-        stock = fetch_inventory("")
-    except Exception:
-        stock = []
-    try:
-        return consultant_model.advise(body.model_dump(), stock)
+        return consultant_model.advise(body.model_dump(), stock, staff, movements)
     except (FileNotFoundError, ImportError) as exc:
         return JSONResponse({"detail": str(exc)}, status_code=503)
 
@@ -2592,8 +2608,10 @@ def consultant_advise(body: ConsultantRequest):
 def consultant_talk(body: TalkRequest):
     import consultant_model
 
+    stock, staff, movements = _consultant_tables()
+    warehouse = consultant_model.warehouse_view(stock, staff, movements)
     messages = [item.model_dump() for item in body.messages]
-    return consultant_model.speak(messages, body.facts)
+    return consultant_model.speak(messages, body.facts, warehouse)
 
 
 FRONTEND_FILES = {

@@ -1,4 +1,8 @@
-"""Programme Consultant: trained ranker plus catalogue-only planner."""
+"""Programme Consultant: trained ranker plus catalogue planner.
+
+Live quantities come from main_inventory (total and available), open
+check_in_out rows, and staff names. Photo embedding tables have no quantity.
+"""
 
 from __future__ import annotations
 
@@ -361,24 +365,139 @@ def rank(request: dict) -> list[dict]:
     return ranked
 
 
-def _stock_booked(catalogue: dict, stock: list[dict]) -> set[str]:
-    booked = set()
-    kits = catalogue.get("kits") or {}
-    dead = []
-    for item in stock or []:
-        available = int(item.get("available") or item.get("available_quantity") or 0)
-        if available > 0:
+_NAME_STOP = {"the", "and", "for", "with", "set", "box", "contains"}
+# ponytail: size/color words are not a different item. "rod"/"solution" still block a match.
+_EXTRA_OK = {
+    "black", "blue", "red", "white", "green", "yellow", "orange", "pink", "grey", "gray",
+    "mm", "mf", "ff",
+}
+
+
+def _name_key(text: str) -> str:
+    return " ".join(re.findall(r"[a-z0-9]+", str(text or "").lower()))
+
+
+def _name_tokens(text: str) -> set[str]:
+    words = _name_key(text).split()
+    merged = []
+    for word in words:
+        if merged and len(word) == 1 and len(merged[-1]) == 1 and merged[-1].isalpha() and word.isalpha():
+            merged[-1] = merged[-1] + word
+        elif merged and word.isdigit() and len(merged[-1]) <= 3 and merged[-1].isalpha():
+            merged[-1] = merged[-1] + word
+        else:
+            merged.append(word)
+    found = set()
+    for word in merged:
+        if len(word) >= 5 and word.endswith("s") and not word.endswith("ss"):
+            word = word[:-1]
+        if word not in {"mm", "mf", "ff"} and (len(word) < 3 or word in _NAME_STOP):
             continue
-        name = str(item.get("inventory_name") or item.get("item_name") or "").lower()
-        if len(name) >= 8:
-            dead.append(name)
-    for offering_id, lines in kits.items():
-        for line in lines:
-            kit_name = str(line.get("name") or "").lower()
-            if len(kit_name) < 8:
+        found.add(word)
+    return found
+
+
+def _real_extra(extra: set[str]) -> set[str]:
+    return {token for token in extra if token not in _EXTRA_OK and not _size_token(token)}
+
+
+def _size_token(token: str) -> bool:
+    return bool(re.fullmatch(r"\d+(ml|mm|cm|m|v|w|pin|mah)?", token))
+
+
+def _stock_rows(stock: list[dict]) -> list[dict]:
+    rows = []
+    for item in stock or []:
+        name = str(item.get("inventory_name") or item.get("item_name") or "").strip()
+        if not name:
+            continue
+        total = item.get("orig_quantity")
+        if total is None:
+            total = item.get("quantity")
+        available = item.get("available")
+        if available is None:
+            available = item.get("available_quantity")
+        rows.append(
+            {
+                "name": name,
+                "key": _name_key(name),
+                "tokens": _name_tokens(name),
+                "total": int(total or 0),
+                "available": int(available or 0),
+            }
+        )
+    return rows
+
+
+def _match_stock(kit_name: str, rows: list[dict], strict: bool = False) -> dict | None:
+    """Match a kit line to store rows. Equal names only, plus size/color variants summed."""
+    tokens = _name_tokens(kit_name)
+    if not tokens:
+        return None
+    hits = []
+    for row in rows:
+        if not row["tokens"] or not tokens <= row["tokens"]:
+            continue
+        extra = row["tokens"] - tokens
+        if strict:
+            if extra:
                 continue
-            if any(kit_name in name or name in kit_name for name in dead):
+        elif _real_extra(extra):
+            continue
+        hits.append(row)
+    if not hits:
+        return None
+    if len(hits) == 1:
+        return hits[0]
+    return {
+        "name": ", ".join(row["name"] for row in hits[:4]),
+        "key": _name_key(kit_name),
+        "tokens": tokens,
+        "total": sum(row["total"] for row in hits),
+        "available": sum(row["available"] for row in hits),
+    }
+
+
+def warehouse_view(stock: list | None, staff: list | None = None, movements: list | None = None) -> dict:
+    """Compact live store. Embedding tables are photos, not stock counts."""
+    items = [
+        {"name": row["name"], "total": row["total"], "available": row["available"]}
+        for row in _stock_rows(stock)
+    ]
+    people = []
+    for row in staff or []:
+        name = str(row.get("staff_name") or "").strip()
+        if name and name not in people:
+            people.append(name)
+    checked_out = []
+    for row in movements or []:
+        direction = str(row.get("direction") or "")
+        if direction and direction != "OUT":
+            continue
+        if row.get("in_dt") and not row.get("out_dt"):
+            continue
+        name = str(row.get("inventory_name") or row.get("class_name") or "").strip()
+        if not name:
+            continue
+        checked_out.append(
+            {
+                "name": name,
+                "quantity": int(row.get("quantity") or row.get("count") or 0),
+                "staff": str(row.get("out_staff_name") or row.get("operator") or row.get("staff_name") or ""),
+            }
+        )
+    return {"items": items, "staff": people, "checked_out": checked_out}
+
+
+def _stock_booked(catalogue: dict, stock: list[dict]) -> set[str]:
+    rows = _stock_rows(stock)
+    booked = set()
+    for offering_id, lines in (catalogue.get("kits") or {}).items():
+        for line in lines:
+            hit = _match_stock(str(line.get("name") or ""), rows, strict=True)
+            if hit and hit["available"] <= 0:
                 booked.add(str(offering_id))
+                break
     return booked
 
 
@@ -414,7 +533,7 @@ def _split_bits(value) -> list[str]:
     return [part.strip() for part in parts if part.strip()]
 
 
-def advise(request: dict, stock: list | None = None) -> dict:
+def advise(request: dict, stock: list | None = None, staff: list | None = None, movements: list | None = None) -> dict:
     catalogue = load_catalogue()
     payload = dict(request)
     payload["_stock"] = list(stock or [])
@@ -502,7 +621,8 @@ def advise(request: dict, stock: list | None = None) -> dict:
         "understanding": " ".join(part for part in understanding_parts if part),
         "missing_questions": questions,
         "assumptions": assumptions,
-        "items": _item_lines(catalogue, chosen, count),
+        "items": _item_lines(catalogue, chosen, count, stock),
+        "warehouse": warehouse_view(stock, staff, movements),
         "in_charge": _in_charge(chosen),
         "recommendations": recommendations,
         "programme_title": title,
@@ -524,8 +644,9 @@ def _sessions(count, offering: dict) -> int:
     return max(1, math.ceil(float(count) / cap))
 
 
-def _item_lines(catalogue: dict, chosen: list[dict], count) -> list[dict]:
+def _item_lines(catalogue: dict, chosen: list[dict], count, stock: list | None = None) -> list[dict]:
     kits = catalogue.get("kits") or {}
+    index = _stock_rows(stock)
     merged = {}
     order = []
     for row in chosen:
@@ -534,6 +655,7 @@ def _item_lines(catalogue: dict, chosen: list[dict], count) -> list[dict]:
             name = kit.get("name") or ""
             packs = kit.get("packs")
             needed = None if packs is None else int(math.ceil(float(packs) * sessions))
+            hit = _match_stock(name, index)
             key = (row["offering_id"], name.strip().lower())
             if key not in merged:
                 order.append(key)
@@ -542,6 +664,9 @@ def _item_lines(catalogue: dict, chosen: list[dict], count) -> list[dict]:
                     "title": row["title"],
                     "name": name,
                     "packs": needed,
+                    "store_name": hit["name"] if hit else "",
+                    "store_total": hit["total"] if hit else None,
+                    "store_available": hit["available"] if hit else None,
                 }
                 continue
             old = merged[key]["packs"]
@@ -574,9 +699,14 @@ def _in_charge(chosen: list[dict]) -> list[dict]:
 _SPEAK_RULE = (
     "You are the OneShot programme consultant. Reply in short plain sentences. "
     "Recommend only items and facilitator counts that appear in FACTS. "
-    "Do not invent a product, kit, activity, or staff name. "
+    "FACTS.warehouse.items is every main_inventory row: name, total, available. "
+    "FACTS.warehouse.checked_out is open check-outs. FACTS.warehouse.staff is staff names. "
+    "items.packs is how many to prepare, not how many are in the store. "
+    "The store count is only store_available, or warehouse.items available. "
+    "If store_available is null, say the item is not in the store. "
+    "Never say the store has the packs number. "
+    "Do not invent a quantity, product, kit, activity, or staff name. "
     "Continue the existing chat. Answer the latest message from FACTS. "
-    "Do not restart the conversation or invent a product, kit, activity, or staff name. "
     "If FACTS has no items, ask only for a missing event, headcount, or target group."
 )
 
@@ -601,9 +731,15 @@ def _plain_reply(facts: dict) -> str:
             name = row.get("name") or ""
             packs = row.get("packs")
             if packs is None:
-                lines.append(f"{title}: {name}.")
+                line = f"{title}: {name}."
             else:
-                lines.append(f"{title}: {name} × {packs}.")
+                line = f"{title}: {name} × {packs}."
+            available = row.get("store_available")
+            if available is None:
+                line += " Not in the store list."
+            else:
+                line += f" Store has {available} available."
+            lines.append(line)
         extra = len(group) - 4
         if extra > 0:
             lines.append(f"{title}: and {extra} more in this kit.")
@@ -627,7 +763,7 @@ def _post_json(url: str, payload: dict, headers: dict) -> dict | None:
 
 
 def _cloud_reply(messages: list[dict], facts: dict, rule: str | None = None) -> dict | None:
-    packed = [{"role": "system", "content": (rule or _SPEAK_RULE) + " FACTS: " + json.dumps(facts)[:6000]}]
+    packed = [{"role": "system", "content": (rule or _SPEAK_RULE) + " FACTS: " + json.dumps(facts)[:24000]}]
     for message in messages[-8:]:
         role = "assistant" if message.get("role") == "assistant" else "user"
         text = str(message.get("content") or "")[:2000]
@@ -677,8 +813,10 @@ def _boundary_reply(facts: dict) -> str:
     )
 
 
-def speak(messages: list[dict], facts: dict | None) -> dict:
-    safe = facts or {}
+def speak(messages: list[dict], facts: dict | None, warehouse: dict | None = None) -> dict:
+    safe = dict(facts or {})
+    if warehouse is not None:
+        safe["warehouse"] = warehouse
     if safe.get("intent") == "decline":
         boundary = _boundary_reply(safe)
         cloud = _cloud_reply(
@@ -717,7 +855,7 @@ def _check_plain_reply() -> None:
     )
     assert "qty not on sheet" not in text
     assert text.count("Universal Indicator") == 1
-    assert "Combustion Show: Burner × 1." in text
+    assert "Combustion Show: Burner × 1. Not in the store list." in text
     assert "and 1 more in this kit." in text
     assert "Combustion Show needs 1 facilitators." in text
 
@@ -755,6 +893,47 @@ def _by_setup(rows: list[dict]) -> list[dict]:
     return sorted(rows, key=setup)
 
 
+def _check_stock() -> None:
+    stock = [
+        {"inventory_name": "Jumper Wire M M", "quantity": 64, "available": 10},
+        {"inventory_name": "Ruler", "quantity": 45, "available": 0},
+    ]
+    hit = _match_stock("Jumper Wire", _stock_rows(stock))
+    assert hit and hit["available"] == 10 and hit["total"] == 64
+    dead = _stock_booked({"kits": {"ACT-009": [{"name": "Ruler"}]}}, stock)
+    assert dead == {"ACT-009"}
+    rods = [{"inventory_name": "glass rod", "quantity": 48, "available": 48}]
+    assert _match_stock("Glass", _stock_rows(rods)) is None
+    beakers = [
+        {"inventory_name": "beakers 250ml", "quantity": 55, "available": 40},
+        {"inventory_name": "beakers 500ml", "quantity": 10, "available": 4},
+    ]
+    beaker = _match_stock("Beaker", _stock_rows(beakers))
+    assert beaker and beaker["available"] == 44
+    view = warehouse_view(
+        stock,
+        [{"staff_name": "Ada"}],
+        [{"direction": "OUT", "class_name": "Ruler", "count": 2, "operator": "Ada"}],
+    )
+    assert view["items"][1]["available"] == 0
+    assert view["staff"] == ["Ada"]
+    assert view["checked_out"] == [{"name": "Ruler", "quantity": 2, "staff": "Ada"}]
+    text = _plain_reply(
+        {
+            "items": [
+                {
+                    "offering_id": "ACT-001",
+                    "title": "Kit",
+                    "name": "Jumper Wire",
+                    "packs": 2,
+                    "store_available": 10,
+                }
+            ]
+        }
+    )
+    assert "Store has 10 available." in text
+
+
 def _journey_step(offering: dict) -> dict:
     return {
         "offering_id": offering.get("offering_id"),
@@ -763,3 +942,10 @@ def _journey_step(offering: dict) -> dict:
         "duration_min": _num(offering.get("standard_duration_min")),
         "method": str(offering.get("engagement_methods") or offering.get("delivery_mode") or ""),
     }
+
+
+if __name__ == "__main__":
+    _check_plain_reply()
+    _check_items()
+    _check_stock()
+    print("consultant checks ok")

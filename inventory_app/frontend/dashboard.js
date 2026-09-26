@@ -766,9 +766,47 @@ function isPhoneDevice() {
     return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent || "");
 }
 
+const CAMERA_OK_KEY = "oneshotCameraAllowed";
+
 function isLoopbackHost() {
     const host = (location.hostname || "").toLowerCase();
     return host === "localhost" || host === "127.0.0.1" || host === "::1";
+}
+
+async function readCameraPermission() {
+    if (!navigator.permissions || !navigator.permissions.query) return "unknown";
+    try {
+        const perm = await navigator.permissions.query({ name: "camera" });
+        return perm.state || "unknown";
+    } catch (error) {
+        return "unknown";
+    }
+}
+
+function cameraChoiceSaved() {
+    try {
+        return window.localStorage.getItem(CAMERA_OK_KEY) === "1";
+    } catch (error) {
+        return false;
+    }
+}
+
+function rememberCameraChoice(saved) {
+    try {
+        if (saved) window.localStorage.setItem(CAMERA_OK_KEY, "1");
+        else window.localStorage.removeItem(CAMERA_OK_KEY);
+    } catch (error) {
+        /* private mode */
+    }
+}
+
+function showAllowCamera() {
+    const unlock = document.getElementById("cameraUnlock");
+    if (unlock) {
+        unlock.textContent = "Allow camera";
+        unlock.classList.remove("is-hidden");
+    }
+    setFaceHint("Allow the camera once. This browser keeps that choice.");
 }
 
 function needsCaptureFallback() {
@@ -881,7 +919,7 @@ async function preferLaptopDeviceId() {
     }
 }
 
-async function startLocalCamera(deviceId, facing) {
+async function startLocalCamera(deviceId, facing, userGesture) {
     const want = facing || cameraFacing || "user";
     cameraFacing = want;
     if (needsCaptureFallback()) {
@@ -891,20 +929,21 @@ async function startLocalCamera(deviceId, facing) {
     if (cameraStartPromise) return cameraStartPromise;
     cameraStartPromise = (async () => {
         try {
+            const permState = await readCameraPermission();
+            const saved = cameraChoiceSaved();
+            if (!userGesture && permState !== "granted" && !(permState === "unknown" && saved)) {
+                showAllowCamera();
+                if (permState === "denied") {
+                    setFaceHint("Camera is blocked for this site. Allow it in the browser, then tap Allow camera.");
+                }
+                return;
+            }
             if (localStream) {
                 localStream.getTracks().forEach((track) => track.stop());
                 localStream = null;
             }
             let chosenId = deviceId || "";
-            let cameraGranted = false;
-            if (navigator.permissions && navigator.permissions.query) {
-                try {
-                    const perm = await navigator.permissions.query({ name: "camera" });
-                    cameraGranted = perm.state === "granted";
-                } catch (error) {
-                    cameraGranted = false;
-                }
-            }
+            const cameraGranted = permState === "granted" || (permState === "unknown" && saved);
             // ponytail: exact deviceId before the site is granted makes the browser ask again.
             // Stay on facingMode until Allow is saved for 127.0.0.1.
             if (!chosenId && cameraGranted && !isPhoneDevice()) {
@@ -932,9 +971,16 @@ async function startLocalCamera(deviceId, facing) {
                 window._oneshotScanTimer = setInterval(ingestScanFrame, 140);
             }
             await refreshCameraList(activeId || "");
+            rememberCameraChoice(true);
             setFaceHint("Camera ready");
         } catch (error) {
             console.error("getUserMedia error:", error);
+            if (error && error.name === "NotAllowedError") {
+                rememberCameraChoice(false);
+                showAllowCamera();
+                setFaceHint("Choose Allow, not a one-time allow, so the next open skips this.");
+                return;
+            }
             enableCaptureFallback();
         } finally {
             cameraStartPromise = null;
@@ -1420,7 +1466,7 @@ async function openRegisterPopup() {
     if (faceToggleWrap) faceToggleWrap.classList.remove("is-hidden");
     if (flowToggleWrap) flowToggleWrap.classList.add("is-hidden");
     setFaceHint("Place your face in the outline to register");
-    startLocalCamera("", "user");
+    startLocalCamera("", "user", true);
 }
 
 function renderRecognized(staff, unknownStaff = false, matchScore = null, matchThreshold = 0.78) {
@@ -1842,7 +1888,7 @@ const cameraFlip = document.getElementById("cameraFlip");
 const cameraUnlock = document.getElementById("cameraUnlock");
 if (cameraSource) {
     cameraSource.addEventListener("change", () => {
-        startLocalCamera(cameraSource.value, cameraFacing);
+        startLocalCamera(cameraSource.value, cameraFacing, true);
     });
 }
 if (cameraFlip) {
@@ -1853,11 +1899,17 @@ if (cameraFlip) {
             enableCaptureFallback();
             return;
         }
-        startLocalCamera("", cameraFacing);
+        startLocalCamera("", cameraFacing, true);
     });
 }
 if (cameraUnlock) {
-    cameraUnlock.addEventListener("click", openNativeCamera);
+    cameraUnlock.addEventListener("click", () => {
+        if (captureFallback) {
+            openNativeCamera();
+            return;
+        }
+        startLocalCamera("", cameraFacing, true);
+    });
 }
 ["iosCamUser", "iosCamEnv"].forEach((id) => {
     const input = document.getElementById(id);
