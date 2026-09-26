@@ -1146,9 +1146,9 @@
     "semantic_hash": ""
   },
   "inventory_app/database/saved_tables/manifest.json": {
-    "mtime": 1790404425.314936,
-    "seen": 1790404490.749509,
-    "ast_hash": "e6615bff1f93a5c3648669d08d574f1e",
+    "mtime": 1790405889.937673,
+    "seen": 1790407107.250444,
+    "ast_hash": "cb0551288d2059e26f0c35421173cc8d",
     "semantic_hash": ""
   },
   "inventory_app/database/setup_db.py": {
@@ -1170,9 +1170,9 @@
     "semantic_hash": "88047166e163de274b114e7e956bbbaa"
   },
   "inventory_app/frontend/dashboard.js": {
-    "mtime": 1790399717.694394,
-    "seen": 1790400034.915892,
-    "ast_hash": "74068cdb1f3cd48851dbea88f2f3f7e6",
+    "mtime": 1790404572.5752587,
+    "seen": 1790404685.1995368,
+    "ast_hash": "7f88fb84493ceedbbf7478e7e9445aa4",
     "semantic_hash": ""
   },
   "inventory_app/frontend/sam-tool.js": {
@@ -1194,9 +1194,9 @@
     "semantic_hash": ""
   },
   "inventory_app/frontend/dashboard.html": {
-    "mtime": 1790399718.5170965,
-    "seen": 1790400034.917739,
-    "ast_hash": "cfc71ccd49b7fa1325f858f3d2a96749",
+    "mtime": 1790404581.8657436,
+    "seen": 1790404685.201858,
+    "ast_hash": "5d162f6e9e73bf8b176229ae10f0c35f",
     "semantic_hash": ""
   },
   "inventory_app/frontend/petronas-logo.svg": {
@@ -1560,15 +1560,15 @@
     "semantic_hash": ""
   },
   "inventory_app/frontend/consultant.js": {
-    "mtime": 1790403611.690253,
-    "seen": 1790403922.1785548,
-    "ast_hash": "ce0ca38e1957bb9fb5f0865da9ea5544",
+    "mtime": 1790407074.4306824,
+    "seen": 1790407107.250526,
+    "ast_hash": "9d3fb0ecd7f1046dfd6322a29ce399de",
     "semantic_hash": ""
   },
   "inventory_app/frontend/consultant.html": {
-    "mtime": 1790402049.8349464,
-    "seen": 1790402251.817869,
-    "ast_hash": "024822d21d8db1d21b455a1bdc341e1e",
+    "mtime": 1790407074.4306793,
+    "seen": 1790407107.252701,
+    "ast_hash": "4c9ee9174406d7da6f399ed6dfbd8f22",
     "semantic_hash": ""
   }
 }

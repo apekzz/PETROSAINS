@@ -277,28 +277,16 @@
       "source_location": "L273"
     },
     {
-      "id": "utils_dataset_class_key",
-      "label": "_class_key()",
+      "id": "utils_dataset_crop_labeled_objects",
+      "label": "crop_labeled_objects()",
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "visualize.py",
+      "community_name": "utils_db/infer.py",
       "file_type": "code",
-      "norm_label": "_class_key()",
+      "norm_label": "crop_labeled_objects()",
       "source_file": "utils/dataset.py",
-      "source_location": "L162"
-    },
-    {
-      "id": "utils_dataset_class_names_for_image",
-      "label": "_class_names_for_image()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
-      "file_type": "code",
-      "norm_label": "_class_names_for_image()",
-      "source_file": "utils/dataset.py",
-      "source_location": "L83"
+      "source_location": "L133"
     },
     {
       "id": "utils_dataset_load_image_and_label",
@@ -306,23 +294,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "visualize.py",
+      "community_name": "utils_db/infer.py",
       "file_type": "code",
       "norm_label": "load_image_and_label()",
       "source_file": "utils/dataset.py",
       "source_location": "L15"
     },
     {
-      "id": "utils_dataset_sample_per_class",
-      "label": "_sample_per_class()",
+      "id": "utils_db_eval_embed_split_crops",
+      "label": "embed_split_crops()",
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "visualize.py",
+      "community_name": "utils_db/infer.py",
       "file_type": "code",
-      "norm_label": "_sample_per_class()",
-      "source_file": "utils/dataset.py",
-      "source_location": "L166"
+      "norm_label": "embed_split_crops()",
+      "source_file": "utils_db/eval.py",
+      "source_location": "L201"
     },
     {
       "id": "utils_db_eval_pick_query_image",
@@ -330,11 +318,47 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "visualize.py",
+      "community_name": "utils_db/infer.py",
       "file_type": "code",
       "norm_label": "pick_query_image()",
       "source_file": "utils_db/eval.py",
       "source_location": "L46"
+    },
+    {
+      "id": "utils_db_infer_color_for_name",
+      "label": "_color_for_name()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "utils_db/infer.py",
+      "file_type": "code",
+      "norm_label": "_color_for_name()",
+      "source_file": "utils_db/infer.py",
+      "source_location": "L21"
+    },
+    {
+      "id": "utils_db_infer_draw_predictions",
+      "label": "draw_predictions()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "utils_db/infer.py",
+      "file_type": "code",
+      "norm_label": "draw_predictions()",
+      "source_file": "utils_db/infer.py",
+      "source_location": "L105"
+    },
+    {
+      "id": "utils_db_infer_predict_labeled_image",
+      "label": "predict_labeled_image()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "utils_db/infer.py",
+      "file_type": "code",
+      "norm_label": "predict_labeled_image()",
+      "source_file": "utils_db/infer.py",
+      "source_location": "L25"
     },
     {
       "id": "utils_visualize_class_color",
@@ -342,95 +366,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "visualize.py",
+      "community_name": "utils_db/infer.py",
       "file_type": "code",
       "norm_label": "_class_color()",
       "source_file": "utils/visualize.py",
       "source_location": "L128"
-    },
-    {
-      "id": "utils_visualize_draw_one",
-      "label": "_draw_one()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
-      "file_type": "code",
-      "norm_label": "_draw_one()",
-      "source_file": "utils/visualize.py",
-      "source_location": "L161"
-    },
-    {
-      "id": "utils_visualize_infer_dataset_dir",
-      "label": "_infer_dataset_dir()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
-      "file_type": "code",
-      "norm_label": "_infer_dataset_dir()",
-      "source_file": "utils/visualize.py",
-      "source_location": "L110"
-    },
-    {
-      "id": "utils_visualize_label_path",
-      "label": "_label_path()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
-      "file_type": "code",
-      "norm_label": "_label_path()",
-      "source_file": "utils/visualize.py",
-      "source_location": "L117"
-    },
-    {
-      "id": "utils_visualize_load_class_names",
-      "label": "load_class_names()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
-      "file_type": "code",
-      "norm_label": "load_class_names()",
-      "source_file": "utils/visualize.py",
-      "source_location": "L31"
-    },
-    {
-      "id": "utils_visualize_parse_objects",
-      "label": "_parse_objects()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
-      "file_type": "code",
-      "norm_label": "_parse_objects()",
-      "source_file": "utils/visualize.py",
-      "source_location": "L133"
-    },
-    {
-      "id": "utils_visualize_summarize_images",
-      "label": "summarize_images()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
-      "file_type": "code",
-      "norm_label": "summarize_images()",
-      "source_file": "utils/visualize.py",
-      "source_location": "L52"
-    },
-    {
-      "id": "utils_visualize_view_labeled_images",
-      "label": "view_labeled_images()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
-      "file_type": "code",
-      "norm_label": "view_labeled_images()",
-      "source_file": "utils/visualize.py",
-      "source_location": "L63"
     },
     {
       "id": "test_pg_predict_labeled_image_main",
@@ -793,6 +733,18 @@
       "source_location": "L111"
     },
     {
+      "id": "utils_dataset_bbox_xyxy",
+      "label": "bbox_xyxy()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "PETROSAINS inventory similarity (`test_pg`)",
+      "file_type": "code",
+      "norm_label": "bbox_xyxy()",
+      "source_file": "utils/dataset.py",
+      "source_location": "L109"
+    },
+    {
       "id": "utils_db_cache_load_query_objects",
       "label": "load_query_objects()",
       "_callable": true,
@@ -913,18 +865,6 @@
       "source_location": "L106"
     },
     {
-      "id": "utils_db_eval_embed_split_crops",
-      "label": "embed_split_crops()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "eval.py",
-      "file_type": "code",
-      "norm_label": "embed_split_crops()",
-      "source_file": "utils_db/eval.py",
-      "source_location": "L201"
-    },
-    {
       "id": "utils_db_eval_evaluate_rule",
       "label": "evaluate_rule()",
       "_callable": true,
@@ -947,6 +887,18 @@
       "norm_label": "_global_mean_sim()",
       "source_file": "utils_db/eval.py",
       "source_location": "L275"
+    },
+    {
+      "id": "utils_db_eval_load_val_test_splits",
+      "label": "load_val_test_splits()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "eval.py",
+      "file_type": "code",
+      "norm_label": "load_val_test_splits()",
+      "source_file": "utils_db/eval.py",
+      "source_location": "L20"
     },
     {
       "id": "utils_db_eval_matrix_labels",
@@ -3013,30 +2965,6 @@
       "source_location": "L19"
     },
     {
-      "id": "utils_dataset_build_embedding_dataframe",
-      "label": "build_embedding_dataframe()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "drive_folder",
-      "file_type": "code",
-      "norm_label": "build_embedding_dataframe()",
-      "source_file": "utils/dataset.py",
-      "source_location": "L178"
-    },
-    {
-      "id": "utils_db_eval_load_val_test_splits",
-      "label": "load_val_test_splits()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 24,
-      "community_name": "drive_folder",
-      "file_type": "code",
-      "norm_label": "load_val_test_splits()",
-      "source_file": "utils_db/eval.py",
-      "source_location": "L20"
-    },
-    {
       "id": "utils_gdrive_drive_folder",
       "label": "drive_folder()",
       "_callable": true,
@@ -4285,6 +4213,78 @@
       "source_location": "L380"
     },
     {
+      "id": "train_v2_evaluation_evaluate_segmentation_count_instances",
+      "label": "count_instances()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "count_instances()",
+      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
+      "source_location": "L42"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_segmentation_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
+      "source_location": "L112"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_segmentation_main_f1",
+      "label": "f1()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "f1()",
+      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
+      "source_location": "L186"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_segmentation_metric_value",
+      "label": "metric_value()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "metric_value()",
+      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
+      "source_location": "L59"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_segmentation_split_images",
+      "label": "split_images()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "split_images()",
+      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
+      "source_location": "L34"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_segmentation_write_text_report",
+      "label": "write_text_report()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "write_text_report()",
+      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
+      "source_location": "L64"
+    },
+    {
       "id": "train_v2_utils_detectron2_recipe_epochmetricprinter_init",
       "label": ".__init__()",
       "_callable": true,
@@ -4573,136 +4573,52 @@
       "source_location": "L359"
     },
     {
-      "id": "train_v2_evaluation_evaluate_segmentation_count_instances",
-      "label": "count_instances()",
+      "id": "train_v2_utils_yolo_to_coco_convert_dataset",
+      "label": "convert_dataset()",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
+      "community": 40,
+      "community_name": "yolo_to_coco.py",
       "file_type": "code",
-      "norm_label": "count_instances()",
-      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
-      "source_location": "L42"
+      "norm_label": "convert_dataset()",
+      "source_file": "train_v2/utils/yolo_to_coco.py",
+      "source_location": "L113"
     },
     {
-      "id": "train_v2_evaluation_evaluate_segmentation_main",
-      "label": "main()",
+      "id": "train_v2_utils_yolo_to_coco_convert_split",
+      "label": "convert_split()",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
+      "community": 40,
+      "community_name": "yolo_to_coco.py",
       "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
-      "source_location": "L112"
-    },
-    {
-      "id": "train_v2_evaluation_evaluate_segmentation_main_f1",
-      "label": "f1()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "file_type": "code",
-      "norm_label": "f1()",
-      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
-      "source_location": "L186"
-    },
-    {
-      "id": "train_v2_evaluation_evaluate_segmentation_metric_value",
-      "label": "metric_value()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "file_type": "code",
-      "norm_label": "metric_value()",
-      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
-      "source_location": "L59"
-    },
-    {
-      "id": "train_v2_evaluation_evaluate_segmentation_split_images",
-      "label": "split_images()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "file_type": "code",
-      "norm_label": "split_images()",
-      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
-      "source_location": "L34"
-    },
-    {
-      "id": "train_v2_evaluation_evaluate_segmentation_write_text_report",
-      "label": "write_text_report()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "file_type": "code",
-      "norm_label": "write_text_report()",
-      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
+      "norm_label": "convert_split()",
+      "source_file": "train_v2/utils/yolo_to_coco.py",
       "source_location": "L64"
     },
     {
-      "id": "utils_dataset_bbox_xyxy",
-      "label": "bbox_xyxy()",
+      "id": "train_v2_utils_yolo_to_coco_image_path",
+      "label": "_image_path()",
       "_callable": true,
       "_origin": "ast",
       "community": 40,
-      "community_name": "predict_labeled_image",
+      "community_name": "yolo_to_coco.py",
       "file_type": "code",
-      "norm_label": "bbox_xyxy()",
-      "source_file": "utils/dataset.py",
-      "source_location": "L109"
+      "norm_label": "_image_path()",
+      "source_file": "train_v2/utils/yolo_to_coco.py",
+      "source_location": "L19"
     },
     {
-      "id": "utils_dataset_crop_labeled_objects",
-      "label": "crop_labeled_objects()",
+      "id": "train_v2_utils_yolo_to_coco_polygons_from_label",
+      "label": "_polygons_from_label()",
       "_callable": true,
       "_origin": "ast",
       "community": 40,
-      "community_name": "predict_labeled_image",
+      "community_name": "yolo_to_coco.py",
       "file_type": "code",
-      "norm_label": "crop_labeled_objects()",
-      "source_file": "utils/dataset.py",
-      "source_location": "L133"
-    },
-    {
-      "id": "utils_db_infer_color_for_name",
-      "label": "_color_for_name()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "predict_labeled_image",
-      "file_type": "code",
-      "norm_label": "_color_for_name()",
-      "source_file": "utils_db/infer.py",
-      "source_location": "L21"
-    },
-    {
-      "id": "utils_db_infer_draw_predictions",
-      "label": "draw_predictions()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "predict_labeled_image",
-      "file_type": "code",
-      "norm_label": "draw_predictions()",
-      "source_file": "utils_db/infer.py",
-      "source_location": "L105"
-    },
-    {
-      "id": "utils_db_infer_predict_labeled_image",
-      "label": "predict_labeled_image()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "predict_labeled_image",
-      "file_type": "code",
-      "norm_label": "predict_labeled_image()",
-      "source_file": "utils_db/infer.py",
-      "source_location": "L25"
+      "norm_label": "_polygons_from_label()",
+      "source_file": "train_v2/utils/yolo_to_coco.py",
+      "source_location": "L28"
     },
     {
       "id": "train_v2_utils_detectron2_recipe_apply_bce_dice_mask_loss",
@@ -5761,52 +5677,136 @@
       "source_location": "L197"
     },
     {
-      "id": "train_v2_utils_yolo_to_coco_convert_dataset",
-      "label": "convert_dataset()",
+      "id": "utils_dataset_build_embedding_dataframe",
+      "label": "build_embedding_dataframe()",
       "_callable": true,
       "_origin": "ast",
       "community": 52,
-      "community_name": "yolo_to_coco.py",
+      "community_name": "visualize.py",
       "file_type": "code",
-      "norm_label": "convert_dataset()",
-      "source_file": "train_v2/utils/yolo_to_coco.py",
-      "source_location": "L113"
+      "norm_label": "build_embedding_dataframe()",
+      "source_file": "utils/dataset.py",
+      "source_location": "L178"
     },
     {
-      "id": "train_v2_utils_yolo_to_coco_convert_split",
-      "label": "convert_split()",
+      "id": "utils_dataset_class_key",
+      "label": "_class_key()",
       "_callable": true,
       "_origin": "ast",
       "community": 52,
-      "community_name": "yolo_to_coco.py",
+      "community_name": "visualize.py",
       "file_type": "code",
-      "norm_label": "convert_split()",
-      "source_file": "train_v2/utils/yolo_to_coco.py",
-      "source_location": "L64"
+      "norm_label": "_class_key()",
+      "source_file": "utils/dataset.py",
+      "source_location": "L162"
     },
     {
-      "id": "train_v2_utils_yolo_to_coco_image_path",
-      "label": "_image_path()",
+      "id": "utils_dataset_class_names_for_image",
+      "label": "_class_names_for_image()",
       "_callable": true,
       "_origin": "ast",
       "community": 52,
-      "community_name": "yolo_to_coco.py",
+      "community_name": "visualize.py",
       "file_type": "code",
-      "norm_label": "_image_path()",
-      "source_file": "train_v2/utils/yolo_to_coco.py",
-      "source_location": "L19"
+      "norm_label": "_class_names_for_image()",
+      "source_file": "utils/dataset.py",
+      "source_location": "L83"
     },
     {
-      "id": "train_v2_utils_yolo_to_coco_polygons_from_label",
-      "label": "_polygons_from_label()",
+      "id": "utils_dataset_sample_per_class",
+      "label": "_sample_per_class()",
       "_callable": true,
       "_origin": "ast",
       "community": 52,
-      "community_name": "yolo_to_coco.py",
+      "community_name": "visualize.py",
       "file_type": "code",
-      "norm_label": "_polygons_from_label()",
-      "source_file": "train_v2/utils/yolo_to_coco.py",
-      "source_location": "L28"
+      "norm_label": "_sample_per_class()",
+      "source_file": "utils/dataset.py",
+      "source_location": "L166"
+    },
+    {
+      "id": "utils_visualize_draw_one",
+      "label": "_draw_one()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "visualize.py",
+      "file_type": "code",
+      "norm_label": "_draw_one()",
+      "source_file": "utils/visualize.py",
+      "source_location": "L161"
+    },
+    {
+      "id": "utils_visualize_infer_dataset_dir",
+      "label": "_infer_dataset_dir()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "visualize.py",
+      "file_type": "code",
+      "norm_label": "_infer_dataset_dir()",
+      "source_file": "utils/visualize.py",
+      "source_location": "L110"
+    },
+    {
+      "id": "utils_visualize_label_path",
+      "label": "_label_path()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "visualize.py",
+      "file_type": "code",
+      "norm_label": "_label_path()",
+      "source_file": "utils/visualize.py",
+      "source_location": "L117"
+    },
+    {
+      "id": "utils_visualize_load_class_names",
+      "label": "load_class_names()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "visualize.py",
+      "file_type": "code",
+      "norm_label": "load_class_names()",
+      "source_file": "utils/visualize.py",
+      "source_location": "L31"
+    },
+    {
+      "id": "utils_visualize_parse_objects",
+      "label": "_parse_objects()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "visualize.py",
+      "file_type": "code",
+      "norm_label": "_parse_objects()",
+      "source_file": "utils/visualize.py",
+      "source_location": "L133"
+    },
+    {
+      "id": "utils_visualize_summarize_images",
+      "label": "summarize_images()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "visualize.py",
+      "file_type": "code",
+      "norm_label": "summarize_images()",
+      "source_file": "utils/visualize.py",
+      "source_location": "L52"
+    },
+    {
+      "id": "utils_visualize_view_labeled_images",
+      "label": "view_labeled_images()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "visualize.py",
+      "file_type": "code",
+      "norm_label": "view_labeled_images()",
+      "source_file": "utils/visualize.py",
+      "source_location": "L63"
     },
     {
       "id": "inventory_app_backend_sam_tool_sam_status",
@@ -6058,7 +6058,19 @@
       "file_type": "code",
       "norm_label": "advise()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L356"
+      "source_location": "L562"
+    },
+    {
+      "id": "inventory_app_frontend_consultant_ageforlevel",
+      "label": "ageForLevel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "consultant.js",
+      "file_type": "code",
+      "norm_label": "ageforlevel()",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L284"
     },
     {
       "id": "inventory_app_frontend_consultant_agefrom",
@@ -6070,7 +6082,7 @@
       "file_type": "code",
       "norm_label": "agefrom()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L66"
+      "source_location": "L141"
     },
     {
       "id": "inventory_app_frontend_consultant_asknext",
@@ -6082,7 +6094,19 @@
       "file_type": "code",
       "norm_label": "asknext()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L97"
+      "source_location": "L172"
+    },
+    {
+      "id": "inventory_app_frontend_consultant_blankchat",
+      "label": "blankChat()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "consultant.js",
+      "file_type": "code",
+      "norm_label": "blankchat()",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L18"
     },
     {
       "id": "inventory_app_frontend_consultant_block",
@@ -6094,7 +6118,7 @@
       "file_type": "code",
       "norm_label": "block()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L176"
+      "source_location": "L309"
     },
     {
       "id": "inventory_app_frontend_consultant_boundarytext",
@@ -6106,7 +6130,31 @@
       "file_type": "code",
       "norm_label": "boundarytext()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L88"
+      "source_location": "L163"
+    },
+    {
+      "id": "inventory_app_frontend_consultant_clearside",
+      "label": "clearSide()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "consultant.js",
+      "file_type": "code",
+      "norm_label": "clearside()",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L401"
+    },
+    {
+      "id": "inventory_app_frontend_consultant_clip",
+      "label": "clip()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "consultant.js",
+      "file_type": "code",
+      "norm_label": "clip()",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L395"
     },
     {
       "id": "inventory_app_frontend_consultant_decline",
@@ -6118,7 +6166,19 @@
       "file_type": "code",
       "norm_label": "decline()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L332"
+      "source_location": "L538"
+    },
+    {
+      "id": "inventory_app_frontend_consultant_emptynote",
+      "label": "emptyNote()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "consultant.js",
+      "file_type": "code",
+      "norm_label": "emptynote()",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L388"
     },
     {
       "id": "inventory_app_frontend_consultant_foldfacts",
@@ -6130,7 +6190,7 @@
       "file_type": "code",
       "norm_label": "foldfacts()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L112"
+      "source_location": "L205"
     },
     {
       "id": "inventory_app_frontend_consultant_followup",
@@ -6142,7 +6202,7 @@
       "file_type": "code",
       "norm_label": "followup()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L345"
+      "source_location": "L551"
     },
     {
       "id": "inventory_app_frontend_consultant_hasaudience",
@@ -6154,7 +6214,7 @@
       "file_type": "code",
       "norm_label": "hasaudience()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L73"
+      "source_location": "L148"
     },
     {
       "id": "inventory_app_frontend_consultant_ingest",
@@ -6166,7 +6226,7 @@
       "file_type": "code",
       "norm_label": "ingest()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L122"
+      "source_location": "L215"
     },
     {
       "id": "inventory_app_frontend_consultant_itemqty",
@@ -6178,7 +6238,31 @@
       "file_type": "code",
       "norm_label": "itemqty()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L299"
+      "source_location": "L505"
+    },
+    {
+      "id": "inventory_app_frontend_consultant_namedlevel",
+      "label": "namedLevel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "consultant.js",
+      "file_type": "code",
+      "norm_label": "namedlevel()",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L268"
+    },
+    {
+      "id": "inventory_app_frontend_consultant_namedskill",
+      "label": "namedSkill()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "consultant.js",
+      "file_type": "code",
+      "norm_label": "namedskill()",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L276"
     },
     {
       "id": "inventory_app_frontend_consultant_packfacts",
@@ -6190,7 +6274,19 @@
       "file_type": "code",
       "norm_label": "packfacts()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L308"
+      "source_location": "L514"
+    },
+    {
+      "id": "inventory_app_frontend_consultant_paintquick",
+      "label": "paintQuick()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "consultant.js",
+      "file_type": "code",
+      "norm_label": "paintquick()",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L99"
     },
     {
       "id": "inventory_app_frontend_consultant_paintrequest",
@@ -6202,7 +6298,31 @@
       "file_type": "code",
       "norm_label": "paintrequest()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L53"
+      "source_location": "L75"
+    },
+    {
+      "id": "inventory_app_frontend_consultant_paintside",
+      "label": "paintSide()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "consultant.js",
+      "file_type": "code",
+      "norm_label": "paintside()",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L408"
+    },
+    {
+      "id": "inventory_app_frontend_consultant_paintsteps",
+      "label": "paintSteps()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "consultant.js",
+      "file_type": "code",
+      "norm_label": "paintsteps()",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L85"
     },
     {
       "id": "inventory_app_frontend_consultant_payload",
@@ -6214,7 +6334,7 @@
       "file_type": "code",
       "norm_label": "payload()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L160"
+      "source_location": "L293"
     },
     {
       "id": "inventory_app_frontend_consultant_pingclienthello",
@@ -6226,7 +6346,19 @@
       "file_type": "code",
       "norm_label": "pingclienthello()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L401"
+      "source_location": "L609"
+    },
+    {
+      "id": "inventory_app_frontend_consultant_promptfor",
+      "label": "promptFor()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "consultant.js",
+      "file_type": "code",
+      "norm_label": "promptfor()",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L121"
     },
     {
       "id": "inventory_app_frontend_consultant_render",
@@ -6238,7 +6370,7 @@
       "file_type": "code",
       "norm_label": "render()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L255"
+      "source_location": "L460"
     },
     {
       "id": "inventory_app_frontend_consultant_resetchat",
@@ -6250,7 +6382,7 @@
       "file_type": "code",
       "norm_label": "resetchat()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L59"
+      "source_location": "L129"
     },
     {
       "id": "inventory_app_frontend_consultant_say",
@@ -6262,7 +6394,19 @@
       "file_type": "code",
       "norm_label": "say()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L41"
+      "source_location": "L63"
+    },
+    {
+      "id": "inventory_app_frontend_consultant_setcomposerbusy",
+      "label": "setComposerBusy()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "consultant.js",
+      "file_type": "code",
+      "norm_label": "setcomposerbusy()",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L56"
     },
     {
       "id": "inventory_app_frontend_consultant_showpicks",
@@ -6274,7 +6418,7 @@
       "file_type": "code",
       "norm_label": "showpicks()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L205"
+      "source_location": "L338"
     },
     {
       "id": "inventory_app_frontend_consultant_showthinking",
@@ -6286,7 +6430,7 @@
       "file_type": "code",
       "norm_label": "showthinking()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L18"
+      "source_location": "L31"
     },
     {
       "id": "inventory_app_frontend_consultant_stopthinking",
@@ -6298,7 +6442,7 @@
       "file_type": "code",
       "norm_label": "stopthinking()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L35"
+      "source_location": "L49"
     },
     {
       "id": "inventory_app_frontend_consultant_takecount",
@@ -6310,7 +6454,7 @@
       "file_type": "code",
       "norm_label": "takecount()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L77"
+      "source_location": "L152"
     },
     {
       "id": "inventory_app_frontend_consultant_talk",
@@ -6322,7 +6466,7 @@
       "file_type": "code",
       "norm_label": "talk()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L322"
+      "source_location": "L528"
     },
     {
       "id": "inventory_app_frontend_consultant_threadmessages",
@@ -6334,7 +6478,7 @@
       "file_type": "code",
       "norm_label": "threadmessages()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L9"
+      "source_location": "L22"
     },
     {
       "id": "inventory_app_frontend_consultant_wantselse",
@@ -6346,7 +6490,7 @@
       "file_type": "code",
       "norm_label": "wantselse()",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L84"
+      "source_location": "L159"
     },
     {
       "id": "inventory_app_database_sql_apply_saved_stock_totals",
@@ -7969,24 +8113,13 @@
       "source_location": "L38"
     },
     {
-      "id": "utils_dataset",
-      "label": "dataset.py",
+      "id": "utils_dataset_py_image",
+      "label": "Image",
       "_origin": "ast",
       "community": 0,
-      "community_name": "visualize.py",
+      "community_name": "utils_db/infer.py",
       "file_type": "code",
-      "norm_label": "dataset.py",
-      "source_file": "utils/dataset.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "utils_dataset_py_path",
-      "label": "Path",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "visualize.py",
-      "file_type": "code",
-      "norm_label": "path",
+      "norm_label": "image",
       "source_file": "",
       "source_location": ""
     },
@@ -7995,88 +8128,110 @@
       "label": "utils_db/infer.py",
       "_origin": "ast",
       "community": 0,
-      "community_name": "visualize.py",
+      "community_name": "utils_db/infer.py",
       "file_type": "code",
       "norm_label": "utils_db/infer.py",
       "source_file": "utils_db/infer.py",
       "source_location": "L1"
     },
     {
-      "id": "utils_visualize",
-      "label": "visualize.py",
+      "id": "utils_db_infer_py_dataframe",
+      "label": "DataFrame",
       "_origin": "ast",
       "community": 0,
-      "community_name": "visualize.py",
+      "community_name": "utils_db/infer.py",
       "file_type": "code",
-      "norm_label": "visualize.py",
-      "source_file": "utils/visualize.py",
-      "source_location": "L1"
+      "norm_label": "dataframe",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "utils_visualize_py_path",
+      "id": "utils_db_infer_py_image",
+      "label": "Image",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "utils_db/infer.py",
+      "file_type": "code",
+      "norm_label": "image",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "utils_db_infer_py_path",
       "label": "Path",
       "_origin": "ast",
       "community": 0,
-      "community_name": "visualize.py",
+      "community_name": "utils_db/infer.py",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "utils_dataset_rationale_1",
-      "label": "Load dataset images/labels and build a catalog dataframe.",
+      "id": "utils_dataset_rationale_139",
+      "label": "Crop each labeled object from ``image`` and attach bbox metadata.",
       "_origin": "ast",
       "community": 0,
-      "community_name": "visualize.py",
+      "community_name": "utils_db/infer.py",
       "file_type": "rationale",
-      "norm_label": "load dataset images/labels and build a catalog dataframe.",
+      "norm_label": "crop each labeled object from ``image`` and attach bbox metadata.",
       "source_file": "utils/dataset.py",
-      "source_location": "L1"
+      "source_location": "L139"
     },
     {
       "id": "utils_dataset_rationale_26",
       "label": "Load one image and its YOLO label. Specify the file with ``image_path=``, or an\u2026",
       "_origin": "ast",
       "community": 0,
-      "community_name": "visualize.py",
+      "community_name": "utils_db/infer.py",
       "file_type": "rationale",
       "norm_label": "load one image and its yolo label. specify the file with ``image_path=``, or an...",
       "source_file": "utils/dataset.py",
       "source_location": "L26"
     },
     {
+      "id": "utils_db_eval_rationale_202",
+      "label": "Embed every labeled crop in ``split``. Reuses a preloaded OpenCLIP model.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "utils_db/infer.py",
+      "file_type": "rationale",
+      "norm_label": "embed every labeled crop in ``split``. reuses a preloaded openclip model.",
+      "source_file": "utils_db/eval.py",
+      "source_location": "L202"
+    },
+    {
       "id": "utils_db_infer_rationale_1",
       "label": "Predict classes for objects in one labeled image using pgvector + Rule 1.",
       "_origin": "ast",
       "community": 0,
-      "community_name": "visualize.py",
+      "community_name": "utils_db/infer.py",
       "file_type": "rationale",
       "norm_label": "predict classes for objects in one labeled image using pgvector + rule 1.",
       "source_file": "utils_db/infer.py",
       "source_location": "L1"
     },
     {
-      "id": "utils_visualize_rationale_1",
-      "label": "Preview dataset images with YOLO box or segmentation labels drawn on top.",
+      "id": "utils_db_infer_rationale_113",
+      "label": "Draw bbox + segmentation mask + predicted class on the input image.",
       "_origin": "ast",
       "community": 0,
-      "community_name": "visualize.py",
+      "community_name": "utils_db/infer.py",
       "file_type": "rationale",
-      "norm_label": "preview dataset images with yolo box or segmentation labels drawn on top.",
-      "source_file": "utils/visualize.py",
-      "source_location": "L1"
+      "norm_label": "draw bbox + segmentation mask + predicted class on the input image.",
+      "source_file": "utils_db/infer.py",
+      "source_location": "L113"
     },
     {
-      "id": "utils_visualize_rationale_73",
-      "label": "Show one or more images from ``images`` with labels overlaid.",
+      "id": "utils_db_infer_rationale_38",
+      "label": "Crop each labeled object, embed it, apply Rule 1, and draw the result. Object\u2026",
       "_origin": "ast",
       "community": 0,
-      "community_name": "visualize.py",
+      "community_name": "utils_db/infer.py",
       "file_type": "rationale",
-      "norm_label": "show one or more images from ``images`` with labels overlaid.",
-      "source_file": "utils/visualize.py",
-      "source_location": "L73"
+      "norm_label": "crop each labeled object, embed it, apply rule 1, and draw the result. object...",
+      "source_file": "utils_db/infer.py",
+      "source_location": "L38"
     },
     {
       "id": "test_pg_predict_labeled_image",
@@ -8371,6 +8526,18 @@
       "source_location": "L29"
     },
     {
+      "id": "test_pg_readme_c_generate_training_embeddings_with_openclip",
+      "label": "C. Generate training embeddings with OpenCLIP",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "PETROSAINS inventory similarity (`test_pg`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "c. generate training embeddings with openclip",
+      "source_file": "test_pg/README.md",
+      "source_location": "L45"
+    },
+    {
       "id": "test_pg_readme_d_development_mode_prediction_and_evaluation",
       "label": "D. Development mode: prediction and evaluation",
       "_origin": "ast",
@@ -8465,6 +8632,17 @@
       "norm_label": "what it does",
       "source_file": "test_pg/README.md",
       "source_location": "L150"
+    },
+    {
+      "id": "utils_dataset_rationale_114",
+      "label": "Axis-aligned crop box from a YOLO box or polygon label.",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "PETROSAINS inventory similarity (`test_pg`)",
+      "file_type": "rationale",
+      "norm_label": "axis-aligned crop box from a yolo box or polygon label.",
+      "source_file": "utils/dataset.py",
+      "source_location": "L114"
     },
     {
       "id": "utils_db_cache_rationale_1",
@@ -8608,17 +8786,6 @@
       "norm_label": "cumulative similarity / soft vote over the top ``top_n`` ranks. ``total_score =...",
       "source_file": "utils_db/eval.py",
       "source_location": "L183"
-    },
-    {
-      "id": "utils_db_eval_rationale_202",
-      "label": "Embed every labeled crop in ``split``. Reuses a preloaded OpenCLIP model.",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "eval.py",
-      "file_type": "rationale",
-      "norm_label": "embed every labeled crop in ``split``. reuses a preloaded openclip model.",
-      "source_file": "utils_db/eval.py",
-      "source_location": "L202"
     },
     {
       "id": "utils_db_eval_rationale_248",
@@ -9589,17 +9756,6 @@
       "source_location": "L432"
     },
     {
-      "id": "test_pg_embed_train_official",
-      "label": "embed_train_official.py",
-      "_origin": "ast",
-      "community": 22,
-      "community_name": "embed.py",
-      "file_type": "code",
-      "norm_label": "embed_train_official.py",
-      "source_file": "test_pg/embed_train_official.py",
-      "source_location": "L1"
-    },
-    {
       "id": "utils_embed",
       "label": "embed.py",
       "_origin": "ast",
@@ -9663,17 +9819,6 @@
       "file_type": "code",
       "norm_label": "utils/__init__.py",
       "source_file": "utils/__init__.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "test_pg_embed_train_official_rationale_1",
-      "label": "Embed every labeled crop from train_official.parquet and save the results.",
-      "_origin": "ast",
-      "community": 22,
-      "community_name": "embed.py",
-      "file_type": "rationale",
-      "norm_label": "embed every labeled crop from train_official.parquet and save the results.",
-      "source_file": "test_pg/embed_train_official.py",
       "source_location": "L1"
     },
     {
@@ -9842,15 +9987,15 @@
       "source_location": "L1"
     },
     {
-      "id": "utils_dataset_py_dataframe",
-      "label": "DataFrame",
+      "id": "test_pg_embed_train_official",
+      "label": "embed_train_official.py",
       "_origin": "ast",
       "community": 24,
       "community_name": "drive_folder",
       "file_type": "code",
-      "norm_label": "dataframe",
-      "source_file": "",
-      "source_location": ""
+      "norm_label": "embed_train_official.py",
+      "source_file": "test_pg/embed_train_official.py",
+      "source_location": "L1"
     },
     {
       "id": "utils_gdrive",
@@ -9886,15 +10031,15 @@
       "source_location": "L1"
     },
     {
-      "id": "utils_dataset_rationale_188",
-      "label": "Build a catalog with image name, path, class name, and empty embeddings.\u2026",
+      "id": "test_pg_embed_train_official_rationale_1",
+      "label": "Embed every labeled crop from train_official.parquet and save the results.",
       "_origin": "ast",
       "community": 24,
       "community_name": "drive_folder",
       "file_type": "rationale",
-      "norm_label": "build a catalog with image name, path, class name, and empty embeddings....",
-      "source_file": "utils/dataset.py",
-      "source_location": "L188"
+      "norm_label": "embed every labeled crop from train_official.parquet and save the results.",
+      "source_file": "test_pg/embed_train_official.py",
+      "source_location": "L1"
     },
     {
       "id": "utils_gdrive_rationale_1",
@@ -10788,6 +10933,28 @@
       "source_location": ""
     },
     {
+      "id": "train_v2_evaluation_evaluate_segmentation",
+      "label": "evaluate_segmentation.py",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "evaluate_segmentation.py",
+      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_segmentation_py_path",
+      "label": "Path",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
       "id": "train_v2_evaluation_evaluate_embedding_mc2_noise_rationale_192",
       "label": "Per-name mean of top-3 cosines (live match_inventory_name).",
       "_origin": "ast",
@@ -10863,6 +11030,17 @@
       "norm_label": "ponytail: smallest assert that live top-3 ranking stays correct.",
       "source_file": "train_v2/evaluation/evaluate_embedding_mc2_noise.py",
       "source_location": "L622"
+    },
+    {
+      "id": "train_v2_evaluation_evaluate_segmentation_rationale_2",
+      "label": "Evaluate YOLO11 segmentation on the merged validation and test splits.",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "file_type": "rationale",
+      "norm_label": "evaluate yolo11 segmentation on the merged validation and test splits.",
+      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
+      "source_location": "L2"
     },
     {
       "id": "commonmetricprinter",
@@ -11001,28 +11179,6 @@
       "source_location": ""
     },
     {
-      "id": "train_v2_evaluation_evaluate_segmentation",
-      "label": "evaluate_segmentation.py",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "file_type": "code",
-      "norm_label": "evaluate_segmentation.py",
-      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "train_v2_evaluation_evaluate_segmentation_py_path",
-      "label": "Path",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
       "id": "train_v2_evaluation_evaluate_embedding_similarity_rationale_145",
       "label": "Replicate top-100, >=3-support, mean-score production matching.",
       "_origin": "ast",
@@ -11078,115 +11234,37 @@
       "source_location": "L34"
     },
     {
-      "id": "train_v2_evaluation_evaluate_segmentation_rationale_2",
-      "label": "Evaluate YOLO11 segmentation on the merged validation and test splits.",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "file_type": "rationale",
-      "norm_label": "evaluate yolo11 segmentation on the merged validation and test splits.",
-      "source_file": "train_v2/evaluation/evaluate_segmentation.py",
-      "source_location": "L2"
-    },
-    {
-      "id": "utils_dataset_py_image",
-      "label": "Image",
+      "id": "train_v2_utils_yolo_to_coco",
+      "label": "yolo_to_coco.py",
       "_origin": "ast",
       "community": 40,
-      "community_name": "predict_labeled_image",
+      "community_name": "yolo_to_coco.py",
       "file_type": "code",
-      "norm_label": "image",
-      "source_file": "",
-      "source_location": ""
+      "norm_label": "yolo_to_coco.py",
+      "source_file": "train_v2/utils/yolo_to_coco.py",
+      "source_location": "L1"
     },
     {
-      "id": "utils_db_infer_py_dataframe",
-      "label": "DataFrame",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "predict_labeled_image",
-      "file_type": "code",
-      "norm_label": "dataframe",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "utils_db_infer_py_image",
-      "label": "Image",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "predict_labeled_image",
-      "file_type": "code",
-      "norm_label": "image",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "utils_db_infer_py_path",
+      "id": "train_v2_utils_yolo_to_coco_py_path",
       "label": "Path",
       "_origin": "ast",
       "community": 40,
-      "community_name": "predict_labeled_image",
+      "community_name": "yolo_to_coco.py",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "test_pg_readme_c_generate_training_embeddings_with_openclip",
-      "label": "C. Generate training embeddings with OpenCLIP",
+      "id": "train_v2_utils_yolo_to_coco_rationale_1",
+      "label": "Convert train_v2 YOLO-seg labels to COCO JSON for Detectron2.",
       "_origin": "ast",
       "community": 40,
-      "community_name": "predict_labeled_image",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "c. generate training embeddings with openclip",
-      "source_file": "test_pg/README.md",
-      "source_location": "L45"
-    },
-    {
-      "id": "utils_dataset_rationale_114",
-      "label": "Axis-aligned crop box from a YOLO box or polygon label.",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "predict_labeled_image",
+      "community_name": "yolo_to_coco.py",
       "file_type": "rationale",
-      "norm_label": "axis-aligned crop box from a yolo box or polygon label.",
-      "source_file": "utils/dataset.py",
-      "source_location": "L114"
-    },
-    {
-      "id": "utils_dataset_rationale_139",
-      "label": "Crop each labeled object from ``image`` and attach bbox metadata.",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "predict_labeled_image",
-      "file_type": "rationale",
-      "norm_label": "crop each labeled object from ``image`` and attach bbox metadata.",
-      "source_file": "utils/dataset.py",
-      "source_location": "L139"
-    },
-    {
-      "id": "utils_db_infer_rationale_113",
-      "label": "Draw bbox + segmentation mask + predicted class on the input image.",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "predict_labeled_image",
-      "file_type": "rationale",
-      "norm_label": "draw bbox + segmentation mask + predicted class on the input image.",
-      "source_file": "utils_db/infer.py",
-      "source_location": "L113"
-    },
-    {
-      "id": "utils_db_infer_rationale_38",
-      "label": "Crop each labeled object, embed it, apply Rule 1, and draw the result. Object\u2026",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "predict_labeled_image",
-      "file_type": "rationale",
-      "norm_label": "crop each labeled object, embed it, apply rule 1, and draw the result. object...",
-      "source_file": "utils_db/infer.py",
-      "source_location": "L38"
+      "norm_label": "convert train_v2 yolo-seg labels to coco json for detectron2.",
+      "source_file": "train_v2/utils/yolo_to_coco.py",
+      "source_location": "L1"
     },
     {
       "id": "test_sahi",
@@ -11478,37 +11556,103 @@
       "source_location": "L206"
     },
     {
-      "id": "train_v2_utils_yolo_to_coco",
-      "label": "yolo_to_coco.py",
+      "id": "utils_dataset",
+      "label": "dataset.py",
       "_origin": "ast",
       "community": 52,
-      "community_name": "yolo_to_coco.py",
+      "community_name": "visualize.py",
       "file_type": "code",
-      "norm_label": "yolo_to_coco.py",
-      "source_file": "train_v2/utils/yolo_to_coco.py",
+      "norm_label": "dataset.py",
+      "source_file": "utils/dataset.py",
       "source_location": "L1"
     },
     {
-      "id": "train_v2_utils_yolo_to_coco_py_path",
+      "id": "utils_dataset_py_dataframe",
+      "label": "DataFrame",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "visualize.py",
+      "file_type": "code",
+      "norm_label": "dataframe",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "utils_dataset_py_path",
       "label": "Path",
       "_origin": "ast",
       "community": 52,
-      "community_name": "yolo_to_coco.py",
+      "community_name": "visualize.py",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "train_v2_utils_yolo_to_coco_rationale_1",
-      "label": "Convert train_v2 YOLO-seg labels to COCO JSON for Detectron2.",
+      "id": "utils_visualize",
+      "label": "visualize.py",
       "_origin": "ast",
       "community": 52,
-      "community_name": "yolo_to_coco.py",
-      "file_type": "rationale",
-      "norm_label": "convert train_v2 yolo-seg labels to coco json for detectron2.",
-      "source_file": "train_v2/utils/yolo_to_coco.py",
+      "community_name": "visualize.py",
+      "file_type": "code",
+      "norm_label": "visualize.py",
+      "source_file": "utils/visualize.py",
       "source_location": "L1"
+    },
+    {
+      "id": "utils_visualize_py_path",
+      "label": "Path",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "visualize.py",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "utils_dataset_rationale_1",
+      "label": "Load dataset images/labels and build a catalog dataframe.",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "visualize.py",
+      "file_type": "rationale",
+      "norm_label": "load dataset images/labels and build a catalog dataframe.",
+      "source_file": "utils/dataset.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "utils_dataset_rationale_188",
+      "label": "Build a catalog with image name, path, class name, and empty embeddings.\u2026",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "visualize.py",
+      "file_type": "rationale",
+      "norm_label": "build a catalog with image name, path, class name, and empty embeddings....",
+      "source_file": "utils/dataset.py",
+      "source_location": "L188"
+    },
+    {
+      "id": "utils_visualize_rationale_1",
+      "label": "Preview dataset images with YOLO box or segmentation labels drawn on top.",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "visualize.py",
+      "file_type": "rationale",
+      "norm_label": "preview dataset images with yolo box or segmentation labels drawn on top.",
+      "source_file": "utils/visualize.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "utils_visualize_rationale_73",
+      "label": "Show one or more images from ``images`` with labels overlaid.",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "visualize.py",
+      "file_type": "rationale",
+      "norm_label": "show one or more images from ``images`` with labels overlaid.",
+      "source_file": "utils/visualize.py",
+      "source_location": "L73"
     },
     {
       "id": "basemodel",
@@ -11962,78 +12106,6 @@
       "source_location": "L60"
     },
     {
-      "id": "collections_abc",
-      "label": "collections_abc",
-      "_origin": "semantic",
-      "community": 0,
-      "community_name": "visualize.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "collections_abc",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "colorsys",
-      "label": "colorsys",
-      "_origin": "semantic",
-      "community": 0,
-      "community_name": "visualize.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "colorsys",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "math",
-      "label": "math",
-      "_origin": "semantic",
-      "community": 0,
-      "community_name": "visualize.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "math",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "matplotlib",
-      "label": "matplotlib",
-      "_origin": "semantic",
-      "community": 0,
-      "community_name": "visualize.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "matplotlib",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "matplotlib_patches",
-      "label": "matplotlib_patches",
-      "_origin": "semantic",
-      "community": 0,
-      "community_name": "visualize.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "matplotlib_patches",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "pil",
-      "label": "pil",
-      "_origin": "semantic",
-      "community": 0,
-      "community_name": "visualize.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "pil",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "argparse",
       "label": "argparse",
       "_origin": "semantic",
@@ -12042,6 +12114,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "argparse",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "dataclasses",
+      "label": "dataclasses",
+      "_origin": "semantic",
+      "community": 1,
+      "community_name": "pathlib",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "dataclasses",
       "source_file": "",
       "type": "external"
     },
@@ -12370,30 +12454,6 @@
       "type": "external"
     },
     {
-      "id": "dataclasses",
-      "label": "dataclasses",
-      "_origin": "semantic",
-      "community": 17,
-      "community_name": "noise_transfer.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "dataclasses",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "typing",
-      "label": "typing",
-      "_origin": "semantic",
-      "community": 17,
-      "community_name": "noise_transfer.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "typing",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "urllib_error",
       "label": "urllib_error",
       "_origin": "semantic",
@@ -12502,26 +12562,14 @@
       "type": "external"
     },
     {
-      "id": "pandas",
-      "label": "pandas",
+      "id": "typing",
+      "label": "typing",
       "_origin": "semantic",
       "community": 22,
       "community_name": "embed.py",
       "external": true,
       "file_type": "concept",
-      "norm_label": "pandas",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "sys",
-      "label": "sys",
-      "_origin": "semantic",
-      "community": 22,
-      "community_name": "embed.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "sys",
+      "norm_label": "typing",
       "source_file": "",
       "type": "external"
     },
@@ -12562,6 +12610,18 @@
       "type": "external"
     },
     {
+      "id": "pandas",
+      "label": "pandas",
+      "_origin": "semantic",
+      "community": 24,
+      "community_name": "drive_folder",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "pandas",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "re",
       "label": "re",
       "_origin": "semantic",
@@ -12570,6 +12630,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "re",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "sys",
+      "label": "sys",
+      "_origin": "semantic",
+      "community": 24,
+      "community_name": "drive_folder",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "sys",
       "source_file": "",
       "type": "external"
     },
@@ -12598,6 +12670,54 @@
       "type": "external"
     },
     {
+      "id": "datetime",
+      "label": "datetime",
+      "_origin": "semantic",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "datetime",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "json",
+      "label": "json",
+      "_origin": "semantic",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "json",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "platform",
+      "label": "platform",
+      "_origin": "semantic",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "platform",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "yaml",
+      "label": "yaml",
+      "_origin": "semantic",
+      "community": 35,
+      "community_name": "evaluate_embedding_mc2_noise.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "yaml",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "ref_crypto",
       "label": "ref_crypto",
       "_origin": "semantic",
@@ -12610,38 +12730,14 @@
       "type": "external"
     },
     {
-      "id": "datetime",
-      "label": "datetime",
+      "id": "tqdm",
+      "label": "tqdm",
       "_origin": "semantic",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
+      "community": 40,
+      "community_name": "yolo_to_coco.py",
       "external": true,
       "file_type": "concept",
-      "norm_label": "datetime",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "platform",
-      "label": "platform",
-      "_origin": "semantic",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "platform",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "yaml",
-      "label": "yaml",
-      "_origin": "semantic",
-      "community": 4,
-      "community_name": "evaluate_embedding_similarity.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "yaml",
+      "norm_label": "tqdm",
       "source_file": "",
       "type": "external"
     },
@@ -12838,14 +12934,62 @@
       "type": "external"
     },
     {
-      "id": "tqdm",
-      "label": "tqdm",
+      "id": "collections_abc",
+      "label": "collections_abc",
       "_origin": "semantic",
       "community": 52,
-      "community_name": "yolo_to_coco.py",
+      "community_name": "visualize.py",
       "external": true,
       "file_type": "concept",
-      "norm_label": "tqdm",
+      "norm_label": "collections_abc",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "colorsys",
+      "label": "colorsys",
+      "_origin": "semantic",
+      "community": 52,
+      "community_name": "visualize.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "colorsys",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "math",
+      "label": "math",
+      "_origin": "semantic",
+      "community": 52,
+      "community_name": "visualize.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "math",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "matplotlib_patches",
+      "label": "matplotlib_patches",
+      "_origin": "semantic",
+      "community": 52,
+      "community_name": "visualize.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "matplotlib_patches",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "pil",
+      "label": "pil",
+      "_origin": "semantic",
+      "community": 52,
+      "community_name": "visualize.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "pil",
       "source_file": "",
       "type": "external"
     },
@@ -12874,6 +13018,18 @@
       "type": "external"
     },
     {
+      "id": "matplotlib",
+      "label": "matplotlib",
+      "_origin": "semantic",
+      "community": 68,
+      "community_name": "analyze_object_areas.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "matplotlib",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "cv2",
       "label": "cv2",
       "_origin": "semantic",
@@ -12882,18 +13038,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "cv2",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "json",
-      "label": "json",
-      "_origin": "semantic",
-      "community": 9,
-      "community_name": "face.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "json",
       "source_file": "",
       "type": "external"
     },
@@ -16016,7 +16160,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L362",
+      "source_location": "L568",
       "weight": 1.0
     },
     {
@@ -16028,7 +16172,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L366",
+      "source_location": "L572",
       "weight": 1.0
     },
     {
@@ -16040,7 +16184,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L374",
+      "source_location": "L580",
       "weight": 1.0
     },
     {
@@ -16052,7 +16196,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L375",
+      "source_location": "L581",
       "weight": 1.0
     },
     {
@@ -16064,7 +16208,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L375",
+      "source_location": "L581",
       "weight": 1.0
     },
     {
@@ -16076,7 +16220,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L376",
+      "source_location": "L582",
       "weight": 1.0
     },
     {
@@ -16088,7 +16232,43 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L380",
+      "source_location": "L586",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_ageforlevel",
+      "target": "inventory_app_frontend_consultant_agefrom",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L290",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_asknext",
+      "target": "inventory_app_frontend_consultant_paintrequest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L176",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_asknext",
+      "target": "inventory_app_frontend_consultant_promptfor",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L177",
       "weight": 1.0
     },
     {
@@ -16100,7 +16280,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L100",
+      "source_location": "L177",
       "weight": 1.0
     },
     {
@@ -16112,7 +16292,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L109",
+      "source_location": "L202",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_clearside",
+      "target": "inventory_app_frontend_consultant_emptynote",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L404",
       "weight": 1.0
     },
     {
@@ -16124,7 +16316,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L335",
+      "source_location": "L541",
       "weight": 1.0
     },
     {
@@ -16136,7 +16328,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L336",
+      "source_location": "L542",
       "weight": 1.0
     },
     {
@@ -16148,7 +16340,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L338",
+      "source_location": "L544",
       "weight": 1.0
     },
     {
@@ -16160,7 +16352,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L338",
+      "source_location": "L544",
       "weight": 1.0
     },
     {
@@ -16172,7 +16364,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L113",
+      "source_location": "L206",
       "weight": 1.0
     },
     {
@@ -16184,7 +16376,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L117",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -16196,7 +16388,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L118",
+      "source_location": "L211",
       "weight": 1.0
     },
     {
@@ -16208,7 +16400,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L347",
+      "source_location": "L553",
       "weight": 1.0
     },
     {
@@ -16220,7 +16412,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L348",
+      "source_location": "L554",
       "weight": 1.0
     },
     {
@@ -16232,7 +16424,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L349",
+      "source_location": "L555",
       "weight": 1.0
     },
     {
@@ -16244,7 +16436,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L125",
+      "source_location": "L218",
       "weight": 1.0
     },
     {
@@ -16256,7 +16448,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L135",
+      "source_location": "L228",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_ingest",
+      "target": "inventory_app_frontend_consultant_ageforlevel",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L232",
       "weight": 1.0
     },
     {
@@ -16268,7 +16472,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L137",
+      "source_location": "L235",
       "weight": 1.0
     },
     {
@@ -16280,7 +16484,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L138",
+      "source_location": "L236",
       "weight": 1.0
     },
     {
@@ -16292,7 +16496,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L139",
+      "source_location": "L237",
       "weight": 1.0
     },
     {
@@ -16304,7 +16508,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L145",
+      "source_location": "L245",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_ingest",
+      "target": "inventory_app_frontend_consultant_namedlevel",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L246",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_ingest",
+      "target": "inventory_app_frontend_consultant_namedskill",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L247",
       "weight": 1.0
     },
     {
@@ -16316,7 +16544,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L149",
+      "source_location": "L256",
       "weight": 1.0
     },
     {
@@ -16328,7 +16556,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L150",
+      "source_location": "L257",
       "weight": 1.0
     },
     {
@@ -16340,7 +16568,91 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L157",
+      "source_location": "L265",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_paintquick",
+      "target": "inventory_app_frontend_consultant_ingest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L114",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_paintrequest",
+      "target": "inventory_app_frontend_consultant_paintsteps",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_paintrequest",
+      "target": "inventory_app_frontend_consultant_paintquick",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L82",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_paintside",
+      "target": "inventory_app_frontend_consultant_emptynote",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L414",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_paintside",
+      "target": "inventory_app_frontend_consultant_clip",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L425",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_payload",
+      "target": "inventory_app_frontend_consultant_ageforlevel",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L297",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_render",
+      "target": "inventory_app_frontend_consultant_paintside",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L461",
       "weight": 1.0
     },
     {
@@ -16352,7 +16664,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L257",
+      "source_location": "L463",
       "weight": 1.0
     },
     {
@@ -16364,7 +16676,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L264",
+      "source_location": "L470",
       "weight": 1.0
     },
     {
@@ -16376,7 +16688,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L294",
+      "source_location": "L500",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_resetchat",
+      "target": "inventory_app_frontend_consultant_blankchat",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L130",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_resetchat",
+      "target": "inventory_app_frontend_consultant_clearside",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L134",
       "weight": 1.0
     },
     {
@@ -16388,7 +16724,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L62",
+      "source_location": "L135",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_resetchat",
+      "target": "inventory_app_frontend_consultant_promptfor",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L137",
       "weight": 1.0
     },
     {
@@ -16400,7 +16748,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L63",
+      "source_location": "L137",
       "weight": 1.0
     },
     {
@@ -16412,7 +16760,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L42",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -16424,7 +16772,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L239",
+      "source_location": "L372",
       "weight": 1.0
     },
     {
@@ -16436,7 +16784,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L19",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_showthinking",
+      "target": "inventory_app_frontend_consultant_setcomposerbusy",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant_stopthinking",
+      "target": "inventory_app_frontend_consultant_setcomposerbusy",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -16448,7 +16820,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L326",
+      "source_location": "L532",
       "weight": 1.0
     },
     {
@@ -22129,6 +22501,18 @@
     },
     {
       "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_blankchat",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
       "target": "inventory_app_frontend_consultant_ingest",
       "relation": "contains",
       "_origin": "ast",
@@ -22136,7 +22520,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L122",
+      "source_location": "L215",
       "weight": 1.0
     },
     {
@@ -22148,19 +22532,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L401",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_resetchat",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L59",
+      "source_location": "L609",
       "weight": 1.0
     },
     {
@@ -32746,167 +33118,13 @@
     },
     {
       "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_foldfacts",
+      "target": "inventory_app_frontend_consultant_promptfor",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L112",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_payload",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L160",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_block",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L176",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_showthinking",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L18",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_showpicks",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L205",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_render",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L255",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_itemqty",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L299",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_packfacts",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L308",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_talk",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L322",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_decline",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L332",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_followup",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L345",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_stopthinking",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L35",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_advise",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L356",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_say",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L41",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_paintrequest",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L53",
+      "source_location": "L121",
       "weight": 1.0
     },
     {
@@ -32917,7 +33135,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L66",
+      "source_location": "L141",
       "weight": 1.0
     },
     {
@@ -32928,7 +33146,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L73",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -32939,7 +33157,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L77",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
@@ -32950,7 +33168,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L84",
+      "source_location": "L159",
       "weight": 1.0
     },
     {
@@ -32961,18 +33179,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L88",
-      "weight": 1.0
-    },
-    {
-      "source": "inventory_app_frontend_consultant",
-      "target": "inventory_app_frontend_consultant_threadmessages",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L9",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -32983,7 +33190,293 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "inventory_app/frontend/consultant.js",
-      "source_location": "L97",
+      "source_location": "L172",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_foldfacts",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L205",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_threadmessages",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_namedlevel",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L268",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_namedskill",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L276",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_ageforlevel",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L284",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_payload",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L293",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_block",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L309",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_showthinking",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_showpicks",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L338",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_emptynote",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L388",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_clip",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L395",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_clearside",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L401",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_paintside",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L408",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_render",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L460",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_stopthinking",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_itemqty",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L505",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_packfacts",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L514",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_talk",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L528",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_decline",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L538",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_followup",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L551",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_setcomposerbusy",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_advise",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L562",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_say",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_paintrequest",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L75",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_paintsteps",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L85",
+      "weight": 1.0
+    },
+    {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_paintquick",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L99",
       "weight": 1.0
     },
     {
@@ -39785,6 +40278,18 @@
       "weight": 1.0
     },
     {
+      "source": "inventory_app_frontend_consultant",
+      "target": "inventory_app_frontend_consultant_resetchat",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "argument",
+      "source_file": "inventory_app/frontend/consultant.js",
+      "source_location": "L591",
+      "weight": 1.0
+    },
+    {
       "source": "inventory_app_frontend_dashboard",
       "target": "inventory_app_frontend_dashboard_startobjectrecognition",
       "relation": "indirect_call",
@@ -41021,5 +41526,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "548a389a13355b3d4c3e78726d0b845dcad44d1f"
+  "built_at_commit": "d9b41302629f7da0a5d814d0b17f2d77cfbeb515"
 }

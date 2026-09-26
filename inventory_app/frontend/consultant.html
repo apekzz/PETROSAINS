@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/theme.css?v=20260926-split">
     <link rel="stylesheet" href="/dashboard.css?v=20260926-split">
-    <link rel="stylesheet" href="/consultant.css?v=20260926-think">
+    <link rel="stylesheet" href="/consultant.css?v=20260926-level">
 </head>
 
 <body class="consultant-body">
@@ -32,20 +32,33 @@
         <div class="consultant-grid">
             <section class="card consultant-form-card" aria-labelledby="requestTitle">
                 <div class="card-head">
-                    <h2 id="requestTitle">Stakeholder request</h2>
+                    <h2 id="requestTitle">Session</h2>
                 </div>
                 <dl class="request-now">
                     <div><dt>Event</dt><dd id="sumEvent">—</dd></div>
                     <div><dt>People</dt><dd id="sumCount">—</dd></div>
                     <div><dt>Target group</dt><dd id="sumGroup">—</dd></div>
+                    <div><dt>Level</dt><dd id="sumLevel">—</dd></div>
+                    <div><dt>Skill</dt><dd id="sumSkill">—</dd></div>
                 </dl>
+                <div class="side-block">
+                    <h3>Activities they can do</h3>
+                    <div id="activitySum" class="side-copy"></div>
+                </div>
+                <div class="side-block">
+                    <h3>Brief summary</h3>
+                    <div id="briefSum" class="side-copy"></div>
+                </div>
             </section>
 
             <section class="card chat-card" aria-labelledby="chatTitle">
-                <div class="card-head">
+                <div class="card-head chat-head">
                     <h2 id="chatTitle">Consultant chat</h2>
+                    <button type="button" id="restartChat" class="chat-chip">Start over</button>
                 </div>
+                <ol id="intakeSteps" class="intake-steps" aria-label="Questions left"></ol>
                 <div id="chatLog" class="chat-log" aria-live="polite"></div>
+                <div id="quickReplies" class="quick-replies" hidden></div>
                 <p id="consultStatus" class="consult-status" role="status"></p>
                 <form id="chatForm" class="chat-composer">
                     <input id="chatInput" type="text" autocomplete="off" placeholder="Message the consultant" aria-label="Message">
@@ -61,7 +74,7 @@
             </section>
         </div>
     </div>
-    <script src="/consultant.js?v=20260926-think"></script>
+    <script src="/consultant.js?v=20260926-skill2"></script>
 </body>
 
 </html>

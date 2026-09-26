@@ -418,6 +418,121 @@ body.consultant-body .container {
     margin: 0 0 0 18px;
 }
 
+.chat-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.intake-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 10px;
+    padding: 0;
+    list-style: none;
+}
+
+.intake-steps li {
+    padding: 4px 8px;
+    border: 1px solid var(--border-soft);
+    border-radius: 999px;
+    color: var(--text-dim);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.intake-steps li.is-now {
+    color: #041016;
+    background: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+}
+
+.intake-steps li.is-done {
+    color: var(--neon-cyan);
+}
+
+.quick-replies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.quick-chip {
+    min-height: 36px;
+    padding: 6px 12px;
+    border: 1px solid rgba(0, 229, 255, 0.35);
+    border-radius: 999px;
+    color: var(--text-main);
+    background: rgba(0, 229, 255, 0.08);
+    font: 600 13px "Inter", sans-serif;
+    cursor: pointer;
+}
+
+.quick-chip:hover,
+.quick-chip:focus-visible {
+    border-color: var(--neon-cyan);
+    outline: none;
+}
+
+.quick-chip:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+.side-block {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-soft);
+}
+
+.side-block h3 {
+    margin: 0 0 10px;
+    color: var(--neon-cyan);
+    font-family: "Rajdhani", sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.side-copy {
+    display: grid;
+    gap: 8px;
+}
+
+.side-copy p,
+.side-activity p {
+    margin: 0;
+    color: var(--text-main);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.side-empty {
+    color: var(--text-dim);
+}
+
+.side-activity {
+    display: grid;
+    gap: 4px;
+    padding: 10px;
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    background: var(--bg-input);
+}
+
+.side-activity h4 {
+    margin: 0;
+    color: var(--text-main);
+    font-family: "Rajdhani", sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.03em;
+}
+
 .page-nav {
     display: flex;
     gap: 6px;
@@ -455,6 +570,18 @@ body.consultant-body .container {
     .consultant-grid {
         grid-template-columns: 1fr;
         height: auto;
+    }
+
+    .chat-card {
+        order: 1;
+    }
+
+    .consultant-form-card {
+        order: 2;
+    }
+
+    .brief-card {
+        order: 3;
     }
 
     .consultant-form-card,

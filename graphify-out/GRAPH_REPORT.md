@@ -1,22 +1,22 @@
 # Graph Report - hilman_21Sep  (2026-09-26)
 
 ## Corpus Check
-- 84 files · ~1,515,957 words
+- 84 files · ~1,516,826 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 548 file(s) not represented in the graph (top: (none) 417, .csv 65, .pt 20)
 
 ## Summary
-- 1105 nodes · 2411 edges · 60 communities (50 shown, 10 thin omitted)
-- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 105 edges (avg confidence: 0.86)
+- 1117 nodes · 2442 edges · 60 communities (50 shown, 10 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 106 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `548a389a`
+- Built from commit: `d9b41302`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- visualize.py
+- utils_db/infer.py
 - pathlib
 - sam_tool.py
 - dashboard.js
@@ -56,7 +56,7 @@
 - ref_crypto
 - MosaicProb
 - OneShot Inventory (`inventory_app`)
-- predict_labeled_image
+- yolo_to_coco.py
 - test_sahi.py
 - apply_bce_dice_mask_loss
 - Saved PostgreSQL tables
@@ -67,7 +67,7 @@
 - db.py
 - visualize_results.py
 - _encode_worker_loop
-- yolo_to_coco.py
+- visualize.py
 - post
 - consultant.js
 - connect_and_prepare
@@ -86,7 +86,7 @@
 7. `load_image_and_label()` - 16 edges
 8. `startLocalCamera()` - 15 edges
 9. `normalize_item_name()` - 14 edges
-10. `camera_capture_loop()` - 14 edges
+10. `ingest()` - 14 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `How to run` --references--> `load_clip_model()`  [INFERRED]
@@ -105,13 +105,13 @@
 
 ## Communities (60 total, 10 thin omitted)
 
-### Community 0 - "visualize.py"
-Cohesion: 0.16
-Nodes (26): collections_abc, colorsys, math, matplotlib, matplotlib_patches, pil, _class_key(), _class_names_for_image() (+18 more)
+### Community 0 - "utils_db/infer.py"
+Cohesion: 0.17
+Nodes (18): crop_labeled_objects(), load_image_and_label(), Image, Crop each labeled object from ``image`` and attach bbox metadata., Load one image and its YOLO label. Specify the file with ``image_path=``, or an…, embed_split_crops(), pick_query_image(), Embed every labeled crop in ``split``. Reuses a preloaded OpenCLIP model. (+10 more)
 
 ### Community 1 - "pathlib"
-Cohesion: 0.14
-Nodes (26): argparse, numpy, pathlib, pgvector_psycopg, main(), parse_args(), Namespace, Classify labeled objects in one image against the pgvector catalog (Rule 1). (+18 more)
+Cohesion: 0.13
+Nodes (27): argparse, dataclasses, numpy, pathlib, pgvector_psycopg, main(), parse_args(), Namespace (+19 more)
 
 ### Community 2 - "sam_tool.py"
 Cohesion: 0.14
@@ -122,8 +122,8 @@ Cohesion: 0.04
 Nodes (52): applyMode(), bootFill, bootOverlay, bootPct, bootStage, bootStartedAt, btnCatalogClose, btnCompareCatalogs (+44 more)
 
 ### Community 4 - "evaluate_embedding_similarity.py"
-Cohesion: 0.11
-Nodes (35): datetime, platform, build_samples(), canonical_name(), classification_metrics(), inventory_name_from_filename(), load_catalog(), load_prediction_records() (+27 more)
+Cohesion: 0.18
+Nodes (25): build_samples(), canonical_name(), classification_metrics(), inventory_name_from_filename(), load_catalog(), load_prediction_records(), main(), make_masked_crop() (+17 more)
 
 ### Community 5 - "main.py"
 Cohesion: 0.07
@@ -143,23 +143,23 @@ Nodes (21): calculateTransform(), captureFrozenFrame(), endStroke(), exportMask(
 
 ### Community 9 - "face.py"
 Cohesion: 0.06
-Nodes (35): cv2, _align_template(), choose_staff_match(), crop_from_box(), draw_landmarks(), encode_crop(), ensure_face_model(), face_in_region() (+27 more)
+Nodes (34): cv2, _align_template(), choose_staff_match(), crop_from_box(), draw_landmarks(), encode_crop(), ensure_face_model(), face_in_region() (+26 more)
 
 ### Community 10 - "download_dataset.py"
 Cohesion: 0.14
 Nodes (21): _bar(), finish(), set_progress(), start(), _width(), shutil, time, _copy_tree() (+13 more)
 
 ### Community 11 - "PETROSAINS inventory similarity (`test_pg`)"
-Cohesion: 0.10
-Nodes (20): pickle, 1. Start Postgres with Docker, 2. Load catalog vectors into pgvector, 3. Evaluate on val / test, A. Dataset and Google Drive, B. Extract inventory as a catalog parquet, D. Development mode: prediction and evaluation, E. Predict one image (`predict_labeled_image.py`) (+12 more)
+Cohesion: 0.08
+Nodes (23): pickle, 1. Start Postgres with Docker, 2. Load catalog vectors into pgvector, 3. Evaluate on val / test, A. Dataset and Google Drive, B. Extract inventory as a catalog parquet, C. Generate training embeddings with OpenCLIP, D. Development mode: prediction and evaluation (+15 more)
 
 ### Community 12 - "detectron2_recipe.py"
 Cohesion: 0.10
 Nodes (19): copy, detectron2, detectron2_config, detectron2_data, detectron2_data_datasets, detectron2_engine, detectron2_engine_hooks, detectron2_engine_train_loop (+11 more)
 
 ### Community 13 - "eval.py"
-Cohesion: 0.15
-Nodes (28): Series, apply_vote_rule(), average_top_n(), classification_metrics(), collect_split_votes(), embed_query_crops(), embed_split_crops(), evaluate_rule() (+20 more)
+Cohesion: 0.16
+Nodes (27): Series, apply_vote_rule(), average_top_n(), classification_metrics(), collect_split_votes(), embed_query_crops(), evaluate_rule(), _global_mean_sim() (+19 more)
 
 ### Community 14 - "tables"
 Cohesion: 0.07
@@ -174,8 +174,8 @@ Cohesion: 0.23
 Nodes (15): applyFaceStatus(), blobToBase64(), captureReadyFace(), grabSegmentedFace(), hasCapturedRegisterFace(), openRegisterPopup(), pollFaceStatus(), sendSegmentedEmbed() (+7 more)
 
 ### Community 17 - "noise_transfer.py"
-Cohesion: 0.09
-Nodes (41): dataclasses, choose_folder(), import_train_catalog(), inventory_name_from_filename(), masked_crops(), _polygon_rows(), Image, ndarray (+33 more)
+Cohesion: 0.10
+Nodes (39): choose_folder(), import_train_catalog(), inventory_name_from_filename(), masked_crops(), _polygon_rows(), Image, ndarray, Path (+31 more)
 
 ### Community 18 - "consultant_model.py"
 Cohesion: 0.06
@@ -194,8 +194,8 @@ Cohesion: 0.27
 Nodes (10): cameraChoiceSaved(), hideRemoteCameraPicker(), isLoopbackHost(), isPhoneDevice(), needsCaptureFallback(), preferLaptopDeviceId(), readCameraPermission(), refreshCameraList() (+2 more)
 
 ### Community 22 - "embed.py"
-Cohesion: 0.14
-Nodes (28): pandas, sys, main(), Embed every labeled crop from train_official.parquet and save the results., build_embedding_df(), ClipEmbedder, _download_yolo11n_seg(), embed_from_dataframe() (+20 more)
+Cohesion: 0.15
+Nodes (26): main(), typing, build_embedding_df(), ClipEmbedder, _download_yolo11n_seg(), embed_from_dataframe(), _find_weights(), get_clip_embedding() (+18 more)
 
 ### Community 23 - "sql.py"
 Cohesion: 0.16
@@ -203,7 +203,7 @@ Nodes (15): contextlib, _app_db_up(), _drop_stale_postmaster_pid(), _embedding_f
 
 ### Community 24 - "drive_folder"
 Cohesion: 0.16
-Nodes (17): main(), Export the full train image catalog to train_official.parquet (no embeddings)., google_colab, re, build_embedding_dataframe(), DataFrame, Build a catalog with image name, path, class name, and empty embeddings.…, load_val_test_splits() (+9 more)
+Nodes (16): main(), Export the full train image catalog to train_official.parquet (no embeddings)., google_colab, pandas, re, sys, Embed every labeled crop from train_official.parquet and save the results., drive_folder() (+8 more)
 
 ### Community 25 - "bootstrap_database"
 Cohesion: 0.14
@@ -242,8 +242,8 @@ Cohesion: 0.25
 Nodes (3): DefaultTrainer, ObjectTrainer, Same Detectron2 loop, plus YOLO-style patience.
 
 ### Community 35 - "evaluate_embedding_mc2_noise.py"
-Cohesion: 0.13
-Nodes (33): build_samples(), canonical_name(), chart_confusion_matrix(), chart_coverage(), chart_side_by_side(), chart_top_confusions(), classification_metrics(), encode_batches() (+25 more)
+Cohesion: 0.09
+Nodes (44): datetime, json, platform, build_samples(), canonical_name(), chart_confusion_matrix(), chart_coverage(), chart_side_by_side() (+36 more)
 
 ### Community 36 - "EpochMetricPrinter"
 Cohesion: 0.29
@@ -257,9 +257,9 @@ Nodes (3): setter, MosaicProb, Process-shared mosaic probability so close_mosaic
 Cohesion: 0.50
 Nodes (3): Layout, OneShot Inventory (`inventory_app`), Run
 
-### Community 40 - "predict_labeled_image"
-Cohesion: 0.16
-Nodes (14): C. Generate training embeddings with OpenCLIP, bbox_xyxy(), crop_labeled_objects(), Image, Axis-aligned crop box from a YOLO box or polygon label., Crop each labeled object from ``image`` and attach bbox metadata., _color_for_name(), draw_predictions() (+6 more)
+### Community 40 - "yolo_to_coco.py"
+Cohesion: 0.46
+Nodes (7): tqdm, convert_dataset(), convert_split(), _image_path(), _polygons_from_label(), Path, Convert train_v2 YOLO-seg labels to COCO JSON for Detectron2.
 
 ### Community 44 - "analyzeLocalFrame"
 Cohesion: 0.21
@@ -281,17 +281,17 @@ Nodes (17): csv, matplotlib_pyplot, build_confusion(), canonical(), confusion_ma
 Cohesion: 0.20
 Nodes (12): _apply_face_embedding(), _encode_image(), _encode_images(), _encode_worker_loop(), face_crop_to_embedding(), _face_detect_job(), _face_embed_worker(), handle_face_info() (+4 more)
 
-### Community 52 - "yolo_to_coco.py"
-Cohesion: 0.46
-Nodes (7): tqdm, convert_dataset(), convert_split(), _image_path(), _polygons_from_label(), Path, Convert train_v2 YOLO-seg labels to COCO JSON for Detectron2.
+### Community 52 - "visualize.py"
+Cohesion: 0.17
+Nodes (23): collections_abc, colorsys, math, matplotlib_patches, pil, build_embedding_dataframe(), _class_key(), _class_names_for_image() (+15 more)
 
 ### Community 54 - "post"
 Cohesion: 0.09
 Nodes (31): BaseModel, sam_status(), analyze_face_frame(), api_noise_capture(), api_start_camera(), capture_sam_frame(), consultant_advise(), consultant_talk() (+23 more)
 
 ### Community 55 - "consultant.js"
-Cohesion: 0.19
-Nodes (24): advise(), ageFrom(), askNext(), block(), boundaryText(), decline(), foldFacts(), followUp() (+16 more)
+Cohesion: 0.13
+Nodes (36): advise(), ageForLevel(), ageFrom(), askNext(), blankChat(), block(), boundaryText(), clearSide() (+28 more)
 
 ### Community 56 - "connect_and_prepare"
 Cohesion: 0.10
@@ -302,8 +302,8 @@ Cohesion: 0.28
 Nodes (9): cosine_similarity(), create_object_embedding(), get_inventory_catalog(), image_to_embedding(), match_inventory_name(), match_staff_embedding(), refresh_inventory_catalog_cache(), register_sam_embedding() (+1 more)
 
 ### Community 68 - "analyze_object_areas.py"
-Cohesion: 0.32
-Nodes (12): _areas_from_label(), collect_split_areas(), _image_size(), main(), parse_args(), plot_histograms(), Namespace, ndarray (+4 more)
+Cohesion: 0.29
+Nodes (13): matplotlib, _areas_from_label(), collect_split_areas(), _image_size(), main(), parse_args(), plot_histograms(), Namespace (+5 more)
 
 ## Knowledge Gaps
 - **83 isolated node(s):** `format`, `exported_at`, `file`, `columns`, `rows` (+78 more)
@@ -313,17 +313,17 @@ Nodes (12): _areas_from_label(), collect_split_areas(), _image_size(), main(), p
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+- **Why does `EpochMetricPrinter` connect `EpochMetricPrinter` to `detectron2_recipe.py`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **Why does `MosaicProb` connect `MosaicProb` to `.__init__`, `EarlyStopHook`, `detectron2_recipe.py`?**
-  _High betweenness centrality (0.031) - this node is a cross-community bridge._
-- **Why does `bbox_xyxy()` connect `predict_labeled_image` to `visualize.py`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
-- **Why does `ObjectTrainer` connect `ObjectTrainer` to `.__init__`, `EarlyStopHook`, `detectron2_recipe.py`, `EpochMetricPrinter`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+- **Why does `bbox_xyxy()` connect `PETROSAINS inventory similarity (`test_pg`)` to `utils_db/infer.py`, `visualize.py`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `main()` (e.g. with `apply_noise_to_image()` and `load_noise_profile_from_capture()`) actually correct?**
   _`main()` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `format`, `exported_at`, `file` to the rest of the system?**
   _83 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `pathlib` be split into smaller, more focused modules?**
-  _Cohesion score 0.13763440860215054 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1310483870967742 - nodes in this community are weakly interconnected._
 - **Should `sam_tool.py` be split into smaller, more focused modules?**
   _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._

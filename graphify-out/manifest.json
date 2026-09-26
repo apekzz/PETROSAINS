@@ -1146,9 +1146,9 @@
     "semantic_hash": ""
   },
   "inventory_app/database/saved_tables/manifest.json": {
-    "mtime": 1790404425.314936,
-    "seen": 1790404490.749509,
-    "ast_hash": "e6615bff1f93a5c3648669d08d574f1e",
+    "mtime": 1790407851.5499368,
+    "seen": 1790408271.385859,
+    "ast_hash": "2e9a4b1408dbd113ce739ab2a79dfbce",
     "semantic_hash": ""
   },
   "inventory_app/database/setup_db.py": {
@@ -1560,15 +1560,15 @@
     "semantic_hash": ""
   },
   "inventory_app/frontend/consultant.js": {
-    "mtime": 1790403611.690253,
-    "seen": 1790403922.1785548,
-    "ast_hash": "ce0ca38e1957bb9fb5f0865da9ea5544",
+    "mtime": 1790407685.16857,
+    "seen": 1790407742.2143989,
+    "ast_hash": "82712dda00ee7f4b017e47650cf5d7a2",
     "semantic_hash": ""
   },
   "inventory_app/frontend/consultant.html": {
-    "mtime": 1790402049.8349464,
-    "seen": 1790402251.817869,
-    "ast_hash": "024822d21d8db1d21b455a1bdc341e1e",
+    "mtime": 1790407685.6755505,
+    "seen": 1790407742.2168572,
+    "ast_hash": "709a07f768bab672e2b90a1d1b5e62b3",
     "semantic_hash": ""
   }
 }

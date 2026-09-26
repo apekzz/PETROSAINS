@@ -4,7 +4,20 @@
     var chatLog = document.getElementById("chatLog");
     var status = document.getElementById("consultStatus");
     var out = document.getElementById("consultOut");
-    var chat = { text: "", notes: [], count: null, audience: "", age: null, step: "event" };
+    var LEVELS = ["Pre-school", "Primary", "Secondary", "Tertiary", "Teachers", "Public"];
+    var SKILLS = ["Beginner", "Intermediate", "Advanced", "Expert"];
+    var STEPS = [
+        { id: "event", label: "Event" },
+        { id: "count", label: "People" },
+        { id: "group", label: "Group" },
+        { id: "level", label: "Level" },
+        { id: "skill", label: "Skill" }
+    ];
+    var chat = blankChat();
+
+    function blankChat() {
+        return { text: "", notes: [], count: null, audience: "", level: "", skill: "", age: null, step: "event" };
+    }
 
     function threadMessages() {
         return Array.prototype.map.call(chatLog.querySelectorAll(".chat-row:not(.is-thinking)"), function (row) {
@@ -30,12 +43,21 @@
         chatLog.appendChild(row);
         chatLog.scrollTop = chatLog.scrollHeight;
         chatInput.disabled = true;
+        setComposerBusy(true);
     }
 
     function stopThinking() {
         var row = chatLog.querySelector(".is-thinking");
         if (row) row.remove();
         chatInput.disabled = false;
+        setComposerBusy(false);
+    }
+
+    function setComposerBusy(busy) {
+        document.getElementById("restartChat").disabled = busy;
+        Array.prototype.forEach.call(document.querySelectorAll(".quick-chip"), function (button) {
+            button.disabled = busy;
+        });
     }
 
     function say(role, text) {
@@ -54,13 +76,66 @@
         document.getElementById("sumEvent").textContent = chat.text || "—";
         document.getElementById("sumCount").textContent = chat.count == null ? "—" : String(chat.count);
         document.getElementById("sumGroup").textContent = chat.audience || "—";
+        document.getElementById("sumLevel").textContent = chat.level || "—";
+        document.getElementById("sumSkill").textContent = chat.skill || "—";
+        paintSteps();
+        paintQuick();
+    }
+
+    function paintSteps() {
+        var list = document.getElementById("intakeSteps");
+        var current = STEPS.findIndex(function (step) { return step.id === chat.step; });
+        if (chat.step === "done") current = STEPS.length;
+        list.replaceChildren();
+        STEPS.forEach(function (step, index) {
+            var item = document.createElement("li");
+            item.textContent = step.label;
+            if (index < current) item.className = "is-done";
+            if (index === current) item.className = "is-now";
+            list.appendChild(item);
+        });
+    }
+
+    function paintQuick() {
+        var box = document.getElementById("quickReplies");
+        box.replaceChildren();
+        var choices = chat.step === "level" ? LEVELS : chat.step === "skill" ? SKILLS : null;
+        if (!choices) {
+            box.hidden = true;
+            return;
+        }
+        box.hidden = false;
+        choices.forEach(function (name) {
+            var button = document.createElement("button");
+            button.type = "button";
+            button.className = "quick-chip";
+            button.textContent = name;
+            button.addEventListener("click", function () {
+                ingest(name);
+            });
+            box.appendChild(button);
+        });
+        chatInput.placeholder = chat.step === "skill" ? "Or type a skill" : "Or type a level";
+    }
+
+    function promptFor(step) {
+        if (step === "count") return "How many people will join? A number is enough.";
+        if (step === "group") return "Who is coming? For example, a school class or families.";
+        if (step === "level") return "What level are they? Tap a button, or type your own.";
+        if (step === "skill") return "Beginner, intermediate, advanced, or expert?";
+        return "What event is this? For example, Science Day or a school visit.";
     }
 
     function resetChat() {
-        chat = { text: "", notes: [], count: null, audience: "", age: null, step: "event" };
+        chat = blankChat();
         chatLog.replaceChildren();
+        out.replaceChildren();
+        status.textContent = "";
+        clearSide();
         paintRequest();
-        say("bot", "What event is this?");
+        chatInput.placeholder = "Name the event";
+        say("bot", promptFor("event"));
+        chatInput.focus();
     }
 
     function ageFrom(text) {
@@ -97,15 +172,33 @@
     function askNext() {
         if (chat.count == null) {
             chat.step = "count";
-            say("bot", "How many people?");
+            chatInput.placeholder = "How many people?";
+            paintRequest();
+            say("bot", promptFor("count"));
             return;
         }
         if (!chat.audience) {
             chat.step = "group";
-            say("bot", "Target group?");
+            chatInput.placeholder = "Who is coming?";
+            paintRequest();
+            say("bot", promptFor("group"));
+            return;
+        }
+        if (!chat.level) {
+            chat.step = "level";
+            paintRequest();
+            say("bot", promptFor("level"));
+            return;
+        }
+        if (!chat.skill) {
+            chat.step = "skill";
+            paintRequest();
+            say("bot", promptFor("skill"));
             return;
         }
         chat.step = "done";
+        chatInput.placeholder = "Ask a follow-up";
+        paintRequest();
         advise();
     }
 
@@ -134,6 +227,11 @@
             chat.audience = line;
             var age = ageFrom(line);
             if (age) chat.age = age;
+        } else if (chat.step === "level") {
+            chat.level = line;
+            if (chat.age == null) chat.age = ageForLevel(line);
+        } else if (chat.step === "skill") {
+            chat.skill = line;
         } else if (chat.step === "done" && wantsElse(line)) {
             paintRequest();
             decline();
@@ -142,26 +240,61 @@
             var priorCount = chat.count;
             var priorAudience = chat.audience;
             var priorAge = chat.age;
+            var priorLevel = chat.level;
+            var priorSkill = chat.skill;
             foldFacts(line);
+            var named = namedLevel(line);
+            var skillName = namedSkill(line);
+            var levelSaid = line.match(/\blevel\b[:\s]+(.+)/i);
+            if (skillName) chat.skill = skillName;
+            else if (levelSaid) chat.level = levelSaid[1].trim();
+            else if (named) chat.level = named;
+            if (chat.age == null) chat.age = ageForLevel(chat.level);
             if (/\bevent\b/i.test(line)) chat.text = line;
             paintRequest();
-            var changed = chat.count !== priorCount || chat.audience !== priorAudience || chat.age !== priorAge || /\bevent\b/i.test(line);
+            var changed = chat.count !== priorCount || chat.audience !== priorAudience || chat.age !== priorAge || chat.level !== priorLevel || chat.skill !== priorSkill || /\bevent\b/i.test(line);
             if (changed) advise();
             else followUp();
             return;
         } else {
             chat.text = line;
             foldFacts(line);
+            chatInput.placeholder = "How many people?";
         }
         paintRequest();
         askNext();
     }
 
+    function namedLevel(line) {
+        var found = "";
+        LEVELS.forEach(function (name) {
+            if (new RegExp("\\b" + name + "\\b", "i").test(line)) found = name;
+        });
+        return found;
+    }
+
+    function namedSkill(line) {
+        var found = "";
+        SKILLS.forEach(function (name) {
+            if (new RegExp("\\b" + name + "\\b", "i").test(line)) found = name;
+        });
+        return found;
+    }
+
+    function ageForLevel(level) {
+        var key = String(level || "").trim().toLowerCase();
+        if (key === "pre-school" || key === "preschool") return 5;
+        if (key === "primary") return 10;
+        if (key === "secondary") return 15;
+        if (key === "tertiary") return 19;
+        return ageFrom(key);
+    }
+
     function payload() {
         return {
             text: chat.text,
-            audience: chat.audience,
-            age: chat.age,
+            audience: [chat.audience, chat.level ? "level " + chat.level : "", chat.skill ? "skill " + chat.skill : ""].filter(Boolean).join(". "),
+            age: chat.age != null ? chat.age : ageForLevel(chat.level),
             count: chat.count,
             duration: null,
             venue: "unknown",
@@ -252,7 +385,80 @@
         return picks;
     }
 
+    function emptyNote(text) {
+        var note = document.createElement("p");
+        note.className = "side-empty";
+        note.textContent = text;
+        return note;
+    }
+
+    function clip(text, max) {
+        var clean = String(text || "").replace(/\s+/g, " ").trim();
+        if (clean.length <= max) return clean;
+        return clean.slice(0, max - 1).trim() + "…";
+    }
+
+    function clearSide() {
+        var activities = document.getElementById("activitySum");
+        var brief = document.getElementById("briefSum");
+        activities.replaceChildren(emptyNote("Answer the questions. Suggested activities land here."));
+        brief.replaceChildren(emptyNote("A short version of the full brief lands here."));
+    }
+
+    function paintSide(data) {
+        var activities = document.getElementById("activitySum");
+        var brief = document.getElementById("briefSum");
+        activities.replaceChildren();
+        var picks = data.recommendations || [];
+        if (!picks.length) {
+            activities.appendChild(emptyNote("No activity matched this brief yet."));
+        }
+        picks.forEach(function (row) {
+            var card = document.createElement("article");
+            card.className = "side-activity";
+            var heading = document.createElement("h4");
+            heading.textContent = row.title || row.offering_id;
+            card.appendChild(heading);
+            var why = row.description || row.reason || "";
+            if (why) {
+                var line = document.createElement("p");
+                line.textContent = clip(why, 180);
+                card.appendChild(line);
+            }
+            activities.appendChild(card);
+        });
+        var lines = [];
+        if (data.programme_title) lines.push(data.programme_title);
+        var names = picks.map(function (row) { return row.title; }).filter(Boolean);
+        if (names.length) lines.push("They can do " + names.join(" and ") + ".");
+        if (data.storyline) lines.push(clip(data.storyline, 240));
+        var flow = (data.journey || []).map(function (step) {
+            var minutes = step.duration_min ? " (" + step.duration_min + " min)" : "";
+            return (step.title || step.offering_id) + minutes;
+        }).filter(Boolean);
+        if (flow.length) lines.push("Flow: " + flow.join(", then ") + ".");
+        var facilitators = (data.in_charge || []).reduce(function (total, row) {
+            return total + (Number(row.facilitators) || 0);
+        }, 0);
+        if (facilitators) lines.push(facilitators + " facilitators in total.");
+        var kitCount = (data.items || []).length;
+        if (kitCount) lines.push(kitCount + " kit lines to prepare. Detail stays in the brief on the right.");
+        var safety = (data.constraints_safety || [])[0];
+        if (safety) lines.push(clip(safety, 160));
+        if (data.alternative && data.alternative.title) {
+            lines.push(data.alternative.title + " is already booked, so it is not the pick.");
+        }
+        brief.replaceChildren();
+        if (!lines.length) brief.appendChild(emptyNote("No brief yet."));
+        lines.forEach(function (line) {
+            var paragraph = document.createElement("p");
+            paragraph.textContent = line;
+            brief.appendChild(paragraph);
+        });
+    }
+
     function render(data) {
+        paintSide(data);
         out.replaceChildren();
         out.appendChild(showPicks(data));
         var more = document.createElement("details");
@@ -354,8 +560,8 @@
     }
 
     function advise() {
-        if (!chat.text || chat.count == null || !chat.audience) {
-            status.textContent = "Finish the chat: event, headcount, target group.";
+        if (!chat.text || chat.count == null || !chat.audience || !chat.level || !chat.skill) {
+            status.textContent = "Finish the chat: event, people, target group, level, skill.";
             return;
         }
         status.textContent = "";
@@ -381,6 +587,8 @@
             status.textContent = error.message || "Advise failed";
         });
     }
+
+    document.getElementById("restartChat").addEventListener("click", resetChat);
 
     resetChat();
 
