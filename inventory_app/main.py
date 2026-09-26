@@ -46,6 +46,7 @@ from db import (
     clear_staff_embeddings,
     save_object_embedding,
     fetch_staff_embeddings,
+    fetch_inventory,
     fetch_inventory_embeddings,
     insert_staff,
     replace_inventory_embeddings,
@@ -2529,6 +2530,30 @@ def video_frame():
 # DASHBOARD
 # ============================================================
 
+class TalkMessage(BaseModel):
+    role: str = "user"
+    content: str = ""
+
+
+class TalkRequest(BaseModel):
+    messages: list[TalkMessage] = []
+    facts: dict = {}
+
+
+class ConsultantRequest(BaseModel):
+    text: str = ""
+    audience: str = ""
+    age: int | None = None
+    count: int | None = None
+    duration: int | None = None
+    venue: str = "unknown"
+    electricity: str = "unknown"
+    internet: str = "unknown"
+    water: str = "unknown"
+    budget: str = "unknown"
+    accessibility: str = ""
+
+
 @app.get("/", response_class=HTMLResponse)
 def serve_dashboard():
     dashboard_path = os.path.join(FRONTEND_DIR, "dashboard.html")
@@ -2539,12 +2564,46 @@ def serve_dashboard():
     return HTMLResponse(content=html)
 
 
+@app.get("/consultant", response_class=HTMLResponse)
+def serve_consultant():
+    page = os.path.join(FRONTEND_DIR, "consultant.html")
+    if not os.path.exists(page):
+        return HTMLResponse("<h1>consultant.html not found</h1>", status_code=500)
+    with open(page, "r", encoding="utf-8") as file:
+        return HTMLResponse(content=file.read())
+
+
+@app.post("/api/consultant/advise")
+def consultant_advise(body: ConsultantRequest):
+    import consultant_model
+
+    stock = []
+    try:
+        stock = fetch_inventory("")
+    except Exception:
+        stock = []
+    try:
+        return consultant_model.advise(body.model_dump(), stock)
+    except (FileNotFoundError, ImportError) as exc:
+        return JSONResponse({"detail": str(exc)}, status_code=503)
+
+
+@app.post("/api/consultant/talk")
+def consultant_talk(body: TalkRequest):
+    import consultant_model
+
+    messages = [item.model_dump() for item in body.messages]
+    return consultant_model.speak(messages, body.facts)
+
+
 FRONTEND_FILES = {
     "theme.css": "text/css",
     "dashboard.css": "text/css",
+    "consultant.css": "text/css",
     "sam-tool.css": "text/css",
     "config.js": "application/javascript",
     "dashboard.js": "application/javascript",
+    "consultant.js": "application/javascript",
     "sam-tool.js": "application/javascript",
     "petronas-logo.svg": "image/svg+xml",
     "petrosains-logo.svg": "image/svg+xml",

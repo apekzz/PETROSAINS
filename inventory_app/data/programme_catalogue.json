@@ -1,0 +1,2275 @@
+{
+  "offerings": [
+    {
+      "offering_id": "ACT-001",
+      "activity_title": "Mini Drone",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "Participants assemble a mini drone, identify key components and practise safe, controlled flight.",
+      "stem_domain": "Technology; Engineering",
+      "key_concepts": "Flight forces; motors; propellers; control systems; circuits",
+      "learning_outcomes": "Identify drone components; explain basic flight principles; assemble and operate a mini drone safely",
+      "recommended_age": "10+",
+      "audience_types": "Primary; Secondary; Teachers; Public",
+      "standard_duration_min": 120.0,
+      "min_participants": 10.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor",
+      "electricity_required": "Yes",
+      "internet_required": "No",
+      "water_required": "No",
+      "facilitators_required": 3.0,
+      "setup_time_min": 45.0,
+      "accessibility_notes": "Provide larger components, visual step cards and paired assistance where required.",
+      "safety_level": "High",
+      "key_hazards": "Fast-spinning propellers; LiPo battery; small parts; sharp tools during assembly",
+      "participant_handling_rule": "Facilitator controls batteries and tools; test one drone at a time in a clear flight zone.",
+      "suitable_themes": "Aviation; Robotics; Future Technology; Industry 4.0",
+      "suitable_objectives": "Build technical confidence; understand systems; practise assembly and troubleshooting",
+      "engagement_methods": "Guided build; demonstration; flight challenge; reflection",
+      "customisable_elements": "Mission route; body design; difficulty level",
+      "key_constraints": "Requires spacious enclosed area, charged batteries and strict flight control.",
+      "complementary_activities": "Microbit; Arduino 100; Gas Detector",
+      "cost_band": "High",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Description and safety details grounded in internal Mini Drone materials; operational values are planning assumptions."
+    },
+    {
+      "offering_id": "ACT-002",
+      "activity_title": "Microbit",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "Participants programme a micro:bit to respond to inputs and produce outputs using LEDs, buttons and sensors.",
+      "stem_domain": "Technology; Mathematics",
+      "key_concepts": "Algorithms; sequencing; inputs and outputs; selection; sensors",
+      "learning_outcomes": "Create a simple programme; explain input-process-output; test and improve code",
+      "recommended_age": "9+",
+      "audience_types": "Primary; Secondary; Teachers",
+      "standard_duration_min": 90.0,
+      "min_participants": 10.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor",
+      "electricity_required": "Yes",
+      "internet_required": "Optional",
+      "water_required": "No",
+      "facilitators_required": 2.0,
+      "setup_time_min": 30.0,
+      "accessibility_notes": "Use block coding, high-contrast instructions and paired support; allow keyboard alternatives.",
+      "safety_level": "Low",
+      "key_hazards": "Loose cables; small components; trip hazards from laptop cables",
+      "participant_handling_rule": "Keep components in trays; route cables away from walkways; facilitator checks connections.",
+      "suitable_themes": "Coding; Digital Literacy; Smart Systems; AI Foundations",
+      "suitable_objectives": "Develop computational thinking; introduce programming; strengthen problem-solving",
+      "engagement_methods": "Live coding; guided challenge; pair work; showcase",
+      "customisable_elements": "Programme theme; icons; sensor challenge; difficulty level",
+      "key_constraints": "Requires compatible devices; internet only if browser-based editor is used.",
+      "complementary_activities": "Arduino 100; Gas Detector; Mini Drone",
+      "cost_band": "Medium",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Core concepts grounded in internal Microbit offering description; timings and staffing require validation."
+    },
+    {
+      "offering_id": "ACT-003",
+      "activity_title": "Bottle Aquarium",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "Participants create a decorative bottle aquarium while exploring water, pressure and surface tension.",
+      "stem_domain": "Science; Art",
+      "key_concepts": "Atmospheric pressure; surface tension; aquatic environments; reuse",
+      "learning_outcomes": "Describe selected water properties; assemble a bottle model; connect reuse with environmental care",
+      "recommended_age": "7+",
+      "audience_types": "Primary; Families; Public",
+      "standard_duration_min": 60.0,
+      "min_participants": 10.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor",
+      "electricity_required": "No",
+      "internet_required": "No",
+      "water_required": "Yes",
+      "facilitators_required": 2.0,
+      "setup_time_min": 25.0,
+      "accessibility_notes": "Pre-cut bottles for participants who need fine-motor support; use large decorative pieces.",
+      "safety_level": "Medium",
+      "key_hazards": "Cutter; sharp bottle edges; water spills; small decorative parts",
+      "participant_handling_rule": "Facilitator performs cutting; inspect bottle edges; wipe spills immediately; no ingestion of materials.",
+      "suitable_themes": "Water; Oceans; Environment; Upcycling",
+      "suitable_objectives": "Explore water science; encourage reuse; develop creativity and fine-motor skills",
+      "engagement_methods": "Demonstration; guided making; observation; discussion",
+      "customisable_elements": "Bottle decoration; aquatic theme; labels",
+      "key_constraints": "Needs water access and pre-cleaned bottles; transport may be affected by leakage.",
+      "complementary_activities": "Water Water Everywhere; Colour Play; Sustainable Suds",
+      "cost_band": "Low",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Materials and concept grounded in internal inventory and offering description."
+    },
+    {
+      "offering_id": "ACT-004",
+      "activity_title": "Colour Play",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "Children investigate primary and secondary colours through mixing, drawing and sensory art.",
+      "stem_domain": "Science; Art",
+      "key_concepts": "Primary colours; secondary colours; colour mixing; observation",
+      "learning_outcomes": "Recognise primary colours; predict and observe colour changes; practise fine-motor control",
+      "recommended_age": "4-8",
+      "audience_types": "Pre-school; Lower Primary; Families",
+      "standard_duration_min": 45.0,
+      "min_participants": 8.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor",
+      "electricity_required": "No",
+      "internet_required": "No",
+      "water_required": "Yes",
+      "facilitators_required": 2.0,
+      "setup_time_min": 20.0,
+      "accessibility_notes": "Use non-toxic materials, thick-handled tools and tactile or high-contrast alternatives.",
+      "safety_level": "Low",
+      "key_hazards": "Spills; staining; sensitivity to modelling dough or art materials",
+      "participant_handling_rule": "Use non-toxic materials; supervise spraying; clean hands and surfaces after activity.",
+      "suitable_themes": "Colours; Creativity; Early Science; Celebrations",
+      "suitable_objectives": "Introduce observation and prediction; strengthen fine-motor skills; support creative expression",
+      "engagement_methods": "Sensory exploration; guided mixing; art-making; show-and-tell",
+      "customisable_elements": "Colour palette; cultural or festive theme; artwork format",
+      "key_constraints": "Requires washable workspace and protection for clothing and tables.",
+      "complementary_activities": "LED Lantern; Bottle Aquarium; Fabulous Fizzy",
+      "cost_band": "Low",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Age range and operations are draft; activity purpose is grounded in internal offering materials."
+    },
+    {
+      "offering_id": "ACT-005",
+      "activity_title": "Gas Detector",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "Participants build or test a sensor-based system that detects gas and activates light and sound alerts.",
+      "stem_domain": "Technology; Engineering; Science",
+      "key_concepts": "Gas sensing; sensors; microcontrollers; alarms; input-output systems",
+      "learning_outcomes": "Explain how sensors detect changes; connect a basic alert circuit; relate detection systems to safety",
+      "recommended_age": "12+",
+      "audience_types": "Upper Primary; Secondary; Teachers",
+      "standard_duration_min": 120.0,
+      "min_participants": 10.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor",
+      "electricity_required": "Yes",
+      "internet_required": "Optional",
+      "water_required": "No",
+      "facilitators_required": 3.0,
+      "setup_time_min": 40.0,
+      "accessibility_notes": "Provide colour-independent wiring labels, enlarged circuit diagrams and paired assembly.",
+      "safety_level": "High",
+      "key_hazards": "Electrical short circuits; heated sensors; test gas or smoke exposure; small parts",
+      "participant_handling_rule": "Only facilitators introduce approved test source; keep exposure minimal; disconnect power before rewiring.",
+      "suitable_themes": "Safety Technology; Smart Systems; Oil and Gas; Engineering",
+      "suitable_objectives": "Understand sensing systems; apply coding and circuitry; connect STEM to workplace safety",
+      "engagement_methods": "Demonstration; circuit build; coding; scenario challenge",
+      "customisable_elements": "Alarm threshold; casing; indicator colours; scenario",
+      "key_constraints": "Requires calibrated sensors, ventilation and an approved safe test method.",
+      "complementary_activities": "Arduino 100; Arduino 200; Microbit",
+      "cost_band": "High",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Components and intent grounded in internal inventory and activity bank; exact test procedure requires HSE validation."
+    },
+    {
+      "offering_id": "ACT-006",
+      "activity_title": "LED Lantern",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "Participants design a decorative lantern and complete a simple battery-powered LED circuit.",
+      "stem_domain": "Engineering; Technology; Art",
+      "key_concepts": "Simple circuits; conductivity; polarity; energy efficiency; design",
+      "learning_outcomes": "Identify circuit components; complete a working circuit; apply creativity to a functional product",
+      "recommended_age": "6+",
+      "audience_types": "Pre-school with support; Primary; Families",
+      "standard_duration_min": 60.0,
+      "min_participants": 10.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor",
+      "electricity_required": "No",
+      "internet_required": "No",
+      "water_required": "No",
+      "facilitators_required": 2.0,
+      "setup_time_min": 25.0,
+      "accessibility_notes": "Use pre-cut templates, large tabs and visual circuit guides; provide one-to-one support where needed.",
+      "safety_level": "Medium",
+      "key_hazards": "Scissors; copper-tape edges; coin-cell battery ingestion risk",
+      "participant_handling_rule": "Adults control coin cells; count batteries before and after; scissors used under supervision.",
+      "suitable_themes": "Light; Festivals; Energy; Creative Engineering",
+      "suitable_objectives": "Introduce circuits; encourage design thinking; create a take-home STEM product",
+      "engagement_methods": "Demonstration; guided making; circuit troubleshooting; showcase",
+      "customisable_elements": "Lantern pattern; cultural theme; colour; message",
+      "key_constraints": "Coin cells require strict control; dim lighting improves the final showcase.",
+      "complementary_activities": "LED Flashlight; Colour Play; Solar Fan",
+      "cost_band": "Low",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Description is grounded in internal offering material; safety controls drafted conservatively."
+    },
+    {
+      "offering_id": "ACT-007",
+      "activity_title": "Scribbling Machine",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "Participants build a motorised drawing machine that moves unpredictably and creates unique patterns.",
+      "stem_domain": "Engineering; Technology; Art",
+      "key_concepts": "Vibration; motion; balance; electric circuits; iterative design",
+      "learning_outcomes": "Build a simple moving mechanism; investigate how balance changes motion; improve a prototype through testing",
+      "recommended_age": "7+",
+      "audience_types": "Primary; Secondary; Families",
+      "standard_duration_min": 75.0,
+      "min_participants": 10.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor",
+      "electricity_required": "No",
+      "internet_required": "No",
+      "water_required": "No",
+      "facilitators_required": 2.0,
+      "setup_time_min": 30.0,
+      "accessibility_notes": "Offer pre-connected motor modules, large switches and stabilising jigs for assembly.",
+      "safety_level": "Medium",
+      "key_hazards": "Rotating motor; loose wires; battery short circuit; marker stains",
+      "participant_handling_rule": "Switch off power before adjustment; keep fingers and hair away from rotating parts; test inside a tray.",
+      "suitable_themes": "Motion; Creative Engineering; Machines; Art and Science",
+      "suitable_objectives": "Explore cause and effect; practise prototyping; develop creativity and troubleshooting",
+      "engagement_methods": "Guided build; experimentation; design challenge; gallery walk",
+      "customisable_elements": "Machine decoration; pen placement; weight distribution; challenge criteria",
+      "key_constraints": "Requires level tables, consumable markers and space for machines to move.",
+      "complementary_activities": "DIY Catapult; LED Flashlight; Microbit",
+      "cost_band": "Medium",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Description and components grounded in internal offering and inventory materials."
+    },
+    {
+      "offering_id": "ACT-008",
+      "activity_title": "LED Flashlight",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "Participants construct a simple flashlight and troubleshoot a battery-powered LED circuit.",
+      "stem_domain": "Engineering; Technology",
+      "key_concepts": "Simple circuits; polarity; conductors; switches; troubleshooting",
+      "learning_outcomes": "Identify the source, pathway and load; assemble a working flashlight; diagnose basic circuit faults",
+      "recommended_age": "6+",
+      "audience_types": "Primary; Families; Public",
+      "standard_duration_min": 60.0,
+      "min_participants": 10.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor",
+      "electricity_required": "No",
+      "internet_required": "No",
+      "water_required": "No",
+      "facilitators_required": 2.0,
+      "setup_time_min": 20.0,
+      "accessibility_notes": "Use large visual circuit diagrams and pre-cut conductive tape for participants needing support.",
+      "safety_level": "Medium",
+      "key_hazards": "Coin-cell battery ingestion risk; scissors; sharp LED legs; copper-tape edges",
+      "participant_handling_rule": "Facilitator distributes and retrieves batteries; bend or cover LED legs; supervise cutting.",
+      "suitable_themes": "Electricity; Light; Inventors; Everyday Technology",
+      "suitable_objectives": "Understand circuits; build confidence in troubleshooting; create a functional product",
+      "engagement_methods": "Demonstration; guided build; fault-finding challenge",
+      "customisable_elements": "Handle design; decoration; switch mechanism",
+      "key_constraints": "Strict battery control required; activity depends on reliable electrical contact.",
+      "complementary_activities": "LED Lantern; Arduino 100; Solar Fan",
+      "cost_band": "Low",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Activity description and components grounded in internal offering and inventory sources."
+    },
+    {
+      "offering_id": "ACT-009",
+      "activity_title": "Arduino 100",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "An introductory Arduino workshop covering microcontrollers, electronic components and basic input-output projects.",
+      "stem_domain": "Technology; Engineering; Mathematics",
+      "key_concepts": "Microcontrollers; digital input and output; analogue input and output; LEDs; buttons; LDR; coding logic",
+      "learning_outcomes": "Explain the role of a microcontroller; wire basic circuits; upload and test simple programmes",
+      "recommended_age": "12+",
+      "audience_types": "Secondary; Teachers; Tertiary",
+      "standard_duration_min": 180.0,
+      "min_participants": 10.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor",
+      "electricity_required": "Yes",
+      "internet_required": "Optional",
+      "water_required": "No",
+      "facilitators_required": 3.0,
+      "setup_time_min": 45.0,
+      "accessibility_notes": "Provide labelled component trays, large circuit diagrams and paired coding support.",
+      "safety_level": "Medium",
+      "key_hazards": "Incorrect wiring; electrical short circuit; sharp component leads; cable trip hazards",
+      "participant_handling_rule": "Power off while rewiring; facilitator checks circuits before connection; keep workstations organised.",
+      "suitable_themes": "Robotics; Coding; Smart Systems; Digital Making",
+      "suitable_objectives": "Build foundational electronics and coding skills; develop computational thinking and debugging",
+      "engagement_methods": "Mini-lecture; guided circuits; coding; troubleshooting challenge",
+      "customisable_elements": "Project context; challenge difficulty; sensor choice",
+      "key_constraints": "Requires laptops, Arduino IDE or compatible editor, USB ports and complete kits.",
+      "complementary_activities": "Arduino 200; Microbit; Gas Detector",
+      "cost_band": "High",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Curriculum and components grounded in internal Arduino 100 modules."
+    },
+    {
+      "offering_id": "ACT-010",
+      "activity_title": "Arduino 200",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "An intermediate Arduino workshop using sensors, displays and actuators to build responsive systems.",
+      "stem_domain": "Technology; Engineering; Mathematics",
+      "key_concepts": "Ultrasonic and infrared sensing; DHT11; servo motor; LCD; integrated systems",
+      "learning_outcomes": "Connect multiple components; interpret sensor data; control outputs; complete an integrated challenge",
+      "recommended_age": "13+",
+      "audience_types": "Secondary; Teachers; Tertiary",
+      "standard_duration_min": 240.0,
+      "min_participants": 10.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor",
+      "electricity_required": "Yes",
+      "internet_required": "Optional",
+      "water_required": "No",
+      "facilitators_required": 3.0,
+      "setup_time_min": 60.0,
+      "accessibility_notes": "Use structured wiring maps, colour-independent labels and starter code for differentiated support.",
+      "safety_level": "Medium",
+      "key_hazards": "Incorrect wiring; moving servo; short circuit; sharp leads; cable trip hazards",
+      "participant_handling_rule": "Power off before rewiring; facilitator verifies connections; keep hands clear of moving servo.",
+      "suitable_themes": "Robotics; Automation; Smart Systems; IoT Foundations",
+      "suitable_objectives": "Advance coding and electronics; integrate sensors and actuators; strengthen systems thinking",
+      "engagement_methods": "Demonstration; guided build; coding; system challenge",
+      "customisable_elements": "Sensor combination; scenario; threshold values; housing",
+      "key_constraints": "Participants should have Arduino 100 foundations; requires laptops and complete component sets.",
+      "complementary_activities": "Arduino 100; Arduino 300; Gas Detector",
+      "cost_band": "High",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Grounded in internal Arduino 200 module and inventory."
+    },
+    {
+      "offering_id": "ACT-011",
+      "activity_title": "Arduino 300",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "Participants use a Wi-Fi-capable NodeMCU board to explore connected sensing and introductory IoT applications.",
+      "stem_domain": "Technology; Engineering",
+      "key_concepts": "NodeMCU; Wi-Fi connectivity; sensors; data transmission; Internet of Things",
+      "learning_outcomes": "Configure a connected controller; collect sensor data; explain how IoT systems connect devices and information",
+      "recommended_age": "14+",
+      "audience_types": "Secondary; Teachers; Tertiary",
+      "standard_duration_min": 240.0,
+      "min_participants": 10.0,
+      "max_participants": 25.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor",
+      "electricity_required": "Yes",
+      "internet_required": "Yes",
+      "water_required": "No",
+      "facilitators_required": 3.0,
+      "setup_time_min": 60.0,
+      "accessibility_notes": "Provide pre-configured software, accessible code templates and paired technical support.",
+      "safety_level": "Medium",
+      "key_hazards": "Incorrect wiring; electrical short circuit; cybersecurity and account access considerations; cable hazards",
+      "participant_handling_rule": "Use sandbox credentials where needed; never collect personal data; power off during rewiring.",
+      "suitable_themes": "Internet of Things; Smart Cities; Connected Environment; Industry 4.0",
+      "suitable_objectives": "Introduce IoT architecture; integrate hardware and software; discuss responsible connected technology",
+      "engagement_methods": "Guided build; live data test; coding; design challenge",
+      "customisable_elements": "Sensor type; dashboard; scenario; alert threshold",
+      "key_constraints": "Stable internet, configured devices and compatible network access are required.",
+      "complementary_activities": "Arduino 200; Gas Detector; Solar Fan",
+      "cost_band": "High",
+      "availability_status": "To be confirmed",
+      "data_confidence": "Medium",
+      "last_validated": "2026-09-22",
+      "notes": "NodeMCU and DHT11 are grounded in internal inventory; full programme design requires validation."
+    },
+    {
+      "offering_id": "ACT-012",
+      "activity_title": "DIY Catapult",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "Participants build and test a small catapult while investigating stored energy, force and projectile motion.",
+      "stem_domain": "Engineering; Science; Mathematics",
+      "key_concepts": "Elastic potential energy; force; levers; trajectory; measurement",
+      "learning_outcomes": "Build a working model; explain energy transfer; measure and improve launch performance",
+      "recommended_age": "8+",
+      "audience_types": "Primary; Secondary; Families",
+      "standard_duration_min": 60.0,
+      "min_participants": 10.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor or sheltered outdoor",
+      "electricity_required": "No",
+      "internet_required": "No",
+      "water_required": "No",
+      "facilitators_required": 2.0,
+      "setup_time_min": 20.0,
+      "accessibility_notes": "Use soft projectiles, pre-bundled materials and clear visual build steps.",
+      "safety_level": "Medium",
+      "key_hazards": "Flying projectiles; rubber-band snap; splinters; eye injury risk",
+      "participant_handling_rule": "Use only soft projectiles; launch towards an empty target zone; never aim at people; eye-level launch is prohibited.",
+      "suitable_themes": "Forces and Motion; Medieval Engineering; Design Challenge; Mathematics",
+      "suitable_objectives": "Explore energy and motion; practise measurement; optimise a design",
+      "engagement_methods": "Guided build; prediction; target challenge; data comparison",
+      "customisable_elements": "Arm length; target distance; scoring rules; decoration",
+      "key_constraints": "Needs a controlled launch lane and durable consumables; performance varies by build quality.",
+      "complementary_activities": "Scribbling Machine; Mini Drone; Solar Fan",
+      "cost_band": "Low",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Materials and core concept grounded in internal inventory and activity bank."
+    },
+    {
+      "offering_id": "ACT-013",
+      "activity_title": "DIY Ice Cream",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "Participants make ice cream using milk, ice and salt while exploring freezing-point depression and heat transfer.",
+      "stem_domain": "Science",
+      "key_concepts": "States of matter; heat transfer; freezing-point depression; mixtures",
+      "learning_outcomes": "Explain why salt lowers the freezing point; observe changes of state; follow a simple food-science process",
+      "recommended_age": "7+",
+      "audience_types": "Primary; Secondary; Families",
+      "standard_duration_min": 60.0,
+      "min_participants": 10.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor or sheltered outdoor",
+      "electricity_required": "No",
+      "internet_required": "No",
+      "water_required": "Yes",
+      "facilitators_required": 3.0,
+      "setup_time_min": 30.0,
+      "accessibility_notes": "Offer roles that do not require vigorous shaking and provide visual sequence cards.",
+      "safety_level": "High",
+      "key_hazards": "Food allergy or intolerance; hygiene; cold exposure; leaking bags; slippery spills",
+      "participant_handling_rule": "Confirm dietary requirements; use food-safe materials; no tasting without approved hygiene controls and consent.",
+      "suitable_themes": "Food Science; Cool Chemistry; States of Matter; Celebrations",
+      "suitable_objectives": "Explore changes of state; connect science to food; practise observation and teamwork",
+      "engagement_methods": "Demonstration; hands-on preparation; observation; tasting where approved",
+      "customisable_elements": "Flavour; topping; recipe quantity; cultural food context",
+      "key_constraints": "Requires cold-chain planning, allergen controls, clean water, waste management and food approval.",
+      "complementary_activities": "Cool Chem Show; Fabulous Fizzy; Water Water Everywhere",
+      "cost_band": "Medium",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Materials grounded in current internal inventory; food and HSE controls require local approval."
+    },
+    {
+      "offering_id": "ACT-014",
+      "activity_title": "Water water Everywhere",
+      "offering_type": "Science Show",
+      "short_description": "An interactive science show demonstrating water as a solvent and its behaviour through acidity, capillary action, cohesion, heat transfer and pressure.",
+      "stem_domain": "Science",
+      "key_concepts": "Solubility; acids and alkalis; capillary action; cohesion and adhesion; heat transfer; pressure",
+      "learning_outcomes": "Recognise key properties of water; predict demonstration outcomes; connect water behaviour to daily life",
+      "recommended_age": "7+",
+      "audience_types": "Primary; Secondary; Families; Public",
+      "standard_duration_min": 45.0,
+      "min_participants": 30.0,
+      "max_participants": 500.0,
+      "delivery_mode": "Facilitated demonstration",
+      "indoor_outdoor": "Indoor or sheltered outdoor",
+      "electricity_required": "Optional",
+      "internet_required": "No",
+      "water_required": "Yes",
+      "facilitators_required": 3.0,
+      "setup_time_min": 60.0,
+      "accessibility_notes": "Use verbal description, high-contrast liquids, close-up projection and front seating for sensory access.",
+      "safety_level": "High",
+      "key_hazards": "Open flame; glass breakage; chemical splashes; water spills; projectiles from pressure demonstrations",
+      "participant_handling_rule": "Audience remains behind safety boundary; only trained facilitators handle flame, glass and chemicals.",
+      "suitable_themes": "Water; Environment; Weather; Everyday Science",
+      "suitable_objectives": "Build appreciation of water science; demonstrate multiple scientific principles; inspire curiosity",
+      "engagement_methods": "Prediction questions; live demonstration; audience responses; volunteer segments with low-risk tasks",
+      "customisable_elements": "Demonstration selection; local water context; show length",
+      "key_constraints": "Needs water access, protected stage area, spill control and HSE-approved demonstration sequence.",
+      "complementary_activities": "Bottle Aquarium; Cool Chem Show; Sustainable Suds",
+      "cost_band": "Medium",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Show content and maximum audience grounded in internal offering and inventory materials."
+    },
+    {
+      "offering_id": "ACT-015",
+      "activity_title": "Combustion Show",
+      "offering_type": "Science Show",
+      "short_description": "An interactive show exploring burning, the fire triangle, fuels, oxygen and combustion-related emissions.",
+      "stem_domain": "Science",
+      "key_concepts": "Combustion; fire triangle; fuels; oxygen; carbon dioxide; emissions",
+      "learning_outcomes": "Identify the conditions needed for combustion; distinguish selected combustion examples; connect burning to emissions and safety",
+      "recommended_age": "9+",
+      "audience_types": "Primary; Secondary; Public",
+      "standard_duration_min": 45.0,
+      "min_participants": 30.0,
+      "max_participants": 500.0,
+      "delivery_mode": "Facilitated demonstration",
+      "indoor_outdoor": "Indoor with approval or suitable outdoor area",
+      "electricity_required": "Optional",
+      "internet_required": "No",
+      "water_required": "No",
+      "facilitators_required": 3.0,
+      "setup_time_min": 90.0,
+      "accessibility_notes": "Use clear narration, large-scale demonstrations and visual fire-triangle graphics.",
+      "safety_level": "High",
+      "key_hazards": "Open flame; heat; smoke; flammable materials; burns",
+      "participant_handling_rule": "Only trained facilitators handle ignition and fuels; maintain exclusion zone, fire controls and venue approval.",
+      "suitable_themes": "Energy; Climate; Fire Science; Safety",
+      "suitable_objectives": "Explain combustion; raise environmental awareness; reinforce fire safety",
+      "engagement_methods": "Live demonstration; prediction; questioning; visual explanation",
+      "customisable_elements": "Demo sequence; industry examples; environmental emphasis",
+      "key_constraints": "Requires formal HSE assessment, venue approval, fire equipment, ventilation and trained personnel.",
+      "complementary_activities": "Elephant Toothpaste; Water Water Everywhere; Cool Chem Show",
+      "cost_band": "High",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Core description, duration and maximum audience grounded in internal rate-card materials."
+    },
+    {
+      "offering_id": "ACT-016",
+      "activity_title": "Eat, Prey, Love Show",
+      "offering_type": "Science Show",
+      "short_description": "A lively ecology show exploring how animals hunt, avoid predators, find mates and maintain balance in food chains.",
+      "stem_domain": "Science",
+      "key_concepts": "Predator-prey relationships; adaptation; survival strategies; mating behaviour; food chains; population balance",
+      "learning_outcomes": "Describe survival adaptations; explain predator-prey relationships; relate population changes to ecosystem balance",
+      "recommended_age": "7+",
+      "audience_types": "Primary; Secondary; Families; Public",
+      "standard_duration_min": 45.0,
+      "min_participants": 30.0,
+      "max_participants": 500.0,
+      "delivery_mode": "Facilitated demonstration",
+      "indoor_outdoor": "Indoor or sheltered outdoor",
+      "electricity_required": "Optional",
+      "internet_required": "No",
+      "water_required": "No",
+      "facilitators_required": 2.0,
+      "setup_time_min": 60.0,
+      "accessibility_notes": "Use visual props, captions, tactile models and non-verbal participation options.",
+      "safety_level": "Low",
+      "key_hazards": "Trip hazards from props; audience movement during participation",
+      "participant_handling_rule": "Keep aisles clear; select volunteers safely; avoid live animals unless separately approved.",
+      "suitable_themes": "Biodiversity; Ecology; Wildlife; Conservation",
+      "suitable_objectives": "Understand food chains and adaptations; encourage care for ecosystems; build science curiosity",
+      "engagement_methods": "Storytelling; demonstrations; role-play; audience quiz",
+      "customisable_elements": "Local species; conservation messages; age-level language",
+      "key_constraints": "Needs suitable stage visibility and accurate, age-appropriate species examples.",
+      "complementary_activities": "Bottle Aquarium; Colour Play; Sustainable Suds",
+      "cost_band": "Medium",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Description and maximum audience grounded in internal science-show materials."
+    },
+    {
+      "offering_id": "ACT-017",
+      "activity_title": "Cool Chem Show",
+      "offering_type": "Science Show",
+      "short_description": "An interactive chemistry show featuring visible reactions, gas production and colour changes.",
+      "stem_domain": "Science",
+      "key_concepts": "Atoms and molecules; chemical reactions; gas production; indicators; colour change",
+      "learning_outcomes": "Recognise signs of chemical change; distinguish observation from explanation; follow safe chemistry practices",
+      "recommended_age": "8+",
+      "audience_types": "Primary; Secondary; Families; Public",
+      "standard_duration_min": 45.0,
+      "min_participants": 30.0,
+      "max_participants": 500.0,
+      "delivery_mode": "Facilitated demonstration",
+      "indoor_outdoor": "Indoor with ventilation",
+      "electricity_required": "Optional",
+      "internet_required": "No",
+      "water_required": "Yes",
+      "facilitators_required": 3.0,
+      "setup_time_min": 75.0,
+      "accessibility_notes": "Use high-contrast reagents, verbal descriptions and projected close-ups where possible.",
+      "safety_level": "High",
+      "key_hazards": "Chemical splashes; pressure build-up; stains; fumes; glassware",
+      "participant_handling_rule": "Only trained facilitators handle chemicals; audience remains behind boundary; use PPE and approved quantities.",
+      "suitable_themes": "Chemistry; Reactions; Colours; Matter",
+      "suitable_objectives": "Make chemistry visible and engaging; introduce evidence of reactions; promote safe experimentation",
+      "engagement_methods": "Prediction; live reactions; questioning; visual explanation",
+      "customisable_elements": "Reaction set; colour theme; curriculum linkage",
+      "key_constraints": "Requires approved chemical list, ventilation, PPE, spill kit and HSE review.",
+      "complementary_activities": "Fabulous Fizzy; Elephant Toothpaste; DIY Ice Cream",
+      "cost_band": "High",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Description, duration and maximum audience grounded in internal show materials; hazard controls require HSE validation."
+    },
+    {
+      "offering_id": "ACT-018",
+      "activity_title": "Sustainable Suds",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "Participants repurpose used cooking oil into soap while discussing waste reduction and sustainable consumption.",
+      "stem_domain": "Science; Engineering",
+      "key_concepts": "Saponification; chemical change; circular economy; waste reduction; pH and safe handling",
+      "learning_outcomes": "Explain the idea of converting waste oil into soap; identify sustainability benefits; follow a controlled making process",
+      "recommended_age": "14+",
+      "audience_types": "Secondary; Teachers; Adults",
+      "standard_duration_min": 120.0,
+      "min_participants": 10.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor with ventilation",
+      "electricity_required": "Yes",
+      "internet_required": "No",
+      "water_required": "Yes",
+      "facilitators_required": 3.0,
+      "setup_time_min": 60.0,
+      "accessibility_notes": "Offer pre-measured materials, clear pictorial steps and alternative observation roles.",
+      "safety_level": "High",
+      "key_hazards": "Corrosive alkali; chemical splashes; heat; slippery oil; unsuitable curing or use",
+      "participant_handling_rule": "Only trained facilitators handle concentrated alkali; PPE mandatory; no immediate skin use; label and cure products correctly.",
+      "suitable_themes": "Sustainability; Circular Economy; Green Chemistry; Waste Management",
+      "suitable_objectives": "Promote waste valorisation; introduce green chemistry; encourage responsible consumption",
+      "engagement_methods": "Demonstration; supervised making; sustainability discussion; reflection",
+      "customisable_elements": "Fragrance; mould; packaging; sustainability message",
+      "key_constraints": "Requires chemical approval, PPE, ventilation, curing time and controlled disposal; not suitable for young children.",
+      "complementary_activities": "Cool Chem Show; Bottle Aquarium; Solar Fan",
+      "cost_band": "Medium",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Purpose grounded in internal activity bank and offering material; chemistry controls require formal validation."
+    },
+    {
+      "offering_id": "ACT-019",
+      "activity_title": "Solar Fan",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "Participants build a small solar-powered fan and observe the conversion of light energy into electrical and kinetic energy.",
+      "stem_domain": "Engineering; Science; Technology",
+      "key_concepts": "Solar energy; energy conversion; circuits; motors; renewable energy",
+      "learning_outcomes": "Assemble a simple solar circuit; explain energy conversion; investigate how light intensity affects performance",
+      "recommended_age": "8+",
+      "audience_types": "Primary; Secondary; Families",
+      "standard_duration_min": 75.0,
+      "min_participants": 10.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor near strong light or outdoor",
+      "electricity_required": "No",
+      "internet_required": "No",
+      "water_required": "No",
+      "facilitators_required": 2.0,
+      "setup_time_min": 30.0,
+      "accessibility_notes": "Use pre-stripped wires, large connectors and paired construction roles.",
+      "safety_level": "Medium",
+      "key_hazards": "Spinning fan blades; sharp wire ends; hot outdoor conditions; small parts",
+      "participant_handling_rule": "Use guarded or soft blades; switch off before adjustment; supervise outdoor heat exposure.",
+      "suitable_themes": "Renewable Energy; Climate Action; Sustainable Technology; Engineering",
+      "suitable_objectives": "Understand solar power; explore energy conversion; build a functional renewable-energy model",
+      "engagement_methods": "Guided build; light testing; design challenge; discussion",
+      "customisable_elements": "Fan housing; blade design; solar angle; application scenario",
+      "key_constraints": "Performance depends on light intensity; indoor use may require a strong lamp.",
+      "complementary_activities": "LED Flashlight; DIY Catapult; Sustainable Suds",
+      "cost_band": "Medium",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Activity purpose grounded in internal activity bank; detailed timing is a planning assumption."
+    },
+    {
+      "offering_id": "ACT-020",
+      "activity_title": "Fabolous Fizzy",
+      "offering_type": "Hands-on Workshop",
+      "short_description": "Participants investigate a safe acid-base reaction that produces carbon dioxide and visible fizzing.",
+      "stem_domain": "Science",
+      "key_concepts": "Acids and bases; gas production; chemical reactions; variables; observation",
+      "learning_outcomes": "Identify signs of reaction; explain that gas is produced; compare how changing a variable affects fizzing",
+      "recommended_age": "6+",
+      "audience_types": "Primary; Families; Public",
+      "standard_duration_min": 45.0,
+      "min_participants": 10.0,
+      "max_participants": 30.0,
+      "delivery_mode": "Facilitated hands-on",
+      "indoor_outdoor": "Indoor or sheltered outdoor",
+      "electricity_required": "No",
+      "internet_required": "No",
+      "water_required": "Yes",
+      "facilitators_required": 2.0,
+      "setup_time_min": 20.0,
+      "accessibility_notes": "Use lightweight containers, large measuring tools and visual step cards.",
+      "safety_level": "Medium",
+      "key_hazards": "Splashes; pressure in closed containers; ingestion; slippery spills",
+      "participant_handling_rule": "Use food-grade or approved materials; never seal reacting mixtures; wear eye protection where splashing is possible.",
+      "suitable_themes": "Chemistry; Celebrations; Gases; Kitchen Science",
+      "suitable_objectives": "Introduce chemical reactions; practise prediction and observation; inspire curiosity",
+      "engagement_methods": "Demonstration; small-group experiment; variable challenge; discussion",
+      "customisable_elements": "Colours; container theme; variable tested; reaction scale",
+      "key_constraints": "Requires spill control, measured quantities and open containers; title spelling should be validated.",
+      "complementary_activities": "Cool Chem Show; Elephant Toothpaste; Colour Play",
+      "cost_band": "Low",
+      "availability_status": "To be confirmed",
+      "data_confidence": "Low",
+      "last_validated": "2026-09-22",
+      "notes": "Draft interpretation based on title only; confirm whether the intended name is “Fabulous Fizzy” and validate the exact procedure."
+    },
+    {
+      "offering_id": "ACT-021",
+      "activity_title": "Elephant Toothpaste",
+      "offering_type": "Science Show",
+      "short_description": "A dramatic chemistry demonstration where a rapid reaction creates a large column of foam.",
+      "stem_domain": "Science",
+      "key_concepts": "Catalysts; decomposition; gas production; exothermic reactions; reaction rate",
+      "learning_outcomes": "Identify visible evidence of reaction; explain the role of a catalyst at an age-appropriate level; observe safe chemistry practice",
+      "recommended_age": "9+",
+      "audience_types": "Primary; Secondary; Families; Public",
+      "standard_duration_min": 30.0,
+      "min_participants": 30.0,
+      "max_participants": 500.0,
+      "delivery_mode": "Facilitated demonstration",
+      "indoor_outdoor": "Indoor with protection or suitable outdoor area",
+      "electricity_required": "Optional",
+      "internet_required": "No",
+      "water_required": "Yes",
+      "facilitators_required": 3.0,
+      "setup_time_min": 60.0,
+      "accessibility_notes": "Use projected close-ups, clear verbal descriptions and a visible safety boundary.",
+      "safety_level": "High",
+      "key_hazards": "Hydrogen peroxide exposure; heat; chemical splashes; large foam overflow; slippery floor",
+      "participant_handling_rule": "Only trained facilitators handle reagents; audience stays behind barrier; use PPE, catch tray and approved concentrations.",
+      "suitable_themes": "Chemistry; Reaction Rates; Catalysts; Spectacular Science",
+      "suitable_objectives": "Demonstrate rapid chemical change; introduce catalysts; build excitement for chemistry",
+      "engagement_methods": "Prediction; live demonstration; questioning; visual explanation",
+      "customisable_elements": "Colour; container size; catalyst type where approved; explanation depth",
+      "key_constraints": "Requires approved reagent concentration, chemical storage, PPE, spill controls and HSE review.",
+      "complementary_activities": "Cool Chem Show; Fabulous Fizzy; Combustion Show",
+      "cost_band": "High",
+      "availability_status": "To be confirmed",
+      "data_confidence": "High",
+      "last_validated": "2026-09-22",
+      "notes": "Assigned ACT-021 because no ID was supplied. Description and show context grounded in internal rate-card material."
+    }
+  ],
+  "mappings": [
+    {
+      "mapping_id": "MAP-001",
+      "theme": "Energy and Electricity",
+      "related_concepts": "Circuits; light; energy transfer; polarity",
+      "stakeholder_objective": "STEM awareness",
+      "suitable_audience": "School; Family",
+      "primary_offering_id": "ACT-006",
+      "secondary_offering_id": "ACT-008",
+      "reason_for_match": "Simple circuit activities provide observable, hands-on learning.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-002",
+      "theme": "Creative Engineering",
+      "related_concepts": "Motors; movement; balance; prototyping",
+      "stakeholder_objective": "Design thinking",
+      "suitable_audience": "School; Family",
+      "primary_offering_id": "ACT-007",
+      "secondary_offering_id": "ACT-012",
+      "reason_for_match": "Both activities support building, testing and improving a physical prototype.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-003",
+      "theme": "Digital Innovation",
+      "related_concepts": "Coding; logic; physical computing; microcontrollers",
+      "stakeholder_objective": "Digital literacy",
+      "suitable_audience": "School; Youth; Educator",
+      "primary_offering_id": "ACT-002",
+      "secondary_offering_id": "ACT-009",
+      "reason_for_match": "The activities connect programming with physical inputs and outputs.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-004",
+      "theme": "Robotics and Automation",
+      "related_concepts": "Sensors; actuators; control systems; coding",
+      "stakeholder_objective": "Future skills; problem-solving",
+      "suitable_audience": "School; Youth; Educator",
+      "primary_offering_id": "ACT-010",
+      "secondary_offering_id": "ACT-005",
+      "reason_for_match": "Both can demonstrate how automated systems sense conditions and trigger outputs.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-005",
+      "theme": "IoT and Smart Systems",
+      "related_concepts": "Connectivity; sensors; data; Wi-Fi; monitoring",
+      "stakeholder_objective": "Digital innovation; Industry 4.0 awareness",
+      "suitable_audience": "Secondary School; Youth; Educator",
+      "primary_offering_id": "ACT-011",
+      "secondary_offering_id": "ACT-005",
+      "reason_for_match": "Connected controllers and gas sensing support a smart-monitoring theme.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-006",
+      "theme": "Aviation and Flight Technology",
+      "related_concepts": "Flight; motors; control; forces; trajectory",
+      "stakeholder_objective": "Engineering interest; technology exposure",
+      "suitable_audience": "School; Youth; Community",
+      "primary_offering_id": "ACT-001",
+      "secondary_offering_id": "ACT-012",
+      "reason_for_match": "Drone flight and catapult motion provide engaging contexts for forces, control and trajectory.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-007",
+      "theme": "Renewable Energy",
+      "related_concepts": "Solar energy; energy conversion; motors; electricity",
+      "stakeholder_objective": "Sustainability awareness; clean-energy literacy",
+      "suitable_audience": "School; Family; Community",
+      "primary_offering_id": "ACT-019",
+      "secondary_offering_id": "ACT-006",
+      "reason_for_match": "Solar Fan demonstrates solar-to-motion energy conversion while LED Lantern complements it with circuit learning.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-008",
+      "theme": "Sustainability and Circular Economy",
+      "related_concepts": "Waste reduction; reuse; resource recovery; green chemistry",
+      "stakeholder_objective": "Environmental responsibility",
+      "suitable_audience": "School; Youth; Family; Community",
+      "primary_offering_id": "ACT-018",
+      "secondary_offering_id": "ACT-003",
+      "reason_for_match": "Sustainable Suds repurposes used cooking oil while Bottle Aquarium can support a reuse-focused environmental context.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-009",
+      "theme": "Water Science",
+      "related_concepts": "Pressure; surface tension; capillary action; cohesion; adhesion",
+      "stakeholder_objective": "Science literacy; environmental awareness",
+      "suitable_audience": "School; Family; Community",
+      "primary_offering_id": "ACT-014",
+      "secondary_offering_id": "ACT-003",
+      "reason_for_match": "Both use water to make physical science concepts tangible through demonstrations or hands-on exploration.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-010",
+      "theme": "Chemistry in Everyday Life",
+      "related_concepts": "Chemical reactions; acids and bases; gas production; indicators",
+      "stakeholder_objective": "STEM engagement; chemistry literacy",
+      "suitable_audience": "School; Family; Community",
+      "primary_offering_id": "ACT-017",
+      "secondary_offering_id": "ACT-020",
+      "reason_for_match": "Cool Chem and Fabulous Fizzy use visible chemical changes to make reaction concepts engaging.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-011",
+      "theme": "Spectacular Chemistry",
+      "related_concepts": "Catalysts; decomposition; gas production; reaction rate",
+      "stakeholder_objective": "Science inspiration",
+      "suitable_audience": "School; Youth; Community",
+      "primary_offering_id": "ACT-021",
+      "secondary_offering_id": "ACT-017",
+      "reason_for_match": "Elephant Toothpaste and Cool Chem are strong visual demonstrations for a chemistry-themed engagement.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-012",
+      "theme": "Fire, Energy and Combustion",
+      "related_concepts": "Combustion; oxygen; fuels; energy; emissions",
+      "stakeholder_objective": "Science awareness; environmental awareness",
+      "suitable_audience": "School; Youth; Community",
+      "primary_offering_id": "ACT-015",
+      "secondary_offering_id": "ACT-014",
+      "reason_for_match": "Combustion provides the main fire-and-energy narrative while the water show provides contrasting physical phenomena.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-013",
+      "theme": "Ecology and Biodiversity",
+      "related_concepts": "Predator-prey; adaptation; ecosystems; food chains",
+      "stakeholder_objective": "Environmental education; conservation awareness",
+      "suitable_audience": "School; Family; Community",
+      "primary_offering_id": "ACT-016",
+      "secondary_offering_id": "ACT-003",
+      "reason_for_match": "Eat, Prey, Love provides an ecology narrative and Bottle Aquarium offers a complementary aquatic-environment context.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-014",
+      "theme": "Food Science",
+      "related_concepts": "Freezing; heat transfer; mixtures; chemical change",
+      "stakeholder_objective": "Everyday science; experiential learning",
+      "suitable_audience": "School; Family; Community",
+      "primary_offering_id": "ACT-013",
+      "secondary_offering_id": "ACT-020",
+      "reason_for_match": "Both connect science with familiar materials and observable changes.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-015",
+      "theme": "Forces and Motion",
+      "related_concepts": "Force; trajectory; stored energy; vibration; movement",
+      "stakeholder_objective": "Problem-solving; engineering thinking",
+      "suitable_audience": "School; Family",
+      "primary_offering_id": "ACT-012",
+      "secondary_offering_id": "ACT-007",
+      "reason_for_match": "Both allow participants to investigate how design changes affect motion.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-016",
+      "theme": "Light and Functional Design",
+      "related_concepts": "Light; circuits; conductivity; polarity; design",
+      "stakeholder_objective": "STEM awareness; creative making",
+      "suitable_audience": "School; Family",
+      "primary_offering_id": "ACT-008",
+      "secondary_offering_id": "ACT-006",
+      "reason_for_match": "Both combine simple circuit learning with a functional light-based build.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-017",
+      "theme": "Creative Science for Young Learners",
+      "related_concepts": "Colours; observation; mixing; fine-motor skills",
+      "stakeholder_objective": "Early STEM interest; creativity",
+      "suitable_audience": "Early Years; Primary School; Family",
+      "primary_offering_id": "ACT-004",
+      "secondary_offering_id": "ACT-003",
+      "reason_for_match": "Both provide visual, creative and accessible entry points into science exploration.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-018",
+      "theme": "Smart Safety Technology",
+      "related_concepts": "Gas sensing; alarms; microcontrollers; input-output",
+      "stakeholder_objective": "Safety awareness; TVET exposure",
+      "suitable_audience": "Secondary School; Youth; Educator",
+      "primary_offering_id": "ACT-005",
+      "secondary_offering_id": "ACT-010",
+      "reason_for_match": "Both demonstrate applied electronics through sensors and responsive outputs.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-019",
+      "theme": "Coding to Connected Technology",
+      "related_concepts": "Programming; microcontrollers; sensors; connectivity",
+      "stakeholder_objective": "Future-ready digital skills",
+      "suitable_audience": "Secondary School; Youth; Educator",
+      "primary_offering_id": "ACT-009",
+      "secondary_offering_id": "ACT-011",
+      "reason_for_match": "Arduino 100 can establish physical-computing foundations before progressing to connected-device concepts.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-020",
+      "theme": "Progressive Electronics Learning",
+      "related_concepts": "Circuits; sensors; displays; actuators; microcontrollers",
+      "stakeholder_objective": "Technical skill development; TVET exposure",
+      "suitable_audience": "Secondary School; Youth; Educator",
+      "primary_offering_id": "ACT-009",
+      "secondary_offering_id": "ACT-010",
+      "reason_for_match": "The pairing supports progression from basic Arduino circuits to integrated sensor-and-actuator systems.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-021",
+      "theme": "Climate and Sustainable Technology",
+      "related_concepts": "Renewable energy; emissions; resource efficiency; circular economy",
+      "stakeholder_objective": "Climate awareness; sustainability action",
+      "suitable_audience": "School; Youth; Community",
+      "primary_offering_id": "ACT-019",
+      "secondary_offering_id": "ACT-018",
+      "reason_for_match": "The activities combine clean-energy learning with waste reduction and resource recovery.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-022",
+      "theme": "Environmental Chemistry",
+      "related_concepts": "Chemical change; water; pH; sustainable materials",
+      "stakeholder_objective": "Environmental awareness; responsible consumption",
+      "suitable_audience": "Secondary School; Youth; Community",
+      "primary_offering_id": "ACT-018",
+      "secondary_offering_id": "ACT-017",
+      "reason_for_match": "Both can use chemistry as a platform for discussing materials, reactions and responsible practices.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-023",
+      "theme": "Large-Audience Science Engagement",
+      "related_concepts": "Chemical reactions; combustion; water phenomena",
+      "stakeholder_objective": "Mass STEM engagement; science inspiration",
+      "suitable_audience": "School; Family; Community; Public",
+      "primary_offering_id": "ACT-017",
+      "secondary_offering_id": "ACT-021",
+      "reason_for_match": "Both offer visually strong chemistry demonstrations suited to science-show programming.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-024",
+      "theme": "Everyday Science",
+      "related_concepts": "Light; circuits; movement; reactions",
+      "stakeholder_objective": "STEM engagement",
+      "suitable_audience": "Family; Community; School",
+      "primary_offering_id": "ACT-008",
+      "secondary_offering_id": "ACT-007",
+      "reason_for_match": "The activities connect scientific principles to tangible objects participants can build and observe.",
+      "validation_status": "To be validated"
+    },
+    {
+      "mapping_id": "MAP-025",
+      "theme": "Problem-Solving Challenge",
+      "related_concepts": "Coding; prototyping; testing; troubleshooting",
+      "stakeholder_objective": "Critical thinking; teamwork; problem-solving",
+      "suitable_audience": "School; Youth; Educator",
+      "primary_offering_id": "ACT-002",
+      "secondary_offering_id": "ACT-012",
+      "reason_for_match": "Coding and physical prototyping provide complementary ways to predict, test and improve solutions.",
+      "validation_status": "To be validated"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "RULE-001",
+      "rule_type": "Age",
+      "trigger": "If stakeholder audience is below the verified minimum age",
+      "recommended_action": "Do not recommend without an approved adaptation; explain the mismatch",
+      "severity": "High",
+      "guidance": "A technical electronics workshop should not automatically be recommended to preschool participants"
+    },
+    {
+      "rule_id": "RULE-002",
+      "rule_type": "Capacity",
+      "trigger": "If participant count exceeds maximum simultaneous capacity",
+      "recommended_action": "Suggest rotations, parallel stations, repeated sessions, or an alternative offering",
+      "severity": "High",
+      "guidance": "An offering for 40 sets cannot automatically serve 200 participants simultaneously"
+    },
+    {
+      "rule_id": "RULE-003",
+      "rule_type": "Electricity",
+      "trigger": "If the venue has no electricity",
+      "recommended_action": "Exclude mains-dependent activities or recommend a verified battery-powered alternative",
+      "severity": "High",
+      "guidance": "Recommend only activities that can operate within the available infrastructure"
+    },
+    {
+      "rule_id": "RULE-004",
+      "rule_type": "Internet",
+      "trigger": "If internet availability is unknown and the activity may require it",
+      "recommended_action": "Ask a follow-up question or state an assumption",
+      "severity": "Medium",
+      "guidance": "Confirm connectivity before recommending a cloud-dependent coding activity"
+    },
+    {
+      "rule_id": "RULE-005",
+      "rule_type": "Duration",
+      "trigger": "If requested duration is shorter than setup plus delivery requirement",
+      "recommended_action": "Propose a simplified version, demonstration, or alternative offering",
+      "severity": "High",
+      "guidance": "Do not compress a complex build into an unrealistic duration"
+    },
+    {
+      "rule_id": "RULE-006",
+      "rule_type": "Venue",
+      "trigger": "If an activity is not validated for outdoor delivery",
+      "recommended_action": "Flag the limitation and ask about shelter, weather, and surface conditions",
+      "severity": "Medium",
+      "guidance": "Do not assume electronic kits can be used outdoors"
+    },
+    {
+      "rule_id": "RULE-007",
+      "rule_type": "Safety",
+      "trigger": "If an activity contains controlled equipment, chemicals, flame, batteries, or tools",
+      "recommended_action": "Apply the relevant safety restriction and trained-facilitator requirement",
+      "severity": "High",
+      "guidance": "Do not recommend participant-led handling when facilitator-only delivery is required"
+    },
+    {
+      "rule_id": "RULE-008",
+      "rule_type": "Budget",
+      "trigger": "If exact pricing is unavailable",
+      "recommended_action": "Use the approved cost band and do not invent a price",
+      "severity": "High",
+      "guidance": "State that exact costing requires validation"
+    },
+    {
+      "rule_id": "RULE-009",
+      "rule_type": "Missing_Data",
+      "trigger": "If critical information is missing",
+      "recommended_action": "Ask targeted follow-up questions or state transparent assumptions",
+      "severity": "Medium",
+      "guidance": "Ask for audience age, participant count, venue, duration, and budget"
+    },
+    {
+      "rule_id": "RULE-010",
+      "rule_type": "Unsupported_Offering",
+      "trigger": "If an offering is not in the verified catalogue",
+      "recommended_action": "Label it as a proposed concept, not an existing offering",
+      "severity": "High",
+      "guidance": "Separate verified Petrosains offerings from AI-generated enhancements"
+    },
+    {
+      "rule_id": "RULE-011",
+      "rule_type": "Accessibility",
+      "trigger": "If accessibility requirements are unspecified",
+      "recommended_action": "Ask about required accommodations and suggest flexible delivery options",
+      "severity": "Medium",
+      "guidance": "Do not make assumptions about individual participants"
+    },
+    {
+      "rule_id": "RULE-012",
+      "rule_type": "Feasibility",
+      "trigger": "If several stakeholder requirements conflict",
+      "recommended_action": "Explain the conflict and recommend an achievable alternative",
+      "severity": "High",
+      "guidance": "Minimal budget, 500 participants, small venue, and individual robot-building cannot be accepted without redesign"
+    }
+  ],
+  "kits": {
+    "ACT-001": [
+      {
+        "name": "A box of DIY Drone set contains:",
+        "packs": 40.0
+      },
+      {
+        "name": "Brown Bag",
+        "packs": null
+      },
+      {
+        "name": "Customised Sticker",
+        "packs": null
+      },
+      {
+        "name": "Activity title sticker",
+        "packs": null
+      }
+    ],
+    "ACT-002": [
+      {
+        "name": "1X Battery Holder (AA Size) , 2X AA Battery,",
+        "packs": 40.0
+      },
+      {
+        "name": "Brown Bag",
+        "packs": 40.0
+      },
+      {
+        "name": "Customised Sticker",
+        "packs": 40.0
+      },
+      {
+        "name": "Activity title sticker",
+        "packs": 40.0
+      }
+    ],
+    "ACT-003": [
+      {
+        "name": "Aquarium Rocks",
+        "packs": 40.0
+      },
+      {
+        "name": "Artificial Aquatic Plant",
+        "packs": null
+      },
+      {
+        "name": "Sharpie Pen",
+        "packs": null
+      },
+      {
+        "name": "Cutter",
+        "packs": null
+      },
+      {
+        "name": "Brown Bag",
+        "packs": null
+      },
+      {
+        "name": "Customised Sticker",
+        "packs": null
+      },
+      {
+        "name": "Activity title sticker",
+        "packs": null
+      }
+    ],
+    "ACT-004": [
+      {
+        "name": "Modelling Dough Non-Toxic",
+        "packs": 40.0
+      },
+      {
+        "name": "Sharpie Pen",
+        "packs": null
+      },
+      {
+        "name": "Filter Paper",
+        "packs": null
+      },
+      {
+        "name": "Empty Spray Bottle",
+        "packs": null
+      },
+      {
+        "name": "Drawing Block",
+        "packs": null
+      },
+      {
+        "name": "Pencils",
+        "packs": null
+      },
+      {
+        "name": "Colour Chart printed materials",
+        "packs": null
+      },
+      {
+        "name": "Brown Bag",
+        "packs": null
+      },
+      {
+        "name": "Customised Sticker",
+        "packs": null
+      },
+      {
+        "name": "Activity title sticker",
+        "packs": null
+      }
+    ],
+    "ACT-005": [
+      {
+        "name": "MQ-2 Gas Sensor",
+        "packs": 40.0
+      },
+      {
+        "name": "RGB LED Module",
+        "packs": null
+      },
+      {
+        "name": "Buzzer Module",
+        "packs": null
+      },
+      {
+        "name": "Arduino Nano",
+        "packs": null
+      },
+      {
+        "name": "Jumper Wire",
+        "packs": null
+      },
+      {
+        "name": "Bread Board",
+        "packs": null
+      },
+      {
+        "name": "Brown Bag",
+        "packs": null
+      },
+      {
+        "name": "Customised Sticker",
+        "packs": null
+      },
+      {
+        "name": "Activity title sticker",
+        "packs": null
+      }
+    ],
+    "ACT-006": [
+      {
+        "name": "Tracing Paper",
+        "packs": 80.0
+      },
+      {
+        "name": "A4 Coloured Hard Paper",
+        "packs": 80.0
+      },
+      {
+        "name": "Printed Material",
+        "packs": 80.0
+      },
+      {
+        "name": "Coin Lithium battery",
+        "packs": 80.0
+      },
+      {
+        "name": "LED multicolor",
+        "packs": 80.0
+      },
+      {
+        "name": "Copper Tape strip",
+        "packs": 80.0
+      },
+      {
+        "name": "Scissors",
+        "packs": 80.0
+      },
+      {
+        "name": "Cellotape",
+        "packs": 80.0
+      },
+      {
+        "name": "Brown Bag",
+        "packs": 80.0
+      }
+    ],
+    "ACT-007": [
+      {
+        "name": "White Paper Cup",
+        "packs": 80.0
+      },
+      {
+        "name": "Battery Holder",
+        "packs": 80.0
+      },
+      {
+        "name": "Rocker Switch",
+        "packs": 80.0
+      },
+      {
+        "name": "Crocodile Clip",
+        "packs": 80.0
+      },
+      {
+        "name": "Magic Pen",
+        "packs": 80.0
+      },
+      {
+        "name": "Pipe Cleaner",
+        "packs": 80.0
+      },
+      {
+        "name": "Large Furball",
+        "packs": 80.0
+      },
+      {
+        "name": "Small Furball",
+        "packs": 80.0
+      },
+      {
+        "name": "Eraser",
+        "packs": 80.0
+      },
+      {
+        "name": "Masking Tape",
+        "packs": 80.0
+      },
+      {
+        "name": "AA Battery",
+        "packs": 80.0
+      },
+      {
+        "name": "Mini DC Motor",
+        "packs": 80.0
+      },
+      {
+        "name": "Brown Bag",
+        "packs": 80.0
+      }
+    ],
+    "ACT-008": [
+      {
+        "name": "Jumbo Popsicle",
+        "packs": 80.0
+      },
+      {
+        "name": "Metal Binder",
+        "packs": 80.0
+      },
+      {
+        "name": "Coin Lithium battery",
+        "packs": 80.0
+      },
+      {
+        "name": "LED multicolor",
+        "packs": 80.0
+      },
+      {
+        "name": "Copper Tape strip",
+        "packs": 80.0
+      },
+      {
+        "name": "Scissors",
+        "packs": 80.0
+      },
+      {
+        "name": "Brown Bag",
+        "packs": 80.0
+      }
+    ],
+    "ACT-009": [
+      {
+        "name": "Arduino UNO with USB B Type Cable",
+        "packs": null
+      },
+      {
+        "name": "Jumper wires (m-m)",
+        "packs": null
+      },
+      {
+        "name": "Light Dependent Resistor",
+        "packs": null
+      },
+      {
+        "name": "LED",
+        "packs": null
+      },
+      {
+        "name": "Resistor 220",
+        "packs": null
+      },
+      {
+        "name": "Resistor 10k",
+        "packs": null
+      },
+      {
+        "name": "Push button",
+        "packs": null
+      },
+      {
+        "name": "RGB Common Cathode",
+        "packs": null
+      },
+      {
+        "name": "Breadboard",
+        "packs": null
+      }
+    ],
+    "ACT-010": [
+      {
+        "name": "Arduino UNO with USB B Type Cable",
+        "packs": null
+      },
+      {
+        "name": "Jumper wires (m-m)",
+        "packs": null
+      },
+      {
+        "name": "Arduino DHT11 Temperature and Humidity Sensor with LED",
+        "packs": null
+      },
+      {
+        "name": "Ultrasonic Sensor HC-SR04",
+        "packs": null
+      },
+      {
+        "name": "I2C LCD 16x2 1602 for Arduino",
+        "packs": null
+      },
+      {
+        "name": "SG90 Micro Servo",
+        "packs": null
+      },
+      {
+        "name": "Breadboard",
+        "packs": null
+      },
+      {
+        "name": "Arduino Adjustable IR Infrared Range Finder Obstacles Avoid Sensor",
+        "packs": null
+      }
+    ],
+    "ACT-011": [
+      {
+        "name": "NodeMCU",
+        "packs": null
+      },
+      {
+        "name": "NodeMCU USB Micro B Cable",
+        "packs": null
+      },
+      {
+        "name": "Jumper wires (m-m)",
+        "packs": null
+      },
+      {
+        "name": "LED",
+        "packs": null
+      },
+      {
+        "name": "Arduino DHT11 Temperature and Humidity Sensor with LED",
+        "packs": null
+      }
+    ],
+    "ACT-012": [
+      {
+        "name": "Popsicle Stick Jumbo",
+        "packs": null
+      },
+      {
+        "name": "Rubber Band",
+        "packs": 5.0
+      },
+      {
+        "name": "Heavy weight Plastic Spoon",
+        "packs": 5.0
+      },
+      {
+        "name": "Ping Pong Ball",
+        "packs": 5.0
+      },
+      {
+        "name": "paper cup",
+        "packs": 5.0
+      }
+    ],
+    "ACT-013": [
+      {
+        "name": "Milk",
+        "packs": null
+      },
+      {
+        "name": "Sugar",
+        "packs": null
+      },
+      {
+        "name": "Salt",
+        "packs": null
+      },
+      {
+        "name": "Ice Cubes",
+        "packs": null
+      },
+      {
+        "name": "Zip Lock Bag",
+        "packs": null
+      },
+      {
+        "name": "Pet Jar",
+        "packs": null
+      },
+      {
+        "name": "Towel",
+        "packs": null
+      },
+      {
+        "name": "Polystyrene Foam Ice Box",
+        "packs": null
+      }
+    ],
+    "ACT-014": [
+      {
+        "name": "Glass",
+        "packs": null
+      },
+      {
+        "name": "Vinegar",
+        "packs": null
+      },
+      {
+        "name": "Clear Soap Solution",
+        "packs": null
+      },
+      {
+        "name": "Universal Indicator",
+        "packs": null
+      },
+      {
+        "name": "Glass Dropper",
+        "packs": null
+      },
+      {
+        "name": "Kitchen Tissue",
+        "packs": null
+      },
+      {
+        "name": "Spray Bottle",
+        "packs": null
+      },
+      {
+        "name": "Universal Indicator",
+        "packs": null
+      },
+      {
+        "name": "Vinegar",
+        "packs": null
+      },
+      {
+        "name": "Clear soap solution",
+        "packs": null
+      },
+      {
+        "name": "Satay Sticks",
+        "packs": null
+      },
+      {
+        "name": "Glass Jar",
+        "packs": null
+      },
+      {
+        "name": "Small Net",
+        "packs": null
+      },
+      {
+        "name": "Container",
+        "packs": null
+      },
+      {
+        "name": "Balloon",
+        "packs": null
+      },
+      {
+        "name": "Lighter",
+        "packs": null
+      },
+      {
+        "name": "Small Umbrella",
+        "packs": null
+      },
+      {
+        "name": "Raincoat",
+        "packs": null
+      },
+      {
+        "name": "Glass",
+        "packs": null
+      },
+      {
+        "name": "Food Coloring",
+        "packs": null
+      },
+      {
+        "name": "Kitchen Tissue",
+        "packs": null
+      },
+      {
+        "name": "Cotton Rope",
+        "packs": null
+      },
+      {
+        "name": "Platform",
+        "packs": null
+      },
+      {
+        "name": "Container",
+        "packs": null
+      },
+      {
+        "name": "Food Coloring",
+        "packs": null
+      },
+      {
+        "name": "9L Bottle",
+        "packs": null
+      },
+      {
+        "name": "Food Coloring",
+        "packs": null
+      },
+      {
+        "name": "Cloth Tape",
+        "packs": null
+      },
+      {
+        "name": "Tray",
+        "packs": null
+      },
+      {
+        "name": "Cotton Rope",
+        "packs": null
+      },
+      {
+        "name": "Glass",
+        "packs": null
+      },
+      {
+        "name": "Masking Tape",
+        "packs": null
+      },
+      {
+        "name": "Sodium Hydroxide",
+        "packs": null
+      },
+      {
+        "name": "Aluminium Foil",
+        "packs": null
+      },
+      {
+        "name": "Balloon",
+        "packs": null
+      },
+      {
+        "name": "Candle",
+        "packs": null
+      }
+    ],
+    "ACT-015": [
+      {
+        "name": "Zippo",
+        "packs": null
+      },
+      {
+        "name": "Clear glass",
+        "packs": null
+      },
+      {
+        "name": "Small candle holder",
+        "packs": null
+      },
+      {
+        "name": "Candle",
+        "packs": null
+      },
+      {
+        "name": "Tong",
+        "packs": null
+      },
+      {
+        "name": "Fire resistant plate",
+        "packs": null
+      },
+      {
+        "name": "Dishwashing liquid",
+        "packs": null
+      },
+      {
+        "name": "Dettol disinfectant spray",
+        "packs": null
+      },
+      {
+        "name": "Heat resistant bowl [pyrex]",
+        "packs": null
+      },
+      {
+        "name": "Whoosh bottle",
+        "packs": null
+      },
+      {
+        "name": "Bendosen ethanol 95%",
+        "packs": null
+      },
+      {
+        "name": "Beaker",
+        "packs": null
+      },
+      {
+        "name": "Lighter with long handle",
+        "packs": null
+      },
+      {
+        "name": "Gas refill lighter",
+        "packs": null
+      }
+    ],
+    "ACT-016": [
+      {
+        "name": "Small Balloons",
+        "packs": null
+      },
+      {
+        "name": "Thick Satin Cloth",
+        "packs": null
+      },
+      {
+        "name": "Mounting Boards",
+        "packs": null
+      },
+      {
+        "name": "Easel",
+        "packs": null
+      },
+      {
+        "name": "Cooking Oil",
+        "packs": null
+      },
+      {
+        "name": "Glass Bowl",
+        "packs": null
+      },
+      {
+        "name": "Test Tube",
+        "packs": null
+      },
+      {
+        "name": "Frog Musical Instrument",
+        "packs": null
+      },
+      {
+        "name": "Glow-in-the-Dark Stick",
+        "packs": null
+      },
+      {
+        "name": "Pliers",
+        "packs": null
+      },
+      {
+        "name": "Safety Goggles",
+        "packs": null
+      },
+      {
+        "name": "Gloves",
+        "packs": null
+      },
+      {
+        "name": "Test Tube rack",
+        "packs": null
+      }
+    ],
+    "ACT-017": [
+      {
+        "name": "Playing with polymer",
+        "packs": null
+      },
+      {
+        "name": "Paper clip",
+        "packs": null
+      },
+      {
+        "name": "balloon",
+        "packs": null
+      },
+      {
+        "name": "Introduction/ Ice breaking_Magic Cup",
+        "packs": null
+      },
+      {
+        "name": "baby diapers",
+        "packs": null
+      },
+      {
+        "name": "paper cup",
+        "packs": null
+      },
+      {
+        "name": "Jar",
+        "packs": null
+      },
+      {
+        "name": "UV Ray",
+        "packs": null
+      },
+      {
+        "name": "tonic water",
+        "packs": null
+      },
+      {
+        "name": "uv light",
+        "packs": null
+      },
+      {
+        "name": "box",
+        "packs": null
+      },
+      {
+        "name": "Chemical Reaction 1_Chemiluminescene",
+        "packs": null
+      },
+      {
+        "name": "light stick",
+        "packs": null
+      },
+      {
+        "name": "test tube",
+        "packs": null
+      },
+      {
+        "name": "test tube holder",
+        "packs": null
+      },
+      {
+        "name": "gergaji",
+        "packs": null
+      },
+      {
+        "name": "hammer",
+        "packs": null
+      },
+      {
+        "name": "ziplog",
+        "packs": null
+      },
+      {
+        "name": "glove latex",
+        "packs": null
+      },
+      {
+        "name": "Chemical Reaction 2_Baking soda + Vinegar",
+        "packs": null
+      },
+      {
+        "name": "baking soda",
+        "packs": null
+      },
+      {
+        "name": "vinegar",
+        "packs": null
+      },
+      {
+        "name": "5L water bottle",
+        "packs": null
+      },
+      {
+        "name": "jug",
+        "packs": null
+      },
+      {
+        "name": "spoon",
+        "packs": null
+      },
+      {
+        "name": "balloon",
+        "packs": null
+      },
+      {
+        "name": "Color Changing [1]-synthetic",
+        "packs": null
+      },
+      {
+        "name": "tissue flower",
+        "packs": null
+      },
+      {
+        "name": "vase",
+        "packs": null
+      },
+      {
+        "name": "stick",
+        "packs": null
+      },
+      {
+        "name": "bottle spray",
+        "packs": null
+      },
+      {
+        "name": "Dishwashing liquid",
+        "packs": null
+      },
+      {
+        "name": "phenolphthalein",
+        "packs": null
+      },
+      {
+        "name": "Color Changing [2]-synthetic / natural",
+        "packs": null
+      },
+      {
+        "name": "glass",
+        "packs": null
+      },
+      {
+        "name": "Dishwashing liquid",
+        "packs": null
+      },
+      {
+        "name": "dropper",
+        "packs": null
+      },
+      {
+        "name": "vinegar",
+        "packs": null
+      },
+      {
+        "name": "universal indicator",
+        "packs": null
+      },
+      {
+        "name": "red cabbage",
+        "packs": null
+      },
+      {
+        "name": "bunga telang",
+        "packs": null
+      },
+      {
+        "name": "Hot Chemistry 1-Whoosh bottle",
+        "packs": null
+      },
+      {
+        "name": "methylated spirit",
+        "packs": null
+      },
+      {
+        "name": "lighter",
+        "packs": null
+      },
+      {
+        "name": "funnel",
+        "packs": null
+      },
+      {
+        "name": "metal cup",
+        "packs": null
+      },
+      {
+        "name": "chopstick long",
+        "packs": null
+      },
+      {
+        "name": "Hot Chemistry 2-Burning Book",
+        "packs": null
+      },
+      {
+        "name": "methylated spirit",
+        "packs": null
+      },
+      {
+        "name": "lighter",
+        "packs": null
+      },
+      {
+        "name": "book",
+        "packs": null
+      },
+      {
+        "name": "Hot Chemistry 3-Fire Tornado",
+        "packs": null
+      },
+      {
+        "name": "lazy susan",
+        "packs": null
+      },
+      {
+        "name": "dustbin",
+        "packs": null
+      },
+      {
+        "name": "aluminium foil",
+        "packs": null
+      },
+      {
+        "name": "small dish",
+        "packs": null
+      },
+      {
+        "name": "mthylated spirit",
+        "packs": null
+      },
+      {
+        "name": "dropper",
+        "packs": null
+      },
+      {
+        "name": "lighter",
+        "packs": null
+      },
+      {
+        "name": "plastic spoon",
+        "packs": null
+      },
+      {
+        "name": "metal salt [ copper chloride]",
+        "packs": null
+      },
+      {
+        "name": "metal salt [strontium chloride]",
+        "packs": null
+      },
+      {
+        "name": "cap from jar",
+        "packs": null
+      },
+      {
+        "name": "General items",
+        "packs": null
+      },
+      {
+        "name": "masking tape",
+        "packs": null
+      },
+      {
+        "name": "marker",
+        "packs": null
+      },
+      {
+        "name": "danger tape",
+        "packs": null
+      },
+      {
+        "name": "scissors",
+        "packs": null
+      },
+      {
+        "name": "blades",
+        "packs": null
+      },
+      {
+        "name": "lighter refill",
+        "packs": null
+      },
+      {
+        "name": "fire extinguisher",
+        "packs": null
+      },
+      {
+        "name": "GOGLES",
+        "packs": null
+      },
+      {
+        "name": "GLOVE",
+        "packs": null
+      }
+    ],
+    "ACT-018": [
+      {
+        "name": "Sodium Hydroxide, NaOH pallete (1kg)",
+        "packs": 40.0
+      },
+      {
+        "name": "Cooking Oil",
+        "packs": 40.0
+      },
+      {
+        "name": "Digital Scale",
+        "packs": 4.0
+      },
+      {
+        "name": "Plastic Measuring Cup",
+        "packs": 4.0
+      },
+      {
+        "name": "Plastic Measuring Beaker",
+        "packs": 8.0
+      },
+      {
+        "name": "Essential Oil",
+        "packs": 20.0
+      },
+      {
+        "name": "Food Colouring",
+        "packs": 20.0
+      },
+      {
+        "name": "Pipette Dropper",
+        "packs": 4.0
+      },
+      {
+        "name": "Tongue Depressor",
+        "packs": 40.0
+      },
+      {
+        "name": "Round plastic container with lid",
+        "packs": 40.0
+      },
+      {
+        "name": "Sticker Paper",
+        "packs": 40.0
+      },
+      {
+        "name": "Nitril latex glove",
+        "packs": 40.0
+      },
+      {
+        "name": "Sauce Container",
+        "packs": 40.0
+      },
+      {
+        "name": "Spatula",
+        "packs": 4.0
+      }
+    ],
+    "ACT-019": [
+      {
+        "name": "Solar powered fan kit",
+        "packs": 40.0
+      },
+      {
+        "name": "Cable tie",
+        "packs": 1.0
+      },
+      {
+        "name": "Torchlight W591",
+        "packs": null
+      }
+    ],
+    "ACT-020": [
+      {
+        "name": "Baking soda",
+        "packs": 40.0
+      },
+      {
+        "name": "Citric acid",
+        "packs": 40.0
+      },
+      {
+        "name": "Epsom salt",
+        "packs": 40.0
+      },
+      {
+        "name": "Soap colouring pigment",
+        "packs": 40.0
+      },
+      {
+        "name": "Coconut oil",
+        "packs": 40.0
+      },
+      {
+        "name": "Cornstarch",
+        "packs": 40.0
+      },
+      {
+        "name": "Essential oil",
+        "packs": 40.0
+      },
+      {
+        "name": "Bath bomb mold",
+        "packs": 40.0
+      },
+      {
+        "name": "Disposable spoon",
+        "packs": 40.0
+      },
+      {
+        "name": "Paper bowl",
+        "packs": 40.0
+      }
+    ],
+    "ACT-021": [
+      {
+        "name": "Potassium Iodide",
+        "packs": null
+      },
+      {
+        "name": "Hydrogen Peroxide",
+        "packs": null
+      },
+      {
+        "name": "Beaker",
+        "packs": null
+      },
+      {
+        "name": "Conical Flask",
+        "packs": null
+      },
+      {
+        "name": "Conical Flask",
+        "packs": null
+      },
+      {
+        "name": "Volumetric Flask",
+        "packs": null
+      },
+      {
+        "name": "Electronic Kitchen Scale",
+        "packs": null
+      },
+      {
+        "name": "Lab Spatula",
+        "packs": null
+      },
+      {
+        "name": "Measuring Cylinder",
+        "packs": null
+      },
+      {
+        "name": "Yeast",
+        "packs": null
+      },
+      {
+        "name": "Distilled Water",
+        "packs": null
+      },
+      {
+        "name": "Goggles",
+        "packs": null
+      },
+      {
+        "name": "Nitrile Gloves",
+        "packs": null
+      }
+    ]
+  }
+}

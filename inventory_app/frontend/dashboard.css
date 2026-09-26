@@ -54,6 +54,29 @@ body::after {
     gap: 12px;
 }
 
+.page-nav {
+    display: flex;
+    gap: 6px;
+}
+
+.page-nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: "Rajdhani", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+}
+
+.page-nav a.is-current {
+    color: var(--neon-cyan);
+    border-color: var(--border-soft);
+}
+
 .header-register-btn {
     padding: 6px 12px;
     border: 1px solid rgba(62, 224, 176, 0.55);
