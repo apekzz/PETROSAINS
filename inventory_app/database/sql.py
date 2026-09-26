@@ -449,36 +449,87 @@ def ensure_tables(conn=None):
 
 
 def _run(cmd):
-    return subprocess.run(cmd, check=False, capture_output=True, text=True)
-
-
-def ensure_postgres_running():
     try:
-        with psycopg.connect(DATABASE_URL, connect_timeout=3) as conn:
+        return subprocess.run(cmd, check=False, capture_output=True, text=True)
+    except FileNotFoundError:
+        return subprocess.CompletedProcess(cmd, 127, "", "")
+
+
+def _remove_postmaster_pid(pid_path, pid, why):
+    try:
+        os.remove(pid_path)
+    except OSError as exc:
+        print(f"[SQL] Could not remove stale postmaster.pid: {exc}")
+        return
+    print(f"[SQL] Removed stale postmaster.pid (pid {pid} {why})")
+
+
+def _drop_stale_postmaster_pid():
+    """Remove postmaster.pid only when that PID is not a live postgres process."""
+    data_dir = os.environ.get("PGDATA", "/opt/homebrew/var/postgresql@16")
+    pid_path = os.path.join(data_dir, "postmaster.pid")
+    if not os.path.isfile(pid_path):
+        return
+    try:
+        pid = int(Path(pid_path).read_text(encoding="utf-8").splitlines()[0])
+    except (OSError, ValueError, IndexError):
+        return
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        _remove_postmaster_pid(pid_path, pid, "is gone")
+        return
+    except PermissionError:
+        pass
+    probe = subprocess.run(
+        ["ps", "-p", str(pid), "-o", "comm="],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    comm = (probe.stdout or "").strip()
+    if not comm or "postgres" in comm:
+        return
+    _remove_postmaster_pid(pid_path, pid, "is not postgres")
+
+
+def _app_db_up():
+    try:
+        with psycopg.connect(DATABASE_URL, connect_timeout=2) as conn:
             conn.execute("SELECT 1")
         return True
     except Exception:
-        pass
+        return False
+
+
+def ensure_postgres_running():
+    if _app_db_up():
+        return True
 
     print("[SQL] Starting Docker Postgres (petrosains-pg)...")
-    _run(["docker", "start", "petrosains-pg"])
-    for _ in range(20):
-        try:
-            with psycopg.connect(ADMIN_URL, connect_timeout=2) as conn:
-                conn.execute("SELECT 1")
-            return True
-        except Exception:
-            time.sleep(1)
+    started = _run(["docker", "start", "petrosains-pg"])
+    if started.returncode == 0:
+        for _ in range(20):
+            try:
+                with psycopg.connect(ADMIN_URL, connect_timeout=2) as conn:
+                    conn.execute("SELECT 1")
+                return True
+            except Exception:
+                time.sleep(1)
 
-    _run(["pg_isready"])
-    try:
-        with psycopg.connect(ADMIN_URL, connect_timeout=2) as conn:
-            conn.execute("SELECT 1")
+    _drop_stale_postmaster_pid()
+    print("[SQL] Starting local Postgres (postgresql@16)...")
+    _run(["brew", "services", "start", "postgresql@16"])
+    for _ in range(15):
+        if _app_db_up():
+            return True
+        time.sleep(1)
+
+    if _app_db_up():
         return True
-    except Exception as exc:
-        raise RuntimeError(
-            "PostgreSQL is not running. Start it with: docker start petrosains-pg"
-        ) from exc
+    raise RuntimeError(
+        "PostgreSQL is not running. Start it with: brew services start postgresql@16"
+    )
 
 
 def ensure_database():
