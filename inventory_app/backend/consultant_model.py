@@ -563,7 +563,9 @@ _SPEAK_RULE = (
     "You are the OneShot programme consultant. Reply in short plain sentences. "
     "Recommend only items and facilitator counts that appear in FACTS. "
     "Do not invent a product, kit, activity, or staff name. "
-    "If FACTS has no items, ask for the missing event, headcount, or target group."
+    "Continue the existing chat. Answer the latest message from FACTS. "
+    "Do not restart the conversation or invent a product, kit, activity, or staff name. "
+    "If FACTS has no items, ask only for a missing event, headcount, or target group."
 )
 
 
@@ -595,8 +597,8 @@ def _post_json(url: str, payload: dict, headers: dict) -> dict | None:
         return None
 
 
-def _cloud_reply(messages: list[dict], facts: dict) -> dict | None:
-    packed = [{"role": "system", "content": _SPEAK_RULE + " FACTS: " + json.dumps(facts)[:6000]}]
+def _cloud_reply(messages: list[dict], facts: dict, rule: str | None = None) -> dict | None:
+    packed = [{"role": "system", "content": (rule or _SPEAK_RULE) + " FACTS: " + json.dumps(facts)[:6000]}]
     for message in messages[-8:]:
         role = "assistant" if message.get("role") == "assistant" else "user"
         text = str(message.get("content") or "")[:2000]
@@ -632,8 +634,35 @@ def _cloud_reply(messages: list[dict], facts: dict) -> dict | None:
     return None
 
 
+def _boundary_reply(facts: dict) -> str:
+    titles = []
+    for row in facts.get("recommendations") or []:
+        title = str(row.get("title") or "").strip()
+        if title and title not in titles:
+            titles.append(title)
+    listed = ", ".join(titles) if titles else "the options in the programme brief"
+    return (
+        "I understand, and that is okay. "
+        f"We can only suggest these: {listed}. "
+        "If you really want something else, please contact the person in charge."
+    )
+
+
 def speak(messages: list[dict], facts: dict | None) -> dict:
     safe = facts or {}
+    if safe.get("intent") == "decline":
+        boundary = _boundary_reply(safe)
+        cloud = _cloud_reply(
+            list(messages or []),
+            safe,
+            "Be warm and brief. The visitor wants something else or does not want the suggestions. "
+            "Do not name any activity that is not in FACTS. "
+            "End with this sentence exactly: " + boundary,
+        )
+        reply = (cloud or {}).get("reply") or ""
+        if "person in charge" in reply.lower():
+            return {"reply": reply, "model": (cloud or {}).get("model") or "catalogue"}
+        return {"reply": boundary, "model": "catalogue"}
     cloud = _cloud_reply(list(messages or []), safe)
     if cloud:
         return cloud

@@ -1,34 +1,10 @@
 (function () {
-    var form = document.getElementById("consultForm");
     var chatForm = document.getElementById("chatForm");
     var chatInput = document.getElementById("chatInput");
     var chatLog = document.getElementById("chatLog");
     var status = document.getElementById("consultStatus");
     var out = document.getElementById("consultOut");
-    var timePanel = document.getElementById("timePanel");
-    var timeToggle = document.getElementById("timeToggle");
-    var savedDuration = null;
-    var chat = { text: "", count: null, audience: "", age: null, step: "event" };
-
-    function minutesBetween(start, end) {
-        var from = start.split(":").map(Number);
-        var to = end.split(":").map(Number);
-        return (to[0] * 60 + to[1]) - (from[0] * 60 + from[1]);
-    }
-
-    function setTimeOpen(open) {
-        timePanel.classList.toggle("is-hidden", !open);
-        timeToggle.setAttribute("aria-expanded", open ? "true" : "false");
-    }
-
-    function clearTime() {
-        savedDuration = null;
-        document.getElementById("timeToggleText").textContent = "Choose time";
-        document.getElementById("startTime").value = "09:00";
-        document.getElementById("endTime").value = "11:00";
-        document.getElementById("timeError").textContent = "";
-        setTimeOpen(false);
-    }
+    var chat = { text: "", notes: [], count: null, audience: "", age: null, step: "event" };
 
     function threadMessages() {
         return Array.prototype.map.call(chatLog.querySelectorAll(".chat-row"), function (row) {
@@ -50,9 +26,16 @@
         chatLog.scrollTop = chatLog.scrollHeight;
     }
 
+    function paintRequest() {
+        document.getElementById("sumEvent").textContent = chat.text || "—";
+        document.getElementById("sumCount").textContent = chat.count == null ? "—" : String(chat.count);
+        document.getElementById("sumGroup").textContent = chat.audience || "—";
+    }
+
     function resetChat() {
-        chat = { text: "", count: null, audience: "", age: null, step: "event" };
+        chat = { text: "", notes: [], count: null, audience: "", age: null, step: "event" };
         chatLog.replaceChildren();
+        paintRequest();
         say("bot", "What event is this?");
     }
 
@@ -72,6 +55,21 @@
         return hit ? Number(hit[1]) : null;
     }
 
+    var lastFacts = null;
+
+    function wantsElse(line) {
+        return /\b(another|something else|different|don'?t want|do not want|not those|not this|instead|other thing|other item|coloring|colouring)\b/i.test(line);
+    }
+
+    function boundaryText() {
+        var titles = [];
+        ((lastFacts && lastFacts.recommendations) || []).forEach(function (row) {
+            if (row.title && titles.indexOf(row.title) < 0) titles.push(row.title);
+        });
+        var listed = titles.length ? titles.join(", ") : "the options in the programme brief";
+        return "I understand, and that is okay. We can only suggest these: " + listed + ". If you really want something else, please contact the person in charge.";
+    }
+
     function askNext() {
         if (chat.count == null) {
             chat.step = "count";
@@ -87,6 +85,16 @@
         advise();
     }
 
+    function foldFacts(line) {
+        var counted = takeCount(line);
+        var bare = line.match(/^\s*(\d{1,4})\s*$/);
+        if (counted) chat.count = counted;
+        else if (bare) chat.count = Number(bare[1]);
+        if (hasAudience(line)) chat.audience = line;
+        var age = ageFrom(line);
+        if (age) chat.age = age;
+    }
+
     function ingest(raw) {
         var line = raw.trim();
         if (!line) return;
@@ -100,29 +108,37 @@
             chat.count = Number(digits[1]);
         } else if (chat.step === "group") {
             chat.audience = line;
-            chat.age = ageFrom(line);
+            var age = ageFrom(line);
+            if (age) chat.age = age;
+        } else if (chat.step === "done" && wantsElse(line)) {
+            paintRequest();
+            decline();
+            return;
+        } else if (chat.step === "done") {
+            chat.notes.push(line);
+            foldFacts(line);
         } else {
             chat.text = line;
-            chat.count = takeCount(line);
-            chat.audience = hasAudience(line) ? line : "";
-            chat.age = ageFrom(line);
+            foldFacts(line);
         }
+        paintRequest();
         askNext();
     }
 
     function payload() {
+        var notes = chat.notes.length ? ". " + chat.notes.join(". ") : "";
         return {
-            text: chat.text,
+            text: chat.text + notes,
             audience: chat.audience,
             age: chat.age,
             count: chat.count,
-            duration: savedDuration,
-            venue: document.getElementById("reqVenue").value,
-            electricity: document.getElementById("reqPower").value,
-            internet: document.getElementById("reqNet").value,
-            water: document.getElementById("reqWater").value,
-            budget: document.getElementById("reqBudget").value,
-            accessibility: document.getElementById("reqAccess").value.trim()
+            duration: null,
+            venue: "unknown",
+            electricity: "unknown",
+            internet: "unknown",
+            water: "unknown",
+            budget: "unknown",
+            accessibility: ""
         };
     }
 
@@ -155,8 +171,65 @@
         return section;
     }
 
+    function showPicks(data) {
+        var picks = document.createElement("div");
+        picks.className = "brief-picks";
+        var title = document.createElement("p");
+        title.className = "brief-title";
+        title.textContent = data.programme_title || "Suggested programme";
+        picks.appendChild(title);
+        (data.recommendations || []).forEach(function (row) {
+            var card = document.createElement("article");
+            card.className = "brief-pick";
+            var heading = document.createElement("h3");
+            heading.textContent = row.title || row.offering_id;
+            card.appendChild(heading);
+            if (row.reason) {
+                var why = document.createElement("p");
+                why.textContent = row.reason;
+                card.appendChild(why);
+            }
+            var who = (data.in_charge || []).filter(function (person) {
+                return person.offering_id === row.offering_id;
+            })[0];
+            if (who) {
+                var charge = document.createElement("p");
+                charge.className = "brief-who";
+                charge.textContent = who.facilitators + " facilitators";
+                card.appendChild(charge);
+            }
+            var lines = (data.items || []).filter(function (item) {
+                return item.offering_id === row.offering_id;
+            }).slice(0, 3);
+            if (lines.length) {
+                var list = document.createElement("ul");
+                lines.forEach(function (item) {
+                    var entry = document.createElement("li");
+                    var qty = item.packs == null ? "" : " × " + item.packs;
+                    entry.textContent = item.name + qty;
+                    list.appendChild(entry);
+                });
+                card.appendChild(list);
+            }
+            picks.appendChild(card);
+        });
+        if (data.alternative) {
+            var booked = document.createElement("p");
+            booked.className = "brief-booked";
+            booked.textContent = data.alternative.title + " is already booked. " + (data.alternative.tradeoff || "");
+            picks.appendChild(booked);
+        }
+        return picks;
+    }
+
     function render(data) {
         out.replaceChildren();
+        out.appendChild(showPicks(data));
+        var more = document.createElement("details");
+        more.className = "brief-more";
+        var summary = document.createElement("summary");
+        summary.textContent = "Full brief";
+        more.appendChild(summary);
         var items = (data.items || []).map(function (row) {
             var qty = row.packs == null ? "qty not on sheet" : "× " + row.packs;
             return row.offering_id + " " + row.title + ". " + row.name + " " + qty;
@@ -189,7 +262,43 @@
             ["Alternative", alt],
             ["Rotations", data.rotations]
         ].forEach(function (pair) {
-            out.appendChild(block(pair[0], pair[1]));
+            more.appendChild(block(pair[0], pair[1]));
+        });
+        out.appendChild(more);
+    }
+
+    function packFacts(data) {
+        lastFacts = {
+            intent: "",
+            items: (data.items || []).slice(0, 8),
+            in_charge: data.in_charge || [],
+            constraints: data.constraints_safety || [],
+            recommendations: (data.recommendations || []).map(function (row) {
+                return { offering_id: row.offering_id, title: row.title, reason: row.reason };
+            })
+        };
+        return lastFacts;
+    }
+
+    function talk(facts) {
+        return fetch("/api/consultant/talk", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ messages: threadMessages(), facts: facts })
+        }).then(function (response) {
+            return response.json();
+        });
+    }
+
+    function decline() {
+        var facts = Object.assign({}, lastFacts || { recommendations: [] }, { intent: "decline" });
+        status.textContent = "";
+        talk(facts).then(function (result) {
+            var reply = (result && result.reply) || "";
+            say("bot", reply.toLowerCase().indexOf("person in charge") >= 0 ? reply : boundaryText());
+            status.textContent = (result && result.model) || "";
+        }).catch(function () {
+            say("bot", boundaryText());
         });
     }
 
@@ -198,8 +307,7 @@
             status.textContent = "Finish the chat: event, headcount, target group.";
             return;
         }
-        status.textContent = "Scoring catalogue…";
-        out.replaceChildren();
+        status.textContent = "";
         fetch("/api/consultant/advise", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -212,24 +320,9 @@
         }).then(function (data) {
             status.textContent = "Writing the reply…";
             render(data);
-            return fetch("/api/consultant/talk", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    messages: threadMessages(),
-                    facts: {
-                        items: data.items || [],
-                        in_charge: data.in_charge || [],
-                        recommendations: (data.recommendations || []).map(function (row) {
-                            return { offering_id: row.offering_id, title: row.title, reason: row.reason };
-                        })
-                    }
-                })
-            }).then(function (response) {
-                return response.json();
-            }).then(function (talk) {
-                say("bot", (talk && talk.reply) || "Catalogue scored. See the programme brief.");
-                status.textContent = (talk && talk.model) || "";
+            return talk(packFacts(data)).then(function (result) {
+                say("bot", (result && result.reply) || "Catalogue scored. See the programme brief.");
+                status.textContent = (result && result.model) || "";
             });
         }).catch(function (error) {
             status.textContent = error.message || "Advise failed";
@@ -238,48 +331,28 @@
 
     resetChat();
 
-    document.getElementById("btnExample").addEventListener("click", function () {
-        resetChat();
-        clearTime();
-        document.getElementById("reqVenue").value = "unknown";
-        document.getElementById("reqPower").value = "unknown";
-        document.getElementById("reqNet").value = "unknown";
-        document.getElementById("reqWater").value = "unknown";
-        document.getElementById("reqBudget").value = "unknown";
-        document.getElementById("reqAccess").value = "";
-        ingest("LEGO and robot");
-    });
-
     chatForm.addEventListener("submit", function (event) {
         event.preventDefault();
         ingest(chatInput.value);
         chatInput.value = "";
+        chatInput.focus();
     });
 
-    timeToggle.addEventListener("click", function () {
-        setTimeOpen(timePanel.classList.contains("is-hidden"));
-    });
-
-    document.getElementById("saveTime").addEventListener("click", function () {
-        var start = document.getElementById("startTime").value;
-        var end = document.getElementById("endTime").value;
-        var gap = minutesBetween(start, end);
-        if (!start || !end || gap <= 0) {
-            document.getElementById("timeError").textContent = "End time must be after start time.";
-            return;
+    chatInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            chatForm.requestSubmit();
         }
-        savedDuration = gap;
-        document.getElementById("timeToggleText").textContent = start + "–" + end + " · " + gap + " min";
-        document.getElementById("timeError").textContent = "";
-        setTimeOpen(false);
     });
 
-    document.addEventListener("click", function (event) {
-        if (!event.target.closest(".time-picker")) setTimeOpen(false);
-    });
+    function pingClientHello() {
+        fetch("/api/client/hello", { method: "POST", cache: "no-store", keepalive: true }).catch(function () {});
+    }
 
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        advise();
+    pingClientHello();
+    setInterval(pingClientHello, 2000);
+    window.addEventListener("pagehide", function (event) {
+        if (event.persisted) return;
+        navigator.sendBeacon("/api/client/leave");
     });
 })();

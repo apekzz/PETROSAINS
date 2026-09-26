@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/theme.css?v=20260926-split">
     <link rel="stylesheet" href="/dashboard.css?v=20260926-split">
-    <link rel="stylesheet" href="/consultant.css?v=20260926-split2">
+    <link rel="stylesheet" href="/consultant.css?v=20260926-see">
 </head>
 
 <body class="consultant-body">
@@ -34,84 +34,11 @@
                 <div class="card-head">
                     <h2 id="requestTitle">Stakeholder request</h2>
                 </div>
-                <form id="consultForm" class="consultant-form">
-                    <details class="more-constraints">
-                        <summary>More constraints</summary>
-                    <div class="time-picker">
-                        <span class="time-label" id="timeLabel">Duration</span>
-                        <button id="timeToggle" type="button" aria-expanded="false" aria-controls="timePanel" aria-labelledby="timeLabel timeToggleText">
-                            <span id="timeToggleText">Choose time</span>
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div id="timePanel" class="time-panel is-hidden">
-                            <div class="time-grid">
-                                <label>Start time
-                                    <span class="time-input">
-                                        <input id="startTime" type="time" min="09:00" max="18:00" value="09:00">
-                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
-                                        </svg>
-                                    </span>
-                                </label>
-                                <label>End time
-                                    <span class="time-input">
-                                        <input id="endTime" type="time" min="09:00" max="18:00" value="11:00">
-                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
-                                        </svg>
-                                    </span>
-                                </label>
-                            </div>
-                            <p id="timeError" class="time-error" role="alert"></p>
-                            <button id="saveTime" type="button">Save time</button>
-                        </div>
-                    </div>
-                    <label>Venue
-                        <select id="reqVenue">
-                            <option value="unknown">Unknown</option>
-                            <option value="indoor">Indoor</option>
-                            <option value="outdoor">Outdoor</option>
-                        </select>
-                    </label>
-                    <label>Electricity
-                        <select id="reqPower">
-                            <option value="unknown">Unknown</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                    </label>
-                    <label>Internet
-                        <select id="reqNet">
-                            <option value="unknown">Unknown</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                    </label>
-                    <label>Water
-                        <select id="reqWater">
-                            <option value="unknown">Unknown</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                    </label>
-                    <label>Budget band
-                        <select id="reqBudget">
-                            <option value="unknown">Unknown</option>
-                            <option value="low">Low</option>
-                            <option value="medium">Medium</option>
-                            <option value="high">High</option>
-                        </select>
-                    </label>
-                    <label>Accessibility
-                        <input id="reqAccess" type="text" autocomplete="off">
-                    </label>
-                    </details>
-                    <div class="consultant-actions">
-                        <button type="submit" class="embed-btn embed-btn-primary">Advise</button>
-                    </div>
-                </form>
+                <dl class="request-now">
+                    <div><dt>Event</dt><dd id="sumEvent">—</dd></div>
+                    <div><dt>People</dt><dd id="sumCount">—</dd></div>
+                    <div><dt>Target group</dt><dd id="sumGroup">—</dd></div>
+                </dl>
             </section>
 
             <section class="card chat-card" aria-labelledby="chatTitle">
@@ -124,7 +51,6 @@
                     <input id="chatInput" type="text" autocomplete="off" placeholder="Message the consultant" aria-label="Message">
                     <button type="submit" class="embed-btn embed-btn-primary">Send</button>
                 </form>
-                <button type="button" id="btnExample" class="chat-chip">Try LEGO and robot</button>
             </section>
 
             <section class="card brief-card" aria-live="polite" aria-labelledby="briefTitle">
@@ -135,7 +61,7 @@
             </section>
         </div>
     </div>
-    <script src="/consultant.js?v=20260926-split"></script>
+    <script src="/consultant.js?v=20260926-nolego"></script>
 </body>
 
 </html>

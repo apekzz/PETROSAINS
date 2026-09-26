@@ -1738,7 +1738,7 @@ def dashboard_leave():
         dashboard_clients = 0
     _last_heartbeat = 0.0
     _cancel_app_exit()
-    timer = threading.Timer(3.0, _maybe_exit_after_leave)
+    timer = threading.Timer(8.0, _maybe_exit_after_leave)
     timer.daemon = True
     _exit_timer = timer
     timer.start()

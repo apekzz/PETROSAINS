@@ -897,7 +897,18 @@ async function startLocalCamera(deviceId, facing) {
                 localStream = null;
             }
             let chosenId = deviceId || "";
-            if (!chosenId && !isPhoneDevice()) {
+            let cameraGranted = false;
+            if (navigator.permissions && navigator.permissions.query) {
+                try {
+                    const perm = await navigator.permissions.query({ name: "camera" });
+                    cameraGranted = perm.state === "granted";
+                } catch (error) {
+                    cameraGranted = false;
+                }
+            }
+            // ponytail: exact deviceId before the site is granted makes the browser ask again.
+            // Stay on facingMode until Allow is saved for 127.0.0.1.
+            if (!chosenId && cameraGranted && !isPhoneDevice()) {
                 chosenId = await preferLaptopDeviceId();
             }
             const video = chosenId
