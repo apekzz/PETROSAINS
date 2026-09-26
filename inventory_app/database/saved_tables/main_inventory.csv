@@ -1,4 +1,5 @@
 id,inventory_name,orig_quantity,available_quantity,registered_date
+2564,iPad Gen 6,1,1,2026-09-26 12:24:44.231578
 71,Rocker Switch 2pin Black,74,74,2026-09-13 05:45:49.286787
 72,volumetric flask,56,56,2026-09-13 05:45:49.286787
 73,Correction Tape,34,34,2026-09-13 05:45:49.286787
@@ -17,6 +18,7 @@ id,inventory_name,orig_quantity,available_quantity,registered_date
 27,N20 Mini Micro Metal Gear,65,65,2026-09-13 05:45:49.286787
 28,Jumper Wire M M,64,64,2026-09-13 05:45:49.286787
 80,glue gun stick,16,16,2026-09-13 05:45:49.286787
+2662,iPhone 13 Pro,1,1,2026-09-26 13:24:16.222093
 93,key ring,21,21,2026-09-13 05:45:49.286787
 94,needle,13,13,2026-09-13 05:45:49.286787
 95,Motor Shield,135,135,2026-09-13 05:45:49.286787
@@ -29,13 +31,13 @@ id,inventory_name,orig_quantity,available_quantity,registered_date
 101,electric thermometer,25,25,2026-09-13 05:45:49.286787
 102,tongue depressor,37,37,2026-09-13 05:45:49.286787
 38,pom pom,23,23,2026-09-13 05:45:49.286787
-103,HC SR04 Ultrasonic Sensor,87,87,2026-09-13 05:45:49.286787
 39,glass rod,48,48,2026-09-13 05:45:49.286787
 40,Cutting Mat,18,18,2026-09-13 05:45:49.286787
 41,Arduino Nano,78,78,2026-09-13 05:45:49.286787
 42,Node MCU,102,102,2026-09-13 05:45:49.286787
 104,ribbon,14,14,2026-09-13 05:45:49.286787
 43,Mallet,29,29,2026-09-13 05:45:49.286787
+103,HC SR04 Ultrasonic Sensor,87,87,2026-09-13 05:45:49.286787
 16,universal indicator,26,26,2026-09-13 05:45:49.286787
 17,Lilypad Coin Cell Battery Holder,43,43,2026-09-13 05:45:49.286787
 18,paper cup,10,10,2026-09-13 05:45:49.286787
@@ -48,7 +50,6 @@ id,inventory_name,orig_quantity,available_quantity,registered_date
 31,Light Dependent Resistor LDR,63,63,2026-09-13 05:45:49.286787
 84,Eraser,40,40,2026-09-13 05:45:49.286787
 85,Permanent Marker,36,36,2026-09-13 05:45:49.286787
-1,Arduino Uno,96,96,2026-09-13 02:31:57.215448
 87,test tubes,125,125,2026-09-13 05:45:49.286787
 32,tracing paper,12,12,2026-09-13 05:45:49.286787
 33,liquid glue,49,49,2026-09-13 05:45:49.286787
@@ -73,6 +74,7 @@ id,inventory_name,orig_quantity,available_quantity,registered_date
 59,Pen,42,42,2026-09-13 05:45:49.286787
 62,Measuring Tape,26,26,2026-09-13 05:45:49.286787
 64,acrylic standee A4 landscape portrait,86,86,2026-09-13 05:45:49.286787
+1,Arduino Uno,96,96,2026-09-13 02:31:57.215448
 65,acrylic table label,69,69,2026-09-13 05:45:49.286787
 66,Screw Phillips,47,47,2026-09-13 05:45:49.286787
 67,Scissor,82,82,2026-09-13 05:45:49.286787
@@ -82,12 +84,12 @@ id,inventory_name,orig_quantity,available_quantity,registered_date
 76,Caliper,14,14,2026-09-13 05:45:49.286787
 54,Hydrogen Peroxide Solution 6,29,29,2026-09-13 05:45:49.286787
 55,clothespin,48,48,2026-09-13 05:45:49.286787
-56,Maker Line Sensor,72,72,2026-09-13 05:45:49.286787
+56,Maker Line Sensor,72,71,2026-09-13 05:45:49.286787
 57,Hammer,32,32,2026-09-13 05:45:49.286787
 58,MAX30102 Heart Rate and Pulse Oximetry Sensor,51,51,2026-09-13 05:45:49.286787
 60,HC SR501 PIR Motion Sensor,123,123,2026-09-13 05:45:49.286787
 61,conical flask 5000ml,59,59,2026-09-13 05:45:49.286787
-63,googly eyes,30,30,2026-09-13 05:45:49.286787
+63,googly eyes,30,28,2026-09-13 05:45:49.286787
 122,syringes 60ml,98,98,2026-09-13 05:45:49.286787
 123,beakers 250ml,55,55,2026-09-13 05:45:49.286787
 124,pipettes 10ml,146,146,2026-09-13 05:45:49.286787

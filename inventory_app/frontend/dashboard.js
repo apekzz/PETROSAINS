@@ -631,13 +631,12 @@ function runBrowserFaceLoop() {
 
 async function startBrowserFaceLandmarker() {
     try {
-        const vision = await import("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs");
+        const vision = await import("/vendor/mediapipe/vision_bundle.mjs");
         FaceLandmarkerClass = vision.FaceLandmarker;
         const fileset = await vision.FilesetResolver.forVisionTasks(
-            "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm"
+            "/vendor/mediapipe/wasm"
         );
-        const modelUrl =
-            "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task";
+        const modelUrl = "/vendor/mediapipe/face_landmarker.task";
         try {
             faceLandmarker = await FaceLandmarkerClass.createFromOptions(fileset, {
                 baseOptions: { modelAssetPath: modelUrl, delegate: "GPU" },
@@ -975,6 +974,13 @@ async function pumpVideo() {
         console.error("Video pump error:", error);
     }
     window.setTimeout(pumpVideo, 33);
+}
+
+function hideRemoteCameraPicker() {
+    if (isLoopbackHost()) return;
+    const select = document.getElementById("cameraSource");
+    const label = select && select.closest("label");
+    if (label) label.hidden = true;
 }
 
 startLocalCamera();

@@ -526,21 +526,33 @@ def _sessions(count, offering: dict) -> int:
 
 def _item_lines(catalogue: dict, chosen: list[dict], count) -> list[dict]:
     kits = catalogue.get("kits") or {}
-    lines = []
+    merged = {}
+    order = []
     for row in chosen:
         sessions = _sessions(count, row["offering"])
         for kit in kits.get(row["offering_id"]) or []:
+            name = kit.get("name") or ""
             packs = kit.get("packs")
             needed = None if packs is None else int(math.ceil(float(packs) * sessions))
-            lines.append(
-                {
+            key = (row["offering_id"], name.strip().lower())
+            if key not in merged:
+                order.append(key)
+                merged[key] = {
                     "offering_id": row["offering_id"],
                     "title": row["title"],
-                    "name": kit.get("name") or "",
+                    "name": name,
                     "packs": needed,
                 }
-            )
-    return lines
+                continue
+            old = merged[key]["packs"]
+            if old is None:
+                total = needed
+            elif needed is None:
+                total = old
+            else:
+                total = old + needed
+            merged[key] = {**merged[key], "packs": total}
+    return [merged[key] for key in order]
 
 
 def _in_charge(chosen: list[dict]) -> list[dict]:
@@ -575,9 +587,26 @@ def _plain_reply(facts: dict) -> str:
     if not items and not charge:
         return "Tell me the event, how many people, and the target group."
     lines = ["Here is what the catalogue supports."]
-    for row in items[:8]:
-        qty = "qty not on sheet" if row.get("packs") is None else f"× {row.get('packs')}"
-        lines.append(f"{row.get('title')}: {row.get('name')} {qty}.")
+    groups = []
+    index = {}
+    for row in items:
+        key = str(row.get("offering_id") or row.get("title") or "")
+        if key not in index:
+            index[key] = len(groups)
+            groups.append([])
+        groups[index[key]].append(row)
+    for group in groups:
+        title = group[0].get("title") or ""
+        for row in group[:4]:
+            name = row.get("name") or ""
+            packs = row.get("packs")
+            if packs is None:
+                lines.append(f"{title}: {name}.")
+            else:
+                lines.append(f"{title}: {name} × {packs}.")
+        extra = len(group) - 4
+        if extra > 0:
+            lines.append(f"{title}: and {extra} more in this kit.")
     for row in charge:
         lines.append(f"{row.get('title')} needs {row.get('facilitators')} facilitators.")
     return " ".join(lines)
@@ -667,6 +696,30 @@ def speak(messages: list[dict], facts: dict | None) -> dict:
     if cloud:
         return cloud
     return {"reply": _plain_reply(safe), "model": "catalogue"}
+
+
+def _check_plain_reply() -> None:
+    text = _plain_reply(
+        {
+            "items": [
+                {"offering_id": "ACT-014", "title": "Water water Everywhere", "name": "Universal Indicator", "packs": None},
+                {"offering_id": "ACT-014", "title": "Water water Everywhere", "name": "Beaker", "packs": None},
+                {"offering_id": "ACT-014", "title": "Water water Everywhere", "name": "Tube", "packs": None},
+                {"offering_id": "ACT-014", "title": "Water water Everywhere", "name": "Rod", "packs": None},
+                {"offering_id": "ACT-014", "title": "Water water Everywhere", "name": "Tray", "packs": None},
+                {"offering_id": "ACT-002", "title": "Combustion Show", "name": "Burner", "packs": 1},
+            ],
+            "in_charge": [
+                {"title": "Water water Everywhere", "facilitators": 2},
+                {"title": "Combustion Show", "facilitators": 1},
+            ],
+        }
+    )
+    assert "qty not on sheet" not in text
+    assert text.count("Universal Indicator") == 1
+    assert "Combustion Show: Burner × 1." in text
+    assert "and 1 more in this kit." in text
+    assert "Combustion Show needs 1 facilitators." in text
 
 
 def _check_items() -> None:

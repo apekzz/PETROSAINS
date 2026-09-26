@@ -7,7 +7,7 @@
     var chat = { text: "", notes: [], count: null, audience: "", age: null, step: "event" };
 
     function threadMessages() {
-        return Array.prototype.map.call(chatLog.querySelectorAll(".chat-row"), function (row) {
+        return Array.prototype.map.call(chatLog.querySelectorAll(".chat-row:not(.is-thinking)"), function (row) {
             return {
                 role: row.classList.contains("user") ? "user" : "assistant",
                 content: row.querySelector(".chat-bubble").textContent
@@ -15,7 +15,31 @@
         });
     }
 
+    function showThinking() {
+        stopThinking();
+        var row = document.createElement("div");
+        row.className = "chat-row bot is-thinking";
+        row.setAttribute("role", "status");
+        row.setAttribute("aria-label", "Thinking");
+        var bubble = document.createElement("p");
+        bubble.className = "chat-bubble chat-thinking";
+        for (var i = 0; i < 3; i += 1) {
+            bubble.appendChild(document.createElement("span")).className = "think-dot";
+        }
+        row.appendChild(bubble);
+        chatLog.appendChild(row);
+        chatLog.scrollTop = chatLog.scrollHeight;
+        chatInput.disabled = true;
+    }
+
+    function stopThinking() {
+        var row = chatLog.querySelector(".is-thinking");
+        if (row) row.remove();
+        chatInput.disabled = false;
+    }
+
     function say(role, text) {
+        stopThinking();
         var row = document.createElement("div");
         row.className = "chat-row " + (role === "user" ? "user" : "bot");
         var bubble = document.createElement("p");
@@ -115,8 +139,16 @@
             decline();
             return;
         } else if (chat.step === "done") {
-            chat.notes.push(line);
+            var priorCount = chat.count;
+            var priorAudience = chat.audience;
+            var priorAge = chat.age;
             foldFacts(line);
+            if (/\bevent\b/i.test(line)) chat.text = line;
+            paintRequest();
+            var changed = chat.count !== priorCount || chat.audience !== priorAudience || chat.age !== priorAge || /\bevent\b/i.test(line);
+            if (changed) advise();
+            else followUp();
+            return;
         } else {
             chat.text = line;
             foldFacts(line);
@@ -126,9 +158,8 @@
     }
 
     function payload() {
-        var notes = chat.notes.length ? ". " + chat.notes.join(". ") : "";
         return {
-            text: chat.text + notes,
+            text: chat.text,
             audience: chat.audience,
             age: chat.age,
             count: chat.count,
@@ -270,7 +301,7 @@
     function packFacts(data) {
         lastFacts = {
             intent: "",
-            items: (data.items || []).slice(0, 8),
+            items: data.items || [],
             in_charge: data.in_charge || [],
             constraints: data.constraints_safety || [],
             recommendations: (data.recommendations || []).map(function (row) {
@@ -293,6 +324,7 @@
     function decline() {
         var facts = Object.assign({}, lastFacts || { recommendations: [] }, { intent: "decline" });
         status.textContent = "";
+        showThinking();
         talk(facts).then(function (result) {
             var reply = (result && result.reply) || "";
             say("bot", reply.toLowerCase().indexOf("person in charge") >= 0 ? reply : boundaryText());
@@ -302,12 +334,24 @@
         });
     }
 
+    function followUp() {
+        status.textContent = "";
+        showThinking();
+        talk(lastFacts || {}).then(function (result) {
+            say("bot", (result && result.reply) || "See the programme brief.");
+            status.textContent = (result && result.model) || "";
+        }).catch(function () {
+            say("bot", "See the programme brief.");
+        });
+    }
+
     function advise() {
         if (!chat.text || chat.count == null || !chat.audience) {
             status.textContent = "Finish the chat: event, headcount, target group.";
             return;
         }
         status.textContent = "";
+        showThinking();
         fetch("/api/consultant/advise", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -325,6 +369,7 @@
                 status.textContent = (result && result.model) || "";
             });
         }).catch(function (error) {
+            stopThinking();
             status.textContent = error.message || "Advise failed";
         });
     }

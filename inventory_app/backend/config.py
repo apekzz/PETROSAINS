@@ -35,11 +35,14 @@ LOW_STOCK_THRESHOLD = 10
 # Server — 0.0.0.0 lets phones/laptops on the same Wi-Fi open the dashboard
 HOST = os.environ.get("HOST", "0.0.0.0")
 PORT = int(os.environ.get("PORT", "8000"))
+LAN_HTTPS_PORT = int(os.environ.get("LAN_HTTPS_PORT", "8443"))
+_CERT_DIR = os.path.join(BASE_DIR, "certs")
 
 
 def get_lan_ip():
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        sock.settimeout(0.4)
         sock.connect(("8.8.8.8", 80))
         ip = sock.getsockname()[0]
         sock.close()
@@ -47,7 +50,52 @@ def get_lan_ip():
             return ip
     except Exception:
         pass
+    # ponytail: 8.8.8.8 is unreachable on a hotspot with no data. en0/bridge100 covers that.
+    if sys.platform == "darwin":
+        for iface in ("en0", "en1", "bridge100"):
+            try:
+                ip = subprocess.check_output(
+                    ["ipconfig", "getifaddr", iface], text=True, timeout=2
+                ).strip()
+            except Exception:
+                ip = ""
+            if ip and not ip.startswith("127."):
+                return ip
     return None
+
+
+def ensure_lan_cert(ip: str) -> tuple[str, str]:
+    os.makedirs(_CERT_DIR, exist_ok=True)
+    cert = os.path.join(_CERT_DIR, "lan.pem")
+    key = os.path.join(_CERT_DIR, "lan-key.pem")
+    stamp = os.path.join(_CERT_DIR, "lan-ip.txt")
+    if os.path.isfile(cert) and os.path.isfile(key) and os.path.isfile(stamp):
+        with open(stamp, encoding="utf-8") as handle:
+            if handle.read().strip() == ip:
+                return cert, key
+    cnf_path = os.path.join(_CERT_DIR, "lan.cnf")
+    with open(cnf_path, "w", encoding="utf-8") as handle:
+        handle.write(
+            "[req]\n"
+            "distinguished_name=req_distinguished_name\n"
+            "x509_extensions=v3_req\n"
+            "prompt=no\n"
+            "[req_distinguished_name]\n"
+            "CN=oneshot\n"
+            "[v3_req]\n"
+            f"subjectAltName=IP:{ip},IP:127.0.0.1,DNS:localhost\n"
+        )
+    subprocess.check_call(
+        [
+            "openssl", "req", "-x509", "-newkey", "rsa:2048", "-sha256", "-days", "825",
+            "-nodes", "-keyout", key, "-out", cert, "-config", cnf_path,
+        ],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    with open(stamp, "w", encoding="utf-8") as handle:
+        handle.write(ip)
+    return cert, key
 
 # Camera — default to laptop FaceTime even if Camo/Continuity is OS index 0
 def _default_camera_index() -> int:

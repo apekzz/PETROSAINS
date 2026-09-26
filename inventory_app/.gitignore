@@ -6,3 +6,4 @@ inventory.db-wal
 inventory.db-shm
 noise_captures/
 .cache/
+certs/

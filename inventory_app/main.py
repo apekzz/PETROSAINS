@@ -72,7 +72,7 @@ from config import (
     TRIGGER_COOLDOWN, MOG2_HISTORY, MOG2_VAR_THRESHOLD, MOG2_DETECT_SHADOWS,
     WARMUP_FRAMES, YOLO_PREVIEW_ENABLED, YOLO_PREVIEW_INTERVAL, YOLO_HOLD_SECONDS,
     FACE_MATCH_THRESHOLD, FACE_MATCH_MARGIN, FACE_MATCH_STREAK, FACE_EMBED_INTERVAL,
-    get_lan_ip,
+    get_lan_ip, ensure_lan_cert, LAN_HTTPS_PORT,
 )
 
 
@@ -2610,6 +2610,21 @@ FRONTEND_FILES = {
 }
 
 
+@app.get("/vendor/{file_path:path}")
+def serve_vendor(file_path: str):
+    root = os.path.realpath(os.path.join(FRONTEND_DIR, "vendor"))
+    target = os.path.realpath(os.path.join(root, file_path))
+    if not target.startswith(root + os.sep) or not os.path.isfile(target):
+        return JSONResponse({"detail": "Not found"}, status_code=404)
+    media = {
+        ".mjs": "text/javascript",
+        ".js": "text/javascript",
+        ".wasm": "application/wasm",
+        ".task": "application/octet-stream",
+    }.get(os.path.splitext(target)[1].lower(), "application/octet-stream")
+    return FileResponse(target, media_type=media)
+
+
 @app.get("/{filename}")
 def serve_frontend_file(filename: str):
     media_type = FRONTEND_FILES.get(filename)
@@ -2630,6 +2645,18 @@ def set_boot(percent, stage):
     boot_percent = percent
     boot_stage = stage
     loader.set_progress(percent, stage)
+
+
+def _serve_lan_https(cert, key):
+    config = uvicorn.Config(
+        app,
+        host=HOST,
+        port=LAN_HTTPS_PORT,
+        ssl_certfile=cert,
+        ssl_keyfile=key,
+        log_level="warning",
+    )
+    uvicorn.Server(config).run()
 
 
 def run_high_end_boot():
@@ -2670,6 +2697,18 @@ def run_high_end_boot():
         lan_ip = get_lan_ip()
         local_url = f"http://127.0.0.1:{PORT}"
         lan_url = f"http://{lan_ip}:{PORT}" if lan_ip else None
+        if lan_ip:
+            try:
+                cert, key = ensure_lan_cert(lan_ip)
+                threading.Thread(
+                    target=_serve_lan_https,
+                    args=(cert, key),
+                    name="LanHTTPS",
+                    daemon=True,
+                ).start()
+                lan_url = f"https://{lan_ip}:{LAN_HTTPS_PORT}"
+            except Exception as exc:
+                print("[APP] LAN https not started:", exc)
         loader.finish(local_url, lan_url)
     except Exception as exc:
         boot_ready = True
