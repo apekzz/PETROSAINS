@@ -582,6 +582,7 @@ def connect_and_prepare():
                 ensure_tables(_boot_conn)
                 ensure_schema_columns(_boot_conn)
                 validate_required_schema(_boot_conn)
+                apply_saved_stock_totals(_boot_conn)
                 recalculate_available_quantities(_boot_conn)
                 _boot_conn.commit()
                 return _boot_conn
@@ -602,6 +603,7 @@ def connect_and_prepare():
             restored.get(t) for t in ALL_EMB_TABLES
         ):
             refresh_main_inventory(_boot_conn)
+        apply_saved_stock_totals(_boot_conn)
         recalculate_available_quantities(_boot_conn)
         _boot_conn.commit()
         if created:
@@ -766,8 +768,44 @@ def fetch_stats():
         }
 
 
+def apply_saved_stock_totals(conn):
+    """Copy official orig_quantity from the main_inventory snapshot onto matching rows.
+
+    Embedding rows are photos, not stock. The snapshot holds the official total.
+    """
+    import csv
+
+    path = SNAPSHOT_DIR / "main_inventory.csv"
+    if not path.is_file():
+        return 0
+    changed = 0
+    with path.open(encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            name = (row.get("inventory_name") or "").strip()
+            if not name:
+                continue
+            try:
+                qty = int(float(row.get("orig_quantity") or 0))
+            except ValueError:
+                continue
+            cur = conn.execute(
+                """
+                UPDATE main_inventory
+                SET orig_quantity = %s
+                WHERE inventory_name = %s
+                  AND orig_quantity IS DISTINCT FROM %s
+                """,
+                (qty, name, qty),
+            )
+            if cur.rowcount and cur.rowcount > 0:
+                changed += int(cur.rowcount)
+    if changed:
+        print(f"[SQL] Applied official stock totals: {changed} items")
+    return changed
+
+
 def refresh_main_inventory(conn=None):
-    """Rebuild summary from mobileclip2 (abubu rule); fallback legacy inventory_emb."""
+    """Add inventory names from photo rows. Do not replace official stock totals."""
 
     def _refresh(cur):
         source_table = "inventory_emb_mobileclip2"
@@ -783,8 +821,7 @@ def refresh_main_inventory(conn=None):
             SELECT inventory_name, COUNT(*)::int, COUNT(*)::int, CURRENT_TIMESTAMP
             FROM {source_table}
             GROUP BY inventory_name
-            ON CONFLICT (inventory_name) DO UPDATE
-            SET orig_quantity = EXCLUDED.orig_quantity
+            ON CONFLICT (inventory_name) DO NOTHING
             """
         )
         cur.execute(
@@ -797,6 +834,7 @@ def refresh_main_inventory(conn=None):
             )
             """
         )
+        apply_saved_stock_totals(cur)
         recalculate_available_quantities(cur)
 
     if conn is not None:
